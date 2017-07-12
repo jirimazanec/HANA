@@ -1,0 +1,32 @@
+
+schema="OTEBW_IMW";
+
+query = "select cm.id_rut,
+	            cm.utl_type,
+	            case when cm.id_change = co.id_change 
+                     then cm.utl_old_value 
+                     else cm.utl_new_value 
+                end as utl_old_value,
+	            cm.utl_new_value,
+	            cm.total_limit,
+	            cm.warning_limit,
+                TO_DATE(co.timestamp_change) as CHANGE_DATE,
+	            to_time(co.timestamp_change) as CHANGE_TIME,
+	            co.id_change 
+           from LIMIT_DYN_CHANGE as co
+	            inner join LIMIT_DYN_CHANGE as cm on 
+	                  cm.id_change <= co.id_change and 
+	                  cm.id_rut = co.id_rut and 
+	                  cm.id_change in (select max(ci.id_change) 
+	                     from LIMIT_DYN_CHANGE as ci 
+	                    where ci.id_change <= co.id_change 
+	                      and ci.id_rut = co.id_rut 
+	                 group by ci.utl_type)
+	            inner join UTL_TYPES as tm1 on
+	                  co.utl_type = tm1.utl_type 
+                inner join UTL_TYPES as tm2 on  
+                      cm.utl_type = tm2.utl_type and
+                      tm1.commodity = tm2.commodity";
+
+depends_on_table=["OTEBW_IMW::LIMIT_DYN_CHANGE"];  
+depends_on_table=["OTEBW_IMW::UTL_TYPES"];  

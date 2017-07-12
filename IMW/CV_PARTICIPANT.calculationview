@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CV_PARTICIPANT" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Projection">
+  <origin/>
+  <descriptions defaultDescription="Identifikace RÚT"/>
+  <metadata changedAt="2017-06-06 13:31:27.48"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources>
+    <DataSource id="IMW::BW_PARTICIPANTS_V" type="DATA_BASE_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews/>
+  <logicalModel id="IMW::BW_PARTICIPANTS_V">
+    <descriptions/>
+    <attributes>
+      <attribute id="PARTIC_ID" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PARTIC_ID"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="PARTIC_ID"/>
+      </attribute>
+      <attribute id="PARTIC_EAN" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PARTIC_EAN"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="PARTIC_EAN"/>
+      </attribute>
+      <attribute id="PARTIC_DESC_HEX" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PARTIC_DESC_HEX"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="PARTIC_DESC_HEX"/>
+      </attribute>
+      <attribute id="PARTIC_REG_NUM" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PARTIC_REG_NUM"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="PARTIC_REG_NUM"/>
+      </attribute>
+      <attribute id="PARTIC_TAX_NUMBER" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PARTIC_TAX_NUMBER"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="PARTIC_TAX_NUMBER"/>
+      </attribute>
+      <attribute id="EMAIL_TXT" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="EMAIL_TXT"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="EMAIL_TXT"/>
+      </attribute>
+      <attribute id="ROLE_CODE" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ROLE_CODE"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="ROLE_CODE"/>
+      </attribute>
+      <attribute id="FOREIGNER_FLAG" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="FOREIGNER_FLAG"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="FOREIGNER_FLAG"/>
+      </attribute>
+      <attribute id="WEB_PAGES_CODE" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="WEB_PAGES_CODE"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="WEB_PAGES_CODE"/>
+      </attribute>
+      <attribute id="LANG_CODE" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="LANG_CODE"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="LANG_CODE"/>
+      </attribute>
+      <attribute id="CREATION_DATE" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CREATION_DATE"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="CREATION_DATE"/>
+      </attribute>
+      <attribute id="VERIF_FLAG" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="VERIF_FLAG"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="VERIF_FLAG"/>
+      </attribute>
+      <attribute id="EIS_FLAG" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="EIS_FLAG"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="EIS_FLAG"/>
+      </attribute>
+      <attribute id="LOCKED_STATUS" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="LOCKED_STATUS"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="LOCKED_STATUS"/>
+      </attribute>
+      <attribute id="ALLOW_CURR" order="15" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ALLOW_CURR"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="ALLOW_CURR"/>
+      </attribute>
+      <attribute id="DEF_CURR" order="16" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DEF_CURR"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="DEF_CURR"/>
+      </attribute>
+      <attribute id="DEF_CURR_FROM" order="17" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DEF_CURR_FROM"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="DEF_CURR_FROM"/>
+      </attribute>
+      <attribute id="PARTIC_EIC" order="18" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PARTIC_EIC"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="PARTIC_EIC"/>
+      </attribute>
+      <attribute id="TRADE_COUNTRY_CODE" order="19" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TRADE_COUNTRY_CODE"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="TRADE_COUNTRY_CODE"/>
+      </attribute>
+      <attribute id="COMMODITY" order="20" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="COMMODITY"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="COMMODITY"/>
+      </attribute>
+      <attribute id="VAT_COUNT" order="21" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="VAT_COUNT"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="VAT_COUNT"/>
+      </attribute>
+      <attribute id="VAT_COUNT_FROM" order="22" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="VAT_COUNT_FROM"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="VAT_COUNT_FROM"/>
+      </attribute>
+      <attribute id="GAS_VAT_COUNT" order="23" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="GAS_VAT_COUNT"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="GAS_VAT_COUNT"/>
+      </attribute>
+      <attribute id="GAS_VAT_COUNT_FROM" order="24" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="GAS_VAT_COUNT_FROM"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="GAS_VAT_COUNT_FROM"/>
+      </attribute>
+      <attribute id="ETAX_WITHOUT_TAX_FROM" order="25" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ETAX_WITHOUT_TAX_FROM"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="ETAX_WITHOUT_TAX_FROM"/>
+      </attribute>
+      <attribute id="ETAX_WITHOUT_TAX_TO" order="26" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ETAX_WITHOUT_TAX_TO"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="ETAX_WITHOUT_TAX_TO"/>
+      </attribute>
+      <attribute id="ETAX_TAX_FREE_FROM" order="27" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ETAX_TAX_FREE_FROM"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="ETAX_TAX_FREE_FROM"/>
+      </attribute>
+      <attribute id="ETAX_TAX_FREE_TO" order="28" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ETAX_TAX_FREE_TO"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="ETAX_TAX_FREE_TO"/>
+      </attribute>
+      <attribute id="GTAX_WITHOUT_TAX_FROM" order="29" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="GTAX_WITHOUT_TAX_FROM"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="GTAX_WITHOUT_TAX_FROM"/>
+      </attribute>
+      <attribute id="GTAX_WITHOUT_TAX_TO" order="30" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="GTAX_WITHOUT_TAX_TO"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="GTAX_WITHOUT_TAX_TO"/>
+      </attribute>
+      <attribute id="GTAX_TAX_FREE_FROM" order="31" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="GTAX_TAX_FREE_FROM"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="GTAX_TAX_FREE_FROM"/>
+      </attribute>
+      <attribute id="GTAX_TAX_FREE_TO" order="32" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="GTAX_TAX_FREE_TO"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="GTAX_TAX_FREE_TO"/>
+      </attribute>
+      <attribute id="ADR_ID_PRE" order="33" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ADR_ID_PRE"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="ADR_ID_PRE"/>
+      </attribute>
+      <attribute id="ADR_ID_PRP" order="34" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ADR_ID_PRP"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="ADR_ID_PRP"/>
+      </attribute>
+      <attribute id="ORG_SLOZKA" order="35" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ORG_SLOZKA"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="ORG_SLOZKA"/>
+      </attribute>
+      <attribute id="STATUS" order="36" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="STATUS"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PARTICIPANTS_V" columnName="STATUS"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures/>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

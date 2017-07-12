@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CV_KMEN3" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" analyticViewCompatibilityMode="true" calculationScenarioType="SCRIPT_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" propagateInstantiation="true" runWithInvokerPrivileges="true" scriptParametersCaseSensitive="true">
+  <descriptions defaultDescription="CV_KMEN3"/>
+  <defaultSchema schemaName="OTEBW_TEST_CLT_CD2"/>
+  <localVariables>
+    <variable id="X_TST" parameter="true">
+      <descriptions defaultDescription="X_TST"/>
+      <variableProperties datatype="TIMESTAMP" defaultValue="CURRENT_TIMESTAMP" mandatory="true">
+        <valueDomain type="Date"/>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+  </localVariables>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources/>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:SqlScriptView" id="Script_View">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute datatype="NVARCHAR" id="EXT_UI" length="18"/>
+        <viewAttribute datatype="NVARCHAR" id="INT_UI" length="22"/>
+        <viewAttribute datatype="NVARCHAR" id="ANLAGE" length="10"/>
+        <viewAttribute datatype="NVARCHAR" id="ANLART" length="4"/>
+        <viewAttribute datatype="NVARCHAR" id="SPEBENE" length="2"/>
+        <viewAttribute datatype="NVARCHAR" id="GRID_ID" length="10"/>
+        <viewAttribute datatype="NVARCHAR" id="MTYPE" length="1"/>
+        <viewAttribute datatype="INTEGER" id="CLASS"/>
+        <viewAttribute datatype="INTEGER" id="AREA"/>
+        <viewAttribute datatype="NVARCHAR" id="SUSPEND" length="1"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <localVariable>#X_TST</localVariable>
+      <definition>BEGIN 
+ 	 var_out = select left(EUITRANS.EXT_UI,18) as EXT_UI, EUIINSTLN.INT_UI, EUIINSTLN.ANLAGE, EANL.ANLART, EANL.SPEBENE, EUIGRID.GRID_ID,
+              ifnull(left(FN_TypM.STRING1,1),' ') as MTYPE, ifnull(cast(FN_Area.WERT1 as int),0) as CLASS, ifnull(cast(FN_Class.WERT1 as int),0) as AREA, ifnull(FN_Susp.STRING3,' ') as SUSPEND
+  from &quot;OTEBW_TEST_CLT_CD2&quot;.EANL_CHG as EANL
+       inner join &quot;OTEBW_TEST_CLT_CD2&quot;.EUIINSTLN_CHG as EUIINSTLN on
+         EUIINSTLN.MANDT  = '100' and
+         EUIINSTLN.ANLAGE = EANL.ANLAGE
+       inner join &quot;OTEBW_TEST_CLT_CD2&quot;.&quot;EUIGRID_CHG&quot; as EUIGRID on
+         EUIGRID.MANDT  = '100' and
+         EUIGRID.INT_UI = EUIINSTLN.INT_UI
+       inner join &quot;OTEBW_TEST_CLT_CD2&quot;.&quot;EUITRANS_CHG&quot; as EUITRANS on
+         EUITRANS.MANDT  = '100' and
+         EUITRANS.INT_UI = EUIINSTLN.INT_UI
+       left outer join &quot;OTEBW_TEST_CLT_CD2&quot;.&quot;ETTIFN_CHG&quot; as FN_TypM on
+         FN_TypM.MANDT   = '100' and
+         FN_TypM.ANLAGE  = EANL.ANLAGE and
+         FN_TypM.OPERAND = 'CDS_TYPM'
+       left outer join &quot;OTEBW_TEST_CLT_CD2&quot;.&quot;ETTIFN_CHG&quot; as FN_Area on
+         FN_Area.MANDT = '100' and
+         FN_Area.ANLAGE = EANL.ANLAGE and
+         FN_Area.OPERAND = 'CDS_AREA'
+       left outer join &quot;OTEBW_TEST_CLT_CD2&quot;.&quot;ETTIFN_CHG&quot; as FN_Class on
+         FN_Class.MANDT = '100' and
+         FN_Class.ANLAGE = EANL.ANLAGE and
+         FN_Class.OPERAND = 'CDS_CLASS'
+       left outer join &quot;OTEBW_TEST_CLT_CD2&quot;.&quot;ETTIFN_CHG&quot; as FN_Susp on
+         FN_Susp.MANDT = '100' and
+         FN_Susp.ANLAGE = EANL.ANLAGE and
+         FN_Susp.OPERAND = 'POZ_ZAS_DT'
+  where EANL.MANDT        =  '100'
+    and EUITRANS.TST      &lt;= :X_TST
+    and EUITRANS.TST_TO   >  :X_TST
+    and EUIINSTLN.TST     &lt;= :X_TST
+    and EUIINSTLN.TST_TO  >  :X_TST
+    and EANL.TST          &lt;= :X_TST
+    and EANL.TST_TO       >  :X_TST
+    and EUIGRID.TST       &lt;= :X_TST
+    and EUIGRID.TST_TO    >  :X_TST
+    and (FN_TypM.TST is null or (FN_TypM.TST       &lt;= :X_TST
+                             and FN_TypM.TST_TO    >  :X_TST))
+    and (FN_Area.TST is null or (FN_Area.TST       &lt;= :X_TST
+                              and FN_Area.TST_TO   >  :X_TST))
+    and (FN_Class.TST is null or (FN_Class.TST     &lt;= :X_TST
+                              and FN_Class.TST_TO  >  :X_TST))
+    and (FN_Susp.TST is null or (FN_Susp.TST       &lt;= :X_TST
+                             and FN_Susp.TST_TO    >  :X_TST));
+ 
+END</definition>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Script_View">
+    <descriptions/>
+    <attributes>
+      <attribute id="EXT_UI" order="1">
+        <descriptions defaultDescription="EXT_UI"/>
+        <keyMapping columnObjectName="Script_View" columnName="EXT_UI"/>
+      </attribute>
+      <attribute id="INT_UI" order="2">
+        <descriptions defaultDescription="INT_UI"/>
+        <keyMapping columnObjectName="Script_View" columnName="INT_UI"/>
+      </attribute>
+      <attribute id="ANLAGE" order="3">
+        <descriptions defaultDescription="ANLAGE"/>
+        <keyMapping columnObjectName="Script_View" columnName="ANLAGE"/>
+      </attribute>
+      <attribute id="ANLART" order="4">
+        <descriptions defaultDescription="ANLART"/>
+        <keyMapping columnObjectName="Script_View" columnName="ANLART"/>
+      </attribute>
+      <attribute id="SPEBENE" order="5">
+        <descriptions defaultDescription="SPEBENE"/>
+        <keyMapping columnObjectName="Script_View" columnName="SPEBENE"/>
+      </attribute>
+      <attribute id="GRID_ID" order="6">
+        <descriptions defaultDescription="GRID_ID"/>
+        <keyMapping columnObjectName="Script_View" columnName="GRID_ID"/>
+      </attribute>
+      <attribute id="MTYPE" order="7">
+        <descriptions defaultDescription="MTYPE"/>
+        <keyMapping columnObjectName="Script_View" columnName="MTYPE"/>
+      </attribute>
+      <attribute id="SUSPEND" order="10">
+        <descriptions defaultDescription="SUSPEND"/>
+        <keyMapping columnObjectName="Script_View" columnName="SUSPEND"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="CLASS" order="8" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CLASS"/>
+        <measureMapping columnObjectName="Script_View" columnName="CLASS"/>
+      </measure>
+      <measure id="AREA" order="9" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="AREA"/>
+        <measureMapping columnObjectName="Script_View" columnName="AREA"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

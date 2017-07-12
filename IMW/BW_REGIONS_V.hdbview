@@ -1,0 +1,15 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW";
+
+query = "SELECT
+   REG_CODE as kod_prodis,
+   REG_DESC,
+   MAP_SAP as kod_sap
+FROM
+   OTEBW_IMW.rpl_regions";
+
+depends_on_table=["OTEBW_IMW::rpl_regions"];  
+

@@ -1,0 +1,22 @@
+schema="OTEBW_CD";
+
+query="select
+		PROFVAL60.version,
+		PROFVAL60.valtime,
+		PROFVAL60.val,
+		TO_DATE(UTCTOLOCAL(PROFVAL60.valtime,'CET')) as g_date,
+		PROFVAL60.g_period,
+		PROFVAL60.profile,
+		elpass.profrole,
+		(select mass from \"OTEBW_CD\".\"CD::1E_EPROFHEAD\" (CURRENT_TIMESTAMP) where profile = PROFVAL60.profile ) as mass,
+		left(elpass.OBJKEY,10) as anlage
+	from 	\"OTEBW_CD\".\"SE_PROFVAL60\" as PROFVAL60 
+		inner join \"OTEBW_CD\".\"ELPASS_CHG\" as elpass on
+			elpass.MANDT='100' and 
+			(not elpass.CLT_ACTION='D') and 
+			elpass.CLT_TST<=CURRENT_TIMESTAMP and 
+			elpass.CLT_TST_TO>=CURRENT_TIMESTAMP and 
+			elpass.OBJTYPE='INSTLN'	and	
+		 elpass.profile = PROFVAL60.profile and 
+	 	 PROFVAL60.stat <> '99'
+";

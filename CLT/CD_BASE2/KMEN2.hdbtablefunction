@@ -1,0 +1,63 @@
+FUNCTION "OTEBW_TEST_CLT_CD2"."CLT.CD_BASE2::KMEN2" ( in x_TST timestamp ) 
+	RETURNS TABLE (EXT_UI nvarchar(18), INT_UI nvarchar(22), ANLAGE nvarchar(10), ANLART nvarchar(4), SPEBENE nvarchar(2), GRID_ID nvarchar(10),
+	               MTYPE nvarchar(1))
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER AS
+BEGIN
+return select left(EUITRANS.EXT_UI,18) as EXT_UI, EUIINSTLN.INT_UI, EUIINSTLN.ANLAGE, EANL.ANLART, EANL.SPEBENE, EUIGRID.GRID_ID,
+              left(FN_TypM.STRING1,1) as MTYPE
+  from "OTEBW_TEST_CLT_CD2".EANL_CHG as EANL
+       inner join "OTEBW_TEST_CLT_CD2".EUIINSTLN_CHG as EUIINSTLN on
+         EUIINSTLN.MANDT  = '100' and
+         EUIINSTLN.ANLAGE = EANL.ANLAGE
+       inner join "OTEBW_TEST_CLT_CD2"."EUIGRID_CHG" as EUIGRID on
+         EUIGRID.MANDT  = '100' and
+         EUIGRID.INT_UI = EUIINSTLN.INT_UI
+       inner join "OTEBW_TEST_CLT_CD2"."EUITRANS_CHG" as EUITRANS on
+         EUITRANS.MANDT  = '100' and
+         EUITRANS.INT_UI = EUIINSTLN.INT_UI
+       left outer join "OTEBW_TEST_CLT_CD2"."ETTIFN_CHG" as FN_TypM on
+         FN_TypM.MANDT   = '100' and
+         FN_TypM.ANLAGE  = EANL.ANLAGE and
+         FN_TypM.OPERAND = 'CDS_TYPM'
+  where EANL.MANDT        =  '100'
+    and EUITRANS.TST      <= :x_TST
+    and EUITRANS.TST_TO   >  :x_TST
+    and EUIINSTLN.TST     <= :x_TST
+    and EUIINSTLN.TST_TO  >  :x_TST
+    and EANL.TST          <= :x_TST
+    and EANL.TST_TO       >  :x_TST
+    and EUIGRID.TST       <= :x_TST
+    and EUIGRID.TST_TO    >  :x_TST
+    and (FN_TypM.TST is null or (FN_TypM.TST       <= :x_TST
+                             and FN_TypM.TST_TO    >  :x_TST));
+
+/*
+select LEFT(EUITRANS.EXT_UI,18) as EXT_UI, EUIINSTLN.INT_UI, EUIINSTLN.ANLAGE, EANL.ANLART, EANL.SPEBENE, EUIGRID.GRID_ID, LEFT(FN_TypM.STRING1,1) as MTYPE
+  from "OTEBW_TEST_CLT_CD2"."EUITRANS_CHG" as EUITRANS
+       inner join "OTEBW_TEST_CLT_CD2"."EUIINSTLN_CHG" as EUIINSTLN on
+         EUIINSTLN.MANDT  = '100' and
+         EUIINSTLN.INT_UI = EUITRANS.INT_UI
+       inner join "OTEBW_TEST_CLT_CD2"."EANL_CHG" as EANL on
+         EANL.MANDT  = '100' and
+         EANL.ANLAGE = EUIINSTLN.ANLAGE
+       inner join "OTEBW_TEST_CLT_CD2"."EUIGRID_CHG" as EUIGRID on
+         EUIGRID.MANDT  = '100' and
+         EUIGRID.INT_UI = EUITRANS.INT_UI
+       left outer join "OTEBW_TEST_CLT_CD2"."ETTIFN_CHG" as FN_TypM on
+         FN_TypM.MANDT   = '100' and
+         FN_TypM.ANLAGE  = EUIINSTLN.ANLAGE and
+         FN_TypM.OPERAND = 'CDS_TYPM'
+  where EUITRANS.MANDT    =  '100'
+    and EUITRANS.TST      <= :x_TST
+    and EUITRANS.TST_TO   >  :x_TST
+    and EUIINSTLN.TST     <= :x_TST
+    and EUIINSTLN.TST_TO  >  :x_TST
+    and EANL.TST          <= :x_TST
+    and EANL.TST_TO       >  :x_TST
+    and EUIGRID.TST       <= :x_TST
+    and EUIGRID.TST_TO    >  :x_TST
+    and (FN_TypM.TST is null or (FN_TypM.TST <= :x_TST and FN_TypM.TST_TO > :x_TST));
+*/
+
+END;

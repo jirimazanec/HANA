@@ -1,0 +1,47 @@
+PROCEDURE "OTEBW_TEST_IMW"."IMW::TRANS_IMW_RUT" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA OTEBW_TEST_IMW AS
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+ 
+ /*  
+   --RPD_PARTICIPANTS       
+   t_RPD_PARTICIPANTS = select * from REMOTE_RPD_PARTICIPANTS where CHANGE_TIME > (select max(CHANGE_TIME) from RPD_PARTICIPANTS);
+  -- select * from REMOTE_RPD_PARTICIPANTS where CHANGE_TIME > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS') order by CHANGE_TIME;
+   -- vymaz zmenenych    
+   delete from RPD_PARTICIPANTS where partic_id in (select partic_id from :t_RPD_PARTICIPANTS);
+   -- vlozeni - nove + menene
+   insert into RPD_PARTICIPANTS select * from :t_RPD_PARTICIPANTS;
+   
+   --RPD_PARTICIPANTS_ATT
+   select to_char(max(CHANGE_TIME),'DD-MM-YYYY HH24:MI:SS')
+     into l_TS
+     from RPD_PARTICIPANTS_ATT;
+   t_RPD_PARTICIPANTS_ATT = select * from REMOTE_RPD_PARTICIPANTS_ATT where CHANGE_TIME > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS') order by CHANGE_TIME;
+   -- vymaz zmenenych    
+   delete from RPD_PARTICIPANTS_ATT where partic_id in (select partic_id from :t_RPD_PARTICIPANTS_ATT);
+   -- vlozeni - nove + menene
+   insert into RPD_PARTICIPANTS_ATT select * from :t_RPD_PARTICIPANTS_ATT;
+   
+   --RPD_PARTICIPANTS_HIST  
+   select to_char(max(CHANGE_TIME_TO),'DD-MM-YYYY HH24:MI:SS')
+     into l_TS
+     from RPD_PARTICIPANTS_HIST;        
+   t_RPD_PARTICIPANTS_HIST = select * from REMOTE_RPD_PARTICIPANTS_HIST where CHANGE_TIME_TO > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS') order by CHANGE_TIME;
+   -- vlozeni 
+   insert into RPD_PARTICIPANTS_HIST select * from :t_RPD_PARTICIPANTS_HIST;
+*/
+   
+ -- změna načítáme vše   
+   truncate table OTEBW_TEST_IMW.RPD_PARTICIPANTS;
+   insert into OTEBW_TEST_IMW.RPD_PARTICIPANTS select * from OTEBW_TEST_IMW.REMOTE_RPD_PARTICIPANTS;
+   truncate table OTEBW_TEST_IMW.RPD_PARTICIPANTS_ATT;
+   insert into OTEBW_TEST_IMW.RPD_PARTICIPANTS_ATT select * from OTEBW_TEST_IMW.REMOTE_RPD_PARTICIPANTS_ATT;
+   truncate table OTEBW_TEST_IMW.RPD_PARTICIPANTS_HIST;
+   insert into OTEBW_TEST_IMW.RPD_PARTICIPANTS_HIST select * from OTEBW_TEST_IMW.REMOTE_RPD_PARTICIPANTS_HIST;
+   
+ 
+END;

@@ -1,0 +1,43 @@
+schema="OTEBW_CD";
+
+query="SELECT
+	MAIN.BUSDAY,
+	MAIN.EXT_UI,
+	MAIN.INT_UI,
+	MAIN.ANLAGE,
+	MAIN.ANLART,
+	MAIN.SPEBENE,
+	MAIN.GRID_ID,
+	ETTIFN_MAIN.MTYPE,
+	ETTIFN_MAIN.CLASS,
+	ETTIFN_MAIN.AREA,
+	ETTIFN_SECOND.SUSPEND,
+	ETTIFN_SECOND.CDS_POWER,
+	ETTIFN_SECOND.RES_POWER,
+	ETTIFN_SECOND.KOGEN,
+	ETTIFN_SECOND.GREEN,
+	ETTIFN_SECOND.NEXTGRID,
+	ETTIFN_SECOND.NEXTPDT,
+	MAIN.UITEXT, 
+	ETTIFN_SECOND.IMPEXP,
+	ETTIFN_SECOND.MICRO_SRC,
+	SERVICES.DIST,
+	SERVICES.SUPP,
+	SERVICES.SZ,
+	SERVICES.PPS,
+	(select right (concat('00000', partic_id), 5) from \"OTEBW_IMW\".\"IMW::BW_PARTICIPANTS_V\" where partic_ean = SERVICES.dist ) as dist_rut,
+	(select right (concat('00000', partic_id), 5) from \"OTEBW_IMW\".\"IMW::BW_PARTICIPANTS_V\" where partic_ean = SERVICES.supp )  as supp_rut,
+	(select right (concat('00000', partic_id), 5) from \"OTEBW_IMW\".\"IMW::BW_PARTICIPANTS_V\" where partic_ean = SERVICES.sz )  as sz_rut,
+	(select right (concat('00000', partic_id), 5) from \"OTEBW_IMW\".\"IMW::BW_PARTICIPANTS_V\" where partic_ean = SERVICES.pps )  as pps_rut
+from \"OTEBW_CD\".\"CD::2E_OPM_MAIN\" as MAIN
+	   inner join \"OTEBW_CD\".\"CD::2E_OPM_ETTIFN_MAIN\" as ETTIFN_MAIN on
+	   MAIN.BUSDAY = CURRENT_DATE AND
+	     MAIN.BUSDAY = ETTIFN_MAIN.BUSDAY and
+	     MAIN.ANLAGE   =  ETTIFN_MAIN.ANLAGE 
+	   inner join \"OTEBW_CD\".\"CD::2E_OPM_ETTIFN_SECOND\" as ETTIFN_SECOND on
+	     MAIN.BUSDAY = ETTIFN_SECOND.BUSDAY and
+	     MAIN.ANLAGE   =  ETTIFN_SECOND.ANLAGE 
+	   inner join \"OTEBW_CD\".\"CD::2E_OPM_SERVICES\" as SERVICES on
+	     MAIN.BUSDAY = SERVICES.BUSDAY and
+	     MAIN.INT_UI   =  SERVICES.INT_UI 
+";

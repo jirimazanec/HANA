@@ -1,0 +1,23 @@
+PROCEDURE "OTEBW_TEST_IMW"."IMW::TRANS_IMW_RE" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA OTEBW_TEST_IMW
+	AS
+BEGIN
+	declare l_id bigint;
+	
+   --RE_HEADS
+   select max(ID_BATCH)
+     into l_id
+     from RE_HEADS;
+     
+   insert into OTEBW_TEST_IMW.RE_HEADS select * from OTEBW_TEST_IMW.REMOTE_RE_HEADS where ID_BATCH > :l_id;
+
+   --RE_EL_POSITIONS
+   insert into OTEBW_TEST_IMW.RE_EL_POSITIONS select * from OTEBW_TEST_IMW.REMOTE_RE_EL_POSITIONS where ID_BATCH > :l_id;
+
+   --RE_GAS_POSITIONS
+   insert into OTEBW_TEST_IMW.RE_GAS_POSITIONS select * from OTEBW_TEST_IMW.REMOTE_RE_GAS_POSITIONS where ID_BATCH > :l_id;
+
+
+END;

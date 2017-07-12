@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="2E_PDT2" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="SCRIPT_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" scriptParametersCaseSensitive="true">
+  <descriptions defaultDescription="2E_PDT2"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources/>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:SqlScriptView" id="Script_View">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute datatype="NVARCHAR" id="BUSDAY" length="8"/>
+        <viewAttribute datatype="NVARCHAR" id="EXT_UI" length="18" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="INT_UI" length="22" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="ANLAGE" length="10" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="ANLART" length="4" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="SPEBENE" length="2" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="GRID_ID" length="10" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="MTYPE" length="1" scale="0"/>
+        <viewAttribute datatype="INTEGER" id="CLASS" length="10" scale="0"/>
+        <viewAttribute datatype="INTEGER" id="AREA" length="10" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="SUSPEND" length="1" scale="0"/>
+        <viewAttribute datatype="DECIMAL" id="CDS_POWER" length="17" scale="3"/>
+        <viewAttribute datatype="DECIMAL" id="RES_POWER" length="17" scale="3"/>
+        <viewAttribute datatype="INTEGER" id="GREEN"/>
+        <viewAttribute datatype="NVARCHAR" id="NEXTGRID" length="4" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="UITEXT" length="60" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="IMPEXP" length="1" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="MICRO_SRC" length="1" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="DIST" length="13" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="SUPP" length="13" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="SZ" length="13" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="PPS" length="13" scale="0"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <definition> 
+ /********* Begin Procedure Script ************/ 
+ BEGIN 
+ 	 var_out =  SELECT
+       BUSDAYS.BUS_DATE as BUSDAY,
+       left(EUITRANS.EXT_UI,18) as EXT_UI,
+       EUIINSTLN.INT_UI,
+       EANL.ANLAGE,
+       EANL.ANLART,
+       EANL.SPEBENE,
+       EUIGRID.GRID_ID,
+       ifnull(left(FN_TypM.STRING1,1),' ') as MTYPE,
+       ifnull(cast(FN_Area.WERT1 as int),0) as CLASS,
+       ifnull(cast(FN_Class.WERT1 as int),0) as AREA,
+       ifnull(FN_Susp.STRING3,' ') as SUSPEND,
+       ifnull(cast(FN_InstPower.WERT1 as dec(17,3)),0) as CDS_POWER, 
+       ifnull(cast(FN_ResPower.WERT1 as dec(17,3)),0) as RES_POWER,
+       ifnull(cast(FN_Green.WERT1 as int),0) as GREEN,
+       ifnull(left(FN_SS.STRING1,4),'') as NEXTGRID,
+       ZEUIHEADT.UITEXT, 
+       ifnull(FN_IMPEXP.STRING3,'') as IMPEXP,
+       ifnull(FN_MICROSRC.STRING3,'') as MICRO_SRC,
+       ifnull(left(SERVDIST.SRVPRVREF,13),'') as DIST,
+       ifnull(left(SERVSUPP.SRVPRVREF,13),'') as SUPP,
+       ifnull(left(SERVSZ.SRVPRVREF,13),'') as SZ,
+       ifnull(left(SERVPPS.SRVPRVREF,13),'') as PPS
+
+from OTEBW_CD.EANL_CHG as EANL
+inner join OTEBW_CD.EUIINSTLN_CHG as EUIINSTLN on
+       EUIINSTLN.ANLAGE   =  EANL.ANLAGE
+inner join OTEBW_CD.EUIGRID_CHG as EUIGRID on
+    EUIGRID.INT_UI   =  EUIINSTLN.INT_UI
+inner join OTEBW_CD.EUITRANS_CHG as EUITRANS on
+    EUITRANS.INT_UI    =  EUIINSTLN.INT_UI     
+inner join OTEBW_CD.Z1BUS_DAYS as BUSDAYS on
+       EUIINSTLN.DATEFROM &lt;= BUSDAYS.BUS_DATE and
+       EUIINSTLN.DATETO   >= BUSDAYS.BUS_DATE and
+       EUIGRID.DATEFROM &lt;= BUSDAYS.BUS_DATE and
+    EUIGRID.DATETO   >= BUSDAYS.BUS_DATE and
+    EUITRANS.DATEFROM  &lt;= BUSDAYS.BUS_DATE and
+    EUITRANS.DATETO    >= BUSDAYS.BUS_DATE
+    
+    and BUSDAYS.BUS_DATE = '20150101'
+
+/* FN_TypM */
+
+left outer join OTEBW_CD.ETTIFN_CHG as FN_TypM on
+       FN_TypM.MANDT = '100' and
+       (not FN_TypM.CLT_ACTION='D') and
+       FN_TypM.CLT_TST &lt;= CURRENT_TIMESTAMP and
+       FN_TypM.CLT_TST_TO >= CURRENT_TIMESTAMP and
+       FN_TypM.ANLAGE  =  EANL.ANLAGE and
+       FN_TypM.OPERAND =  'CDS_TYPM' and
+       FN_TypM.AB      &lt;= BUSDAYS.BUS_DATE and
+       FN_TypM.BIS     >= BUSDAYS.BUS_DATE
+
+/* FN_AREA */
+
+left outer join OTEBW_CD.ETTIFN_CHG as FN_Area on
+       FN_Area.MANDT = '100' and
+       (not FN_Area.CLT_ACTION='D') and
+       FN_Area.CLT_TST &lt;= CURRENT_TIMESTAMP and
+       FN_Area.CLT_TST_TO >= CURRENT_TIMESTAMP and
+       FN_Area.ANLAGE  =  EANL.ANLAGE and
+       FN_Area.OPERAND =  'CDS_AREA' and
+       FN_Area.AB      &lt;= BUSDAYS.BUS_DATE and
+       FN_Area.BIS     >= BUSDAYS.BUS_DATE
+
+/* FN_CLASS */
+
+left outer join OTEBW_CD.ETTIFN_CHG as FN_Class on
+       FN_Class.MANDT = '100' and
+       (not FN_Class.CLT_ACTION='D') and
+       FN_Class.CLT_TST &lt;= CURRENT_TIMESTAMP and
+       FN_Class.CLT_TST_TO >= CURRENT_TIMESTAMP and
+    FN_Class.ANLAGE  =  EANL.ANLAGE and
+    FN_Class.OPERAND =  'CDS_CLASS' and
+    FN_Class.AB      &lt;= BUSDAYS.BUS_DATE and
+    FN_Class.BIS     >= BUSDAYS.BUS_DATE
+
+/* POZ_ZAS_DT */
+
+left outer join OTEBW_CD.ETTIFN_CHG as FN_Susp on
+       FN_Susp.MANDT = '100' and
+       (not FN_Class.CLT_ACTION='D') and
+       FN_Susp.CLT_TST &lt;= CURRENT_TIMESTAMP and
+       FN_Susp.CLT_TST_TO >= CURRENT_TIMESTAMP and
+    FN_Susp.ANLAGE  =  EANL.ANLAGE and
+    FN_Susp.OPERAND =  'POZ_ZAS_DT' and
+    FN_Susp.AB      &lt;= BUSDAYS.BUS_DATE and
+    FN_Susp.BIS     >= BUSDAYS.BUS_DATE
+
+/* CDS_POWER */
+
+left outer join OTEBW_CD.ETTIFN_CHG as FN_InstPower on
+       FN_InstPower.MANDT = '100' and
+       (not FN_InstPower.CLT_ACTION='D') and
+       FN_InstPower.CLT_TST &lt;= CURRENT_TIMESTAMP and
+       FN_InstPower.CLT_TST_TO >= CURRENT_TIMESTAMP and
+    FN_InstPower.ANLAGE  =  EANL.ANLAGE and
+    FN_InstPower.OPERAND =  'CDS_POWER' and
+    FN_InstPower.AB      &lt;= BUSDAYS.BUS_DATE and
+    FN_InstPower.BIS     >= BUSDAYS.BUS_DATE
+
+/* RES_POWER */
+
+left outer join OTEBW_CD.ETTIFN_CHG as FN_ResPower on
+       FN_ResPower.MANDT = '100' and
+       (not FN_ResPower.CLT_ACTION='D') and
+       FN_ResPower.CLT_TST &lt;= CURRENT_TIMESTAMP and
+       FN_ResPower.CLT_TST_TO >= CURRENT_TIMESTAMP and
+    FN_ResPower.ANLAGE  =  EANL.ANLAGE and
+    FN_ResPower.OPERAND =  'RES_POWER' and
+    FN_ResPower.AB      &lt;= BUSDAYS.BUS_DATE and
+    FN_ResPower.BIS     >= BUSDAYS.BUS_DATE
+
+/* CDS_OBNOV */
+
+left outer join OTEBW_CD.ETTIFN_CHG as FN_Green on
+       FN_Green.MANDT = '100' and
+       (not FN_Green.CLT_ACTION='D') and
+       FN_Green.CLT_TST &lt;= CURRENT_TIMESTAMP and
+       FN_Green.CLT_TST_TO >= CURRENT_TIMESTAMP and
+    FN_Green.ANLAGE  =  EANL.ANLAGE and
+    FN_Green.OPERAND =  'CDS_OBNOV' and
+    FN_Green.AB      &lt;= BUSDAYS.BUS_DATE and
+    FN_Green.BIS     >= BUSDAYS.BUS_DATE
+
+
+/* CDS_SS */
+
+left outer join OTEBW_CD.ETTIFN_CHG as FN_SS on
+       FN_SS.MANDT = '100' and
+       (not FN_SS.CLT_ACTION='D') and
+       FN_SS.CLT_TST &lt;= CURRENT_TIMESTAMP and
+       FN_SS.CLT_TST_TO >= CURRENT_TIMESTAMP and
+    FN_SS.ANLAGE  =  EANL.ANLAGE and
+    FN_SS.OPERAND =  'CDS_SS' and
+    FN_SS.AB      &lt;= BUSDAYS.BUS_DATE and
+    FN_SS.BIS     >= BUSDAYS.BUS_DATE
+    
+
+/* C */
+    
+left outer join OTEBW_CD.ZEUIHEADT_CHG as ZEUIHEADT on
+       ZEUIHEADT.MANDT = '100' and
+       (not ZEUIHEADT.CLT_ACTION='D') and
+       ZEUIHEADT.CLT_TST &lt;= CURRENT_TIMESTAMP and
+       ZEUIHEADT.CLT_TST_TO >= CURRENT_TIMESTAMP and
+    ZEUIHEADT.INT_UI =  EUIINSTLN.INT_UI and
+    ZEUIHEADT.SPRAS  =  'C' and
+    ZEUIHEADT.AB     &lt;= BUSDAYS.BUS_DATE and
+    ZEUIHEADT.BIS    >= BUSDAYS.BUS_DATE
+
+/* FN_IMPEXP */
+
+left outer join OTEBW_CD.ETTIFN_CHG as FN_IMPEXP on
+       FN_IMPEXP.MANDT = '100' and
+       (not FN_IMPEXP.CLT_ACTION='D') and
+       FN_IMPEXP.CLT_TST &lt;= CURRENT_TIMESTAMP and
+       FN_IMPEXP.CLT_TST_TO >= CURRENT_TIMESTAMP and
+    FN_IMPEXP.ANLAGE  =  EANL.ANLAGE and
+    FN_IMPEXP.OPERAND =  'CDS_IMPEXP' and
+    FN_IMPEXP.AB      &lt;= BUSDAYS.BUS_DATE and
+    FN_IMPEXP.BIS     >= BUSDAYS.BUS_DATE
+
+/* MICRO_SRC */
+
+left outer join OTEBW_CD.ETTIFN_CHG as FN_MICROSRC on
+       FN_MICROSRC.MANDT = '100' and
+       (not FN_MICROSRC.CLT_ACTION='D') and
+       FN_MICROSRC.CLT_TST &lt;= CURRENT_TIMESTAMP and
+       FN_MICROSRC.CLT_TST_TO >= CURRENT_TIMESTAMP and
+    FN_MICROSRC.ANLAGE  =  EANL.ANLAGE and
+    FN_MICROSRC.OPERAND =  'MICRO_SRC' and
+    FN_MICROSRC.AB      &lt;= BUSDAYS.BUS_DATE and
+    FN_MICROSRC.BIS     >= BUSDAYS.BUS_DATE
+
+/* CDS_PPS */
+
+left outer join OTEBW_CD.ETTIFN_CHG as FN_PPS on
+       FN_PPS.MANDT = '100' and
+       (not FN_PPS.CLT_ACTION='D') and
+       FN_PPS.CLT_TST &lt;= CURRENT_TIMESTAMP and
+       FN_PPS.CLT_TST_TO >= CURRENT_TIMESTAMP and
+    FN_PPS.ANLAGE  =  EANL.ANLAGE and
+    FN_PPS.OPERAND =  'CDS_PPS' and
+    FN_PPS.AB      &lt;= BUSDAYS.BUS_DATE and
+    FN_PPS.BIS     >= BUSDAYS.BUS_DATE
+
+/* 0013 */
+
+left outer join OTEBW_CD.ESERVICE_CHG as SERVDIST on
+       SERVDIST.MANDT = '100' and
+       (not SERVDIST.CLT_ACTION='D') and
+       SERVDIST.CLT_TST &lt;= CURRENT_TIMESTAMP and
+       SERVDIST.CLT_TST_TO >= CURRENT_TIMESTAMP and
+    SERVDIST.INT_UI        =  EUIINSTLN.INT_UI and
+    SERVDIST.SERVICE       =  '0013' and
+    SERVDIST.SERVICE_START &lt;= BUSDAYS.BUS_DATE and
+    SERVDIST.SERVICE_END   >= BUSDAYS.BUS_DATE
+
+/* 0001 */
+
+left outer join OTEBW_CD.ESERVICE_CHG as SERVSUPP on
+       SERVSUPP.MANDT = '100' and
+       (not SERVSUPP.CLT_ACTION='D') and
+       SERVSUPP.CLT_TST &lt;= CURRENT_TIMESTAMP and
+       SERVSUPP.CLT_TST_TO >= CURRENT_TIMESTAMP and
+    SERVSUPP.INT_UI        =  EUIINSTLN.INT_UI and
+   SERVSUPP.SERVICE       =  '0001' and
+    SERVSUPP.SERVICE_START &lt;= BUSDAYS.BUS_DATE and
+    SERVSUPP.SERVICE_END   >= BUSDAYS.BUS_DATE
+
+/* 0011 */
+
+left outer join OTEBW_CD.ESERVICE_CHG as SERVSZ on
+             SERVSZ.MANDT = '100' and
+             (not SERVSZ.CLT_ACTION='D') and
+             SERVSZ.CLT_TST &lt;= CURRENT_TIMESTAMP and
+             SERVSZ.CLT_TST_TO >= CURRENT_TIMESTAMP and
+        SERVSZ.INT_UI        =  EUIINSTLN.INT_UI and
+        SERVSZ.SERVICE       =  '0011' and
+        SERVSZ.SERVICE_START &lt;= BUSDAYS.BUS_DATE and
+        SERVSZ.SERVICE_END   >= BUSDAYS.BUS_DATE
+
+/* 0012*/
+
+left outer join OTEBW_CD.ESERVICE_CHG as SERVPPS on
+             SERVPPS.MANDT = '100' and
+             (not SERVPPS.CLT_ACTION='D') and
+             SERVPPS.CLT_TST &lt;= CURRENT_TIMESTAMP and
+             SERVPPS.CLT_TST_TO >= CURRENT_TIMESTAMP and
+        SERVPPS.INT_UI        =  EUIINSTLN.INT_UI and
+        SERVPPS.SERVICE       =  '0012' and
+        SERVPPS.SERVICE_START &lt;= BUSDAYS.BUS_DATE and
+        SERVPPS.SERVICE_END   >= BUSDAYS.BUS_DATE
+
+where
+EANL.MANDT = '100' and
+(not EANL.CLT_ACTION='D') and
+EANL.CLT_TST &lt;= CURRENT_TIMESTAMP and
+EANL.CLT_TST_TO >= CURRENT_TIMESTAMP and
+EANL.LOEVM=char(32) and
+EUIINSTLN.MANDT = '100' and
+(not EUIINSTLN.CLT_ACTION='D') and
+EUIINSTLN.CLT_TST &lt;= CURRENT_TIMESTAMP and
+EUIINSTLN.CLT_TST_TO >= CURRENT_TIMESTAMP and
+EUIINSTLN.LOEVM=char(32);
+ 	 
+
+END /********* End Procedure Script ************/</definition>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Script_View">
+    <descriptions/>
+    <attributes>
+      <attribute id="BUSDAY" order="1">
+        <descriptions defaultDescription="KEYDATE"/>
+        <keyMapping columnObjectName="Script_View" columnName="BUSDAY"/>
+      </attribute>
+      <attribute id="EXT_UI" order="2">
+        <descriptions defaultDescription="EXT_UI"/>
+        <keyMapping columnObjectName="Script_View" columnName="EXT_UI"/>
+      </attribute>
+      <attribute id="INT_UI" order="3">
+        <descriptions defaultDescription="INT_UI"/>
+        <keyMapping columnObjectName="Script_View" columnName="INT_UI"/>
+      </attribute>
+      <attribute id="ANLAGE" order="4">
+        <descriptions defaultDescription="ANLAGE"/>
+        <keyMapping columnObjectName="Script_View" columnName="ANLAGE"/>
+      </attribute>
+      <attribute id="ANLART" order="5">
+        <descriptions defaultDescription="ANLART"/>
+        <keyMapping columnObjectName="Script_View" columnName="ANLART"/>
+      </attribute>
+      <attribute id="SPEBENE" order="6">
+        <descriptions defaultDescription="SPEBENE"/>
+        <keyMapping columnObjectName="Script_View" columnName="SPEBENE"/>
+      </attribute>
+      <attribute id="GRID_ID" order="7">
+        <descriptions defaultDescription="GRID_ID"/>
+        <keyMapping columnObjectName="Script_View" columnName="GRID_ID"/>
+      </attribute>
+      <attribute id="MTYPE" order="8">
+        <descriptions defaultDescription="MTYPE"/>
+        <keyMapping columnObjectName="Script_View" columnName="MTYPE"/>
+      </attribute>
+      <attribute id="SUSPEND" order="11">
+        <descriptions defaultDescription="SUSPEND"/>
+        <keyMapping columnObjectName="Script_View" columnName="SUSPEND"/>
+      </attribute>
+      <attribute id="NEXTGRID" order="15">
+        <descriptions defaultDescription="NEXTGRID"/>
+        <keyMapping columnObjectName="Script_View" columnName="NEXTGRID"/>
+      </attribute>
+      <attribute id="UITEXT" order="16">
+        <descriptions defaultDescription="UITEXT"/>
+        <keyMapping columnObjectName="Script_View" columnName="UITEXT"/>
+      </attribute>
+      <attribute id="IMPEXP" order="17">
+        <descriptions defaultDescription="IMPEXP"/>
+        <keyMapping columnObjectName="Script_View" columnName="IMPEXP"/>
+      </attribute>
+      <attribute id="MICRO_SRC" order="18">
+        <descriptions defaultDescription="MICRO_SRC"/>
+        <keyMapping columnObjectName="Script_View" columnName="MICRO_SRC"/>
+      </attribute>
+      <attribute id="DIST" order="19">
+        <descriptions defaultDescription="DIST"/>
+        <keyMapping columnObjectName="Script_View" columnName="DIST"/>
+      </attribute>
+      <attribute id="SUPP" order="20">
+        <descriptions defaultDescription="SUPP"/>
+        <keyMapping columnObjectName="Script_View" columnName="SUPP"/>
+      </attribute>
+      <attribute id="SZ" order="21">
+        <descriptions defaultDescription="SZ"/>
+        <keyMapping columnObjectName="Script_View" columnName="SZ"/>
+      </attribute>
+      <attribute id="PPS" order="22">
+        <descriptions defaultDescription="PPS"/>
+        <keyMapping columnObjectName="Script_View" columnName="PPS"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="CLASS" order="9" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CLASS"/>
+        <measureMapping columnObjectName="Script_View" columnName="CLASS"/>
+      </measure>
+      <measure id="AREA" order="10" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="AREA"/>
+        <measureMapping columnObjectName="Script_View" columnName="AREA"/>
+      </measure>
+      <measure id="CDS_POWER" order="12" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CDS_POWER"/>
+        <measureMapping columnObjectName="Script_View" columnName="CDS_POWER"/>
+      </measure>
+      <measure id="RES_POWER" order="13" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="RES_POWER"/>
+        <measureMapping columnObjectName="Script_View" columnName="RES_POWER"/>
+      </measure>
+      <measure id="GREEN" order="14" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="GREEN"/>
+        <measureMapping columnObjectName="Script_View" columnName="GREEN"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

@@ -1,0 +1,20 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW";
+
+query = "  SELECT
+   to_date(per.change_time) change_time
+  ,per.person_id
+  ,act.act_code
+  ,per.role_code
+  ,act.status_flag
+  ,act.default_flag
+FROM
+   OTEBW_IMW.add_role_pers per,
+   OTEBW_IMW.add_role_act act
+WHERE per.role_code = act.role_code";
+
+depends_on_table=["OTEBW_IMW::add_role_pers"];  
+depends_on_table=["OTEBW_IMW::add_role_act"];  

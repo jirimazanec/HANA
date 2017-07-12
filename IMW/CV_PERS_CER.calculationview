@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CV_PERS_CER" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Projection">
+  <origin/>
+  <descriptions defaultDescription="Certifikáty"/>
+  <metadata changedAt="2017-06-06 14:48:36.851"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="40"/>
+  <dataSources>
+    <DataSource id="IMW::BW_PERS_CERTS_V" type="DATA_BASE_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERS_CERTS_V"/>
+    </DataSource>
+    <DataSource id="CV_PERSONS" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/IMW/calculationviews/CV_PERSONS</resourceUri>
+    </DataSource>
+    <DataSource id="Projection_3$$$$CV_PERSONS$$" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/IMW/calculationviews/CV_PERSONS</resourceUri>
+    </DataSource>
+    <DataSource id="Projection_4$$$$CV_PERSONS$$" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/IMW/calculationviews/CV_PERSONS</resourceUri>
+    </DataSource>
+    <DataSource id="CV_PARTICIPANT" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/IMW/calculationviews/CV_PARTICIPANT</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERSON_ID"/>
+        <viewAttribute id="CERT_VALID_FROM"/>
+        <viewAttribute id="CERT_CHANGE_TIME"/>
+        <viewAttribute id="CERT_VALID_TO"/>
+        <viewAttribute id="CHANGE_TIME_FROM"/>
+        <viewAttribute id="CHANGE_TIME_TO"/>
+        <viewAttribute id="CERT_CHANGE_UID"/>
+        <viewAttribute id="CHUSER_CODE"/>
+        <viewAttribute id="CERT_CHANGE_TYPE"/>
+        <viewAttribute id="CERT_SERIAL_NUMBER"/>
+        <viewAttribute id="CERT_SUBJECT"/>
+        <viewAttribute id="CERT_ISSUER"/>
+        <viewAttribute id="CERT_ID"/>
+        <viewAttribute id="TYPE"/>
+        <viewAttribute id="SUBJECT_SERIAL_NUMBER"/>
+        <viewAttribute id="ISSUER_CN"/>
+        <viewAttribute id="PRIMARY_FLAG"/>
+        <viewAttribute id="PLATNOST"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="DECIMAL" id="POCET" length="34" expressionLanguage="COLUMN_ENGINE">
+          <formula>1</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#IMW::BW_PERS_CERTS_V">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_ID" source="PERSON_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_VALID_FROM" source="CERT_VALID_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_TIME" source="CERT_CHANGE_TIME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_VALID_TO" source="CERT_VALID_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_TIME_FROM" source="CHANGE_TIME_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_TIME_TO" source="CHANGE_TIME_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_UID" source="CERT_CHANGE_UID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHUSER_CODE" source="CHUSER_CODE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_TYPE" source="CERT_CHANGE_TYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_SERIAL_NUMBER" source="CERT_SERIAL_NUMBER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_SUBJECT" source="CERT_SUBJECT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_ISSUER" source="CERT_ISSUER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_ID" source="CERT_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TYPE" source="TYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBJECT_SERIAL_NUMBER" source="SUBJECT_SERIAL_NUMBER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ISSUER_CN" source="ISSUER_CN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PRIMARY_FLAG" source="PRIMARY_FLAG"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PLATNOST" source="PLATNOST"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CHANGE_TIME_FROM"/>
+        <viewAttribute id="CHANGE_TIME_TO"/>
+        <viewAttribute id="PERSON_ID"/>
+        <viewAttribute id="TITLE_CODE_BEF"/>
+        <viewAttribute id="SURN_TXT"/>
+        <viewAttribute id="NAME_TXT"/>
+        <viewAttribute id="PHONE_NUM"/>
+        <viewAttribute id="FAX_NUM"/>
+        <viewAttribute id="MOBILE_NUM"/>
+        <viewAttribute id="EMAIL"/>
+        <viewAttribute id="PARTIC_ID"/>
+        <viewAttribute id="STATUTORY_FLAG"/>
+        <viewAttribute id="SIGN_TXT"/>
+        <viewAttribute id="TITLE_CODE_AFT"/>
+        <viewAttribute id="ACCOST_TXT"/>
+        <viewAttribute id="BIRTH_DATE"/>
+        <viewAttribute id="DIVISION_DESC"/>
+        <viewAttribute id="CERT_VALID_TO"/>
+        <viewAttribute id="STATUS"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#CV_PERSONS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_TIME_FROM" source="CHANGE_TIME_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_TIME_TO" source="CHANGE_TIME_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_ID" source="PERSON_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TITLE_CODE_BEF" source="TITLE_CODE_BEF"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SURN_TXT" source="SURN_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NAME_TXT" source="NAME_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PHONE_NUM" source="PHONE_NUM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FAX_NUM" source="FAX_NUM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MOBILE_NUM" source="MOBILE_NUM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EMAIL" source="EMAIL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTIC_ID" source="PARTIC_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="STATUTORY_FLAG" source="STATUTORY_FLAG"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SIGN_TXT" source="SIGN_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TITLE_CODE_AFT" source="TITLE_CODE_AFT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ACCOST_TXT" source="ACCOST_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BIRTH_DATE" source="BIRTH_DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_DESC" source="DIVISION_DESC"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_VALID_TO" source="CERT_VALID_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="STATUS" source="STATUS"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERSON_SURN_TXT"/>
+        <viewAttribute id="PERSON_NAME_TXT"/>
+        <viewAttribute id="PERSON_PARTIC_ID"/>
+        <viewAttribute id="CERT_VALID_TO"/>
+        <viewAttribute id="PERSON_STATUS"/>
+        <viewAttribute id="PERSON_ID"/>
+        <viewAttribute id="CERT_VALID_FROM"/>
+        <viewAttribute id="CERT_CHANGE_TIME"/>
+        <viewAttribute id="PERSON_CERT_VALID_TO"/>
+        <viewAttribute id="CHANGE_TIME_FROM"/>
+        <viewAttribute id="CHANGE_TIME_TO"/>
+        <viewAttribute id="CERT_CHANGE_UID"/>
+        <viewAttribute id="CHUSER_CODE"/>
+        <viewAttribute id="CERT_CHANGE_TYPE"/>
+        <viewAttribute id="CERT_SERIAL_NUMBER"/>
+        <viewAttribute id="CERT_SUBJECT"/>
+        <viewAttribute id="CERT_ISSUER"/>
+        <viewAttribute id="CERT_ID"/>
+        <viewAttribute id="TYPE"/>
+        <viewAttribute id="SUBJECT_SERIAL_NUMBER"/>
+        <viewAttribute id="ISSUER_CN"/>
+        <viewAttribute id="PRIMARY_FLAG"/>
+        <viewAttribute id="PLATNOST"/>
+        <viewAttribute id="POCET"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Projection_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_ID" source="PERSON_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_VALID_FROM" source="CERT_VALID_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_TIME" source="CERT_CHANGE_TIME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_CERT_VALID_TO" source="CERT_VALID_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_TIME_FROM" source="CHANGE_TIME_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_TIME_TO" source="CHANGE_TIME_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_UID" source="CERT_CHANGE_UID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHUSER_CODE" source="CHUSER_CODE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_TYPE" source="CERT_CHANGE_TYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_SERIAL_NUMBER" source="CERT_SERIAL_NUMBER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_SUBJECT" source="CERT_SUBJECT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_ISSUER" source="CERT_ISSUER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_ID" source="CERT_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TYPE" source="TYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBJECT_SERIAL_NUMBER" source="SUBJECT_SERIAL_NUMBER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ISSUER_CN" source="ISSUER_CN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PRIMARY_FLAG" source="PRIMARY_FLAG"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PLATNOST" source="PLATNOST"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POCET" source="POCET"/>
+      </input>
+      <input node="#Projection_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_SURN_TXT" source="SURN_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_NAME_TXT" source="NAME_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_PARTIC_ID" source="PARTIC_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_VALID_TO" source="CERT_VALID_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_STATUS" source="STATUS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_ID" source="PERSON_ID"/>
+      </input>
+      <joinAttribute name="PERSON_ID"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_3">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CHANGE_TIME_FROM"/>
+        <viewAttribute id="CHANGE_TIME_TO"/>
+        <viewAttribute id="PERSON_ID"/>
+        <viewAttribute id="TITLE_CODE_BEF"/>
+        <viewAttribute id="SURN_TXT"/>
+        <viewAttribute id="NAME_TXT"/>
+        <viewAttribute id="PHONE_NUM"/>
+        <viewAttribute id="FAX_NUM"/>
+        <viewAttribute id="MOBILE_NUM"/>
+        <viewAttribute id="EMAIL"/>
+        <viewAttribute id="PARTIC_ID"/>
+        <viewAttribute id="STATUTORY_FLAG"/>
+        <viewAttribute id="SIGN_TXT"/>
+        <viewAttribute id="ACCOST_TXT"/>
+        <viewAttribute id="TITLE_CODE_AFT"/>
+        <viewAttribute id="BIRTH_DATE"/>
+        <viewAttribute id="DIVISION_DESC"/>
+        <viewAttribute id="CERT_VALID_TO"/>
+        <viewAttribute id="STATUS"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="NVARCHAR" id="PERSON_ID_CHAR" length="10" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;PERSON_ID&quot;</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#Projection_3$$$$CV_PERSONS$$">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_TIME_FROM" source="CHANGE_TIME_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_TIME_TO" source="CHANGE_TIME_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_ID" source="PERSON_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TITLE_CODE_BEF" source="TITLE_CODE_BEF"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SURN_TXT" source="SURN_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NAME_TXT" source="NAME_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PHONE_NUM" source="PHONE_NUM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FAX_NUM" source="FAX_NUM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MOBILE_NUM" source="MOBILE_NUM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EMAIL" source="EMAIL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTIC_ID" source="PARTIC_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="STATUTORY_FLAG" source="STATUTORY_FLAG"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SIGN_TXT" source="SIGN_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ACCOST_TXT" source="ACCOST_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TITLE_CODE_AFT" source="TITLE_CODE_AFT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BIRTH_DATE" source="BIRTH_DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_DESC" source="DIVISION_DESC"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_VALID_TO" source="CERT_VALID_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="STATUS" source="STATUS"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERSON_SURN_TXT"/>
+        <viewAttribute id="PERSON_NAME_TXT"/>
+        <viewAttribute id="PERSON_PARTIC_ID"/>
+        <viewAttribute id="CERT_VALID_TO"/>
+        <viewAttribute id="PERSON_STATUS"/>
+        <viewAttribute id="PERSON_ID"/>
+        <viewAttribute id="CERT_VALID_FROM"/>
+        <viewAttribute id="CERT_CHANGE_TIME"/>
+        <viewAttribute id="PERSON_CERT_VALID_TO"/>
+        <viewAttribute id="CHANGE_TIME_FROM"/>
+        <viewAttribute id="CHANGE_TIME_TO"/>
+        <viewAttribute id="CERT_CHANGE_UID"/>
+        <viewAttribute id="CHUSER_CODE"/>
+        <viewAttribute id="CERT_CHANGE_TYPE"/>
+        <viewAttribute id="CERT_SERIAL_NUMBER"/>
+        <viewAttribute id="CERT_SUBJECT"/>
+        <viewAttribute id="CERT_ISSUER"/>
+        <viewAttribute id="CERT_ID"/>
+        <viewAttribute id="TYPE"/>
+        <viewAttribute id="SUBJECT_SERIAL_NUMBER"/>
+        <viewAttribute id="ISSUER_CN"/>
+        <viewAttribute id="PRIMARY_FLAG"/>
+        <viewAttribute id="PLATNOST"/>
+        <viewAttribute id="CERT_CHANGE_UID_SURN_TXT"/>
+        <viewAttribute id="CERT_CHANGE_UID_NAME_TXT"/>
+        <viewAttribute id="POCET"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_SURN_TXT" source="PERSON_SURN_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_NAME_TXT" source="PERSON_NAME_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_PARTIC_ID" source="PERSON_PARTIC_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_VALID_TO" source="CERT_VALID_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_STATUS" source="PERSON_STATUS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_ID" source="PERSON_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_VALID_FROM" source="CERT_VALID_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_TIME" source="CERT_CHANGE_TIME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_CERT_VALID_TO" source="PERSON_CERT_VALID_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_TIME_FROM" source="CHANGE_TIME_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_TIME_TO" source="CHANGE_TIME_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_UID" source="CERT_CHANGE_UID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHUSER_CODE" source="CHUSER_CODE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_TYPE" source="CERT_CHANGE_TYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_SERIAL_NUMBER" source="CERT_SERIAL_NUMBER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_SUBJECT" source="CERT_SUBJECT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_ISSUER" source="CERT_ISSUER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_ID" source="CERT_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TYPE" source="TYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBJECT_SERIAL_NUMBER" source="SUBJECT_SERIAL_NUMBER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ISSUER_CN" source="ISSUER_CN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PRIMARY_FLAG" source="PRIMARY_FLAG"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PLATNOST" source="PLATNOST"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POCET" source="POCET"/>
+      </input>
+      <input node="#Projection_3">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_UID_SURN_TXT" source="SURN_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_UID_NAME_TXT" source="NAME_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_UID" source="PERSON_ID_CHAR"/>
+      </input>
+      <joinAttribute name="CERT_CHANGE_UID"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_4">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CHANGE_TIME_FROM"/>
+        <viewAttribute id="CHANGE_TIME_TO"/>
+        <viewAttribute id="PERSON_ID"/>
+        <viewAttribute id="TITLE_CODE_BEF"/>
+        <viewAttribute id="SURN_TXT"/>
+        <viewAttribute id="NAME_TXT"/>
+        <viewAttribute id="PHONE_NUM"/>
+        <viewAttribute id="FAX_NUM"/>
+        <viewAttribute id="MOBILE_NUM"/>
+        <viewAttribute id="EMAIL"/>
+        <viewAttribute id="PARTIC_ID"/>
+        <viewAttribute id="STATUTORY_FLAG"/>
+        <viewAttribute id="SIGN_TXT"/>
+        <viewAttribute id="ACCOST_TXT"/>
+        <viewAttribute id="TITLE_CODE_AFT"/>
+        <viewAttribute id="BIRTH_DATE"/>
+        <viewAttribute id="DIVISION_DESC"/>
+        <viewAttribute id="CERT_VALID_TO"/>
+        <viewAttribute id="STATUS"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="NVARCHAR" id="PERSON_ID_CHAR" length="10" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;PERSON_ID&quot;</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#Projection_4$$$$CV_PERSONS$$">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_TIME_FROM" source="CHANGE_TIME_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_TIME_TO" source="CHANGE_TIME_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_ID" source="PERSON_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TITLE_CODE_BEF" source="TITLE_CODE_BEF"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SURN_TXT" source="SURN_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NAME_TXT" source="NAME_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PHONE_NUM" source="PHONE_NUM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FAX_NUM" source="FAX_NUM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MOBILE_NUM" source="MOBILE_NUM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EMAIL" source="EMAIL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTIC_ID" source="PARTIC_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="STATUTORY_FLAG" source="STATUTORY_FLAG"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SIGN_TXT" source="SIGN_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ACCOST_TXT" source="ACCOST_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TITLE_CODE_AFT" source="TITLE_CODE_AFT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BIRTH_DATE" source="BIRTH_DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_DESC" source="DIVISION_DESC"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_VALID_TO" source="CERT_VALID_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="STATUS" source="STATUS"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_3" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERSON_SURN_TXT"/>
+        <viewAttribute id="PERSON_NAME_TXT"/>
+        <viewAttribute id="PERSON_PARTIC_ID"/>
+        <viewAttribute id="CERT_VALID_TO"/>
+        <viewAttribute id="PERSON_STATUS"/>
+        <viewAttribute id="PERSON_ID"/>
+        <viewAttribute id="CERT_VALID_FROM"/>
+        <viewAttribute id="CERT_CHANGE_TIME"/>
+        <viewAttribute id="PERSON_CERT_VALID_TO"/>
+        <viewAttribute id="CHANGE_TIME_FROM"/>
+        <viewAttribute id="CHANGE_TIME_TO"/>
+        <viewAttribute id="CERT_CHANGE_UID"/>
+        <viewAttribute id="CHUSER_CODE"/>
+        <viewAttribute id="CERT_CHANGE_TYPE"/>
+        <viewAttribute id="CERT_SERIAL_NUMBER"/>
+        <viewAttribute id="CERT_SUBJECT"/>
+        <viewAttribute id="CERT_ISSUER"/>
+        <viewAttribute id="CERT_ID"/>
+        <viewAttribute id="TYPE"/>
+        <viewAttribute id="SUBJECT_SERIAL_NUMBER"/>
+        <viewAttribute id="ISSUER_CN"/>
+        <viewAttribute id="PRIMARY_FLAG"/>
+        <viewAttribute id="PLATNOST"/>
+        <viewAttribute id="CERT_CHANGE_UID_SURN_TXT"/>
+        <viewAttribute id="CERT_CHANGE_UID_NAME_TXT"/>
+        <viewAttribute id="CHUSER_CODE_SURN_TXT"/>
+        <viewAttribute id="CHUSER_CODE_NAME_TXT"/>
+        <viewAttribute id="POCET"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_SURN_TXT" source="PERSON_SURN_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_NAME_TXT" source="PERSON_NAME_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_PARTIC_ID" source="PERSON_PARTIC_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_VALID_TO" source="CERT_VALID_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_STATUS" source="PERSON_STATUS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_ID" source="PERSON_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_VALID_FROM" source="CERT_VALID_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_TIME" source="CERT_CHANGE_TIME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_CERT_VALID_TO" source="PERSON_CERT_VALID_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_TIME_FROM" source="CHANGE_TIME_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_TIME_TO" source="CHANGE_TIME_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_UID" source="CERT_CHANGE_UID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHUSER_CODE" source="CHUSER_CODE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_TYPE" source="CERT_CHANGE_TYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_SERIAL_NUMBER" source="CERT_SERIAL_NUMBER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_SUBJECT" source="CERT_SUBJECT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_ISSUER" source="CERT_ISSUER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_ID" source="CERT_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TYPE" source="TYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBJECT_SERIAL_NUMBER" source="SUBJECT_SERIAL_NUMBER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ISSUER_CN" source="ISSUER_CN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PRIMARY_FLAG" source="PRIMARY_FLAG"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PLATNOST" source="PLATNOST"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_UID_SURN_TXT" source="CERT_CHANGE_UID_SURN_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_UID_NAME_TXT" source="CERT_CHANGE_UID_NAME_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POCET" source="POCET"/>
+      </input>
+      <input node="#Projection_4">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHUSER_CODE_SURN_TXT" source="SURN_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHUSER_CODE_NAME_TXT" source="NAME_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHUSER_CODE" source="PERSON_ID_CHAR"/>
+      </input>
+      <joinAttribute name="CHUSER_CODE"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_5">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PARTIC_ID"/>
+        <viewAttribute id="PARTIC_EAN"/>
+        <viewAttribute id="PARTIC_DESC_HEX"/>
+        <viewAttribute id="PARTIC_REG_NUM"/>
+        <viewAttribute id="PARTIC_TAX_NUMBER"/>
+        <viewAttribute id="EMAIL_TXT"/>
+        <viewAttribute id="ROLE_CODE"/>
+        <viewAttribute id="FOREIGNER_FLAG"/>
+        <viewAttribute id="WEB_PAGES_CODE"/>
+        <viewAttribute id="LANG_CODE"/>
+        <viewAttribute id="CREATION_DATE"/>
+        <viewAttribute id="VERIF_FLAG"/>
+        <viewAttribute id="EIS_FLAG"/>
+        <viewAttribute id="LOCKED_STATUS"/>
+        <viewAttribute id="ALLOW_CURR"/>
+        <viewAttribute id="DEF_CURR"/>
+        <viewAttribute id="DEF_CURR_FROM"/>
+        <viewAttribute id="PARTIC_EIC"/>
+        <viewAttribute id="TRADE_COUNTRY_CODE"/>
+        <viewAttribute id="COMMODITY"/>
+        <viewAttribute id="VAT_COUNT"/>
+        <viewAttribute id="VAT_COUNT_FROM"/>
+        <viewAttribute id="GAS_VAT_COUNT"/>
+        <viewAttribute id="GAS_VAT_COUNT_FROM"/>
+        <viewAttribute id="ETAX_WITHOUT_TAX_FROM"/>
+        <viewAttribute id="ETAX_WITHOUT_TAX_TO"/>
+        <viewAttribute id="ETAX_TAX_FREE_FROM"/>
+        <viewAttribute id="ETAX_TAX_FREE_TO"/>
+        <viewAttribute id="GTAX_WITHOUT_TAX_FROM"/>
+        <viewAttribute id="GTAX_WITHOUT_TAX_TO"/>
+        <viewAttribute id="GTAX_TAX_FREE_FROM"/>
+        <viewAttribute id="GTAX_TAX_FREE_TO"/>
+        <viewAttribute id="ADR_ID_PRE"/>
+        <viewAttribute id="ADR_ID_PRP"/>
+        <viewAttribute id="ORG_SLOZKA"/>
+        <viewAttribute id="STATUS"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#CV_PARTICIPANT">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTIC_ID" source="PARTIC_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTIC_EAN" source="PARTIC_EAN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTIC_DESC_HEX" source="PARTIC_DESC_HEX"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTIC_REG_NUM" source="PARTIC_REG_NUM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTIC_TAX_NUMBER" source="PARTIC_TAX_NUMBER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EMAIL_TXT" source="EMAIL_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ROLE_CODE" source="ROLE_CODE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FOREIGNER_FLAG" source="FOREIGNER_FLAG"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="WEB_PAGES_CODE" source="WEB_PAGES_CODE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LANG_CODE" source="LANG_CODE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CREATION_DATE" source="CREATION_DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VERIF_FLAG" source="VERIF_FLAG"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EIS_FLAG" source="EIS_FLAG"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LOCKED_STATUS" source="LOCKED_STATUS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ALLOW_CURR" source="ALLOW_CURR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEF_CURR" source="DEF_CURR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEF_CURR_FROM" source="DEF_CURR_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PARTIC_EIC" source="PARTIC_EIC"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TRADE_COUNTRY_CODE" source="TRADE_COUNTRY_CODE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="COMMODITY" source="COMMODITY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VAT_COUNT" source="VAT_COUNT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VAT_COUNT_FROM" source="VAT_COUNT_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GAS_VAT_COUNT" source="GAS_VAT_COUNT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GAS_VAT_COUNT_FROM" source="GAS_VAT_COUNT_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ETAX_WITHOUT_TAX_FROM" source="ETAX_WITHOUT_TAX_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ETAX_WITHOUT_TAX_TO" source="ETAX_WITHOUT_TAX_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ETAX_TAX_FREE_FROM" source="ETAX_TAX_FREE_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ETAX_TAX_FREE_TO" source="ETAX_TAX_FREE_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GTAX_WITHOUT_TAX_FROM" source="GTAX_WITHOUT_TAX_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GTAX_WITHOUT_TAX_TO" source="GTAX_WITHOUT_TAX_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GTAX_TAX_FREE_FROM" source="GTAX_TAX_FREE_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GTAX_TAX_FREE_TO" source="GTAX_TAX_FREE_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ADR_ID_PRE" source="ADR_ID_PRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ADR_ID_PRP" source="ADR_ID_PRP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ORG_SLOZKA" source="ORG_SLOZKA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="STATUS" source="STATUS"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_4" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERSON_SURN_TXT"/>
+        <viewAttribute id="PERSON_NAME_TXT"/>
+        <viewAttribute id="PERSON_PARTIC_ID"/>
+        <viewAttribute id="CERT_VALID_TO"/>
+        <viewAttribute id="PERSON_STATUS"/>
+        <viewAttribute id="PERSON_ID"/>
+        <viewAttribute id="CERT_VALID_FROM"/>
+        <viewAttribute id="CERT_CHANGE_TIME"/>
+        <viewAttribute id="PERSON_CERT_VALID_TO"/>
+        <viewAttribute id="CHANGE_TIME_FROM"/>
+        <viewAttribute id="CHANGE_TIME_TO"/>
+        <viewAttribute id="CERT_CHANGE_UID"/>
+        <viewAttribute id="CHUSER_CODE"/>
+        <viewAttribute id="CERT_CHANGE_TYPE"/>
+        <viewAttribute id="CERT_SERIAL_NUMBER"/>
+        <viewAttribute id="CERT_SUBJECT"/>
+        <viewAttribute id="CERT_ISSUER"/>
+        <viewAttribute id="CERT_ID"/>
+        <viewAttribute id="TYPE"/>
+        <viewAttribute id="SUBJECT_SERIAL_NUMBER"/>
+        <viewAttribute id="ISSUER_CN"/>
+        <viewAttribute id="PRIMARY_FLAG"/>
+        <viewAttribute id="PLATNOST"/>
+        <viewAttribute id="CERT_CHANGE_UID_SURN_TXT"/>
+        <viewAttribute id="CERT_CHANGE_UID_NAME_TXT"/>
+        <viewAttribute id="CHUSER_CODE_SURN_TXT"/>
+        <viewAttribute id="CHUSER_CODE_NAME_TXT"/>
+        <viewAttribute id="PERSON_PARTIC_EAN"/>
+        <viewAttribute id="PERSON_PARTIC_REG_NUM"/>
+        <viewAttribute id="PERSON_PARTIC_TAX_NUMBER"/>
+        <viewAttribute id="PERSON_PARTIC_DESC_HEX"/>
+        <viewAttribute id="POCET"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_3">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_SURN_TXT" source="PERSON_SURN_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_NAME_TXT" source="PERSON_NAME_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_PARTIC_ID" source="PERSON_PARTIC_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_VALID_TO" source="CERT_VALID_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_STATUS" source="PERSON_STATUS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_ID" source="PERSON_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_VALID_FROM" source="CERT_VALID_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_TIME" source="CERT_CHANGE_TIME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_CERT_VALID_TO" source="PERSON_CERT_VALID_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_TIME_FROM" source="CHANGE_TIME_FROM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_TIME_TO" source="CHANGE_TIME_TO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_UID" source="CERT_CHANGE_UID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHUSER_CODE" source="CHUSER_CODE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_TYPE" source="CERT_CHANGE_TYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_SERIAL_NUMBER" source="CERT_SERIAL_NUMBER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_SUBJECT" source="CERT_SUBJECT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_ISSUER" source="CERT_ISSUER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_ID" source="CERT_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TYPE" source="TYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUBJECT_SERIAL_NUMBER" source="SUBJECT_SERIAL_NUMBER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ISSUER_CN" source="ISSUER_CN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PRIMARY_FLAG" source="PRIMARY_FLAG"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PLATNOST" source="PLATNOST"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_UID_SURN_TXT" source="CERT_CHANGE_UID_SURN_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CERT_CHANGE_UID_NAME_TXT" source="CERT_CHANGE_UID_NAME_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHUSER_CODE_SURN_TXT" source="CHUSER_CODE_SURN_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CHUSER_CODE_NAME_TXT" source="CHUSER_CODE_NAME_TXT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POCET" source="POCET"/>
+      </input>
+      <input node="#Projection_5">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_PARTIC_EAN" source="PARTIC_EAN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_PARTIC_REG_NUM" source="PARTIC_REG_NUM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_PARTIC_TAX_NUMBER" source="PARTIC_TAX_NUMBER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_PARTIC_DESC_HEX" source="PARTIC_DESC_HEX"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSON_PARTIC_ID" source="PARTIC_ID"/>
+      </input>
+      <joinAttribute name="PERSON_PARTIC_ID"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Join_4">
+    <descriptions/>
+    <attributes>
+      <attribute id="PERSON_SURN_TXT" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERSON_SURN_TXT"/>
+        <keyMapping columnObjectName="Join_4" columnName="PERSON_SURN_TXT"/>
+      </attribute>
+      <attribute id="PERSON_NAME_TXT" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERSON_NAME_TXT"/>
+        <keyMapping columnObjectName="Join_4" columnName="PERSON_NAME_TXT"/>
+      </attribute>
+      <attribute id="PERSON_PARTIC_ID" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERSON_PARTIC_ID"/>
+        <keyMapping columnObjectName="Join_4" columnName="PERSON_PARTIC_ID"/>
+      </attribute>
+      <attribute id="CERT_VALID_TO" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CERT_VALID_TO"/>
+        <keyMapping columnObjectName="Join_4" columnName="CERT_VALID_TO"/>
+      </attribute>
+      <attribute id="PERSON_STATUS" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERSON_STATUS"/>
+        <keyMapping columnObjectName="Join_4" columnName="PERSON_STATUS"/>
+      </attribute>
+      <attribute id="PERSON_ID" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERSON_ID"/>
+        <keyMapping columnObjectName="Join_4" columnName="PERSON_ID"/>
+      </attribute>
+      <attribute id="CERT_VALID_FROM" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CERT_VALID_FROM"/>
+        <keyMapping columnObjectName="Join_4" columnName="CERT_VALID_FROM"/>
+      </attribute>
+      <attribute id="CERT_CHANGE_TIME" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CERT_CHANGE_TIME"/>
+        <keyMapping columnObjectName="Join_4" columnName="CERT_CHANGE_TIME"/>
+      </attribute>
+      <attribute id="PERSON_CERT_VALID_TO" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERSON_CERT_VALID_TO"/>
+        <keyMapping columnObjectName="Join_4" columnName="PERSON_CERT_VALID_TO"/>
+      </attribute>
+      <attribute id="CHANGE_TIME_FROM" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CHANGE_TIME_FROM"/>
+        <keyMapping columnObjectName="Join_4" columnName="CHANGE_TIME_FROM"/>
+      </attribute>
+      <attribute id="CHANGE_TIME_TO" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CHANGE_TIME_TO"/>
+        <keyMapping columnObjectName="Join_4" columnName="CHANGE_TIME_TO"/>
+      </attribute>
+      <attribute id="CERT_CHANGE_UID" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CERT_CHANGE_UID"/>
+        <keyMapping columnObjectName="Join_4" columnName="CERT_CHANGE_UID"/>
+      </attribute>
+      <attribute id="CHUSER_CODE" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CHUSER_CODE"/>
+        <keyMapping columnObjectName="Join_4" columnName="CHUSER_CODE"/>
+      </attribute>
+      <attribute id="CERT_CHANGE_TYPE" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CERT_CHANGE_TYPE"/>
+        <keyMapping columnObjectName="Join_4" columnName="CERT_CHANGE_TYPE"/>
+      </attribute>
+      <attribute id="CERT_SERIAL_NUMBER" order="15" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CERT_SERIAL_NUMBER"/>
+        <keyMapping columnObjectName="Join_4" columnName="CERT_SERIAL_NUMBER"/>
+      </attribute>
+      <attribute id="CERT_SUBJECT" order="16" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CERT_SUBJECT"/>
+        <keyMapping columnObjectName="Join_4" columnName="CERT_SUBJECT"/>
+      </attribute>
+      <attribute id="CERT_ISSUER" order="17" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CERT_ISSUER"/>
+        <keyMapping columnObjectName="Join_4" columnName="CERT_ISSUER"/>
+      </attribute>
+      <attribute id="CERT_ID" order="18" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CERT_ID"/>
+        <keyMapping columnObjectName="Join_4" columnName="CERT_ID"/>
+      </attribute>
+      <attribute id="TYPE" order="19" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TYPE"/>
+        <keyMapping columnObjectName="Join_4" columnName="TYPE"/>
+      </attribute>
+      <attribute id="SUBJECT_SERIAL_NUMBER" order="20" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SUBJECT_SERIAL_NUMBER"/>
+        <keyMapping columnObjectName="Join_4" columnName="SUBJECT_SERIAL_NUMBER"/>
+      </attribute>
+      <attribute id="ISSUER_CN" order="21" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ISSUER_CN"/>
+        <keyMapping columnObjectName="Join_4" columnName="ISSUER_CN"/>
+      </attribute>
+      <attribute id="PRIMARY_FLAG" order="22" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PRIMARY_FLAG"/>
+        <keyMapping columnObjectName="Join_4" columnName="PRIMARY_FLAG"/>
+      </attribute>
+      <attribute id="PLATNOST" order="23" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PLATNOST"/>
+        <keyMapping columnObjectName="Join_4" columnName="PLATNOST"/>
+      </attribute>
+      <attribute id="CERT_CHANGE_UID_SURN_TXT" order="24" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CERT_CHANGE_UID_SURN_TXT"/>
+        <keyMapping columnObjectName="Join_4" columnName="CERT_CHANGE_UID_SURN_TXT"/>
+      </attribute>
+      <attribute id="CERT_CHANGE_UID_NAME_TXT" order="25" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CERT_CHANGE_UID_NAME_TXT"/>
+        <keyMapping columnObjectName="Join_4" columnName="CERT_CHANGE_UID_NAME_TXT"/>
+      </attribute>
+      <attribute id="CHUSER_CODE_SURN_TXT" order="26" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CHUSER_CODE_SURN_TXT"/>
+        <keyMapping columnObjectName="Join_4" columnName="CHUSER_CODE_SURN_TXT"/>
+      </attribute>
+      <attribute id="CHUSER_CODE_NAME_TXT" order="27" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CHUSER_CODE_NAME_TXT"/>
+        <keyMapping columnObjectName="Join_4" columnName="CHUSER_CODE_NAME_TXT"/>
+      </attribute>
+      <attribute id="PERSON_PARTIC_EAN" order="28" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERSON_PARTIC_EAN"/>
+        <keyMapping columnObjectName="Join_4" columnName="PERSON_PARTIC_EAN"/>
+      </attribute>
+      <attribute id="PERSON_PARTIC_REG_NUM" order="29" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERSON_PARTIC_REG_NUM"/>
+        <keyMapping columnObjectName="Join_4" columnName="PERSON_PARTIC_REG_NUM"/>
+      </attribute>
+      <attribute id="PERSON_PARTIC_TAX_NUMBER" order="30" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERSON_PARTIC_TAX_NUMBER"/>
+        <keyMapping columnObjectName="Join_4" columnName="PERSON_PARTIC_TAX_NUMBER"/>
+      </attribute>
+      <attribute id="PERSON_PARTIC_DESC_HEX" order="31" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERSON_PARTIC_DESC_HEX"/>
+        <keyMapping columnObjectName="Join_4" columnName="PERSON_PARTIC_DESC_HEX"/>
+      </attribute>
+      <attribute id="POCET" order="32" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="POCET"/>
+        <keyMapping columnObjectName="Join_4" columnName="POCET"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures/>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="174" y="87"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="549"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="176" y="549"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="99" y="453"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_3" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="253" y="453"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="175" y="357"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_4" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="329" y="357"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_3" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="251" y="261"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_5" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="97" y="261"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_4" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="174" y="165"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

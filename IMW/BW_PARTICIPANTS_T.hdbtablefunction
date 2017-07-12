@@ -1,0 +1,124 @@
+FUNCTION "OTEBW_IMW"."IMW::BW_PARTICIPANTS_T" ( ) 
+	RETURNS TABLE(PARTIC_ID	DECIMAL(5),
+				  PARTIC_EAN	NVARCHAR(13),
+				  PARTIC_DESC_HEX	NVARCHAR(256),
+				  PARTIC_REG_NUM	NVARCHAR(10),
+				  PARTIC_TAX_NUMBER	NVARCHAR(20),
+			  	  EMAIL_TXT	NVARCHAR(60),
+				  ROLE_CODE	NVARCHAR(5),
+				  FOREIGNER_FLAG	NVARCHAR(1),
+				  WEB_PAGES_CODE	NVARCHAR(50),
+				  LANG_CODE	NVARCHAR(2),
+				  CREATION_DATE	DATE,
+				  VERIF_FLAG	NVARCHAR(1),
+				  EIS_FLAG	NVARCHAR(1),
+				  LOCKED_STATUS	DECIMAL(1),
+			   	  ALLOW_CURR	NVARCHAR(40),
+				  DEF_CURR	NVARCHAR(3),
+				  DEF_CURR_FROM	DATE,
+				  PARTIC_EIC	NVARCHAR(16),
+				  TRADE_COUNTRY_CODE	NVARCHAR(2),
+				  COMMODITY	DECIMAL(1),
+				  VAT_COUNT	NVARCHAR(1),
+				  VAT_COUNT_FROM	DATE,
+				  GAS_VAT_COUNT	NVARCHAR(1),
+				  GAS_VAT_COUNT_FROM	DATE,
+				  ETAX_WITHOUT_TAX_FROM	DATE,
+				  ETAX_WITHOUT_TAX_TO	DATE,
+				  ETAX_TAX_FREE_FROM	DATE,
+				  ETAX_TAX_FREE_TO	DATE,
+				  GTAX_WITHOUT_TAX_FROM	DATE,
+				  GTAX_WITHOUT_TAX_TO	DATE,
+				  GTAX_TAX_FREE_FROM	DATE,
+				  GTAX_TAX_FREE_TO	DATE,
+				  ADR_ID_PRE	DECIMAL,
+				  ADR_ID_PRP	DECIMAL,
+				  ORG_SLOZKA	NVARCHAR(256),
+				  STATUS	DECIMAL(1)
+				  )
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER AS
+BEGIN
+RETURN SELECT partic.partic_id,
+                partic.partic_ean,
+    			partic.partic_desc as partic_desc_hex,   
+    			partic.partic_reg_num,
+    			partic.partic_tax_num partic_tax_number,
+    			partic.email_txt,
+    			partic.role_code,                                            --          role
+    			partic_att.foreigner_flag,                                   --          cizinec ano/ne
+    			partic.web_pages_code,                                       --          WEB
+    			partic_att.lang_code,                                        --          komunikacni jazyk
+    			to_date(partic.creation_date) creation_date,     --          datum vytvoreni
+    			partic_att.verif_flag,                                           --          potvrzeni registrace
+    			partic_att.eis_flag,                                             --          fakturace EIS ano/ne
+    			partic_att.locked_status,                                        --          uzamcen ano/ne
+    			"OTEBW_TEST_IMW"."IMW::RPF_FIND_ALLOW_CURR"(partic.partic_id) as allow_curr,         -- + CR427: seznam povolenych men oddelenych strednikem
+    			cp.curr_code  as def_curr,                                   -- + CR427: aktualni default mena pro DT
+    			to_date(cp.date_from) as def_curr_from,          -- + CR427: platnost default meny pro DT od
+    			partic.partic_eic,
+    			partic_att.trade_country_code,
+    			partic_att.commodity,
+    			partic_att.vat_count,
+    			to_date(partic_att.vat_count_from) as vat_count_from,    
+    			partic_att.gas_vat_count,
+    			to_date(partic_att.gas_vat_count_from) as gas_vat_count_from, 
+    			case when partic_att.ekt_count = '00' 
+         			 then to_date(partic_att.ekt_count_from)
+         			 else null
+    			end as etax_without_tax_from,
+    			case when partic_att.ekt_count = '00' 
+         			 then to_date(partic_att.ekt_count_to)
+         		else null
+    			end as etax_without_tax_to,
+    			case when partic_att.ekt_count = '02' 
+         			 then to_date(partic_att.ekt_count_from)
+         			 else null
+    			end as etax_tax_free_from,
+    			case when partic_att.ekt_count = '02' 
+    			     then to_date(partic_att.ekt_count_to)
+         			 else null
+    			end as etax_tax_free_to,
+    			case when partic_att.gas_count = '00' 
+         			 then to_date(partic_att.gas_count_from)
+         			 else null
+    			end as gtax_without_tax_from,
+    			case when partic_att.gas_count = '00' 
+         			 then to_date(partic_att.gas_count_to)
+         			 else null
+    			end as gtax_without_tax_to,
+    			case when partic_att.gas_count = '02' 
+         			 then to_date(partic_att.gas_count_from)
+         			 else null
+    			end as gtax_tax_free_from,
+    			case when partic_att.gas_count = '02' 
+         			 then to_date(partic_att.gas_count_to)
+         			 else null
+    			end as gtax_tax_free_to,
+         		(select addr.adr_id 
+       			   from OTEBW_TEST_IMW.rpd_addresses addr
+           			   ,OTEBW_TEST_IMW.rpd_addr_partic adrpa
+      			  where addr.adr_id = adrpa.adr_id
+        			    and adrpa.type_code = 'PRE'
+        				and addr.partic_id = partic.partic_id) as adr_id_pre,
+                (select addr.adr_id 
+                   from OTEBW_TEST_IMW.rpd_addresses addr
+                       ,OTEBW_TEST_IMW.rpd_addr_partic adrpa
+      			  where addr.adr_id = adrpa.adr_id
+                    and adrpa.type_code = 'PRP'
+                    and addr.partic_id = partic.partic_id) as adr_id_prp,
+                (select addr.company_name
+                   from OTEBW_TEST_IMW.rpd_addresses addr
+           			   ,OTEBW_TEST_IMW.rpd_addr_partic adrpa
+                  where addr.adr_id = adrpa.adr_id
+                    and adrpa.type_code = 'FYZ'
+                    and addr.partic_id = partic.partic_id) as org_slozka,
+                partic_att.status
+           FROM OTEBW_TEST_IMW.rpd_participants as partic
+                INNER JOIN OTEBW_TEST_IMW.rpd_participants_att as partic_att on partic.partic_id = partic_att.partic_id
+    			LEFT OUTER JOIN OTEBW_TEST_IMW.RPD_CURR_PARTS as cp 
+    			  on partic.partic_id = cp.partic_id 
+                 and 'OKO' = cp.act_code                                   -- CR 427 - pro BW default menu zatim jen pro denni trh
+                 and CURRENT_DATE >= cp.date_from 
+                 and CURRENT_DATE <= ifnull(cp.date_to, CURRENT_DATE);
+END;

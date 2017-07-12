@@ -1,0 +1,24 @@
+{
+ "metadata": {
+  "activated_at": "2017-05-29 14:38:43.470 GMT+02:00",
+  "activated_by": "SUHAJEKS",
+  "change_number": "4074",
+  "delivery_unit": "",
+  "du_vendor": "",
+  "du_version": "",
+  "du_version_patch": "",
+  "du_version_sp": "",
+  "edit": "true",
+  "format_version": "",
+  "object_status": "0",
+  "released_at": "2017-07-10 13:17:59.7300000",
+  "type": "1",
+  "version_id": "6"
+ },
+ "name": "2E_TEST1",
+ "package": "CD",
+ "suffix": "hdbtablefunction",
+ "version": {
+  "versionType": "1"
+ }
+}

@@ -1,0 +1,40 @@
+PROCEDURE "OTEBW_TEST_IMW"."IMW::TRANS_IMW_ADDRESS" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA OTEBW_TEST_IMW
+	AS
+BEGIN
+    declare l_TS varchar2(20);
+   
+   --RPD_ADDRESSES 
+   select to_char(max(CHANGE_TIME),'DD-MM-YYYY HH24:MI:SS')
+     into l_TS
+     from RPD_ADDRESSES;        
+   t_RPD_ADDRESSES = select * from REMOTE_RPD_ADDRESSES where CHANGE_TIME > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS') order by CHANGE_TIME;
+   
+   -- vymaz smazanych zaznamu          
+   delete from RPD_ADDRESSES 
+    where ADR_ID in (select ADR_ID from REMOTE_RPD_ADDRESSES_HIST 
+                           where OPERATION_TYPE = 'D' and CHANGE_TIME_TO > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS'));             
+      
+   -- vymaz zmenenych    
+   delete from RPD_ADDRESSES where ADR_ID in (select ADR_ID from :t_RPD_ADDRESSES);
+   -- vlozeni - nove + menene
+   insert into RPD_ADDRESSES select * from :t_RPD_ADDRESSES;
+
+   --RPD_ADDR_PARTIC 
+   select to_char(max(CHANGE_TIME),'DD-MM-YYYY HH24:MI:SS')
+     into l_TS
+     from RPD_ADDR_PARTIC;        
+   t_RPD_ADDR_PARTIC = select * from REMOTE_RPD_ADDR_PARTIC where CHANGE_TIME > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS') order by CHANGE_TIME;
+   
+   -- vymaz smazanych zaznamu          
+   delete from RPD_ADDR_PARTIC 
+    where (ADR_ID, TYPE_CODE) in (select ADR_ID, TYPE_CODE from REMOTE_RPD_ADDR_PARTIC_HIST 
+                           where OPERATION_TYPE = 'D' and CHANGE_TIME_TO > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS'));             
+      
+   -- vlozeni - nove
+   insert into RPD_ADDR_PARTIC select * from :t_RPD_ADDR_PARTIC;
+   
+ 
+END;

@@ -1,0 +1,26 @@
+schema="OTEBW_IMW";
+
+query = "select
+	 c.person_id as person_id ,
+	 c.CERT_VALID_FROM as CERT_VALID_FROM,
+	 c.CERT_VALID_TO,
+	 c.CERT_CHANGE_TIME,
+	 c.CHANGE_TIME_FROM,
+	 c.CHANGE_TIME_TO,
+	 c.CERT_CHANGE_UID,
+	 c.CHUSER_CODE,
+	 c.CERT_CHANGE_TYPE,
+	 c.CERT_SERIAL_NUMBER,
+	 c.CERT_SUBJECT,
+	 c.CERT_ISSUER,
+	 c.CERT_ID,
+	 c.TYPE,
+	 c.SUBJECT_SERIAL_NUMBER,
+	 c.ISSUER_CN,
+	 c.PRIMARY_FLAG,
+	 c.PLATNOST,
+	 p.partic_id as partic_id 
+from \"OTEBW_IMW\".\"IMW::BW_PERS_CERTS_V\" as c 
+	left outer join \"OTEBW_IMW\".\"IMW::BW_PERSONS_V\" as p on c.person_id = p.person_id ";
+
+

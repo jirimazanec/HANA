@@ -1,0 +1,15 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW";
+
+query = "SELECT to_date(lic_val_date_from)lic_val_date_from
+             ,to_date(lic_val_date_to) lic_val_date_to
+  			 ,partic_id
+             ,UCASE(lic_type_code) as lic_type_code
+             ,licenc_code
+             ,1 as pocet_licence
+        FROM OTEBW_IMW.rpd_licences";
+
+depends_on_table=["OTEBW_IMW::rpd_licences"];  

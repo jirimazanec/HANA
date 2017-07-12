@@ -1,0 +1,14 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+schema="OTEBW_IMW";
+
+query = "SELECT
+   role_code
+  ,role_desc
+  ,role_module
+FROM
+   OTEBW_IMW.adl_roles";
+
+depends_on_table=["OTEBW_IMW::adl_roles"];  
+   

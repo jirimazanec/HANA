@@ -1,0 +1,21 @@
+schema="OTEBW_IMW";
+
+query = "select to_date(VALID_DATE) AS VALID_DATE,
+       CURR_CODE,
+       to_varchar(CNB_CREATE_DATE,'YYYYMMDDHHMMSS') as CNB_CREATE_DATE,
+       CNB_RATE,
+       CNB_USER_ID,
+       to_varchar(KB_CREATE_DATE,'YYYYMMDDHHMMSS') as KB_CREATE_DATE,
+       to_decimal(KB_BUY_RATE,17,2) as KB_BUY_RATE,
+       to_decimal(KB_SALE_RATE,17,2) as KB_SALE_RATE,
+       to_decimal(OTE_FINAL_RATE,17,2) as OTE_FINAL_RATE,
+       KB_USER_ID,
+       to_decimal(OTE_EMD_RATE,17,2) as OTE_EMD_RATE,
+       to_varchar(EMD_CREATE_DATE,'YYYYMMDDHHMMSS') as EMD_CREATE_DATE,
+       EMD_USER_ID,
+       to_decimal(OTE_FINAL_G_RATE,17,2) as OTE_FINAL_G_RATE,
+       to_decimal(OTE_FINAL_VDT_RATE,17,2) as OTE_FINAL_VDT_RATE,
+       'CZK' AS CURRENCY
+  FROM ADD_EXCH_RATE";
+
+depends_on_table=["OTEBW_IMW::ADD_EXCH_RATE"];  

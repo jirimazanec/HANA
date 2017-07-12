@@ -1,0 +1,41 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_CD";
+
+query = "SELECT
+	CALENDAR.DATE_SQL as BUSDAY,
+	EUIINSTLN.INT_UI,
+	ifnull(left(SERVDIST.SRVPRVREF,13),'') as DIST,
+	ifnull(left(SERVSUPP.SRVPRVREF,13),'') as SUPP,
+	ifnull(left(SERVSZ.SRVPRVREF,13),'') as SZ,
+	ifnull(left(SERVPPS.SRVPRVREF,13),'') as PPS
+from \"OTEBW_CD\".\"CD::1E_EUIINSTLN\"(CURRENT_TIMESTAMP) as EUIINSTLN 
+	   inner join \"OTEBW\".\"OZ::M_TIME__CALENDAR_V\" as CALENDAR on
+	   	 CALENDAR.FACT_CAL_ID = 'CZ' and
+	   	 EUIINSTLN.DATEFROM <= CALENDAR.DATE_SQL and
+	   	 EUIINSTLN.DATETO   >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ESERVICE\"(CURRENT_TIMESTAMP) as SERVDIST on
+         SERVDIST.INT_UI        =  EUIINSTLN.INT_UI and
+         SERVDIST.SERVICE       =  '0013' and
+         SERVDIST.SERVICE_START <= CALENDAR.DATE_SQL and
+         SERVDIST.SERVICE_END   >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ESERVICE\"(CURRENT_TIMESTAMP) as SERVSUPP on
+         SERVSUPP.INT_UI        =  EUIINSTLN.INT_UI and
+         SERVSUPP.SERVICE       =  '0001' and
+         SERVSUPP.SERVICE_START <= CALENDAR.DATE_SQL and
+         SERVSUPP.SERVICE_END   >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ESERVICE\"(CURRENT_TIMESTAMP) as SERVSZ on
+         SERVSZ.INT_UI        =  EUIINSTLN.INT_UI and
+         SERVSZ.SERVICE       =  '0011' and
+         SERVSZ.SERVICE_START <= CALENDAR.DATE_SQL and
+         SERVSZ.SERVICE_END   >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ESERVICE\"(CURRENT_TIMESTAMP) as SERVPPS on
+         SERVPPS.INT_UI        =  EUIINSTLN.INT_UI and
+         SERVPPS.SERVICE       =  '0012' and
+         SERVPPS.SERVICE_START <= CALENDAR.DATE_SQL and
+         SERVPPS.SERVICE_END   >= CALENDAR.DATE_SQL
+";
+
+

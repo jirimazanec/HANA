@@ -1,0 +1,75 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW";
+
+query = "SELECT a.PERSON_UID as person_id, 
+	            to_date(b.valid_from) as cert_valid_from ,
+	            to_date(b.valid_to) as cert_valid_to ,
+	            to_time(b.valid_from) as cert_valid_time_from ,
+	            to_time(b.valid_to) as cert_valid_time_to , 
+	            to_nchar(a.CERT_CHANGE_TIME, 'YYYYMMDDHHMMSS') as CERT_CHANGE_TIME , 	                    
+	            to_date(a.CHANGE_TIME) as CHANGE_date_FROM,
+	            to_time(a.CHANGE_TIME) as CHANGE_time_FROM,
+	            to_date('01.01.5000') as CHANGE_date_TO,
+      			to_time('00:00:00') as CHANGE_time_TO,
+	            case when a.CERT_CHANGE_UID='PRODISCZ' then '909090909' 
+	           		 when a.CERT_CHANGE_UID='PRODDISCZ' then '909090909' 
+	            	 else a.CERT_CHANGE_UID
+	            end as CERT_CHANGE_UID ,
+	            case when a.CHUSER_CODE='PRODISCZ' then '909090909' 
+	           		 when a.CHUSER_CODE='PRODDISCZ' then '909090909' 
+	            	 else a.CHUSER_CODE
+	            end as CHUSER_CODE,
+	            a.CERT_CHANGE_TYPE,
+	            b.SERIAL_NUMBER as CERT_SERIAL_NUMBER ,
+	            b.SUBJECT as CERT_SUBJECT ,
+	            b.ISSUER_SUBJECT as CERT_ISSUER ,
+	            b.cert_id ,
+	            a.TYPE ,
+	            upper(b.SUBJECT_SERIAL_NUMBER) as SUBJECT_SERIAL_NUMBER,
+	            upper(b.ISSUER_CN) as ISSUER_CN ,
+	            CASE WHEN a.PRIMARY_FLAG = 1 THEN 'A' ELSE 'N' END as PRIMARY_FLAG,
+	            'X' AS PLATNOST,
+	            p.partic_id as partic_id 
+	       FROM OTEBW_IMW.LDD_PERS_CERTS as A
+	       		INNER JOIN OTEBW_IMW.LDD_CERTS as b on a.cert_id = b.cert_id 
+	       		left outer join \"OTEBW_IMW\".\"IMW::BW_PERSONS_V\" as p on a.PERSON_UID = p.person_id 
+ 	  UNION ALL 
+	     SELECT a.PERSON_UID as person_id ,
+	            to_date(b.valid_from) as cert_valid_date_from ,
+	            to_date(b.valid_to) as cert_date_valid_to ,
+	            to_time(b.valid_from) as cert_valid_time_from ,
+	            to_time(b.valid_to) as cert_valid_time_to ,
+	            to_nchar(a.CERT_CHANGE_TIME, 'YYYYMMDDHHMMSS') as CERT_CHANGE_TIME , 	
+	            to_date(a.CERT_CHANGE_TIME) as CHANGE_date_from ,
+	            to_time(a.CERT_CHANGE_TIME) as CHANGE_TIME_from ,
+	            to_date(a.CHANGE_TIME_TO) as CHANGE_date_to ,
+	            to_time(a.CHANGE_TIME_TO) as CHANGE_time_to ,
+	            case when a.CERT_CHANGE_UID='PRODISCZ' then '909090909' 
+	           		 when a.CERT_CHANGE_UID='PRODDISCZ' then '909090909' 
+	            	 else a.CERT_CHANGE_UID
+	            end as CERT_CHANGE_UID ,
+	            case when a.CHUSER_CODE='PRODISCZ' then '909090909' 
+	           		 when a.CHUSER_CODE='PRODDISCZ' then '909090909' 
+	            	 else a.CHUSER_CODE
+	            end as CHUSER_CODE,
+	            a.CERT_CHANGE_TYPE ,
+	            b.SERIAL_NUMBER as CERT_SERIAL_NUMBER ,
+	            b.SUBJECT as CERT_SUBJECT ,
+	            b.ISSUER_SUBJECT as CERT_ISSUER ,
+	            b.cert_id ,
+	            a.TYPE ,
+	            upper(b.SUBJECT_SERIAL_NUMBER) as SUBJECT_SERIAL_NUMBER,
+	            upper(b.ISSUER_CN) as ISSUER_CN ,
+	            CASE WHEN a.PRIMARY_FLAG = 1 THEN 'A' ELSE 'N' END as PRIMARY_FLAG,
+	            ' ' AS PLATNOST,
+	            p.partic_id as partic_id 
+	       FROM OTEBW_IMW.LDD_PERS_CERTS_HIST as A
+	       		INNER JOIN OTEBW_IMW.LDD_CERTS as b on a.cert_id = b.cert_id
+	       		left outer join \"OTEBW_IMW\".\"IMW::BW_PERSONS_V\" as p on a.PERSON_UID = p.person_id ";
+
+depends_on_table=["OTEBW_IMW::LDD_PERS_CERTS"];  
+depends_on_table=["OTEBW_IMW::LDD_CERTS"];  
+depends_on_table=["OTEBW_IMW::LDD_PERS_CERTS_HIST"];

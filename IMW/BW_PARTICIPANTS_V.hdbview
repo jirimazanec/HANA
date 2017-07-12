@@ -1,0 +1,96 @@
+
+
+
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW"; 
+ 
+query = "SELECT partic.partic_id,
+                partic.partic_ean,
+    			partic.partic_desc as partic_desc_hex,   
+    			partic.partic_reg_num,
+    			partic.partic_tax_num partic_tax_number,
+    			partic.email_txt,
+    			partic.role_code,                                            --          role
+    			partic_att.foreigner_flag,                                   --          cizinec ano/ne
+    			partic.web_pages_code,                                       --          WEB
+    			partic_att.lang_code,                                        --          komunikacni jazyk
+    			to_date(partic.creation_date) creation_date,     --          datum vytvoreni
+    			partic_att.verif_flag,                                           --          potvrzeni registrace
+    			partic_att.eis_flag,                                             --          fakturace EIS ano/ne
+    			partic_att.locked_status,                                        --          uzamcen ano/ne
+    			(select allow_curr from OTEBW_IMW.\"IMW::RPF_ALLOW_CURR\"() as curr where curr.reg_part_id = partic.partic_id) as allow_curr,
+    			cp.curr_code  as def_curr,                                   -- + CR427: aktualni default mena pro DT
+    			to_date(cp.date_from) as def_curr_from,          -- + CR427: platnost default meny pro DT od
+    			partic.partic_eic,
+    			partic_att.trade_country_code,  
+    			partic_att.commodity,
+    			partic_att.vat_count,
+    			to_date(partic_att.vat_count_from) as vat_count_from,    
+    			partic_att.gas_vat_count,
+    			to_date(partic_att.gas_vat_count_from) as gas_vat_count_from, 
+    			case when partic_att.ekt_count = '00' 
+         			 then to_date(partic_att.ekt_count_from)
+         			 else null
+    			end as etax_without_tax_from,
+    			case when partic_att.ekt_count = '00' 
+         			 then to_date(partic_att.ekt_count_to)
+         		else null
+    			end as etax_without_tax_to,
+    			case when partic_att.ekt_count = '02' 
+         			 then to_date(partic_att.ekt_count_from)
+         			 else null
+    			end as etax_tax_free_from,
+    			case when partic_att.ekt_count = '02' 
+    			     then to_date(partic_att.ekt_count_to)
+         			 else null
+    			end as etax_tax_free_to,
+    			case when partic_att.gas_count = '00' 
+         			 then to_date(partic_att.gas_count_from)
+         			 else null
+    			end as gtax_without_tax_from,
+    			case when partic_att.gas_count = '00' 
+         			 then to_date(partic_att.gas_count_to)
+         			 else null
+    			end as gtax_without_tax_to,
+    			case when partic_att.gas_count = '02' 
+         			 then to_date(partic_att.gas_count_from)
+         			 else null
+    			end as gtax_tax_free_from,
+    			case when partic_att.gas_count = '02' 
+         			 then to_date(partic_att.gas_count_to)
+         			 else null
+    			end as gtax_tax_free_to,
+         		(select addr.adr_id 
+       			   from OTEBW_TEST_IMW.rpd_addresses addr
+           			   ,OTEBW_TEST_IMW.rpd_addr_partic adrpa
+      			  where addr.adr_id = adrpa.adr_id
+        			    and adrpa.type_code = 'PRE'
+        				and addr.partic_id = partic.partic_id) as adr_id_pre,
+                (select addr.adr_id 
+                   from OTEBW_IMW.rpd_addresses addr
+                       ,OTEBW_IMW.rpd_addr_partic adrpa
+      			  where addr.adr_id = adrpa.adr_id
+                    and adrpa.type_code = 'PRP'
+                    and addr.partic_id = partic.partic_id) as adr_id_prp,
+                (select addr.company_name
+                   from OTEBW_IMW.rpd_addresses addr
+           			   ,OTEBW_IMW.rpd_addr_partic adrpa 
+                  where addr.adr_id = adrpa.adr_id
+                    and adrpa.type_code = 'FYZ'
+                    and addr.partic_id = partic.partic_id) as org_slozka,
+                partic_att.status,
+                1 as pocet
+           FROM OTEBW_IMW.rpd_participants as partic
+                INNER JOIN OTEBW_IMW.rpd_participants_att as partic_att on partic.partic_id = partic_att.partic_id
+    			LEFT OUTER JOIN OTEBW_IMW.RPD_CURR_PARTS as cp 
+    			  on partic.partic_id = cp.partic_id 
+                 and 'OKO' = cp.act_code                                   -- CR 427 - pro BW default menu zatim jen pro denni trh
+                 and CURRENT_DATE >= cp.date_from 
+                 and CURRENT_DATE <= ifnull(cp.date_to, CURRENT_DATE)";
+                
+depends_on_table=["OTEBW_IMW::rpd_participants"];  
+depends_on_table=["OTEBW_IMW::rpd_participants_att"];
+depends_on_table=["OTEBW_IMW::RPD_CURR_PARTS"];

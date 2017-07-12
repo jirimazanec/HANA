@@ -1,0 +1,11 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW";
+
+query = "SELECT CERT_CHANGE_TYPE,
+              CERT_CHANGE_TYPE_DESC
+        FROM OTEBW_IMW.LDL_PERS_CERTS_CHANGE_TYPE";
+
+depends_on_table=["OTEBW_IMW::LDL_PERS_CERTS_CHANGE_TYPE"];  

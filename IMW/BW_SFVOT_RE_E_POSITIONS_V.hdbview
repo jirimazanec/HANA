@@ -1,0 +1,50 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+schema="OTEBW_IMW";
+query = "SELECT to_date(DELIVERY_DATE) as delivery_date,
+	            PARTIC_ID,
+	 			CASE WHEN IMBALANCE_TYPE = '+' THEN 'K' ELSE 'Z' END as IMBALANCE_TYPE,
+	 			CONTRACT_TYPE,
+	 			RE_TYPE,
+	 			'XXX' as RE_PORADI,
+	 			SUB_PARTIC_ID,
+	 			PARAMETRIC_PRICE,
+	 			QUANTITY01,
+	 			QUANTITY02,
+	 			QUANTITY03,
+	 			QUANTITY04,
+	 			QUANTITY05,
+	 			QUANTITY06,
+	 			QUANTITY07,
+	 			QUANTITY08,
+	 			QUANTITY09,
+	 			QUANTITY10,
+	 			QUANTITY11,
+	 			QUANTITY12,
+	 			QUANTITY13,
+	 			QUANTITY14,
+	 			QUANTITY15,
+	 			QUANTITY16,
+	 			QUANTITY17,
+	 			QUANTITY18,
+	 			QUANTITY19,
+	 			QUANTITY20,
+	 			QUANTITY21,
+	 			QUANTITY22,
+	 			QUANTITY23,
+	 			QUANTITY24,
+	 			QUANTITY25,
+	 			'MWH' as unit,
+	 			'CZK' as currency 
+		   FROM OTEBW_IMW.RE_EL_POSITIONS as p 
+		  WHERE p.id_batch in (select max(h.id_batch) 
+		                         from OTEBW_IMW.RE_HEADS as h 
+	                            where h.COMMODITY = 'E' 
+	                              and h.err_code = 0 
+	                         group by h.DELIVERY_DATE)
+
+";
+
+depends_on_table=["OTEBW_IMW::RE_HEADS"]; 
+depends_on_table=["OTEBW_IMW::RE_EL_POSITIONS"];  

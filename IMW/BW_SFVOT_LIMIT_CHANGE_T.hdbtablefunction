@@ -1,0 +1,41 @@
+FUNCTION "OTEBW_IMW"."IMW::BW_SFVOT_LIMIT_CHANGE_T" ( ) 
+	RETURNS TABLE(ID_RUT		DECIMAL(5),
+				  UTL_TYPE		NVARCHAR(10),
+				  UTL_OLD_VALUE	DECIMAL,
+				  UTL_NEW_VALUE	DECIMAL(20,2),
+				  TOTAL_LIMIT	DECIMAL(20,2),
+				  WARNING_LIMIT	DECIMAL(20,2),
+				  CHANGE_DATE	DATE,
+				  CHANGE_TIME	TIME,
+				  ID_CHANGE		DECIMAL(27)
+				 )
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER AS
+BEGIN
+RETURN select cm.id_rut,
+	            cm.utl_type,
+	            case when cm.id_change = co.id_change 
+                     then cm.utl_old_value 
+                     else cm.utl_new_value 
+                end as utl_old_value,
+	            cm.utl_new_value,
+	            cm.total_limit,
+	            cm.warning_limit,
+                TO_DATE(co.timestamp_change) as CHANGE_DATE,
+	            to_time(co.timestamp_change) as CHANGE_TIME,
+	            co.id_change 
+           from OTEBW_IMW.LIMIT_DYN_CHANGE as co
+	            inner join OTEBW_IMW.LIMIT_DYN_CHANGE as cm on 
+	                  cm.id_change <= co.id_change and 
+	                  cm.id_rut = co.id_rut and 
+	                  cm.id_change in (select max(ci.id_change) 
+	                     from OTEBW_IMW.LIMIT_DYN_CHANGE as ci 
+	                    where ci.id_change <= co.id_change 
+	                      and ci.id_rut = co.id_rut 
+	                 group by ci.utl_type)
+	            inner join OTEBW_IMW.UTL_TYPES as tm1 on
+	                  co.utl_type = tm1.utl_type 
+                inner join OTEBW_IMW.UTL_TYPES as tm2 on  
+                      cm.utl_type = tm2.utl_type and
+                      tm1.commodity = tm2.commodity;
+END;

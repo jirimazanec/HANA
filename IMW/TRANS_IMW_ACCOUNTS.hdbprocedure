@@ -1,0 +1,59 @@
+PROCEDURE "OTEBW_TEST_IMW"."IMW::TRANS_IMW_ACCOUNTS" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA OTEBW_TEST_IMW
+	AS
+BEGIN
+    declare l_TS varchar2(20);
+   
+   --RPD_ACCOUNTS 
+   select to_char(max(CHANGE_TIME),'DD-MM-YYYY HH24:MI:SS')
+     into l_TS
+     from RPD_ACCOUNTS;        
+   t_RPD_ACCOUNTS = select * from REMOTE_RPD_ACCOUNTS where CHANGE_TIME > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS') order by CHANGE_TIME;
+   
+   -- vymaz smazanych zaznamu          
+   delete from RPD_ACCOUNTS 
+    where ACC_ID in (select ACC_ID from REMOTE_RPD_ACCOUNTS_HIST 
+                           where OPERATION_TYPE = 'D' and CHANGE_TIME_TO > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS'));             
+      
+   -- vymaz zmenenych    
+   delete from RPD_ACCOUNTS where ACC_ID in (select ACC_ID from :t_RPD_ACCOUNTS);
+   -- vlozeni - nove + menene
+   insert into RPD_ACCOUNTS select * from :t_RPD_ACCOUNTS;
+   
+   --RPD_ACCOUNTS_HIST  
+   select to_char(max(CHANGE_TIME_TO),'DD-MM-YYYY HH24:MI:SS')
+     into l_TS
+     from RPD_ACCOUNTS_HIST;        
+   t_RPD_ACCOUNTS_HIST = select * from REMOTE_RPD_ACCOUNTS_HIST where CHANGE_TIME_TO > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS') order by CHANGE_TIME;
+   -- vlozeni 
+   insert into RPD_ACCOUNTS_HIST select * from :t_RPD_ACCOUNTS_HIST;
+   
+   
+   --RPD_REG_ACCOUNTS
+   select to_char(max(CHANGE_TIME),'DD-MM-YYYY HH24:MI:SS')
+     into l_TS
+     from RPD_REG_ACCOUNTS;        
+   t_RPD_REG_ACCOUNTS = select * from REMOTE_RPD_REG_ACCOUNTS where CHANGE_TIME > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS') order by CHANGE_TIME;
+   
+   -- vymaz smazanych zaznamu          
+   delete from RPD_REG_ACCOUNTS 
+    where (REG_PART_ID, CURR_CODE, ACC_SEQ) in (select REG_PART_ID, CURR_CODE, ACC_SEQ from REMOTE_RPD_REG_ACCOUNTS_HIST 
+                                               where OPERATION_TYPE = 'D' and CHANGE_TIME_TO > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS'));             
+      
+   -- vymaz zmenenych    
+   delete from RPD_REG_ACCOUNTS where (REG_PART_ID, CURR_CODE, ACC_SEQ) in (select REG_PART_ID, CURR_CODE, ACC_SEQ from :t_RPD_REG_ACCOUNTS);
+   -- vlozeni - nove + menene
+   insert into RPD_REG_ACCOUNTS select * from :t_RPD_REG_ACCOUNTS;
+   
+   --RPD_REG_ACCOUNTS_HIST  
+   select to_char(max(CHANGE_TIME_TO),'DD-MM-YYYY HH24:MI:SS')
+     into l_TS
+     from RPD_REG_ACCOUNTS_HIST;        
+   t_RPD_REG_ACCOUNTS_HIST = select * from REMOTE_RPD_REG_ACCOUNTS_HIST where CHANGE_TIME_TO > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS') order by CHANGE_TIME;
+   -- vlozeni 
+   insert into RPD_REG_ACCOUNTS_HIST select * from :t_RPD_REG_ACCOUNTS_HIST;
+   
+
+END;

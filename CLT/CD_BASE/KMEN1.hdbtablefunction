@@ -1,0 +1,38 @@
+FUNCTION "OTEBW_TEST_CLT_CD"."CLT.CD_BASE::KMEN1" ( in x_TST timestamp, x_KeyDate date ) 
+	RETURNS TABLE (EXT_UI nvarchar(18), INT_UI nvarchar(22), ANLAGE nvarchar(10), ANLART nvarchar(4), SPEBENE nvarchar(2), GRID_ID nvarchar(10), GRID_NAME nvarchar(40), MTYPE nvarchar(1))
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER AS
+BEGIN
+return select LEFT(EUITRANS.EXT_UI,18) as EXT_UI, EUIINSTLN.INT_UI, EUIINSTLN.ANLAGE, EANL.ANLART, EANL.SPEBENE, EUIGRID.GRID_ID, EGRIDT.GRID_NAME, LEFT(FN_TypM.STRING1,1) as MTYPE
+  from "OTEBW_TEST_CLT_CD"."CLT.CD_BASE::EUITRANS"( ) as EUITRANS
+       inner join "OTEBW_TEST_CLT_CD"."CLT.CD_BASE::EUIINSTLN"( ) as EUIINSTLN on
+         EUIINSTLN.MANDT  = '100' and
+         EUIINSTLN.INT_UI = EUITRANS.INT_UI
+       inner join "OTEBW_TEST_CLT_CD"."CLT.CD_BASE::EANL"( ) as EANL on
+         EANL.MANDT  = '100' and
+         EANL.ANLAGE = EUIINSTLN.ANLAGE
+       inner join "OTEBW_TEST_CLT_CD"."CLT.CD_BASE::EUIGRID"( ) as EUIGRID on
+         EUIGRID.MANDT  = '100' and
+         EUIGRID.INT_UI = EUITRANS.INT_UI
+       inner join "OTEBW_TEST_CLT_CD"."CLT.CD_BASE::EGRIDT"( ) as EGRIDT on
+         EGRIDT.MANDT  = '100' and
+         EGRIDT.GRID_ID = EUIGRID.GRID_ID         
+       left outer join "OTEBW_TEST_CLT_CD"."CLT.CD_BASE::ETTIFN"( ) as FN_TypM on
+         FN_TypM.MANDT = '100' and
+         FN_TypM.ANLAGE = EUIINSTLN.ANLAGE and
+         FN_TypM.OPERAND = 'CDS_TYPM'
+  where EUITRANS.MANDT    =  '100'
+    and EUITRANS.TT_FROM  <= :x_TST
+    and EUITRANS.TT_TO    >= :x_TST
+    and EUIINSTLN.TT_FROM <= :x_TST
+    and EUIINSTLN.TT_TO   >= :x_TST
+    and EANL.TT_FROM      <= :x_TST
+    and EANL.TT_TO        >= :x_TST
+    and EUIGRID.TT_FROM   <= :x_TST
+    and EUIGRID.TT_TO     >= :x_TST
+    and EGRIDT.TT_FROM    <= :x_TST
+    and EGRIDT.TT_TO      >= :x_TST
+    and FN_TypM.TT_FROM   <= :x_TST
+    and FN_TypM.TT_TO     >= :x_TST;
+
+END;

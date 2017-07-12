@@ -1,0 +1,24 @@
+{
+ "metadata": {
+  "activated_at": "2017-03-27 13:36:54.668 GMT+02:00",
+  "activated_by": "SUHAJEKS",
+  "change_number": "4074",
+  "delivery_unit": "",
+  "du_vendor": "",
+  "du_version": "",
+  "du_version_patch": "",
+  "du_version_sp": "",
+  "edit": "true",
+  "format_version": "",
+  "object_status": "0",
+  "released_at": "2017-07-10 13:17:59.7300000",
+  "type": "1",
+  "version_id": "1"
+ },
+ "name": "EGRID_TRANSF_TT_TO",
+ "package": "CLT.CD_BASE",
+ "suffix": "hdbscalarfunction",
+ "version": {
+  "versionType": "1"
+ }
+}

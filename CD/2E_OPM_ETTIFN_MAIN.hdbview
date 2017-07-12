@@ -1,0 +1,27 @@
+schema="OTEBW_CD";
+
+query="SELECT
+	CALENDAR.DATE_SQL as BUSDAY,
+	EANL.ANLAGE,
+	ifnull(left(FN_TypM.STRING1,1),' ') as MTYPE,
+	ifnull(left(to_char(FN_Area.WERT1),3),' ') as CLASS,
+	ifnull(left(to_char(FN_Area.WERT1),3),' ') as AREA
+from \"OTEBW_CD\".\"CD::1E_EANL\"(CURRENT_TIMESTAMP) as EANL
+	   inner join \"OTEBW\".\"OZ::M_TIME__CALENDAR_V\" as CALENDAR on
+	   	 CALENDAR.FACT_CAL_ID = 'CZ' 
+	   left outer join \"OTEBW_CD\".\"CD::1E_ETTIFN\"(CURRENT_TIMESTAMP) as FN_TypM on
+	     FN_TypM.ANLAGE  =  EANL.ANLAGE and
+	     FN_TypM.OPERAND =  'CDS_TYPM' and
+	     FN_TypM.AB      <= CALENDAR.DATE_SQL and
+	     FN_TypM.BIS     >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ETTIFN\"(CURRENT_TIMESTAMP) as FN_Area on
+         FN_Area.ANLAGE  =  EANL.ANLAGE and
+         FN_Area.OPERAND =  'CDS_AREA' and
+         FN_Area.AB      <= CALENDAR.DATE_SQL and
+         FN_Area.BIS     >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ETTIFN\"(CURRENT_TIMESTAMP) as FN_Class on
+         FN_Class.ANLAGE  =  EANL.ANLAGE and
+         FN_Class.OPERAND =  'CDS_CLASS' and
+         FN_Class.AB      <= CALENDAR.DATE_SQL and
+         FN_Class.BIS     >= CALENDAR.DATE_SQL
+";

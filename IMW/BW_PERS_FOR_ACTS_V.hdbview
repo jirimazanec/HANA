@@ -1,0 +1,67 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW";
+
+query = "SELECT
+   to_date(act.change_time) as date_from
+  ,to_date('31.12.9999') as date_to
+  ,act.person_id
+  ,rp.partic_id
+  ,rp.act_code
+  ,act.status_per_flag
+  ,act.primar_per_flag
+  ,act.fax_use_flag                                     -- + CIP 101: fax
+  ,r.role_code
+  ,'XXX' as zdroj_dat
+  ,to_fixedchar(rp.acc_id,16) as ID_BANK 
+  ,to_date(rp.reg_date_from) as reg_date_from
+  ,to_date(rp.reg_date_to) as reg_date_to
+  ,1 as pocet_cinnosti
+FROM
+   OTEBW_IMW.rpd_pers_for_acts act,
+   OTEBW_IMW.add_role_act ra,
+   OTEBW_IMW.add_role_pers r,
+   OTEBW_IMW.\"IMW::BW_REG_PARTS_V\" rp
+WHERE act.reg_part_id = rp.reg_part_id
+  and r.person_id = act.person_id
+  and ra.act_code = rp.act_code
+  and ra.status_flag = act.status_per_flag
+  and ra.role_code = r.role_code
+  and rp.reg_date_from <= CURRENT_DATE
+  and rp.reg_date_to >= CURRENT_DATE
+union
+SELECT
+   to_date(prt.change_time) as date_from
+  ,to_date('31.12.9999') as date_to
+  ,null                               as person_id
+  ,prt.partic_id
+  ,prt.act_code
+  ,null                               as status_per_flag
+  ,null                               as primar_per_flag
+  ,null                               as fax_use_flag            
+  ,null                               as role_code
+  ,'XXX' as zdroj_dat
+  ,to_fixedchar(rac.acc_id,16) as ID_BANK 
+  ,to_date(prt.reg_date_from) as reg_date_from
+  ,to_date(prt.reg_date_to) as reg_date_to
+  ,1 as pocet_cinnosti
+FROM
+   OTEBW_IMW.rpd_reg_parts prt,
+   OTEBW_IMW.rpd_reg_accounts rac
+WHERE prt.reg_date_from <= CURRENT_DATE
+  and prt.reg_date_to >= CURRENT_DATE
+  and prt.reg_part_id = rac.reg_part_id
+  and prt.act_code not in 
+    (select rp.act_code
+       from OTEBW_IMW.RPD_PERS_FOR_ACTS pa,
+            OTEBW_IMW.rpd_reg_parts rp
+      where rp.reg_part_id = pa.reg_part_id
+        and rp.partic_id = prt.partic_id
+    )";
+
+depends_on_table=["OTEBW_IMW::rpd_reg_parts"];  
+depends_on_table=["OTEBW_IMW::RPD_PERS_FOR_ACTS"];  
+depends_on_table=["OTEBW_IMW::add_role_act"];  
+depends_on_table=["OTEBW_IMW::add_role_pers"];  

@@ -1,0 +1,128 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW";
+
+query = "select ra.partic_id                                 AS ID_RUT,
+       pa.partic_desc                               AS NAZEV,
+       ra.start_num                                 AS PREDCISLI,
+       ra.acc_num                                   AS CISLO_UCTU,
+       b.direct_code                                AS KOD_BANKY,
+       ra.CHUSER_CODE                               AS ZMENIL,
+       case when pe.surn_txt is not null or pe.name_txt is not null
+            then pe.surn_txt||' '||pe.name_txt
+            else null
+       end AS OSOBA,
+       ra.CHANGE_TIME 								AS CASOVA_ZNACKA,
+       rrp.act_code                                 AS KOD_CINNOSTI,
+       'X'                                          AS PLATNOST
+  from OTEBW_IMW.RPD_ACCOUNTS as ra
+       inner join OTEBW_IMW.RPD_PARTICIPANTS as pa on 
+             pa.partic_id = ra.partic_id             
+       inner join OTEBW_IMW.RPL_BANKS as b on
+             ra.bank_id = b.bank_id
+       left outer join OTEBW_IMW.RPD_PERSONS as pe on
+             lpad(TO_CHAR(pe.person_id),9,'0') = ra.CHUSER_CODE
+       inner join OTEBW_IMW.RPD_PARTICIPANTS_ATT as att on
+        	 pa.partic_id  = att.partic_id and 
+             att.poze_flag = 1
+       inner join OTEBW_IMW.rpd_reg_parts as rrp on
+       		 rrp.partic_id = pa.partic_id and 
+       		 rrp.act_code in ('OZE', 'OZT', 'OZP', 'OZB') 
+       inner join OTEBW_IMW.rpd_reg_accounts as rra on
+  			 rrp.reg_part_id = rra.reg_part_id and 
+  			 ra.acc_id = rra.acc_id       
+ where ra.CHUSER_CODE not in ('PRODISCZ','PRODDISCZ')
+union
+select ra.partic_id                                 AS ID_RUT,
+       pa.partic_desc                               AS NAZEV,
+       ra.start_num                                 AS PREDCISLI,
+       ra.acc_num                                   AS CISLO_UCTU,
+       b.direct_code                                AS KOD_BANKY,
+       ra.CHUSER_CODE                               AS ZMENIL,
+       null                                         AS OSOBA,
+       ra.CHANGE_TIME								AS CASOVA_ZNACKA,
+       rrp.act_code                                 AS KOD_CINNOSTI,
+       'X'                                          AS PLATNOST
+  from OTEBW_IMW.RPD_ACCOUNTS ra,
+       OTEBW_IMW.RPD_PARTICIPANTS pa,
+       OTEBW_IMW.RPL_BANKS b,
+       OTEBW_IMW.RPD_PARTICIPANTS_ATT att,
+       OTEBW_IMW.rpd_reg_parts rrp,
+       OTEBW_IMW.rpd_reg_accounts rra
+where pa.partic_id  = att.partic_id
+  and att.poze_flag = 1
+  and pa.partic_id = ra.partic_id
+  and ra.bank_id = b.bank_id
+  and ra.CHUSER_CODE in ('PRODISCZ','PRODDISCZ')
+  and rrp.partic_id = pa.partic_id
+  and rrp.act_code in ('OZE', 'OZT', 'OZP', 'OZB')
+  and rrp.reg_part_id = rra.reg_part_id
+  and ra.acc_id = rra.acc_id
+union
+select ra.partic_id                                 AS ID_RUT,
+       pa.partic_desc                               AS NAZEV,
+       ra.start_num                                 AS PREDCISLI,
+       ra.acc_num                                   AS CISLO_UCTU,
+       b.direct_code                                AS KOD_BANKY,
+       ra.CHUSER_CODE                               AS ZMENIL,
+       case when pe.surn_txt is not null or pe.name_txt is not null
+            then pe.surn_txt||' '||pe.name_txt
+            else null
+       end AS OSOBA,
+       ra.CHANGE_TIME								AS CASOVA_ZNACKA,
+       rrp.act_code                                 AS KOD_CINNOSTI,
+       ' '                                          AS PLATNOST
+  from OTEBW_IMW.RPD_ACCOUNTS_HIST as ra
+       inner join OTEBW_IMW.RPD_PARTICIPANTS as pa on 
+             pa.partic_id = ra.partic_id             
+       inner join OTEBW_IMW.RPL_BANKS as b on
+             ra.bank_id = b.bank_id
+       left outer join OTEBW_IMW.RPD_PERSONS as pe on
+             lpad(TO_CHAR(pe.person_id),9,'0') = ra.CHUSER_CODE
+       inner join OTEBW_IMW.RPD_PARTICIPANTS_ATT as att on
+        	 pa.partic_id  = att.partic_id and 
+             att.poze_flag = 1
+       inner join OTEBW_IMW.rpd_reg_parts as rrp on
+       		 rrp.partic_id = pa.partic_id and 
+       		 rrp.act_code in ('OZE', 'OZT', 'OZP', 'OZB') 
+       inner join OTEBW_IMW.rpd_reg_accounts as rra on
+  			 rrp.reg_part_id = rra.reg_part_id and 
+  			 ra.acc_id = rra.acc_id       
+ where ra.CHUSER_CODE not in ('PRODISCZ','PRODDISCZ')
+union
+select ra.partic_id                                 AS ID_RUT,
+       pa.partic_desc                               AS NAZEV,
+       ra.start_num                                 AS PREDCISLI,
+       ra.acc_num                                   AS CISLO_UCTU,
+       b.direct_code                                AS KOD_BANKY,
+       ra.CHUSER_CODE                               AS ZMENIL,
+       null                                         AS OSOBA,
+       ra.CHANGE_TIME								AS CASOVA_ZNACKA,
+       rrp.act_code                                 AS KOD_CINNOSTI,
+       ' '                                          AS PLATNOST
+  from OTEBW_IMW.RPD_ACCOUNTS_HIST ra,
+       OTEBW_IMW.RPD_PARTICIPANTS pa,
+       OTEBW_IMW.RPL_BANKS b,
+       OTEBW_IMW.RPD_PARTICIPANTS_ATT att,
+       OTEBW_IMW.rpd_reg_parts rrp,
+       OTEBW_IMW.rpd_reg_accounts rra
+where pa.partic_id  = att.partic_id
+  and att.poze_flag = 1
+  and pa.partic_id = ra.partic_id
+  and ra.bank_id = b.bank_id
+  and ra.CHUSER_CODE in ('PRODISCZ','PRODDISCZ')
+  and rrp.partic_id = pa.partic_id
+  and rrp.act_code in ('OZE', 'OZT', 'OZP', 'OZB')
+  and rrp.reg_part_id = rra.reg_part_id
+  and ra.acc_id = rra.acc_id
+";
+
+depends_on_table=["OTEBW_IMW::RPD_ACCOUNTS_HIST"];  
+depends_on_table=["OTEBW_IMW::RPD_PARTICIPANTS"];  
+depends_on_table=["OTEBW_IMW::RPL_BANKS"];  
+depends_on_table=["OTEBW_IMW::RPD_PARTICIPANTS_ATT"];  
+depends_on_table=["OTEBW_IMW::rpd_reg_parts"];  
+depends_on_table=["OTEBW_IMW::rpd_reg_accounts"];  
+depends_on_table=["OTEBW_IMW::RPD_ACCOUNTS"];

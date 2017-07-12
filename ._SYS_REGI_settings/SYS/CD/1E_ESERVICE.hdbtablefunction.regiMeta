@@ -1,0 +1,24 @@
+{
+ "metadata": {
+  "activated_at": "2017-07-12 08:55:12.913 GMT+02:00",
+  "activated_by": "SUHAJEKS",
+  "change_number": "0",
+  "delivery_unit": "",
+  "du_vendor": "",
+  "du_version": "",
+  "du_version_patch": "",
+  "du_version_sp": "",
+  "edit": "true",
+  "format_version": "",
+  "object_status": "0",
+  "released_at": "null",
+  "type": "1",
+  "version_id": "3"
+ },
+ "name": "1E_ESERVICE",
+ "package": "CD",
+ "suffix": "hdbtablefunction",
+ "version": {
+  "versionType": "1"
+ }
+}

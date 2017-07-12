@@ -1,0 +1,25 @@
+PROCEDURE "OTEBW_TEST_IMW"."IMW::TRANS_IMW_PERSON" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA OTEBW_TEST_IMW AS
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+ /*   declare l_TS varchar2(20);
+   
+   --RPD_PERSONS
+   select to_char(max(CHANGE_TIME),'DD-MM-YYYY HH24:MI:SS')
+     into l_TS
+     from RPD_PERSONS;        
+   t_RPD_PERSONS = select * from "OTEBW_TEST_IMW"."REMOTE_RPD_PERSONS" where CHANGE_TIME > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS') order by CHANGE_TIME;
+   -- vymaz zmenenych    
+   delete from "OTEBW_TEST_IMW"."RPD_PERSONS" where person_id in (select person_id from :t_RPD_PERSONS);
+   -- vlozeni - nove + menene
+   insert into "OTEBW_TEST_IMW"."RPD_PERSONS" select * from :t_RPD_PERSONS;
+ */
+ -- změna načítáme vše   
+   truncate table OTEBW_TEST_IMW.RPD_PERSONS;
+   insert into OTEBW_TEST_IMW.RPD_PERSONS select * from OTEBW_TEST_IMW.REMOTE_RPD_PERSONS;
+       
+END;

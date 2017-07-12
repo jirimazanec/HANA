@@ -1,0 +1,34 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW";
+
+query = "SELECT
+   to_date(change_time) as change_time_from
+  ,to_date('01.01.5000','dd.mm.yyyy') as CHANGE_TIME_TO
+  ,person_id
+  ,title_code_bef 
+  ,surn_txt 
+  ,name_txt 
+  ,phone_num
+  ,fax_num
+  ,mobile_num
+  ,email_txt 			EMAIL
+  ,partic_id
+  ,statutory_flag
+  ,sign_txt 
+  ,accost_txt 
+  ,title_code_aft 
+  ,to_date(birth_date) 	birth_date  --          datum narozeni
+  ,division_desc 
+  ,status
+  ,(select to_date(max(lc.valid_to))
+      from OTEBW_IMW.LDD_CERTS lc,
+           OTEBW_IMW.LDD_PERS_CERTS lpc
+     where lc.cert_id = lpc.cert_id
+       and lpc.person_uid = person_id
+       and lpc.cert_change_type >= 0) as CERT_VALID_TO
+FROM OTEBW_IMW.rpd_persons";
+
+depends_on_table=["OTEBW_IMW::rpd_persons"];  

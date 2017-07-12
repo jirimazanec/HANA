@@ -1,0 +1,50 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW";
+
+query = "select b.partic_reg_num                         AS IC
+      ,b.partic_desc                            AS NAZEV_SPOLECNOSTI
+      ,a.PARTIC_ID                              AS ID_RUT
+      ,a.PERSON_ID                              AS ID_USER
+      ,a.TITLE_CODE_BEF                         AS TITUL_PRED
+      ,a.NAME_TXT                               AS JMENO
+      ,a.SURN_TXT                               AS PRIJMENI
+      ,a.TITLE_CODE_AFT                         AS TITUL_ZA
+      ,a.PHONE_NUM                              as TELEFON
+      ,a.MOBILE_NUM                             as MOBILNI_TELEFON
+      ,a.FAX_NUM                                as FAX
+      ,a.EMAIL_TXT                              as EMAIL
+      ,ifnull((select min(1)
+              from OTEBW_IMW.LDD_CERTS cert,
+                   OTEBW_IMW.LDD_PERS_CERTS pc
+             where a.person_id = pc.person_uid
+               and pc.cert_id = cert.cert_id ),0) AS PRISTUP_CS_OTE
+      ,ifnull((select min(1)
+              from OTEBW_IMW.LDD_CERTS cert,
+                   OTEBW_IMW.LDD_PERS_CERTS pc
+             where a.person_id = pc.person_uid
+               and pc.cert_id = cert.cert_id
+               and pc.cert_change_type >= 0
+               and cert.valid_from <= CURRENT_TIMESTAMP and cert.valid_to >= CURRENT_TIMESTAMP),0) AS PLATNY_CERTIFIKAT
+from OTEBW_IMW.rpd_persons a
+    ,OTEBW_IMW.rpd_participants b
+    ,OTEBW_IMW.rpd_participants_att c
+where a.partic_id = b.partic_id
+  and a.partic_id = c.partic_id
+  and c.poze_flag  = 1
+  and exists(select 1 from OTEBW_IMW.RPD_PERS_FOR_ACTS pa, OTEBW_IMW.rpd_reg_parts rp
+              where pa.person_id = a.person_id
+                and rp.partic_id = a.partic_id
+                and rp.reg_part_id = pa.reg_part_id
+                and rp.act_code in ('OZE', 'NEV', 'OZB', 'ZPR', 'OTE', 'SK', 'OZT', 'OZP', 'VIE', 'SEI', 'ERU')
+            )";
+
+depends_on_table=["OTEBW_IMW::LDD_CERTS"];  
+depends_on_table=["OTEBW_IMW::LDD_PERS_CERTS"];  
+depends_on_table=["OTEBW_IMW::rpd_persons"];  
+depends_on_table=["OTEBW_IMW::rpd_participants"];  
+depends_on_table=["OTEBW_IMW::rpd_participants_att"];  
+depends_on_table=["OTEBW_IMW::RPD_PERS_FOR_ACTS"];  
+depends_on_table=["OTEBW_IMW::rpd_reg_parts"];

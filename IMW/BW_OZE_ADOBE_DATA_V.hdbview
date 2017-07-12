@@ -1,0 +1,50 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW";
+
+query = "select h.ID_MESS_WS                      as ID_ZPRAVY_WS,
+       h.ID_MESS_DS                             as ID_ZPRAVY_DS,
+       h.ID_BATCH                               as ID_DAVKY,
+       h.TAX_NUM_SENDER                         as IC_DS,
+       h.STATUS                                 as STATUS_VST_ZPRAC,
+       h.STATUS_TEXT                            as STATUS_VST_ZPRAC_TXT,
+       h.TIMESTAMP							    as CASOVA_ZNACKA,
+       d.COMPANY_TYPE                           as TYP_SPOLECNOSTI,
+       d.TITLE                                  as TITUL,
+       d.NAME                                   as JMENO,
+       d.SURNAME                                as PRIJMENI,
+       d.EMAIL                                  as EMAIL,
+       d.PHONE                                  as TELEFON,
+       d.company_name                           as JMENO_SPOLECNOSTI,
+       d.IC                                     as IC,
+       d.DIC                                    as DIC,
+       d.TAX                                    as DODAVKY_BEZ_DPH,
+       d.ACT_CODE                               as KOD_CINNOSTI,
+       d.LICENCE                                as CISLO_LICENCE,
+       TO_date(d.LICENCE_FROM) 			        as PLATNOST_LICENCE_OD,
+       TO_date(d.LICENCE_TO)        			as PLATNOST_LICENCE_DO,
+       d.STREET_SID                             as SID_ULICE,
+       d.HOME_NUM_SID                           as SID_CISLO_POPISNE,
+       d.ORIENT_NUM_SID                         as SID_CISLO_ORIENTACNI,
+       d.POST_CODE_SID                          as SID_PSC,
+       d.CITY_SID                               as SID_MESTO,
+       d.STREET_KOR                             as KOR_ULICE,
+       d.HOME_NUM_KOR                           as KOR_CISLO_POPISNE,
+       d.ORIENT_NUM_KOR                         as KOR_CISLO_ORIENTACNI,
+       d.POST_CODE_KOR                          as KOR_PSC,
+       d.CITY_KOR                               as KOR_MESTO,
+       d.START_NUM                              as PREDCISLI,
+       d.ACC_NUM                                as UCET,
+       d.BANK_CODE                              as KOD_BANKY,
+       d.CURRENCY                               as MENA,
+       d.RESULT_STATUS                          as STATUS_VYST_ZPRAC,
+       d.RESULT_STATUS_TEXT                     as STATUS_VYST_ZPRAC_TXT,
+       d.PARTIC_ID                              as ID_RUT_PRODIS
+  from OTEBW_IMW.OZD_ADOBE_DATA_HEAD as h 
+  left outer join OTEBW_IMW.OZD_ADOBE_DATA_DETAIL as d on h.id_batch = d.id_batch
+order by h.id_batch";
+
+depends_on_table=["OTEBW_IMW::OZD_ADOBE_DATA_HEAD"];  
+depends_on_table=["OTEBW_IMW::OZD_ADOBE_DATA_DETAIL"];  

@@ -1,0 +1,31 @@
+PROCEDURE "OTEBW_TEST_IMW"."IMW::TRANS_IMW_REG_PARTS" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA OTEBW_TEST_IMW AS
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+    declare l_TS varchar2(20);
+   
+   --RPD_REG_PARTS
+   select to_char(max(CHANGE_TIME),'DD-MM-YYYY HH24:MI:SS')
+     into l_TS
+     from RPD_REG_PARTS;        
+   t_RPD_REG_PARTS = select * from "OTEBW_TEST_IMW"."REMOTE_RPD_REG_PARTS" where CHANGE_TIME > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS') order by CHANGE_TIME;
+   
+   -- vymaz smazanych zaznamu          
+   delete from RPD_REG_PARTS 
+    where REG_PART_ID in (select REG_PART_ID from REMOTE_RPD_REG_PARTS_HIST 
+                           where OPERATION_TYPE = 'D' and CHANGE_TIME_TO > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS'));             
+      
+   -- vymaz zmenenych    
+   delete from RPD_REG_PARTS where REG_PART_ID in (select REG_PART_ID from :t_RPD_REG_PARTS);
+   -- vlozeni - nove + menene
+   insert into RPD_REG_PARTS select * from :t_RPD_REG_PARTS;
+   
+   -- def mena k cinnostem
+   truncate table OTEBW_TEST_IMW.RPD_CURR_PARTS;
+   insert into OTEBW_TEST_IMW.RPD_CURR_PARTS select * from OTEBW_TEST_IMW.REMOTE_RPD_CURR_PARTS;   
+   
+END;

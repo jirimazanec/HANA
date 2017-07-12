@@ -1,0 +1,10 @@
+{
+    "description": "Migrace CD",
+    "action": "CLT.CD_BASE::MIG_CD",
+    "schedules": [
+       {
+          "description": "Migrace",
+          "xscron": "2017 03 29 * 14 37 00"
+       }
+    ]
+}

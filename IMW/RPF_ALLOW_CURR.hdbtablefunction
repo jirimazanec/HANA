@@ -1,0 +1,15 @@
+FUNCTION "OTEBW_IMW"."IMW::RPF_ALLOW_CURR" ( ) 
+	RETURNS table(reg_part_id decimal(5), allow_curr nvarchar(50))
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER AS
+BEGIN
+  return select reg_part_id, string_agg(curr_code || ';') as allow_curr from
+    ( select distinct ra.reg_part_id, curr_code
+        from OTEBW_TEST_IMW.RPD_REG_ACCOUNTS as ra
+	         inner join OTEBW_TEST_IMW.RPD_REG_PARTS as rp 
+	                on CURRENT_DATE between rp.reg_date_from and ifnull(rp.reg_date_to, CURRENT_DATE)
+					and rp.reg_part_id = ra.reg_part_id
+        order by 1 )
+   group by reg_part_id;
+
+END;

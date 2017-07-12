@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="2E_PDT_VER" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="SCRIPT_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" scriptParametersCaseSensitive="true">
+  <descriptions defaultDescription="2E_PDT_VER"/>
+  <defaultSchema schemaName="OTEBW_CD"/>
+  <localVariables>
+    <variable id="X_FR" parameter="true">
+      <descriptions defaultDescription="Datum od"/>
+      <variableProperties datatype="DATE" mandatory="true">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+        <defaultRange/>
+      </variableProperties>
+    </variable>
+    <variable id="X_TO" parameter="true">
+      <descriptions defaultDescription="Datum do"/>
+      <variableProperties datatype="DATE" mandatory="true">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+        <defaultRange/>
+      </variableProperties>
+    </variable>
+  </localVariables>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources/>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:SqlScriptView" id="Script_View">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute datatype="DATE" id="KEYDATE"/>
+        <viewAttribute datatype="NVARCHAR" id="EXT_UI" length="18" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="INT_UI" length="22" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="ANLAGE" length="10" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="ANLART" length="4" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="SPEBENE" length="2" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="GRID_ID" length="4" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="RE" length="1" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="MTYPE" length="1" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="CLASS" length="3"/>
+        <viewAttribute datatype="NVARCHAR" id="AREA" length="3"/>
+        <viewAttribute datatype="NVARCHAR" id="SUSPEND" length="1" scale="0"/>
+        <viewAttribute datatype="DECIMAL" id="CDS_POWER" length="17" scale="3"/>
+        <viewAttribute datatype="DECIMAL" id="RES_POWER" length="17" scale="3"/>
+        <viewAttribute datatype="DECIMAL" id="KOGEN" length="17" scale="3"/>
+        <viewAttribute datatype="DECIMAL" id="GREEN" length="17" scale="3"/>
+        <viewAttribute datatype="NVARCHAR" id="NEXTGRID" length="4" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="NEXTPDT" length="18" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="UITEXT" length="60" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="IMPEXP" length="1" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="MICRO_SRC" length="1" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="DIST" length="13" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="SUPP" length="13" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="SZ" length="13" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="PPS" length="13" scale="0"/>
+        <viewAttribute datatype="NVARCHAR" id="DIST_RUT" length="5"/>
+        <viewAttribute datatype="NVARCHAR" id="SUPP_RUT" length="5"/>
+        <viewAttribute datatype="NVARCHAR" id="SZ_RUT" length="5"/>
+        <viewAttribute datatype="NVARCHAR" id="PPS_RUT" length="5"/>
+        <viewAttribute datatype="INTEGER" id="POCET"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <localVariable>#X_FR</localVariable>
+      <localVariable>#X_TO</localVariable>
+      <definition>BEGIN 
+
+declare x_TST timestamp;
+
+--x_TST=&quot;OTEBW_CD&quot;.&quot;CD::Get_Aggr_DateTime&quot;(X_VER, X_KEYDATE);
+x_TST=&quot;OTEBW_CD&quot;.&quot;CD::Get_Aggr_DateTime&quot;('2', CURRENT_DATE ); -- Vraci 9999.31.12.23:59:59 prozatimní řešení než bude kmenová data ve verzích
+ 
+var_out = select 	KEYDATE,
+					EXT_UI,	
+					INT_UI, 
+					ANLAGE, 
+					ANLART, 
+					SPEBENE, 
+					GRID_ID,
+                 	CASE WHEN RE = 'X' THEN 'A' ELSE 'N' END as RE, 
+                 	MTYPE,
+                 	to_char(CLASS) as class, 
+                 	to_char(AREA) as area,
+                 	SUSPEND, 
+                 	CDS_POWER, 	
+                 	RES_POWER,
+                 	KOGEN, 
+                 	GREEN,
+                 	NEXTGRID, 
+                 	NEXTPDT,
+                 	UITEXT, 
+					CASE WHEN IMPEXP = 'X' THEN 'A' ELSE 'N' END as IMPEXP, 
+					CASE WHEN MICRO_SRC = 'X' THEN 'A' ELSE 'N' END as MICRO_SRC,
+                 	DIST, 
+                 	SUPP, 
+                 	SZ, 
+                 	PPS,
+					(select right (concat('00000', partic_id), 5) from &quot;OTEBW_IMW&quot;.&quot;IMW::BW_PARTICIPANTS_V&quot; where partic_ean = dist ) as dist_rut,
+					(select right (concat('00000', partic_id), 5) from &quot;OTEBW_IMW&quot;.&quot;IMW::BW_PARTICIPANTS_V&quot; where partic_ean = supp ) as supp_rut,
+					(select right (concat('00000', partic_id), 5) from &quot;OTEBW_IMW&quot;.&quot;IMW::BW_PARTICIPANTS_V&quot; where partic_ean = sz ) as sz_rut,
+					(select right (concat('00000', partic_id), 5) from &quot;OTEBW_IMW&quot;.&quot;IMW::BW_PARTICIPANTS_V&quot; where partic_ean = pps ) as pps_rut,
+					1 as pocet
+			from &quot;CD::2E_PDT&quot;(PLACEHOLDER.&quot;$$x_tst$$&quot; => :x_TST, PLACEHOLDER.&quot;$$x_fr$$&quot; => :X_FR , PLACEHOLDER.&quot;$$x_to$$&quot; => :X_TO)
+            with hint(INLINE);
+END</definition>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Script_View">
+    <descriptions/>
+    <attributes>
+      <attribute id="KEYDATE" order="1">
+        <descriptions defaultDescription="KEYDATE"/>
+        <keyMapping columnObjectName="Script_View" columnName="KEYDATE"/>
+      </attribute>
+      <attribute id="EXT_UI" order="2">
+        <descriptions defaultDescription="EXT_UI"/>
+        <keyMapping columnObjectName="Script_View" columnName="EXT_UI"/>
+      </attribute>
+      <attribute id="INT_UI" order="3">
+        <descriptions defaultDescription="INT_UI"/>
+        <keyMapping columnObjectName="Script_View" columnName="INT_UI"/>
+      </attribute>
+      <attribute id="ANLAGE" order="4">
+        <descriptions defaultDescription="ANLAGE"/>
+        <keyMapping columnObjectName="Script_View" columnName="ANLAGE"/>
+      </attribute>
+      <attribute id="ANLART" order="5">
+        <descriptions defaultDescription="ANLART"/>
+        <keyMapping columnObjectName="Script_View" columnName="ANLART"/>
+      </attribute>
+      <attribute id="SPEBENE" order="6">
+        <descriptions defaultDescription="SPEBENE"/>
+        <keyMapping columnObjectName="Script_View" columnName="SPEBENE"/>
+      </attribute>
+      <attribute id="GRID_ID" order="7">
+        <descriptions defaultDescription="GRID_ID"/>
+        <keyMapping columnObjectName="Script_View" columnName="GRID_ID"/>
+      </attribute>
+      <attribute id="RE" order="8">
+        <descriptions defaultDescription="RE"/>
+        <keyMapping columnObjectName="Script_View" columnName="RE"/>
+      </attribute>
+      <attribute id="MTYPE" order="9">
+        <descriptions defaultDescription="MTYPE"/>
+        <keyMapping columnObjectName="Script_View" columnName="MTYPE"/>
+      </attribute>
+      <attribute id="CLASS" order="10">
+        <descriptions defaultDescription="CLASS"/>
+        <keyMapping columnObjectName="Script_View" columnName="CLASS"/>
+      </attribute>
+      <attribute id="AREA" order="11">
+        <descriptions defaultDescription="AREA"/>
+        <keyMapping columnObjectName="Script_View" columnName="AREA"/>
+      </attribute>
+      <attribute id="SUSPEND" order="12">
+        <descriptions defaultDescription="SUSPEND"/>
+        <keyMapping columnObjectName="Script_View" columnName="SUSPEND"/>
+      </attribute>
+      <attribute id="NEXTGRID" order="17">
+        <descriptions defaultDescription="NEXTGRID"/>
+        <keyMapping columnObjectName="Script_View" columnName="NEXTGRID"/>
+      </attribute>
+      <attribute id="NEXTPDT" order="18">
+        <descriptions defaultDescription="NEXTPDT"/>
+        <keyMapping columnObjectName="Script_View" columnName="NEXTPDT"/>
+      </attribute>
+      <attribute id="UITEXT" order="19">
+        <descriptions defaultDescription="UITEXT"/>
+        <keyMapping columnObjectName="Script_View" columnName="UITEXT"/>
+      </attribute>
+      <attribute id="IMPEXP" order="20">
+        <descriptions defaultDescription="IMPEXP"/>
+        <keyMapping columnObjectName="Script_View" columnName="IMPEXP"/>
+      </attribute>
+      <attribute id="MICRO_SRC" order="21">
+        <descriptions defaultDescription="MICRO_SRC"/>
+        <keyMapping columnObjectName="Script_View" columnName="MICRO_SRC"/>
+      </attribute>
+      <attribute id="DIST" order="22">
+        <descriptions defaultDescription="DIST"/>
+        <keyMapping columnObjectName="Script_View" columnName="DIST"/>
+      </attribute>
+      <attribute id="SUPP" order="23">
+        <descriptions defaultDescription="SUPP"/>
+        <keyMapping columnObjectName="Script_View" columnName="SUPP"/>
+      </attribute>
+      <attribute id="SZ" order="24">
+        <descriptions defaultDescription="SZ"/>
+        <keyMapping columnObjectName="Script_View" columnName="SZ"/>
+      </attribute>
+      <attribute id="PPS" order="25">
+        <descriptions defaultDescription="PPS"/>
+        <keyMapping columnObjectName="Script_View" columnName="PPS"/>
+      </attribute>
+      <attribute id="DIST_RUT" order="26">
+        <descriptions defaultDescription="DIST_RUT"/>
+        <keyMapping columnObjectName="Script_View" columnName="DIST_RUT"/>
+      </attribute>
+      <attribute id="SUPP_RUT" order="27">
+        <descriptions defaultDescription="SUPP_RUT"/>
+        <keyMapping columnObjectName="Script_View" columnName="SUPP_RUT"/>
+      </attribute>
+      <attribute id="SZ_RUT" order="28">
+        <descriptions defaultDescription="SZ_RUT"/>
+        <keyMapping columnObjectName="Script_View" columnName="SZ_RUT"/>
+      </attribute>
+      <attribute id="PPS_RUT" order="29">
+        <descriptions defaultDescription="PPS_RUT"/>
+        <keyMapping columnObjectName="Script_View" columnName="PPS_RUT"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="CDS_POWER" order="13" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="CDS_POWER"/>
+        <measureMapping columnObjectName="Script_View" columnName="CDS_POWER"/>
+      </measure>
+      <measure id="RES_POWER" order="14" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="RES_POWER"/>
+        <measureMapping columnObjectName="Script_View" columnName="RES_POWER"/>
+      </measure>
+      <measure id="KOGEN" order="15" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="KOGEN"/>
+        <measureMapping columnObjectName="Script_View" columnName="KOGEN"/>
+      </measure>
+      <measure id="GREEN" order="16" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="GREEN"/>
+        <measureMapping columnObjectName="Script_View" columnName="GREEN"/>
+      </measure>
+      <measure id="POCET" order="30" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="POCET"/>
+        <measureMapping columnObjectName="Script_View" columnName="POCET"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

@@ -1,0 +1,33 @@
+PROCEDURE "OTEBW_IMW"."IMW::MIG_EZP" ( )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   DEFAULT SCHEMA OTEBW_IMW
+   AS
+BEGIN
+   truncate table BW_EZP_ACCOUNTS;
+   insert into BW_EZP_ACCOUNTS select * from REMOTE_BW_EZP_ACCOUNTS;
+   truncate table BW_EZP_ACC_ST_LIST;
+   insert into BW_EZP_ACC_ST_LIST select * from REMOTE_BW_EZP_ACC_ST_LIST;
+   truncate table BW_EZP_ACC_TYPE_LIST;
+   insert into BW_EZP_ACC_TYPE_LIST select * from REMOTE_BW_EZP_ACC_TYPE_LIST;
+   truncate table BW_EZP_EN_SOURCE_TYPE;
+   insert into BW_EZP_EN_SOURCE_TYPE select * from REMOTE_BW_EZP_EN_SOURCE_TYPE;
+   truncate table BW_EZP_TECHNOLOGY_TYPE;
+   insert into BW_EZP_TECHNOLOGY_TYPE select * from REMOTE_BW_EZP_TECHNOLOGY_TYPE;
+   truncate table BW_EZP_TRAN;
+   insert into BW_EZP_TRAN select * from REMOTE_BW_EZP_TRAN;
+   
+   truncate table BW_EZP_TRAN_STATUS_LIST;
+   insert into BW_EZP_TRAN_STATUS_LIST select * from REMOTE_BW_EZP_TRAN_STATUS_LIST;
+   truncate table BW_EZP_TRAN_TYPE_LIST;
+   insert into BW_EZP_TRAN_TYPE_LIST select * from REMOTE_BW_EZP_TRAN_TYPE_LIST;
+   truncate table BW_EZP_PLATBY_EZ2;
+   insert into BW_EZP_PLATBY_EZ2 select * from REMOTE_BW_EZP_PLATBY_EZ2;
+   truncate table BW_EZP_PLATBY_EZ3;
+   insert into BW_EZP_PLATBY_EZ3 select * from REMOTE_BW_EZP_PLATBY_EZ3;
+   truncate table BW_EZP_PLATBY_EZ4;
+   insert into BW_EZP_PLATBY_EZ4 select * from REMOTE_BW_EZP_PLATBY_EZ4;
+   truncate table BW_EZP_PLATBY_EZ5;
+   insert into BW_EZP_PLATBY_EZ5 select * from REMOTE_BW_EZP_PLATBY_EZ5;
+
+END;

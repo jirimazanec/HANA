@@ -1,0 +1,18 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW";
+
+query = "SELECT
+   act_code
+  ,I18N_VALUE act_desc
+  ,manacc_flag
+FROM
+   OTEBW_IMW.rpl_acts,
+   OTEBW_IMW.ADL_I18N_TEXTS
+WHERE LANG_CODE = 'cs'   
+  and I18N_KEY = act_desc;";
+
+depends_on_table=["OTEBW_IMW::rpl_acts"];  
+depends_on_table=["OTEBW_IMW::ADL_I18N_TEXTS"];  

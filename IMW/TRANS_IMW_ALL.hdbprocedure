@@ -1,0 +1,46 @@
+PROCEDURE "OTEBW_TEST_IMW"."IMW::TRANS_IMW_ALL" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA OTEBW_TEST_IMW
+AS	
+BEGIN
+   -- PRODIS
+   -- ciselniky
+   truncate table OTEBW_TEST_IMW.ADL_I18N_TEXTS;
+   insert into OTEBW_TEST_IMW.ADL_I18N_TEXTS select * from OTEBW_TEST_IMW.REMOTE_ADL_I18N_TEXTS;
+   truncate table OTEBW_TEST_IMW.LDL_PERS_CERTS_CHANGE_TYPE;
+   insert into OTEBW_TEST_IMW.LDL_PERS_CERTS_CHANGE_TYPE select * from OTEBW_TEST_IMW.REMOTE_LDL_PERS_CERTS_CHNG_TYP;
+   truncate table OTEBW_TEST_IMW.RPL_PART_TYPE;
+   insert into OTEBW_TEST_IMW.RPL_PART_TYPE select * from OTEBW_TEST_IMW.REMOTE_RPL_PART_TYPE;
+   truncate table OTEBW_TEST_IMW.RPL_ROLES;
+   insert into OTEBW_TEST_IMW.RPL_ROLES select * from OTEBW_TEST_IMW.REMOTE_RPL_ROLES;
+   truncate table OTEBW_TEST_IMW.RPL_LICENCE_TYPE;
+   insert into OTEBW_TEST_IMW.RPL_LICENCE_TYPE select * from OTEBW_TEST_IMW.REMOTE_RPL_LICENCE_TYPE;
+   truncate table OTEBW_TEST_IMW.RPL_ACTS;
+   insert into OTEBW_TEST_IMW.RPL_ACTS select * from OTEBW_TEST_IMW.REMOTE_RPL_ACTS;
+   truncate table OTEBW_TEST_IMW.RPL_BANKS;
+   insert into OTEBW_TEST_IMW.RPL_BANKS select * from OTEBW_TEST_IMW.REMOTE_RPL_BANKS;
+   truncate table OTEBW_TEST_IMW.RPL_ADDRESS_TYPE;
+   insert into OTEBW_TEST_IMW.RPL_ADDRESS_TYPE select * from OTEBW_TEST_IMW.REMOTE_RPL_ADDRESS_TYPE;
+   truncate table OTEBW_TEST_IMW.RPL_DISTRICTS;
+   insert into OTEBW_TEST_IMW.RPL_DISTRICTS select * from OTEBW_TEST_IMW.REMOTE_RPL_DISTRICTS;
+   truncate table OTEBW_TEST_IMW.RPL_REGIONS;
+   insert into OTEBW_TEST_IMW.RPL_REGIONS select * from OTEBW_TEST_IMW.REMOTE_RPL_REGIONS;
+   truncate table OTEBW_TEST_IMW.ADL_ROLES;
+   insert into OTEBW_TEST_IMW.ADL_ROLES select * from OTEBW_TEST_IMW.REMOTE_ADL_ROLES;
+   truncate table OTEBW_TEST_IMW.ADD_ROLE_ACT;
+   insert into OTEBW_TEST_IMW.ADD_ROLE_ACT select * from OTEBW_TEST_IMW.REMOTE_ADD_ROLE_ACT;
+         
+   -- SFVOT
+   -- číselníky
+   truncate table OTEBW_TEST_IMW.centr_limits_def;
+   insert into OTEBW_TEST_IMW.centr_limits_def select * from OTEBW_TEST_IMW.REMOTE_centr_limits_def;
+   truncate table OTEBW_TEST_IMW.add_utilizations;
+   insert into OTEBW_TEST_IMW.add_utilizations select * from OTEBW_TEST_IMW.REMOTE_add_utilizations;
+   truncate table OTEBW_TEST_IMW.UTL_TYPES;
+   insert into OTEBW_TEST_IMW.UTL_TYPES select * from OTEBW_TEST_IMW.REMOTE_UTL_TYPES;
+   truncate table OTEBW_TEST_IMW.RE_TRADE_TYPES;
+   insert into OTEBW_TEST_IMW.RE_TRADE_TYPES select * from OTEBW_TEST_IMW.REMOTE_RE_TRADE_TYPES;
+   
+
+END;

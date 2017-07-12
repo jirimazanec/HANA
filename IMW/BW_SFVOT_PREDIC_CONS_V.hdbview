@@ -1,0 +1,22 @@
+schema="OTEBW_IMW";
+
+query = "select g1.id_rut AS ID_RUT,
+	            g1.id_rut_orig AS ID_RUT_ORIG,
+	            g1.time_stamp AS TIME_STAMP,
+	            g1.delivery_date AS DELIVERY_DATE,
+	            g1.version AS VERSION,
+	            g1.energy * 1000 AS PREDIC_CONS 
+           from GAS_NOMIN_TRADES g1 
+          where g1.type_trade = 'SPO' 
+            and g1.accept_flag = 'Y' 
+            and to_date(time_stamp) <= to_date(delivery_date) 
+            and g1.id_instance = (select max(id_instance) 
+                                    from GAS_NOMIN_TRADES g2 
+	                               where g2.id_rut = g1.id_rut 
+	                                 and g2.id_rut_orig = g1.id_rut_orig 
+	                                 and g2.type_trade = g1.type_trade 
+	                                 and g2.delivery_date = g1.delivery_date 
+	                                 and to_date(g2.time_stamp) = to_date(g1.time_stamp) 
+	                                 and g2.accept_flag = g1.accept_flag)";
+
+depends_on_table=["OTEBW_IMW::GAS_NOMIN_TRADES"];  

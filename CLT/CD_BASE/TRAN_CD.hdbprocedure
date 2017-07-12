@@ -1,0 +1,231 @@
+PROCEDURE "OTEBW_TEST_CLT_CD"."CLT.CD_BASE::TRAN_CD" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	--DEFAULT SCHEMA <default_schema_name>
+	AS
+BEGIN
+
+declare i int;
+declare Cnt int;
+declare MANDT NVARCHAR(000003);
+declare ABLBELNR NVARCHAR(000020);
+declare ANLAGE NVARCHAR(000010);
+declare ABLESGR NVARCHAR(000002);
+declare GRID_ID NVARCHAR(000010);
+declare SPRAS NVARCHAR(000001);
+declare OBJKEY NVARCHAR(000070);
+declare OBJTYPE NVARCHAR(000010);
+declare LOGLPRELNO NVARCHAR(000018);
+declare BIS NVARCHAR(000008);
+declare PROFILE NVARCHAR(000018);
+declare VALUEDAY NVARCHAR(000008);
+declare DATETO NVARCHAR(000008);
+declare TIMETO NVARCHAR(000006);
+declare STAT NVARCHAR(000005);
+declare VERTRAG NVARCHAR(000010);
+declare SERVICEID NVARCHAR(000010);
+declare OPERAND NVARCHAR(000010);
+declare SAISON NVARCHAR(000010);
+declare AB NVARCHAR(000008);
+declare ABLFDNR NVARCHAR(000004);
+declare INT_UI NVARCHAR(000022);
+declare MR_ID NVARCHAR(000020);
+-- EABL
+t_ModifEABL = select * from "OTEBW_TEST_CLT_CD"."REMOTE_EABL_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."EABL_CHG" select * from :t_ModifEABL;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifEABL.MANDT[:i];
+  ABLBELNR = :t_ModifEABL.ABLBELNR[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_EABL_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND ABLBELNR=:ABLBELNR;
+end for;
+-- EABLG
+t_ModifEABLG = select * from "OTEBW_TEST_CLT_CD"."REMOTE_EABLG_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."EABLG_CHG" select * from :t_ModifEABLG;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifEABLG.MANDT[:i];
+  ABLBELNR = :t_ModifEABLG.ABLBELNR[:i];
+  ANLAGE = :t_ModifEABLG.ANLAGE[:i];
+  ABLESGR = :t_ModifEABLG.ABLESGR[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_EABLG_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND ABLBELNR=:ABLBELNR AND ANLAGE=:ANLAGE AND ABLESGR=:ABLESGR;
+end for;
+-- EANL
+t_ModifEANL = select * from "OTEBW_TEST_CLT_CD"."REMOTE_EANL_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."EANL_CHG" select * from :t_ModifEANL;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifEANL.MANDT[:i];
+  ANLAGE = :t_ModifEANL.ANLAGE[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_EANL_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND ANLAGE=:ANLAGE;
+end for;
+-- EGRID
+t_ModifEGRID = select * from "OTEBW_TEST_CLT_CD"."REMOTE_EGRID_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."EGRID_CHG" select * from :t_ModifEGRID;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifEGRID.MANDT[:i];
+  GRID_ID = :t_ModifEGRID.GRID_ID[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_EGRID_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND GRID_ID=:GRID_ID;
+end for;
+-- EGRIDT
+t_ModifEGRIDT = select * from "OTEBW_TEST_CLT_CD"."REMOTE_EGRIDT_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."EGRIDT_CHG" select * from :t_ModifEGRIDT;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifEGRIDT.MANDT[:i];
+  SPRAS = :t_ModifEGRIDT.SPRAS[:i];
+  GRID_ID = :t_ModifEGRIDT.GRID_ID[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_EGRIDT_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND SPRAS=:SPRAS AND GRID_ID=:GRID_ID;
+end for;
+-- ELPASS
+t_ModifELPASS = select * from "OTEBW_TEST_CLT_CD"."REMOTE_ELPASS_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."ELPASS_CHG" select * from :t_ModifELPASS;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifELPASS.MANDT[:i];
+  OBJKEY = :t_ModifELPASS.OBJKEY[:i];
+  OBJTYPE = :t_ModifELPASS.OBJTYPE[:i];
+  LOGLPRELNO = :t_ModifELPASS.LOGLPRELNO[:i];
+  BIS = :t_ModifELPASS.BIS[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_ELPASS_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND OBJKEY=:OBJKEY AND OBJTYPE=:OBJTYPE AND LOGLPRELNO=:LOGLPRELNO AND BIS=:BIS;
+end for;
+-- EPROFHEAD
+t_ModifEPROFHEAD = select * from "OTEBW_TEST_CLT_CD"."REMOTE_EPROFHEAD_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."EPROFHEAD_CHG" select * from :t_ModifEPROFHEAD;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifEPROFHEAD.MANDT[:i];
+  PROFILE = :t_ModifEPROFHEAD.PROFILE[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_EPROFHEAD_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND PROFILE=:PROFILE;
+end for;
+-- EPROFVAL60
+t_ModifEPROFVAL60 = select * from "OTEBW_TEST_CLT_CD"."REMOTE_EPROFVAL60_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."EPROFVAL60_CHG" select * from :t_ModifEPROFVAL60;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifEPROFVAL60.MANDT[:i];
+  PROFILE = :t_ModifEPROFVAL60.PROFILE[:i];
+  VALUEDAY = :t_ModifEPROFVAL60.VALUEDAY[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_EPROFVAL60_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND PROFILE=:PROFILE AND VALUEDAY=:VALUEDAY;
+end for;
+-- EPROFVALMONTH
+t_ModifEPROFVALMONTH = select * from "OTEBW_TEST_CLT_CD"."REMOTE_EPROFVALMONTH_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."EPROFVALMONTH_CHG" select * from :t_ModifEPROFVALMONTH;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifEPROFVALMONTH.MANDT[:i];
+  PROFILE = :t_ModifEPROFVALMONTH.PROFILE[:i];
+  VALUEDAY = :t_ModifEPROFVALMONTH.VALUEDAY[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_EPROFVALMONTH_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND PROFILE=:PROFILE AND VALUEDAY=:VALUEDAY;
+end for;
+-- EPROFVALSTAT
+t_ModifEPROFVALSTAT = select * from "OTEBW_TEST_CLT_CD"."REMOTE_EPROFVALSTAT_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."EPROFVALSTAT_CHG" select * from :t_ModifEPROFVALSTAT;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifEPROFVALSTAT.MANDT[:i];
+  PROFILE = :t_ModifEPROFVALSTAT.PROFILE[:i];
+  DATETO = :t_ModifEPROFVALSTAT.DATETO[:i];
+  TIMETO = :t_ModifEPROFVALSTAT.TIMETO[:i];
+  STAT = :t_ModifEPROFVALSTAT.STAT[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_EPROFVALSTAT_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND PROFILE=:PROFILE AND DATETO=:DATETO AND TIMETO=:TIMETO AND STAT=:STAT;
+end for;
+-- ESERVICE
+t_ModifESERVICE = select * from "OTEBW_TEST_CLT_CD"."REMOTE_ESERVICE_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."ESERVICE_CHG" select * from :t_ModifESERVICE;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifESERVICE.MANDT[:i];
+  VERTRAG = :t_ModifESERVICE.VERTRAG[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_ESERVICE_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND VERTRAG=:VERTRAG;
+end for;
+-- ESERVPROV
+t_ModifESERVPROV = select * from "OTEBW_TEST_CLT_CD"."REMOTE_ESERVPROV_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."ESERVPROV_CHG" select * from :t_ModifESERVPROV;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifESERVPROV.MANDT[:i];
+  SERVICEID = :t_ModifESERVPROV.SERVICEID[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_ESERVPROV_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND SERVICEID=:SERVICEID;
+end for;
+-- ESERVPROVT
+t_ModifESERVPROVT = select * from "OTEBW_TEST_CLT_CD"."REMOTE_ESERVPROVT_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."ESERVPROVT_CHG" select * from :t_ModifESERVPROVT;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifESERVPROVT.MANDT[:i];
+  SPRAS = :t_ModifESERVPROVT.SPRAS[:i];
+  SERVICEID = :t_ModifESERVPROVT.SERVICEID[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_ESERVPROVT_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND SPRAS=:SPRAS AND SERVICEID=:SERVICEID;
+end for;
+-- ETTIFN
+t_ModifETTIFN = select * from "OTEBW_TEST_CLT_CD"."REMOTE_ETTIFN_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."ETTIFN_CHG" select * from :t_ModifETTIFN;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifETTIFN.MANDT[:i];
+  ANLAGE = :t_ModifETTIFN.ANLAGE[:i];
+  OPERAND = :t_ModifETTIFN.OPERAND[:i];
+  SAISON = :t_ModifETTIFN.SAISON[:i];
+  AB = :t_ModifETTIFN.AB[:i];
+  ABLFDNR = :t_ModifETTIFN.ABLFDNR[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_ETTIFN_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND ANLAGE=:ANLAGE AND OPERAND=:OPERAND AND SAISON=:SAISON AND AB=:AB AND ABLFDNR=:ABLFDNR;
+end for;
+-- EUIGRID
+t_ModifEUIGRID = select * from "OTEBW_TEST_CLT_CD"."REMOTE_EUIGRID_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."EUIGRID_CHG" select * from :t_ModifEUIGRID;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifEUIGRID.MANDT[:i];
+  INT_UI = :t_ModifEUIGRID.INT_UI[:i];
+  DATETO = :t_ModifEUIGRID.DATETO[:i];
+  TIMETO = :t_ModifEUIGRID.TIMETO[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_EUIGRID_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND INT_UI=:INT_UI AND DATETO=:DATETO AND TIMETO=:TIMETO;
+end for;
+-- EUIINSTLN
+t_ModifEUIINSTLN = select * from "OTEBW_TEST_CLT_CD"."REMOTE_EUIINSTLN_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."EUIINSTLN_CHG" select * from :t_ModifEUIINSTLN;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifEUIINSTLN.MANDT[:i];
+  INT_UI = :t_ModifEUIINSTLN.INT_UI[:i];
+  ANLAGE = :t_ModifEUIINSTLN.ANLAGE[:i];
+  DATETO = :t_ModifEUIINSTLN.DATETO[:i];
+  TIMETO = :t_ModifEUIINSTLN.TIMETO[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_EUIINSTLN_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND INT_UI=:INT_UI AND ANLAGE=:ANLAGE AND DATETO=:DATETO AND TIMETO=:TIMETO;
+end for;
+-- EUITRANS
+t_ModifEUITRANS = select * from "OTEBW_TEST_CLT_CD"."REMOTE_EUITRANS_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."EUITRANS_CHG" select * from :t_ModifEUITRANS;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifEUITRANS.MANDT[:i];
+  INT_UI = :t_ModifEUITRANS.INT_UI[:i];
+  DATETO = :t_ModifEUITRANS.DATETO[:i];
+  TIMETO = :t_ModifEUITRANS.TIMETO[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_EUITRANS_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND INT_UI=:INT_UI AND DATETO=:DATETO AND TIMETO=:TIMETO;
+end for;
+-- ZEUIHEADT
+t_ModifZEUIHEADT = select * from "OTEBW_TEST_CLT_CD"."REMOTE_ZEUIHEADT_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."ZEUIHEADT_CHG" select * from :t_ModifZEUIHEADT;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifZEUIHEADT.MANDT[:i];
+  INT_UI = :t_ModifZEUIHEADT.INT_UI[:i];
+  SPRAS = :t_ModifZEUIHEADT.SPRAS[:i];
+  AB = :t_ModifZEUIHEADT.AB[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_ZEUIHEADT_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND INT_UI=:INT_UI AND SPRAS=:SPRAS AND AB=:AB;
+end for;
+-- ZGAS_MREADINGS
+t_ModifZGAS_MREADINGS = select * from "OTEBW_TEST_CLT_CD"."REMOTE_ZGAS_MREADINGS_CHG" where CLT_PROCESSED = ' ' order by TST;
+Cnt := ::ROWCOUNT;
+insert into "OTEBW_TEST_CLT_CD"."ZGAS_MREADINGS_CHG" select * from :t_ModifZGAS_MREADINGS;
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifZGAS_MREADINGS.MANDT[:i];
+  MR_ID = :t_ModifZGAS_MREADINGS.MR_ID[:i];
+  update "OTEBW_TEST_CLT_CD"."REMOTE_ZGAS_MREADINGS_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT AND MR_ID=:MR_ID;
+end for;
+/*****
+***/
+END;

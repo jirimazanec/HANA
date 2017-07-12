@@ -1,0 +1,9 @@
+schema="OTEBW_IMW";
+
+query = "SELECT RE_TYPE,
+                RE_TYPE_DESC,
+                COMMODITY,
+                POSITION
+           FROM RE_TRADE_TYPES";
+
+depends_on_table=["OTEBW_IMW::RE_TRADE_TYPES"];  

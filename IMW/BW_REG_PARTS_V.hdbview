@@ -1,0 +1,28 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW";
+
+query = "SELECT
+   to_date(reg.reg_date_from) as reg_date_from
+  ,to_date(reg.reg_date_to) as reg_date_to
+  ,reg.partic_id
+  ,rac.acc_id
+  ,reg.act_code
+  --,reg.status_code
+  ,reg.comment_txt
+  ,case when reg.act_code = 'DSP' then '1'
+  		when reg.act_code = 'SZP' then '2'
+  		when reg.act_code = 'SDP' then '3'
+  		else '' end as rut_prior
+  , 1 as POCET
+  ,reg.change_time
+  ,reg.reg_part_id 
+FROM
+   OTEBW_IMW.rpd_reg_parts as reg 
+   left outer join OTEBW_IMW.rpd_reg_accounts as rac on
+       reg.reg_part_id = rac.reg_part_id ";
+
+depends_on_table=["OTEBW_IMW::rpd_reg_parts"];  
+depends_on_table=["OTEBW_IMW::rpd_reg_accounts"];

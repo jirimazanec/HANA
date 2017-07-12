@@ -1,0 +1,53 @@
+schema="OTEBW_IMW";
+
+query = "SELECT addr.change_time
+  			   ,partic_id
+  			   ,street_txt 
+  			   ,home_num
+  			   ,orient_num
+  			   ,city_txt   
+  			   ,city_part_txt   
+  			   ,dist.distr_desc  
+  			   ,post_code
+  			   ,country_code
+  			   ,adrpa.type_code
+  			   ,addr.ADR_ID
+		  FROM rpd_addresses as addr
+		       LEFT OUTER JOIN rpl_districts as dist on dist.distr_code = addr.distr_code 
+		       INNER JOIN rpd_addr_partic as adrpa on adrpa.adr_id = addr.adr_id
+		 where (addr.change_time, partic_id, adrpa.type_code) in
+					(SELECT  max(addr.change_time) change_time
+  							,partic_id
+  							,adrpa.type_code type_code
+					  FROM rpd_addresses as addr
+					       LEFT OUTER JOIN rpd_addr_partic as adrpa on adrpa.adr_id = addr.adr_id 
+                  group by to_char(addr.change_time, 'YYYYMMDD'), addr.PARTIC_ID, adrpa.type_code)
+      UNION all
+         SELECT addr.change_time
+  			   ,partic_id
+  			   ,street_txt 
+  			   ,home_num
+  			   ,orient_num
+  			   ,city_txt   
+  			   ,city_part_txt   
+  			   ,dist.distr_desc  
+  			   ,post_code
+  			   ,country_code
+  			   ,null as type_code
+  			   ,addr.ADR_ID
+		  FROM rpd_addresses as addr
+		       LEFT OUTER JOIN rpl_districts as dist on dist.distr_code = addr.distr_code
+         WHERE not exists(select 1 from rpd_addr_partic as adrpa
+                           where adrpa.adr_id = addr.adr_id) and 
+               (addr.change_time, partic_id) in
+                (SELECT max(addr.change_time) change_time
+                       ,partic_id
+                   FROM rpd_addresses as addr
+                  WHERE not exists(select 1 from rpd_addr_partic adrpa
+                                    where adrpa.adr_id = addr.adr_id)
+                                 group by to_char(addr.change_time, 'YYYYMMDD'), addr.PARTIC_ID)                  
+                  ";
+
+depends_on_table=["OTEBW_TEST_IMW::rpd_addresses"];  
+depends_on_table=["OTEBW_TEST_IMW::rpl_districts"];  
+depends_on_table=["OTEBW_TEST_IMW::rpd_addr_partic"];

@@ -1,0 +1,23 @@
+PROCEDURE "OTEBW_TEST_IMW"."IMW::TRANS_IMW_UTL" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA OTEBW_TEST_IMW
+	AS
+BEGIN
+   	declare l_id bigint;
+   	
+   -- OFFLINE_UTL_CHANGE
+   select max(id_change)
+     into l_id
+     from OFFLINE_UTL_CHANGE;
+     
+   insert into OTEBW_TEST_IMW.OFFLINE_UTL_CHANGE select * from OTEBW_TEST_IMW.REMOTE_OFFLINE_UTL_CHANGE where id_change > :l_id;
+     
+   -- LIMIT_DYN_CHANGE
+   select max(id_change)
+     into l_id
+     from LIMIT_DYN_CHANGE;
+     
+   insert into OTEBW_TEST_IMW.LIMIT_DYN_CHANGE select * from OTEBW_TEST_IMW.REMOTE_LIMIT_DYN_CHANGE where id_change > :l_id;
+   
+END;

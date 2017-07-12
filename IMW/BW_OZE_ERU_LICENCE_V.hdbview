@@ -1,0 +1,39 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW";
+
+query = "  select ps.PROD_SOURCE_ID                                    AS ID_ZDROJE,
+       p.PLANT_ID                                           AS ID_PROVOZOVNY,
+       p.PLANT_VERSION                                      AS VERZE_PROVOZOVNY,
+       l.SUPPLIER_HOME_NUM                                  AS CISLO_POPISNE,
+       l.SUPPLIER_ORIENT_NUM                                AS CISLO_ORIENTACNI,
+       l.SUPPLIER_STREET                                    AS ULICE,
+       l.SUPPLIER_POST_CODE                                 AS PSC,
+       l.SUPPLIER_CITY                                      AS OBEC,
+       l.SUPPLIER_DISTRICT                                  AS OKRES,
+       l.SUPPLIER_AREA                                      AS KRAJ,
+       l.SUPPLIER_LICENSE_NUMBER                            AS LICENCE,
+       l.SUPPLIER_VERSION                                   AS VERZE_LICENCE,
+       TO_CHAR(l.SUPPLIER_LICENSE_DATE_FROM,'YYYYMMDD')     AS DATUM_VZNIKU_OPRAVNENI,
+       TO_CHAR(l.SUPPLIER_LICENSE_DATE_TO,'YYYYMMDD')       AS DATUM_KONCE_OPRAVNENI,
+       TO_CHAR(l.supplier_legal_effect_date,'YYYYMMDD')     AS DATUM_PRAVNI_UCINNOSTI,
+       l.SUPPLIER_TAX_NUM                                   AS IC,
+       l.SUPPLIER_COMPANY_NAME                              AS NAZEV_SUBJEKTU,
+       l.SUPPLIER_FIRST_NAME                                AS JMENO,
+       l.SUPPLIER_SURN_NAME                                 AS PRIJMENI,
+       l.SUPPLIER_BEF_TITLE                                 AS TITUL,
+       ps.PROD_SOURCE_INSTALL_CAPACITY                      AS INSTALOVANY_VYKON,
+       ps.PROD_SOURCE_FUEL_TYPE                             AS DRUH_PALIVA
+ from OTEBW_IMW.ERU2OTE_LICENSES as l
+      inner join OTEBW_IMW.ERU2OTE_PLANTS as p on 
+            l.SUPPLIER_LICENSE_NUMBER = p.SUPPLIER_LICENSE_NUMBER
+      inner join OTEBW_IMW.ERU2OTE_PROD_SOURCES as ps on
+            p.PLANT_ID = ps.PLANT_ID and 
+            p.SUPPLIER_LICENSE_NUMBER = ps.SUPPLIER_LICENSE_NUMBER";
+
+depends_on_table=["OTEBW_IMW::ERU2OTE_LICENSES"];         		
+depends_on_table=["OTEBW_IMW::ERU2OTE_PLANTS"];
+depends_on_table=["OTEBW_IMW::ERU2OTE_PROD_SOURCES"];
+	       		

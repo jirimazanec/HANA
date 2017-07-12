@@ -1,0 +1,44 @@
+PROCEDURE "OTEBW_TEST_IMW"."IMW::TRANS_IMW_REG_PERS" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA OTEBW_TEST_IMW AS
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+    declare l_TS varchar2(20);
+   
+   --RPD_PERS_FOR_ACTS
+   select to_char(max(CHANGE_TIME),'DD-MM-YYYY HH24:MI:SS')
+     into l_TS
+     from RPD_PERS_FOR_ACTS;
+     
+   -- menena data 
+   t_RPD_PERS_FOR_ACTS = select * from REMOTE_RPD_PERS_FOR_ACTS where CHANGE_TIME > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS') order by CHANGE_TIME;
+             
+   -- vymaz smazanych zaznamu          
+   delete from RPD_PERS_FOR_ACTS 
+    where (person_id, REG_PART_ID) in (select person_id, REG_PART_ID from REMOTE_RPD_PERS_FOR_ACTS_HIST 
+                                        where OPERATION_TYPE = 'D' and CHANGE_TIME_TO > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS'));             
+                             
+   -- vymaz zmenenych    
+   delete from RPD_PERS_FOR_ACTS where (person_id, REG_PART_ID) in (select person_id, REG_PART_ID from :t_RPD_PERS_FOR_ACTS);
+   -- vlozeni - nove + menene
+   insert into RPD_PERS_FOR_ACTS select * from :t_RPD_PERS_FOR_ACTS;
+   
+       
+  -- ADD_ROLE_PERS  
+   select to_char(max(CHANGE_TIME),'DD-MM-YYYY HH24:MI:SS')
+     into l_TS
+     from ADD_ROLE_PERS;
+   -- menena data           
+   t_ADD_ROLE_PERS = select * from REMOTE_ADD_ROLE_PERS where CHANGE_TIME > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS') order by CHANGE_TIME;
+   -- vymaz smazanych zaznamu          
+   delete from ADD_ROLE_PERS 
+    where (person_id, ROLE_CODE) in (select person_id, ROLE_CODE from REMOTE_ADD_ROLE_PERS_HIST 
+                                        where OPERATION_TYPE = 'D' and CHANGE_TIME_TO > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS'));             
+   -- vlozeni - nove
+   insert into ADD_ROLE_PERS select * from :t_ADD_ROLE_PERS;
+
+    
+END;

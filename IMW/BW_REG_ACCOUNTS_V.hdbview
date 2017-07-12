@@ -1,0 +1,64 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW";
+
+query = "WITH REG_ACCOUNTS AS
+    (
+    select ACC_ID, CHUSER_CODE, CHANGE_TIME, REG_PART_ID, null AS CHANGE_TIME_TO, 'X' AS PLATNOST from OTEBW_IMW.rpd_reg_accounts
+    UNION
+    select ACC_ID, CHUSER_CODE, CHANGE_TIME, REG_PART_ID, CHANGE_TIME_TO, ' ' AS PLATNOST from OTEBW_IMW.rpd_reg_accounts_hist
+    ),
+    ACCOUNTS AS
+    (
+    select ACC_ID, BANK_ID, PARTIC_ID, ACC_NUM, START_NUM, CHANGE_TIME, null AS CHANGE_TIME_TO, curr_code, POZE_BLOCKED, 'X' AS PLATNOST, IBAN from OTEBW_IMW.rpd_accounts
+    UNION
+    select ACC_ID, BANK_ID, PARTIC_ID, ACC_NUM, START_NUM, CHANGE_TIME, CHANGE_TIME_TO, curr_code, POZE_BLOCKED, ' ' AS PLATNOST, IBAN from OTEBW_IMW.rpd_accounts_hist
+    )    
+    select ra.partic_id                                 AS ID_RUT,
+           reg.act_code,
+           to_date(reg.reg_date_from)       			AS reg_date_from,
+           to_date(reg.reg_date_to)         			AS reg_date_to,
+           ra.start_num                                 AS PREDCISLI,
+           ra.acc_num                                   AS CISLO_UCTU,
+           b.direct_code                                AS KOD_BANKY,
+           ra.curr_code,
+           case when rac.CHUSER_CODE='PRODISCZ' then '909090909'
+           		when rac.CHUSER_CODE='PRODDISCZ' then '909090909' 
+				else rac.CHUSER_CODE 
+				end       								AS ID_OSOBA,
+           case when pe.surn_txt is not null or pe.name_txt is not null 
+               then pe.surn_txt||' '||pe.name_txt
+               else null
+           end AS OSOBA,
+           to_date(rac.CHANGE_TIME)						AS CASOVA_ZNACKA_PRIRAZENI_date,
+           to_time(rac.CHANGE_TIME)						AS CASOVA_ZNACKA_PRIRAZENI_time,
+           ra.CHANGE_TIME								AS CASOVA_ZNACKA_UCET,
+           rac.acc_id,
+           case when rac.PLATNOST = 'X' and ra.PLATNOST = 'X' then 'X' else ' ' end AS PLATNOST,
+           ra.poze_blocked                              AS OMEZ_ZMEN,
+           UPPER(ra.iban) 								as IBAN,
+           case when ra.start_num = 0 then '' else ra.start_num || '-' end ||ra.acc_num  ||'/'||b.direct_code  as bank_spoj,
+           'PRODIS' as zdroj,
+           1 as pocet
+      FROM REG_ACCOUNTS rac, 
+           ACCOUNTS ra, 
+           OTEBW_IMW.RPL_BANKS b,
+           OTEBW_IMW.RPD_PERSONS pe,
+           OTEBW_IMW.rpd_reg_parts reg
+     where ra.bank_id = b.bank_id
+       and lpad(TO_CHAR(pe.person_id ),9,'0') = rac.CHUSER_CODE
+       and reg.reg_part_id = rac.reg_part_id
+       and rac.acc_id = ra.acc_id  
+       and ra.change_time <= ifnull(rac.change_time_to,to_date('01.01.5000','dd.mm.yyyy') )
+       and ifnull(ra.change_time_to,to_date('01.01.5000','dd.mm.yyyy') ) >= rac.change_time
+    order by 1,2,3,10";
+
+depends_on_table=["OTEBW_IMW::rpd_accounts"];  
+depends_on_table=["OTEBW_IMW::rpd_accounts_hist"];  
+depends_on_table=["OTEBW_IMW::rpd_reg_accounts"];  
+depends_on_table=["OTEBW_IMW::rpd_reg_accounts_hist"];  
+depends_on_table=["OTEBW_IMW::RPL_BANKS"];  
+depends_on_table=["OTEBW_IMW::RPD_PERSONS"];  
+depends_on_table=["OTEBW_IMW::rpd_reg_parts"];  

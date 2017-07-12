@@ -1,0 +1,53 @@
+schema="OTEBW_IMW";
+
+query = "SELECT lsm.time_stamp,
+	            to_date(lsm.valid_from) AS VALID_FROM,
+	            to_date(lsm.valid_to) AS VALID_TO,
+	            TO_FIXEDCHAR(lsm.rpd_participants_id, 16) AS ID_RUT,
+	            lsm.rpd_persons_id1 AS PERSON1_ID,
+	            lsm.rpd_persons_id2 AS PERSON2_ID,
+	            lsm.description1 AS DESC1, 
+                lsm.description2 AS DESC2,
+ 	            cp.coefficient AS COEF_P,
+	            cs.coefficient AS COEF_S,
+	            lsm.ratings_def_id AS RATING_ID,
+	            lsm.trade_bands_def_p_id AS TRADE_BAND_P_ID,
+	            lsm.trade_bands_def_s_id AS TRADE_BAND_S_ID,
+	            lsm.total_limit AS TOTAL_LIMIT,
+	            lsm.tot_wrng_thresh AS TOT_WRNG_THRESH,
+	            lsm.calc_type AS CALC_TYPE,
+	            lsm.partic_lock AS PARTIC_LOCK,
+	            lsm.total_guar_amt AS TOTAL_GUAR,
+	            lsm.gas_total_limit AS GAS_TOTAL_LIMIT,
+	            lsm.gas_tot_wrng_thresh AS GAS_TOT_WRNG_THRESH,
+	            lsm.gas_limit_discount AS GAS_LIMIT_DISCOUNT,
+	            lsm.total_guar_amt AS TOTAL_GUAR_AMT,
+	            lsm.gas_bank_guar AS GAS_BANK_GUAR,
+	            lsm.base_guar_no AS BASE_GUAR_NO,
+	            lsm.gas_base_guar_no AS GAS_BASE_GUAR_NO,
+	            lsm.gas_money_ote_credit AS GAS_MONEY_OTE_CREDIT,
+	            lsm.bt_order_amount AS BT_ORDER_AMOUNT,
+	            ifnull(au.add_utl,0) AS ADD_UTL,
+	            lsm.ele_limit_discount AS LIMIT_DISCOUNT, -- CR101 new
+ 	            lsm.ele_money_ote_credit AS MONEY_OTE_CREDIT,	 -- CR101 new
+ 	            lsm.ele_re_limit AS ABSOLUTE_LIMIT -- CR101 new
+           FROM otebw_imw.limit_stat_main as lsm 
+                inner join otebw_imw.centr_limits_def as cp on 
+                      lsm.ratings_def_id = cp.ratings_def_id 
+                  and lsm.trade_bands_def_p_id = cp.trade_bands_def_id 
+                inner join otebw_imw.centr_limits_def as cs on 
+                      lsm.ratings_def_id = cs.ratings_def_id 
+                  and lsm.trade_bands_def_s_id = cs.trade_bands_def_id 
+                left outer join otebw_imw.add_utilizations as au on 
+                     lsm.rpd_participants_id = au.lim_dyn_id 
+                  and au.status = 'V' 
+          WHERE lsm.status = 'V' 
+            AND cp.status = 'V' 
+            AND cs.status = 'V' 
+            AND cp.trade_type = 0 
+            AND cs.trade_type = 1";
+
+depends_on_table=["OTEBW_IMW::limit_stat_main"];  
+depends_on_table=["OTEBW_IMW::centr_limits_def"];  
+depends_on_table=["OTEBW_IMW::add_utilizations"]; 
+

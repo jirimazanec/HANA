@@ -1,0 +1,24 @@
+{
+ "metadata": {
+  "activated_at": "2017-07-12 10:19:16.270 GMT+02:00",
+  "activated_by": "SUHAJEKS",
+  "change_number": "0",
+  "delivery_unit": "",
+  "du_vendor": "",
+  "du_version": "",
+  "du_version_patch": "",
+  "du_version_sp": "",
+  "edit": "true",
+  "format_version": "",
+  "object_status": "0",
+  "released_at": "null",
+  "type": "1",
+  "version_id": "6"
+ },
+ "name": "2E_PRF_VAL",
+ "package": "CD",
+ "suffix": "hdbview",
+ "version": {
+  "versionType": "1"
+ }
+}

@@ -1,0 +1,197 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW";
+
+query = "select t.partic_id                              AS RUT_ID,
+       t.partic_reg_num                         AS IC,
+       t.partic_ean                             AS EAN,
+       t.partic_eic                             AS EIC,
+       t.partic_shrt                            AS KRATKY_NAZEV,
+       t.partic_desc                            AS JMENO_FIRMY,
+       t.role_code                              AS PROFIL_RUT,
+       t.email_txt                              AS EMAIL,
+       t.partic_tax_num                         AS DIC,
+       to_date(t.creation_date) 		        AS DATUM_VYTVORENI,
+       t.PART_TYPE_CODE                         AS TYP,
+       t.WEB_PAGES_CODE                         AS WEB,
+       ifnull((select min(1)
+              from OTEBW_IMW.LDD_CERTS cert,
+                   OTEBW_IMW.LDD_PERS_CERTS pc,
+                   OTEBW_IMW.rpd_persons p
+             where p.person_id = pc.person_uid
+               and p.partic_id = t.partic_id
+               and pc.cert_id = cert.cert_id ),0)  AS PRISTUP_CS_OTE,
+       ads.street_txt                           AS SID_ULICE,
+       ads.home_num                             AS SID_C_POPISNE,
+       ads.orient_num                           AS SID_C_ORIENTACNI,
+       ads.city_txt                             AS SID_OBEC,
+       ads.post_code                            AS SID_PSC,
+       ads.reg_code                             AS SID_REGION,
+       ads.country_code                         AS SID_STAT,
+       aps.type_code                            AS SID_TYP_ADRESY,
+       adk.street_txt                           AS KOR_ULICE,
+       adk.home_num                             AS KOR_C_POPISNE,
+       adk.orient_num                           AS KOR_C_ORIENTACNI,
+       adk.city_txt                             AS KOR_OBEC,
+       adk.post_code                            AS KOR_PSC,
+       adk.reg_code                             AS KOR_REGION,
+       adk.country_code                         AS KOR_STAT,
+       apk.type_code                            AS KOR_TYP_ADRESY,
+       rl.LICENC_CODE                           AS CISLO_LICENCE,
+       rl.LIC_TYPE_CODE                         AS TYP_LICENCE,
+       rl.LICENC_DESC                           AS NAZEV_LICENCE,
+       to_date(rl.LIC_VAL_DATE_FROM) 			AS PLATNOST_OD,
+       to_date(rl.LIC_VAL_DATE_TO)   			AS PLATNOST_DO
+  from OTEBW_IMW.rpd_participants as t 
+       inner join OTEBW_IMW.rpd_participants_att as att on 
+       		 t.partic_id = att.partic_id and 
+       		 att.poze_flag = 1
+       inner join OTEBW_IMW.rpd_addresses as ads on  
+             t.partic_id = ads.partic_id
+       inner join OTEBW_IMW.rpd_addr_partic as aps on  
+             ads.adr_id = aps.adr_id and 
+             aps.type_code = 'SID' -- adresa sidla
+       inner join OTEBW_IMW.rpd_addresses as adk on
+             t.partic_id = adk.partic_id
+       inner join OTEBW_IMW.rpd_addr_partic as apk on
+             adk.adr_id = apk.adr_id and 
+   			 apk.type_code = 'KOR' -- korespondencni adresa
+       left outer join OTEBW_IMW.rpd_licences as rl on  
+            rl.partic_id = t.partic_id and 
+            rl.LIC_TYPE_CODE = '11'
+       inner join OTEBW_IMW.rpd_reg_parts as r on
+       		r.partic_id = t.partic_id and 
+       		r.act_code in ('OZE', 'NEV', 'OZB', 'ZPR', 'OTE', 'SK', 'OZT', 'OZP', 'VIE', 'SEI', 'ERU')
+union
+-- existuje SID, KOR neexistuje
+select t.partic_id                              AS RUT_ID,
+       t.partic_reg_num                         AS IC,
+       t.partic_ean                             AS EAN,
+       t.partic_eic                             AS EIC,
+       t.partic_shrt                            AS KRATKY_NAZEV,
+       t.partic_desc                            AS JMENO_FIRMY,
+       t.role_code                              AS PROFIL_RUT,
+       t.email_txt                              AS EMAIL,
+       t.partic_tax_num                         AS DIC,
+       to_date(t.creation_date)				    AS DATUM_VYTVORENI,
+       t.PART_TYPE_CODE                         AS TYP,
+       t.WEB_PAGES_CODE                         AS WEB,
+       ifnull((select min(1)
+              from OTEBW_IMW.LDD_CERTS cert,
+                   OTEBW_IMW.LDD_PERS_CERTS pc,
+                   OTEBW_IMW.rpd_persons p
+             where p.person_id = pc.person_uid
+               and p.partic_id = t.partic_id
+               and pc.cert_id = cert.cert_id ),0)  AS PRISTUP_CS_OTE,
+       ads.street_txt                           AS SID_ULICE,
+       ads.home_num                             AS SID_C_POPISNE,
+       ads.orient_num                           AS SID_C_ORIENTACNI,
+       ads.city_txt                             AS SID_OBEC,
+       ads.post_code                            AS SID_PSC,
+       ads.reg_code                             AS SID_REGION,
+       ads.country_code                         AS SID_STAT,
+       aps.type_code                            AS SID_TYP_ADRESY,
+       null                                     AS KOR_ULICE,
+       null                                     AS KOR_C_POPISNE,
+       null                                     AS KOR_C_ORIENTACNI,
+       null                                     AS KOR_OBEC,
+       null                                     AS KOR_PSC,
+       null                                     AS KOR_REGION,
+       null                                     AS KOR_STAT,
+       null                                     AS KOR_TYP_ADRESY,
+       rl.LICENC_CODE                           AS CISLO_LICENCE,
+       rl.LIC_TYPE_CODE                         AS TYP_LICENCE,
+       rl.LICENC_DESC                           AS NAZEV_LICENCE,
+       to_date(rl.LIC_VAL_DATE_FROM) 			AS PLATNOST_OD,
+       to_date(rl.LIC_VAL_DATE_TO)   			AS PLATNOST_DO
+  from OTEBW_IMW.rpd_participants as t 
+       inner join OTEBW_IMW.rpd_participants_att as att on 
+       		 t.partic_id = att.partic_id and 
+       		 att.poze_flag = 1
+       inner join OTEBW_IMW.rpd_addresses as ads on  
+             t.partic_id = ads.partic_id
+       inner join OTEBW_IMW.rpd_addr_partic as aps on  
+             ads.adr_id = aps.adr_id and 
+             aps.type_code = 'SID' -- adresa sidla
+       left outer join OTEBW_IMW.rpd_licences as rl on  
+            rl.partic_id = t.partic_id and 
+            rl.LIC_TYPE_CODE = '11'
+       inner join OTEBW_IMW.rpd_reg_parts as r on
+       		r.partic_id = t.partic_id and 
+       		r.act_code in ('OZE', 'NEV', 'OZB', 'ZPR', 'OTE', 'SK', 'OZT', 'OZP', 'VIE', 'SEI', 'ERU')
+ where not exists (select ap.adr_id 
+                     from OTEBW_IMW.rpd_addr_partic as ap, 
+                          OTEBW_IMW.rpd_addresses as ad
+                    where ap.adr_id = ad.adr_id
+                      and ad.partic_id = t.partic_id
+                      and ap.type_code = 'KOR')
+union
+-- existuje KOR, SID neexistuje
+select t.partic_id                              AS RUT_ID,
+       t.partic_reg_num                         AS IC,
+       t.partic_ean                             AS EAN,
+       t.partic_eic                             AS EIC,
+       t.partic_shrt                            AS KRATKY_NAZEV,
+       replace(t.partic_desc,'&','&amp;')       AS JMENO_FIRMY,
+       t.role_code                              AS PROFIL_RUT,
+       t.email_txt                              AS EMAIL,
+       t.partic_tax_num                         AS DIC,
+       to_date(t.creation_date)				    AS DATUM_VYTVORENI,
+       t.PART_TYPE_CODE                         AS TYP,
+       t.WEB_PAGES_CODE                         AS WEB,
+       ifnull((select min(1)
+              from OTEBW_IMW.LDD_CERTS cert,
+                   OTEBW_IMW.LDD_PERS_CERTS pc,
+                   OTEBW_IMW.rpd_persons p
+             where p.person_id = pc.person_uid
+               and p.partic_id = t.partic_id
+               and pc.cert_id = cert.cert_id ),0)  AS PRISTUP_CS_OTE,
+       null                                     AS SID_ULICE,
+       null                                     AS SID_C_POPISNE,
+       null                                     AS SID_C_ORIENTACNI,
+       null                                     AS SID_OBEC,
+       null                                     AS SID_PSC,
+       null                                     AS SID_REGION,
+       null                                     AS SID_STAT,
+       null                                     AS SID_TYP_ADRESY,
+       adk.street_txt                           AS KOR_ULICE,
+       adk.home_num                             AS KOR_C_POPISNE,
+       adk.orient_num                           AS KOR_C_ORIENTACNI,
+       adk.city_txt                             AS KOR_OBEC,
+       adk.post_code                            AS KOR_PSC,
+       adk.reg_code                             AS KOR_REGION,
+       adk.country_code                         AS KOR_STAT,
+       apk.type_code                            AS KOR_TYP_ADRESY,
+       rl.LICENC_CODE                           AS CISLO_LICENCE,
+       rl.LIC_TYPE_CODE                         AS TYP_LICENCE,
+       rl.LICENC_DESC                           AS NAZEV_LICENCE,
+       to_date(rl.LIC_VAL_DATE_FROM) 			AS PLATNOST_OD,
+       to_date(rl.LIC_VAL_DATE_TO)   			AS PLATNOST_DO
+  from OTEBW_IMW.rpd_participants as t 
+       inner join OTEBW_IMW.rpd_participants_att as att on 
+       		 t.partic_id = att.partic_id and 
+       		 att.poze_flag = 1
+       inner join OTEBW_IMW.rpd_addresses as adk on
+             t.partic_id = adk.partic_id
+       inner join OTEBW_IMW.rpd_addr_partic as apk on
+             adk.adr_id = apk.adr_id and 
+   			 apk.type_code = 'KOR' -- korespondencni adresa
+       left outer join OTEBW_IMW.rpd_licences as rl on  
+            rl.partic_id = t.partic_id and 
+            rl.LIC_TYPE_CODE = '11'
+       inner join OTEBW_IMW.rpd_reg_parts as r on
+       		r.partic_id = t.partic_id and 
+       		r.act_code in ('OZE', 'NEV', 'OZB', 'ZPR', 'OTE', 'SK', 'OZT', 'OZP', 'VIE', 'SEI', 'ERU')
+ where not exists (select ap.adr_id from OTEBW_IMW.rpd_addr_partic ap, OTEBW_IMW.rpd_addresses ad
+                    where ap.adr_id = ad.adr_id
+                    and ad.partic_id = t.partic_id
+                    and ap.type_code = 'SID')  ";
+
+depends_on_table=["OTEBW_IMW::rpd_participants"];  
+depends_on_table=["OTEBW_IMW::rpd_participants_att"];  
+depends_on_table=["OTEBW_IMW::rpd_addresses"];  
+depends_on_table=["OTEBW_IMW::rpd_addr_partic"];  
+depends_on_table=["OTEBW_IMW::rpd_licences"];  
+depends_on_table=["OTEBW_IMW::rpd_reg_parts"];  

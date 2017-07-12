@@ -1,0 +1,54 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW";
+
+query = "select ra.partic_id                        		AS ID_RUT,
+       			ra.start_num                        		AS PREDCISLI,
+       			ra.acc_num                          		AS CISLO_UCTU,
+         		b.direct_code                       		AS KOD_BANKY,
+       			ra.acc_desc                         		AS NAZEV_UCTU,
+       			ifnull(ra.COLL_ACC_FLAG,0)         		 	AS COLL_ACC_FLAG_E,
+       			ifnull(ra.COLL_ACC_FLAG_G,0)        		AS COLL_ACC_FLAG_G,
+       			ra.FZ_FLAG,
+       			ra.curr_code,
+       			ra.CHUSER_CODE                      		AS ID_OSOBA,
+       			case when pe.surn_txt is not null or pe.name_txt is not null 
+            		 then pe.surn_txt||' '||pe.name_txt
+            		 else null
+       			end 										AS OSOBA,
+       			ra.CHANGE_TIME								AS CASOVA_ZNACKA,
+       			'X'                                         AS PLATNOST,
+       			ra.IBAN
+  from OTEBW_IMW.RPD_ACCOUNTS as ra
+       inner join OTEBW_IMW.RPL_BANKS as b on ra.bank_id = b.bank_id
+       left outer join OTEBW_IMW.RPD_PERSONS as pe 
+         on lpad(TO_CHAR(pe.person_id),9,'0') = ra.CHUSER_CODE  
+ union
+select ra.partic_id                                 AS ID_RUT,
+       ra.start_num                                 AS PREDCISLI,
+       ra.acc_num                                   AS CISLO_UCTU,
+       b.direct_code                                AS KOD_BANKY,
+       ra.acc_desc                                  AS NAZEV_UCTU,
+       ifnull(ra.COLL_ACC_FLAG,0)                      AS COLL_ACC_FLAG_E,
+       ifnull(ra.COLL_ACC_FLAG_G,0)                    AS COLL_ACC_FLAG_G,
+       ra.FZ_FLAG,
+       ra.curr_code,
+       ra.CHUSER_CODE                               AS ID_OSOBA,
+       case when pe.surn_txt is not null or pe.name_txt is not null 
+            then pe.surn_txt||' '||pe.name_txt
+            else null
+       end AS OSOBA,
+       ra.CHANGE_TIME								AS CASOVA_ZNACKA,
+       ' '                                          AS PLATNOST,
+       ra.IBAN
+  from OTEBW_IMW.RPD_ACCOUNTS_HIST as ra
+       inner join OTEBW_IMW.RPL_BANKS as b on ra.bank_id = b.bank_id
+       left outer join OTEBW_IMW.RPD_PERSONS as pe 
+         on lpad(TO_CHAR(pe.person_id),9,'0') = ra.CHUSER_CODE";
+
+depends_on_table=["OTEBW_IMW::RPD_ACCOUNTS"];  
+depends_on_table=["OTEBW_IMW::RPL_BANKS"];  
+depends_on_table=["OTEBW_IMW::RPD_PERSONS"];  
+depends_on_table=["OTEBW_IMW::RPD_ACCOUNTS_HIST"];  

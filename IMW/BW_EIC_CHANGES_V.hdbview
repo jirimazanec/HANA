@@ -1,0 +1,39 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW";
+
+query = "with eic_changes as ( select p.partic_id, p.partic_eic current_eic,
+         							  h.partic_eic hist_eic,
+         							  max(h.change_time_to) change_time,
+         							  min(h.creation_date) creation_date
+    							 from OTEBW_IMW.RPD_PARTICIPANTS p, OTEBW_IMW.RPD_PARTICIPANTS_HIST h
+   								where p.partic_id = h.partic_id
+     							  and p.partic_eic <> h.partic_eic
+   							 group by p.partic_id, p.partic_eic, h.partic_eic
+							)
+select ID_RUT,
+       EIC,
+       (case when VALID_TO IS NULL then add_days(VALID_FROM,1) else VALID_FROM end) as VALID_FROM,
+       (case when VALID_TO IS NULL then '31.12.9999' else VALID_TO end) as VALID_TO,
+       TIME_STAMP
+       from							
+(select partic_id as ID_RUT,
+       current_eic as EIC,
+       max(change_time) as VALID_FROM,
+       null as VALID_TO,
+       max(change_time) as TIME_STAMP
+  from eic_changes
+  group by partic_id, current_eic
+union all
+select partic_id as ID_RUT,
+       hist_eic as EIC,
+       ifnull((select max(c2.change_time) from eic_changes c2 where c2.partic_id = c1.partic_id and c1.change_time > c2.change_time), c1.creation_date) as VALID_FROM,
+       change_time as VALID_TO,
+       change_time as TIME_STAMP
+  from eic_changes c1)";
+
+depends_on_table=["OTEBW_IMW::rpd_participants"];  
+depends_on_table=["OTEBW_IMW::rpd_participants_hist"];
+

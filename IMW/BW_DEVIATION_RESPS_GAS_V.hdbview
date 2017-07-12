@@ -1,0 +1,27 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_IMW";
+
+query = "SELECT to_date(d.bus_per_date_from) as bus_per_date_from,
+              to_date(d.bus_per_date_to) as bus_per_date_to,
+              d.partic_id,
+              d.partic_id_resp,
+              d.type,
+              d.nom,
+              d.verify_flag,
+              case when r.partic_id is null 
+                   then '0'
+                   else '1'
+              end as SSZ,                                
+              --to_char(coalesce(r.partic_id, '1', '0')) as SSZ -- 6.12.2012 IS added SuperSZ flag (by outer join to reg_parts)
+              'E' as komodita
+           FROM OTEBW_IMW.vmd_deviation_resp_gas as d
+                left outer join OTEBW_IMW.rpd_reg_parts as r 
+                  on d.partic_id = r.partic_id 
+  				 and 'SZP' = r.act_code 
+                 and greatest(r.reg_date_from, d.bus_per_date_from) <= least(ifnull(r.reg_date_to, to_date('01.01.5000', 'DD.MM.YYYY')), ifnull(d.bus_per_date_to, to_date('01.01.5000', 'DD.MM.YYYY')))";
+
+depends_on_table=["OTEBW_IMW::vmd_deviation_resp_gas"];  
+depends_on_table=["OTEBW_IMW::rpd_reg_parts"];  

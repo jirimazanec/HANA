@@ -1,0 +1,24 @@
+{
+ "metadata": {
+  "activated_at": "2017-05-11 12:46:00.124 GMT+02:00",
+  "activated_by": "SUHAJEKS",
+  "change_number": "4074",
+  "delivery_unit": "",
+  "du_vendor": "",
+  "du_version": "",
+  "du_version_patch": "",
+  "du_version_sp": "",
+  "edit": "true",
+  "format_version": "",
+  "object_status": "0",
+  "released_at": "2017-07-10 13:17:59.7300000",
+  "type": "1",
+  "version_id": "4"
+ },
+ "name": "KMEN2",
+ "package": "CLT.CD_BASE2",
+ "suffix": "hdbtablefunction",
+ "version": {
+  "versionType": "1"
+ }
+}

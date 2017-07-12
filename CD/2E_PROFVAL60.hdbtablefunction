@@ -1,0 +1,124 @@
+FUNCTION "OTEBW_CD"."CD::2E_PROFVAL60" (in x_Ver nvarchar(1), in x_KeyDate date, in x_Profile nvarchar(18)) 
+	RETURNS TABLE(PROFILE nvarchar(18), VERSION nvarchar(1), VALTIME timestamp, Val decimal(000016,0), Stat nvarchar(2))
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER AS
+BEGIN
+
+declare l_TST timestamp;
+declare l_DF date;
+declare l_DT date;
+declare l_TF time;
+declare l_TT time;
+declare l_F timestamp;
+declare l_T timestamp;
+
+l_TST="OTEBW_CD"."CD::Get_Aggr_DateTime"(:x_Ver, :x_KeyDate);
+l_DF=to_date(localtoutc(:x_KeyDate, 'CET'));
+l_TF=to_time(localtoutc(:x_KeyDate, 'CET'));
+l_DT=to_date(localtoutc(add_days(:x_KeyDate, 1), 'CET'));
+l_TT=to_time(localtoutc(add_days(:x_KeyDate, 1), 'CET'));
+l_F=localtoutc(:x_KeyDate, 'CET');
+l_T=localtoutc(add_days(:x_KeyDate, 1), 'CET');
+
+return
+select :x_Profile as PROFILE, :x_Ver as VERSION, * from (
+select to_timestamp(concat(VALUEDAY, '000000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL0000 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '000000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '010000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL0100 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '010000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '020000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL0200 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '020000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '030000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL0300 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '030000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '040000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL0400 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '040000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '050000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL0500 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '050000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '060000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL0600 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '060000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '070000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL0700 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '070000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '080000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL0800 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '080000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '090000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL0900 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '090000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '100000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL1000 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '100000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '110000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL1100 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '110000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '120000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL1200 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '120000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '130000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL1300 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '130000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '140000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL1400 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '140000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '150000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL1500 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '150000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '160000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL1600 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '160000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '170000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL1700 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '170000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '180000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL1800 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '180000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '190000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL1900 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '190000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '200000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL2000 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '200000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '210000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL2100 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '210000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '220000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL2200 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '220000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+  union 
+select to_timestamp(concat(VALUEDAY, '230000'), 'YYYYMMDDHH24MISS') as VALTIME, VAL2300 as Val,
+  "OTEBW_CD"."CD::2E_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '230000') as Stat
+  from "OTEBW_CD"."CD::1E_EPROFVAL60"(:l_TST) where Profile=:x_Profile and VALUEDAY>=:l_DF and VALUEDAY<=:l_DT
+) where VALTIME>=:l_F and VALTIME<:l_T
+order by VALTIME
+with hint(INLINE);
+
+END;

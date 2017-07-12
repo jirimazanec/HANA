@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CV_PERSONS" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Projection">
+  <origin/>
+  <descriptions defaultDescription="CV_PERSONS"/>
+  <metadata changedAt="2017-06-06 10:36:52.225"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources>
+    <DataSource id="IMW::BW_PERSONS_V" type="DATA_BASE_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews/>
+  <logicalModel id="IMW::BW_PERSONS_V">
+    <descriptions/>
+    <attributes>
+      <attribute id="CHANGE_TIME_FROM" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CHANGE_TIME_FROM"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="CHANGE_TIME_FROM"/>
+      </attribute>
+      <attribute id="CHANGE_TIME_TO" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CHANGE_TIME_TO"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="CHANGE_TIME_TO"/>
+      </attribute>
+      <attribute id="PERSON_ID" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PERSON_ID"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="PERSON_ID"/>
+      </attribute>
+      <attribute id="TITLE_CODE_BEF" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TITLE_CODE_BEF"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="TITLE_CODE_BEF"/>
+      </attribute>
+      <attribute id="SURN_TXT" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SURN_TXT"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="SURN_TXT"/>
+      </attribute>
+      <attribute id="NAME_TXT" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="NAME_TXT"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="NAME_TXT"/>
+      </attribute>
+      <attribute id="PHONE_NUM" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PHONE_NUM"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="PHONE_NUM"/>
+      </attribute>
+      <attribute id="FAX_NUM" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="FAX_NUM"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="FAX_NUM"/>
+      </attribute>
+      <attribute id="MOBILE_NUM" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="MOBILE_NUM"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="MOBILE_NUM"/>
+      </attribute>
+      <attribute id="EMAIL" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="EMAIL"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="EMAIL"/>
+      </attribute>
+      <attribute id="PARTIC_ID" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PARTIC_ID"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="PARTIC_ID"/>
+      </attribute>
+      <attribute id="STATUTORY_FLAG" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="STATUTORY_FLAG"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="STATUTORY_FLAG"/>
+      </attribute>
+      <attribute id="SIGN_TXT" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SIGN_TXT"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="SIGN_TXT"/>
+      </attribute>
+      <attribute id="ACCOST_TXT" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ACCOST_TXT"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="ACCOST_TXT"/>
+      </attribute>
+      <attribute id="TITLE_CODE_AFT" order="15" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TITLE_CODE_AFT"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="TITLE_CODE_AFT"/>
+      </attribute>
+      <attribute id="BIRTH_DATE" order="16" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="BIRTH_DATE"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="BIRTH_DATE"/>
+      </attribute>
+      <attribute id="DIVISION_DESC" order="17" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DIVISION_DESC"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="DIVISION_DESC"/>
+      </attribute>
+      <attribute id="CERT_VALID_TO" order="18" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CERT_VALID_TO"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="CERT_VALID_TO"/>
+      </attribute>
+      <attribute id="STATUS" order="19" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="STATUS"/>
+        <keyMapping schemaName="OTEBW_IMW" columnObjectName="IMW::BW_PERSONS_V" columnName="STATUS"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures/>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

@@ -1,0 +1,77 @@
+PROCEDURE "OTEBW_TEST_IMW"."IMW::TRANS_IMW_PREDIC" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA OTEBW_TEST_IMW
+	AS
+BEGIN
+   declare l_id bigint;
+   declare l_count bigint;
+   declare l_i bigint;
+   declare l_id_rut int;
+   declare l_trade_type varchar(6);
+   declare l_trade_date timestamp;
+   declare l_hour int;
+      
+
+   --EL_SUPP_CONS
+   select max(REC_id)
+     into l_id
+     from EL_SUPP_CONS;
+     
+   t_EL_SUPP_CONS = select * from REMOTE_EL_SUPP_CONS where REC_ID > :l_id order by rec_id;
+   l_count := ::ROWCOUNT;
+
+   -- zmena statusu u starych zaznamu 
+   for l_i in 1 .. :l_count do
+     l_id_rut = :t_EL_SUPP_CONS.id_rut_orig[:l_i];
+     l_trade_type = :t_EL_SUPP_CONS.trade_type[:l_i];
+     l_trade_date = :t_EL_SUPP_CONS.trade_date[:l_i];
+     l_hour = :t_EL_SUPP_CONS.hour[:l_i];
+    
+    update EL_SUPP_CONS
+       set status = 'A'
+     where id_rut_orig = l_id_rut and
+           trade_type = l_trade_type and
+           trade_date = l_trade_date and
+           hour = l_hour and
+           status = 'V';
+            
+	end for;
+	-- vlozeni novych zaznamu
+	insert into EL_SUPP_CONS select * from :t_EL_SUPP_CONS;
+   
+   
+   --EL_SUPP_NEG_DEV
+   select max(REC_ID)
+     into l_id
+     from EL_SUPP_NEG_DEV;
+     
+   insert into EL_SUPP_NEG_DEV select * from REMOTE_EL_SUPP_NEG_DEV where REC_ID > :l_id;
+   
+   -- GAS_NOMIN_TRADES
+   select max(ID_INSTANCE)
+     into l_id
+     from GAS_NOMIN_TRADES
+    where type_trade = 'SPO';
+    
+   t_GAS_NOMIN_TRADES = select * from REMOTE_GAS_NOMIN_TRADES where ID_INSTANCE > :l_id and type_trade = 'SPO' order by ID_INSTANCE;
+   l_count := ::ROWCOUNT;
+    
+   -- zmena statusu u starych zaznamu 
+   for l_i in 1 .. :l_count do
+     l_id_rut = :t_GAS_NOMIN_TRADES.id_rut_orig[:l_i];
+     l_trade_date = :t_GAS_NOMIN_TRADES.delivery_date[:l_i];
+    
+    update GAS_NOMIN_TRADES
+       set status = 'A'
+     where type_trade = 'SPO'
+       and delivery_date = l_trade_date
+       and id_rut_orig = l_id_rut
+       and status = 'V';
+            
+	end for;
+       
+	-- vlozeni novych zaznamu
+	insert into GAS_NOMIN_TRADES select * from :t_GAS_NOMIN_TRADES;
+             
+END;

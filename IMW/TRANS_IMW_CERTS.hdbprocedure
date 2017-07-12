@@ -1,0 +1,40 @@
+PROCEDURE "OTEBW_TEST_IMW"."IMW::TRANS_IMW_CERTS" ( ) 
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   DEFAULT SCHEMA OTEBW_TEST_IMW
+AS
+BEGIN
+   declare l_TS varchar2(20);
+   declare l_id bigint;
+
+   -- LDD_CERTS
+   select max(CERT_ID)
+     into l_id
+     from LDD_CERTS;
+   
+   insert into OTEBW_TEST_IMW.LDD_CERTS (CERT_ID,SUBJECT,SERIAL_NUMBER,VALID_FROM,VALID_TO,FINGERPRINT,ISSUER_SUBJECT,SUBJECT_SERIAL_NUMBER,ISSUER_CN)
+   select CERT_ID,SUBJECT,SERIAL_NUMBER,VALID_FROM,VALID_TO,FINGERPRINT,ISSUER_SUBJECT,SUBJECT_SERIAL_NUMBER,ISSUER_CN 
+     from OTEBW_TEST_IMW.REMOTE_LDD_CERTS 
+    where CERT_ID > :l_id;
+    
+   --LDD_PERS_CERTS
+   select to_char(max(CHANGE_TIME),'DD-MM-YYYY HH24:MI:SS')
+     into l_TS
+     from LDD_PERS_CERTS;        
+   t_LDD_PERS_CERTS = select * from REMOTE_LDD_PERS_CERTS where CHANGE_TIME > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS') order by CHANGE_TIME;
+         
+   -- vymaz zmenenych    
+   delete from LDD_PERS_CERTS where (CERT_ID,PERSON_UID,TYPE) in (select CERT_ID,PERSON_UID,TYPE from :t_LDD_PERS_CERTS);
+   -- vlozeni - nove + menene
+   insert into LDD_PERS_CERTS select * from :t_LDD_PERS_CERTS;
+   
+   --LDD_PERS_CERTS_HIST  
+   select to_char(max(CHANGE_TIME_TO),'DD-MM-YYYY HH24:MI:SS')
+     into l_TS
+     from LDD_PERS_CERTS_HIST;        
+   t_LDD_PERS_CERTS_HIST = select * from REMOTE_LDD_PERS_CERTS_HIST where CHANGE_TIME_TO > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS') order by CHANGE_TIME;
+   -- vlozeni 
+   insert into LDD_PERS_CERTS_HIST select * from :t_LDD_PERS_CERTS_HIST;
+    
+      
+END;

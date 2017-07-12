@@ -1,0 +1,26 @@
+PROCEDURE "OTEBW_TEST_IMW"."IMW::TRANS_IMW_LIC" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA OTEBW_TEST_IMW
+	AS
+BEGIN
+    declare l_TS varchar2(20);
+   
+   --RPD_ACCOUNTS
+   select to_char(max(CHANGE_TIME),'DD-MM-YYYY HH24:MI:SS')
+     into l_TS
+     from RPD_LICENCES;        
+   t_RPD_LICENCES = select * from REMOTE_RPD_LICENCES where CHANGE_TIME > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS') order by CHANGE_TIME;
+   
+   -- vymaz smazanych zaznamu          
+   delete from RPD_LICENCES 
+    where (PARTIC_ID,LIC_TYPE_CODE,LICENC_CODE) in (select PARTIC_ID,LIC_TYPE_CODE,LICENC_CODE from REMOTE_RPD_LICENCES_HIST 
+                           where OPERATION_TYPE = 'D' and CHANGE_TIME_TO > TO_TIMESTAMP(:l_TS, 'DD-MM-YYYY HH24:MI:SS'));             
+      
+   -- vymaz zmenenych    
+   delete from RPD_LICENCES where (PARTIC_ID,LIC_TYPE_CODE,LICENC_CODE) in (select PARTIC_ID,LIC_TYPE_CODE,LICENC_CODE from :t_RPD_LICENCES);
+   -- vlozeni - nove + menene
+   insert into RPD_LICENCES select * from :t_RPD_LICENCES;
+   
+ 
+END;
