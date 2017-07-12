@@ -1,0 +1,13 @@
+{
+    "description": "Migrace LARGE TABLES",
+    "action": "OZ::TRAN_OZ_MIG_LARGE_ALL",
+    "schedules": [
+       {
+          "description": "Migration large tables",
+          "xscron": "2017 * * * 22 30 0",
+          "parameter": {
+
+             }
+       }
+    ]
+}

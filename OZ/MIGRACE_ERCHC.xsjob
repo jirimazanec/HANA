@@ -1,0 +1,13 @@
+{
+    "description": "Migrace_ERCHC",
+    "action": "OZ::TRAN_OZ_MIG_ERCHC",
+    "schedules": [
+       {
+          "description": "Read current stock value",
+          "xscron": "2017 * * * 0 0 0",
+          "parameter": {
+             "stock": "SAP.DE"
+             }
+       }
+    ]
+}

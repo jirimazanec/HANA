@@ -1,0 +1,66 @@
+schema= "OTEBW_OZ";
+
+query = "SELECT
+  tfacd.ident FACT_CAL_ID,
+  tfact.ltext FACT_CAL_NAME,
+  cal.DATE_SQL,
+  cal.DATE_SAP,
+  cal.YEAR,
+  cal.QUARTER,
+  cal.MONTH,
+  cal.WEEK,
+  cal.WEEK_YEAR,
+  cal.DAY_OF_WEEK,
+  cal.DAY,
+  cal.CALQUARTER,
+  cal.CALMONTH,
+  cal.CALWEEK,
+  cal.YEAR_INT,
+  cal.QUARTER_INT,
+  cal.MONTH_INT,
+  cal.WEEK_INT,
+  cal.WEEK_YEAR_INT,
+  cal.DAY_OF_WEEK_INT,
+  cal.DAY_INT,
+  cal.MONTH_LAST_DAY,
+  DAYNAME(cal.DATE_SQL) DAY_NAME,
+  MONTHNAME(cal.DATE_SQL) MONTH_NAME,
+  CASE
+    WHEN tfain.wert = 0 THEN 0
+    WHEN tfain.wert = 1 THEN 1
+    WHEN phol.IS_HOLIDAY = 'X' AND tfacd.fetag = 0 THEN 0
+    WHEN cal.DAY_OF_WEEK_INT = 0 AND tfacd.motag = 0 THEN 0
+    WHEN cal.DAY_OF_WEEK_INT = 1 AND tfacd.ditag = 0 THEN 0
+    WHEN cal.DAY_OF_WEEK_INT = 2 AND tfacd.miwch = 0 THEN 0
+    WHEN cal.DAY_OF_WEEK_INT = 3 AND tfacd.dotag = 0 THEN 0
+    WHEN cal.DAY_OF_WEEK_INT = 4 AND tfacd.frtag = 0 THEN 0
+    WHEN cal.DAY_OF_WEEK_INT = 5 AND tfacd.satag = 0 THEN 0
+    WHEN cal.DAY_OF_WEEK_INT = 6 AND tfacd.sotag = 0 THEN 0
+    ELSE 1
+  END WORKDAY,
+  phol.DATE_DESC_LONG HOLIDAY_DESC,
+  --IFNULL(phol.DATE_DESC_LONG, DAYNAME(cal.DATE_SQL)) HOLIDAY_DESC,
+  CASE
+    WHEN cal.DATE_SQL
+      = MAX(CASE WHEN tfain.wert = 0 THEN NULL
+                 WHEN tfain.wert = 1 THEN NULL
+                 WHEN phol.IS_HOLIDAY ='X' AND tfacd.fetag = 0 THEN NULL
+                 WHEN cal.DAY_OF_WEEK_INT = 0 AND tfacd.motag = 0 THEN NULL
+                 WHEN cal.DAY_OF_WEEK_INT = 1 AND tfacd.ditag = 0 THEN NULL
+                 WHEN cal.DAY_OF_WEEK_INT = 2 AND tfacd.miwch = 0 THEN NULL
+                 WHEN cal.DAY_OF_WEEK_INT = 3 AND tfacd.dotag = 0 THEN NULL
+                 WHEN cal.DAY_OF_WEEK_INT = 4 AND tfacd.frtag = 0 THEN NULL
+                 WHEN cal.DAY_OF_WEEK_INT = 5 AND tfacd.satag = 0 THEN NULL
+                 WHEN cal.DAY_OF_WEEK_INT = 6 AND tfacd.sotag = 0 THEN NULL
+                 ELSE cal.DATE_SQL
+            END) over (partition BY cal.CALMONTH)
+    THEN 1
+    ELSE 0
+  END last_workday_in_month
+FROM \"_SYS_BI\".\"TC_DAY_CALENDAR\" cal
+INNER JOIN \"SAPABAP1\".\"TFACD\" tfacd ON cal.DATE_SAP BETWEEN (tfacd.vjahr|| '0101') AND (tfacd.bjahr|| '1231')
+LEFT OUTER JOIN \"SAPABAP1\".\"TFACT\" tfact ON tfact.ident  = tfacd.ident AND tfact.spras = 'E'
+LEFT OUTER JOIN \"SAPABAP1\".\"TFAIN\" tfain ON tfain.ident = tfacd.ident
+                        AND cal.DATE_SAP BETWEEN (tfain.von) AND (tfain.bis)
+LEFT OUTER JOIN \"_SYS_BI\".\"V_PUBLIC_HOLIDAY\" phol ON phol.DATE = cal.DATE_SAP AND phol.IDENT = tfacd.hocid
+";

@@ -1,0 +1,131 @@
+schema="OTEBW_CD";
+
+query="SELECT
+	CALENDAR.DATE_SQL as BUSDAY,
+	left(EUITRANS.EXT_UI,18) as EXT_UI,
+	EUIINSTLN.INT_UI,
+	EANL.ANLAGE,
+	EANL.ANLART,
+	EANL.SPEBENE,
+	EUIGRID.GRID_ID,
+	ifnull(left(FN_TypM.STRING1,1),' ') as MTYPE,
+	ifnull(cast(FN_Area.WERT1 as int),0) as CLASS,
+	ifnull(cast(FN_Class.WERT1 as int),0) as AREA,
+	ifnull(FN_Susp.STRING3,' ') as SUSPEND,
+	ifnull(cast(FN_InstPower.WERT1 as int),0) as CDS_POWER,
+	ifnull(cast(FN_ResPower.WERT1 as int),0) as RES_POWER,
+	ifnull(cast(FN_Kogen.WERT1 as int),0) as KOGEN,
+	ifnull(cast(FN_Green.WERT1 as int),0) as GREEN,
+	ifnull(left(FN_SS.STRING1,4),'') as NEXTGRID,
+	ifnull(left(concat(FN_SOPM.STRING1,FN_SOPM.STRING2),18),'') as NEXTPDT,
+	ZEUIHEADT.UITEXT, ifnull(FN_IMPEXP.STRING3,'') as IMPEXP,
+	ifnull(FN_MICROSRC.STRING3,'') as MICRO_SRC,
+	ifnull(left(SERVDIST.SRVPRVREF,13),'') as DIST,
+	ifnull(left(SERVSUPP.SRVPRVREF,13),'') as SUPP,
+	ifnull(left(SERVSZ.SRVPRVREF,13),'') as SZ,
+	ifnull(left(SERVPPS.SRVPRVREF,13),'') as PPS
+from \"OTEBW_CD\".\"CD::1E_EANL\"(CURRENT_TIMESTAMP) as EANL
+	   inner join \"OTEBW_CD\".\"CD::1E_EUIINSTLN\"(CURRENT_TIMESTAMP) as EUIINSTLN on
+	     EUIINSTLN.ANLAGE   =  EANL.ANLAGE 
+	   inner join \"OTEBW_CD\".\"CD::1E_EUIGRID\"(CURRENT_TIMESTAMP) as EUIGRID on
+	     EUIGRID.INT_UI   =  EUIINSTLN.INT_UI
+	   inner join \"OTEBW_CD\".\"CD::1E_EUITRANS\"(CURRENT_TIMESTAMP) as EUITRANS on
+	     EUITRANS.INT_UI    =  EUIINSTLN.INT_UI
+	   inner join \"OTEBW\".\"OZ::M_TIME__CALENDAR_V\" as CALENDAR on
+	   	 CALENDAR.FACT_CAL_ID = 'CZ' and
+	   	 EUIINSTLN.DATEFROM <= CALENDAR.DATE_SQL and
+	   	 EUIINSTLN.DATETO   >= CALENDAR.DATE_SQL and
+	     EUIGRID.DATEFROM <= CALENDAR.DATE_SQL and
+	     EUIGRID.DATETO   >= CALENDAR.DATE_SQL and
+	     EUITRANS.DATEFROM  <= CALENDAR.DATE_SQL and
+	     EUITRANS.DATETO    >= CALENDAR.DATE_SQL
+	   left outer join \"OTEBW_CD\".\"CD::1E_ETTIFN\"(CURRENT_TIMESTAMP) as FN_TypM on
+	     FN_TypM.ANLAGE  =  EANL.ANLAGE and
+	     FN_TypM.OPERAND =  'CDS_TYPM' and
+	     FN_TypM.AB      <= CALENDAR.DATE_SQL and
+	     FN_TypM.BIS     >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ETTIFN\"(CURRENT_TIMESTAMP) as FN_Area on
+         FN_Area.ANLAGE  =  EANL.ANLAGE and
+         FN_Area.OPERAND =  'CDS_AREA' and
+         FN_Area.AB      <= CALENDAR.DATE_SQL and
+         FN_Area.BIS     >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ETTIFN\"(CURRENT_TIMESTAMP) as FN_Class on
+         FN_Class.ANLAGE  =  EANL.ANLAGE and
+         FN_Class.OPERAND =  'CDS_CLASS' and
+         FN_Class.AB      <= CALENDAR.DATE_SQL and
+         FN_Class.BIS     >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ETTIFN\"(CURRENT_TIMESTAMP) as FN_Susp on
+         FN_Susp.ANLAGE  =  EANL.ANLAGE and
+         FN_Susp.OPERAND =  'POZ_ZAS_DT' and
+         FN_Susp.AB      <= CALENDAR.DATE_SQL and
+         FN_Susp.BIS     >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ETTIFN\"(CURRENT_TIMESTAMP) as FN_InstPower on
+         FN_InstPower.ANLAGE  =  EANL.ANLAGE and
+         FN_InstPower.OPERAND =  'CDS_POWER' and
+         FN_InstPower.AB      <= CALENDAR.DATE_SQL and
+         FN_InstPower.BIS     >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ETTIFN\"(CURRENT_TIMESTAMP) as FN_ResPower on
+         FN_ResPower.ANLAGE  =  EANL.ANLAGE and
+         FN_ResPower.OPERAND =  'RES_POWER' and
+         FN_ResPower.AB      <= CALENDAR.DATE_SQL and
+         FN_ResPower.BIS     >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ETTIFN\"(CURRENT_TIMESTAMP) as FN_Kogen on
+         FN_Kogen.ANLAGE  =  EANL.ANLAGE and
+         FN_Kogen.OPERAND =  'CDS_KOGEN' and
+         FN_Kogen.AB      <= CALENDAR.DATE_SQL and
+         FN_Kogen.BIS     >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ETTIFN\"(CURRENT_TIMESTAMP) as FN_Green on
+         FN_Green.ANLAGE  =  EANL.ANLAGE and
+         FN_Green.OPERAND =  'CDS_OBNOV' and
+         FN_Green.AB      <= CALENDAR.DATE_SQL and
+         FN_Green.BIS     >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ETTIFN\"(CURRENT_TIMESTAMP) as FN_SS on
+         FN_SS.ANLAGE  =  EANL.ANLAGE and
+         FN_SS.OPERAND =  'CDS_SS' and
+         FN_SS.AB      <= CALENDAR.DATE_SQL and
+         FN_SS.BIS     >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ETTIFN\"(CURRENT_TIMESTAMP) as FN_SOPM on
+         FN_SOPM.ANLAGE  =  EANL.ANLAGE and
+         FN_SOPM.OPERAND =  'CDS_SOPM' and
+         FN_SOPM.AB      <= CALENDAR.DATE_SQL and
+         FN_SOPM.BIS     >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ZEUIHEADT\"(CURRENT_TIMESTAMP) as ZEUIHEADT on
+         ZEUIHEADT.INT_UI =  EUIINSTLN.INT_UI and
+         ZEUIHEADT.SPRAS  =  'C' and
+         ZEUIHEADT.AB     <= CALENDAR.DATE_SQL and
+         ZEUIHEADT.BIS    >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ETTIFN\"(CURRENT_TIMESTAMP) as FN_IMPEXP on
+         FN_IMPEXP.ANLAGE  =  EANL.ANLAGE and
+         FN_IMPEXP.OPERAND =  'CDS_IMPEXP' and
+         FN_IMPEXP.AB      <= CALENDAR.DATE_SQL and
+         FN_IMPEXP.BIS     >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ETTIFN\"(CURRENT_TIMESTAMP) as FN_MICROSRC on
+         FN_MICROSRC.ANLAGE  =  EANL.ANLAGE and
+         FN_MICROSRC.OPERAND =  'MICRO_SRC' and
+         FN_MICROSRC.AB      <= CALENDAR.DATE_SQL and
+         FN_MICROSRC.BIS     >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ETTIFN\"(CURRENT_TIMESTAMP) as FN_PPS on
+         FN_PPS.ANLAGE  =  EANL.ANLAGE and
+         FN_PPS.OPERAND =  'CDS_PPS' and
+         FN_PPS.AB      <= CALENDAR.DATE_SQL and
+         FN_PPS.BIS     >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ESERVICE\"(CURRENT_TIMESTAMP) as SERVDIST on
+         SERVDIST.INT_UI        =  EUIINSTLN.INT_UI and
+         SERVDIST.SERVICE       =  '0013' and
+         SERVDIST.SERVICE_START <= CALENDAR.DATE_SQL and
+         SERVDIST.SERVICE_END   >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ESERVICE\"(CURRENT_TIMESTAMP) as SERVSUPP on
+         SERVSUPP.INT_UI        =  EUIINSTLN.INT_UI and
+         SERVSUPP.SERVICE       =  '0001' and
+         SERVSUPP.SERVICE_START <= CALENDAR.DATE_SQL and
+         SERVSUPP.SERVICE_END   >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ESERVICE\"(CURRENT_TIMESTAMP) as SERVSZ on
+         SERVSZ.INT_UI        =  EUIINSTLN.INT_UI and
+         SERVSZ.SERVICE       =  '0011' and
+         SERVSZ.SERVICE_START <= CALENDAR.DATE_SQL and
+         SERVSZ.SERVICE_END   >= CALENDAR.DATE_SQL
+       left outer join \"OTEBW_CD\".\"CD::1E_ESERVICE\"(CURRENT_TIMESTAMP) as SERVPPS on
+         SERVPPS.INT_UI        =  EUIINSTLN.INT_UI and
+         SERVPPS.SERVICE       =  '0012' and
+         SERVPPS.SERVICE_START <= CALENDAR.DATE_SQL and
+         SERVPPS.SERVICE_END   >= CALENDAR.DATE_SQL";

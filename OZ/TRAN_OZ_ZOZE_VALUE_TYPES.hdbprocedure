@@ -1,0 +1,31 @@
+PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_ZOZE_VALUE_TYPES" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	--DEFAULT SCHEMA <default_schema_name>
+	AS
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+ 
+declare exit handler for sqlexception begin
+  insert into OTEBW."Log" ("CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") values (::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
+end;
+
+truncate table "OTEBW_OZ"."ZOZE_VALUE_TYPES";
+insert into "OTEBW_OZ"."ZOZE_VALUE_TYPES" select
+	 MANDT,
+	VALUE_TYPE,
+	VALUE_TEXT,
+	OPERAND,
+	UNIT,
+	DECIMALS,
+	CHECK_PROMO_REL,
+	CHECK_MV_REL
+from "OTEBW_OZ"."REMOTE_ZOZE_VALUE_TYPES";
+commit;
+
+insert into "OTEBW"."Log" ( "CurrSchema", "CurrObject", "Cnt", "ErrorMess") values ('OTEBW_OZ', 'ZOZE_VALUE_TYPES', ::rowcount, 'Transfer');
+commit;
+ 
+END;

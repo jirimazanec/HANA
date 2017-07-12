@@ -1,0 +1,13 @@
+{
+    "description": "Migrace DBERCHZ1",
+    "action": "OZ::TRAN_OZ_MIG_DBERCHZ1",
+    "schedules": [
+       {
+          "description": "Read current stock value",
+          "xscron": "2017 * * * 18 0 0",
+          "parameter": {
+             "stock": "SAP.DE"
+             }
+       }
+    ]
+}

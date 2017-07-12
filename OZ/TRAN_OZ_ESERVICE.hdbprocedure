@@ -1,0 +1,44 @@
+PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_ESERVICE" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	--DEFAULT SCHEMA <default_schema_name>
+	AS
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+ 
+declare exit handler for sqlexception begin
+  insert into OTEBW."Log" ("CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") values (::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
+end;
+
+insert into "OTEBW_OZ"."ESERVICE" select
+	 MANDT,
+	VERTRAG,
+	INT_UI,
+	SERVICE_START,
+	SERVICE_END,
+	SERVICE,
+	SERVICEID,
+	SRVPRVREF,
+	SERVPROV_PAY,
+	SPARTE,
+	STARTOBJTYPE,
+	STARTOBJKEY,
+	ENDOBJTYPE,
+	ENDOBJKEY,
+	ERDAT,
+	ERNAM,
+	AEDAT,
+	AENAM,
+	BEGRU,
+	LOEVM,
+	PREV_SERV_START,
+	PREV_SERV_END
+from "OTEBW_OZ"."REMOTE_ESERVICE";
+commit;
+
+insert into "OTEBW"."Log" ( "CurrSchema", "CurrObject", "Cnt", "ErrorMess") values ('OTEBW_OZ', 'ESERVICE', ::rowcount, 'Transfer');
+commit;
+
+END;

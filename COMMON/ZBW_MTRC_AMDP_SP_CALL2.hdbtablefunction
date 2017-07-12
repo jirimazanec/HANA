@@ -1,0 +1,11 @@
+FUNCTION "OTEBW_OZ"."COMMON::ZBW_MTRC_AMDP_SP_CALL2" (input1 INT ) 
+	RETURNS output1 AS
+	--LANGUAGE SQLSCRIPT AS
+	--LANGUAGE SQLSCRIPT
+	--SQL SECURITY INVOKER AS
+BEGIN
+/***************************** 
+	Write your function logic
+ *****************************/
+ output1 := :input1 * :input1;
+ END;

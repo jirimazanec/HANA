@@ -1,0 +1,76 @@
+PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_ZOZE_HEAT_SOURCE" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	--DEFAULT SCHEMA <default_schema_name>
+	 AS
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+ 
+declare exit handler for sqlexception begin
+  insert into OTEBW."Log" ("CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") values (::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
+end;
+
+
+truncate table "OTEBW_OZ"."ZOZE_HEAT_SOURCE";
+insert into "OTEBW_OZ"."ZOZE_HEAT_SOURCE"
+SELECT
+	MANDT,
+	APPL_FORM_ID,
+	STATUS,
+	SOURCE_ID,
+	GENERATION_PLANT,
+	LICENCE,
+	GRID_ID,
+	GRID_LICENCE,
+	AREA_ID,
+	SOURCE_NAME,
+	PRODUCER,
+	LICENCE_ID, 
+	SOURCE_TYPE,
+	DELIVERY_POINT_N,
+	INVESTMENT,
+	PROMOTION_PGM,
+	DEC_INVEST_DATE,
+	INVESTMENT_COSTS,
+	INVESTMENT_PROMO,
+	CASE WHEN IRR = ' ' THEN 0 ELSE TO_DECIMAL(IRR,5,2) END AS IRR,
+	REJECTION_REASON,
+	REGION,
+	DISTRICT,
+	CITY,
+	CITY_PART,
+	POST_CODE,
+	STREET,
+	HOUSE_NUM_1,
+	HOUSE_NUM_2,
+	CADASTRAL_CODE,
+	PARCEL_NUMBER,
+	LOCATION_DESCR,
+	GPS_LATITUDE,
+	GPS_LONGITUDE,
+	OPER_START_DATE,
+	PROMO_START_DATE,
+	PROMO_END_DATE,
+	PREFIX,
+	ACCOUNT_NUMBER,
+	BANK_ID,
+	IBAN,
+	BANK_BLOCKING,
+	BANK_BLOCK_FROM,
+	BANK_BLOCK_TO,
+	SPEC_PAY,
+	EXECUTION,
+	ERDAT,
+	ERTIM,
+	ERNAM,
+	AEDAT,
+	AETIM,
+	AENAM
+FROM "OTEBW_OZ"."REMOTE_ZOZE_HEAT_SOURCE"; 
+
+insert into "OTEBW"."Log" ( "CurrSchema", "CurrObject", "Cnt", "ErrorMess") values ('OTEBW_OZ', 'ZOZE_HEAT_SOURCE', ::rowcount, 'Transfer');
+commit;
+ 
+END;

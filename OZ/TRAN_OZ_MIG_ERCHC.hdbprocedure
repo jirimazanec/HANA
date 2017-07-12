@@ -1,0 +1,92 @@
+PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_MIG_ERCHC" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	--DEFAULT SCHEMA <default_schema_name>
+	AS
+BEGIN
+
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+ 
+declare Cnt int;
+declare Cnt_chg int;
+
+declare exit handler for sqlexception 
+begin
+insert into "OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG" ("Log_ID","TST","CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") 
+	values ("OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG_SEQ".nextval, current_timestamp, ::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
+end;
+
+truncate table "OTEBW_OZ"."REMOTE_ERCHC_CHG";
+truncate table "OTEBW_OZ"."ERCHC_CHG";
+truncate table "OTEBW_OZ"."ERCHC";
+
+t_ERCHC=select
+	 MANDT,
+	BELNR,
+	LFDNR,
+	OPBEL,
+	CPUDT,
+	BUDAT,
+	INTOPBEL,
+	INTCPUDT,
+	INTBUDAT,
+	TOBRELEASD,
+	SIMULATED,
+	INVOICED,
+	SPCANC,
+	STATUPD,
+	STATUPD_CANC 
+from "OTEBW_OZ"."REMOTE_ERCHC";
+
+insert into "OTEBW_OZ"."ERCHC_CHG" select
+	 MANDT,
+	BELNR,
+	LFDNR,
+	OPBEL,
+	CPUDT,
+	BUDAT,
+	INTOPBEL,
+	INTCPUDT,
+	INTBUDAT,
+	TOBRELEASD,
+	SIMULATED,
+	INVOICED,
+	SPCANC,
+	STATUPD,
+	STATUPD_CANC,
+	'I' AS CLT_ACTION,
+	' ' AS CLT_PROCESSED,
+	TO_TIMESTAMP ('20000101 00:00:00.000', 'YYYYMMDD HH24:MI:SS.FF3') AS CLT_TST,
+	TO_TIMESTAMP ('99991231 23:59:59.999', 'YYYYMMDD HH24:MI:SS.FF3') AS CLT_TST_TO 
+from :t_ERCHC;
+
+insert into "OTEBW_OZ"."ERCHC" select
+	 MANDT,
+	BELNR,
+	LFDNR,
+	OPBEL,
+	CPUDT,
+	BUDAT,
+	INTOPBEL,
+	INTCPUDT,
+	INTBUDAT,
+	TOBRELEASD,
+	SIMULATED,
+	INVOICED,
+	SPCANC,
+	STATUPD,
+	STATUPD_CANC 
+from :t_ERCHC;
+commit;
+
+
+select count(*) into Cnt from "OTEBW_OZ"."ERCHC";  
+select count(*) into Cnt_chg from "OTEBW_OZ"."ERCHC_CHG";  
+
+insert into "OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG" ("Log_ID","TST", "CurrSchema", "CurrObject", "Cnt", "ErrorMess") 
+values ("OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG_SEQ".nextval, current_timestamp, 'OTEBW_OZ', 'ERCHC,'||' ERCHC_CHG', cnt + Cnt_chg, 'Transfered');  
+commit;
+
+END;

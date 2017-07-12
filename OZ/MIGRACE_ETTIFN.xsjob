@@ -1,0 +1,13 @@
+{
+    "description": "Migration procedure",
+    "action": "OZ::TRAN_OZ_MIG_ETTIFN",
+    "schedules": [
+       {
+          "description": "Migration procedure",
+          "xscron": "2017 * * * 20 0 0",
+          "parameter": {
+
+             }
+       }
+    ]
+}

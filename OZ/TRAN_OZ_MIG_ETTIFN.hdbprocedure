@@ -1,0 +1,121 @@
+PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_MIG_ETTIFN" ( )
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	--DEFAULT SCHEMA <default_schema_name>
+	AS
+BEGIN
+
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+declare Cnt int;
+declare Cnt_chg int;
+
+declare exit handler for sqlexception 
+begin
+insert into "OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG" ("Log_ID","TST","CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") 
+	values ("OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG_SEQ".nextval, current_timestamp, ::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
+end;
+  
+ 
+truncate table "OTEBW_OZ"."REMOTE_ETTIFN_CHG";
+truncate table "OTEBW_OZ"."ETTIFN_CHG";
+truncate table "OTEBW_OZ"."ETTIFN";
+
+t_ETTIFN=select
+	 MANDT,
+	ANLAGE,
+	OPERAND,
+	SAISON,
+	AB,
+	ABLFDNR,
+	BIS,
+	BELNR,
+	MBELNR,
+	MAUSZUG,
+	ALTBIS,
+	INAKTIV,
+	MANAEND,
+	TARIFART,
+	KONDIGR,
+	WERT1,
+	WERT2,
+	STRING1,
+	STRING2,
+	STRING3,
+	STRING4,
+	ERSATZWERT,
+	BETRAG,
+	WAERS 
+from "OTEBW_OZ"."REMOTE_ETTIFN";
+
+insert into "OTEBW_OZ"."ETTIFN_CHG" select
+	 MANDT,
+	ANLAGE,
+	OPERAND,
+	SAISON,
+	AB,
+	ABLFDNR,
+	BIS,
+	BELNR,
+	MBELNR,
+	MAUSZUG,
+	ALTBIS,
+	INAKTIV,
+	MANAEND,
+	TARIFART,
+	KONDIGR,
+	WERT1,
+	WERT2,
+	STRING1,
+	STRING2,
+	STRING3,
+	STRING4,
+	ERSATZWERT,
+	BETRAG,
+	WAERS,
+	'I' AS CLT_ACTION,
+	' ' AS CLT_PROCESSED,
+	TO_TIMESTAMP ('20000101 00:00:00.000',
+	 'YYYYMMDD HH24:MI:SS.FF3') AS CLT_TST,
+	TO_TIMESTAMP ('99991231 23:59:59.999',
+	 'YYYYMMDD HH24:MI:SS.FF3') AS CLT_TST_TO 
+from :t_ETTIFN;
+
+insert into "OTEBW_OZ"."ETTIFN" select
+	 MANDT,
+	ANLAGE,
+	OPERAND,
+	SAISON,
+	AB,
+	ABLFDNR,
+	BIS,
+	BELNR,
+	MBELNR,
+	MAUSZUG,
+	ALTBIS,
+	INAKTIV,
+	MANAEND,
+	TARIFART,
+	KONDIGR,
+	WERT1,
+	WERT2,
+	STRING1,
+	STRING2,
+	STRING3,
+	STRING4,
+	ERSATZWERT,
+	BETRAG,
+	WAERS 
+from :t_ETTIFN;
+commit;
+
+
+select count(*) into Cnt from "OTEBW_OZ"."DBERCHZ1";  
+select count(*) into Cnt_chg from "OTEBW_OZ"."DBERCHZ1_CHG";  
+
+insert into "OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG" ("Log_ID","TST", "CurrSchema", "CurrObject", "Cnt", "ErrorMess") 
+values ("OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG_SEQ".nextval, current_timestamp, 'OTEBW_OZ', 'ETTIFN,'||' ETTIFN_CHG', cnt + Cnt_chg, 'Transfered');  
+commit;
+
+END;

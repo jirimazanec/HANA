@@ -1,0 +1,118 @@
+PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_EVER" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	--DEFAULT SCHEMA <default_schema_name>
+	AS
+BEGIN
+/*****************************  
+	Write your procedure logic 
+ *****************************/
+ 
+declare exit handler for sqlexception begin
+  insert into OTEBW."Log" ("CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") values (::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
+end;
+
+truncate table "OTEBW_OZ"."EVER";    
+insert into "OTEBW_OZ"."EVER" select
+	 MANDT,
+	VERTRAG,
+	BUKRS, 
+	SPARTE,
+	EIGENVERBR,
+	KOFIZ,
+	PORTION,
+	ABSLANFO,
+	ABSZYK,
+	ABSMNANP,
+	GEMFAKT,
+	MANABR,
+	ABRSPERR,
+	ABRFREIG,
+	BSTATUS,
+	KOSTL,
+	VBEZ,
+	VBEGINN,
+	EINZDAT_ALT,
+	VENDE,
+	KUENDDAT,
+	KFRIST,
+	KUENPER,
+	VBISDAT,
+	VERLAENG,
+	VERPER,
+	VABSCHLEVU,
+	VABSCHLKND,
+	VABSCHLKNDTI,
+	PERSNR,
+	VREFER,
+	ERDAT,
+	ERNAM,
+	AEDAT,
+	AENAM,
+	BEGRU,
+	LOEVM,
+	TXJCD,
+	MANOUTSORT,
+	FAKTURIERT,
+	AUFNR,
+	PS_PSP_PNR,
+	PRCTR,
+	COPAKONT,
+	AUSGRUP,
+	OUTCOUNT,
+	PYPLT,
+	PYPLS, 
+	GSBER,
+	SEGMENT,
+	SERVICEID,
+	SRVPRVREF,
+	BILLMETHOD,
+	STAGRUVER,
+	PYPLA,
+	BILLFINIT,
+	BFA_DEB_STAT,
+	BFA_CRED_STAT,
+	SALESEMPLOYEE,
+	SALESPARTNER,
+	SALESDOCUMENT,
+	PS_STARTDAT,
+	SERVPROV_PAY,
+	INVOICING_PARTY,
+	COKEY,
+	BUPLA,
+	CONTRACTCLASS,
+	CANCREASON,
+	CANCREASON_NEW,
+	EXTRAPOLWASTE,
+	PPM_CONTRACT,
+	OSB_GROUP,
+	OUCONT,
+	RULEGR,
+	REGIOGROUP,
+	CMGRP,
+	STRAT,
+	CPERS,
+	ANLAGE,
+	VKONTO,
+	KZSONDEINZ,
+	KZSONDAUSZ,
+	AUTEIGEINZ,
+	EINZDAT,
+	AUSZDAT,
+	ABSSTOPDAT,
+	SCHLFAKT,
+	MAHNV,
+	MAHNVUMZ,
+	MANSP,
+	BEZUG,
+	TRANSVER,
+	SSWTCREASON,
+	XVERA
+from "OTEBW_OZ"."REMOTE_EVER";
+commit;
+
+
+insert into "OTEBW"."Log" ( "CurrSchema", "CurrObject", "Cnt", "ErrorMess") values ('OTEBW_OZ', 'EVER', ::rowcount, 'Transfer');
+commit;
+ 
+END;

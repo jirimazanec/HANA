@@ -1,0 +1,12 @@
+{
+    "description": "Migrace ERDK",
+    "action": "OZ::TRAN_OZ_MIG_ERDK",
+    "schedules": [
+       {
+          "description": "Migration procedure",
+          "xscron": "2017 * * * 17 30 0",
+          "parameter": {
+             }
+       }
+    ]
+}

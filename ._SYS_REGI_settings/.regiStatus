@@ -1,0 +1,522 @@
+{
+ "name": "",
+ "filenames": [
+  {
+   "filename": "CD/1E_EUIINSTLN.hdbtablefunction",
+   "filesize": "415",
+   "timest": "2017-07-07 08:26:03.371 UTC",
+   "sha1value": "3517050184.2726627024.559487714.2531512546.3995427035"
+  },
+  {
+   "filename": "CD/2E_OPM_DATEHDB.hdbview",
+   "filesize": "7001",
+   "timest": "2017-07-07 08:14:07.13 UTC",
+   "sha1value": "2837846676.1596511336.2084124513.639724247.342213420"
+  },
+  {
+   "filename": "CD/2E_OPM_DATEHDB_ONDRA&JIRKA.hdbview",
+   "filesize": "9898",
+   "timest": "2017-07-07 13:03:40.825 UTC",
+   "sha1value": "2655704963.1711159535.369153422.1846061189.1650222948"
+  },
+  {
+   "filename": "CD/2E_PDT.calculationview",
+   "filesize": "16753",
+   "timest": "2017-07-11 13:51:15.759 UTC",
+   "sha1value": "3278745603.2295189142.506781379.3090770900.810797456"
+  },
+  {
+   "filename": "CD/ConvertProfStat.hdbscalarfunction",
+   "filesize": "471",
+   "timest": "2017-07-07 09:01:47.730 UTC",
+   "sha1value": "3921687283.1948043954.3610617652.409888005.2270844758"
+  },
+  {
+   "filename": "CD/MIGRACE_TRAN_CD_CD_CDS_OPM.xsjob",
+   "filesize": "283",
+   "timest": "2017-07-11 14:46:46.504 UTC",
+   "sha1value": "1629795616.3203179972.2007070859.2060514611.1881582347"
+  },
+  {
+   "filename": "CD/TRAN_CD_CDS_OPM.hdbprocedure",
+   "filesize": "10300",
+   "timest": "2017-07-11 15:07:15.816 UTC",
+   "sha1value": "4276882781.3627275423.3512564026.4105908309.2141999378"
+  },
+  {
+   "filename": "CD/TRAN_CD_EANL.hdbprocedure",
+   "filesize": "1385",
+   "timest": "2017-06-20 08:42:19.276 UTC",
+   "sha1value": "1299521150.3680645441.851669191.506095000.3260920988"
+  },
+  {
+   "filename": "CD/test.hdbview",
+   "filesize": "9290",
+   "timest": "2017-07-11 10:23:45.688 UTC",
+   "sha1value": "2602927697.435244755.1315961148.294483671.1074930612"
+  },
+  {
+   "filename": "COMMON/ZBW_MTRC_AMDP_SP_CALL.hdbprocedure",
+   "filesize": "578",
+   "timest": "2017-05-30 09:46:53.913 UTC",
+   "sha1value": "918717129.2941455401.4168364934.2793088620.1354993334"
+  },
+  {
+   "filename": "COMMON/ZBW_MTRC_AMDP_SP_CALL2.hdbtablefunction",
+   "filesize": "305",
+   "timest": "2017-05-25 08:56:31.93 UTC",
+   "sha1value": "3751873113.3075207695.3315447854.2444502773.1551578823"
+  },
+  {
+   "filename": "OZ/.xsapp",
+   "filesize": "0",
+   "timest": "2017-06-14 11:34:03.54 UTC",
+   "sha1value": "3661210606.1584089869.844480495.2506102928.2950170377"
+  },
+  {
+   "filename": "OZ/ETTIFN_BELNR.hdbview",
+   "filesize": "226",
+   "timest": "2017-06-27 11:06:42.514 UTC",
+   "sha1value": "3558843289.553778270.3839986480.2619125309.739127104"
+  },
+  {
+   "filename": "OZ/ETTIFN_GET_BELNR.hdbscalarfunction",
+   "filesize": "363",
+   "timest": "2017-06-20 13:55:15.205 UTC",
+   "sha1value": "314339251.3912476083.151911777.2053620465.1465263851"
+  },
+  {
+   "filename": "OZ/MIGRACE_DBERCHZ1.xsjob",
+   "filesize": "306",
+   "timest": "2017-06-26 08:31:18.983 UTC",
+   "sha1value": "1505975035.2039281606.1322069809.2298881704.459668356"
+  },
+  {
+   "filename": "OZ/MIGRACE_DBERCHZ3.xsjob",
+   "filesize": "305",
+   "timest": "2017-06-15 13:32:17.275 UTC",
+   "sha1value": "1032364394.457575453.3357819040.2893766957.3361127198"
+  },
+  {
+   "filename": "OZ/MIGRACE_EPROFVAL60.xsjob",
+   "filesize": "309",
+   "timest": "2017-06-15 13:31:45.747 UTC",
+   "sha1value": "142078468.1839875411.3944106382.2562942349.239612711"
+  },
+  {
+   "filename": "OZ/MIGRACE_ERCH.xsjob",
+   "filesize": "297",
+   "timest": "2017-06-15 13:31:06.558 UTC",
+   "sha1value": "274529578.2863252014.2884759548.2690234334.617784579"
+  },
+  {
+   "filename": "OZ/MIGRACE_ERCHC.xsjob",
+   "filesize": "299",
+   "timest": "2017-06-15 13:30:47.824 UTC",
+   "sha1value": "711241860.3375179986.2181922994.2413829653.2519825627"
+  },
+  {
+   "filename": "OZ/MIGRACE_ERDK.xsjob",
+   "filesize": "262",
+   "timest": "2017-06-26 08:31:35.793 UTC",
+   "sha1value": "3508674121.3763528012.3461892954.581304034.3573827546"
+  },
+  {
+   "filename": "OZ/MIGRACE_ETTIFN.xsjob",
+   "filesize": "272",
+   "timest": "2017-06-15 13:45:13.139 UTC",
+   "sha1value": "524377161.1342086374.1174149058.2937098836.1450746428"
+  },
+  {
+   "filename": "OZ/MIGRACE_LARGE_ALL.xsjob",
+   "filesize": "280",
+   "timest": "2017-07-04 09:01:53.487 UTC",
+   "sha1value": "456783632.4284898050.3211602375.209451350.310385410"
+  },
+  {
+   "filename": "OZ/MIGRACE_SMALL_ALL.xsjob",
+   "filesize": "275",
+   "timest": "2017-07-04 09:02:59.19 UTC",
+   "sha1value": "1781901335.145641261.176321031.3034535572.2550322262"
+  },
+  {
+   "filename": "OZ/MIGRATION_STATISTIC.hdbview",
+   "filesize": "15050",
+   "timest": "2017-07-04 09:59:52.992 UTC",
+   "sha1value": "2723430916.868065428.501256821.486695995.2805726308"
+  },
+  {
+   "filename": "OZ/M_TIME__CALENDAR_V.hdbview",
+   "filesize": "2618",
+   "timest": "2017-06-19 12:34:42.201 UTC",
+   "sha1value": "3781749397.906491373.85062043.3281264497.3748912697"
+  },
+  {
+   "filename": "OZ/Memory_monitoring.hdbview",
+   "filesize": "347",
+   "timest": "2017-06-15 11:09:38.199 UTC",
+   "sha1value": "532599667.540061176.1674821726.4220000364.1670206451"
+  },
+  {
+   "filename": "OZ/TESTETTIFN.hdbview",
+   "filesize": "487",
+   "timest": "2017-06-27 11:06:42.507 UTC",
+   "sha1value": "2893272710.3143585858.2370149489.3974240138.1737099424"
+  },
+  {
+   "filename": "OZ/TRANS_OZ_CREATE_ZOZE_REPORT.hdbprocedure",
+   "filesize": "531",
+   "timest": "2017-07-12 10:39:50.432 UTC",
+   "sha1value": "4289510213.2896778173.92952448.3063687451.4185822089"
+  },
+  {
+   "filename": "OZ/TRANS_OZ_TRANSFER_ZOZE_REPORT.hdbprocedure",
+   "filesize": "419",
+   "timest": "2017-06-28 10:59:04.702 UTC",
+   "sha1value": "2851163148.3890486904.3614423590.2480291959.796225026"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_BUT000.hdbprocedure",
+   "filesize": "1927",
+   "timest": "2017-07-10 08:04:01.28 UTC",
+   "sha1value": "903178779.673175999.22174265.3998142435.3133571658"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_BUT0ID.hdbprocedure",
+   "filesize": "894",
+   "timest": "2017-07-10 07:59:13.470 UTC",
+   "sha1value": "1195395129.2482753294.2963105281.1578643607.1593241087"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_DBERCHZ1.hdbprocedure",
+   "filesize": "16405",
+   "timest": "2017-06-26 12:50:20.295 UTC",
+   "sha1value": "1826664739.807048211.2559734175.3672322377.1502690954"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_DBERCHZ3.hdbprocedure",
+   "filesize": "6806",
+   "timest": "2017-06-26 12:57:51.169 UTC",
+   "sha1value": "3981705219.2821019789.331917129.3273403213.4013763607"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_DFKKBPTAXNUM.hdbprocedure",
+   "filesize": "1181",
+   "timest": "2017-07-10 08:00:19.839 UTC",
+   "sha1value": "1205938418.1374109420.670140127.340810268.2646420650"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_EANL.hdbprocedure",
+   "filesize": "1204",
+   "timest": "2017-07-10 08:03:38.288 UTC",
+   "sha1value": "1392394630.3071884029.3709034940.3524025327.2054232634"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_EANLH.hdbprocedure",
+   "filesize": "1049",
+   "timest": "2017-07-10 08:03:25.205 UTC",
+   "sha1value": "3512292686.404980301.318536046.875053010.3887195142"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_EGRID.hdbprocedure",
+   "filesize": "834",
+   "timest": "2017-07-10 08:03:11.673 UTC",
+   "sha1value": "4250119521.309748889.3281887388.1401703543.3179440589"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_EGRIDT.hdbprocedure",
+   "filesize": "784",
+   "timest": "2017-07-10 08:13:28.142 UTC",
+   "sha1value": "2769105922.287639081.3864725653.443933618.641951834"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_ELPASS.hdbprocedure",
+   "filesize": "896",
+   "timest": "2017-07-10 08:13:14.822 UTC",
+   "sha1value": "999332895.3052467900.4011548816.1091262877.3069760375"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_EPROFASS.hdbprocedure",
+   "filesize": "933",
+   "timest": "2017-07-10 08:12:51.179 UTC",
+   "sha1value": "421117334.669234206.3043998548.2212332797.2098515711"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_EPROFVAL_60.hdbprocedure",
+   "filesize": "5512",
+   "timest": "2017-06-27 12:56:42.814 UTC",
+   "sha1value": "4021087503.844391543.1126272849.2545773275.2058957574"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_ERCH.hdbprocedure",
+   "filesize": "16005",
+   "timest": "2017-06-27 12:47:53.377 UTC",
+   "sha1value": "880892457.167504165.1412122989.1283352869.3395449429"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_ERCHC.hdbprocedure",
+   "filesize": "3721",
+   "timest": "2017-06-27 12:50:46.102 UTC",
+   "sha1value": "2558624915.2618897116.696228962.269915742.682959319"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_ERDK.hdbprocedure",
+   "filesize": "10602",
+   "timest": "2017-06-27 13:20:26.177 UTC",
+   "sha1value": "4043656346.1148046267.3530453454.706457886.2796330041"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_ESERVICE.hdbprocedure",
+   "filesize": "989",
+   "timest": "2017-07-10 08:16:06.347 UTC",
+   "sha1value": "648696278.3953635435.947469542.2217543397.3652210658"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_ETTAF.hdbprocedure",
+   "filesize": "914",
+   "timest": "2017-07-10 08:20:47.798 UTC",
+   "sha1value": "3702306184.1207121051.2159977714.3302784659.2889348942"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_ETTIFN.hdbprocedure",
+   "filesize": "4935",
+   "timest": "2017-06-26 16:13:56.633 UTC",
+   "sha1value": "2525522721.1909406420.1002791399.1517761901.949083030"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_EUIGRID.hdbprocedure",
+   "filesize": "893",
+   "timest": "2017-07-10 08:20:35.529 UTC",
+   "sha1value": "3995674208.2466015649.3474022732.852669693.380787928"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_EUIINSTLN.hdbprocedure",
+   "filesize": "920",
+   "timest": "2017-07-10 08:20:23.656 UTC",
+   "sha1value": "1452141560.3597836605.464470440.620166419.3880910429"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_EUITRANS.hdbprocedure",
+   "filesize": "900",
+   "timest": "2017-07-10 08:22:00.395 UTC",
+   "sha1value": "1920999200.1381166701.2797049581.1009807560.3433914725"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_EVER.hdbprocedure",
+   "filesize": "1853",
+   "timest": "2017-07-10 13:35:03.946 UTC",
+   "sha1value": "3836201342.781338522.1571317603.2101714205.2767776960"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_FKKVKP.hdbprocedure",
+   "filesize": "2094",
+   "timest": "2017-07-10 08:23:59.615 UTC",
+   "sha1value": "1807973739.601241865.530077819.1477879423.2827481931"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_MIG_DBERCHZ1.hdbprocedure",
+   "filesize": "5569",
+   "timest": "2017-07-12 07:51:46.471 UTC",
+   "sha1value": "1916590202.2701793538.2946931646.482571154.1873995775"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_MIG_DBERCHZ3.hdbprocedure",
+   "filesize": "2902",
+   "timest": "2017-07-10 07:42:13.859 UTC",
+   "sha1value": "2787795588.3549382387.2061789669.2490904467.1039402670"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_MIG_EPROFVAL60.hdbprocedure",
+   "filesize": "2518",
+   "timest": "2017-07-10 07:41:41.427 UTC",
+   "sha1value": "2376754608.4286557899.139553080.2892846794.2875770143"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_MIG_ERCH.hdbprocedure",
+   "filesize": "5667",
+   "timest": "2017-07-10 07:44:28.288 UTC",
+   "sha1value": "1215623697.748663524.4132649331.1898892199.4007272124"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_MIG_ERCHC.hdbprocedure",
+   "filesize": "2054",
+   "timest": "2017-07-10 07:41:07.107 UTC",
+   "sha1value": "1390203926.113814510.3751538676.4010104774.581448822"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_MIG_ERDK.hdbprocedure",
+   "filesize": "4045",
+   "timest": "2017-07-10 07:40:39.455 UTC",
+   "sha1value": "3592581551.1584370702.629528559.248052536.657044477"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_MIG_ETTIFN.hdbprocedure",
+   "filesize": "2315",
+   "timest": "2017-07-10 07:43:55.813 UTC",
+   "sha1value": "1260078289.148712609.1536110624.2442362690.1833689779"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_MIG_LARGE_ALL.hdbprocedure",
+   "filesize": "628",
+   "timest": "2017-07-11 08:46:24.260 UTC",
+   "sha1value": "3736015444.206268759.3087995936.2801445136.1960984645"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_MIG_SMALL_ALL.hdbprocedure",
+   "filesize": "1436",
+   "timest": "2017-07-07 13:24:01.768 UTC",
+   "sha1value": "1711246265.4164764691.993058352.663142994.1333533530"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_TRUNCATE_LARGE_TABLES.hdbprocedure",
+   "filesize": "999",
+   "timest": "2017-06-27 11:44:17.65 UTC",
+   "sha1value": "3404627266.1668618563.2071052949.360408065.4069584834"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_ZOZE_AGREGACE.hdbprocedure",
+   "filesize": "1017",
+   "timest": "2017-07-10 09:13:45.99 UTC",
+   "sha1value": "3167681653.3414906075.2292230035.670460223.787727279"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_ZOZE_BI_PROFIL.hdbprocedure",
+   "filesize": "918",
+   "timest": "2017-07-10 09:14:04.807 UTC",
+   "sha1value": "541163865.1522140481.531560759.774446823.1907629125"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_ZOZE_HEAT_SOURCE.hdbprocedure",
+   "filesize": "1581",
+   "timest": "2017-07-10 08:48:13.866 UTC",
+   "sha1value": "4230896012.2839103254.1959093254.3461736501.425845891"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_ZOZE_HEAT_SRC_H.hdbprocedure",
+   "filesize": "398",
+   "timest": "2017-05-17 11:36:43.347 UTC",
+   "sha1value": "3034510116.2561134501.1137126159.3934561085.3247809293"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_ZOZE_PRICE_LINE.hdbprocedure",
+   "filesize": "845",
+   "timest": "2017-07-10 08:52:42.853 UTC",
+   "sha1value": "4288605203.3585510153.4216964239.2431093153.3527465543"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_ZOZE_PRICE_LIST.hdbprocedure",
+   "filesize": "858",
+   "timest": "2017-07-10 08:53:30.739 UTC",
+   "sha1value": "2946965097.4080004146.2020403186.1724191645.3632685229"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_ZOZE_SOURCE.hdbprocedure",
+   "filesize": "2346",
+   "timest": "2017-07-10 09:14:25.249 UTC",
+   "sha1value": "740588735.3558175261.1148630413.1151890783.4165212089"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_ZOZE_SOURCE_COS.hdbprocedure",
+   "filesize": "942",
+   "timest": "2017-07-10 08:54:34.623 UTC",
+   "sha1value": "168481040.3743573671.1632650856.2858592659.2783632370"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_ZOZE_SOURCE_H.hdbprocedure",
+   "filesize": "925",
+   "timest": "2017-07-10 09:21:43.798 UTC",
+   "sha1value": "420095033.4251684176.2076099485.477563568.232898369"
+  },
+  {
+   "filename": "OZ/TRAN_OZ_ZOZE_VALUE_TYPES.hdbprocedure",
+   "filesize": "899",
+   "timest": "2017-07-10 08:55:31.172 UTC",
+   "sha1value": "28863535.3877198054.435447458.3608122522.2985942692"
+  },
+  {
+   "filename": "OZ/ZOZE_ETTIFN_CENY_PV.hdbview",
+   "filesize": "4670",
+   "timest": "2017-07-12 07:51:12.484 UTC",
+   "sha1value": "250540166.57400454.2525825393.6898375.3230714413"
+  },
+  {
+   "filename": "OZ/ZOZE_HEAT_H_V.hdbview",
+   "filesize": "299",
+   "timest": "2017-06-07 15:08:59.891 UTC",
+   "sha1value": "2990256068.2444660747.251348724.2467171414.3430636235"
+  },
+  {
+   "filename": "OZ/ZOZE_HEAT_TEST_V.hdbview",
+   "filesize": "1995",
+   "timest": "2017-06-14 06:44:20.367 UTC",
+   "sha1value": "1843928136.1633652354.4125546700.450291191.871688479"
+  },
+  {
+   "filename": "OZ/ZOZE_HEAT_V.hdbview",
+   "filesize": "2005",
+   "timest": "2017-06-14 06:44:20.367 UTC",
+   "sha1value": "3916132662.1098262156.1150403773.1818605299.1198461520"
+  },
+  {
+   "filename": "OZ/ZOZE_PARTNER_V.hdbview",
+   "filesize": "1201",
+   "timest": "2017-06-14 06:44:20.351 UTC",
+   "sha1value": "225819583.4072467980.2004586495.3506793607.2060459996"
+  },
+  {
+   "filename": "OZ/ZOZE_POWER_PLANT.hdbview",
+   "filesize": "247",
+   "timest": "2017-05-25 10:37:18.397 UTC",
+   "sha1value": "1705195448.668841372.557343305.1196340577.3599543672"
+  },
+  {
+   "filename": "OZ/ZOZE_REPORT.hdbview",
+   "filesize": "21839",
+   "timest": "2017-07-12 11:06:27.637 UTC",
+   "sha1value": "3819402093.4209185043.2847447013.362650550.1173052058"
+  },
+  {
+   "filename": "OZ/ZOZE_REPORT_FULL.hdbview",
+   "filesize": "50125",
+   "timest": "2017-06-15 11:24:25.36 UTC",
+   "sha1value": "2567307930.436247180.389150059.2011520832.1635982742"
+  },
+  {
+   "filename": "OZ/ZOZE_SOURCE_H_V.hdbview",
+   "filesize": "694",
+   "timest": "2017-06-14 07:36:31.737 UTC",
+   "sha1value": "1769082682.3078823286.3526066651.1233162231.1808580420"
+  },
+  {
+   "filename": "OZ/ZOZE_SOURCE_V.hdbview",
+   "filesize": "4695",
+   "timest": "2017-07-12 07:51:12.489 UTC",
+   "sha1value": "3579314757.2777671374.3177957227.1125839257.2633033367"
+  },
+  {
+   "filename": "OZ/ZOZE_TOP_AF.hdbview",
+   "filesize": "965",
+   "timest": "2017-06-27 11:06:42.490 UTC",
+   "sha1value": "1180858780.1004554142.2696182586.1282850862.2596315915"
+  },
+  {
+   "filename": "test/.project",
+   "filesize": "1048",
+   "timest": "2017-06-28 13:59:02.57 UTC",
+   "sha1value": "1002259132.1981341330.1959497028.2343651305.1782057135"
+  },
+  {
+   "filename": "test/test.xsjs",
+   "filesize": "2510",
+   "timest": "2017-06-28 13:59:01.953 UTC",
+   "sha1value": "399837735.590274812.3683224749.685265831.2780637200"
+  },
+  {
+   "filename": "test/.settings/.jsdtscope",
+   "filesize": "403",
+   "timest": "2017-06-28 13:58:59.680 UTC",
+   "sha1value": "3092348289.1514320135.2527355164.1195235312.3359712394"
+  }
+ ],
+ "conflicts": []
+}

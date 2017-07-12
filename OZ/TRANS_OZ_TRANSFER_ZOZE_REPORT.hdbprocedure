@@ -1,0 +1,18 @@
+PROCEDURE "OTEBW_OZ"."OZ::TRANS_OZ_TRANSFER_ZOZE_REPORT" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	--DEFAULT SCHEMA <default_schema_name>
+	AS
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+ 
+
+DELETE FROM "OTEBW_OZ"."ZOZE_REPORT_PERIODIC"; 
+
+INSERT INTO "OTEBW_OZ"."ZOZE_REPORT_PERIODIC" 
+(
+SELECT  * FROM "OTEBW_OZ"."OZ::ZOZE_REPORT"
+);
+END;

@@ -1,0 +1,13 @@
+{
+    "description": "Read stock value",
+    "action": "OZ::TRAN_OZ_MIG_SMALL_ALL",
+    "schedules": [
+       {
+          "description": "Read current stock value",
+          "xscron":"2017 * * * 2 0 0",
+          "parameter": {
+
+             }
+       }
+    ]
+}

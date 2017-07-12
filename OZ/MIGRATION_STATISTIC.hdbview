@@ -1,0 +1,86 @@
+schema="OTEBW_OZ";
+
+query = "SELECT * FROM (
+select 'L' as TYPE,'ETTIFN' as SOURCE,                      count(*) as ORACLE, (select  count(*) from \"OTEBW_OZ\".\"ETTIFN\")                    	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ETTIFN\";'as TRANSPORT_____________________________PROCEDURE, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_MIG_ETTIFN\";' as MIGRATION_____________________________PROCEDURE    from \"OTEBW_OZ\".\"REMOTE_ETTIFN\"
+union all
+select 'L' as TYPE,'EPROFVAL60' as SOURCE,                  count(*) as ORACLE , (select count(*) from \"OTEBW_OZ\".\"EPROFVAL60\")          		as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_EPROFVAL60\";'as TRANSPORT_____________________________PROCEDURE, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_MIG_EPROFVAL60\";' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_EPROFVAL60\"
+union all
+select 'L' as TYPE,'ERDK' as SOURCE,                        count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ERDK\")                      	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ERDK\";'as TRANSPORT_____________________________PROCEDURE, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_MIG_ERDK\";' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_ERDK\"
+union all
+select 'L' as TYPE,'ERCHC' as SOURCE,                       count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ERCHC\")                       as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ERCHC\";'as TRANSPORT_____________________________PROCEDURE, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_MIG_ERCHC\";' as MIGRATION_____________________________PROCEDURE from \"OTEBW_OZ\".\"REMOTE_ERCHC\"
+union all
+select 'L' as TYPE,'ERCH' as SOURCE,                        count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ERCH\")                      	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ERCH\";'as TRANSPORT_____________________________PROCEDURE, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_MIG_ERCH\";' as MIGRATION_____________________________PROCEDURE  from \"OTEBW_OZ\".\"REMOTE_ERCH\"
+union all
+select 'L' as TYPE,'DBERCHZ1' as SOURCE,                    count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"DBERCHZ1\")                  	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_DBERCHZ1\";'as TRANSPORT_____________________________PROCEDURE, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_MIG_DBERCHZ1\";' as MIGRATION_____________________________PROCEDURE  from \"OTEBW_OZ\".\"REMOTE_DBERCHZ1\"
+union all
+select 'L' as TYPE,'DBERCHZ3' as SOURCE,                    count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"DBERCHZ3\")                  	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_DBERCHZ3\";'as TRANSPORT_____________________________PROCEDURE, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_MIG_DBERCHZ3\";' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_DBERCHZ3\"
+union all
+select 'S' as TYPE,'EANL' as SOURCE,                        count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"EANL\")                      	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_EANL\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_EANL\"
+union all
+select 'S' as TYPE,'EANLH' as SOURCE,                        count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"EANLH\")                      	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_EANLH\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_EANLH\"
+union all
+select 'S' as TYPE,'EGRID' as SOURCE,                       count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"EGRID\")                       as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_EGRID\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_EGRID\"
+union all
+select 'S' as TYPE,'EGRIDT' as SOURCE,                		count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"EGRIDT\")                      as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_EGRIDT\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_EGRIDT\"
+union all
+select 'S' as TYPE,'ELPASS' as SOURCE,                		count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ELPASS\")                      as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ELPASS\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_ELPASS\"
+union all
+select 'S' as TYPE,'EPROFASS' as SOURCE,                    count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"EPROFASS\")                  	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_EPROFASS\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_EPROFASS\"
+union all
+select 'S' as TYPE,'ESERVICE' as SOURCE,                    count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ESERVICE\")                  	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ESERVICE\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_ESERVICE\"
+union all
+select 'S' as TYPE,'EUIGRID' as SOURCE,                     count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"EUIGRID\")                   	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_EUIGRID\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_EUIGRID\"
+union all
+select 'S' as TYPE,'EUIINSTLN' as SOURCE,                   count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"EUIINSTLN\")                 	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_EUIINSTLN\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_EUIINSTLN\"
+union all
+select 'S' as TYPE,'EUITRANS' as SOURCE,                    count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"EUITRANS\")                  	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_EUITRANS\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_EUITRANS\"
+union all
+select 'S' as TYPE,'EVER' as SOURCE,                        count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"EVER\")                      	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_EVER\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_EVER\"
+union all
+select 'S' as TYPE,'FKKVKP' as SOURCE,                		count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"FKKVKP\")                      as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_FKKVKP\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_FKKVKP\"
+union all
+select 'S' as TYPE,'ZOZE_BI_PROFIL' as SOURCE,        		count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ZOZE_BI_PROFIL\")            	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ZOZE_BI_PROFIL\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_ZOZE_BI_PROFIL\"
+union all
+select 'S' as TYPE,'ZOZE_HEAT_SOURCE' as SOURCE,      		count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ZOZE_HEAT_SOURCE\")    		as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ZOZE_HEAT_SOURCE\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_ZOZE_HEAT_SOURCE\"
+union all
+select 'S' as TYPE,'ZOZE_HEAT_SRC_H' as SOURCE,       		count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ZOZE_HEAT_SRC_H\")     		as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ZOZE_HEAT_SRC_H\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_ZOZE_HEAT_SRC_H\"
+union all
+select 'S' as TYPE,'ZOZE_PRICE_LINE' as SOURCE,       		count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ZOZE_PRICE_LINE\")     		as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ZOZE_PRICE_LINE\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_ZOZE_PRICE_LINE\"
+union all
+select 'S' as TYPE,'ZOZE_PRICE_LIST' as SOURCE,       		count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ZOZE_PRICE_LIST\")     		as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ZOZE_PRICE_LIST\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_ZOZE_PRICE_LIST\"
+union all
+select 'S' as TYPE,'ZOZE_SOURCE' as SOURCE,           		count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ZOZE_SOURCE\")         		as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ZOZE_SOURCE\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_ZOZE_SOURCE\"
+union all
+select 'S' as TYPE,'ZOZE_SOURCE_COS' as SOURCE,       		count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ZOZE_SOURCE_COS\")     		as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ZOZE_SOURCE_COS\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_ZOZE_SOURCE_COS\"
+union all
+select 'S' as TYPE,'ZOZE_SOURCE_H' as SOURCE,               count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ZOZE_SOURCE_H\")             	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ZOZE_SOURCE_H\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_ZOZE_SOURCE_H\"
+union all
+select 'S' as TYPE,'ZOZE_VALUE_TYPES' as SOURCE,      		count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ZOZE_VALUE_TYPES\")    		as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ZOZE_VALUE_TYPES\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_ZOZE_VALUE_TYPES\"
+union all
+select 'S' as TYPE,'BUT000' as SOURCE,                		count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"BUT000\")                      as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_BUT000\";'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_BUT000\"
+union all
+select 'S' as TYPE,'BUT0ID' as SOURCE,                		count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"BUT0ID\")                      as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_BUT0ID\";'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_BUT0ID\"
+union all
+select 'S' as TYPE,'DFKKBPTAXNUM' as SOURCE,          		count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"DFKKBPTAXNUM\")              	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_DFKKBPTAXNUM\";'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_DFKKBPTAXNUM\"
+union all
+select 'S' as TYPE,'ETTAF' as SOURCE,          				count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ETTAF\")              			as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ETTAF\";'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_ETTAF\"
+union all
+select 'S' as TYPE,'ZOZE_AGREGACE' as SOURCE,  				count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ZOZE_AGREGACE\")      			as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ZOZE_AGREGACE\"; 'as TRANSPORT_____________________________PROCEDURE, ' ' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_ZOZE_AGREGACE\"
+union all
+select 'CHG' as TYPE,'ETTIFN_CHG' as SOURCE,          		count(*) as ORACLE, (select  count(*) from \"OTEBW_OZ\".\"ETTIFN_CHG\")          		as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ETTIFN\";'as TRANSPORT_____________________________PROCEDURE, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_MIG_ETTIFN\";' as MIGRATION_____________________________PROCEDURE    from \"OTEBW_OZ\".\"REMOTE_ETTIFN_CHG\"
+union all
+select 'CHG' as TYPE,'EPROFVAL60_CHG' as SOURCE,      		count(*) as ORACLE , (select count(*) from \"OTEBW_OZ\".\"EPROFVAL60_CHG\")      		as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_EPROFVAL60\";'as TRANSPORT_____________________________PROCEDURE, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_MIG_EPROFVAL60\";' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_EPROFVAL60_CHG\"
+union all
+select 'CHG' as TYPE,'ERDK_CHG' as SOURCE,                  count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ERDK_CHG\")                  	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ERDK\";'as TRANSPORT_____________________________PROCEDURE, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_MIG_ERDK\";' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_ERDK_CHG\"
+union all
+select 'CHG' as TYPE,'ERCHC_CHG' as SOURCE,           		count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ERCHC_CHG\")                 	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ERCHC\";'as TRANSPORT_____________________________PROCEDURE, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_MIG_ERCHC\";' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_ERCHC_CHG\"
+union all
+select 'CHG' as TYPE,'ERCH_CHG' as SOURCE,                  count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"ERCH_CHG\")                  	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_ERCH\";'as TRANSPORT_____________________________PROCEDURE, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_MIG_ERCH\";' as MIGRATION_____________________________PROCEDURE  from \"OTEBW_OZ\".\"REMOTE_ERCH_CHG\"
+union all
+select 'CHG' as TYPE,'DBERCHZ1_CHG' as SOURCE,              count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"DBERCHZ1_CHG\")              	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_DBERCHZ1\";'as TRANSPORT_____________________________PROCEDURE, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_MIG_DBERCHZ1\";' as MIGRATION_____________________________PROCEDURE  from \"OTEBW_OZ\".\"REMOTE_DBERCHZ1_CHG\"
+union all
+select 'CHG' as TYPE,'DBERCHZ3_CHG' as SOURCE,              count(*) as ORACLE, (select count(*) from \"OTEBW_OZ\".\"DBERCHZ3_CHG\")              	as HANA, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_DBERCHZ3\";'as TRANSPORT_____________________________PROCEDURE, 'CALL \"OTEBW_OZ\".\"OZ::TRAN_OZ_MIG_DBERCHZ3\";' as MIGRATION_____________________________PROCEDURE   from \"OTEBW_OZ\".\"REMOTE_DBERCHZ3_CHG\"
+)
+order by TYPE DESC, SOURCE ASC;
+";
+

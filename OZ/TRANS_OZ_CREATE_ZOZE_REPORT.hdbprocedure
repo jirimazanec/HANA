@@ -1,0 +1,20 @@
+PROCEDURE "OTEBW_OZ"."OZ::TRANS_OZ_CREATE_ZOZE_REPORT" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	--DEFAULT SCHEMA <default_schema_name>
+	AS
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+ 
+DROP TABLE "OTEBW_OZ"."ZOZE_REPORT_PERIODIC";
+ 
+CREATE COLUMN TABLE "OTEBW_OZ"."ZOZE_REPORT_PERIODIC" AS 
+ (
+SELECT * FROM "OTEBW_OZ"."OZ::ZOZE_REPORT"
+);
+
+EXECUTE IMMEDIATE 'alter table "OTEBW_OZ"."ZOZE_REPORT_PERIODIC" add primary key (ANLAGE,AB,BIS)';
+  
+END;

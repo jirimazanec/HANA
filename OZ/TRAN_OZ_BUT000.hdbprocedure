@@ -1,0 +1,120 @@
+PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_BUT000" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	--DEFAULT SCHEMA <default_schema_name>
+	AS
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+ 
+declare exit handler for sqlexception begin
+  insert into OTEBW."Log" ("CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") values (::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
+end;
+
+truncate table "OTEBW_OZ"."BUT000";
+insert into "OTEBW_OZ"."BUT000" select 
+	 CLIENT,
+	PARTNER,
+	TYPE,
+	BPKIND,
+	BU_GROUP,
+	BPEXT,
+	BU_SORT1,
+	BU_SORT2,
+	SOURCE,
+	TITLE,
+	XDELE,
+	XBLCK,
+	AUGRP,
+	TITLE_LET,
+	BU_LOGSYS,
+	CONTACT,
+	NOT_RELEASED,
+	NOT_LG_COMPETENT,
+	PRINT_MODE,
+	BP_EEW_DUMMY,
+	ZZZOZE_DPH,
+	ZZZOZE_COMM,
+	ZZZOZE_SOAP,
+	ZZZOZE_ENCRY,
+	ZZZOZE_FMT,
+	ZZZOZE_EZP0001,
+	ZZZOZE_CAPIT,
+	ZZZOZE_COMP,
+	NAME_ORG1,
+	NAME_ORG2,
+	NAME_ORG3,
+	NAME_ORG4,
+	LEGAL_ENTY,
+	IND_SECTOR,
+	LEGAL_ORG,
+	FOUND_DAT,
+	LIQUID_DAT,
+	LOCATION_1,
+	LOCATION_2,
+	LOCATION_3,
+	NAME_LAST,
+	NAME_FIRST,
+	NAME_LST2,
+	NAME_LAST2,
+	NAMEMIDDLE,
+	TITLE_ACA1,
+	TITLE_ACA2,
+	TITLE_ROYL,
+	PREFIX1,
+	PREFIX2,
+	NAME1_TEXT,
+	NICKNAME,
+	INITIALS,
+	NAMEFORMAT,
+	NAMCOUNTRY,
+	LANGU_CORR,
+	XSEXM,
+	XSEXF,
+	BIRTHPL,
+	MARST,
+	EMPLO,
+	JOBGR,
+	NATIO,
+	CNTAX,
+	CNDSC,
+	PERSNUMBER,
+	XSEXU,
+	XUBNAME,
+	BU_LANGU,
+	BIRTHDT,
+	DEATHDT,
+	PERNO,
+	CHILDREN,
+	MEM_HOUSE,
+	PARTGRPTYP,
+	NAME_GRP1,
+	NAME_GRP2,
+	MC_NAME1,
+	MC_NAME2,
+	CRUSR,
+	CRDAT,
+	CRTIM,
+	CHUSR,
+	CHDAT,
+	CHTIM,
+	PARTNER_GUID,
+	ADDRCOMM,
+	TD_SWITCH,
+	IS_ORG_CENTRE,
+	DB_KEY,
+	VALID_FROM,
+	VALID_TO,
+	XPCPT,
+	NATPERS,
+	PAR_REL,
+	BP_SORT,
+	KBANKS,
+	KBANKL
+from "OTEBW_OZ"."REMOTE_BUT000";
+
+insert into "OTEBW"."Log" ( "CurrSchema", "CurrObject", "Cnt", "ErrorMess") values ('OTEBW_OZ', 'BUT000', ::rowcount, 'Transfer');
+commit;
+ 
+END;

@@ -1,0 +1,34 @@
+PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_BUT0ID" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	--DEFAULT SCHEMA <default_schema_name>
+	AS
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+declare exit handler for sqlexception begin
+  insert into OTEBW."Log" ("CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") values (::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
+end;
+
+truncate table "OTEBW_OZ"."BUT0ID";
+insert into "OTEBW_OZ"."BUT0ID"
+select
+	CLIENT,
+	PARTNER,
+	TYPE,
+	IDNUMBER,
+	INSTITUTE,
+	ENTRY_DATE,
+	VALID_DATE_FROM,
+	VALID_DATE_TO,
+	COUNTRY,
+	REGION,
+	IDNUMBER_GUID,
+	BP_EEW_BUT0ID 
+from "OTEBW_OZ"."REMOTE_BUT0ID";
+
+insert into "OTEBW"."Log" ( "CurrSchema", "CurrObject", "Cnt", "ErrorMess") values ('OTEBW_OZ', 'BUT0ID', ::rowcount, 'Transfer');
+commit;
+ 
+END;

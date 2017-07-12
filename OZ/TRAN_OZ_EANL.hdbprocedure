@@ -1,0 +1,63 @@
+PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_EANL" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	--DEFAULT SCHEMA <default_schema_name>
+	AS
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+declare exit handler for sqlexception begin
+  insert into OTEBW."Log" ("CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") values (::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
+end;
+
+truncate table "OTEBW_OZ"."EANL";
+insert into "OTEBW_OZ"."EANL" select
+	 MANDT,
+	ANLAGE,
+	SPARTE,
+	VSTELLE,
+	ABLSPERR,
+	BAPERTYP,
+	ANSCHREI,
+	SPEBENE,
+	DRCKSTUF,
+	ANLART,
+	BEZUG,
+	ABLESARTST,
+	NODISCONCT,
+	SERVICE,
+	DEREGSTAT,
+	INFOREL,
+	ETIMEZONE,
+	OUCONT,
+	HOLICALID,
+	ZSOURCE_NAME,
+	ZSOURCE_ID,
+	ZGEN_PLANT,
+	ZCATEGORY,
+	ZCONNECTION_TYPE,
+	ZLIC_EFFECT,
+	ZOPER_START,
+	ZNOPBFROM,
+	ZNOPBTO,
+	ZNORECALC,
+	ZPBTOG,
+	ZWKEY,
+	ZMAXDIFMR,
+	ZTADVB,
+	ZINSTLN,
+	ERDAT,
+	ERNAM,
+	AEDAT,
+	AENAM,
+	BEGRU,
+	LOEVM
+from "OTEBW_OZ"."REMOTE_EANL";
+commit;
+
+insert into "OTEBW"."Log" ( "CurrSchema", "CurrObject", "Cnt", "ErrorMess") values ('OTEBW_OZ', 'EANL', ::rowcount, 'Transfer');
+commit;
+ 
+ 
+END;
