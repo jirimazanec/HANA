@@ -1,7 +1,7 @@
 {
  "metadata": {
-  "activated_at": "2017-07-07 09:37:38.090 GMT+02:00",
-  "activated_by": "REHANEKM",
+  "activated_at": "2017-07-11 13:26:17.438 GMT+02:00",
+  "activated_by": "NEPOMUCKYO",
   "change_number": "0",
   "delivery_unit": "",
   "du_vendor": "",
@@ -13,12 +13,12 @@
   "object_status": "0",
   "released_at": "null",
   "type": "1",
-  "version_id": "3"
+  "version_id": "23"
  },
+ "name": "2E_OPM_DATEHDB",
+ "package": "CD",
+ "suffix": "hdbview",
  "version": {
   "versionType": "1"
- },
- "package": "CD",
- "name": "2E_OPM_DATEHDB",
- "suffix": "hdbview"
+ }
 }

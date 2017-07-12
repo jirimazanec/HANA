@@ -1,7 +1,7 @@
 {
  "metadata": {
-  "activated_at": "2017-06-23 12:09:53.233 GMT+02:00",
-  "activated_by": "REHANEKM",
+  "activated_at": "2017-07-12 08:57:27.193 GMT+02:00",
+  "activated_by": "SUHAJEKS",
   "change_number": "0",
   "delivery_unit": "",
   "du_vendor": "",
@@ -13,12 +13,12 @@
   "object_status": "0",
   "released_at": "null",
   "type": "1",
-  "version_id": "9"
+  "version_id": "10"
  },
+ "name": "1E_EUIINSTLN",
+ "package": "CD",
+ "suffix": "hdbtablefunction",
  "version": {
   "versionType": "1"
- },
- "package": "CD",
- "name": "1E_EUIINSTLN",
- "suffix": "hdbtablefunction"
+ }
 }

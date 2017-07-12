@@ -1,5 +1,8 @@
 {
  "metadata": {
+  "activated_at": "2017-07-12 15:32:55.101 GMT+02:00",
+  "activated_by": "MAZANECJ",
+  "change_number": "0",
   "delivery_unit": "",
   "du_vendor": "",
   "du_version": "",
@@ -7,17 +10,15 @@
   "du_version_sp": "",
   "edit": "true",
   "format_version": "",
-  "is_deletion": "false",
-  "last_changed_at": "2017-07-12 09:50:42.603 GMT+02:00",
-  "type": "2",
+  "object_status": "0",
+  "released_at": "null",
+  "type": "1",
   "version_id": "15"
+ },
+ "version": {
+  "versionType": "1"
  },
  "package": "OZ",
  "name": "TRAN_OZ_MIG_DBERCHZ1",
- "suffix": "hdbprocedure",
- "version": {
-  "versionType": "2",
-  "owner": "MAZANECJ",
-  "workspace": ""
- }
+ "suffix": "hdbprocedure"
 }

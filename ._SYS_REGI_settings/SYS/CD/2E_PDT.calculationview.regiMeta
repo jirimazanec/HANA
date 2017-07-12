@@ -1,7 +1,7 @@
 {
  "metadata": {
-  "activated_at": "2017-07-11 12:33:51.693 GMT+02:00",
-  "activated_by": "REHANEKM",
+  "activated_at": "2017-07-12 09:17:25.560 GMT+02:00",
+  "activated_by": "SUHAJEKS",
   "change_number": "0",
   "delivery_unit": "",
   "du_vendor": "",
@@ -13,12 +13,12 @@
   "object_status": "0",
   "released_at": "null",
   "type": "1",
-  "version_id": "11"
+  "version_id": "13"
  },
+ "name": "2E_PDT",
+ "package": "CD",
+ "suffix": "calculationview",
  "version": {
   "versionType": "1"
- },
- "package": "CD",
- "name": "2E_PDT",
- "suffix": "calculationview"
+ }
 }

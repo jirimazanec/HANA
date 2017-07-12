@@ -23,4 +23,4 @@ commit;
 insert into "OTEBW"."Log" ( "CurrSchema", "CurrObject", "Cnt", "ErrorMess") values ('OTEBW_OZ', 'EGRIDT', ::rowcount, 'Transfer');
 commit;
  
-END;
+END; 

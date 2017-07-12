@@ -77,6 +77,7 @@ var_out = select CAL.bus_date as KEYDATE,
                  
   from &quot;OTEBW_CD&quot;.&quot;CD::1E_EANL&quot;(:x_TST) as EANL 
   	  inner join &quot;OTEBW_CD&quot;.&quot;Z1BUS_DAYS&quot; as CAL on
+  	     CAL.MANDT = '100' and
   	   	 cal.bus_date >= :X_FR and
   	   	 cal.bus_date &lt;= :X_TO
        inner join &quot;OTEBW_CD&quot;.&quot;CD::1E_EUIINSTLN&quot;(:x_TST) as EUIINSTLN on
@@ -180,8 +181,8 @@ var_out = select CAL.bus_date as KEYDATE,
          SERVPPS.INT_UI        =  EUIINSTLN.INT_UI and
          SERVPPS.SERVICE       =  '0012' and
          SERVPPS.SERVICE_START &lt;= cal.bus_date and
-         SERVPPS.SERVICE_END   >= cal.bus_date;
- 	 
+         SERVPPS.SERVICE_END   >= cal.bus_date
+  with hint(INLINE);
 END</definition>
     </calculationView>
   </calculationViews>
