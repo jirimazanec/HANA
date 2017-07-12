@@ -1929,9 +1929,9 @@
   },
   {
    "filename": "OZ/TRAN_OZ_ZOZE_PRICE_LINE.hdbprocedure",
-   "filesize": "845",
-   "timest": "2017-07-10 08:52:42.853 UTC",
-   "sha1value": "4288605203.3585510153.4216964239.2431093153.3527465543"
+   "filesize": "844",
+   "timest": "2017-07-12 16:44:52.510 UTC",
+   "sha1value": "2754111590.3355266825.2640326204.2971724797.1713560978"
   },
   {
    "filename": "OZ/TRAN_OZ_ZOZE_PRICE_LIST.hdbprocedure",

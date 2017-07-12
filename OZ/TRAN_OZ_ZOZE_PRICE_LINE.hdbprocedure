@@ -23,6 +23,6 @@ from "OTEBW_OZ"."REMOTE_ZOZE_PRICE_LINE";
 commit;
 
 insert into "OTEBW"."Log" ( "CurrSchema", "CurrObject", "Cnt", "ErrorMess") values ('OTEBW_OZ', 'ZOZE_PRICE_LINE', ::rowcount, 'Transfer');
-commit; 
+commit;
  
 END;
