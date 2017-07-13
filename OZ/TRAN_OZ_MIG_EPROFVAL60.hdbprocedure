@@ -5,7 +5,7 @@ PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_MIG_EPROFVAL60" ( )
 	AS
 BEGIN
 
-/***************************** 
+/*****************************  
 	Write your procedure logic 
  *****************************/
 declare Cnt int;
@@ -23,7 +23,7 @@ truncate table "OTEBW_OZ"."EPROFVAL60_CHG";
 truncate table "OTEBW_OZ"."EPROFVAL60";
 
 t_EPROFVAL60=select
-	 MANDT,
+	 MANDT, 
 	PROFILE,
 	VALUEDAY,
 	VAL0000,

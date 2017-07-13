@@ -6,7 +6,7 @@ PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_BUT000" ( )
 BEGIN
 /***************************** 
 	Write your procedure logic 
- *****************************/
+ *** ****************** ********/
  
 declare exit handler for sqlexception begin
   insert into OTEBW."Log" ("CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") values (::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
@@ -20,7 +20,7 @@ insert into "OTEBW_OZ"."BUT000" select
 	BPKIND,
 	BU_GROUP,
 	BPEXT,
-	BU_SORT1,
+	BU_SORT1, 
 	BU_SORT2,
 	SOURCE,
 	TITLE,

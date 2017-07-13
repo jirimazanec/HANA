@@ -1707,9 +1707,9 @@
   },
   {
    "filename": "OZ/TRAN_OZ_BUT000.hdbprocedure",
-   "filesize": "1927",
-   "timest": "2017-07-10 08:04:01.28 UTC",
-   "sha1value": "903178779.673175999.22174265.3998142435.3133571658"
+   "filesize": "1930",
+   "timest": "2017-07-13 12:38:04.16 UTC",
+   "sha1value": "2857050517.651103068.3239160260.1724505596.2980074178"
   },
   {
    "filename": "OZ/TRAN_OZ_BUT0ID.hdbprocedure",
@@ -1845,9 +1845,9 @@
   },
   {
    "filename": "OZ/TRAN_OZ_MIG_DBERCHZ1.hdbprocedure",
-   "filesize": "5578",
-   "timest": "2017-07-13 12:33:12.33 UTC",
-   "sha1value": "4153868676.194104991.3056308636.2734943880.2687689400"
+   "filesize": "5573",
+   "timest": "2017-07-13 12:37:13.766 UTC",
+   "sha1value": "1806577326.3361342949.3592117642.1860984728.3827361150"
   },
   {
    "filename": "OZ/TRAN_OZ_MIG_DBERCHZ3.hdbprocedure",
@@ -1857,9 +1857,9 @@
   },
   {
    "filename": "OZ/TRAN_OZ_MIG_EPROFVAL60.hdbprocedure",
-   "filesize": "2518",
-   "timest": "2017-07-10 07:41:41.427 UTC",
-   "sha1value": "2376754608.4286557899.139553080.2892846794.2875770143"
+   "filesize": "2520",
+   "timest": "2017-07-13 12:38:55.420 UTC",
+   "sha1value": "4101818798.1102736825.64016525.3467983012.2155069210"
   },
   {
    "filename": "OZ/TRAN_OZ_MIG_ERCH.hdbprocedure",
