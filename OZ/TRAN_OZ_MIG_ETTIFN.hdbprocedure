@@ -19,7 +19,7 @@ end;
  
  
 truncate table "OTEBW_OZ"."REMOTE_ETTIFN_CHG";
-truncate table "OTEBW_OZ"."ETTIFN_CHG";
+truncate table "OTEBW_OZ"."ETTIFN_CHG";  
 truncate table "OTEBW_OZ"."ETTIFN";
 
 t_ETTIFN=select

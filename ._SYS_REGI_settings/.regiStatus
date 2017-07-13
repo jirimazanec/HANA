@@ -1845,9 +1845,9 @@
   },
   {
    "filename": "OZ/TRAN_OZ_MIG_DBERCHZ1.hdbprocedure",
-   "filesize": "5569",
-   "timest": "2017-07-12 07:51:46.471 UTC",
-   "sha1value": "1916590202.2701793538.2946931646.482571154.1873995775"
+   "filesize": "5578",
+   "timest": "2017-07-13 12:33:12.33 UTC",
+   "sha1value": "4153868676.194104991.3056308636.2734943880.2687689400"
   },
   {
    "filename": "OZ/TRAN_OZ_MIG_DBERCHZ3.hdbprocedure",
@@ -1881,9 +1881,9 @@
   },
   {
    "filename": "OZ/TRAN_OZ_MIG_ETTIFN.hdbprocedure",
-   "filesize": "2314",
-   "timest": "2017-07-13 12:12:06.634 UTC",
-   "sha1value": "1377935304.533109355.838815869.1476119228.4044126179"
+   "filesize": "2316",
+   "timest": "2017-07-13 12:32:26.95 UTC",
+   "sha1value": "3572314180.2694916011.123583584.2682700589.3292086715"
   },
   {
    "filename": "OZ/TRAN_OZ_MIG_LARGE_ALL.hdbprocedure",
