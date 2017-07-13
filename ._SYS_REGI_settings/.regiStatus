@@ -292,8 +292,8 @@
   {
    "filename": "CD/MIGRACE_TRAN_CD_CD_CDS_OPM.xsjob",
    "filesize": "283",
-   "timest": "2017-07-11 14:46:46.504 UTC",
-   "sha1value": "1629795616.3203179972.2007070859.2060514611.1881582347"
+   "timest": "2017-07-13 07:26:15.139 UTC",
+   "sha1value": "493196063.1462824765.2269857700.279127195.630715629"
   },
   {
    "filename": "CD/MigProfValToSerie.hdbprocedure",
@@ -1785,9 +1785,9 @@
   },
   {
    "filename": "OZ/TRAN_OZ_ERCHC.hdbprocedure",
-   "filesize": "3721",
-   "timest": "2017-06-27 12:50:46.102 UTC",
-   "sha1value": "2558624915.2618897116.696228962.269915742.682959319"
+   "filesize": "3722",
+   "timest": "2017-07-13 10:17:54.852 UTC",
+   "sha1value": "2937537367.2218208481.2372952864.3662833449.1997360448"
   },
   {
    "filename": "OZ/TRAN_OZ_ERDK.hdbprocedure",
