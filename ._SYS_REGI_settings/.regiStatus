@@ -1857,9 +1857,9 @@
   },
   {
    "filename": "OZ/TRAN_OZ_MIG_EPROFVAL60.hdbprocedure",
-   "filesize": "2520",
-   "timest": "2017-07-13 12:42:00.654 UTC",
-   "sha1value": "4101818798.1102736825.64016525.3467983012.2155069210"
+   "filesize": "2518",
+   "timest": "2017-07-13 14:20:24.861 UTC",
+   "sha1value": "1921326103.1321851438.3257693979.3248970969.4251934650"
   },
   {
    "filename": "OZ/TRAN_OZ_MIG_ERCH.hdbprocedure",

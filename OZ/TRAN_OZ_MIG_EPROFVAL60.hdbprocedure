@@ -17,8 +17,7 @@ insert into "OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG" ("Log_ID","TST","CurrSchema"
 	values ("OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG_SEQ".nextval, current_timestamp, ::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
 end; 
  
- 
-truncate table "OTEBW_OZ"."REMOTE_EPROFVAL60_CHG";
+truncate table "OTEBW_OZ"."REMOTE_EPROFVAL60_CHG"; 
 truncate table "OTEBW_OZ"."EPROFVAL60_CHG";
 truncate table "OTEBW_OZ"."EPROFVAL60";
 
