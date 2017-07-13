@@ -11,7 +11,6 @@ declare exit handler for sqlexception begin
   insert into OTEBW."Log" ("CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") values (::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
 end;
 
-
 truncate table "OTEBW_OZ"."EPROFASS";
 insert into "OTEBW_OZ"."EPROFASS" select
 	 MANDT,
