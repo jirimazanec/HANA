@@ -1,8 +1,5 @@
 {
  "metadata": {
-  "activated_at": "2017-07-13 15:42:10.677 GMT+02:00",
-  "activated_by": "MAZANECJ",
-  "change_number": "0",
   "delivery_unit": "",
   "du_vendor": "",
   "du_version": "",
@@ -10,15 +7,17 @@
   "du_version_sp": "",
   "edit": "true",
   "format_version": "",
-  "object_status": "0",
-  "released_at": "null",
-  "type": "1",
-  "version_id": "8"
- },
- "version": {
-  "versionType": "1"
+  "is_deletion": "false",
+  "last_changed_at": "2017-07-13 16:24:11.619 GMT+02:00",
+  "type": "2",
+  "version_id": "9"
  },
  "package": "OZ",
  "name": "TRAN_OZ_EPROFASS",
- "suffix": "hdbprocedure"
+ "suffix": "hdbprocedure",
+ "version": {
+  "versionType": "2",
+  "owner": "MAZANECJ",
+  "workspace": ""
+ }
 }

@@ -13,7 +13,7 @@ end;
 
 truncate table "OTEBW_OZ"."EPROFASS";
 insert into "OTEBW_OZ"."EPROFASS" select
-	 MANDT,
+	 MANDT, 
 	LOGIKZW,
 	PROFROLE,
 	DATETO,

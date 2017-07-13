@@ -11,7 +11,7 @@ BEGIN
 declare Cnt int;
 declare Cnt_chg int;
 
-declare exit handler for sqlexception 
+declare exit handler for sqlexception  
 begin
 insert into "OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG" ("Log_ID","TST","CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") 
 	values ("OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG_SEQ".nextval, current_timestamp, ::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
