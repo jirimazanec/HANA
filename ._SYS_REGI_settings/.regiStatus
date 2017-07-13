@@ -1881,9 +1881,9 @@
   },
   {
    "filename": "OZ/TRAN_OZ_MIG_ETTIFN.hdbprocedure",
-   "filesize": "2315",
-   "timest": "2017-07-10 07:43:55.813 UTC",
-   "sha1value": "1260078289.148712609.1536110624.2442362690.1833689779"
+   "filesize": "2314",
+   "timest": "2017-07-13 12:12:06.634 UTC",
+   "sha1value": "1377935304.533109355.838815869.1476119228.4044126179"
   },
   {
    "filename": "OZ/TRAN_OZ_MIG_LARGE_ALL.hdbprocedure",
