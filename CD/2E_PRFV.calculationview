@@ -74,10 +74,10 @@ var_out = select
  	 		from 	&quot;OTEBW_CD&quot;.&quot;SE_PROFVAL60&quot; as PROFVAL60  
  	 			inner join	&quot;OTEBW_CD&quot;.&quot;CD::1E_ELPASS&quot;(current_timestamp) as elpass 
  	 				on elpass.profile = PROFVAL60.profile  
- 	 			inner join	&quot;OTEBW_CD&quot;.&quot;CD::M1E_PDT_V&quot; as OPM 
+ 	 			inner join	&quot;OTEBW_CD&quot;.&quot;CD::1E_OPM_E&quot; as OPM 
  	 				on 	elpass.OBJKEY = OPM.anlage  and
- 	 					OPM.date_from >= TO_DATE(UTCTOLOCAL(PROFVAL60.valtime,'CET')) and
- 	 					OPM.date_to &lt;= TO_DATE(UTCTOLOCAL(PROFVAL60.valtime,'CET'))
+ 	 					OPM.date_from &lt;= TO_DATE(UTCTOLOCAL(PROFVAL60.valtime,'CET')) and
+ 	 					OPM.date_to >= TO_DATE(UTCTOLOCAL(PROFVAL60.valtime,'CET'))
  	 				
  	 		where  	PROFVAL60.valtime >= V_FR
 	 			and PROFVAL60.valtime &lt;= V_TO

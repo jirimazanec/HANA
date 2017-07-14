@@ -1,6 +1,7 @@
 schema="OTEBW_CD";
 
-query="select
+query="
+	select
 		PROFVAL60.version,
 		PROFVAL60.valtime,
 		PROFVAL60.val,
@@ -9,14 +10,20 @@ query="select
 		PROFVAL60.profile,
 		elpass.profrole,
 		(select mass from \"OTEBW_CD\".\"CD::1E_EPROFHEAD\" (CURRENT_TIMESTAMP) where profile = PROFVAL60.profile ) as mass,
-		left(elpass.OBJKEY,10) as anlage
+		OPM.EXT_UI,
+		OPM.ANLART,
+		OPM.GRID_ID,
+		OPM.MTYPE,
+		OPM.dist_rut,
+	    OPM.supp_rut,
+		OPM.sz_rut
 	from 	\"OTEBW_CD\".\"SE_PROFVAL60\" as PROFVAL60 
-		inner join \"OTEBW_CD\".\"ELPASS_CHG\" as elpass on
-			elpass.MANDT='100' and 
-			(not elpass.CLT_ACTION='D') and 
-			elpass.CLT_TST<=CURRENT_TIMESTAMP and 
-			elpass.CLT_TST_TO>=CURRENT_TIMESTAMP and 
-			elpass.OBJTYPE='INSTLN'	and	
-		 elpass.profile = PROFVAL60.profile and 
-	 	 PROFVAL60.stat <> '99'
+		inner join	\"OTEBW_CD\".\"CD::1E_ELPASS\"(current_timestamp) as elpass on
+			elpass.profile = PROFVAL60.profile  and
+			PROFVAL60.stat <> '99'
+		inner join	\"OTEBW_CD\".\"CD::M1E_PDT_V\" as OPM on
+			elpass.OBJKEY = OPM.anlage  and
+			OPM.date_from <= TO_DATE(UTCTOLOCAL(PROFVAL60.valtime,'CET')) and
+			OPM.date_to >= TO_DATE(UTCTOLOCAL(PROFVAL60.valtime,'CET'))
+
 ";

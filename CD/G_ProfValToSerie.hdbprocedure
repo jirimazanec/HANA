@@ -10,7 +10,7 @@ declare l_D1 date;
 l_TST="OTEBW_CD"."CD::G_Get_Aggr_DateTime"(:x_Ver, :x_KeyDate);
 l_D1=to_date(concat(to_char(:x_KeyDate, 'YYYYMM'), '01'), 'YYYYMMDD');
 
-
+/*
 upsert OTEBW_CD.SG_PROFVALMONTH(PROFILE, VERSION, VALDATE, VAL, STAT)
 select :x_Profile as PROFILE, :x_Ver as Version, * from (
 select to_timestamp(concat(VALUEDAY, '010000'), 'YYYYMMDDHH24MISS') as VALDATE, VAL01*OTEBW_CD."CD::2G_GetProfDecimals"(:x_Profile, l_TST) as Val,
@@ -105,5 +105,5 @@ select to_timestamp(concat(VALUEDAY, '230000'), 'YYYYMMDDHH24MISS') as VALDATE, 
   "OTEBW_CD"."CD::2G_GetProfValStat"(:l_TST, :x_Profile, VALUEDAY, '230000') as Stat
   from "OTEBW_CD"."CD::1G_EPROFVALMONTH"(:l_TST) where Profile=:x_Profile and VALUEDAY=:l_D1
 ) where VALDATE=:x_KeyDate;
-
+*/
 END;
