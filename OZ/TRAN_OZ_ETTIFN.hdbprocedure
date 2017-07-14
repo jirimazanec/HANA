@@ -5,7 +5,7 @@ PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_ETTIFN" ( )
 	AS
 BEGIN
 
-/***************************** ******
+/***********************************
 	Write your procedure logic 
  *****************************/
 
