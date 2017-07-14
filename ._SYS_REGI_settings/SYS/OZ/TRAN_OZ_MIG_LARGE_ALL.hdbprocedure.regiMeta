@@ -1,6 +1,9 @@
 {
+ "package": "OZ",
+ "name": "TRAN_OZ_MIG_LARGE_ALL",
+ "suffix": "hdbprocedure",
  "metadata": {
-  "activated_at": "2017-07-11 10:45:22.527 GMT+02:00",
+  "activated_at": "2017-07-14 10:00:13.854 GMT+02:00",
   "activated_by": "MAZANECJ",
   "change_number": "0",
   "delivery_unit": "",
@@ -13,12 +16,9 @@
   "object_status": "0",
   "released_at": "null",
   "type": "1",
-  "version_id": "9"
+  "version_id": "10"
  },
  "version": {
   "versionType": "1"
- },
- "package": "OZ",
- "name": "TRAN_OZ_MIG_LARGE_ALL",
- "suffix": "hdbprocedure"
+ }
 }
