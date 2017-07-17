@@ -1,0 +1,24 @@
+{
+ "metadata": {
+  "activated_at": "2017-07-17 14:53:27.574 GMT+02:00",
+  "activated_by": "MAZANECJ",
+  "change_number": "0",
+  "delivery_unit": "",
+  "du_vendor": "",
+  "du_version": "",
+  "du_version_patch": "",
+  "du_version_sp": "",
+  "edit": "true",
+  "format_version": "",
+  "object_status": "0",
+  "released_at": "null",
+  "type": "1",
+  "version_id": "8"
+ },
+ "version": {
+  "versionType": "1"
+ },
+ "package": "CD",
+ "name": "TRAN_CD_CDS_OPM",
+ "suffix": "hdbprocedure"
+}
