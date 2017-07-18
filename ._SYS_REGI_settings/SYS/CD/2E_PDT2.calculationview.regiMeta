@@ -8,13 +8,13 @@
   "edit": "true",
   "format_version": "",
   "is_deletion": "false",
-  "last_changed_at": "2017-07-18 10:56:07.388 GMT+02:00",
+  "last_changed_at": "2017-07-18 10:56:29.080 GMT+02:00",
   "type": "2",
-  "version_id": "11"
+  "version_id": "1"
  },
  "package": "CD",
- "name": "TRAN_CD_CDS_OPM",
- "suffix": "hdbprocedure",
+ "name": "2E_PDT2",
+ "suffix": "calculationview",
  "version": {
   "versionType": "2",
   "owner": "MAZANECJ",

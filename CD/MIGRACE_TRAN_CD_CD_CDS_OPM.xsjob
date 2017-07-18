@@ -4,10 +4,10 @@
     "schedules": [
        {
           "description": "Read current stock value",
-          "xscron": "2017 * * * 22 30 0",
+          "xscron": "2017 * * * 18 00 0",
           "parameter": {
              
              }
-       }
+       } 
     ]
 }
