@@ -1,0 +1,23 @@
+{
+ "metadata": {
+  "delivery_unit": "",
+  "du_vendor": "",
+  "du_version": "",
+  "du_version_patch": "",
+  "du_version_sp": "",
+  "edit": "true",
+  "format_version": "",
+  "is_deletion": "true",
+  "last_changed_at": "2017-07-17 15:10:10.442 GMT+02:00",
+  "type": "2",
+  "version_id": "1"
+ },
+ "version": {
+  "owner": "MAZANECJ",
+  "versionType": "2",
+  "workspace": ""
+ },
+ "package": "OZ",
+ "name": "ZOZE_ETTIFN",
+ "suffix": "hdbview"
+}

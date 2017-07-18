@@ -1,0 +1,24 @@
+{
+ "name": "TRAN_OZ_ZOZE_AGREGACE",
+ "package": "OZ",
+ "suffix": "hdbprocedure",
+ "metadata": {
+  "activated_at": "2017-07-18 11:15:56.732 GMT+02:00",
+  "activated_by": "MAZANECJ",
+  "change_number": "0",
+  "delivery_unit": "",
+  "du_vendor": "",
+  "du_version": "",
+  "du_version_patch": "",
+  "du_version_sp": "",
+  "edit": "true",
+  "format_version": "",
+  "object_status": "0",
+  "released_at": "null",
+  "type": "1",
+  "version_id": "7"
+ },
+ "version": {
+  "versionType": "1"
+ }
+}
