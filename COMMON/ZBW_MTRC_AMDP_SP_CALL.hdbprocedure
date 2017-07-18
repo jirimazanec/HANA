@@ -1,20 +1,20 @@
-PROCEDURE "OTEBW_OZ"."COMMON::ZBW_MTRC_AMDP_SP_CALL" ( in IN_schemeName varchar(32),  in IN_spName varchar(32) , OUT ex_message string ) 
+PROCEDURE "OTEBW_OZ"."COMMON::ZBW_MTRC_AMDP_SP_CALL" ( in IN_schemeName varchar(32),  in IN_spName varchar(32) ) 
 	LANGUAGE SQLSCRIPT as
+	
 BEGIN
 
-DECLARE prikaz string;
+--DECLARE prikaz string;
 
-prikaz := 'CALL "OTEBW_OZ"."OZ::TRAN_OZ_EGRID"( ? );';
-
---prikaz :=  "OTEBW_OZ"."OZ::TRAN_OZ_EGRID"  ( ? );
+--prikaz := 'CALL "OTEBW_OZ"."OZ::TRAN_OZ_EGRID"';
 --ex_message := prikaz;
 
---exec 'call "'|| IN_schemeName ||'"."' || IN_spName || '" ( :ex_message )';
+exec 'call "'|| IN_schemeName ||'"."' || IN_spName || '"';
 --CALL "OTEBW_OZ"."OZ::TRAN_OZ_EGRID"  ( :ex_message );
 --EXEC :prikaz;
 
-EXECUTE IMMEDIATE :prikaz INTO :ex_message;
--- EXEC :prikaz INTO ex_message;
+--EXECUTE IMMEDIATE 'CALL "OTEBW_OZ"."OZ::TRAN_OZ_EGRID"';
+
+--CALL "OTEBW_OZ"."OZ::TRAN_OZ_EGRID"  ( :ex_message );
 
 END;
  
