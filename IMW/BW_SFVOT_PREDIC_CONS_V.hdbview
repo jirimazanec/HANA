@@ -1,17 +1,28 @@
 schema="OTEBW_IMW";
 
-query = "select g1.id_rut AS ID_RUT,
-	            g1.id_rut_orig AS ID_RUT_ORIG,
+query = "select to_fixedchar(g1.id_rut,16) AS ID_RUT,
+	            to_fixedchar(g1.id_rut_orig,16) AS ID_RUT_ORIG,
 	            g1.time_stamp AS TIME_STAMP,
-	            g1.delivery_date AS DELIVERY_DATE,
+	            to_date(g1.time_stamp) as NOM_DAY,
+	            to_time(g1.time_stamp) as NOM_TIME,
+	            to_date(g1.delivery_date) AS DELIVERY_DATE,
 	            g1.version AS VERSION,
-	            g1.energy * 1000 AS PREDIC_CONS 
-           from GAS_NOMIN_TRADES g1 
-          where g1.type_trade = 'SPO' 
+	            g1.energy * 1000 AS PREDIC_CONS,
+	            'KWH' as UNIT,
+	            T.CALMONTH as CALMONTH,
+	            T.MONTH as MONTH,
+	 			T.YEAR as CALYEAR,
+	 			T.CALWEEK as CALWEEK,
+	 			T.CALQUARTER as CALQUARTER,
+	 			T.QUARTER as QUARTER
+           from OTEBW_IMW.GAS_NOMIN_TRADES g1,
+           		_SYS_BI.TC_DAY_CALENDAR T 
+          where T.DATE_SQL = g1.DELIVERY_DATE
+          	and g1.type_trade = 'SPO' 
             and g1.accept_flag = 'Y' 
             and to_date(time_stamp) <= to_date(delivery_date) 
             and g1.id_instance = (select max(id_instance) 
-                                    from GAS_NOMIN_TRADES g2 
+                                    from OTEBW_IMW.GAS_NOMIN_TRADES g2 
 	                               where g2.id_rut = g1.id_rut 
 	                                 and g2.id_rut_orig = g1.id_rut_orig 
 	                                 and g2.type_trade = g1.type_trade 
