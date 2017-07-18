@@ -8,7 +8,7 @@ BEGIN
 --prikaz := 'CALL "OTEBW_OZ"."OZ::TRAN_OZ_EGRID"';
 --ex_message := prikaz;
 
-exec 'call "'|| IN_schemeName ||'"."' || IN_spName || '"';
+EXECUTE IMMEDIATE  'CALL "'|| :IN_schemeName ||'"."' || :IN_spName || '"';
 --CALL "OTEBW_OZ"."OZ::TRAN_OZ_EGRID"  ( :ex_message );
 --EXEC :prikaz;
 
@@ -17,4 +17,3 @@ exec 'call "'|| IN_schemeName ||'"."' || IN_spName || '"';
 --CALL "OTEBW_OZ"."OZ::TRAN_OZ_EGRID"  ( :ex_message );
 
 END;
- 
