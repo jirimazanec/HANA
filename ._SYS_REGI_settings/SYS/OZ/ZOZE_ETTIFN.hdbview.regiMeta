@@ -1,5 +1,11 @@
 {
+ "package": "OZ",
+ "name": "ZOZE_ETTIFN",
+ "suffix": "hdbview",
  "metadata": {
+  "activated_at": "2017-07-12 16:32:15.072 GMT+02:00",
+  "activated_by": "NEPOMUCKYO",
+  "change_number": "0",
   "delivery_unit": "",
   "du_vendor": "",
   "du_version": "",
@@ -7,17 +13,12 @@
   "du_version_sp": "",
   "edit": "true",
   "format_version": "",
-  "is_deletion": "true",
-  "last_changed_at": "2017-07-17 15:10:10.442 GMT+02:00",
-  "type": "2",
-  "version_id": "1"
+  "object_status": "0",
+  "released_at": "null",
+  "type": "1",
+  "version_id": "4"
  },
  "version": {
-  "owner": "MAZANECJ",
-  "versionType": "2",
-  "workspace": ""
- },
- "package": "OZ",
- "name": "ZOZE_ETTIFN",
- "suffix": "hdbview"
+  "versionType": "1"
+ }
 }
