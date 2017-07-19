@@ -14,8 +14,7 @@ end;
 
 
 truncate table "OTEBW_OZ"."ZOZE_HEAT_SOURCE";
-insert into "OTEBW_OZ"."ZOZE_HEAT_SOURCE"
-SELECT
+insert into "OTEBW_OZ"."ZOZE_HEAT_SOURCE" SELECT
 	MANDT,
 	APPL_FORM_ID,
 	STATUS,
