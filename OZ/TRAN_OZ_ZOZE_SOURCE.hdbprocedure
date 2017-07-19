@@ -88,6 +88,7 @@ select
 	AENAM,
 	DOCNUM 
 from "OTEBW_OZ"."REMOTE_ZOZE_SOURCE";
+commit;
 
 insert into "OTEBW"."Log" ( "CurrSchema", "CurrObject", "Cnt", "ErrorMess") values ('OTEBW_OZ', 'ZOZE_SOURCE', ::rowcount, 'Transfer');
 commit;
