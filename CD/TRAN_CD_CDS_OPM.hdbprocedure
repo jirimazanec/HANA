@@ -10,8 +10,9 @@ BEGIN
 truncate table "OTEBW_CD"."CDS_OPM_E";
 
 INSERT INTO "OTEBW_CD"."CDS_OPM_E" (
+
 select       
-       MIN(BUSDAY_TO) as date_from,
+       MIN(BUSDAY_TO) as date_from, 
        MAX(BUSDAY) as date_to, 
         EXT_UI,
        INT_UI,
@@ -52,23 +53,25 @@ select
        EUIGRID.GRID_ID,
        CASE WHEN FN_PPS.STRING3 = 'X' THEN 'A' ELSE 'N' END  as RE,
        ifnull(left(FN_TypM.STRING1,     1),    ' ') as MTYPE,
-       left(ifnull(cast(FN_Area.WERT1 as char),     0), 3) as CLASS, 
-       left(ifnull(cast(FN_Class.WERT1 as int),    0), 3 ) as AREA,
+       left(ifnull(cast(to_int(FN_Area.WERT1) as char),     0), 3) as CLASS, 
+       left(ifnull(cast(to_int(FN_Class.WERT1) as char),    0), 3 ) as AREA,
        ifnull(FN_Susp.STRING3,   ' ') as SUSPEND,
        ifnull(cast(FN_InstPower.WERT1 as dec(17,     3)),0) as CDS_POWER,
        ifnull(cast(FN_ResPower.WERT1 as dec(17,      3)),   0) as RES_POWER,
        ifnull(cast(FN_Kogen.WERT1 as dec(17,  3)),   0) as KOGEN, 
-        ifnull(cast(FN_Green.WERT1 as dec(17,  3)),   0) as GREEN,
+       ifnull(cast(FN_Green.WERT1 as dec(17,  3)),   0) as GREEN,
        ifnull(left(FN_SS.STRING1, 4),   '') as NEXTGRID,    
        ZEUIHEADT.UITEXT,
        ifnull(left(concat(FN_SOPM.STRING1,    FN_SOPM.STRING2),   18),   '') as NEXTPDT,     
        CASE WHEN FN_IMPEXP.STRING3 = 'X' THEN 'A' ELSE 'N' END as IMPEXP,      
        CASE WHEN FN_MICROSRC.STRING3 = 'X' THEN 'A' ELSE 'N' END  as MICRO_SRC,
---        ifnull(FN_MICROSRCFN_PPSas MICRO_SRC,  
         ifnull(left(SERVDIST.SRVPRVREF,  13),'') as DIST,    
         ifnull(left(SERVSUPP.SRVPRVREF,  13),   '') as SUPP, 
         ifnull(left(SERVSZ.SRVPRVREF,    13),'') as SZ,      
-        ifnull(left(SERVPPS.SRVPRVREF,   13), '') as PPS 
+        ifnull(left(SERVPPS.SRVPRVREF,   13), '') as PPS,
+        1 as POCET,
+       null as VERSION 
+        
        
 from OTEBW_CD.EANL_CHG as EANL 
 inner join OTEBW_CD.EUIINSTLN_CHG as EUIINSTLN on EUIINSTLN.ANLAGE = EANL.ANLAGE 
@@ -239,7 +242,10 @@ and SERVDIST.CLT_TST_TO >= CURRENT_TIMESTAMP
 and SERVDIST.INT_UI = EUIINSTLN.INT_UI 
 and SERVDIST.SERVICE = '0013' 
 and SERVDIST.SERVICE_START <= BUSDAYS.BUS_DATE 
-and SERVDIST.SERVICE_END >= BUSDAYS.BUS_DATE /* 0001 */ 
+and SERVDIST.SERVICE_END >= BUSDAYS.BUS_DATE 
+
+/* 0001 */ 
+
 left outer join OTEBW_CD.ESERVICE_CHG as SERVSUPP on SERVSUPP.MANDT = '100' 
 and (not SERVSUPP.CLT_ACTION='D') 
 and SERVSUPP.CLT_TST <= CURRENT_TIMESTAMP 
@@ -318,8 +324,11 @@ and EUIINSTLN.CLT_TST <= CURRENT_TIMESTAMP
 and EUIINSTLN.CLT_TST_TO >= CURRENT_TIMESTAMP 
 and EUIINSTLN.LOEVM=char(32) 
 
+
 ) 
--- where GRID_ID = '0200' 
+
+--where MTYPE in ('A', 'B')
+--WHERE  grid_id = '0021' 
 GROUP BY 
 
         EXT_UI,
@@ -347,6 +356,7 @@ GROUP BY
         PPS,
         SZ 
 order by date_from
+
 
 );
 
