@@ -1,0 +1,16 @@
+FUNCTION "OTEBW_CD"."CD::Get_Profile_MASS" (in x_PROFILE NVARCHAR(000018), in x_TST timestamp) 
+	RETURNS y_MASS NVARCHAR(000003)
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA "OTEBW_CD"
+	DETERMINISTIC
+  AS
+BEGIN
+
+select MASS 
+  into y_MASS
+  from  "OTEBW_CD"."EPROFHEAD_CHG"  
+  where profile = x_PROFILE
+  	and MANDT='100' and (not CLT_ACTION='D') and CLT_TST<=:x_TST and CLT_TST_TO>=:x_TST and not (LOEVM='X');
+  
+END;

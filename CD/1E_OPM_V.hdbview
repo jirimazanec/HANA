@@ -1,0 +1,33 @@
+schema="OTEBW_CD";
+
+query="select 
+	DATE_FROM,
+	DATE_TO,
+	EXT_UI,
+	INT_UI,
+	ANLAGE,
+	ANLART,
+	SPEBENE,
+	GRID_ID,
+	RE,
+	MTYPE,
+	CLASS,
+	AREA,
+	SUSPEND,
+	CDS_POWER,
+	RES_POWER,
+	KOGEN,
+	GREEN,
+	NEXTGRID,
+	UITEXT,
+	NEXTPDT,
+	IMPEXP,
+	MICRO_SRC,
+	dist_rut,
+	supp_rut,
+	sz_rut,
+	pps_rut,
+  	POCET,
+  	VERSION
+	FROM \"OTEBW_CD\".\"CDS_OPM_E\"
+	";

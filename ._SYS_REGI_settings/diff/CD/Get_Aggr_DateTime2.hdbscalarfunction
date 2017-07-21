@@ -1,0 +1,26 @@
+FUNCTION "OTEBW_CD"."CD::Get_Aggr_DateTime2" (x_Ver nvarchar(1), x_KeyDate date) 
+	RETURNS y_Aggr_DateTime timestamp
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER
+	DEFAULT SCHEMA "OTEBW_CD"
+	DETERMINISTIC
+AS BEGIN
+
+declare exit handler for sqlexception begin
+  y_Aggr_DateTime=to_timestamp('99991231235959','YYYYMMDDHH24MISS');
+end;
+
+if x_Ver='4'
+  then
+    y_Aggr_DateTime=to_timestamp('99991231235959','YYYYMMDDHH24MISS');
+  else
+select case when x_Ver='0' then to_timestamp(concat(Date1,Time1),'YYYYMMDDHH24MISS')
+		    when x_Ver='1' then to_timestamp(concat(Date3,Time3),'YYYYMMDDHH24MISS')
+		    when x_Ver='2' then to_timestamp(concat(Date4,Time4),'YYYYMMDDHH24MISS')
+		    when x_Ver='3' then to_timestamp(concat(Date2,Time2),'YYYYMMDDHH24MISS') end
+  into y_Aggr_DateTime
+  from OTEBW_CD."Z1BUS_DAYS"
+  where MANDT='100' and BUS_DATE=to_char(:x_KeyDate,'YYYYMMDD');
+end if;
+
+END;

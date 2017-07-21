@@ -1,0 +1,255 @@
+FUNCTION "OTEBW_CD"."CD::1G_OPM" (in x_Ver nvarchar(1)) 
+	RETURNS table(DATEFROM nvarchar(8), DATETO nvarchar(8), EXT_UI nvarchar(50), INT_UI nvarchar(22), ANLAGE nvarchar(10), UITEXT nvarchar(60), GRID_ID nvarchar(10), ANLART nvarchar(4),
+	   TYPM nvarchar(10), TDD_CLASS decimal(16,7), CDS_DPI nvarchar(1),
+       EST_CONS decimal(16,7), EST_CONS_2 decimal(16,7), POZ_ZS nvarchar(1), CTG_CU nvarchar(10), CTG_EM nvarchar(10),
+       SOPM nvarchar(20), NEXTGRID_ID nvarchar(10), OPM_GROUP nvarchar(10),
+       TYPSRC nvarchar(10), FC_BLK nvarchar(1), DISTR_CAP decimal(16,7),
+       ZPROVIDER nvarchar(30), ZPROVIDER_TEXT nvarchar(40), VALID_FROM nvarchar(8), VALID_TO nvarchar(8),
+       ZSUPPLIER nvarchar(30), ZSUPPLIER_TEXT nvarchar(40), ZSUPPLIER_FROM nvarchar(8), ZSUPPLIER_TO nvarchar(8),
+       ZSUBJ_ZUCT nvarchar(30), ZSUBJ_ZUCT_TEXT nvarchar(40), ZSUBJ_ZUCT_FROM nvarchar(8), ZSUBJ_ZUCT_TO nvarchar(8))
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER AS
+BEGIN
+
+/* Verze:
+0             C             Data pro denní zúčt.      Data pro denní zúčtování
+1             C             Data pro MV      Data pro měsíční zúčtování
+2             C             Data pro ZMV   Data pro závěrečné měsíční zúčtování
+3             C             Data pro PMV   Data pro předběžné měsíční zúčtování
+9                           Aktuální data
+*/
+
+if :x_Ver='0' or :x_Ver='1' then return
+select min(KEYDATE) as DATEFROM, max(KEYDATE) as DATETO, EXT_UI, INT_UI, ANLAGE, UITEXT, GRID_ID, ANLART, ifnull(TYPM, ' ') as TYPM, ifnull(TDD_CLASS, 0) as TDD_CLASS, ifnull(CDS_DPI, ' ') as CDS_DPI,
+       ifnull(EST_CONS, 0) as EST_CONS, ifnull(EST_CONS_2, 0) as EST_CONS_2, ifnull(POZ_ZS, ' ') as POZ_ZS, ifnull(CTG_CU, '') as CTG_CU, ifnull(CTG_EM, '') as CTG_EM,
+       ifnull(SOPM, '') as SOPM, ifnull(NEXTGRID_ID, '') as NEXTGRID_ID, ifnull(OPM_GROUP, '') as OPM_GROUP, ifnull(TYPSRC, '') as TYPSRC, ifnull(FC_BLK, ' ') as FC_BLK, ifnull(DISTR_CAP, 0) as DISTR_CAP,
+       ZPROVIDER, ZPROVIDER_TEXT, VALID_FROM, VALID_TO, ZSUPPLIER, ZSUPPLIER_TEXT, ZSUPPLIER_FROM, ZSUPPLIER_TO, ZSUBJ_ZUCT, ZSUBJ_ZUCT_TEXT, ZSUBJ_ZUCT_FROM, ZSUBJ_ZUCT_TO from (
+select BD.BUS_DATE as KEYDATE, EUITRANS.EXT_UI, EUIINSTLN.INT_UI, EANL.ANLAGE,
+       EUIHEADT.UITEXT as UITEXT, EUIGRID.GRID_ID, EANL.ANLART, FNTypM.STRING1 as TYPM, FNClass.WERT1 as TDD_CLASS, FNDPI.STRING3 as CDS_DPI,
+       FNEC.WERT1 as EST_CONS, FNEC2.WERT1 as EST_CONS_2, FNSusp.STRING3 as POZ_ZS, FNCTGCU.STRING1 as CTG_CU, FNCTGEM.STRING1 as CTG_EM,
+       concat(FNSOPM.STRING1, FNSOPM.STRING2) as SOPM, FNNEXTGR.STRING1 as NEXTGRID_ID, FNGrp.STRING1 as OPM_GROUP, FNTSrc.STRING1 as TYPSRC, FNFCBLK.STRING3 as FC_BLK, FNDC.WERT1 as DISTR_CAP,
+       SerDist.SRVPRVREF as ZPROVIDER, SerDistT.SP_NAME as ZPROVIDER_TEXT, SerDist.SERVICE_START as VALID_FROM, SerDist.SERVICE_END as VALID_TO,
+       SerSupp.SRVPRVREF as ZSUPPLIER, SerSuppT.SP_NAME as ZSUPPLIER_TEXT, SerSupp.SERVICE_START as ZSUPPLIER_FROM, SerSupp.SERVICE_END as ZSUPPLIER_TO,
+       SerSZ.SRVPRVREF as ZSUBJ_ZUCT, SerSZT.SP_NAME as ZSUBJ_ZUCT_TEXT, SerSZ.SERVICE_START as ZSUBJ_ZUCT_FROM, SerSZ.SERVICE_END as ZSUBJ_ZUCT_TO
+  from OTEBW_CD.ZGASBUS_DAYS as BD
+       inner join OTEBW_CD.EUITRANS_CHG as EUITRANS on
+         EUITRANS.MANDT      =  '200' and
+         EUITRANS.DATEFROM   <= BD.BUS_DATE and
+         EUITRANS.DATETO     >= BD.BUS_DATE and
+         EUITRANS.CLT_ACTION <> 'D' and
+         EUITRANS.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         EUITRANS.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         EUITRANS.LOEVM      =  ' '
+       inner join OTEBW_CD.EUIINSTLN_CHG as EUIINSTLN on
+         EUIINSTLN.MANDT      =  '200' and
+         EUIINSTLN.INT_UI     =  EUITRANS.INT_UI and
+         EUIINSTLN.DATEFROM   <= BD.BUS_DATE and
+         EUIINSTLN.DATETO     >= BD.BUS_DATE and
+         EUIINSTLN.CLT_ACTION <> 'D' and
+         EUIINSTLN.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         EUIINSTLN.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         EUIINSTLN.LOEVM      =  ' '
+       inner join OTEBW_CD.EANL_CHG as EANL on
+         EANL.MANDT      =  '200' and
+         EANL.ANLAGE     =  EUIINSTLN.ANLAGE and
+         EANL.CLT_ACTION <> 'D' and
+         EANL.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         EANL.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         EANL.LOEVM      =  ' '
+       inner join OTEBW_CD.EUIGRID_CHG as EUIGRID on
+         EUIGRID.MANDT      =  '200' and
+         EUIGRID.INT_UI     =  EUIINSTLN.INT_UI and
+         EUIGRID.CLT_ACTION <> 'D' and
+         EUIGRID.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         EUIGRID.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         EUIGRID.LOEVM      =  ' '
+       left outer join OTEBW_CD.ZEUIHEADT_CHG as EUIHEADT on
+         EUIHEADT.MANDT      =  '200' and
+         EUIHEADT.INT_UI     =  EUIINSTLN.INT_UI and
+         EUIHEADT.SPRAS      =  upper(left(session_context('LOCALE'), 1)) and
+         EUIHEADT.AB         <= BD.BUS_DATE and
+         EUIHEADT.BIS        >= BD.BUS_DATE and
+         EUIHEADT.CLT_ACTION <> 'D' and
+         EUIHEADT.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         EUIHEADT.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS')
+       left outer join OTEBW_CD.ETTIFN_CHG as FNTypM on
+         FNTypM.MANDT      =  '200' and
+         FNTypM.ANLAGE     =  EANL.ANLAGE and
+         FNTypM.OPERAND    =  'GAS_TYPM' and
+         FNTypM.AB         <= BD.BUS_DATE and
+         FNTypM.BIS        >= BD.BUS_DATE and
+         FNTypM.CLT_ACTION <> 'D' and
+         FNTypM.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         FNTypM.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS')
+       left outer join OTEBW_CD.ETTIFN_CHG as FNClass on
+         FNClass.MANDT      =  '200' and
+         FNClass.ANLAGE     =  EANL.ANLAGE and
+         FNClass.OPERAND    =  'GAS_CLASS' and
+         FNClass.AB         <= BD.BUS_DATE and
+         FNClass.BIS        >= BD.BUS_DATE and
+         FNClass.CLT_ACTION <> 'D' and
+         FNClass.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         FNClass.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS')
+       left outer join OTEBW_CD.ETTIFN_CHG as FNDPI on
+         FNDPI.MANDT      =  '200' and
+         FNDPI.ANLAGE     =  EANL.ANLAGE and
+         FNDPI.OPERAND    =  'GAS_DPI' and
+         FNDPI.AB         <= BD.BUS_DATE and
+         FNDPI.BIS        >= BD.BUS_DATE and
+         FNDPI.CLT_ACTION <> 'D' and
+         FNDPI.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         FNDPI.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS')
+       left outer join OTEBW_CD.ETTIFN_CHG as FNEC on
+         FNEC.MANDT      =  '200' and
+         FNEC.ANLAGE     =  EANL.ANLAGE and
+         FNEC.OPERAND    =  'GAS_EST_CO' and
+         FNEC.AB         <= BD.BUS_DATE and
+         FNEC.BIS        >= BD.BUS_DATE and
+         FNEC.CLT_ACTION <> 'D' and
+         FNEC.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         FNEC.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS')
+       left outer join OTEBW_CD.ETTIFN_CHG as FNEC2 on
+         FNEC2.MANDT      =  '200' and
+         FNEC2.ANLAGE     =  EANL.ANLAGE and
+         FNEC2.OPERAND    =  'GAS_EST_2' and
+         FNEC2.AB         <= BD.BUS_DATE and
+         FNEC2.BIS        >= BD.BUS_DATE and
+         FNEC2.CLT_ACTION <> 'D' and
+         FNEC2.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         FNEC2.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS')
+       left outer join OTEBW_CD.ETTIFN_CHG as FNSusp on
+         FNSusp.MANDT      =  '200' and
+         FNSusp.ANLAGE     =  EANL.ANLAGE and
+         FNSusp.OPERAND    =  'GAS_POZ_ZS' and
+         FNSusp.AB         <= BD.BUS_DATE and
+         FNSusp.BIS        >= BD.BUS_DATE and
+         FNSusp.CLT_ACTION <> 'D' and
+         FNSusp.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         FNSusp.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS')
+       left outer join OTEBW_CD.ETTIFN_CHG as FNCTGCU on
+         FNCTGCU.MANDT      =  '200' and
+         FNCTGCU.ANLAGE     =  EANL.ANLAGE and
+         FNCTGCU.OPERAND    =  'GAS_CTG_CU' and
+         FNCTGCU.AB         <= BD.BUS_DATE and
+         FNCTGCU.BIS        >= BD.BUS_DATE and
+         FNCTGCU.CLT_ACTION <> 'D' and
+         FNCTGCU.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         FNCTGCU.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS')
+       left outer join OTEBW_CD.ETTIFN_CHG as FNCTGEM on
+         FNCTGEM.MANDT      =  '200' and
+         FNCTGEM.ANLAGE     =  EANL.ANLAGE and
+         FNCTGEM.OPERAND    =  'GAS_CTG_EM' and
+         FNCTGEM.AB         <= BD.BUS_DATE and
+         FNCTGEM.BIS        >= BD.BUS_DATE and
+         FNCTGEM.CLT_ACTION <> 'D' and
+         FNCTGEM.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         FNCTGEM.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS')
+       left outer join OTEBW_CD.ETTIFN_CHG as FNSOPM on
+         FNSOPM.MANDT      =  '200' and
+         FNSOPM.ANLAGE     =  EANL.ANLAGE and
+         FNSOPM.OPERAND    =  'GAS_SOPM' and
+         FNSOPM.AB         <= BD.BUS_DATE and
+         FNSOPM.BIS        >= BD.BUS_DATE and
+         FNSOPM.CLT_ACTION <> 'D' and
+         FNSOPM.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         FNSOPM.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS')
+       left outer join OTEBW_CD.ETTIFN_CHG as FNNEXTGR on
+         FNNEXTGR.MANDT      =  '200' and
+         FNNEXTGR.ANLAGE     =  EANL.ANLAGE and
+         FNNEXTGR.OPERAND    =  'GAS_NEXTGR' and
+         FNNEXTGR.AB         <= BD.BUS_DATE and
+         FNNEXTGR.BIS        >= BD.BUS_DATE and
+         FNNEXTGR.CLT_ACTION <> 'D' and
+         FNNEXTGR.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         FNNEXTGR.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS')
+       left outer join OTEBW_CD.ETTIFN_CHG as FNGrp on
+         FNGrp.MANDT      =  '200' and
+         FNGrp.ANLAGE     =  EANL.ANLAGE and
+         FNGrp.OPERAND    =  'GAS_FC_GRP' and
+         FNGrp.AB         <= BD.BUS_DATE and
+         FNGrp.BIS        >= BD.BUS_DATE and
+         FNGrp.CLT_ACTION <> 'D' and
+         FNGrp.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         FNGrp.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS')
+       left outer join OTEBW_CD.ETTIFN_CHG as FNTSrc on
+         FNTSrc.MANDT      =  '200' and
+         FNTSrc.ANLAGE     =  EANL.ANLAGE and
+         FNTSrc.OPERAND    =  'GAS_SOURCE' and
+         FNTSrc.AB         <= BD.BUS_DATE and
+         FNTSrc.BIS        >= BD.BUS_DATE and
+         FNTSrc.CLT_ACTION <> 'D' and
+         FNTSrc.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         FNTSrc.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS')
+       left outer join OTEBW_CD.ETTIFN_CHG as FNFCBLK on
+         FNFCBLK.MANDT      =  '200' and
+         FNFCBLK.ANLAGE     =  EANL.ANLAGE and
+         FNFCBLK.OPERAND    =  'GAS_FC_BLK' and
+         FNFCBLK.AB         <= BD.BUS_DATE and
+         FNFCBLK.BIS        >= BD.BUS_DATE and
+         FNFCBLK.CLT_ACTION <> 'D' and
+         FNFCBLK.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         FNFCBLK.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS')
+       left outer join OTEBW_CD.ETTIFN_CHG as FNDC on
+         FNDC.MANDT      =  '200' and
+         FNDC.ANLAGE     =  EANL.ANLAGE and
+         FNDC.OPERAND    =  'GAS_R_CAP' and
+         FNDC.AB         <= BD.BUS_DATE and
+         FNDC.BIS        >= BD.BUS_DATE and
+         FNDC.CLT_ACTION <> 'D' and
+         FNDC.CLT_TST    <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         FNDC.CLT_TST_TO >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS')
+
+       left outer join OTEBW_CD.ESERVICE_CHG as SerDist on
+         SerDist.MANDT         =  '200' and
+         SerDist.INT_UI        =  EUIINSTLN.INT_UI and
+         SerDist.SERVICE       =  '113' and
+         SerDist.SERVICE_START <= BD.BUS_DATE and
+         SerDist.SERVICE_END   >= BD.BUS_DATE and
+         SerDist.CLT_ACTION    <> 'D' and
+         SerDist.CLT_TST       <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         SerDist.CLT_TST_TO    >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS')
+       left outer join OTEBW_CD.ESERVPROVT as SerDistT on
+         SerDistT.MANDT     = '200' and
+         SerDistT.SPRAS     = upper(left(session_context('LOCALE'), 1)) and
+         SerDistT.SERVICEID = SerDist.SERVICEID
+       left outer join OTEBW_CD.ESERVICE_CHG as SerSupp on
+         SerSupp.MANDT         =  '200' and
+         SerSupp.INT_UI        =  EUIINSTLN.INT_UI and
+         SerSupp.SERVICE       =  '101' and
+         SerSupp.SERVICE_START <= BD.BUS_DATE and
+         SerSupp.SERVICE_END   >= BD.BUS_DATE and
+         SerSupp.CLT_ACTION    <> 'D' and
+         SerSupp.CLT_TST       <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         SerSupp.CLT_TST_TO    >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS')
+       left outer join OTEBW_CD.ESERVPROVT as SerSuppT on
+         SerSuppT.MANDT     = '200' and
+         SerSuppT.SPRAS     = upper(left(session_context('LOCALE'), 1)) and
+         SerSuppT.SERVICEID = SerSupp.SERVICEID
+       left outer join OTEBW_CD.ESERVICE_CHG as SerSZ on
+         SerSZ.MANDT         =  '200' and
+         SerSZ.INT_UI        =  EUIINSTLN.INT_UI and
+         SerSZ.SERVICE       =  '101' and
+         SerSZ.SERVICE_START <= BD.BUS_DATE and
+         SerSZ.SERVICE_END   >= BD.BUS_DATE and
+         SerSZ.CLT_ACTION    <> 'D' and
+         SerSZ.CLT_TST       <= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+         SerSZ.CLT_TST_TO    >= to_date(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS')
+       left outer join OTEBW_CD.ESERVPROVT as SerSZT on
+         SerSZT.MANDT     = '200' and
+         SerSZT.SPRAS     = upper(left(session_context('LOCALE'), 1)) and
+         SerSZT.SERVICEID = SerSZ.SERVICEID
+  where BD.MANDT='200'
+    and BD.PROC_TYPE='A'
+    and not(BD.DATE1_END='00000000')
+    and not(BD.DATE1_END='        ')
+/*    and BD.BUS_DATE>='20160601'
+    and BD.BUS_DATE<='20160610'
+    and EUIINSTLN.ANLAGE>='0000374352'
+    and EUIINSTLN.ANLAGE<='0000374360'*/
+) group by EXT_UI, INT_UI, ANLAGE, UITEXT, GRID_ID, ANLART, TYPM, TDD_CLASS, CDS_DPI, EST_CONS, EST_CONS_2, POZ_ZS, CTG_CU, CTG_EM, SOPM, NEXTGRID_ID, OPM_GROUP, TYPSRC, FC_BLK, DISTR_CAP,
+           ZPROVIDER, ZPROVIDER_TEXT, VALID_FROM, VALID_TO, ZSUPPLIER, ZSUPPLIER_TEXT, ZSUPPLIER_FROM, ZSUPPLIER_TO, ZSUBJ_ZUCT, ZSUBJ_ZUCT_TEXT, ZSUBJ_ZUCT_FROM, ZSUBJ_ZUCT_TO
+  with hint(INLINE);
+
+end if;
+
+END;

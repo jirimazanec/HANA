@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="TEST9" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="SCRIPT_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" scriptParametersCaseSensitive="true">
+  <descriptions defaultDescription="TEST9"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources/>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:SqlScriptView" id="Script_View">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute datatype="INTEGER" id="K"/>
+        <viewAttribute datatype="VARCHAR" id="S" length="20"/>
+        <viewAttribute datatype="VARCHAR" id="V" length="60"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <definition> 
+ /********* Begin Procedure Script ************/ 
+ BEGIN 
+ 	 var_out = select t1.K , t1.S , t1.V from &quot;OTEBW_CD&quot;.&quot;T1&quot; as t1  where t1.s = ' ';
+
+END /********* End Procedure Script ************/</definition>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Script_View">
+    <descriptions/>
+    <attributes>
+      <attribute id="S" order="2">
+        <descriptions defaultDescription="S"/>
+        <keyMapping columnObjectName="Script_View" columnName="S"/>
+      </attribute>
+      <attribute id="V" order="3">
+        <descriptions defaultDescription="V"/>
+        <keyMapping columnObjectName="Script_View" columnName="V"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="K" order="1" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="K"/>
+        <measureMapping columnObjectName="Script_View" columnName="K"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

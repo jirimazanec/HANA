@@ -1,0 +1,72 @@
+
+
+schema="OTEBW_CD";
+
+query = "select
+					CHS.ID,
+					CHS.RUT_ID,
+					CHS.OPM_ID,
+					CHS.DATE_FROM,
+					CHS.DATE_TO,
+					CHS.CALMONTH,
+					CHS.STATUS,
+					CHS.CHS_TYPE,
+					CHS.CHS_REASON,
+					CHS.CONTRACT_TYPE,
+					CHS.RCH_REASON,
+					CHS.ERDAT,
+					CHS.ERTIM,
+					CHS.AEDAT,
+					CHS.AETIM,
+					CHS.CNTR_NEG_TYPE,
+					CHS.REF_WF_ID,
+					case 	when OPM.MTYPE='A' or OPM.MTYPE='B' then 
+								'VO'
+							when OPM.MTYPE='C' then 
+								case 	when OPM.anlart = '0001' then char(32)
+										else
+									 		case 	when OPM.CLASS='1' or OPM.CLASS='2' or OPM.CLASS='3' or OPM.CLASS='8'  then 'MOP'
+													when  OPM.CLASS='4' or OPM.CLASS='5'or OPM.CLASS='6' or OPM.CLASS='7'  then 'MOO'
+										end	
+								end		
+					end
+					 as CATEGORY,
+					ifnull(CHS_UNI.UNI, 'N') as \"UNIQUE\",
+					CHS.SUPPLIER_NEW_ID,
+					CHS.SUPPLIER_OLD_ID,
+					CHS.SZ_NEW_EXP_ID,
+					CHS.SZ_NEW_IMP_ID,
+					CHS.SZ_OLD_ID,
+					OPM.ANLART,
+					OPM.SPEBENE,
+					OPM.GRID_ID,
+					OPM.MTYPE,
+					OPM.CLASS,
+					OPM.AREA,
+					1 as pocet
+ 	 
+ 	 				from 		\"OTEBW_CD\".\"CD::1E_CHS\" as CHS
+						left outer join (	select  CHS_U.OPM_ID, CHS_U.DATE_FROM, max(CHS_U.id) as id, 'A' as UNI
+							from OTEBW_CD.ZCDV_F4_REQ_H as CHS_U
+							where 	CHS_U.status = 'ANY' and
+									CHS_U.CHS_TYPE <> 'SZD' and 
+									CHS_U.CHS_TYPE <> 'RZD' 
+									group by  CHS_U.OPM_ID, CHS_U.DATE_FROM
+						UNION ALL
+						select  CHS_R.OPM_ID, CHS_R.DATE_FROM,  CHS_R.id, 'A' as UNI
+							from OTEBW_CD.ZCDV_F4_REQ_H as CHS_R
+							where  not (CHS_R.status = 'ANY' and
+									CHS_R.CHS_TYPE <> 'SZD' and 
+									CHS_R.CHS_TYPE <> 'RZD' 
+									)
+								)  as CHS_UNI 
+							on	CHS_UNI.OPM_ID = CHS.OPM_ID and
+								CHS_UNI.DATE_FROM = CHS.DATE_FROM and
+								CHS_UNI.id = CHS.id 	 					
+						left outer join	\"OTEBW_CD\".\"CD::1E_OPM_V\" as OPM 
+ 	 					on 	CHS.OPM_ID = OPM.ext_ui  and
+ 	 						OPM.date_from <= CHS.AEDAT and
+ 	 						OPM.date_to >= CHS.AEDAT
+ 	 						
+ 	 						";
+

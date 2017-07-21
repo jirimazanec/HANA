@@ -1,0 +1,10 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_CD";
+
+query = " select * from \"OTEBW_CD\".\"CD::1E_PRFV_V\" where (profrole = 'A12' or grid_id = '1000') and supp_rut is not null
+
+";
+

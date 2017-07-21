@@ -1,0 +1,10 @@
+{
+    "description": "Migrace CD",
+    "action": "CD::MigTestToPreProd",
+    "schedules": [
+       {
+          "description": "Migrace",
+          "xscron": "2017 05 25 * 11 17 00"
+       }
+    ]
+}

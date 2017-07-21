@@ -1,0 +1,18 @@
+FUNCTION "OTEBW_CD"."CD::Get_Category"(x_MType nvarchar(10), x_Class decimal(16,7)) 
+	RETURNS y_Categ nvarchar(3)
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER
+	DETERMINISTIC
+AS BEGIN
+
+if x_MType='A' or x_MType='B' then
+  y_Categ='VO';
+elseif x_Class=1 or x_Class=2 or x_Class=3 or x_Class=8 then
+  y_Categ='MOP';
+elseif x_Class=4 or x_Class=5 or x_Class=6 or x_Class=7 then
+  y_Categ='MOO';
+else
+  y_Categ='';
+end if;
+
+END;

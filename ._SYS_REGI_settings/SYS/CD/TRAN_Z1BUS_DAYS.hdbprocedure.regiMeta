@@ -1,5 +1,8 @@
 {
  "metadata": {
+  "activated_at": "2017-07-14 14:12:16.254 GMT+02:00",
+  "activated_by": "MAZANECJ",
+  "change_number": "0",
   "delivery_unit": "",
   "du_vendor": "",
   "du_version": "",
@@ -7,17 +10,15 @@
   "du_version_sp": "",
   "edit": "true",
   "format_version": "",
-  "is_deletion": "false",
-  "last_changed_at": "2017-07-18 10:56:30.546 GMT+02:00",
-  "type": "2",
-  "version_id": "1"
+  "object_status": "0",
+  "released_at": "null",
+  "type": "1",
+  "version_id": "2"
  },
- "package": "CD",
  "name": "TRAN_Z1BUS_DAYS",
+ "package": "CD",
  "suffix": "hdbprocedure",
  "version": {
-  "versionType": "2",
-  "owner": "MAZANECJ",
-  "workspace": ""
+  "versionType": "1"
  }
 }

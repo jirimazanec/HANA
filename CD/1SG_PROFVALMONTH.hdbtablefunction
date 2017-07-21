@@ -1,0 +1,764 @@
+FUNCTION "OTEBW_CD"."CD::1SG_PROFVALMONTH"(in x_Ver nvarchar(1)) 
+	RETURNS table(PROFILE nvarchar(18), VERSION nvarchar(1), VALDATE nvarchar(8), VAL decimal(20, 10), STAT nvarchar(2)) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER AS
+BEGIN
+
+/* Verze:
+0             C             Data pro denní zúčt.      Data pro denní zúčtování
+1             C             Data pro MV      Data pro měsíční zúčtování
+2             C             Data pro ZMV   Data pro závěrečné měsíční zúčtování
+3             C             Data pro PMV   Data pro předběžné měsíční zúčtování
+9                           Aktuální data
+*/
+
+if :x_Ver='0' then
+return select PV.PROFILE, :x_Ver as VERSION, BD.BUS_DATE as VALDATE, VAL*power(10, -PH.PROFDECIMALS) as VAL, case PS.STAT when 'IU012' then '46' when 'IU013' then '99' when 'IU014' then '66' else '00' end as STAT
+    from OTEBW_CD.ZGASBUS_DAYS as BD inner join
+	    (
+		select PROFILE, concat(left(VALUEDAY,6),'01') as VALDATE, VAL01 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'02') as VALDATE, VAL02 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'03') as VALDATE, VAL03 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'04') as VALDATE, VAL04 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'05') as VALDATE, VAL05 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'06') as VALDATE, VAL06 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'07') as VALDATE, VAL07 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'08') as VALDATE, VAL08 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'09') as VALDATE, VAL09 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'10') as VALDATE, VAL10 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'11') as VALDATE, VAL11 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'12') as VALDATE, VAL12 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'13') as VALDATE, VAL13 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'14') as VALDATE, VAL14 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'15') as VALDATE, VAL15 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'16') as VALDATE, VAL16 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'17') as VALDATE, VAL17 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'18') as VALDATE, VAL18 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'19') as VALDATE, VAL19 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'20') as VALDATE, VAL20 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'21') as VALDATE, VAL21 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'22') as VALDATE, VAL22 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'23') as VALDATE, VAL23 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'24') as VALDATE, VAL24 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'25') as VALDATE, VAL25 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'26') as VALDATE, VAL26 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'27') as VALDATE, VAL27 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'28') as VALDATE, VAL28 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'29') as VALDATE, VAL29 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'30') as VALDATE, VAL30 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'31') as VALDATE, VAL31 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D') as PV
+		on PV.VALDATE=BD.BUS_DATE
+	left outer join OTEBW_CD.EPROFHEAD_CHG as PH on
+	  PH.MANDT     = '200' and
+	  PH.PROFILE   = PV.PROFILE and
+	  PH.CLT_TST   <=to_timestamp(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+	  PH.CLT_TST_TO> to_timestamp(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') 
+	left outer join OTEBW_CD.EPROFVALSTAT_CHG as PS on
+	  PS.MANDT     = '200' and
+	  PS.PROFILE   = PV.PROFILE and
+	  PS.CLT_TST   <=to_timestamp(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+	  PS.CLT_TST_TO> to_timestamp(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') and
+	  PS.DATEFROM  <=PV.VALDATE and
+	  PS.DATETO    > PV.VALDATE and
+	  PS.STAT      in ('IU012', 'IU013', 'IU014')
+	where BD.MANDT='200'
+	  and BD.PROC_TYPE='A'
+	  and not(BD.DATE1_END='')
+	  and not(BD.DATE1_END='        ')
+	  and not(BD.DATE1_END='00000000')
+	  and PV.CLT_TST   <=to_timestamp(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS') 
+	  and PV.CLT_TST_TO> to_timestamp(concat(BD.DATE1_END, BD.TIME1_END), 'YYYYMMDDHH24MISS');
+
+
+elseif :x_Ver='1' then
+return select PV.PROFILE, :x_Ver as VERSION, BD.BUS_DATE as VALDATE, VAL*power(10, -PH.PROFDECIMALS) as VAL, case PS.STAT when 'IU012' then '46' when 'IU013' then '99' when 'IU014' then '66' else '00' end as STAT
+    from OTEBW_CD.ZGASBUS_DAYS as BD inner join
+	    (
+		select PROFILE, concat(left(VALUEDAY,6),'01') as VALDATE, VAL01 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'02') as VALDATE, VAL02 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'03') as VALDATE, VAL03 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'04') as VALDATE, VAL04 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'05') as VALDATE, VAL05 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'06') as VALDATE, VAL06 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'07') as VALDATE, VAL07 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'08') as VALDATE, VAL08 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'09') as VALDATE, VAL09 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'10') as VALDATE, VAL10 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'11') as VALDATE, VAL11 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'12') as VALDATE, VAL12 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'13') as VALDATE, VAL13 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'14') as VALDATE, VAL14 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'15') as VALDATE, VAL15 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'16') as VALDATE, VAL16 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'17') as VALDATE, VAL17 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'18') as VALDATE, VAL18 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'19') as VALDATE, VAL19 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'20') as VALDATE, VAL20 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'21') as VALDATE, VAL21 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'22') as VALDATE, VAL22 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'23') as VALDATE, VAL23 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'24') as VALDATE, VAL24 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'25') as VALDATE, VAL25 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'26') as VALDATE, VAL26 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'27') as VALDATE, VAL27 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'28') as VALDATE, VAL28 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'29') as VALDATE, VAL29 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'30') as VALDATE, VAL30 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'31') as VALDATE, VAL31 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D') as PV
+		on PV.VALDATE=BD.BUS_DATE
+	left outer join OTEBW_CD.EPROFHEAD_CHG as PH on
+	  PH.MANDT     = '200' and
+	  PH.PROFILE   = PV.PROFILE and
+	  PH.CLT_TST   <=to_timestamp(concat(BD.DATE3_END, BD.TIME3_END), 'YYYYMMDDHH24MISS') and
+	  PH.CLT_TST_TO> to_timestamp(concat(BD.DATE3_END, BD.TIME3_END), 'YYYYMMDDHH24MISS')
+	left outer join OTEBW_CD.EPROFVALSTAT_CHG as PS on
+	  PS.MANDT     = '200' and
+	  PS.PROFILE   = PV.PROFILE and
+	  PS.CLT_TST   <=to_timestamp(concat(BD.DATE3_END, BD.TIME3_END), 'YYYYMMDDHH24MISS') and
+	  PS.CLT_TST_TO> to_timestamp(concat(BD.DATE3_END, BD.TIME3_END), 'YYYYMMDDHH24MISS') and
+	  PS.DATEFROM  <=PV.VALDATE and
+	  PS.DATETO    > PV.VALDATE and
+	  PS.STAT      in ('IU012', 'IU013', 'IU014')
+	where BD.MANDT='200'
+	  and BD.PROC_TYPE='A'
+	  and not(BD.DATE3_END='')
+	  and not(BD.DATE3_END='        ')
+	  and not(BD.DATE3_END='00000000')
+	  and PV.CLT_TST   <=to_timestamp(concat(BD.DATE3_END, BD.TIME3_END), 'YYYYMMDDHH24MISS') 
+	  and PV.CLT_TST_TO> to_timestamp(concat(BD.DATE3_END, BD.TIME3_END), 'YYYYMMDDHH24MISS');
+
+
+elseif :x_Ver='2' then
+return select PV.PROFILE, :x_Ver as VERSION, BD.BUS_DATE as VALDATE, VAL*power(10, -PH.PROFDECIMALS) as VAL, case PS.STAT when 'IU012' then '46' when 'IU013' then '99' when 'IU014' then '66' else '00' end as STAT
+    from OTEBW_CD.ZGASBUS_DAYS as BD inner join
+	    (
+		select PROFILE, concat(left(VALUEDAY,6),'01') as VALDATE, VAL01 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'02') as VALDATE, VAL02 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'03') as VALDATE, VAL03 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'04') as VALDATE, VAL04 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'05') as VALDATE, VAL05 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'06') as VALDATE, VAL06 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'07') as VALDATE, VAL07 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'08') as VALDATE, VAL08 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'09') as VALDATE, VAL09 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'10') as VALDATE, VAL10 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'11') as VALDATE, VAL11 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'12') as VALDATE, VAL12 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'13') as VALDATE, VAL13 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'14') as VALDATE, VAL14 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'15') as VALDATE, VAL15 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'16') as VALDATE, VAL16 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'17') as VALDATE, VAL17 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'18') as VALDATE, VAL18 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'19') as VALDATE, VAL19 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'20') as VALDATE, VAL20 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'21') as VALDATE, VAL21 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'22') as VALDATE, VAL22 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'23') as VALDATE, VAL23 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'24') as VALDATE, VAL24 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'25') as VALDATE, VAL25 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'26') as VALDATE, VAL26 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'27') as VALDATE, VAL27 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'28') as VALDATE, VAL28 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'29') as VALDATE, VAL29 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'30') as VALDATE, VAL30 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'31') as VALDATE, VAL31 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D') as PV
+		on PV.VALDATE=BD.BUS_DATE
+	left outer join OTEBW_CD.EPROFHEAD_CHG as PH on
+	  PH.MANDT     = '200' and
+	  PH.PROFILE   = PV.PROFILE and
+	  PH.CLT_TST   <=to_timestamp(concat(BD.DATE4_END, BD.TIME4_END), 'YYYYMMDDHH24MISS') and
+	  PH.CLT_TST_TO> to_timestamp(concat(BD.DATE4_END, BD.TIME4_END), 'YYYYMMDDHH24MISS')
+	left outer join OTEBW_CD.EPROFVALSTAT_CHG as PS on
+	  PS.MANDT     = '200' and
+	  PS.PROFILE   = PV.PROFILE and
+	  PS.CLT_TST   <=to_timestamp(concat(BD.DATE4_END, BD.TIME4_END), 'YYYYMMDDHH24MISS') and
+	  PS.CLT_TST_TO> to_timestamp(concat(BD.DATE4_END, BD.TIME4_END), 'YYYYMMDDHH24MISS') and
+	  PS.DATEFROM  <=PV.VALDATE and
+	  PS.DATETO    > PV.VALDATE and
+	  PS.STAT      in ('IU012', 'IU013', 'IU014')
+	where BD.MANDT='200'
+	  and BD.PROC_TYPE='A'
+	  and not(BD.DATE4_END='')
+	  and not(BD.DATE4_END='        ')
+	  and not(BD.DATE4_END='00000000')
+	  and PV.CLT_TST   <=to_timestamp(concat(BD.DATE4_END, BD.TIME4_END), 'YYYYMMDDHH24MISS') 
+	  and PV.CLT_TST_TO> to_timestamp(concat(BD.DATE4_END, BD.TIME4_END), 'YYYYMMDDHH24MISS');
+
+
+elseif :x_Ver='1' then
+return select PV.PROFILE, :x_Ver as VERSION, BD.BUS_DATE as VALDATE, VAL*power(10, -PH.PROFDECIMALS) as VAL, case PS.STAT when 'IU012' then '46' when 'IU013' then '99' when 'IU014' then '66' else '00' end as STAT
+    from OTEBW_CD.ZGASBUS_DAYS as BD inner join
+	    (
+		select PROFILE, concat(left(VALUEDAY,6),'01') as VALDATE, VAL01 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'02') as VALDATE, VAL02 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'03') as VALDATE, VAL03 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'04') as VALDATE, VAL04 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'05') as VALDATE, VAL05 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'06') as VALDATE, VAL06 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'07') as VALDATE, VAL07 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'08') as VALDATE, VAL08 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'09') as VALDATE, VAL09 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'10') as VALDATE, VAL10 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'11') as VALDATE, VAL11 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'12') as VALDATE, VAL12 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'13') as VALDATE, VAL13 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'14') as VALDATE, VAL14 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'15') as VALDATE, VAL15 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'16') as VALDATE, VAL16 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'17') as VALDATE, VAL17 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'18') as VALDATE, VAL18 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'19') as VALDATE, VAL19 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'20') as VALDATE, VAL20 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'21') as VALDATE, VAL21 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'22') as VALDATE, VAL22 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'23') as VALDATE, VAL23 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'24') as VALDATE, VAL24 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'25') as VALDATE, VAL25 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'26') as VALDATE, VAL26 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'27') as VALDATE, VAL27 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'28') as VALDATE, VAL28 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'29') as VALDATE, VAL29 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'30') as VALDATE, VAL30 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'31') as VALDATE, VAL31 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D') as PV
+		on PV.VALDATE=BD.BUS_DATE
+	left outer join OTEBW_CD.EPROFHEAD_CHG as PH on
+	  PH.MANDT     = '200' and
+	  PH.PROFILE   = PV.PROFILE and
+	  PH.CLT_TST   <=to_timestamp(concat(BD.DATE2_END, BD.TIME2_END), 'YYYYMMDDHH24MISS') and
+	  PH.CLT_TST_TO> to_timestamp(concat(BD.DATE2_END, BD.TIME2_END), 'YYYYMMDDHH24MISS')
+	left outer join OTEBW_CD.EPROFVALSTAT_CHG as PS on
+	  PS.MANDT     = '200' and
+	  PS.PROFILE   = PV.PROFILE and
+	  PS.CLT_TST   <=to_timestamp(concat(BD.DATE2_END, BD.TIME2_END), 'YYYYMMDDHH24MISS') and
+	  PS.CLT_TST_TO> to_timestamp(concat(BD.DATE2_END, BD.TIME2_END), 'YYYYMMDDHH24MISS') and
+	  PS.DATEFROM  <=PV.VALDATE and
+	  PS.DATETO    > PV.VALDATE and
+	  PS.STAT      in ('IU012', 'IU013', 'IU014')
+	where BD.MANDT='200'
+	  and BD.PROC_TYPE='A'
+	  and not(BD.DATE2_END='')
+	  and not(BD.DATE2_END='        ')
+	  and not(BD.DATE2_END='00000000')
+	  and PV.CLT_TST   <=to_timestamp(concat(BD.DATE2_END, BD.TIME2_END), 'YYYYMMDDHH24MISS') 
+	  and PV.CLT_TST_TO> to_timestamp(concat(BD.DATE2_END, BD.TIME2_END), 'YYYYMMDDHH24MISS');
+
+elseif :x_Ver='9' then
+return select PV.PROFILE, :x_Ver as VERSION, BD.BUS_DATE as VALDATE, VAL*power(10, -PH.PROFDECIMALS) as VAL, case PS.STAT when 'IU012' then '46' when 'IU013' then '99' when 'IU014' then '66' else '00' end as STAT
+    from OTEBW_CD.ZGASBUS_DAYS as BD inner join
+	    (
+		select PROFILE, concat(left(VALUEDAY,6),'01') as VALDATE, VAL01 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'02') as VALDATE, VAL02 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'03') as VALDATE, VAL03 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'04') as VALDATE, VAL04 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'05') as VALDATE, VAL05 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'06') as VALDATE, VAL06 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'07') as VALDATE, VAL07 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'08') as VALDATE, VAL08 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'09') as VALDATE, VAL09 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'10') as VALDATE, VAL10 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'11') as VALDATE, VAL11 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'12') as VALDATE, VAL12 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'13') as VALDATE, VAL13 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'14') as VALDATE, VAL14 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'15') as VALDATE, VAL15 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'16') as VALDATE, VAL16 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'17') as VALDATE, VAL17 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'18') as VALDATE, VAL18 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'19') as VALDATE, VAL19 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'20') as VALDATE, VAL20 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'21') as VALDATE, VAL21 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'22') as VALDATE, VAL22 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'23') as VALDATE, VAL23 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'24') as VALDATE, VAL24 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'25') as VALDATE, VAL25 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'26') as VALDATE, VAL26 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'27') as VALDATE, VAL27 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'28') as VALDATE, VAL28 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'29') as VALDATE, VAL29 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'30') as VALDATE, VAL30 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D'
+		  union
+		select PROFILE, concat(left(VALUEDAY,6),'31') as VALDATE, VAL31 as VAL, CLT_TST, CLT_TST_TO
+		  from OTEBW_CD.EPROFVALMONTH_CHG
+		  where MANDT='200' and not CLT_ACTION='D') as PV
+		on PV.VALDATE=BD.BUS_DATE
+	left outer join OTEBW_CD.EPROFHEAD_CHG as PH on
+	  PH.MANDT     = '200' and
+	  PH.PROFILE   = PV.PROFILE and
+	  PH.CLT_TST   <=CURRENT_TIMESTAMP and
+	  PH.CLT_TST_TO> CURRENT_TIMESTAMP
+	left outer join OTEBW_CD.EPROFVALSTAT_CHG as PS on
+	  PS.MANDT     = '200' and
+	  PS.PROFILE   = PV.PROFILE and
+	  PS.CLT_TST   <=CURRENT_TIMESTAMP and
+	  PS.CLT_TST_TO> CURRENT_TIMESTAMP and
+	  PS.DATEFROM  <=PV.VALDATE and
+	  PS.DATETO    > PV.VALDATE and
+	  PS.STAT      in ('IU012', 'IU013', 'IU014')
+	where BD.MANDT='200'
+	  and BD.PROC_TYPE='A'
+	  and not(BD.DATE2_END='')
+	  and not(BD.DATE2_END='        ')
+	  and not(BD.DATE2_END='00000000')
+	  and PV.CLT_TST   <=CURRENT_TIMESTAMP 
+	  and PV.CLT_TST_TO> CURRENT_TIMESTAMP;
+end if;
+
+END;

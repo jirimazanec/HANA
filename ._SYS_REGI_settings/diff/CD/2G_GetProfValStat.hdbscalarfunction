@@ -1,0 +1,11 @@
+FUNCTION "OTEBW_CD"."CD::2G_GetProfValStat"(x_TST timestamp, x_Profile nvarchar(18), x_ValDay nvarchar(8)) 
+	RETURNS y_Stat nvarchar(2)
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER AS
+BEGIN
+select ifnull("OTEBW_CD"."CD::ConvertProfStat"(STAT), '00') into y_Stat from "OTEBW_CD"."CD::1G_EPROFVALSTAT"(:x_TST)
+                 where PROFILE=:x_Profile
+                   and DATEFROM<:x_ValDay
+                   and DATETO>:x_ValDay
+                 with hint(INLINE);
+END;

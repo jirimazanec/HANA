@@ -1,0 +1,36 @@
+// To define an SQL view, you can use the following code.
+// In the example below a schema and 2 tables should exist in sample.test package.
+
+
+schema="OTEBW_CD";
+
+query = " select
+			  PROFVAL60.version,
+			  PROFVAL60.valtime,
+ 	 		  PROFVAL60.val,
+ 	 		  --TO_DATE(UTCTOLOCAL(PROFVAL60.valtime,'CET')) as 
+ 	 		  g_date,
+		      PROFVAL60.g_period,
+ 	 		  PROFVAL60.profile,
+			  elpass.profrole,
+ 	 		  OPM.EXT_UI,
+ 	 		  OPM.ANLART,
+ 	 		  OPM.GRID_ID,
+ 	 		  OPM.MTYPE,
+ 	 		  OPM.dist_rut,
+		      OPM.supp_rut,
+			  OPM.sz_rut,
+			  PROFROLE_UNIT.mass
+ 	 		from 	\"OTEBW_CD\".\"SE_PROFVAL60\" as PROFVAL60  
+ 	 			inner join	\"OTEBW_CD\".\"CD::1E_ELPASS\"(current_timestamp) as elpass 
+ 	 				on elpass.profile = PROFVAL60.profile  
+ 	 			inner join \"OTEBW_CD\".\"PROFROLE_UNIT\" as PROFROLE_UNIT
+ 	 					on PROFROLE_UNIT.profrole = elpass.profrole
+ 	 			inner join	\"OTEBW_CD\".\"CD::1E_OPM_V\" as OPM 
+ 	 				on 	elpass.OBJKEY = OPM.anlage	and
+ 	 					to_char(g_date, 'YYYYMMDD') between OPM.date_from and OPM.date_to
+
+ 	 		where  	PROFVAL60.stat <> '99'
+ 	 		--	and g_date = '01.01.2011'
+ 	 				";
+

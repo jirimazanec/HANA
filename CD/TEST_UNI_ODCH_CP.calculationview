@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="TEST_UNI_ODCH_CP" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="SCRIPT_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" scriptParametersCaseSensitive="true">
+  <descriptions defaultDescription="TEST_UNI_ODCH_CPCH_CP"/>
+  <localVariables>
+    <variable id="X_FR" parameter="true">
+      <descriptions defaultDescription="X_FR"/>
+      <variableProperties datatype="DATE" mandatory="true">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+        <defaultRange/>
+      </variableProperties>
+    </variable>
+    <variable id="X_TO" parameter="true">
+      <descriptions defaultDescription="X_TO"/>
+      <variableProperties datatype="DATE" mandatory="true">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+        <defaultRange/>
+      </variableProperties>
+    </variable>
+  </localVariables>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources/>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:SqlScriptView" id="Script_View">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute datatype="DATE" id="DELIVERYDAY"/>
+        <viewAttribute datatype="NVARCHAR" id="EXTERNALVERSION" length="1"/>
+        <viewAttribute datatype="NVARCHAR" id="PERIOD" length="2"/>
+        <viewAttribute datatype="NVARCHAR" id="PARTIC" length="5"/>
+        <viewAttribute datatype="DECIMAL" id="VOLUME" length="17" scale="3"/>
+        <viewAttribute datatype="DECIMAL" id="VOLUME_AGGR" length="17" scale="3"/>
+        <viewAttribute datatype="NVARCHAR" id="CONCEPTABRV" length="8"/>
+        <viewAttribute datatype="NVARCHAR" id="UNIT" length="3"/>
+        <viewAttribute datatype="NVARCHAR" id="BUYSELL" length="2"/>
+        <viewAttribute datatype="NVARCHAR" id="BUSSTYPE" length="2"/>
+        <viewAttribute datatype="NVARCHAR" id="CREDITDEBET" length="1"/>
+        <viewAttribute datatype="NVARCHAR" id="CALMONTH" length="6"/>
+        <viewAttribute datatype="NVARCHAR" id="CALYEAR" length="4"/>
+        <viewAttribute datatype="NVARCHAR" id="CALWEEK" length="6"/>
+        <viewAttribute datatype="NVARCHAR" id="CALQUARTER" length="5"/>
+        <viewAttribute datatype="NVARCHAR" id="CENY_CURRENCYID" length="5"/>
+        <viewAttribute datatype="NVARCHAR" id="CENY_UNIT" length="3"/>
+        <viewAttribute datatype="DECIMAL" id="SYSIMBALANCE" length="17" scale="3"/>
+        <viewAttribute datatype="DECIMAL" id="SETTLPRICEIMB" length="17" scale="3"/>
+        <viewAttribute datatype="DECIMAL" id="SETTLPRICEANTIIMB" length="17" scale="3"/>
+        <viewAttribute datatype="DECIMAL" id="VOLUME_SIEP" length="17" scale="3"/>
+        <viewAttribute datatype="DECIMAL" id="VOLUME_SIEM" length="17" scale="3"/>
+        <viewAttribute datatype="NVARCHAR" id="IEP_IEM_UNIT" length="3"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <localVariable>#X_FR</localVariable>
+      <localVariable>#X_TO</localVariable>
+      <definition> 
+ /********* Begin Procedure Script ************/ 
+ BEGIN 
+ 	 var_out = select 	odhc_union.*,
+		ceny.CALMONTH,
+	 	ceny.CALYEAR,
+	 	ceny.CALWEEK,
+	 	ceny.CALQUARTER,
+	 	ceny.CURRENCYID as CENY_CURRENCYID,
+	 	ceny.UNIT as CENY_UNIT,
+	 	ceny.SYSIMBALANCE,
+	 	ceny.SETTLPRICEIMB,
+	 	ceny.SETTLPRICEANTIIMB,
+	 	iep_iem.VOLUME_SIEP,
+	 	iep_iem.VOLUME_SIEM,
+	 	iep_iem.UNIT as iep_iem_UNIT
+   from
+	(select   DPLATBY_E.DELIVERYDAY,
+			 DPLATBY_E.EXTERNALVERSION,
+			 DPLATBY_E.PERIOD,
+			 DPLATBY_E.PARTIC,
+			 DPLATBY_E.VOLUME,
+			 0 as VOLUME_AGGR,
+			 DPLATBY_E.CONCEPTABRV,
+			 DPLATBY_E.UNIT,
+			 DPLATBY_E.BUYSELL,
+			 '' as BUSSTYPE,
+			 DPLATBY_E.CREDITDEBET 
+		from &quot;OTEBW_EMTAS&quot;.&quot;EMTAS::BW_DPLATBY_E&quot; as DPLATBY_E
+	UNION ALL
+	select   ERD.DELIVERYDAY,
+			 ERD.EXTERNALVERSION,
+			 ERD.PERIOD,
+			 ERD.PARTIC,
+			 ERD.VOLUME,
+			 0 as VOLUME_AGGR,
+			 '' as CONCEPTABRV,
+			 ERD.UNIT,
+			 ERD.BUYSELL,
+			 ERD.BUSSTYPE,
+			 '' as CREDITDEBET 
+		from &quot;OTEBW_EMTAS&quot;.&quot;EMTAS::BW_KONCOVY_PLAN_ERD&quot; as ERD
+	UNION ALL
+	select   PRFV.G_DATE as DELIVERYDAY,
+			 PRFV.VERSION as EXTERNALVERSION,
+			 PRFV.G_PERIOD as PERIOD,
+			 PRFV.SUPP_RUT as PARTIC,
+			 PRFV.VAL as VOLUME,
+			 0 as VOLUME_AGGR,
+			 PRFV.PROFROLE as CONCEPTABRV,
+			 PRFV.MASS as UNIT,
+			 '' as BUYSELL,
+			 '' as BUSSTYPE,
+			 '' as CREDITDEBET 
+		from &quot;OTEBW_CD&quot;.&quot;CD::2E_PRFV_ODCH_V&quot; as PRFV
+		where PRFV.G_DATE between  :X_FR and :X_TO
+	UNION ALL
+	select   AGGR.DELIVERYDAY,
+			 AGGR.EXTERNALVERSION,
+			 AGGR.PERIOD,
+			 AGGR.PARTIC,
+			 AGGR.VOLUME,
+			 AGGR.VOLUME_AGGR,
+			 AGGR.CONCEPTABRV,
+			 AGGR.UNIT,
+			 AGGR.BUYSELL,
+			 '' as BUSSTYPE,
+			 '' as CREDITDEBET 
+		from &quot;OTEBW_EMTAS&quot;.&quot;EMTAS::BW_ODCHYLKY_AGGR&quot; as AGGR
+		) as odhc_union 
+	inner join &quot;OTEBW_EMTAS&quot;.&quot;EMTAS::BW_ODCHYLKY_CENY&quot; as ceny 
+		on 	odhc_union.DELIVERYDAY = ceny.DELIVERYDAY 
+		and	odhc_union.EXTERNALVERSION = ceny.EXTERNALVERSION
+		and odhc_union.PERIOD = ceny.PERIOD
+		and odhc_union.PARTIC = ceny.PARTIC
+	inner join &quot;OTEBW_EMTAS&quot;.&quot;EMTAS::BW_ODCHYLKY_SUM_IEP_IEM&quot; as iep_iem
+		on 	odhc_union.DELIVERYDAY = iep_iem.DELIVERYDAY 
+		and	odhc_union.EXTERNALVERSION = iep_iem.EXTERNALVERSION
+		and odhc_union.PERIOD = iep_iem.PERIOD;
+
+END /********* End Procedure Script ************/</definition>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Script_View">
+    <descriptions/>
+    <attributes>
+      <attribute id="DELIVERYDAY" order="1">
+        <descriptions defaultDescription="DELIVERYDAY"/>
+        <keyMapping columnObjectName="Script_View" columnName="DELIVERYDAY"/>
+      </attribute>
+      <attribute id="EXTERNALVERSION" order="2">
+        <descriptions defaultDescription="EXTERNALVERSION"/>
+        <keyMapping columnObjectName="Script_View" columnName="EXTERNALVERSION"/>
+      </attribute>
+      <attribute id="PERIOD" order="3">
+        <descriptions defaultDescription="PERIOD"/>
+        <keyMapping columnObjectName="Script_View" columnName="PERIOD"/>
+      </attribute>
+      <attribute id="PARTIC" order="4">
+        <descriptions defaultDescription="PARTIC"/>
+        <keyMapping columnObjectName="Script_View" columnName="PARTIC"/>
+      </attribute>
+      <attribute id="CONCEPTABRV" order="7">
+        <descriptions defaultDescription="CONCEPTABRV"/>
+        <keyMapping columnObjectName="Script_View" columnName="CONCEPTABRV"/>
+      </attribute>
+      <attribute id="UNIT" order="8">
+        <descriptions defaultDescription="UNIT"/>
+        <keyMapping columnObjectName="Script_View" columnName="UNIT"/>
+      </attribute>
+      <attribute id="BUYSELL" order="9">
+        <descriptions defaultDescription="BUYSELL"/>
+        <keyMapping columnObjectName="Script_View" columnName="BUYSELL"/>
+      </attribute>
+      <attribute id="BUSSTYPE" order="10">
+        <descriptions defaultDescription="BUSSTYPE"/>
+        <keyMapping columnObjectName="Script_View" columnName="BUSSTYPE"/>
+      </attribute>
+      <attribute id="CREDITDEBET" order="11">
+        <descriptions defaultDescription="CREDITDEBET"/>
+        <keyMapping columnObjectName="Script_View" columnName="CREDITDEBET"/>
+      </attribute>
+      <attribute id="CALMONTH" order="12">
+        <descriptions defaultDescription="CALMONTH"/>
+        <keyMapping columnObjectName="Script_View" columnName="CALMONTH"/>
+      </attribute>
+      <attribute id="CALYEAR" order="13">
+        <descriptions defaultDescription="CALYEAR"/>
+        <keyMapping columnObjectName="Script_View" columnName="CALYEAR"/>
+      </attribute>
+      <attribute id="CALWEEK" order="14">
+        <descriptions defaultDescription="CALWEEK"/>
+        <keyMapping columnObjectName="Script_View" columnName="CALWEEK"/>
+      </attribute>
+      <attribute id="CALQUARTER" order="15">
+        <descriptions defaultDescription="CALQUARTER"/>
+        <keyMapping columnObjectName="Script_View" columnName="CALQUARTER"/>
+      </attribute>
+      <attribute id="CENY_CURRENCYID" order="16">
+        <descriptions defaultDescription="CENY_CURRENCYID"/>
+        <keyMapping columnObjectName="Script_View" columnName="CENY_CURRENCYID"/>
+      </attribute>
+      <attribute id="CENY_UNIT" order="17">
+        <descriptions defaultDescription="CENY_UNIT"/>
+        <keyMapping columnObjectName="Script_View" columnName="CENY_UNIT"/>
+      </attribute>
+      <attribute id="IEP_IEM_UNIT" order="23">
+        <descriptions defaultDescription="IEP_IEM_UNIT"/>
+        <keyMapping columnObjectName="Script_View" columnName="IEP_IEM_UNIT"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="VOLUME" order="5" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VOLUME"/>
+        <measureMapping columnObjectName="Script_View" columnName="VOLUME"/>
+      </measure>
+      <measure id="VOLUME_AGGR" order="6" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VOLUME_AGGR"/>
+        <measureMapping columnObjectName="Script_View" columnName="VOLUME_AGGR"/>
+      </measure>
+      <measure id="SYSIMBALANCE" order="18" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="SYSIMBALANCE"/>
+        <measureMapping columnObjectName="Script_View" columnName="SYSIMBALANCE"/>
+      </measure>
+      <measure id="SETTLPRICEIMB" order="19" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="SETTLPRICEIMB"/>
+        <measureMapping columnObjectName="Script_View" columnName="SETTLPRICEIMB"/>
+      </measure>
+      <measure id="SETTLPRICEANTIIMB" order="20" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="SETTLPRICEANTIIMB"/>
+        <measureMapping columnObjectName="Script_View" columnName="SETTLPRICEANTIIMB"/>
+      </measure>
+      <measure id="VOLUME_SIEP" order="21" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VOLUME_SIEP"/>
+        <measureMapping columnObjectName="Script_View" columnName="VOLUME_SIEP"/>
+      </measure>
+      <measure id="VOLUME_SIEM" order="22" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="VOLUME_SIEM"/>
+        <measureMapping columnObjectName="Script_View" columnName="VOLUME_SIEM"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

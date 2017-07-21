@@ -1,0 +1,23 @@
+{
+ "metadata": {
+  "delivery_unit": "",
+  "du_vendor": "",
+  "du_version": "",
+  "du_version_patch": "",
+  "du_version_sp": "",
+  "edit": "true",
+  "format_version": "",
+  "is_deletion": "false",
+  "last_changed_at": "2017-07-14 13:23:51.631 GMT+02:00",
+  "type": "2",
+  "version_id": "10"
+ },
+ "name": "Get_Aggr_DateTime",
+ "package": "CD",
+ "suffix": "hdbscalarfunction",
+ "version": {
+  "owner": "MAZANECJ",
+  "versionType": "2",
+  "workspace": ""
+ }
+}

@@ -1,0 +1,32 @@
+PROCEDURE "OTEBW_CD"."CD::TRAN_EPROFVALSTAT" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA OTEBW_CD
+AS BEGIN
+declare i int;
+declare Cnt int;
+declare CLT_TST nvarchar(17);
+declare MANDT NVARCHAR(000003);
+declare PROFILE NVARCHAR(000018);
+declare DATETO NVARCHAR(000008);
+declare TIMETO NVARCHAR(000006);
+declare STAT NVARCHAR(000005);
+declare exit handler for sqlexception begin
+  insert into OTEBW."Log" ("CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") values (::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
+end;
+-- EPROFVALSTAT
+t_ModifEPROFVALSTAT = select * from "OTEBW_CD"."REMOTE_EPROFVALSTAT_CHG" where CLT_PROCESSED = ' ' order by CLT_TST;
+select count(*) into Cnt from :t_ModifEPROFVALSTAT;
+insert into "OTEBW_CD"."EPROFVALSTAT_CHG" select MANDT,PROFILE,DATETO,TIMETO,STAT,DATEFROM,TIMEFROM,INACT,CHGNR,CLT_ACTION,CLT_PROCESSED,TO_TIMESTAMP(CLT_TST, 'YYYYMMDDHH24MISSFF3') AS CLT_TST,TO_TIMESTAMP ('99991231 23:59:59.999', 'YYYYMMDD HH24:MI:SS.FF3') as CLT_TST_TO from :t_ModifEPROFVALSTAT;
+insert into "OTEBW"."Log" ("CurrSchema", "CurrObject", "Cnt", "ErrorMess") values ('OTEBW_CD', 'EPROFVALSTAT', ::rowcount, 'Transfer');
+for i in 1 .. :Cnt do
+  MANDT = :t_ModifEPROFVALSTAT.MANDT[:i];
+  PROFILE = :t_ModifEPROFVALSTAT.PROFILE[:i];
+  DATETO = :t_ModifEPROFVALSTAT.DATETO[:i];
+  TIMETO = :t_ModifEPROFVALSTAT.TIMETO[:i];
+  STAT = :t_ModifEPROFVALSTAT.STAT[:i];
+  CLT_TST = :t_ModifEPROFVALSTAT.CLT_TST[:i];
+  update "OTEBW_CD"."REMOTE_EPROFVALSTAT_CHG" set CLT_PROCESSED = 'X' where MANDT=:MANDT and PROFILE=:PROFILE and DATETO=:DATETO and TIMETO=:TIMETO and STAT=:STAT and CLT_TST=:CLT_TST;
+  update "OTEBW_CD"."EPROFVALSTAT_CHG" set CLT_TST_TO = TO_TIMESTAMP(:CLT_TST, 'YYYYMMDDHH24MISSFF3') where MANDT=:MANDT and PROFILE=:PROFILE and DATETO=:DATETO and TIMETO=:TIMETO and STAT=:STAT and CLT_TST_TO = TO_TIMESTAMP ('99991231 23:59:59.999', 'YYYYMMDD HH24:MI:SS.FF3') and CLT_TST<TO_TIMESTAMP(:CLT_TST, 'YYYYMMDDHH24MISSFF3');
+end for;
+END;
