@@ -1,16 +1,18 @@
-PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_MIG_SMALL_ALL" ( ) 
+PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_MIG_SMALL_ALL" (in IN_load_uid varchar(32) ) 
 	LANGUAGE SQLSCRIPT
 	SQL SECURITY INVOKER 
 	--DEFAULT SCHEMA <default_schema_name>
 	AS
+
 BEGIN
+--declare IN_load_uid NVARCHAR(32);
 /***************************** 
 	Write your procedure logic 
  *****************************/
- 
-truncate table "OTEBW_OZ"."TRANSPORT_SMALL_TABLES_LOG";
 
-CALL "OTEBW_OZ"."OZ::TRAN_OZ_BUT0ID" ( );
+ 
+CALL "OTEBW_OZ"."OZ::TRAN_OZ_BUT000" (  :IN_load_uid );
+/*
 CALL "OTEBW_OZ"."OZ::TRAN_OZ_BUT000" ( );
 CALL "OTEBW_OZ"."OZ::TRAN_OZ_EANL" ( );
 CALL "OTEBW_OZ"."OZ::TRAN_OZ_EANLH" ( );
@@ -35,5 +37,5 @@ CALL "OTEBW_OZ"."OZ::TRAN_OZ_ZOZE_PRICE_LINE" ( );
 CALL "OTEBW_OZ"."OZ::TRAN_OZ_ZOZE_PRICE_LIST" ( );
 CALL "OTEBW_OZ"."OZ::TRAN_OZ_ZOZE_SOURCE" ( );
 CALL "OTEBW_OZ"."OZ::TRAN_OZ_ZOZE_VALUE_TYPES" ( );
-
+*/
 END;

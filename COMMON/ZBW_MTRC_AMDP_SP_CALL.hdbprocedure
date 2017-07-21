@@ -1,4 +1,4 @@
-PROCEDURE "OTEBW_OZ"."COMMON::ZBW_MTRC_AMDP_SP_CALL" ( in IN_schemeName varchar(32),  in IN_spName varchar(32) ) 
+PROCEDURE "OTEBW_OZ"."COMMON::ZBW_MTRC_AMDP_SP_CALL" ( in IN_schemeName varchar(32),  in IN_spName varchar(32), in IN_load_uid varchar(32) ) 
 	LANGUAGE SQLSCRIPT as
 	
 BEGIN
