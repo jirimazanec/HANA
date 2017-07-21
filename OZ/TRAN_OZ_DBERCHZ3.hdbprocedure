@@ -1,4 +1,4 @@
-PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_DBERCHZ3" ( ) 
+PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_DBERCHZ3" (in IN_load_uid nvarchar(32)) 
 	LANGUAGE SQLSCRIPT
 	SQL SECURITY INVOKER 
 	--DEFAULT SCHEMA <default_schema_name>
@@ -52,7 +52,10 @@ declare V_NETTOBTR_L DECIMAL(000017,000000);
 declare N_NETTOBTR_L DECIMAL(000014,000000);
 
 declare exit handler for sqlexception begin
-  insert into OTEBW."Log" ("CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") values (::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
+
+insert into "SAPABAP1"."ZBW_LOAD_LOG" ("MANDT", "TST", "LOAD_UID", "CNT", "CURR_SCHEMA", "CURR_OBJECT", "ERROR_CODE", "ERROR_MESS" )
+values
+('400', TO_VARCHAR(CURRENT_TIMESTAMP,'YYYYMMDDHHMMSS'), :IN_load_uid, 0, ::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
 end;
 
 -- DBERCHZ3
@@ -60,7 +63,10 @@ end;
 t_ModifDBERCHZ3 = select * from "OTEBW_OZ"."REMOTE_DBERCHZ3_CHG" where CLT_PROCESSED = ' ' order by CLT_TST;
 select count(*) into Cnt from :t_ModifDBERCHZ3;
 insert into "OTEBW_OZ"."DBERCHZ3_CHG" select MANDT,BELNR,BELZEILE,MWSKZ,ERMWSKZ,NETTOBTR,TWAERS,PREISTUF,PREISTYP,PREIS,PREISZUS,VONZONE,BISZONE,ZONENNR,PREISBTR,MNGBASIS,PREIGKL,URPREIS,PREIADD,PREIFAKT,OPMULT,TXDAT_KK,PRCTR,KOSTL,PS_PSP_PNR,AUFNR,PAOBJNR,PAOBJNR_S,GSBER,APERIODIC,GROSSGROUP,BRUTTOZEILE,BUPLA,LINE_CLASS,PREISART,SEGMENT,V_NETTOBTR_L,N_NETTOBTR_L,CLT_ACTION,CLT_PROCESSED,TO_TIMESTAMP(CLT_TST, 'YYYYMMDDHH24MISSFF3') AS CLT_TST,TO_TIMESTAMP ('99991231 23:59:59.999', 'YYYYMMDD HH24:MI:SS.FF3') as CLT_TST_TO from :t_ModifDBERCHZ3;
-insert into "OTEBW"."Log" ("CurrSchema", "CurrObject", "Cnt", "ErrorMess") values ('OTEBW_OZ', 'DBERCHZ3', ::rowcount, 'Transfer');
+insert into "SAPABAP1"."ZBW_LOAD_LOG" ("MANDT", "TST", "LOAD_UID", "CNT", "CURR_SCHEMA", "CURR_OBJECT", "ERROR_CODE", "ERROR_MESS") 
+values
+('400',TO_VARCHAR(CURRENT_TIMESTAMP,'YYYYMMDDHHMMSS'), :IN_load_uid, ::rowcount, ::current_object_schema, ::current_object_name, 0, 'Transfer');
+commit;
 
 for i in 1 .. :Cnt do
   MANDT = :t_ModifDBERCHZ3.MANDT[:i];

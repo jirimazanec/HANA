@@ -1,4 +1,4 @@
-PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_ERDK" ( ) 
+PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_ERDK" (in IN_load_uid nvarchar(32))
 	LANGUAGE SQLSCRIPT
 	SQL SECURITY INVOKER 
 	--DEFAULT SCHEMA <default_schema_name>
@@ -82,9 +82,12 @@ declare OUTSORT1 NVARCHAR(000001);
 declare ZSZLCAT NVARCHAR(000008);
 declare NUMCOPY NVARCHAR(000005);
 declare MOUNTED NVARCHAR(000001);
-declare exit handler for sqlexception 
-begin
-  insert into OTEBW."Log" ("CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") values (::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
+
+declare exit handler for sqlexception begin
+
+insert into "SAPABAP1"."ZBW_LOAD_LOG" ("MANDT", "TST", "LOAD_UID", "CNT", "CURR_SCHEMA", "CURR_OBJECT", "ERROR_CODE", "ERROR_MESS" )
+values
+('400', TO_VARCHAR(CURRENT_TIMESTAMP,'YYYYMMDDHHMMSS'), :IN_load_uid, 0, ::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
 end;
 
 -- ERDK
@@ -92,7 +95,10 @@ end;
 t_ModifERDK = select * from "OTEBW_OZ"."REMOTE_ERDK_CHG" where CLT_PROCESSED = ' ' order by CLT_TST;
 select count(*) into Cnt from :t_ModifERDK;
 insert into "OTEBW_OZ"."ERDK_CHG" select MANDT,OPBEL,DRUCKDAT,FAEDN,FAEDS,SKTPZ,BUDAT,BLDAT,STOKZ,INTOPBEL,ERDZ_V,ERDR_V,ERDO_V,ERDB_V,ERDU_V,ERDTS_V,FICA_V,TOTAL_AMNT,TOTAL_WAER,TOTAL_AMNT_USE,PYMET,ZSBTR,ZLSCH,NRZAS,PARTNER,VKONT,PORTION,ABRVORG,FORMKEY,FIKEY,TOBRELEASD,SIMULATED,INVOICED,ABWVK,ABWBL,ERGRD,LANGU,INVOICING_PARTY,ERDAT,ERNAM,AEDAT,AENAM,BEGRU,LOEVM,VERART,STO_BUDAT,STO_OPBEL,ICREASON,MAZAE,ITEMS_ARCHIVED,EXKID,EXBEL,MAZAE_ABS,PRINTLOCK,EDIDISPATCH,EDISENDDATE,TAXDATE,CREATION_TIME,BILLING_PERIOD,OSB_GROUP,ZZREVERSE_DOC,ZZDUE_DATE1,ZZDUE_DATE2,ZZ_ODL_PRIJEMCE,REVLOCK,SEPA_PRENOT,INVDOCNO,SELECTION_DATE,OUTSORT1,ZSZLCAT,NUMCOPY,MOUNTED,CLT_ACTION,CLT_PROCESSED,TO_TIMESTAMP(CLT_TST, 'YYYYMMDDHH24MISSFF3') AS CLT_TST,TO_TIMESTAMP ('99991231 23:59:59.999', 'YYYYMMDD HH24:MI:SS.FF3') as CLT_TST_TO from :t_ModifERDK;
-insert into "OTEBW"."Log" ("CurrSchema", "CurrObject", "Cnt", "ErrorMess") values ('OTEBW_OZ', 'ERDK', ::rowcount, 'Transfer');
+insert into "SAPABAP1"."ZBW_LOAD_LOG" ("MANDT", "TST", "LOAD_UID", "CNT", "CURR_SCHEMA", "CURR_OBJECT", "ERROR_CODE", "ERROR_MESS") 
+values
+('400',TO_VARCHAR(CURRENT_TIMESTAMP,'YYYYMMDDHHMMSS'), :IN_load_uid, ::rowcount, ::current_object_schema, ::current_object_name, 0, 'Transfer');
+commit;
 
 for i in 1 .. :Cnt do
   MANDT = :t_ModifERDK.MANDT[:i];

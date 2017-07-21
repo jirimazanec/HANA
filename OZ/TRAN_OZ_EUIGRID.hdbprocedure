@@ -1,4 +1,4 @@
-PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_EUIGRID" ( ) 
+PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_EUIGRID" (in IN_load_uid nvarchar(32))
 	LANGUAGE SQLSCRIPT
 	SQL SECURITY INVOKER 
 	--DEFAULT SCHEMA <default_schema_name>
@@ -9,7 +9,10 @@ BEGIN
  *****************************/
  
 declare exit handler for sqlexception begin
-  insert into OTEBW."Log" ("CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") values (::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
+
+insert into "SAPABAP1"."ZBW_LOAD_LOG" ("MANDT", "TST", "LOAD_UID", "CNT", "CURR_SCHEMA", "CURR_OBJECT", "ERROR_CODE", "ERROR_MESS" )
+values
+('400', TO_VARCHAR(CURRENT_TIMESTAMP,'YYYYMMDDHHMMSS'), :IN_load_uid, 0, ::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
 end;
 
 truncate table "OTEBW_OZ"."EUIGRID";
@@ -31,7 +34,9 @@ insert into "OTEBW_OZ"."EUIGRID" select
 from "OTEBW_OZ"."REMOTE_EUIGRID";
 commit;
 
-insert into "OTEBW"."Log" ( "CurrSchema", "CurrObject", "Cnt", "ErrorMess") values ('OTEBW_OZ', 'EUIGRID', ::rowcount, 'Transfer');
+insert into "SAPABAP1"."ZBW_LOAD_LOG" ("MANDT", "TST", "LOAD_UID", "CNT", "CURR_SCHEMA", "CURR_OBJECT", "ERROR_CODE", "ERROR_MESS") 
+values
+('400',TO_VARCHAR(CURRENT_TIMESTAMP,'YYYYMMDDHHMMSS'), :IN_load_uid, ::rowcount, ::current_object_schema, ::current_object_name, 0, 'Transfer');
 commit;
  
 END;

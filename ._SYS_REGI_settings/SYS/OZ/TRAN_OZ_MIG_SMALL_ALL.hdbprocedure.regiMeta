@@ -1,6 +1,6 @@
 {
  "metadata": {
-  "activated_at": "2017-07-21 11:28:14.971 GMT+02:00",
+  "activated_at": "2017-07-21 15:15:33.412 GMT+02:00",
   "activated_by": "MAZANECJ",
   "change_number": "0",
   "delivery_unit": "",
@@ -13,7 +13,7 @@
   "object_status": "0",
   "released_at": "null",
   "type": "1",
-  "version_id": "12"
+  "version_id": "18"
  },
  "version": {
   "versionType": "1"

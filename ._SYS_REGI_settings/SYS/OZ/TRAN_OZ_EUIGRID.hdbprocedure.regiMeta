@@ -1,9 +1,6 @@
 {
- "name": "TRAN_OZ_EUIGRID",
- "package": "OZ",
- "suffix": "hdbprocedure",
  "metadata": {
-  "activated_at": "2017-07-18 11:15:56.732 GMT+02:00",
+  "activated_at": "2017-07-21 14:44:15.113 GMT+02:00",
   "activated_by": "MAZANECJ",
   "change_number": "0",
   "delivery_unit": "",
@@ -16,9 +13,12 @@
   "object_status": "0",
   "released_at": "null",
   "type": "1",
-  "version_id": "10"
+  "version_id": "11"
  },
  "version": {
   "versionType": "1"
- }
+ },
+ "package": "OZ",
+ "name": "TRAN_OZ_EUIGRID",
+ "suffix": "hdbprocedure"
 }

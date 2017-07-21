@@ -1,4 +1,4 @@
-PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_ETTIFN" ( ) 
+PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_ETTIFN" (in IN_load_uid nvarchar(32))
 	LANGUAGE SQLSCRIPT
 	SQL SECURITY INVOKER 
 	--DEFAULT SCHEMA <default_schema_name>
@@ -38,7 +38,10 @@ declare BETRAG DECIMAL(000013,000000);
 declare WAERS NVARCHAR(000005);
 
 declare exit handler for sqlexception begin
-  insert into OTEBW."Log" ("CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") values (::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
+
+insert into "SAPABAP1"."ZBW_LOAD_LOG" ("MANDT", "TST", "LOAD_UID", "CNT", "CURR_SCHEMA", "CURR_OBJECT", "ERROR_CODE", "ERROR_MESS" )
+values
+('400', TO_VARCHAR(CURRENT_TIMESTAMP,'YYYYMMDDHHMMSS'), :IN_load_uid, 0, ::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
 end;
 
 -- ETTIFN
@@ -46,8 +49,10 @@ end;
 t_ModifETTIFN = select * from "OTEBW_OZ"."REMOTE_ETTIFN_CHG" where CLT_PROCESSED = ' ' order by CLT_TST;
 select count(*) into Cnt from :t_ModifETTIFN;
 insert into "OTEBW_OZ"."ETTIFN_CHG" select MANDT,ANLAGE,OPERAND,SAISON,AB,ABLFDNR,BIS,BELNR,MBELNR,MAUSZUG,ALTBIS,INAKTIV,MANAEND,TARIFART,KONDIGR,WERT1,WERT2,STRING1,STRING2,STRING3,STRING4,ERSATZWERT,BETRAG,WAERS,CLT_ACTION,CLT_PROCESSED,TO_TIMESTAMP(CLT_TST, 'YYYYMMDDHH24MISSFF3') AS CLT_TST,TO_TIMESTAMP ('99991231 23:59:59.999', 'YYYYMMDD HH24:MI:SS.FF3') as CLT_TST_TO from :t_ModifETTIFN;
-insert into "OTEBW"."Log" ("CurrSchema", "CurrObject", "Cnt", "ErrorMess") values ('OTEBW_OZ', 'ETTIFN', ::rowcount, 'Transfer');
-
+insert into "SAPABAP1"."ZBW_LOAD_LOG" ("MANDT", "TST", "LOAD_UID", "CNT", "CURR_SCHEMA", "CURR_OBJECT", "ERROR_CODE", "ERROR_MESS") 
+values
+('400',TO_VARCHAR(CURRENT_TIMESTAMP,'YYYYMMDDHHMMSS'), :IN_load_uid, ::rowcount, ::current_object_schema, ::current_object_name, 0, 'Transfer');
+commit;
 
 for i in 1 .. :Cnt do
   MANDT = :t_ModifETTIFN.MANDT[:i];

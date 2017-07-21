@@ -1,10 +1,8 @@
-PROCEDURE "OTEBW_OZ"."COMMON::ZBW_MTRC_AMDP_SP_CALL" ( in IN_schemeName varchar(32),  in IN_spName varchar(32), in IN_load_uid varchar(32) ) 
+PROCEDURE "OTEBW_OZ"."COMMON::ZBW_MTRC_AMDP_SP_CALL" ( in IN_schemeName nvarchar(32),  in IN_spName nvarchar(32), in IN_load_uid nvarchar(32) ) 
 	LANGUAGE SQLSCRIPT as
 	
 BEGIN
 
-EXECUTE IMMEDIATE  'CALL "'|| :IN_schemeName ||'"."' || :IN_spName || '"';
-
---EXECUTE IMMEDIATE 'CALL "OTEBW_OZ"."OZ::TRAN_OZ_EGRID"';
+EXECUTE IMMEDIATE  'CALL "'|| :IN_schemeName ||'"."' || :IN_spName ||'" ( ' || Char(39) || :IN_load_uid || Char(39) ||  ' )';
 
 END;
