@@ -1,8 +1,5 @@
 {
  "metadata": {
-  "activated_at": "2017-07-14 14:13:56.459 GMT+02:00",
-  "activated_by": "MAZANECJ",
-  "change_number": "0",
   "delivery_unit": "",
   "du_vendor": "",
   "du_version": "",
@@ -10,15 +7,17 @@
   "du_version_sp": "",
   "edit": "true",
   "format_version": "",
-  "object_status": "0",
-  "released_at": "null",
-  "type": "1",
-  "version_id": "5"
+  "is_deletion": "false",
+  "last_changed_at": "2017-07-21 16:39:30.846 GMT+02:00",
+  "type": "2",
+  "version_id": "6"
  },
- "name": "Get_Aggr_DateTime2",
  "package": "CD",
+ "name": "Get_Aggr_DateTime2",
  "suffix": "hdbscalarfunction",
  "version": {
-  "versionType": "1"
+  "versionType": "2",
+  "owner": "MAZANECJ",
+  "workspace": ""
  }
 }

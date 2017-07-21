@@ -8,16 +8,16 @@
   "edit": "true",
   "format_version": "",
   "is_deletion": "false",
-  "last_changed_at": "2017-07-14 13:23:02.588 GMT+02:00",
+  "last_changed_at": "2017-07-21 16:39:39.285 GMT+02:00",
   "type": "2",
   "version_id": "2"
  },
- "name": "1G_EPROFVALMONTH",
  "package": "CD",
+ "name": "1G_EPROFVALMONTH",
  "suffix": "hdbtablefunction",
  "version": {
-  "owner": "MAZANECJ",
   "versionType": "2",
+  "owner": "MAZANECJ",
   "workspace": ""
  }
 }

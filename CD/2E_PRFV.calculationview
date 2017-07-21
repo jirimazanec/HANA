@@ -55,10 +55,11 @@ v_FR= LOCALTOUTC( to_timestamp(concat(:x_FR ,' 00:00:00'),'YYYY-MM-DD HH24:MI:SS
 v_TO= LOCALTOUTC( to_timestamp(concat(:x_TO ,' 23:59:59'),'YYYY-MM-DD HH24:MI:SS'),'CET');
 
 var_out = select
-			  PROFVAL60.version,
+			  			  PROFVAL60.version,
 			  PROFVAL60.valtime,
  	 		  PROFVAL60.val,
- 	 		  TO_DATE(UTCTOLOCAL(PROFVAL60.valtime,'CET')) as g_date,
+ 	 		  --TO_DATE(UTCTOLOCAL(PROFVAL60.valtime,'CET')) as 
+ 	 		  g_date,
 		      PROFVAL60.g_period,
  	 		  PROFVAL60.profile,
 			  elpass.profrole,
@@ -69,15 +70,18 @@ var_out = select
  	 		  OPM.dist_rut,
 		      OPM.supp_rut,
 			  OPM.sz_rut,
- 	 		  (select mass from &quot;OTEBW_CD&quot;.&quot;CD::1E_EPROFHEAD&quot; (current_timestamp) where profile = PROFVAL60.profile ) as mass
-
+			  PROFROLE_UNIT.mass
  	 		from 	&quot;OTEBW_CD&quot;.&quot;SE_PROFVAL60&quot; as PROFVAL60  
  	 			inner join	&quot;OTEBW_CD&quot;.&quot;CD::1E_ELPASS&quot;(current_timestamp) as elpass 
  	 				on elpass.profile = PROFVAL60.profile  
- 	 			inner join	&quot;OTEBW_CD&quot;.&quot;CD::1E_OPM_E&quot; as OPM 
- 	 				on 	elpass.OBJKEY = OPM.anlage  and
- 	 					OPM.date_from &lt;= TO_DATE(UTCTOLOCAL(PROFVAL60.valtime,'CET')) and
- 	 					OPM.date_to >= TO_DATE(UTCTOLOCAL(PROFVAL60.valtime,'CET'))
+ 	 			inner join &quot;OTEBW_CD&quot;.&quot;PROFROLE_UNIT&quot; as PROFROLE_UNIT
+ 	 					on PROFROLE_UNIT.profrole = elpass.profrole
+ 	 			inner join	&quot;OTEBW_CD&quot;.&quot;CD::1E_OPM_V&quot; as OPM 
+ 	 				on 	elpass.OBJKEY = OPM.anlage	and
+ 	 					to_char(g_date, 'YYYYMMDD') between OPM.date_from and OPM.date_to
+
+ --	 					OPM.date_from &lt;= TO_DATE(UTCTOLOCAL(PROFVAL60.valtime,'CET')) and
+ --	 					OPM.date_to >= TO_DATE(UTCTOLOCAL(PROFVAL60.valtime,'CET'))
  	 				
  	 		where  	PROFVAL60.valtime >= V_FR
 	 			and PROFVAL60.valtime &lt;= V_TO

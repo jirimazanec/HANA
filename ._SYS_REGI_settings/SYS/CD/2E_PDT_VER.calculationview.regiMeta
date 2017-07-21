@@ -1,8 +1,5 @@
 {
  "metadata": {
-  "activated_at": "2017-07-14 16:05:45.854 GMT+02:00",
-  "activated_by": "MAZANECJ",
-  "change_number": "0",
   "delivery_unit": "",
   "du_vendor": "",
   "du_version": "",
@@ -10,15 +7,17 @@
   "du_version_sp": "",
   "edit": "true",
   "format_version": "",
-  "object_status": "0",
-  "released_at": "null",
-  "type": "1",
-  "version_id": "30"
+  "is_deletion": "false",
+  "last_changed_at": "2017-07-21 16:39:21.656 GMT+02:00",
+  "type": "2",
+  "version_id": "31"
  },
- "name": "2E_PDT_VER",
  "package": "CD",
+ "name": "2E_PDT_VER",
  "suffix": "calculationview",
  "version": {
-  "versionType": "1"
+  "versionType": "2",
+  "owner": "MAZANECJ",
+  "workspace": ""
  }
 }

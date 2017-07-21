@@ -1,6 +1,6 @@
 {
  "metadata": {
-  "activated_at": "2017-07-14 14:12:28.501 GMT+02:00",
+  "activated_at": "2017-07-21 16:40:12.168 GMT+02:00",
   "activated_by": "MAZANECJ",
   "change_number": "0",
   "delivery_unit": "",
@@ -13,12 +13,12 @@
   "object_status": "0",
   "released_at": "null",
   "type": "1",
-  "version_id": "2"
+  "version_id": "3"
  },
- "name": "",
- "package": "CD",
- "suffix": "xsaccess",
  "version": {
   "versionType": "1"
- }
+ },
+ "package": "CD",
+ "name": "",
+ "suffix": "xsaccess"
 }
