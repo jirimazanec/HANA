@@ -1,0 +1,32 @@
+schema="OTEBW_EMTAS";
+
+query = "select to_date(DELIVERYDAY) as DELIVERYDAY,
+				COODTYPE,
+				COUPLINGMODE,
+				map(SECONDAUCTION,'Y','A','N','N','C','C') as SECONDAUCTION,
+				ATCRECEIVED,
+				ATCPUBLIC,
+				GTC1AUCTION,
+				GTO2AUCTION,
+				GTC2AUCTION,
+				RESULTPUBLIC,
+				MINPRICE,
+				MAXPRICE,
+				MINVOLUME,
+				MAXVOLUME,
+				CZLOWLIMIT,
+				CZUPLIMIT,
+				SKLOWLIMIT,
+				SKUPLIMIT,
+				HULOWLIMIT,
+				HUUPLIMIT,
+				ROLOWLIMIT,
+				ROUPLIMIT,
+				to_varchar(to_date(DELIVERYDAY),'YYYYMM') as CALMONTH,
+				to_varchar(to_date(DELIVERYDAY),'YYYY') as CALYEAR,
+				'MWH' as UNIT,
+				'EUR' as CURRENCY
+from BW_DM_CALENDAR"
+;
+
+depends_on_table=["OTEBW_EMTAS::BW_DM_CALENDAR"];

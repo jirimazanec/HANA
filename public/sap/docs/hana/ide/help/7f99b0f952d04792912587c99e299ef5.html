@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="SAP HANA Extended Application Services (SAP HANA XS) provides the SAP HANA Web-based Development Workbench that you can use to build and test development artifacts in the SAP HANA environment."/>
+<meta name="description" content="SAP HANA Extended Application Services (SAP HANA XS) provides the SAP HANA Web-based Development Workbench that you can use to build and test development artifacts in the SAP HANA environment."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=7995826946703003"/>
+<title>SAP HANA Web-Based Development Workbench</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio7f99b0f952d04792912587c99e299ef5";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio7f99b0f952d04792912587c99e299ef5">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">SAP HANA Web-Based Development Workbench</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">SAP HANA Extended Application Services (SAP HANA XS) provides the SAP HANA Web-based
+		Development Workbench that you can use to build and test development artifacts in the SAP
+		HANA environment.</p>
+
+		<p class="p">The SAP HANA Web-based Development Workbench allows you to develop entire applications in
+			a Web browser without having to install any development tools and is therefore a quick
+			and easy alternative to using the SAP HANA studio for developing native applications for
+			SAP HANA XS. It provides an intuitive user interface and simplifies development by
+			providing many convenient functions. For example, it includes a wizard for creating
+			applications and automatically generates the application descriptors (the
+				<span class="ph filepath">.xsapp</span> and <span class="ph filepath">.xsaccess</span> files) that SAP HANA
+			applications are required to have.</p>
+
+		<p class="p">The SAP HANA Web-based Development Workbench is available on the SAP HANA XS Web server
+			at the following URL:</p>
+
+		<p class="p">
+			<span class="ph filepath">http://<var class="keyword varname">&lt;WebServerHost&gt;</var>:80<var class="keyword varname">&lt;SAPHANAinstance&gt;</var>/sap/hana/ide</span></p>
+
+		<div class="p">
+			<div class="note note"><span class="notetitle">Note</span> The SAP HANA Web-based Development Workbench supports Microsoft Internet Explorer
+				(10+), Mozilla Firefox, and Google Chrome Web browsers.</div>
+
+		</div>
+
+		<div class="section"><div class="section_title">Required Roles</div><div type="Required Roles">
+			
+			<p class="p">Before you start using the SAP HANA Web-based Development Workbench, the SAP HANA
+				administrator must set up a user account for you in the database and assign the
+				developer roles you require for the specific tools:</p>
+
+			<div class="p">
+				
+<div class="table-wrapper tablenoborder"><table summary="" id="loio7f99b0f952d04792912587c99e299ef5__table_dz3_szy_1m" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="17.36111111111111%"/><col width="49.30555555555556%"/><col width="33.333333333333336%"/></colgroup>
+
+						
+						
+						
+						<thead class="thead" align="left">
+							<tr class="row">
+								<th class="entry" valign="top" width="17.36111111111111%" id="d2136540e69">Tool</th>
+
+								<th class="entry" valign="top" width="49.30555555555555%" id="d2136540e72">Description</th>
+
+								<th class="entry" valign="top" width="33.33333333333333%" id="d2136540e75">Required Role</th>
+
+							</tr>
+
+						</thead>
+
+						<tbody class="tbody">
+							<tr class="row">
+								<td class="entry" rowspan="2" valign="top" width="17.36111111111111%" headers="d2136540e69 ">Editor</td>
+
+								<td class="entry" valign="top" width="49.30555555555555%" headers="d2136540e72 ">Inspect, create, change, delete and activate <span class="ph pname">SAP
+										HANA</span> repository objects</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2136540e75 "><span class="ph uicontrol">sap.hana.ide.roles::EditorDeveloper</span></td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="49.30555555555555%" headers="d2136540e72 ">Debug server-side JavaScript code</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2136540e75 "><span class="ph uicontrol">sap.hana.xs.debugger::Debugger</span>
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="17.36111111111111%" headers="d2136540e69 ">Catalog</td>
+
+								<td class="entry" valign="top" width="49.30555555555555%" headers="d2136540e72 ">Create, edit, execute and manage SQL catalog artifacts in the
+										<span class="ph pname">SAP HANA</span> database</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2136540e75 "><span class="ph uicontrol">sap.hana.ide.roles::CatalogDeveloper</span></td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="17.36111111111111%" headers="d2136540e69 ">Security</td>
+
+								<td class="entry" valign="top" width="49.30555555555555%" headers="d2136540e72 ">Create users and user roles</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2136540e75 "><span class="ph uicontrol">sap.hana.ide.roles::SecurityAdmin</span></td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="17.36111111111111%" headers="d2136540e69 ">Traces</td>
+
+								<td class="entry" valign="top" width="49.30555555555555%" headers="d2136540e72 ">View and download <span class="ph pname">SAP HANA</span> trace files and set trace levels</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2136540e75 "><span class="ph uicontrol">sap.hana.ide.roles::TraceViewer</span></td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" colspan="3" valign="top" headers="d2136540e69 d2136540e72 d2136540e75 ">
+									<div class="note note"><span class="notetitle">Note</span> The parent role <span class="ph uicontrol">sap.hana.ide.roles::Developer</span> allows you to
+										use all tools included in the SAP HANA Web-based Development
+										Workbench. To use the debugging features, however, you also
+										need to be assigned the
+											<span class="ph uicontrol">sap.hana.xs.debugger::Debugger</span>
+										role. </div>
+
+								</td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+</div>
+
+			</div>
+
+		</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?2d6b7d4aafeb4165a235f94efdde673a.html" target="_top" title="SAP HANA Web-based Development Workbench includes an all-purpose editor tool that enables you to maintain and run design-time objects in the SAP HANA Repository.">SAP HANA Web-based Development Workbench: Editor</a></div>
+<div><a class="link" href="default.html?6d0f9a91be984a03be91502061e70b75.html" target="_top" title="SAP HANA Web-based Development Workbench includes a catalog tool that enables you to develop and maintain SQL catalog objects in the SAP HANA database.">SAP HANA Web-based Development Workbench: Catalog</a></div>
+<div><a class="link" href="default.html?fc230a7d3cab45e4b57e0ca19b68e81f.html" target="_top" title="SAP HANA Web-based Development Workbench includes a trace tool that enables you to view the SAP HANA trace files.">SAP HANA Web-based Development Workbench: Trace</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="SAP HANA Web-Based Development Workbench";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

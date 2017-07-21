@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="CDS supports the use of Geographic Information Systems (GIS) functions and element types in CDS-compliant entities and views."/>
+<meta name="description" content="CDS supports the use of Geographic Information Systems (GIS) functions and element types in CDS-compliant entities and views."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=9700471797915511"/>
+<title>Spatial Types and Functions</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio3c6980ab6ddb45f7bf15ef67a461258e";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio3c6980ab6ddb45f7bf15ef67a461258e">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Spatial Types and Functions</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">CDS supports the use of Geographic Information Systems (GIS) functions and element types
+		in CDS-compliant entities and views.</p>
+
+		<p class="p">Spatial data is data that describes the position, shape, and orientation of objects in a
+			defined space; the data is represented as two-dimensional geometries in the form of
+			points, line strings, and polygons. The following examples shows how to use the spatial
+			function <samp class="ph codeph">ST_Distance</samp> in a CDS view. The underlying spatial data used in
+			the view is defined in a CDS entity using the type <samp class="ph codeph">ST_POINT</samp>.</p>
+
+		<p class="p">The following example, the CDS entity <samp class="ph codeph">Address</samp> is used to store
+			geo-spatial coordinates in element <samp class="ph codeph">loc</samp> of type
+				<samp class="ph codeph">ST_POINT</samp>: </p>
+
+		<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">namespace samples;
+@Schema: 'MYSCHEMA'
+context Spatial {
+    entity Person {
+        key id : Integer;
+        name : String(100);
+        homeAddress : Association[1] to Address;
+        officeAddress : Association[1] to Address;
+    };
+    entity Address {
+        key id : Integer;
+        street_number : Integer;
+        street_name : String(100);
+        zip : String(10);
+        city : String(100);
+        loc : hana.ST_POINT(4326);
+    };
+    view GeoView1 as select from Person {
+        name,
+        homeAddress.street_name || ', ' || homeAddress.city as home,
+        officeAddress.street_name || ', ' || officeAddress.city as office,
+        round( homeAddress.loc.ST_Distance(officeAddress.loc, 'meter')/1000, 1) as distanceHomeToWork,
+        round( homeAddress.loc.ST_Distance(NEW ST_POINT(8.644072, 49.292910), 'meter')/1000, 1) as distFromSAP03
+    };
+};</pre></div>
+
+		</div>
+
+		<p class="p">The view <samp class="ph codeph">GeoView1</samp> is used to display a list of all persons using the spatial
+			function <samp class="ph codeph">ST_Distance</samp> to include information such as the distance
+			between each person's home and business address (<samp class="ph codeph">distanceHomeToWork</samp>),
+			and the distance between their home address and the building SAP03
+				(<samp class="ph codeph">distFromSAP03</samp>). The value for both distances is measured in
+			kilometers. </p>
+
+		<div class="p">
+			<div class="note caution"><span class="cautiontitle">Caution</span> (<span class="ph emphasis emphasis">*</span>) <span class="ph">SAP HANA server software and tools can be used
+        for several SAP HANA platform and options scenarios as well as the respective capabilities
+        used in these scenarios. The availability of these is based on the available SAP HANA
+        licenses and the SAP HANA landscape, including the type and version of the back-end systems
+        the SAP HANA administration and development tools are connected to. There are several types
+        of licenses available for SAP HANA. Depending on your SAP HANA installation license type,
+        some of the features and tools described in the SAP HANA platform documentation may only be
+        available in the SAP HANA options and capabilities, which may be released independently of
+        an SAP HANA Platform Support Package Stack (SPS). Although various features included in SAP
+        HANA options and capabilities are cited in the SAP HANA platform documentation, each SAP
+        HANA edition governs the options and capabilities available. Based on this, customers do not
+        necessarily have the right to use features included in SAP HANA options and capabilities.
+        For customers to whom these license restrictions apply, the use of features included in SAP
+        HANA options and capabilities in a production system requires purchasing the corresponding
+        software license(s) from SAP. The documentation for the SAP HANA options is available in SAP
+        Help Portal. If you have additional questions about what your particular license provides,
+        or wish to discuss licensing features available in SAP HANA options, please contact your SAP
+        account team representative.</span></div>
+
+		</div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?1f122dda87664cd8a5b7e827e380ba9b.html" target="_top" title="A view is a virtual table based on the dynamic results returned in response to an SQL statement. SAP HANA Extended Application Services (SAP HANA XS) enables you to use CDS syntax to create a database view as a design-time file in the repository.">Create a View in CDS</a></div>
+<div><a class="link" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html" target="_top" title="SAP HANA XS includes a dedicated, CDS-compliant syntax, which you must adhere to when using a CDS document to define a view as a design-time artifact.">CDS View Syntax Options</a></div>
+<div><a class="link" href="default.html?ad036c56b5e545ae8b31ece0ab95379f.html" target="_top" title="The entity is the core design-time artifact for persistence model definition using the CDS syntax.">CDS Entity Syntax Options</a></div>
+<div><a class="link" href="default.html?cf394efd3fb4400f9c09d10315028515.html" target="_top" title="In the Data Definition Language (DDL), primitive (or core) data types are the basic building blocks that you use to define entities or structure types with DDL.">CDS Primitive Data Types</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Spatial Types and Functions";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

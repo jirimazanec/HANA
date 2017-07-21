@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Maintain run time configurations for jobs and job schedules in SAP HANA XS advanced."/>
+<meta name="description" content="Maintain run time configurations for jobs and job schedules in SAP HANA XS advanced."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=13970525331808792"/>
+<title>Maintain Jobs and Job Schedules in XS Advanced</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio791a171998384f029ae544f0b266cecc";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio791a171998384f029ae544f0b266cecc">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Maintain Jobs and Job Schedules in XS Advanced</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">Maintain run time configurations for jobs and job schedules in SAP HANA XS
+		advanced.</p>
+
+		<div class="section prereq p"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Prerequisites</h2></div>
+			<ul class="ul" id="loio791a171998384f029ae544f0b266cecc__ul_xyv_rbn_yt">
+				<li class="li">
+					<p class="p">The service broker and the service instance for the Job Scheduler service are
+						available.</p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">The application using the Job Schedule is deployed in the space and bound to the Job
+						Scheduler service instance. </p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">You have the authorization scope for <span class="keyword cmdname">POST</span>, <span class="keyword cmdname">PUT</span>, and
+							<span class="keyword cmdname">DELETE</span> requests (for example,
+							<span class="ph uicontrol">jobscheduler.Admin</span>).</p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">To access the <span class="ph uicontrol">Job Scheduler Dashboard</span>, you must have
+						the authorization scopes defined in the roles grouped together in one of the
+						following role collections:</p>
+
+					<ul class="ul" id="loio791a171998384f029ae544f0b266cecc__ul_fx2_vfd_xt">
+						<li class="li">XS_CONTROLLER_ADMIN<p class="p">Full access: no access restrictions</p>
+</li>
+
+						<li class="li">XS_CONTROLLER_USER<p class="p">Modify and read-only access </p>
+</li>
+
+						<li class="li">XS_CONTROLLER_AUDITOR<p class="p">Read-only access</p>
+</li>
+
+					</ul>
+
+					<div class="note tip"><span class="tiptitle">Tip</span> 
+						<p class="p">Role collections can be assigned to an SAP HANA user in SAP HANA studio
+							by means of user parameters, for example,
+								<span class="keyword parmname">XS_RC_XS_CONTROLLER_ADMIN</span> or
+								<span class="keyword parmname">XS_RC_XS_CONTROLLER_USER</span>, or
+								<span class="keyword parmname">XS_RC_XS_CONTROLLER_AUDITOR</span>.</p>
+
+					</div>
+
+				</li>
+
+			</ul>
+
+		</div>
+
+		<div class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<p class="p">To maintain jobs and job schedules, you use the Job Scheduler REST APIs (for example,
+					<cite class="cite">Job Creation</cite>, <cite class="cite">Job Configuration</cite>, or <cite class="cite">Job
+					Deletion</cite>) as illustrated in the following examples.</p>
+
+			<div class="note note"><span class="notetitle">Note</span> 
+				<p class="p">The code examples are not always complete; they are intended for illustration
+					purposes only.</p>
+
+			</div>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+				<span class="ph cmd">Create a new job.</span>
+				<div class="itemgroup info">
+					<p class="p">Use the <cite class="cite">Job Creation</cite> API (<span class="keyword cmdname">POST /scheduler/Jobs</span>), as
+						illustrated in the example request:</p>
+
+				</div>
+				<div class="itemgroup stepxmp">
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">POST /scheduler/jobs HTTP/1.1
+Host: localhost:4242
+Authorization: Basic YWJjOmRlZg==
+Content-Type: application/json
+Cache-Control: no-cache
+
+{"name":"validateSalesOrder", "description": "cron job that validates sales order requests", "action":"http://salesOrderApp.hana.acme.com:40023/salesOrders/validate","active": true, "httpMethod":"PUT", "schedules": [{"cron":"* * * * * * */10", "description": "this schedule runs every 10 seconds", "data":{"salesOrderId":"1234"}, "active": true, "startTime": {"date": "2015-10-20 04:30 +0000", "format": "YYYY-MM-DD HH:mm Z"}}]} 
+</pre></div>
+
+				</div>
+				<div class="itemgroup stepresult">
+					<p class="p">The response to the job-creation request should look like the following
+						example:</p>
+
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{"name": "validateSalesOrder", "action":"http://salesOrderApp.hana.acme.com:40023/salesOrders/validate","active":true,"httpMethod":"PUT","description":"cron job that validates sales order requests","startTime":null,"endTime":null,"signatureVersion":0,"schedules":[{"active":true,"startTime":"2015-10-20 04:30:00","endTime":null,"description":"every 10 seconds, every 2 minutes","data":"{\"salesOrderId\":\"1234\"}","cron":"* * * * * * */10","type":"recurring","scheduleId":"cb5c9def-e2a0-4294-8a51-61e4db373f99"}],"_id":3}
+
+Headers:
+Connection → keep-alive
+Content-Length → 468
+Content-Type → application/json; charset=utf-8
+Date → Mon, 09 Nov 2016 09:08:53 GMT
+ETag → W/"1d4-P7BnAm3yordzbrYyJtpalg"
+Location → /scheduler/jobs/3
+X-Powered-By → Express
+</pre></div>
+
+				</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Modify (configure) a new job.</span>
+				<div class="itemgroup info">
+					<p class="p">Use the <cite class="cite">Job Configuration</cite> API (<span class="keyword cmdname">PUT /scheduler/Jobs</span>), as
+						illustrated in the example request:</p>
+
+				</div>
+				<div class="itemgroup stepxmp">
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">PUT /scheduler/jobs/3 HTTP/1.1
+Host: localhost:4242
+Authorization: Basic YWJjOmRlZg==
+Content-Type: application/json
+Cache-Control: no-cache
+
+{"active": true, "user":"abc", "password":"def", "httpMethod": "GET"}
+</pre></div>
+
+				</div>
+				<div class="itemgroup stepresult">
+					<p class="p">The response to the job-configuration request should look like the following
+						example:</p>
+
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{"success":true}
+
+Headers:
+Connection → keep-alive
+Content-Length → 16
+Content-Type → application/json; charset=utf-8
+Date → Mon, 09 Nov 2016 09:30:36 GMT
+ETag → W/"10-c2PoX+nt7m8FOksxlYjAhg"
+X-Powered-By → Express
+</pre></div>
+
+				</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Delete an existing job.</span>
+				<div class="itemgroup info">
+					<p class="p">Use the <cite class="cite">Job Deletion</cite> API (<span class="keyword cmdname">DELETE /scheduler/Jobs</span>), as
+						illustrated in the example request:</p>
+
+				</div>
+				<div class="itemgroup stepxmp">
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">DELETE /scheduler/jobs/4 HTTP/1.1
+Host: localhost:4242
+Authorization: Basic YWJjOmRlZg==
+Content-Type: application/json
+Cache-Control: no-cache
+</pre></div>
+
+				</div>
+				<div class="itemgroup stepresult">
+					<p class="p">The response to the job-deletion request should look like the following
+						example:</p>
+
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{"success":true}
+
+Headers:
+Connection → keep-alive
+Content-Length → 16
+Content-Type → application/json; charset=utf-8
+Date → Mon, 09 Nov 2016 09:30:36 GMT
+ETag → W/"10-c2PoX+nt7m8FOksxlYjAhg"
+X-Powered-By → Express
+</pre></div>
+
+				</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Create a new job schedule.</span>
+				<div class="itemgroup info">
+					<p class="p">Use the <cite class="cite">Job Schedule Creation</cite> API (<span class="keyword cmdname">POST
+							/scheduler/jobs/3/schedules</span>), as illustrated in the example
+						request:</p>
+
+				</div>
+				<div class="itemgroup stepxmp">
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">POST /scheduler/jobs/3/schedules HTTP/1.1
+Host: localhost:4242
+Authorization: Basic YWJjOmRlZg==
+Content-Type: application/json
+Cache-Control: no-cache
+
+{"repeatEvery":"2 hours","data":{"order_id":"abcd"}, "active":true, "description":"New Schedule", "startTime":{"date": "2016-04-21", "format": "YYYY-MM-DD"}}
+</pre></div>
+
+				</div>
+				<div class="itemgroup stepresult">
+					<p class="p">The response to the job-schedule creation request should look like the
+						following example:</p>
+
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">"repeatInterval":"2 hours","repeatAt":null,"time":null,"cron":null,"data":"{\"order_id\":\"abcd\"}","description":"New Schedule","type":"recurring","active":true,"startTime":"2016-04-21 18:30:00","endTime":null,"jobId":3,"scheduleId":"0e29c67c-563e-4931-af08-43acb10813e8"}
+
+Headers:
+Connection → keep-alive
+Content-Length → 274
+Content-Type → application/json; charset=utf-8
+Date → Mon, 09 Nov 2016 09:42:13 GMT
+ETag → W/"112-rdQSXHBVY0u6JNI/Wf0I7w"
+Location → /scheduler/jobs/3/schedules/0e29c67c-563e-4931-af08-43acb10813e8
+X-Powered-By → Express
+</pre></div>
+
+				</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Delete an existing job schedule.</span>
+				<div class="itemgroup info">
+					<p class="p">Use the <cite class="cite">Job Schedule Deletion</cite> API (<span class="keyword cmdname">DELETE
+							/scheduler/jobs/3/schedules</span>), as illustrated in the example
+						request:</p>
+
+				</div>
+				<div class="itemgroup stepxmp">
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">DELETE /scheduler/jobs/4 HTTP/1.1
+Host: localhost:4242
+Authorization: Basic YWJjOmRlZg==
+Content-Type: application/json
+Cache-Control: no-cache</pre></div>
+
+				</div>
+				<div class="itemgroup stepresult">
+					<p class="p">The response to the job-schedule deletion request should look like the
+						following example:</p>
+
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{"success":true}
+
+Headers:
+Connection → keep-alive
+Content-Length → 16
+Content-Type → application/json; charset=utf-8
+Date → Mon, 09 Nov 2016 09:51:39 GMT
+ETag → W/"10-c2PoX+nt7m8FOksxlYjAhg"
+X-Powered-By → Express
+</pre></div>
+
+				</div>
+			</li>
+</ol>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?5ef38ae037434042baf25dc79598bf8d.html" target="_top" title="The Job Scheduler APIs enable applications to use the functionality provided in Job Scheduler.">Job Scheduler REST API for XS Advanced</a></div>
+<div><a class="link" href="default.html?d471f9803bcb4479845d17be0519ce4a.html" target="_top" title="The Job Scheduler dashboard provides schedule snapshots, view service instances, and manage jobs for a service instance.">The Job Scheduler Dashboard</a></div>
+<div><a class="link" href="default.html?4de4ea4f04ea460cbccb7d97c78e7183.html" target="_top" title="The Job Scheduler service enables you to create and schedule long-running operations or jobs.">Scheduling Jobs in XS Advanced</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Maintain Jobs and Job Schedules in XS Advanced";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

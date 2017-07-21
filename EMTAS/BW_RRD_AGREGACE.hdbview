@@ -1,0 +1,22 @@
+schema="OTEBW_EMTAS";
+
+query = "select to_date(DELIVERYDAY) as DELIVERYDAY,
+				'EN' as COMMODITY,
+				PARTIC,
+				BUYSELL,
+				PERIOD,
+				SUM(ifnull(VOLUME,0)) as VOLUME,
+				EXTERNALVERSION as VERSION,
+				to_varchar(to_date(DELIVERYDAY),'YYYYMM') as CALMONTH,
+				to_varchar(to_date(DELIVERYDAY),'YYYY') as CALYEAR	
+		   from BW_KONCOVY_PLAN_ERD
+		  WHERE version in (2,3,4)
+		   /* and busstype = 'I' */
+	   GROUP BY DELIVERYDAY, PARTIC, BUYSELL, PERIOD, EXTERNALVERSION
+       ORDER BY DELIVERYDAY, PARTIC, BUYSELL, PERIOD, EXTERNALVERSION		      
+";
+
+depends_on_table=["OTEBW_EMTAS::BW_KONCOVY_PLAN_ERD"];
+
+
+

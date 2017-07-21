@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content=""/>
+<meta name="description" content=""/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=02325369349774975"/>
+<title>Conditionals</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio46e875a0d4e446ae9ab08334f13cd1aa";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio46e875a0d4e446ae9ab08334f13cd1aa">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Conditionals</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc"/>
+
+		<p class="p"><span class="ph emphasis emphasis">Syntax:</span></p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">IF &lt;bool_expr1&gt; 
+THEN 
+	&lt;then_stmts1&gt;
+[{ELSEIF &lt;bool_expr2&gt; 
+THEN 
+	&lt;then_stmts2&gt;}...]
+[ELSE 
+	&lt;else_stmts3&gt;] 
+END IF</pre></div>
+
+		<p class="p"><span class="ph emphasis emphasis">Syntax elements:</span></p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;bool_expr1&gt;  ::= &lt;condition&gt;
+&lt;bool_expr2&gt;  ::= &lt;condition&gt;
+&lt;condition&gt;   ::= &lt;comparison&gt; | &lt;null_check&gt;
+&lt;comparison&gt;  ::= &lt;comp_val&gt; &lt;comparator&gt; &lt;comp_val&gt;
+&lt;null_check&gt;  ::= &lt;comp_val&gt; IS [NOT] NULL</pre></div>
+
+		<div class="p">Tests if <samp class="ph codeph">&lt;comp_val&gt;</samp> is <samp class="ph codeph">NULL</samp> or <samp class="ph codeph">NOT
+				NULL</samp>.<div class="note note" id="loio46e875a0d4e446ae9ab08334f13cd1aa__note_N1003C_N10029_N10011_N10001"><span class="notetitle">Note</span> <samp class="ph codeph">NULL</samp> is
+				the default value for all local variables.</div>
+</div>
+
+		<p class="p">See <cite class="cite">Example 2</cite> for an example use of this comparison.</p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">
+&lt;comparator&gt;  ::= &lt; | &gt; | = | &lt;= | &gt;= | != 
+&lt;comp_val&gt;    ::= &lt;scalar_expression&gt;|&lt;scalar_udf&gt;
+&lt;scalar_expression&gt; ::=&lt;scalar_value&gt;[{operator}&lt;scalar_value&gt;…]
+&lt;scalar_value&gt; ::= &lt;numeric_literal&gt; | &lt;exact_numeric_literal&gt;| &lt;unsigned_numeric_literal&gt;
+&lt;operator&gt;::=+|-|/|* </pre></div>
+
+		<p class="p">Specifies the comparison value. This can be based on either scalar literals or scalar
+			variables.</p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">
+&lt;then_stmts1&gt; ::= &lt;proc&gt;
+&lt;then_stmts2&gt; ::= &lt;proc_stmts&gt;
+&lt;else_stmts3&gt; ::= &lt;proc_stmts&gt;
+&lt;proc_stmts&gt; ::= !! SQLScript procedural statements</pre></div>
+
+		<p class="p">Defines procedural statements to be executed dependent on the preceding conditional
+			expression.</p>
+
+		<p class="p"><span class="ph emphasis emphasis">Description:</span></p>
+
+		<p class="p">The <samp class="ph codeph">IF</samp> statement consists of a Boolean expression
+				<samp class="ph codeph">&lt;bool_expr1&gt;</samp>. If this expression evaluates to true then the
+			statements <samp class="ph codeph">&lt;then_stmts1&gt;</samp> in the mandatory <samp class="ph codeph">THEN</samp>
+			block are executed. The <samp class="ph codeph">IF</samp> statement ends with <samp class="ph codeph">END IF</samp>.
+			The remaining parts are optional.</p>
+
+		<p class="p">If the Boolean expression <samp class="ph codeph">&lt;bool_expr1&gt;</samp> does not evaluate to true the
+				<samp class="ph codeph">ELSE</samp>-branch is evaluated. The
+				statements<samp class="ph codeph">&lt;else_stmts3&gt;</samp> are executed without further checks.
+			After an else branch no further <samp class="ph codeph">ELSE</samp> branch or <samp class="ph codeph">ELSEIF</samp>
+			branch is allowed.</p>
+
+		<p class="p">Alternatively, when <samp class="ph codeph">ELSEIF</samp> is used instead of <samp class="ph codeph">ELSE</samp> a further
+			Boolean expression <samp class="ph codeph">&lt;bool_expr2&gt;</samp> is evaluated. If it evaluates to
+			true, the statements <samp class="ph codeph">&lt;then_stmts2&gt;</samp> are executed. In this manner
+			an arbitrary number of <samp class="ph codeph">ELSEIF</samp> clauses can be added.</p>
+
+		<p class="p">This statement can be used to simulate the switch-case statement known from many
+			programming languages.</p>
+
+		<p class="p"><span class="ph emphasis emphasis">Examples:</span></p>
+
+		<p class="p"><cite class="cite">Example 1</cite></p>
+
+		<p class="p"> You use the <samp class="ph codeph">IF</samp> statement to implementing the functionality of the SAP HANA
+			database`s <samp class="ph codeph">UPSERT</samp> statement.</p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE PROCEDURE upsert_proc (IN v_isbn VARCHAR(20)) 
+LANGUAGE SQLSCRIPT AS
+BEGIN
+	DECLARE found INT = 1;
+    SELECT count(*) INTO found FROM books WHERE isbn = :v_isbn;
+    IF :found = 0 
+	THEN
+        INSERT INTO books
+        VALUES (:v_isbn, 'In-Memory Data Management', 1, 1,
+                '2011', 42.75, 'EUR');
+    ELSE
+        UPDATE books SET price = 42.75 WHERE isbn =:v_isbn;
+    END IF;
+END;
+</pre></div>
+
+		<p class="p"><cite class="cite">Example 2</cite></p>
+
+		<p class="p"> You use the <samp class="ph codeph">IF</samp> statement to check if variable <samp class="ph codeph">:found</samp> is
+				<samp class="ph codeph">NULL</samp>.</p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT count(*) INTO found FROM books WHERE isbn = :v_isbn;
+IF :found IS NULL THEN
+   CALL ins_msg_proc('result of count(*) cannot be NULL');
+ELSE
+   CALL ins_msg_proc('result of count(*) not NULL - as expected');
+END IF;
+</pre></div>
+
+		<p class="p"><cite class="cite">Example 3</cite></p>
+
+		<p class="p">It is also possible to use a scalar UDF in the condition, as shown in the following
+			example.</p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE PROCEDURE proc (in input1 INTEGER, out output1 TYPE1)
+AS
+BEGIN
+    DECLARE i INTEGER DEFAULT :input1; 
+    IF SUDF(:i) = 1 THEN
+         output1 = SELECT value FROM T1;
+    ELSEIF SUDF(:i) = 2 THEN
+         output1 = SELECT value FROM T2;
+    ELSE 
+         output1 = SELECT value FROM T3;
+    END IF;
+END;
+</pre></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?4f169bfccedc4e6ea100216652f84370.html" target="_top">ins_msg_proc</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Conditionals";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

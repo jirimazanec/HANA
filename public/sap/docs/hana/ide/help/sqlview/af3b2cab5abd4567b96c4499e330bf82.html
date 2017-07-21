@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Alters the properties of a data statistics object."/>
+<meta name="description" content="Alters the properties of a data statistics object."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=8531066363696601"/>
+<title>ALTER STATISTICS Statement (Extended Store Table) [Dynamic Tiering]</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioaf3b2cab5abd4567b96c4499e330bf82";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioaf3b2cab5abd4567b96c4499e330bf82">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">ALTER STATISTICS Statement (Extended Store Table) [Dynamic Tiering]</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">Alters the properties of a data statistics object.</p>
+
+		<div class="section" id="loioaf3b2cab5abd4567b96c4499e330bf82__sql_drop_statistics_1sql_drop_statistics_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+			<div class="note caution"><span class="cautiontitle">Caution</span> <span class="ph">This
+                                                  information applies only for the SAP HANA option
+                                                  cited in the title of this topic. You must have
+                                                  purchased the license for it in order to use the
+                                                  information contained in this topic.</span></div>
+
+			<div class="note note"><span class="notetitle">Note</span> 
+				<span class="ph">While
+                                SAP HANA and dynamic tiering share much of the same base SQL syntax,
+                                there are some differences in supported and nonsupported clauses and
+                                parameters. The following syntax applies only to dynamic
+                                tiering.</span></div>
+
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER STATISTICS {<var class="keyword varname">&lt;data_statistics_name&gt;</var> 
+   | ON <var class="keyword varname">&lt;data_sources&gt;</var> [[HAVING] <var class="keyword varname">&lt;match_properties&gt;</var>]}
+ SET <var class="keyword varname">&lt;set_data_statistics_properties&gt;</var>
+ [<var class="keyword varname">&lt;initial_refresh&gt;</var>]</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loioaf3b2cab5abd4567b96c4499e330bf82__sql_drop_statistics_1sql_drop_statistics_syntax_element"><div class="section_title">Syntax Element</div><div type="Syntax Element">
+			
+			<dl class="dl parml">
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;data_statistics_name&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies the name of the data statistics object to alter.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;data_statistics_name&gt;</var> ::= [<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis">ON <var class="keyword varname">&lt;data_sources&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies the data source(s) of the data statistics objects to alter.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;data_sources&gt;</var> ::= 
+<var class="keyword varname">&lt;table_name&gt;</var> [(<var class="keyword varname">&lt;column_name&gt;</var>{, <var class="keyword varname">&lt;column_name&gt;</var>}...)] [<var class="keyword varname">&lt;match_type&gt;</var>]</pre></div>
+
+						<dl class="dl">
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;table_name&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Alters statistics for the specified table name, with the
+										optional schema name. </p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_name&gt;</var> ::= [<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;identifier&gt;</var>
+										
+<var class="keyword varname">&lt;schema_name&gt;</var> ::= <var class="keyword varname">&lt;unicode_name&gt;</var></pre></div>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;column_name&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Alters statistics for the specified column.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+									<p class="p"> If no <var class="keyword varname">&lt;column_name&gt;</var> is specified, then all statistics for the table
+										that match the specified <var class="keyword varname">&lt;match_properties&gt;</var>
+										are altered, including table-wide statistics (currently only
+										RECORD COUNT).</p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;match_type&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Controls which data statistics objects to match to
+											<var class="keyword varname">&lt;data_sources&gt;</var>. </p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;match_type&gt;</var> ::= EXACT | CASCADE </pre></div>
+
+									<p class="p">If <var class="keyword varname">&lt;match_type&gt;</var> is not specified, then any
+										data statistics object(s) that reference all or some of the
+										columns specified in <var class="keyword varname">&lt;data_sources&gt;</var> are
+										altered.</p>
+
+									<p class="p">Specify EXACT to alter data statistics objects that precisely match
+											<var class="keyword varname">&lt;data_sources&gt;</var> (including column
+										order).</p>
+
+									<p class="p">Specify CASCADE to alter data statistics objects that
+										reference at least one column in
+											<var class="keyword varname">&lt;data_sources&gt;</var>.</p>
+
+									<p class="p">Use this table to understand how matching is performed based
+										on <var class="keyword varname">&lt;match_type&gt;</var> when
+											<var class="keyword varname">&lt;data_sources&gt;</var> is T(A, B, C):</p>
+
+									<div class="table-wrapper"><table summary="" id="loioaf3b2cab5abd4567b96c4499e330bf82__simpletable_l1w_ctf_2v" border="1" class="simpletable"><tr class="sthead">
+											<th valign="bottom" align="left" id="d28782989e222" class="stentry" width="33.333333333333336%">
+												<p class="p">Match type</p>
+
+											</th>
+
+											<th valign="bottom" align="left" id="d28782989e228" class="stentry" width="33.333333333333336%">
+												<p class="p">Example matches</p>
+
+											</th>
+
+											<th valign="bottom" align="left" id="d28782989e234" class="stentry" width="33.333333333333336%">Example non-matches</th>
+
+										</tr>
+<tr class="strow">
+											<td valign="top" headers="d28782989e222" class="stentry">
+												<p class="p">(not specified)</p>
+
+											</td>
+
+											<td valign="top" headers="d28782989e228" class="stentry">
+												<p class="p">T(A, C) </p>
+
+												<p class="p">T.C </p>
+
+												<p class="p">T(B, A) </p>
+
+											</td>
+
+											<td valign="top" headers="d28782989e234" class="stentry">
+												<p class="p">T(A, X) - because T.X is not a column in
+												<var class="keyword varname">&lt;data_sources&gt;</var>.</p>
+
+											</td>
+
+										</tr>
+<tr class="strow">
+											<td valign="top" headers="d28782989e222" class="stentry">
+												<p class="p">EXACT</p>
+
+											</td>
+
+											<td valign="top" headers="d28782989e228" class="stentry">
+												<p class="p">T(A, B, C)</p>
+
+											</td>
+
+											<td valign="top" headers="d28782989e234" class="stentry">
+												<p class="p">T(B, A, C) - because the column order is
+												different than the column order of
+												<var class="keyword varname">&lt;data_sources&gt;</var>.</p>
+
+												<p class="p">T.A - because it does not contain the exact same
+												columns and column order of
+												<var class="keyword varname">&lt;data_sources&gt;</var>.</p>
+
+												<p class="p">T(X, A, B, C) - because T.X is not a column in
+												<var class="keyword varname">&lt;data_sources&gt;</var>.</p>
+
+											</td>
+
+										</tr>
+<tr class="strow">
+											<td valign="top" headers="d28782989e222" class="stentry">
+												<p class="p">CASCADE</p>
+
+											</td>
+
+											<td valign="top" headers="d28782989e228" class="stentry">
+												<p class="p">T(A, C) </p>
+
+												<p class="p">T.C</p>
+
+												<p class="p">T(B, A) </p>
+
+												<p class="p">T(A, B, C)</p>
+
+												<p class="p">T(A, X) </p>
+
+												<p class="p">T(B, C) </p>
+
+												<p class="p">T.A </p>
+
+												<p class="p">T(C, B, A, X) </p>
+
+											</td>
+
+											<td valign="top" headers="d28782989e234" class="stentry">
+												<p class="p">T.X - because it does not contain any columns
+												that match the columns in
+												<var class="keyword varname">&lt;data_sources&gt;</var>.</p>
+
+											</td>
+
+										</tr>
+</table></div>
+
+								</dd>
+
+							
+						</dl>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;match_properties&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies properties to use for matching when selecting data statistics
+							to alter.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;match_properties&gt;</var> ::= <var class="keyword varname">&lt;match_property&gt;</var> [<var class="keyword varname">&lt;...&gt;</var>] 
+
+<var class="keyword varname">&lt;match_property&gt;</var> ::=
+ TYPE <var class="keyword varname">&lt;data_statistics_type&gt;</var>
+ | REFRESH TYPE <var class="keyword varname">&lt;refresh_type&gt;</var></pre></div>
+
+						<p class="p">If TYPE is not specified, then all data statistics objects on specified
+							data sources are altered (ALL). See the CREATE STATISTICS Statement
+							topic for descriptions of the supported data statistics types.</p>
+
+						<dl class="dl">
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;data_statistics_type&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Specifies the type of data statistics objects to match when
+										selecting the data statistics to alter.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;data_statistics_type&gt;</var> ::= 
+ HISTOGRAM 
+ | SIMPLE
+ | SKETCH
+ | RECORD COUNT 
+ | TOPK
+ | ALL</pre></div>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;refresh_type&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Specifies the refresh strategy to match in the data
+										statistics objects when selecting the data statistics to
+										alter. ALL is the default.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;refresh_type&gt;</var> ::= REFRESH TYPE {AUTO | MANUAL | ALL}</pre></div>
+
+								</dd>
+
+							
+						</dl>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;data_statistics_properties&gt;</var></dt>
+
+					<dd class="dd pd">
+						<div class="p">Specifies the properties to set for the data statistics
+							objects.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;data_statistics_properties&gt;</var> := <var class="keyword varname">&lt;data_statistics_property&gt;</var>
+
+<var class="keyword varname">&lt;data_statistics_property&gt;</var> ::= 
+   | CONSTRAINT <var class="keyword varname">&lt;constraint_param&gt;</var>
+   | BUCKETS <var class="keyword varname">&lt;unsigned_integer&gt;</var>
+   | MEMORY <var class="keyword varname">&lt;memory_bytes&gt;</var>
+   | MEMORY PERCENT <var class="keyword varname">&lt;memory_percentage   &gt;</var>
+   | REFRESH <var class="keyword varname">&lt;refresh_type&gt;</var>
+   | ENABLE <var class="keyword varname">&lt;on_off&gt;</var></pre></div>
+</div>
+
+						<p class="p">Certain properties affect only some objects. See the property
+							descriptions for restrictions.</p>
+
+						<dl class="dl">
+							
+								<dt class="dt dlterm emphasis">CONSTRAINT</dt>
+
+								<dd class="dd">
+									<div class="p">The mathematical constraint used to build a histogram.
+										<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CONSTRAINT <var class="keyword varname">&lt;constraint_param&gt;</var>
+
+<var class="keyword varname">&lt;constraint_param&gt;</var> ::= MAXDIFF</pre></div>
+You
+										can only specify this parameter when TYPE is HISTOGRAM. Only
+										MAXDIFF histograms are supported.</div>
+
+									<div class="note note"><span class="notetitle">Note</span> 
+										<p class="p">Histogram sizing restrictions (BUCKETS, MEMORY, and
+											MEMORY PERCENT) are applied per histogram. A non-default
+											CONSTRAINT for a histogram returns an error.</p>
+
+									</div>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">BUCKETS <var class="keyword varname">&lt;unsigned_integer&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">This parameter is used only with TYPE HISTOGRAM or TOPK. For HISTOGRAM, BUCKETS
+										specifies the maximum number of data buckets in the
+										histogram. For TOPK, BUCKETS specifies the K value. The
+										histogram algorithm used determines the default
+										automatically. </p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">MEMORY <var class="keyword varname">&lt;memory_bytes&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Specifies the maximum amount of memory, in bytes, to use for
+										the data statistics object.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;memory_bytes&gt;</var> ::= <var class="keyword varname">&lt;unsigned_integer&gt;</var></pre></div>
+
+									<p class="p">Similar to the MEMORY PERCENT parameter, the MEMORY parameter limits the memory for data
+										statistics objects.</p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">MEMORY PERCENT <var class="keyword varname">&lt;memory_percentage&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Limits the amount of memory used for data statistics
+										objects.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;memory_percentage&gt;</var> ::= <var class="keyword varname">&lt;unsigned_integer&gt;</var></pre></div>
+
+									<p class="p">Data statistics objects can use a large amount of memory for
+										some data sources. <var class="keyword varname">&lt;memory_percentage&gt;</var> is
+										specified as the percentage of the space used by the data
+										source itself. It represents the maximum amount of memory
+										that can be used for the data statistics object. For
+										example, if a data source is a table column that uses 100 MB
+										of memory, and <var class="keyword varname">&lt;memory_percentage&gt;</var> is 5,
+										then the data statistics object for this column can use, at
+										most, 5 MB for its memory representation.</p>
+
+									<p class="p">The default is automatically determined by the histogram
+										algorithm in use.</p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">REFRESH <var class="keyword varname">&lt;refresh_type&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Specifies the strategy for refreshing the data statistics
+										object.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;refresh_type&gt;</var> ::= TYPE {AUTO | MANUAL | DEFAULT}</pre></div>
+
+									<p class="p">AUTO specifies that the data statistics object is refreshed
+										automatically when underlying data changes.</p>
+
+									<p class="p">MANUAL specifies that the database statistics object is not
+										refreshed until explicitly requested by a REFRESH STATISTICS
+										object.</p>
+
+									<p class="p">DEFAULT specifies that the database server decides the best
+										refresh strategy based on the data source. For DT tables the
+										default depends on <var class="keyword varname">&lt;statistics_type&gt;</var>. For
+										RECORD COUNT, SIMPLE, and TOPK, the default is AUTO. For
+										HISTOGRAM, the default is MANUAL. </p>
+
+									<p class="p">REFRESH TYPE only affects data statistics objects that are
+										enabled.</p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">ENABLE <var class="keyword varname">&lt;on_off&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Controls whether the optimizer uses the data statistics
+										object.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;on_off&gt;</var> ::= ON | OFF</pre></div>
+
+									<p class="p">ENABLE ON enables the use of the data statistics object by
+										the optimizer. However, the data statistics object must also
+										be populated with data (refreshed) for the optimizer to use
+										it. The default behavior is ENABLE ON unless you specify NO
+										INITIAL REFRESH.</p>
+
+									<p class="p">You cannot specify ENABLE ON if you specify NO INITIAL
+										REFRESH unless the data statistics object was previously
+										populated with data.</p>
+
+									<p class="p">ENABLE OFF disables the use of the data statistics object by
+										the optimizer and prevents the ability to refresh the data
+										statistics object. Data statistics objects that are not
+										enabled can still be dropped. To make a data statistics
+										object with ENABLE OFF accessible to the optimizer, execute
+										an ALTER STATISTICS..ENABLE ON statement.</p>
+
+								</dd>
+
+							
+						</dl>
+
+						
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;initial_refresh&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies whether to repopulate the data statistics object with data
+							after altering it.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;initial_refresh&gt;</var> ::= [ NO ] INITIAL REFRESH</pre></div>
+
+						<dl class="dl">
+							
+								<dt class="dt dlterm emphasis">INITIAL REFRESH</dt>
+
+								<dd class="dd">
+									<p class="p">Alters the definition of the data statistics object and
+										repopulates it with data. The default behavior is INITIAL
+										REFRESH.</p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">NO INITIAL REFRESH</dt>
+
+								<dd class="dd">
+									<p class="p">Alters the definition of the data statistics object, but does
+										not repopulate it with data.</p>
+
+									<p class="p">Use NO INITIAL REFRESH when you want to change the underlying
+										data before refreshing the data statistics object.</p>
+
+									<p class="p">You cannot specify NO INITIAL REFRESH if you specify ENABLE
+										ON.</p>
+
+								</dd>
+
+							
+						</dl>
+
+					</dd>
+
+				
+			</dl>
+
+		</div></div>
+
+		<div class="section" id="loioaf3b2cab5abd4567b96c4499e330bf82__sql_drop_statistics_1sql_drop_statistics_description"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">The ALTER STATISTICS statement alters the properties of a data statistics object. A typical
+				change to a data statistics object might be to enable or disable it, or to change
+				settings for constraints such as BUCKETS.</p>
+
+			<p class="p">Refer to the CREATE STATISTICS statement for complete descriptions of the data
+				statistic types (<var class="keyword varname">&lt;data_statistics_type&gt;</var>).</p>
+
+			<p class="p">You cannot alter the type for the data statistics object. For example, you cannot change a
+				data statistics object from a HISTOGRAM to a SIMPLE, you must create the SIMPLE data
+				statistics object separately.</p>
+
+		</div></div>
+
+		<div class="section" id="loioaf3b2cab5abd4567b96c4499e330bf82__sql_drop_statistics_1sql_drop_statistics_example"><div class="section_title">Example</div><div type="Example">
+			
+			<p class="p">Set the refresh type of histograms on data source T(X) to AUTO:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER STATISTICS on T(X) TYPE HISTOGRAM SET REFRESH TYPE AUTO;</pre></div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="ALTER STATISTICS Statement (Extended Store Table) [Dynamic Tiering]";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

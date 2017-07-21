@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Recovers an SAP HANA database to a specific point in time or to a specific log position."/>
+<meta name="description" content="Recovers an SAP HANA database to a specific point in time or to a specific log position."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=24192947770342"/>
+<title>RECOVER DATABASE Statement (Backup and Recovery)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioc4205f73bb571014ba46d209981bc1f5";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioc4205f73bb571014ba46d209981bc1f5">
+<div id="wrapper"><div id="container">
+<h1 class="title topictitle1">RECOVER DATABASE Statement (Backup and Recovery)</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">Recovers an SAP HANA database to a specific point in time or to a specific log
+			position.</p>
+
+		<div class="section" id="loioc4205f73bb571014ba46d209981bc1f5__section_skc_pwn_hz">
+			<div class="note note"><span class="notetitle">Note</span> 
+				<p class="p">To recover a database, it must be offline. However, you can still execute SQL statements on
+					the online system database to recover an offline tenant database.</p>
+
+				<p class="p">Use the <span class="keyword cmdname">recoverSys.py</span> tool to execute SQL statements to
+					recover an offline system database or single-container system.</p>
+
+				<p class="p">For more information about using <span class="keyword cmdname">recoverSys.py</span>, see the <cite class="cite">SAP HANA
+						Administration Guide (SAP HANA Database Backup and Recovery)</cite>.</p>
+
+			</div>
+
+		</div>
+
+		<div class="section"><div class="section_title">Syntax</div><div type="Syntax">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">RECOVER DATABASE [FOR <var class="keyword varname">&lt;database_name&gt;</var>]
+  { <var class="keyword varname">&lt;until_definition&gt;</var>
+   [<var class="keyword varname">&lt;system_source_definition&gt;</var>]
+   [<var class="keyword varname">&lt;strategy_using_definition&gt;</var>]
+   [<var class="keyword varname">&lt;check_access_definition&gt;</var>]
+   [<var class="keyword varname">&lt;ignore_options&gt;</var>] 
+  }</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+			
+			<dl class="dl parml">
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;database_name&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Recovers a tenant database to a specific point in time.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;database_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+						<p class="p">After the recovery, the log is replayed and the tenant database is in an ACTIVE state. This
+							option is only available for SAP HANA tenant databases.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;until_definition&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Defines the target of the recovery.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;until_definition&gt;</var> ::=
+ UNTIL LOG POSITION <var class="keyword varname">&lt;log_pos&gt;</var> AT VOLUME <var class="keyword varname">&lt;volume_id&gt;</var> [<var class="keyword varname">&lt;recover_additional_option_list&gt;</var>]
+ | UNTIL TIMESTAMP '<var class="keyword varname">&lt;timestamp&gt;</var>' [<var class="keyword varname">&lt;recover_additional_option_list&gt;</var>]</pre></div>
+
+						<p class="p"><var class="keyword varname">&lt;timestamp&gt;</var> is interpreted as UTC time. 3:00 pm means
+							3:00 pm UTC and <span class="ph emphasis emphasis">not</span> 3:00 pm in your local time
+							zone.</p>
+
+						<dl class="dl">
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;recover_additional_option_list&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Specifies additional recovery options.</p>
+
+									
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;recover_additional_option_list&gt;</var> ::=
+ <var class="keyword varname">&lt;recover_additional_option&gt;</var>
+ | <var class="keyword varname">&lt;recover_additional_option_list&gt;</var> <var class="keyword varname">&lt;recover_additional_option&gt;</var>
+
+<var class="keyword varname">&lt;recover_additional_option&gt;</var> ::= CLEAR LOG | SET LICENSE <var class="keyword varname">&lt;license&gt;</var>
+
+<var class="keyword varname">&lt;license&gt;</var> ::= <var class="keyword varname">&lt;apostrophe&gt;</var><var class="keyword varname">&lt;string_const&gt;</var><var class="keyword varname">&lt;apostrophe&gt;</var></pre></div>
+
+									<p class="p">The CLEAR LOG option prevents the recovery of entries from
+										the log area. No log entries from the log area are replayed,
+										and the log area is initialized. As a consequence, the
+										content of the log area is lost.</p>
+
+									<p class="p">If they are needed, the log entries from the log backups are
+										replayed.</p>
+
+									<p class="p">CLEAR LOG must be used in the following situations:</p>
+
+									<ul class="ul" id="loioc4205f73bb571014ba46d209981bc1f5__ul_oml_f5m_xt">
+										<li class="li">The log area is unusable.</li>
+
+										<li class="li">You are recovering the database to a different system.
+										</li>
+
+									</ul>
+
+									<p class="p">The CLEAR LOG command corresponds to the
+											<span class="keyword uinolabel">Initialize log area</span> option in
+											SAP HANA studio.</p>
+
+								</dd>
+
+							
+						</dl>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;system_source_definition&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Identifies the source system.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;system_source_definition&gt;</var> ::= USING SOURCE '<var class="keyword varname">&lt;system_id&gt;</var>'</pre></div>
+
+						<p class="p">This option is available for use with USING BACKINT. </p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;strategy_using_definition&gt;</var></dt>
+
+					<dd class="dd pd">
+						
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;strategy_using_definition&gt;</var> ::= 
+ <var class="keyword varname">&lt;path_definition&gt;</var> [<var class="keyword varname">&lt;start_from_and_guid_definition&gt;</var>]</pre></div>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;path_definition&gt;</var> ::=
+ [<var class="keyword varname">&lt;catalog_path_definition&gt;</var>]
+ [USING LOG PATH (<var class="keyword varname">&lt;path_list&gt;</var>)]
+ [USING DATA PATH (<var class="keyword varname">&lt;path_list&gt;</var>)]</pre></div>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;catalog_path_definition&gt;</var> ::= 
+ USING CATALOG BACKINT
+ | USING CATALOG PATH ('<var class="keyword varname">&lt;path&gt;</var>')</pre></div>
+
+						<p class="p">For more information about backing up the backup catalog, see the
+								<cite class="cite">SAP HANA Administration Guide</cite>.</p>
+
+						<dl class="dl">
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;path_list&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Defines the path to the backup.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;path_list&gt;</var> ::=
+ '<var class="keyword varname">&lt;path&gt;</var>'
+ | <var class="keyword varname">&lt;path_list&gt;</var>, '<var class="keyword varname">&lt;path&gt;</var>'
+
+<var class="keyword varname">&lt;start_from_and_guid_definition&gt;</var> ::= 
+[<var class="keyword varname">&lt;start_from_definition&gt;</var>] [<var class="keyword varname">&lt;guid_definition&gt;</var>]
+
+<var class="keyword varname">&lt;start_from_definition&gt;</var> ::=
+ USING BACKUP_ID <var class="keyword varname">&lt;int_const&gt;</var>
+ | USING SNAPSHOT
+ | USING RESUME</pre></div>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;guid_definition&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Defines the starting point of the backup.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;guid_definition&gt;</var> ::= USING GUID_ID '<var class="keyword varname">&lt;guid&gt;</var>'</pre></div>
+
+									<p class="p">With BACKUP_ID, this is a complete data backup. With
+										USING_SNAPSHOT, this is a snapshot and with USING RESUME
+										this is a previously unsuccessful backup.</p>
+
+								</dd>
+
+							
+						</dl>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;check_access_definition&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Checks if the backup files are present according to the recovery
+							strategy.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;check_access_definition&gt;</var> ::=
+ CHECK ACCESS ALL| CHECK ACCESS USING FILE
+ | CHECK ACCESS USING BACKINT</pre></div>
+
+						<p class="p">CHECK ACCESS USING FILE checks for backup files in the file system, CHECK ACCESS USING
+							BACKINT checks for backup files created with a third-party backup tool,
+							and CHECK ALL checks for both.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;ignore_options&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Restores data from the log backups, ignoring all incremental and
+							differential backups.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;ignore_options&gt;</var> ::= [IGNORE DELTA DATA BACKUPS]</pre></div>
+
+					</dd>
+
+				
+			</dl>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">RECOVER DATABASE recovers an SAP HANA database to a specific point in time or
+				to a specific log position.</p>
+
+			<p class="p">Currently, a storage snapshot can only be used to recover an SAP HANA single-tenant
+				system.</p>
+
+			<p class="p">Recover a database using SQL statements by using the tool <span class="keyword cmdname">recoverSys.py</span>
+				when the database is offline. In a multi-tenant database system the recovery
+				statement hast to be sent by using the system database instead.</p>
+
+			<p class="p">Under special circumstances, it may be necessary to use a specific log history. This can be
+				done with USING GUID (global unique ID). You can find a specific GUID in the
+					<span class="ph filepath">backup.log</span>.</p>
+
+			<p class="p">CHECK ACCESS checks whether the required backups are available before the recovery process is
+				started. If one or more backups are not available, then you are notified of this
+				before starting the recovery and the recovery fails before any changes are made to
+				the database. If you do not check the availability of the required backups before
+				recovery starts, then any missing backups are only discovered during recovery. In
+				this case, you may need to restart the entire recovery process.</p>
+
+			<p class="p">For more information, refer to the Database Backup and Recovery chapter in the <cite class="cite">SAP HANA
+					Administration Guide</cite></p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Examples</div><div type="Examples">
+			
+		</div></div>
+
+		
+		<div class="example"><h2 class="exampletitle example_title">Example: </h2><div class="title authorexampletitle">Scenario 1: Recovery to a Point in Time</div>
+			
+			<p class="p">The last complete data backup was created on Thursday, October 22, 2015 at 8 am CEST (6am
+				UTC).</p>
+
+			<p class="p">The database ran until 6pm CEST (4 pm UTC). You want to recover the database to its
+				state at 5pm (3 pm UTC).</p>
+
+			<p class="p">Use the following statement:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">RECOVER DATABASE UNTIL TIMESTAMP '2015-10-22 15:00:00';</pre></div>
+
+			<p class="p">The database timestamp is interpreted as UTC time. 3pm therefore means 3pm UTC and
+					<span class="ph emphasis emphasis">not</span> 3pm CEST.</p>
+
+			<p class="p">The specified timestamp is not included in the transactions to be redone. This means
+				that only transactions with a commit timestamp before the target timestamp is
+				redone.</p>
+
+			<p class="p">In this scenario, the <samp class="ph systemoutput">CHECK ACCESS</samp> option is recommended:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">RECOVER DATABASE UNTIL TIMESTAMP '2015-10-22 15:00:00' CHECK ACCESS ALL;</pre></div>
+
+		</div>
+
+		<div class="example"><h2 class="exampletitle example_title">Example: </h2><div class="title authorexampletitle">Scenario 2: Recovery to a Point in Time Using a Specific Directory</div>
+			
+			<p class="p">Recover the database to a point in time with a specific timestamp, using a dedicated directory
+				for data backups and further directories containing automatically written log
+				backups. </p>
+
+			<p class="p">Use the following statement: </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">RECOVER DATABASE UNTIL TIMESTAMP '2015-10-22 15:00:00' USING DATA PATH ('/backup/THURSDAY/') USING LOG PATH ('/backup/logs1/','/backup/logs2/');</pre></div>
+
+			
+		</div>
+
+		<div class="example"><h2 class="exampletitle example_title">Example: </h2><div class="title authorexampletitle">Scenario 3: Recovery Using a Storage Snapshot</div>
+			
+			<p class="p">Recover the database using a storage snapshot, and verify that the required backups
+				are available before the recovery is started. </p>
+
+			<p class="p">Use the following statement: </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">RECOVER DATABASE UNTIL TIMESTAMP '2015-10-22 15:00:00' USING SNAPSHOT CHECK ACCESS ALL;</pre></div>
+
+			<p class="p"/>
+
+			<p class="p">To recover the database to a specific point in time, you can combine the storage
+				snapshot with log backups:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">RECOVER DATABASE UNTIL TIMESTAMP '2015-10-22 15:00:00' USING SNAPSHOT CHECK ACCESS ALL;</pre></div>
+
+			<p class="p"/>
+
+			<p class="p">With USING SNAPSHOT, no paths are specified. Before the recovery is started, the storage
+				snapshot needs to be made available in the data area.</p>
+
+		</div>
+
+		<div class="example"><h2 class="exampletitle example_title">Example: </h2><div class="title authorexampletitle">Scenario 4: Recovery Using a Catalog Path</div>
+			
+			<p class="p">Recover the database until a point in time with a specific timestamp, using a
+				distinct destination for backups of the backup catalog.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">RECOVER DATABASE UNTIL TIMESTAMP '2016-06-01' USING CATALOG PATH ('/hana/HHB/backup/catalog') USING LOG PATH ('/hana/HHB/backup/log') CHECK ACCESS ALL;</pre></div>
+
+		</div>
+</div>
+
+	
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+</div>
+</div></div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="RECOVER DATABASE Statement (Backup and Recovery)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

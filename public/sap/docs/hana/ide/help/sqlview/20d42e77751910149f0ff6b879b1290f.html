@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Creates read only functions."/>
+<meta name="description" content="Creates read only functions."/>
+<meta name="keywords" content="CREATE FUNCTION"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=09867065726001456"/>
+<title>CREATE FUNCTION Statement (Procedural)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20d42e77751910149f0ff6b879b1290f";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20d42e77751910149f0ff6b879b1290f">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">CREATE FUNCTION Statement (Procedural)</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Creates read only functions.</p>
+
+      <div class="section" id="loio20d42e77751910149f0ff6b879b1290f__sql_create_function_1sql_create_function_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+         
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE FUNCTION <var class="keyword varname">&lt;function_name&gt;</var> [(<var class="keyword varname">&lt;parameter_clause&gt;</var>)] RETURNS <var class="keyword varname">&lt;return_type&gt;</var>
+   [LANGUAGE <var class="keyword varname">&lt;lang&gt;</var>]
+   [SQL SECURITY <var class="keyword varname">&lt;mode&gt;</var>] 
+   [DEFAULT SCHEMA <var class="keyword varname">&lt;default_schema_name&gt;</var>]
+   [DETERMINISTIC] 
+   AS
+      {
+      BEGIN
+         <var class="keyword varname">&lt;function_body&gt;</var>
+      END
+      | HEADER ONLY
+      }
+   [WITH [<var class="keyword varname">&lt;cache_type&gt;</var>] CACHE RETENTION <var class="keyword varname">&lt;minute_value&gt;</var>
+   [OF <var class="keyword varname">&lt;projection_list&gt;</var>] [FILTER <var class="keyword varname">&lt;filter_condition&gt;</var>]]</pre></div>
+
+      </div></div>
+
+      <div class="section" id="loio20d42e77751910149f0ff6b879b1290f__sql_create_function_1sql_create_function_syntax_elements"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+         
+         <dl class="dl parml">
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;function_name&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the function name, and optionally, a schema name.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;function_name&gt;</var> ::= [<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;schema_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;parameter_clause&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the input parameters for the function.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;parameter_clause&gt;</var> ::= <var class="keyword varname">&lt;parameter&gt;</var> [{,<var class="keyword varname">&lt;parameter&gt;</var>}...]</pre></div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;parameter&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies a function parameter with its data type.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;parameter&gt;</var> ::= [IN] <var class="keyword varname">&lt;param_name&gt;</var> <var class="keyword varname">&lt;datatype&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;param_name&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the variable name for a parameter.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;param_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;datatype&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the data type of the parameter.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;datatype&gt;</var> ::= <var class="keyword varname">&lt;sql_type&gt;</var> | <var class="keyword varname">&lt;table_type&gt;</var></pre></div>
+
+                           <p class="p">Scalar user-defined functions only support primitive SQL types as
+                              input, whereas table user-defined functions also support table types
+                              as input.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;sql_type&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the primitive SQL type.</p>
+
+                           <p class="p">Scalar user-defined functions support the following SQL types:</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;sql_type&gt;</var> ::=
+ DATE
+ | TIME
+ | TIMESTAMP
+ | SECONDDATE
+ | TINYINT
+ | SMALLINT
+ | INTEGER
+ | BIGINT
+ | DECIMAL
+ | SMALLDECIMAL
+ | REAL
+ | DOUBLE
+ | VARCHAR
+ | NVARCHAR</pre></div>
+
+                           <p class="p">Table user-defined functions support the following SQL types:</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;sql_type&gt;</var> ::=
+ DATE
+ | TIME
+ | TIMESTAMP
+ | SECONDDATE
+ | TINYINT
+ | SMALLINT
+ | INTEGER
+ | BIGINT
+ | DECIMAL
+ | SMALLDECIMAL
+ | REAL
+ | DOUBLE
+ | VARCHAR
+ | NVARCHAR
+ | ALPHANUM
+ | VARBINARY
+ | CLOB
+ | NCLOB
+ | BLOB</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;table_type&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the table type.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_type&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                           <p class="p">To look at a table type previously defined with the CREATE TYPE
+                              command, see CREATE TYPE.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;table_type_definition&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies a table type that is implicitly defined within the
+                              signature.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_type_definition&gt;</var> ::= TABLE (<var class="keyword varname">&lt;column_list_definition&gt;</var>)
+
+<var class="keyword varname">&lt;column_list_definition&gt;</var> ::= <var class="keyword varname">&lt;column_elem&gt;</var>[{, <var class="keyword varname">&lt;column_elem&gt;</var>}...]
+
+<var class="keyword varname">&lt;column_elem&gt;</var> ::= <var class="keyword varname">&lt;column_name&gt;</var> <var class="keyword varname">&lt;data_type&gt;</var>
+
+<var class="keyword varname">&lt;column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;return_type&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the return type.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;return_type&gt;</var> ::= <var class="keyword varname">&lt;return_parameter_list&gt;</var> | <var class="keyword varname">&lt;return_table_type&gt;</var></pre></div>
+
+                  <p class="p">Table functions must return a table whose type is defined by
+                        <var class="keyword varname">&lt;return_table_type&gt;</var>. Scalar functions must return scalar
+                     values specified in <var class="keyword varname">&lt;return_parameter_list&gt;</var>. </p>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;return_parameter_list&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the output parameters</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;return_parameter_list&gt;</var> ::= <var class="keyword varname">&lt;return_parameter&gt;</var>[{, <var class="keyword varname">&lt;return_parameter&gt;</var>}...]
+
+<var class="keyword varname">&lt;return_parameter&gt;</var> ::= <var class="keyword varname">&lt;parameter_name&gt;</var> <var class="keyword varname">&lt;sql_type&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;return_table_type&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the structure of the returned table data.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;return_table_type&gt;</var> ::= TABLE ( <var class="keyword varname">&lt;ret_column_list&gt;</var> )</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;ret_column_list&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the list of columns returned from the function.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;ret_column_list&gt;</var> ::= <var class="keyword varname">&lt;ret_column_elem&gt;</var>[{, <var class="keyword varname">&lt;ret_column_elem&gt;</var>}...]</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;ret_column_elem&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the name of the column element with its associated data
+                              type.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;ret_column_elem&gt;</var> ::= <var class="keyword varname">&lt;column_name&gt;</var> <var class="keyword varname">&lt;sql_type&gt;</var> 
+
+<var class="keyword varname">&lt;column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;lang&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the programming language used in the function.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">LANGUAGE <var class="keyword varname">&lt;lang&gt;</var>
+
+<var class="keyword varname">&lt;lang&gt;</var> ::= SQLSCRIPT</pre></div>
+
+                  <p class="p">You can only use SQLScript functions.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;mode&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the security mode of the function.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SQL SECURITY <var class="keyword varname">&lt;mode&gt;</var>
+
+<var class="keyword varname">&lt;mode&gt;</var> ::= DEFINER | INVOKER</pre></div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis">DEFINER</dt>
+
+                        <dd class="dd">
+                           <p class="p">Performs the execution of the function with the privileges of the
+                              definer of the function. DEFINER is the default for table user-defined
+                              functions.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">INVOKER</dt>
+
+                        <dd class="dd">
+                           <p class="p">Performs the execution of the function with the privileges of the
+                              invoker of the function. Invoker is the default for scalar
+                              user-defined functions.</p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;default_schema_name&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the schema for unqualified objects in the function body.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;default_schema_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                  <p class="p">If <var class="keyword varname">&lt;default_schema_name&gt;</var> is not specified, then the
+                        <var class="keyword varname">&lt;current_schema&gt;</var> of the session is used.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis">DETERMINISTIC</dt>
+
+               <dd class="dd pd">
+                  <p class="p">For use with scalar functions, DETERMINISTIC specifies that the function always
+                     returns the same result any time it is called with a specific set of input
+                     parameters. Deterministic functions offer the advantage that they do not need
+                     to be recalculated every the result every time; you can refer to the cached
+                     result </p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;function_body&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the main body of the table functions and scalar functions.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;function_body&gt;</var> ::= <var class="keyword varname">&lt;scalar_function_body&gt;</var>|<var class="keyword varname">&lt;table_function_body&gt;</var>
+
+<var class="keyword varname">&lt;scalar_function_body&gt;</var> ::= [DECLARE <var class="keyword varname">&lt;func_var&gt;</var>] <var class="keyword varname">&lt;proc_assign&gt;</var>
+
+<var class="keyword varname">&lt;table_function_body&gt;</var> ::= [<var class="keyword varname">&lt;func_block_decl_list&gt;</var>]
+ [<var class="keyword varname">&lt;func_handler_list&gt;</var>]
+ <var class="keyword varname">&lt;func_stmt_list&gt;</var>
+ <var class="keyword varname">&lt;func_return_statement&gt;</var></pre></div>
+
+                  <p class="p">Because the function is flagged as read-only, neither DDL or DML statements
+                     (INSERT, UPDATE, and DELETE) are allowed in the function body. Scalar functions
+                     do not support table-typed input variables or table operations in the function
+                     body.</p>
+
+                  <p class="p">For the definition of <var class="keyword varname">&lt;proc_assign&gt;</var>, see the CREATE PROCEDURE statement.</p>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;func_block_decl_list&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies one or more local variables that are associated with a
+                              scalar type or an array type.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;func_block_decl_list&gt;</var> ::=
+ DECLARE {
+    <var class="keyword varname">&lt;func_var&gt;</var>
+    |<var class="keyword varname">&lt;func_cursor&gt;</var>
+    |<var class="keyword varname">&lt;func_condition&gt;</var>
+   }
+
+<var class="keyword varname">&lt;func_var&gt;</var> ::=
+ <var class="keyword varname">&lt;variable_name_list&gt;</var> [CONSTANT] { <var class="keyword varname">&lt;sql_type&gt;</var> | <var class="keyword varname">&lt;array_datatype&gt;</var> }
+   [NOT NULL][<var class="keyword varname">&lt;func_default&gt;</var>];
+
+<var class="keyword varname">&lt;array_datatype&gt;</var> ::= <var class="keyword varname">&lt;sql_type&gt;</var> ARRAY [ := <var class="keyword varname">&lt;array_constructor&gt;</var> ]
+
+<var class="keyword varname">&lt;array_constructor&gt;</var> ::= ARRAY ( <var class="keyword varname">&lt;expression&gt;</var> [{,<var class="keyword varname">&lt;expression&gt;</var>}...] )
+
+<var class="keyword varname">&lt;func_default&gt;</var> ::= { DEFAULT | := } <var class="keyword varname">&lt;func_expr&gt;</var>
+
+<var class="keyword varname">&lt;func_expr&gt;</var> ::= !!An element of the type specified by <var class="keyword varname">&lt;sql_type&gt;</var></pre></div>
+
+                           <p class="p">An array type has <var class="keyword varname">&lt;type&gt;</var> as its element type. An
+                              array has a range from 1 to 2,147,483,647, which is the limitation of
+                              underlying structure.</p>
+
+                           <p class="p">Assign default values by specifying <var class="keyword varname">&lt;expression&gt;</var>.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;func_handler_list&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies a list of function handlers.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;func_handler_list&gt;</var> ::= <var class="keyword varname">&lt;proc_handler_list&gt;</var></pre></div>
+
+                           <p class="p">See the CREATE PROCEDURE statement for more information about this clause.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;func_stmt_list&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies statements for the functions.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;func_stmt_list&gt;</var> ::=
+ <var class="keyword varname">&lt;func_stmt&gt;</var>
+ | <var class="keyword varname">&lt;func_stmt_list&gt;</var> <var class="keyword varname">&lt;func_stmt&gt;</var>
+
+<var class="keyword varname">&lt;func_stmt&gt;</var> ::= 
+ <var class="keyword varname">&lt;proc_block&gt;</var>
+ | <var class="keyword varname">&lt;proc_assign&gt;</var>
+ | <var class="keyword varname">&lt;proc_single_assign&gt;</var>
+ | <var class="keyword varname">&lt;proc_if&gt;</var>
+ | <var class="keyword varname">&lt;proc_while&gt;</var>
+ | <var class="keyword varname">&lt;proc_for&gt;</var>
+ | <var class="keyword varname">&lt;proc_foreach&gt;</var>
+ | <var class="keyword varname">&lt;proc_exit&gt;</var>
+ | <var class="keyword varname">&lt;proc_signal&gt;</var>
+ | <var class="keyword varname">&lt;proc_resignal&gt;</var>
+ | <var class="keyword varname">&lt;proc_open&gt;</var>
+ | <var class="keyword varname">&lt;proc_fetch&gt;</var>
+ | <var class="keyword varname">&lt;proc_close&gt;</var></pre></div>
+
+                           <p class="p">For further information about the definitions in
+                              <var class="keyword varname">&lt;func_stmt&gt;</var>, see the CREATE PROCEDURE statement.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;func_return_statement&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the return statement for the function.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;func_return_statement&gt;</var> ::= RETURN <var class="keyword varname">&lt;function_return_expr&gt;</var>
+
+<var class="keyword varname">&lt;func_return_expr&gt;</var> ::= <var class="keyword varname">&lt;table_variable&gt;</var> | <var class="keyword varname">&lt;subquery&gt;</var></pre></div>
+
+                           <p class="p">Table functions must contain a return statement.</p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis">WITH CACHE RETENTION <var class="keyword varname">&lt;minute_value&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Caches the result of the function and users can get stale data.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;cache_type&gt;</var> ::= STATIC</pre></div>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">RETENTION <var class="keyword varname">&lt;minute_value&gt;</var>
+
+<var class="keyword varname">&lt;minute_value&gt;</var> ::= <var class="keyword varname">&lt;unsigned_integer&gt;</var></pre></div>
+
+                  <p class="p">With this option, you can cache the result of a table function and the user may
+                     get stale data. However, only stale data access that does not exceed the
+                     specified <var class="keyword varname">&lt;RETENTION&gt;</var> period is allowed. For outdated data
+                     that exceeds the RETENTION period, internally the cache is refreshed and
+                     up-to-date data is returned.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;projection_list&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">OF <var class="keyword varname">&lt;projection_list&gt;</var>
+
+<var class="keyword varname">&lt;projection_list&gt;</var> ::= <var class="keyword varname">&lt;projection_name&gt;</var> [{, <var class="keyword varname">&lt;projection_name&gt;</var>}]
+
+<var class="keyword varname">&lt;projection_name&gt;</var> ::= <var class="keyword varname">&lt;column_name&gt;</var> | <var class="keyword varname">&lt;aggr_type&gt;</var>(<var class="keyword varname">&lt;column_name&gt;</var>)
+
+<var class="keyword varname">&lt;aggr_type&gt;</var> ::= SUM | MIN | MAX | COUNT</pre></div>
+
+                  <p class="p">Reduce the cached data by specifying cached projection list. If a column that
+                     is not part of the projection list is requested or included in the WHERE
+                     clause, then the cache cannot be exploited. In addition, you can direct an
+                     aggregation type of a specific column. If it is specified, then the cache
+                     includes aggregated results for that column and returns aggregated results
+                     only. </p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;filter_condition&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">FILTER <var class="keyword varname">&lt;filter_condition&gt;</var>
+
+<var class="keyword varname">&lt;filter_condition&gt;</var> ::= <var class="keyword varname">&lt;condition&gt;</var>
+
+<var class="keyword varname">&lt;condition&gt;</var> ::=
+ <var class="keyword varname">&lt;condition&gt;</var> AND <var class="keyword varname">&lt;condition&gt;</var>
+ | <var class="keyword varname">&lt;comparison_predicate&gt;</var></pre></div>
+
+                  <p class="p">Reduce the cached data by specifying a filter condition. Only filtered results
+                     are cached. Unsupported predicate types are <span class="keyword cmdname">CONTAINS</span> and
+                     predicates having subqueries.</p>
+
+               </dd>
+
+            
+         </dl>
+
+      </div></div>
+
+      <div class="section" id="loio20d42e77751910149f0ff6b879b1290f__sql_create_function_1sql_create_function_description"><div class="section_title">Description</div><div type="Description">
+         
+         <p class="p">There are two kinds of user-defined function (UDF): table and scalar. They differ by
+            input/output parameter, supported functionality in the body, and the way they are
+            consumed in SQL statements.</p>
+
+         <p class="p">User-defined functions are read-only functions that are free of side effects: DDL or DML
+            statements are not allowed within the function body.</p>
+
+         <p class="p">The CREATE FUNCTION statement creates read-only functions that are free of side effects.
+            Neither DDL or DML statements (INSERT, UPDATE, and DELETE) are allowed in the function
+            body. Also other functions or procedures selected/called from the body of the function
+            must be read only.</p>
+
+         <p class="p">When you specify HEADERS ONLY, only the properties of the function are created along
+            with the OID and no function dependencies exist. Once the headers are replaced with full
+            function definitions, dependencies are created while the function OID remains the same.
+            Dependencies appear in the OBJECT_DEPENDENCIES system view. HEADERS
+            ONLY is useful when you need to create dependent functions.</p>
+
+      </div></div>
+
+      <div class="section" id="loio20d42e77751910149f0ff6b879b1290f__sql_create_function_1sql_create_function_examples"><div class="section_title">Examples</div><div type="Examples">
+         
+         <p class="p">Create a table function.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE FUNCTION scale (val INT)
+ RETURNS TABLE (a INT, b INT) LANGUAGE SQLSCRIPT AS
+ BEGIN
+     RETURN SELECT a, :val * b AS  b FROM mytab;
+ END;</pre></div>
+
+         <p class="p">Use the scale function like a table. For example: </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM scale(10);
+ SELECT * FROM scale(10) AS a, scale(10) AS b WHERE a.a =  b.a;</pre></div>
+
+         <p class="p">Create a scalar function.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE FUNCTION func_add_mul(x Double, y Double) 
+ RETURNS result_add Double, result_mul Double 
+ LANGUAGE SQLSCRIPT READS SQL DATA AS
+ BEGIN
+     result_add := :x + :y;
+     result_mul := :x * :y;
+ END;</pre></div>
+
+         <p class="p"> Use the func_add_mul function like a built-in function. For example: </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE TAB (a Double, b Double);
+ INSERT INTO TAB VALUES (1.0, 2.0);
+ INSERT INTO TAB VALUES (3.0, 4.0);
+ 
+SELECT a, b, func_add_mul(a, b).result_add AS ADD, func_add_mul(a, b).result_mul AS MUL FROM TAB ORDER BY a;</pre></div>
+
+         <p class="p">The SELECT statement returns the following results:</p>
+
+         
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20d42e77751910149f0ff6b879b1290f__table_m1g_bzy_nw" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="25%"/><col width="25%"/><col width="25%"/><col width="25%"/></colgroup>
+
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" id="d14231952e1027">
+                        <p class="p">A</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d14231952e1033">
+                        <p class="p">B</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d14231952e1039">
+                        <p class="p">ADD</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d14231952e1045">
+                        <p class="p">MUL</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d14231952e1027 ">
+                        <p class="p">1</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d14231952e1033 ">
+                        <p class="p">2</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d14231952e1039 ">
+                        <p class="p">3</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d14231952e1045 ">
+                        <p class="p">2</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d14231952e1027 ">
+                        <p class="p">3</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d14231952e1033 ">
+                        <p class="p">4</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d14231952e1039 ">
+                        <p class="p">7</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d14231952e1045 ">
+                        <p class="p">12</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p">Create a function func_mul that is assigned to a scalar variable in the func_mul_wrapper
+            function. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE FUNCTION func_mul(input1 INT)
+ RETURNS output1 INT LANGUAGE SQLSCRIPT AS
+ BEGIN
+     output1 := :input1 * :input1;
+ END;
+
+ CREATE FUNCTION func_mul_wrapper(input1 INT)
+ RETURNS output1 INT LANGUAGE SQLSCRIPT AS
+ BEGIN
+     output1 := func_mul(:input1);
+ END;
+
+ SELECT func_mul_wrapper(2) as RESULT FROM DUMMY;</pre></div>
+
+         <p class="p">The SELECT statement returns 4.</p>
+
+         <p class="p">Create the function FuncHeader as HEADER only. Later you use ALTER FUNCTION to replace
+            the header with the full function definitions.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE FUNCTION FuncHeader (input1 integer) RETURNS  output1  integer AS HEADER ONLY;
+
+ALTER FUNCTION FuncHeader (input1 integer) RETURNS  output1  integer 
+AS
+BEGIN 
+  output1 := :input1 * :input1;
+END;</pre></div>
+
+         <p class="p">Create a table function FUNC with a static result cache:</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE FUNCTION FUNC RETURNS TABLE (COL1 INT, COL2 INT) AS
+BEGIN
+    RETURN SELECT * FROM TAB;
+END
+WITH CACHE RETENTION 10;</pre></div>
+
+      </div></div>
+
+   </div>
+
+
+<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?20d5c1ed75191014a80d897035629def.html" target="_top" title="Creates a user-defined type">CREATE TYPE Statement (Procedural)</a></div>
+<div><a class="link" href="default.html?20d467407519101484f190f545d54b24.html" target="_top" title="Creates a procedure that uses the specified programming language.">CREATE PROCEDURE Statement (Procedural)</a></div>
+<div><a class="link" href="default.html?20a4389775191014b5a6bf2ccc0df2ed.html" target="_top" title="Describes the expression support offered in SAP HANA.">Expressions</a></div>
+<div><a class="link" href="default.html?20a2ab29751910148de0fe7189c330bc.html" target="_top">Predicates</a></div>
+<div><a class="link" href="default.html?20cbd12e7519101489c7cfcd0f32868d.html" target="_top" title="Provides information about dependencies between objects, such as which views refer to a specific table.">OBJECT_DEPENDENCIES System View</a></div>
+<div><a class="link" href="default.html?55d2f440e375408194be7e58266733fa.html" target="_top" title="Creates a virtual functions that allows you to employ smart data access on service interfaces exposed by remote systems (both ODBC/non-ODBC).">CREATE VIRTUAL FUNCTION Statement (Procedural)</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="CREATE FUNCTION Statement (Procedural)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "exposed" : true, 
+  "authentication": null,
+  "prevent_xsrf" : true,
+  "default_file" : "index.html"
+}

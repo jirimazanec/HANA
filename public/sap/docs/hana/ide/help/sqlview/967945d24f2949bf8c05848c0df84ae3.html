@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Removes the system objects required by remote data sync server from the current tenant database."/>
+<meta name="description" content="Removes the system objects required by remote data sync server from the current tenant database."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=15178018488053602"/>
+<title>ALTER SYSTEM UNINITIALIZE SERVICE Statement (Remote Data Sync)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio967945d24f2949bf8c05848c0df84ae3";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio967945d24f2949bf8c05848c0df84ae3">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">ALTER SYSTEM UNINITIALIZE SERVICE Statement (Remote Data Sync)</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">Removes the system objects required by remote data sync server from the current tenant
+		database.</p>
+		<div class="section"><div class="section_title">Syntax</div><div type="Syntax">
+		<div class="note caution"><span class="cautiontitle">Caution</span> <span class="ph">This
+                                                  information applies only for the SAP HANA option
+                                                  cited in the title of this topic. You must have
+                                                  purchased the license for it in order to use the
+                                                  information contained in this topic.</span></div>
+
+		<div class="note note"><span class="notetitle">Note</span> <span class="ph">While
+                                SAP HANA and remote data sync share much of the same base SQL
+                                syntax, there are some differences in supported and nonsupported
+                                clauses and parameters. The following syntax applies only to remote
+                                data sync.</span></div>
+
+		
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><span class="keyword cmdname">ALTER SYSTEM UNINITIALIZE SERVICE 'rdsyncserver'</span> 
+[ <span class="keyword cmdname">AT</span> [ <span class="keyword cmdname">LOCATION</span> ] '<var class="keyword varname">&lt;hostname&gt;</var>[:<var class="keyword varname">&lt;port_number&gt;</var> ]']</pre></div>
+
+	</div></div>
+
+		<div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;hostname&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+			<p class="p">This parameter specifies the name of the host where the remote data sync server is
+				installed.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;port_number&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+			<p class="p">This parameter specifies the port number that the remote data sync server uses on the
+				host.</p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">Execute this statement as the SYSTEM user in the tenant database. </p>
+
+			<p class="p">This statement must be executed once for every remote data sync server associated
+				with the tenant database. Once you execute this statement, the remote data sync
+				server is in an uninitialized state and it cannot process synchronization requests. </p>
+
+			<p class="p">When the last remote data sync server for a tenant is uninitialized, the remote data
+				sync system objects are removed from the tenant. </p>
+
+			<p class="p">Typically you execute an ALTER DATABASE...REMOVE statement in  SYSTEMDB after
+				executing an ALTER SYSTEM UNINITIALIZE SERVICE statement in the tenant database.</p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Example</div><div type="Example">
+			
+			<p class="p">The following example shows you how to remove the remote data sync system objects from a
+				tenant database.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER SYSTEM UNINITIALIZE SERVICE 'rdsyncserver'</pre></div>
+
+		</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?305aae363904403d8c59dc1a8692ee40.html" target="_top" title="Alters an existing database by adding or removing the rdsyncserver service.">ALTER DATABASE Statement (Remote Data Sync)</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="ALTER SYSTEM UNINITIALIZE SERVICE Statement (Remote Data Sync)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

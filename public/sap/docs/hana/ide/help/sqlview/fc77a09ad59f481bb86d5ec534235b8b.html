@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Provides the estimated size of the next data backup."/>
+<meta name="description" content="Provides the estimated size of the next data backup."/>
+<meta name="keywords" content="M_BACKUP_SIZE_ESTIMATIONS"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=9364590525230808"/>
+<title>M_BACKUP_SIZE_ESTIMATIONS System View</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loiofc77a09ad59f481bb86d5ec534235b8b";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loiofc77a09ad59f481bb86d5ec534235b8b">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">M_BACKUP_SIZE_ESTIMATIONS System View</h1>
+
+	
+	
+	<div class="body refbody"><p class="shortdesc">Provides the estimated size of the next data backup.</p>
+
+		<div class="section"><div class="section_title">Structure</div><div type="Structure">
+			
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loiofc77a09ad59f481bb86d5ec534235b8b__table_xj3_v5n_cw" class="table" frame="border" border="1" rules="all">
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" id="d34094493e40">
+								<p class="p">Column name</p>
+
+							</th>
+
+							<th class="entry" valign="top" id="d34094493e46">
+								<p class="p">Data type</p>
+
+							</th>
+
+							<th class="entry" valign="top" id="d34094493e52">
+								<p class="p">Description</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" headers="d34094493e40 d34094493e46 d34094493e52 ">
+								<p class="p"> HOST </p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d34094493e40 d34094493e46 d34094493e52 ">
+								<p class="p"> VARCHAR(64) </p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d34094493e40 d34094493e46 d34094493e52 ">
+								<p class="p"> Host name</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d34094493e40 d34094493e46 d34094493e52 ">
+								<p class="p"> PORT </p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d34094493e40 d34094493e46 d34094493e52 ">
+								<p class="p"> INTEGER </p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d34094493e40 d34094493e46 d34094493e52 ">
+								<p class="p"> Internal port</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d34094493e40 d34094493e46 d34094493e52 ">
+								<p class="p"> SERVICE_NAME </p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d34094493e40 d34094493e46 d34094493e52 ">
+								<p class="p"> NVARCHAR(32) </p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d34094493e40 d34094493e46 d34094493e52 ">
+								<p class="p"> Name of the service </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d34094493e40 d34094493e46 d34094493e52 ">
+								<p class="p"> ENTRY_TYPE_NAME </p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d34094493e40 d34094493e46 d34094493e52 ">
+								<p class="p"> NVARCHAR(64) </p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d34094493e40 d34094493e46 d34094493e52 ">
+								<p class="p"> Classification of the type of backup. The following types are supported: complete data
+									backup, data snapshot, log backup, log missing, differential and
+									incremental backups </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d34094493e40 d34094493e46 d34094493e52 ">
+								<p class="p"> ESTIMATED_SIZE </p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d34094493e40 d34094493e46 d34094493e52 ">
+								<p class="p"> BIGINT </p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d34094493e40 d34094493e46 d34094493e52 ">
+								<p class="p"> The estimated size of the backup in bytes </p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+			<div class="p">
+				<div class="note note"><span class="notetitle">Note</span> The actual backup size may differ from the estimation shown in this view.</div>
+
+			</div>
+
+			<p class="p">The ENTRY_TYPE_NAME column is equivalent to the column in the M_BACKUP_CATALOG view. The table
+				contains records for each service with a volume for all the supported backup types.
+				If a complete data backup has not yet been written, a differential or incremental
+				backup will not be possible. If no differential or incremental backups have been
+				created, this table will not contain any records for differential or incremental
+				backups.</p>
+
+		</div></div>
+
+	</div>
+
+	
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="M_BACKUP_SIZE_ESTIMATIONS System View";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Every user who wants to work directly with the SAP HANA database must have a database user with the necessary privileges. Although privileges can be granted to users directly, roles are the standard way to authorize users. A role is a collection of privileges."/>
+<meta name="description" content="Every user who wants to work directly with the SAP HANA database must have a database user with the necessary privileges. Although privileges can be granted to users directly, roles are the standard way to authorize users. A role is a collection of privileges."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=8646530854102786"/>
+<title>Setting Up Roles and Privileges</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio92d2a896ab244941bdb99eff94e77c17";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio92d2a896ab244941bdb99eff94e77c17">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Setting Up Roles and Privileges</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">Every user who wants to work directly with the SAP HANA database must have a database
+		user with the necessary privileges. Although privileges can be granted to users directly,
+		roles are the standard way to authorize users. A role is a collection of
+		privileges.</p>
+
+		<div class="section"><div class="section_title">Overview of Roles and Privileges</div><div type="Overview of Roles and Privileges">
+			
+			<p class="p">After users have successfully logged on to SAP HANA, they can do only those things they are
+				authorized to do. This is determined by the privileges that they have been granted.
+				Several privilege types exist in the SAP HANA database, for example system
+				privileges, object privileges, and application privileges.</p>
+
+			<p class="p">Privileges can be granted to users directly or indirectly through roles. Roles are the
+				standard mechanism of granting privileges as they allow you to implement complex,
+				reusable authorization concepts that can be modeled on business roles. It is
+				possible to create roles as pure runtime objects that follow classic SQL principles
+					(<dfn class="term">catalog roles</dfn>) or as design-time objects in the repository of the
+				SAP HANA database (<dfn class="term">repository roles</dfn>). In general, repository roles are
+				recommended as they offer more flexibility. For example, they can be transported
+				between systems. For more information, see <cite class="cite">Catalog Roles and Repository Roles
+					Compared</cite> in the <cite class="cite">SAP HANA Security Guide</cite>.</p>
+
+			<div class="note note"><span class="notetitle">Note</span> Part of the logon process is user authentication. SAP HANA supports several
+				authentication mechanisms, including user name/password authentication and external
+				authentication services such as SAML and Kerberos. For more information, see
+					<cite class="cite">SAP HANA Authentication and Single Sign-On</cite> in the <cite class="cite">SAP HANA
+					Security Guide</cite>.</div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Application Authorization</div><div type="Application Authorization">
+			
+			<p class="p">Application developers define application descriptors to specify how users accessing
+				their applications are authenticated and what authorization is required. For more
+				information, see <cite class="cite">Creating the Application Descriptors</cite>.</p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">User Management</div><div type="User Management">
+			
+			<p class="p">User administrators are responsible for creating database users and granting them the required
+				roles and privileges. For more information about creating and authorizing users, as
+				well as other user provisioning tasks, see <cite class="cite">User Provisioning</cite> in the
+					<cite class="cite">SAP HANA Administration Guide</cite>.</p>
+
+		</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?be15895c24ad4f00bebabeda31eeda3f.html" target="_top" title="The application descriptors describe the framework in which an SAP HANA XS application runs. The framework defined by the application descriptors includes the root point in the package hierarchy where content is to be served to client requests, and who has access to the content.">Creating the Application Descriptors</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Setting Up Roles and Privileges";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

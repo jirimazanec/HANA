@@ -1,0 +1,2809 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="The Job Scheduler APIs enable applications to use the functionality provided in Job Scheduler."/>
+<meta name="description" content="The Job Scheduler APIs enable applications to use the functionality provided in Job Scheduler."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=24948463444130564"/>
+<title>Job Scheduler REST API for XS Advanced</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio5ef38ae037434042baf25dc79598bf8d";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio5ef38ae037434042baf25dc79598bf8d">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Job Scheduler REST API for XS Advanced</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">The Job Scheduler APIs enable applications to use the functionality provided in Job
+		Scheduler.</p>
+
+		<div class="section">
+			<p class="p">The Job Scheduler-as-a-Service is a microservice component, which enables you to create,
+				schedule, and run application tasks. The component exposes REST endpoints for
+				interaction, with JSON as the format for data communication. The Job Scheduler API
+				for SAP HANA XS advanced includes the commands listed in the following table. For
+				more information about the configuration parameters required for the request, see
+				the API documentation provided with the <span class="ph uicontrol">Job Scheduler
+					Dashboard</span> tool.</p>
+
+			<div class="note note"><span class="notetitle">Note</span> 
+				<p class="p">Access to the APIs is controlled by authorization scopes, for example,
+						<samp class="ph codeph">admin</samp> for <span class="keyword cmdname">POST</span> and
+						<span class="keyword cmdname">PUT</span> requests, or <samp class="ph codeph">view</samp> for
+						<span class="keyword cmdname">GET</span> requests. Scopes are built into <dfn class="term">roles</dfn>,
+					which can be assigned to users in <dfn class="term">role collections</dfn>. The Job
+					Scheduler REST APIs are protected with basic authentication.</p>
+
+			</div>
+
+			<p class="p">An application, which has been bound to the Job Scheduler service and wants to
+				interact with the Job Scheduler service, must extract the authentication credentials
+				from the <var class="keyword varname">&lt;VCAP_SERVICES&gt;</var> environment variable and use these
+				credentials to call the REST APIs. To invoke the API, the user-authentication
+				credentials must be encoded and passed in the <span class="q">“Authorization”</span> header. If the
+				credentials are not passed or they are passed wrongly, the APIs return a response
+				with the status code <span class="q">“<samp class="ph systemoutput">401- Unauthorized</samp>”</span>.</p>
+
+			<p class="p">In this section, you can find information about the following topics:</p>
+
+			<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_wrd_ttr_xt">
+				<li class="li">
+					<p class="p"><a class="xref nopagenumber" href="default.html?5ef38ae037434042baf25dc79598bf8d.html#loio5ef38ae037434042baf25dc79598bf8d__section_fnf_str_xt" target="_top">Command Overview</a></p>
+
+				</li>
+
+				<li class="li">
+					<p class="p"><a class="xref nopagenumber" href="default.html?5ef38ae037434042baf25dc79598bf8d.html#loio5ef38ae037434042baf25dc79598bf8d__section_ycg_w2r_xt" target="_top">Human-Readable Dates</a></p>
+
+				</li>
+
+				<li class="li">
+					<p class="p"><a class="xref nopagenumber" href="default.html?5ef38ae037434042baf25dc79598bf8d.html#loio5ef38ae037434042baf25dc79598bf8d__section_uly_y2r_xt" target="_top">Time Formats</a></p>
+
+				</li>
+
+			</ul>
+
+		</div>
+
+		<div class="section" id="loio5ef38ae037434042baf25dc79598bf8d__section_fnf_str_xt"><div class="section_title">Command Overview</div><div type="Command Overview">
+			
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio5ef38ae037434042baf25dc79598bf8d__table_hlf_mv3_xt" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: XS Advanced Job Scheduler REST API</span></caption>
+<colgroup><col width="25.862068965517242%"/><col width="61.20689655172414%"/><col width="12.931034482758621%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="25.862068965517242%" id="d992699e118">
+								<p class="p">API</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="61.206896551724135%" id="d992699e124">
+								<p class="p">Description</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="12.931034482758621%" id="d992699e130">Required Scope</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="25.862068965517242%" headers="d992699e118 ">
+								<p class="p"><a class="xref nopagenumber" href="default.html?5ef38ae037434042baf25dc79598bf8d.html#loio5ef38ae037434042baf25dc79598bf8d__section_bdj_psq_xt" target="_top">Job Creation</a></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.206896551724135%" headers="d992699e124 ">
+								<p class="p">Used to create a job. Job creation can accept a collection of job
+									schedules to be created.</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.931034482758621%" headers="d992699e130 "><samp class="ph codeph">admin</samp></td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.862068965517242%" headers="d992699e118 ">
+								<p class="p"><a class="xref nopagenumber" href="default.html?5ef38ae037434042baf25dc79598bf8d.html#loio5ef38ae037434042baf25dc79598bf8d__section_cq2_rsq_xt" target="_top">Job Configuration</a></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.206896551724135%" headers="d992699e124 ">
+								<p class="p">Configure a job with updated run time information. The API can
+									also be used to create a job if a Job with the Job Name in the
+									URI segment, is not found.</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.931034482758621%" headers="d992699e130 "><samp class="ph codeph">admin</samp></td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.862068965517242%" headers="d992699e118 ">
+								<p class="p"><a class="xref nopagenumber" href="default.html?5ef38ae037434042baf25dc79598bf8d.html#loio5ef38ae037434042baf25dc79598bf8d__section_o12_x1r_xt" target="_top">Job Deletion</a></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.206896551724135%" headers="d992699e124 ">
+								<p class="p">Delete a job and purge all its run time information such as job
+									schedules and logs. </p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.931034482758621%" headers="d992699e130 "><samp class="ph codeph">admin</samp></td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.862068965517242%" headers="d992699e118 ">
+								<p class="p"><a class="xref nopagenumber" href="default.html?5ef38ae037434042baf25dc79598bf8d.html#loio5ef38ae037434042baf25dc79598bf8d__section_vjw_mvq_xt" target="_top">Job Schedule Creation</a></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.206896551724135%" headers="d992699e124 ">
+								<p class="p">Create a job schedule for a specified job. All job configuration
+									values (Action URL, HTTP Method, User, Password &amp; Job
+									Activation Status) are valid for the newly created schedule. A
+									job schedule will only run if both the job and the schedule are
+									active. </p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.931034482758621%" headers="d992699e130 "><samp class="ph codeph">admin</samp></td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.862068965517242%" headers="d992699e118 ">
+								<p class="p"><a class="xref nopagenumber" href="default.html?5ef38ae037434042baf25dc79598bf8d.html#loio5ef38ae037434042baf25dc79598bf8d__section_hvh_gwq_xt" target="_top">Job Schedule
+									Modification</a></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.206896551724135%" headers="d992699e124 ">
+								<p class="p">Configure the run time information of a job schedule for a
+									specified job. All job configuration values (for example:
+										<samp class="ph codeph">Action URL</samp>, <samp class="ph codeph">HTTP Method</samp>,
+										<samp class="ph codeph">User</samp>, <samp class="ph codeph">Password</samp>, and
+										<samp class="ph codeph">Job Activation Status</samp>) remain valid for the
+									modified schedule. </p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.931034482758621%" headers="d992699e130 "><samp class="ph codeph">admin</samp></td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.862068965517242%" headers="d992699e118 ">
+								<p class="p"><a class="xref nopagenumber" href="default.html?5ef38ae037434042baf25dc79598bf8d.html#loio5ef38ae037434042baf25dc79598bf8d__section_usq_jbr_xt" target="_top">Job Schedule Deletion</a></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.206896551724135%" headers="d992699e124 ">
+								<p class="p">Delete and purge run time information of the job schedule of the
+									specified job. All related information like job schedule
+									configurations and logs are purged. The processing of the
+									schedule is also immediately stopped. </p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.931034482758621%" headers="d992699e130 "><samp class="ph codeph">admin</samp></td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.862068965517242%" headers="d992699e118 ">
+								<p class="p">
+									<a class="xref nopagenumber" href="default.html?5ef38ae037434042baf25dc79598bf8d.html#loio5ef38ae037434042baf25dc79598bf8d__section_qcy_3wq_xt" target="_top">Bulk Job Schedule
+										Activation</a></p>
+
+								<p class="p"><a class="xref nopagenumber" href="default.html?5ef38ae037434042baf25dc79598bf8d.html#loio5ef38ae037434042baf25dc79598bf8d__section_qcy_3wq_xt" target="_top">Bulk Job Schedule
+										Deactivation</a></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.206896551724135%" headers="d992699e124 ">
+								<p class="p">This is a utility API used to activate or deactivate all existing
+									schedules of a job. This API triggers the immediate processing
+									(or a halt in processing) of all job schedules for the specified
+									job.</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.931034482758621%" headers="d992699e130 "><samp class="ph codeph">admin</samp></td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.862068965517242%" headers="d992699e118 ">
+								<p class="p"><a class="xref nopagenumber" href="default.html?5ef38ae037434042baf25dc79598bf8d.html#loio5ef38ae037434042baf25dc79598bf8d__section_kdn_dxq_xt" target="_top">Job Details</a></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.206896551724135%" headers="d992699e124 ">
+								<p class="p">Retrieve the saved details and configurations of a specified job.
+									If the <samp class="ph codeph">displaySchedules</samp> parameter is not
+									provided, the schedules for the job are not returned and only
+									the job details are returned.</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.931034482758621%" headers="d992699e130 "><samp class="ph codeph">view</samp></td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.862068965517242%" headers="d992699e118 ">
+								<p class="p"><a class="xref nopagenumber" href="default.html?5ef38ae037434042baf25dc79598bf8d.html#loio5ef38ae037434042baf25dc79598bf8d__section_n24_cyq_xt" target="_top">Job Schedule Details</a></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.206896551724135%" headers="d992699e124 ">
+								<p class="p">Retrieve the saved details and configurations of a specified job
+									schedule &amp; optionally the generated logs for the
+									schedule.</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.931034482758621%" headers="d992699e130 "><samp class="ph codeph">view</samp></td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.862068965517242%" headers="d992699e118 ">
+								<p class="p"><a class="xref nopagenumber" href="default.html?5ef38ae037434042baf25dc79598bf8d.html#loio5ef38ae037434042baf25dc79598bf8d__section_t3k_wbr_xt" target="_top">Bulk Job Schedule
+									Deletion</a></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.206896551724135%" headers="d992699e124 ">
+								<p class="p">Delete and purge run time information of all the currently
+									configured job schedules of the specified job. All related
+									information like job schedule configurations and logs are
+									purged. The processing of the schedules is also immediately
+									stopped.</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.931034482758621%" headers="d992699e130 "><samp class="ph codeph">admin</samp></td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.862068965517242%" headers="d992699e118 ">
+								<p class="p"><a class="xref nopagenumber" href="default.html?5ef38ae037434042baf25dc79598bf8d.html#loio5ef38ae037434042baf25dc79598bf8d__section_tpn_syq_xt" target="_top">Job Run Log Update</a></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.206896551724135%" headers="d992699e124 ">
+								<p class="p">Used by applications, to inform the Job Scheduler about the
+									status of an asynchronous, long-running job run. </p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.931034482758621%" headers="d992699e130 "><samp class="ph codeph">admin</samp></td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loio5ef38ae037434042baf25dc79598bf8d__section_bdj_psq_xt"><div class="section_title">Job Creation</div><div type="Job Creation">
+			
+			<p class="p">To create a job schedule, at least one of the fields <samp class="ph codeph">repeatAt</samp>,
+					<samp class="ph codeph">repeatEvery</samp>, <samp class="ph codeph">cron</samp> and <samp class="ph codeph">time</samp>
+				must be used. The response from the job creation API is a JSON body with the job
+				details, including the ID of the job.</p>
+
+			<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_w5c_bw3_xt">
+				<li class="li"><span class="ph emphasis emphasis">Route</span><p class="p"><samp class="ph codeph">POST /scheduler/jobs</samp></p>
+</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Response</span><p class="p">A JSON body containing the job details,
+						including the ID of the job with status code
+								<span class="q">“<samp class="ph systemoutput">201-CREATED</samp>”</span> , if the call was
+						successful. A location header with the relative path to the job-details is
+						included in the response.</p>
+</li>
+
+			</ul>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">POST /scheduler/jobs HTTP/1.1 
+content-type:application/json;charset=utf-8 
+host: https://scheduler.service.acme.com 
+content-length: 500 
+{"name":"hello_world", "description": "greets the world periodically", "action":"http://httpbin.org/basic-auth/abc/def", "active": true, "httpMethod":"GET", "schedules": [{"repeatEvery":"2 minutes", "description": "every 2 minutes, run this schedule", "data":{"time":"abc"}, "active": true}, {"cron":"* * * * *", "description": "every minute, run this schedule", "data":{"time":"abc"}, "active": true}]} </pre></div>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">Response: 
+Status: 201 CREATED 
+Location: /scheduler/jobs/109 
+Content-Type: application/json; charset=utf-8 
+Body: {"_id":109,"name":"hello_world","description":"greets the world periodically","action":"http://httpbin.org/basic-auth/abc/def","active":true,"user":null,"httpMethod":"GET","schedules":[{"scheduleId":"a66cbdd4-42ce-4c36-b61a-66bc8be6c2d0","description":"every 2 minutes, run this schedule","data":{"time":"abc"},"type":"recurring","active":true,"startTime":null,"endTime":null,"repeatInterval":"2 minutes"},{"scheduleId":"24d6f8f0-d156-4d48-b678-44d353e700d2","description":"every minute, run this schedule","data":{"time":"abc"},"type":"recurring","active":true,"startTime":null,"endTime":null,"cron":"* * * * *"}]}</pre></div>
+
+			</div>
+
+			<div class="p">The job schedule creation request is defined with the parameters listed in the
+				following table:<div class="note note"><span class="notetitle">Note</span> 
+					<p class="p">Parameters marked with an asterisk (*) are mandatory.</p>
+
+				</div>
+</div>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio5ef38ae037434042baf25dc79598bf8d__table_kpk_d4q_xt" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 2: Job Creation: Request Body Fields</span></caption>
+<colgroup><col width="23.329425556858144%"/><col width="11.723329425556857%"/><col width="64.94724501758499%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="23.329425556858144%" id="d992699e472">
+								<p class="p">Request Field</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="11.723329425556857%" id="d992699e478">
+								<p class="p">Type</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="64.94724501758499%" id="d992699e484">
+								<p class="p">Descrition</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="23.329425556858144%" headers="d992699e472 ">
+								<p class="p"><span class="keyword parmname">name</span> *</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="11.723329425556857%" headers="d992699e478 ">
+								<p class="p">String</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.94724501758499%" headers="d992699e484 ">
+								<p class="p">The unique name of the job to be created</p>
+
+								<div class="note note"><span class="notetitle">Note</span> 
+									<p class="p">If a job with the same name for the technical user
+										credentials already exists, the job creation request
+										fails.</p>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.329425556858144%" headers="d992699e472 ">
+								<p class="p"><span class="keyword parmname">description</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="11.723329425556857%" headers="d992699e478 ">
+								<p class="p">String</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.94724501758499%" headers="d992699e484 ">
+								<p class="p">Describes the user-defined job</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.329425556858144%" headers="d992699e472 ">
+								<p class="p"><span class="keyword parmname">action</span> * </p>
+
+							</td>
+
+							<td class="entry" valign="top" width="11.723329425556857%" headers="d992699e478 ">
+								<p class="p">String</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.94724501758499%" headers="d992699e484 ">
+								<p class="p">The fully qualified URL endpoint to be called when the job runs,
+									for example: <samp class="ph codeph">http://host.acme.com/app/call</samp></p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.329425556858144%" headers="d992699e472 ">
+								<p class="p"><span class="keyword parmname">active</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="11.723329425556857%" headers="d992699e478 ">
+								<p class="p">Boolean</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.94724501758499%" headers="d992699e484 ">
+								<p class="p">Defines if the job should be activated on creation. Allowed
+									values are: </p>
+
+								<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_p4f_y4q_xt">
+									<li class="li"><samp class="ph codeph">false</samp> (default)<p class="p">The job is in inactive
+											mode on creation </p>
+</li>
+
+									<li class="li"><samp class="ph codeph">true</samp><p class="p">The job is activated on
+										creation</p>
+</li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.329425556858144%" headers="d992699e472 ">
+								<p class="p"><span class="keyword parmname">httpMethod</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="11.723329425556857%" headers="d992699e478 ">
+								<p class="p">String</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.94724501758499%" headers="d992699e484 ">
+								<p class="p">The HTTP method to be used to call the end-point URL for the job
+									action . Allowed values are: <span class="keyword cmdname">GET</span>,
+										<span class="keyword cmdname">POST</span> (default), <span class="keyword cmdname">PUT</span>,
+									and <span class="keyword cmdname">DELETE</span></p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.329425556858144%" headers="d992699e472 ">
+								<p class="p"><span class="keyword parmname">startTime</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="11.723329425556857%" headers="d992699e478 ">
+								<p class="p">Object</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.94724501758499%" headers="d992699e484 ">
+								<p class="p">The start time for the job. If the start time is specified for
+									the job, the scheduler checks if a start time is provided for
+									the schedule as well. If a start time is provided for the
+									schedule, it is used for determining the start of the schedule
+									run. If no job-schedule start time is defined, the start time
+									for the job is used. The date and time-formats must be specified
+									as strings.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.329425556858144%" headers="d992699e472 ">
+								<p class="p"><span class="keyword parmname">endTime</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="11.723329425556857%" headers="d992699e478 ">
+								<p class="p">Object</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.94724501758499%" headers="d992699e484 ">
+								<p class="p">The end time for the job. If the end time is specified for a job,
+									the scheduler checks if an end time is provided for the schedule
+									as well. If an end time is provided for the schedule, it is used
+									for determining the end of the schedule run If not, the end time
+									for the job is used. The date and time-formats must be specified
+									as strings.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.329425556858144%" headers="d992699e472 ">
+								<p class="p"><samp class="ph codeph"><span class="keyword parmname">schedules</span></samp> *</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="11.723329425556857%" headers="d992699e478 ">
+								<p class="p">Array</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.94724501758499%" headers="d992699e484 ">
+								<p class="p">The array of job schedule objects, to be created on job
+									creation.</p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+			<p class="p">The <samp class="ph codeph">schedules</samp> parameter can be used to provide details of the job
+				schedule (as properties of each job schedule object); the following table lists the
+				permitted properties:</p>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio5ef38ae037434042baf25dc79598bf8d__table_yxk_1qq_xt" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 3: Schedule Parameter Fields</span></caption>
+<colgroup><col width="23.642943305186975%"/><col width="12.062726176115804%"/><col width="64.29433051869724%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="23.642943305186975%" id="d992699e736">
+								<p class="p">Schedule Field</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="12.062726176115804%" id="d992699e742">
+								<p class="p">Type</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="64.29433051869722%" id="d992699e748">
+								<p class="p">Description</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e736 ">
+								<p class="p"><span class="keyword parmname">data</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e742 ">
+								<p class="p">object </p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e748 ">
+								<p class="p">Optional data to be passed to the job action endpoint when invoked. Typically, the custom
+									data is sent based on the HTTP method configured for invoking
+									the end point URL,for example: <samp class="ph codeph">{"dataParam":
+										"somevalue"}</samp></p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e736 ">
+								<p class="p"><span class="keyword parmname">time</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e742 ">
+								<p class="p">string or object</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e748 ">
+								<p class="p">For one-time schedules, the parameter denoting the time at which
+									the task executes. A human-readable text can be used to specify
+									the time, for example, <span class="q">“<samp class="ph codeph">3.30pm</samp>”</span> or
+											<span class="q">“<samp class="ph codeph">tomorrow at 2am</samp>”</span>. If an object is
+									used, the date and time-formats must be specified as strings.
+								</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e736 ">
+								<p class="p"><span class="keyword parmname">repeatEvery</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e742 ">
+								<p class="p">string</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e748 ">
+								<p class="p">For recurring schedules, the parameter denoting when the schedule should run. The
+									parameter supports the use of human readable formats.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e736 ">
+								<p class="p"><span class="keyword parmname">repeatAt</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e742 ">
+								<p class="p">string </p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e748 ">
+								<p class="p">For recurring schedules, the parameter denoting the exact time
+									when the job schedule must run. A human-readable text can be
+									used to denote a specified time, for example,
+											<span class="q">“<samp class="ph codeph">3.30pm</samp>”</span> or <span class="q">“<samp class="ph codeph">tomorrow at
+											2am</samp>”</span>, if the schedule runs repeatedly.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e736 ">
+								<p class="p"><span class="keyword parmname">cron</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e742 ">
+								<p class="p">string</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e748 ">
+								<p class="p">For recurring schedules, the parameter denoting the <span class="keyword cmdname">cron</span> pattern. It
+									must be a valid <span class="keyword cmdname">crontab</span> format, for example:
+										<samp class="ph codeph">"* * * * * * */10"</samp></p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e736 ">
+								<p class="p"><span class="keyword parmname">startTime</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e742 ">
+								<p class="p">object</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e748 ">
+								<p class="p">The time when the job scheduling should start. The date and
+									time-formats must be specified as strings.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e736 ">
+								<p class="p"><span class="keyword parmname">endTime</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e742 ">
+								<p class="p">object</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e748 ">
+								<p class="p">The time when the job scheduling should end. The date and
+									time-formats must be specified as strings</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e736 ">
+								<p class="p"><span class="keyword parmname">description</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e742 ">
+								<p class="p">string</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e748 ">
+								<p class="p">The user-provided description of the job schedule</p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loio5ef38ae037434042baf25dc79598bf8d__section_cq2_rsq_xt"><div class="section_title">Job Configuration</div><div type="Job Configuration">
+			
+			<p class="p">Configure a job with updated run time information. The API can also be used to create
+				a job if a Job with the Job Name in the URI segment, is not found. If the API is
+				being used to create a job, the parameters must conform to the same constraints as
+				provided in the Job Creation API</p>
+
+			<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_uq1_4w3_xt">
+				<li class="li"><span class="ph emphasis emphasis">Route</span><p class="p"><samp class="ph codeph">PUT
+							/scheduler/jobs/:jobId</samp></p>
+<p class="p"><samp class="ph codeph">PUT
+							/scheduler/jobs/:jobName</samp></p>
+<p class="p"><span class="q">“<samp class="ph codeph">:jobId</samp>”</span>
+						is the ID of the job previously created using the Job Creation API. If the
+						job name is used in the URI, it is first checked if the job with the name,
+						exists. If no such named job exists, the API tries to create the job. If it
+						does exist, the API configures the job with the details provided in the
+						request body.</p>
+<div class="note note"><span class="notetitle">Note</span> 
+						<p class="p">If the API is used to create a job, care must be taken to ensure that the
+							job name in the request URI matches the name of the job in the request
+							body. If the names do not match, an error is returned. </p>
+
+					</div>
+</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Response</span><p class="p">If the API finds an existing job, the response
+						has a status code of <span class="q">“<samp class="ph systemoutput">200-OK</samp>”</span>, if the call
+						was successful. The response has a status code of
+								<span class="q">“<samp class="ph systemoutput">201-CREATED</samp>”</span>, if the API is used
+						to create a new job; for new jobs, a location header containing the relative
+						path to the job-details is returned in the response.</p>
+</li>
+
+			</ul>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">PUT /schedule/jobs/5 HTTP/1.1
+content-type:application/json;charset=utf-8
+host:https://scheduler.service.acme.com
+content-length: 500
+{"active": true, "user":"abc", "password":"def", "httpMethod": "GET"}</pre></div>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">Response: 
+status: 200 OK
+content-type: application/json; charset=utf-8
+{"success": true}</pre></div>
+
+			</div>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">PUT /schedule/jobs/jobwhichdoesnotexist HTTP/1.1
+content-type:application/json;charset=utf-8
+host:https://scheduler.service.acme.com
+content-length: 500
+{"name":"jobwhichdoesnotexist", "jobDescription": "greets the world periodically", "action":"http://httpbin.org/basic-auth/abc/def","active":true, "httpMethod":"GET", "schedules": [{"repeatEvery":"2 minutes", "scheduleDescription": "every 2 minutes, run this schedule", "data":{"time":"abc"}, "active": true}, {"cron":"* * * * *", "scheduleDescription": "every 4 minutes, run this schedule", "data":{"time":"abc"}, "active": false}]}</pre></div>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">Response: 
+status: 201 CREATED
+content-type: application/json; charset=utf-8
+{"_id":120,"name":"jobwhichdoesnotexist","description":"","action":"http://httpbin.org/basic-auth/abc/def","active":true,"user":null,"httpMethod":"GET","schedules":[{"scheduleId":"b373469c-c6d4-4d5f-a002-c56f18455dc5","description":"Default Schedule","data":{"time":"abc"},"type":"recurring","active":true,"startTime":null,"endTime":null,"repeatInterval":"2 minutes"},{"scheduleId":"2f98471c-26de-4293-ae53-e4a16e1513f5","description":"Default Schedule","data":{"time":"abc"},"type":"recurring","active":false,"startTime":null,"endTime":null,"cron":"* * * * *"}]}</pre></div>
+
+			</div>
+
+			<p class="p">The job schedule configuration request is defined with the parameters listed in the
+				following table:</p>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio5ef38ae037434042baf25dc79598bf8d__table_f5n_ssq_xt" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 4: Job Creation: Request Body Fields</span></caption>
+<colgroup><col width="23.329425556858144%"/><col width="11.723329425556857%"/><col width="64.94724501758499%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="23.329425556858144%" id="d992699e1049">
+								<p class="p">Request Field</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="11.723329425556857%" id="d992699e1055">
+								<p class="p">Type</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="64.94724501758499%" id="d992699e1061">
+								<p class="p">Descrition</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="23.329425556858144%" headers="d992699e1049 ">
+								<p class="p"><span class="keyword parmname">active</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="11.723329425556857%" headers="d992699e1055 ">
+								<p class="p">Boolean</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.94724501758499%" headers="d992699e1061 ">
+								<p class="p">Defines if the job should be activated on configuration. Allowed values are: </p>
+
+								<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_g5n_ssq_xt">
+									<li class="li"><samp class="ph codeph">false</samp> (default)<p class="p">The job is in inactive mode when configured</p>
+</li>
+
+									<li class="li"><samp class="ph codeph">true</samp><p class="p">The job is active when configured</p>
+</li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.329425556858144%" headers="d992699e1049 ">
+								<p class="p"><span class="keyword parmname">user</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="11.723329425556857%" headers="d992699e1055 ">
+								<p class="p">String</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.94724501758499%" headers="d992699e1061 ">
+								<p class="p">The name of the user account to run the configured job</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.329425556858144%" headers="d992699e1049 ">
+								<p class="p"><span class="keyword parmname">password</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="11.723329425556857%" headers="d992699e1055 ">
+								<p class="p">String</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.94724501758499%" headers="d992699e1061 ">
+								<p class="p">The password for the user account to run the configured job</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.329425556858144%" headers="d992699e1049 ">
+								<p class="p"><span class="keyword parmname">httpMethod</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="11.723329425556857%" headers="d992699e1055 ">
+								<p class="p">String</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.94724501758499%" headers="d992699e1061 ">
+								<p class="p">The HTTP method to be used to call the end-point URL for the job
+									action . Allowed values are: <span class="keyword cmdname">GET</span>,
+										<span class="keyword cmdname">POST</span> (default), <span class="keyword cmdname">PUT</span>,
+									and <span class="keyword cmdname">DELETE</span></p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.329425556858144%" headers="d992699e1049 ">
+								<p class="p"><span class="keyword parmname">startTime</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="11.723329425556857%" headers="d992699e1055 ">
+								<p class="p">Object</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.94724501758499%" headers="d992699e1061 ">
+								<p class="p">The start time for the job. If the start time is specified for
+									the job, the scheduler checks if a start time is provided for
+									the schedule as well. If a start time is provided for the
+									schedule, it is used for determining the start of the schedule
+									run. If no job-schedule start time is defined, the start time
+									for the job is used. The date and time-formats must be specified
+									as strings.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.329425556858144%" headers="d992699e1049 ">
+								<p class="p"><span class="keyword parmname">endTime</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="11.723329425556857%" headers="d992699e1055 ">
+								<p class="p">Object</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.94724501758499%" headers="d992699e1061 ">
+								<p class="p">The end time for the job. If the end time is specified for a job,
+									the scheduler checks if an end time is provided for the schedule
+									as well. If an end time is provided for the schedule, it is used
+									for determining the end of the schedule run If not, the end time
+									for the job is used. The date and time-formats must be specified
+									as strings.</p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loio5ef38ae037434042baf25dc79598bf8d__section_o12_x1r_xt"><div class="section_title">Job Deletion</div><div type="Job Deletion">
+			
+			<p class="p">Delete a job and purge all its run time information such as job schedules and logs. </p>
+
+			<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_ocs_4w3_xt">
+				<li class="li"><span class="ph emphasis emphasis">Route</span><p class="p"><samp class="ph codeph">DELETE
+					/scheduler/jobs/:jobId</samp></p>
+</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Response</span><p class="p">If the call is successful, the response has a status code
+								<span class="q">“<samp class="ph systemoutput">200-OK</samp>”</span> and includes a JSON
+						response <samp class="ph codeph"> {"success": true}</samp>.</p>
+</li>
+
+			</ul>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">DELETE /schedule/jobs/:jobId HTTP/1.1 
+content-type:application/json;charset=utf-8 
+host:https://scheduler.service.acme.com </pre></div>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">Response: Status: 200 OK 
+Content-Type: application/json;charset=utf-8 
+{"success":true}</pre></div>
+
+			</div>
+
+		</div></div>
+
+		<div class="section" id="loio5ef38ae037434042baf25dc79598bf8d__section_vjw_mvq_xt"><div class="section_title">Job Schedule Creation</div><div type="Job Schedule Creation">
+			
+			<p class="p">Create a job schedule for a specified job. All job configuration values (Action URL,
+				HTTP Method, User, Password &amp; Job Activation Status) are valid for the newly
+				created schedule. A job schedule will only run if both the job and the schedule are
+				active. </p>
+
+			<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_kpq_bbr_xt">
+				<li class="li"><span class="ph emphasis emphasis">Route</span><p class="p"><samp class="ph codeph">POST
+							/scheduler/jobs/:jobId/schedules</samp></p>
+</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Response</span><p class="p">If the call is successful, the response has a
+						status code of <span class="q">“<samp class="ph systemoutput">201-CREATED</samp>”</span>. A location
+						header with the relative path to the schedule-details, is returned in the
+						response. </p>
+</li>
+
+			</ul>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">POST /schedule/jobs/:jobId/schedules HTTP/1.1 
+content-type:application/json;charset=utf-8 
+host:https://scheduler.service.acme.com 
+content-length: 500 
+{"repeatEvery":"2 hours","data":{"param":"abc"}, "active":true, "description":"New Schedule", "startTime":{"date": "2015-04-21", "format": "YYYY-MM-DD"}}</pre></div>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">Response: 
+Status: 200 OK 
+Content-Type: application/json; charset=utf-8 
+{"scheduleId":"0252c255-8f57-4fd5-aa47-c7b344ac9a46","name":"greet the world2","data":{"param":"abc"},"type":"recurring","priority":0,"action":"http://httpbin.org/basic-auth/abc/def","nextRunAt":"2015-04-23T03:04:32.856Z","startTime":"2015-04-20T18:30:00.000Z","endTime":null,"repeatInterval":"2 hours","active":true,"description":"New Schedule","jobId":"132"}</pre></div>
+
+			</div>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio5ef38ae037434042baf25dc79598bf8d__table_wlc_k5q_xt" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 5: Job Schedule Creation Parameters</span></caption>
+<colgroup><col width="23.642943305186975%"/><col width="12.062726176115804%"/><col width="64.29433051869724%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="23.642943305186975%" id="d992699e1331">
+								<p class="p">Request Field</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="12.062726176115804%" id="d992699e1337">
+								<p class="p">Type</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="64.29433051869722%" id="d992699e1343">
+								<p class="p">Description</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e1331 ">
+								<p class="p"><span class="keyword parmname">time</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e1337 ">
+								<p class="p">string or object</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e1343 ">
+								<p class="p">For one-time schedules, the parameter denoting the time at which
+									the task executes. A human-readable text can be used to specify
+									the time, for example, <span class="q">“<samp class="ph codeph">3.30pm</samp>”</span> or
+											<span class="q">“<samp class="ph codeph">tomorrow at 2am</samp>”</span>. If an object is
+									used, the date and time-formats must be specified as strings.
+								</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e1331 ">
+								<p class="p"><span class="keyword parmname">repeatEvery</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e1337 ">
+								<p class="p">string</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e1343 ">
+								<p class="p">For recurring schedules, the parameter denoting when the schedule should run. The
+									parameter supports the use of human readable formats.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e1331 ">
+								<p class="p"><span class="keyword parmname">repeatAt</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e1337 ">
+								<p class="p">string </p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e1343 ">
+								<p class="p">For recurring schedules, the parameter denoting the exact time
+									when the job schedule must run. A human-readable text can be
+									used to denote a specified time, for example,
+											<span class="q">“<samp class="ph codeph">3.30pm</samp>”</span> or <span class="q">“<samp class="ph codeph">tomorrow at
+											2am</samp>”</span>, if the schedule runs repeatedly.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e1331 ">
+								<p class="p"><span class="keyword parmname">cron</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e1337 ">
+								<p class="p">string</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e1343 ">
+								<p class="p">For recurring schedules, the parameter denoting the <span class="keyword cmdname">cron</span> pattern. It
+									must be a valid <span class="keyword cmdname">crontab</span> format, for example:
+										<samp class="ph codeph">"* * * * * * */10"</samp></p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e1331 ">
+								<p class="p"><span class="keyword parmname">data</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e1337 ">
+								<p class="p">object </p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e1343 ">
+								<p class="p">The parameter denoting optional data to be passed to the job
+									action endpoint when invoked. Typically, the custom data is sent
+									based on the HTTP method configured for invoking the end point
+									URL,for example: <samp class="ph codeph">{"dataParam": "somevalue"}</samp></p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e1331 ">
+								<p class="p"><span class="keyword parmname">startTime</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e1337 ">
+								<p class="p">object</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e1343 ">
+								<p class="p">The time when the job scheduling should start. The date and
+									time-formats must be specified as strings.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e1331 ">
+								<p class="p"><span class="keyword parmname">endTime</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e1337 ">
+								<p class="p">object</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e1343 ">
+								<p class="p">The time when the job scheduling should end. The date and
+									time-formats must be specified as strings</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e1331 ">
+								<p class="p"><span class="keyword parmname">active</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e1337 ">
+								<p class="p">Boolean</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e1343 ">
+								<p class="p">Defines if the job should be activated on configuration. Allowed
+									values are: </p>
+
+								<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_cj3_dvq_xt">
+									<li class="li"><samp class="ph codeph">false</samp> (default)<p class="p">The job is in inactive
+											mode when configured</p>
+</li>
+
+									<li class="li"><samp class="ph codeph">true</samp><p class="p">The job is active when
+											configured</p>
+</li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e1331 ">
+								<p class="p"><span class="keyword parmname">description</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e1337 ">
+								<p class="p">string</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e1343 ">
+								<p class="p">The user-provided description of the job schedule</p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loio5ef38ae037434042baf25dc79598bf8d__section_hvh_gwq_xt"><div class="section_title">Job Schedule Modification</div><div type="Job Schedule Modification">
+			
+			<p class="p">Configure the run time information of a job schedule for a specified job. All job
+				configuration values (for example: <samp class="ph codeph">Action URL</samp>, <samp class="ph codeph">HTTP
+					Method</samp>, <samp class="ph codeph">User</samp>, <samp class="ph codeph">Password</samp>, and
+					<samp class="ph codeph">Job Activation Status</samp>) remain valid for the modified schedule. </p>
+
+			<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_qbw_dy3_xt">
+				<li class="li"><span class="ph emphasis emphasis">Route</span><p class="p"><samp class="ph codeph">PUT
+							/scheduler/jobs/:jobId/schedules/:scheduleId</samp></p>
+</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Response</span><p class="p">If the call is successful, the response has a
+						status code of <samp class="ph systemoutput">200- OK</samp>.</p>
+</li>
+
+			</ul>
+
+			<p class="p">Calling this API stops further scheduling of the previously configured job schedule
+				and, if activated, the processing for the newly configured schedule is started. This
+				API cannot be used to change the scheduling mode for the job schedule. For example,
+				if the schedule was created as a recurring <span class="q">“cron”</span>-type schedule, it cannot be
+				changed to a <span class="q">“repeatEvery”</span>-type schedule. However, existing schedule values can
+				be changed. </p>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">PUT /schedule/jobs/:jobId/schedules/:scheduleId HTTP/1.1 
+content-type:application/json;charset=utf-8 
+host:https://scheduler.service.acme.com 
+content-length: 500 
+{"description": "Edited Schedule", "startTime": {"date": "2013-02-08 09:30:26.123"}, "endTime": {"date": "2015-06-08 09:30:26.123"}, "active": true, "cron": "* * * * *" } </pre></div>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">Response: 
+Status: 200 OK 
+Content-Type: application/json; charset=utf-8 
+{"scheduleId":"80e23846-734e-4b4b-a130-159a492ec482","name":"greet the world3","data":{"time":"abc"},"type":"recurring","priority":0,"action":"http://httpbin.org/basic-auth/abc/def","nextRunAt":"2015-04-23T03:58:21.358Z","startTime":"2013-02-08T04:00:26.123Z","endTime":"2015-06-08T04:00:26.123Z","active":true,"description":"Edited Schedule","jobId":"136","cron":"* * * * *"}</pre></div>
+
+			</div>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio5ef38ae037434042baf25dc79598bf8d__table_z2z_zvq_xt" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 6: Job Schedule Modification Parameters</span></caption>
+<colgroup><col width="23.642943305186975%"/><col width="12.062726176115804%"/><col width="64.29433051869724%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="23.642943305186975%" id="d992699e1676">
+								<p class="p">Request Field</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="12.062726176115804%" id="d992699e1682">
+								<p class="p">Type</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="64.29433051869722%" id="d992699e1688">
+								<p class="p">Description</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e1676 ">
+								<p class="p"><span class="keyword parmname">time</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e1682 ">
+								<p class="p">string or object</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e1688 ">
+								<p class="p">For one-time schedules, the parameter denoting the time at which
+									the task executes. A human-readable text can be used to specify
+									the time, for example, <span class="q">“<samp class="ph codeph">3.30pm</samp>”</span> or
+											<span class="q">“<samp class="ph codeph">tomorrow at 2am</samp>”</span>. If an object is
+									used, the date and time-formats must be specified as strings.
+								</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e1676 ">
+								<p class="p"><span class="keyword parmname">repeatEvery</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e1682 ">
+								<p class="p">string</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e1688 ">
+								<p class="p">For recurring schedules, the parameter denoting when the schedule should run. The
+									parameter supports the use of human readable formats.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e1676 ">
+								<p class="p"><span class="keyword parmname">repeatAt</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e1682 ">
+								<p class="p">string </p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e1688 ">
+								<p class="p">For recurring schedules, the parameter denoting the exact time
+									when the job schedule must run. A human-readable text can be
+									used to denote a specified time, for example,
+											<span class="q">“<samp class="ph codeph">3.30pm</samp>”</span> or <span class="q">“<samp class="ph codeph">tomorrow at
+											2am</samp>”</span>, if the schedule runs repeatedly.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e1676 ">
+								<p class="p"><span class="keyword parmname">cron</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e1682 ">
+								<p class="p">string</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e1688 ">
+								<p class="p">For recurring schedules, the parameter denoting the <span class="keyword cmdname">cron</span> pattern. It
+									must be a valid <span class="keyword cmdname">crontab</span> format, for example:
+										<samp class="ph codeph">"* * * * * * */10"</samp></p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e1676 ">
+								<p class="p"><span class="keyword parmname">data</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e1682 ">
+								<p class="p">object </p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e1688 ">
+								<p class="p">The parameter denoting optional data to be passed to the job
+									action endpoint when invoked. Typically, the custom data is sent
+									based on the HTTP method configured for invoking the end point
+									URL,for example: <samp class="ph codeph">{"dataParam": "somevalue"}</samp></p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e1676 ">
+								<p class="p"><span class="keyword parmname">startTime</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e1682 ">
+								<p class="p">object</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e1688 ">
+								<p class="p">The time when the job scheduling should start. The date and
+									time-formats must be specified as strings.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e1676 ">
+								<p class="p"><span class="keyword parmname">endTime</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e1682 ">
+								<p class="p">object</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e1688 ">
+								<p class="p">The time when the job scheduling should end. The date and
+									time-formats must be specified as strings</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e1676 ">
+								<p class="p"><span class="keyword parmname">active</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e1682 ">
+								<p class="p">Boolean</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e1688 ">
+								<p class="p">Defines if the job should be activated on configuration. Allowed
+									values are: </p>
+
+								<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_afz_zvq_xt">
+									<li class="li"><samp class="ph codeph">false</samp> (default)<p class="p">The job is in inactive
+											mode when configured</p>
+</li>
+
+									<li class="li"><samp class="ph codeph">true</samp><p class="p">The job is active when
+											configured</p>
+</li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.642943305186975%" headers="d992699e1676 ">
+								<p class="p"><span class="keyword parmname">description</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.062726176115804%" headers="d992699e1682 ">
+								<p class="p">string</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="64.29433051869722%" headers="d992699e1688 ">
+								<p class="p">The user-provided description of the job schedule</p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loio5ef38ae037434042baf25dc79598bf8d__section_usq_jbr_xt"><div class="section_title">Job Schedule Deletion</div><div type="Job Schedule Deletion">
+			
+			<p class="p">Delete and purge run time information of the job schedule of the specified job. All
+				related information like job schedule configurations and logs are purged. The
+				processing of the schedule is also immediately stopped. </p>
+
+			<div class="note caution"><span class="cautiontitle">Caution</span> 
+				<p class="p">This API removes all the run time configuration information of the job schedule,
+					irrespective of whether the schedule is active or not.</p>
+
+			</div>
+
+			<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_dtk_jbr_xt">
+				<li class="li"><span class="ph emphasis emphasis">Route</span><p class="p"><samp class="ph codeph">DELETE
+							/scheduler/jobs/:jobId/schedules/:scheduleId</samp></p>
+</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Response</span><p class="p">If the call is successful, the response has a
+						status code, <span class="q">“<samp class="ph systemoutput">200-OK</samp>”</span> and includes a JSON
+						response <samp class="ph codeph"> {"success": true}</samp>.</p>
+</li>
+
+			</ul>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">DELETE /scheduler/jobs/:jobId/schedules/:scheduleId HTTP/1.1 
+content-type:application/json;charset=utf-8 
+host:https://scheduler.service.acme.com 
+</pre></div>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">Response: {"success": true} 
+Status Code: 200 OK</pre></div>
+
+			</div>
+
+		</div></div>
+
+		<div class="section" id="loio5ef38ae037434042baf25dc79598bf8d__section_qcy_3wq_xt"><div class="section_title">Bulk Job Schedule Activation/Deactivation</div><div type="Bulk Job Schedule Activation/Deactivation">
+			
+			<p class="p">This is a utility API used to activate or deactivate all existing schedules of a
+				job.</p>
+
+			<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_izg_2y3_xt">
+				<li class="li"><span class="ph emphasis emphasis">Route</span><p class="p"><samp class="ph codeph">POST
+							/scheduler/jobs/:jobId/schedules/activationStatus</samp></p>
+</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Response</span><p class="p">If the call is successful, the response has a
+						status code, <span class="q">“<samp class="ph systemoutput">200-OK</samp>”</span> and includes a JSON
+						response <samp class="ph codeph"> {"success": true}</samp>.</p>
+</li>
+
+			</ul>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">POST /scheduler/jobs/:jobId/schedules/activationStatus HTTP/1.1 
+content-type:application/json;charset=utf-8 
+host:https://scheduler.service.acme.com 
+{"activationStatus": true} 
+</pre></div>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">Response: {"success": true} 
+Status Code: 200 OK</pre></div>
+
+			</div>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio5ef38ae037434042baf25dc79598bf8d__table_cyt_kwq_xt" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 7: Bulk Job Schedule Activation Parameters</span></caption>
+<colgroup><col width="23.73300370828183%"/><col width="12.360939431396787%"/><col width="63.906056860321385%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="23.73300370828183%" id="d992699e2047">
+								<p class="p">Request Field</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="12.360939431396787%" id="d992699e2053">
+								<p class="p">Type</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="63.90605686032138%" id="d992699e2059">
+								<p class="p">Description</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="23.73300370828183%" headers="d992699e2047 ">
+								<p class="p"><span class="keyword parmname">activationStatus</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.360939431396787%" headers="d992699e2053 ">
+								<p class="p">Boolean</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="63.90605686032138%" headers="d992699e2059 ">
+								<div class="p">The desired activation status of the job schedules for the job.
+									Allowed values for the activation status are: <ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_dww_rwq_xt">
+										<li class="li"><samp class="ph codeph">false</samp> (default)<p class="p">All job schedules for
+												the specified job should be
+												<span class="ph emphasis emphasis">de</span>activated</p>
+</li>
+
+										<li class="li"><samp class="ph codeph">true</samp><p class="p">All job schedules for the
+												specified job should be activated</p>
+</li>
+
+									</ul>
+</div>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loio5ef38ae037434042baf25dc79598bf8d__section_kdn_dxq_xt"><div class="section_title">Job Details</div><div type="Job Details">
+			
+			<p class="p">Retrieve the saved details and configurations of a specified job.</p>
+
+			<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_mdl_2y3_xt">
+				<li class="li"><span class="ph emphasis emphasis">Route</span><p class="p"><samp class="ph codeph">GET
+							/scheduler/jobs/:jobId?displaySchedules=true</samp></p>
+<p class="p"><samp class="ph codeph">GET
+							/scheduler/jobs?jobId=:jobId&amp;displaySchedules=true
+						Route</samp></p>
+<p class="p"><samp class="ph codeph">GET
+							/scheduler/jobs?name=:jobName&amp;displaySchedules=true
+					</samp></p>
+</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Response</span><p class="p">If the call is successful, the response has a
+						status code, <span class="q">“<samp class="ph systemoutput">200-OK</samp>”</span> and includes a JSON
+						response with the schedule details, for example:
+							<samp class="ph codeph">{"schedules":[{"data":{"time":"abc"},"type":"recurring","repeatInterval":"2
+							minutes","active":false,"startTime":null,"endTime":null,"repeatAt":null,
+							[...]}</samp>.</p>
+</li>
+
+			</ul>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">GET /scheduler/jobs/:jobId?displaySchedules=true HTTP/1.1 
+content-type:application/json;charset=utf-8 
+host:https://scheduler.service.acme.com </pre></div>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">Response: 
+Status: 200 OK 
+Content-type: application/json;charset=utf-8 
+{"schedules":[{"data":{"time":"abc"},"type":"recurring","repeatInterval":"2 minutes","active":false,"startTime":null,"endTime":null,"repeatAt":null,"scheduleId":"0d3b4cc1-0f7b-4ee6-ab12-63d474b900f2","description":"Default Schedule"},{"data":{"time":"abc"},"type":"recurring","cron":"* * * * *","active":false,"startTime":null,"endTime":null,"repeatAt":null,"scheduleId":"1b1bb70f-cada-46c9-9974-a7a1b87ba24f","description":"Default Schedule"}],"name":"greet the world2","description":"","action":"http://httpbin.org/basic-auth/abc/def","user":null,"httpMethod":"GET","active":false,"_id":111}</pre></div>
+
+			</div>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio5ef38ae037434042baf25dc79598bf8d__table_rjb_4xq_xt" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 8: Job Details Parameters</span></caption>
+<colgroup><col width="23.73300370828183%"/><col width="12.360939431396787%"/><col width="63.906056860321385%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="23.73300370828183%" id="d992699e2176">
+								<p class="p">Request Field</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="12.360939431396787%" id="d992699e2182">
+								<p class="p">Type</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="63.90605686032138%" id="d992699e2188">
+								<p class="p">Description</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="23.73300370828183%" headers="d992699e2176 ">
+								<p class="p"><span class="keyword parmname">displaySchedules</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.360939431396787%" headers="d992699e2182 ">
+								<p class="p">Boolean</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="63.90605686032138%" headers="d992699e2188 ">
+								<div class="p">Display details of the job schedules for the job. Allowed values for the job details are:
+										<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_sjb_4xq_xt">
+										<li class="li"><samp class="ph codeph">false</samp><p class="p">Do <span class="ph emphasis emphasis">not</span>
+												display details of job schedules for the specified
+												job</p>
+</li>
+
+										<li class="li"><samp class="ph codeph">true</samp><p class="p">Display details of job schedules
+												for the specified job</p>
+</li>
+
+									</ul>
+</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.73300370828183%" headers="d992699e2176 ">
+								<p class="p"><span class="keyword parmname">jobId</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.360939431396787%" headers="d992699e2182 ">String</td>
+
+							<td class="entry" valign="top" width="63.90605686032138%" headers="d992699e2188 ">The job ID needed to query for the job details. This can be
+								passed as a URI segment parameter or as a query parameter.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.73300370828183%" headers="d992699e2176 ">
+								<p class="p"><span class="keyword parmname">name</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="12.360939431396787%" headers="d992699e2182 ">String</td>
+
+							<td class="entry" valign="top" width="63.90605686032138%" headers="d992699e2188 ">The job name needed to query the job details. This can be passed
+								as a query parameter</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loio5ef38ae037434042baf25dc79598bf8d__section_n24_cyq_xt"><div class="section_title">Job Schedule Details</div><div type="Job Schedule Details">
+			
+			<p class="p">Retrieve the saved details and configurations of a specified job schedule &amp;
+				optionally the generated logs for the schedule. Either <samp class="ph codeph">:jobId</samp> or
+					<samp class="ph codeph">:name</samp> is required to invoke this API. If
+					<samp class="ph codeph">displayLogs</samp> is not provided, the logs for the schedule are not
+				returned and only the schedule details are returned. </p>
+
+			<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_bbp_2y3_xt">
+				<li class="li"><span class="ph emphasis emphasis">Route</span><p class="p"><samp class="ph codeph">GET
+							/scheduler/jobs/:jobId/schedules/:scheduleId?displayLogs=true
+						</samp></p>
+</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Response</span><p class="p">If the call is successful, the response has a
+						status code, <span class="q">“<samp class="ph systemoutput">200-OK</samp>”</span> and includes a JSON
+						response with the schedule details, for example:
+							<samp class="ph codeph">{"data":{"time":"abc"},"type":"recurring","repeatInterval":"2
+							minutes","plannedTime":"2015-04-19T15:12:44.000Z","active":true,"startTime":null,"endTime":null,"repeatAt":null,
+							[...]}</samp>.</p>
+</li>
+
+			</ul>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">GET /scheduler/jobs/112/schedules/550d1b96-8002-4d0d-850e-368aaa591671?displayLogs=true
+HTTP/1.1 content-type:application/json;charset=utf-8 
+host:https://scheduler.service.acme.com </pre></div>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">Response: 
+Status: 200 OK 
+Content-Type: application/json; charset=utf-8 
+{"data":{"time":"abc"},"type":"recurring","repeatInterval":"2 minutes","plannedTime":"2015-04-19T15:12:44.000Z","active":true,"startTime":null,"endTime":null,"repeatAt":null,"logs":[{"text":null,"httpStatus":null,"executionTime":null,"status":"SCHEDULED","scheduleTime":"2015-04-19T15:10:53.000Z","completionTime":null}],"scheduleId":"550d1b96-8002-4d0d-850e-368aaa591671","description":"Default Schedule"}</pre></div>
+
+			</div>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio5ef38ae037434042baf25dc79598bf8d__table_c5p_3yq_xt" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 9: Job Schedule Details Parameters</span></caption>
+<colgroup><col width="23.853211009174313%"/><col width="13.106159895150721%"/><col width="63.04062909567496%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="23.853211009174313%" id="d992699e2339">
+								<p class="p">Request Parameter</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="13.106159895150721%" id="d992699e2345">
+								<p class="p">Type</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="63.04062909567496%" id="d992699e2351">
+								<p class="p">Description</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="23.853211009174313%" headers="d992699e2339 ">
+								<p class="p"><span class="keyword parmname">displayLogs</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="13.106159895150721%" headers="d992699e2345 ">
+								<p class="p">Boolean</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="63.04062909567496%" headers="d992699e2351 ">
+								<p class="p">Controls whether the API should return (<samp class="ph codeph">true</samp>)
+									all the generated logs for the job schedule or not
+										(<samp class="ph codeph">false</samp>)</p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loio5ef38ae037434042baf25dc79598bf8d__section_t3k_wbr_xt"><div class="section_title">Bulk Job Schedule Deletion</div><div type="Bulk Job Schedule Deletion">
+			
+			<p class="p">Delete and purge run time information of all the currently configured job schedules
+				of the specified job. All related information like job schedule configurations and
+				logs are purged. The processing of the schedules is also immediately stopped.</p>
+
+			<div class="note caution"><span class="cautiontitle">Caution</span> 
+				<p class="p">This API removes all the run time configuration information of the job schedule,
+					irrespective of whether the schedule is active or not.</p>
+
+			</div>
+
+			<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_ams_2y3_xt">
+				<li class="li"><span class="ph emphasis emphasis">Route</span><p class="p"><samp class="ph codeph">DELETE
+							/scheduler/jobs/:jobId/schedules</samp></p>
+</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Response</span><p class="p">If the call is successful, the response has a
+						status code, <span class="q">“<samp class="ph systemoutput">200-OK</samp>”</span> and includes a JSON
+						response <samp class="ph codeph"> {"success": true}</samp>.</p>
+</li>
+
+			</ul>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">DELETE /scheduler/jobs/:jobId/schedules HTTP/1.1 
+content-type:application/json;charset=utf-8 
+host:https://scheduler.service.acme.com </pre></div>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">Response: {"success": true} 
+Status Code: 200 OK</pre></div>
+
+			</div>
+
+		</div></div>
+
+		<div class="section" id="loio5ef38ae037434042baf25dc79598bf8d__section_tpn_syq_xt"><div class="section_title">Job Run Log Update</div><div type="Job Run Log Update">
+			
+			<p class="p">Inform the Job Scheduler about the status of an asynchronous, long-running job run.
+				This API must be invoked by the application after the asynchronous execution of the
+				job has completed, with the status of the job run and optionally some text about the
+				job execution.</p>
+
+			<div class="note caution"><span class="cautiontitle">Caution</span> 
+				<p class="p">This API must be invoked by the application after the
+						<span class="ph emphasis emphasis">asynchronous</span> execution of the job has completed, with
+					the status of the job run and optionally some text about the job execution. </p>
+
+			</div>
+
+			<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_q3h_p1j_xt">
+				<li class="li"><span class="ph emphasis emphasis">Route</span><p class="p"><samp class="ph codeph">PUT
+							/scheduler/jobs/:jobId/schedules/:scheduleId/runs/:runId</samp></p>
+</li>
+
+			</ul>
+
+			<div class="note note"><span class="notetitle">Note</span> 
+				<p class="p">Parameters marked with an asterisk (*) are mandatory.</p>
+
+			</div>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio5ef38ae037434042baf25dc79598bf8d__table_qgr_5yq_xt" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 10: Job Run Log Update Parameters</span></caption>
+<colgroup><col width="23.853211009174313%"/><col width="13.106159895150721%"/><col width="63.04062909567496%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="23.853211009174313%" id="d992699e2492">
+								<p class="p">Request Parameter</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="13.106159895150721%" id="d992699e2498">
+								<p class="p">Type</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="63.04062909567496%" id="d992699e2504">
+								<p class="p">Description</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="23.853211009174313%" headers="d992699e2492 ">
+								<p class="p"><span class="keyword parmname">success</span> *</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="13.106159895150721%" headers="d992699e2498 ">
+								<p class="p">Boolean</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="63.04062909567496%" headers="d992699e2504 ">
+								<p class="p">Indicates that the job run was successful (<samp class="ph codeph">true</samp>)
+									or failed (<samp class="ph codeph">false</samp>) </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="23.853211009174313%" headers="d992699e2492 ">
+								<p class="p"><span class="keyword parmname">message</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="13.106159895150721%" headers="d992699e2498 ">
+								<p class="p">String</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="63.04062909567496%" headers="d992699e2504 ">
+								<p class="p">Additional log/text about the job run</p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loio5ef38ae037434042baf25dc79598bf8d__section_ycg_w2r_xt"><div class="section_title">Human Readable Dates</div><div type="Human Readable Dates">
+			
+			<p class="p">The job scheduler for XS advanced supports human readable dates and ranges for the
+				parameters <span class="keyword parmname">time</span>, <span class="keyword parmname">repeatAt</span> and
+					<span class="keyword parmname">repeatEvery</span>, which are used for configuring job schedules.
+				The job scheduler uses an embedded English language date parser for this facility.
+				Valid human readable strings for the parameters are shown below:</p>
+
+			<div class="note note"><span class="notetitle">Note</span> 
+				<p class="p">The date parser expects a valid readable string; invalid strings will either
+					throw parser errors or cause the job scheduling to happen inconsistently.</p>
+
+			</div>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio5ef38ae037434042baf25dc79598bf8d__table_ncc_ldr_xt" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 11: Date and Time Parameters</span></caption>
+<colgroup><col width="17.36111111111111%"/><col width="54.513888888888886%"/><col width="28.124999999999996%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="17.361111111111107%" id="d992699e2609">
+								<p class="p">Parameter</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="54.513888888888886%" id="d992699e2615">
+								<p class="p">Comments</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="28.125%" id="d992699e2621">Examples</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="17.361111111111107%" headers="d992699e2609 ">
+								<p class="p"><span class="keyword parmname">time</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="54.513888888888886%" headers="d992699e2615 ">
+								<p class="p">Designates a particular timestamp for running a job schedule. If
+									an invalid string is provided, the scheduler falls back to the
+									current timestamp and runs the schedule immediately. The
+									following example strings are valid for the
+										<span class="keyword parmname">time</span> parameter: </p>
+
+							</td>
+
+							<td class="entry" valign="top" width="28.125%" headers="d992699e2621 ">
+								<p class="p"><span class="q">“10 hours from now”</span></p>
+
+								<p class="p"><span class="q">“20 minutes from now”</span></p>
+
+								<p class="p"><span class="q">“in 2 hours”</span></p>
+
+								<p class="p"><span class="q">“tomorrow at 4pm”</span>
+								</p>
+
+								<p class="p"><span class="q">“next week monday at 5am”</span></p>
+
+								<p class="p"><span class="q">“9pm tonight”</span></p>
+
+								<p class="p"><span class="q">“3.30pm”</span></p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="17.361111111111107%" headers="d992699e2609 ">
+								<p class="p"><span class="keyword parmname">repeatAt</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="54.513888888888886%" headers="d992699e2615 ">
+								<p class="p">Represents a convenient way to create daily timestamp-based
+									schedules. The string should designate a particular timestamp
+									for repeatedly running a job schedule. This follows the same
+									pattern as the recommendations for the "time" parameter, barring
+									a few discrepancies. While the text for the "time" parameter
+									must denote something concrete and in the future, the 'repeatAt'
+									must designate a timestamp, which is valid and constant daily.
+									If an invalid string is used, the scheduler falls back to the
+									current timestamp and runs the schedule immediately.</p>
+
+								<div class="note note"><span class="notetitle">Note</span> 
+									<p class="p">Second-based precision can sometimes be inaccurately timed; timezones must be specified
+										using the offset (in hours), for example, <span class="q">“+07:00”</span></p>
+
+								</div>
+
+							</td>
+
+							<td class="entry" valign="top" width="28.125%" headers="d992699e2621 ">
+								<p class="p"><span class="q">“4.40pm”</span></p>
+
+								<p class="p"><span class="q">“18.40”</span></p>
+
+								<p class="p"><span class="q">“6.20am”</span></p>
+
+								<p class="p"><span class="q">“17.20:30 ”</span></p>
+
+								<p class="p"><span class="q">“09:30:26.123+07:00”</span></p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="17.361111111111107%" headers="d992699e2609 ">
+								<p class="p"><span class="keyword parmname">repeatEvery</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="54.513888888888886%" headers="d992699e2615 ">
+								<p class="p">The string should designate a interval to repeat the job
+									execution. Word strings for denoting the numeric value are not
+									supported yet. For example, for <span class="q">“twenty minutes”</span>, use <span class="q">“20
+										minutes”</span> to denote the interval. Supported time-units for
+									this parameter are "years", "months", "weeks", "days", "hours",
+									"minutes", "seconds". </p>
+
+							</td>
+
+							<td class="entry" valign="top" width="28.125%" headers="d992699e2621 ">
+								<p class="p"><span class="q">“10 hours ”</span></p>
+
+								<p class="p"><span class="q">“2 days ”</span></p>
+
+								<p class="p"><span class="q">“3 seconds”</span></p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loio5ef38ae037434042baf25dc79598bf8d__section_uly_y2r_xt"><div class="section_title">Date and Time Formats in Job Schedule Parameters</div><div type="Date and Time Formats in Job Schedule Parameters"><p class="p">The date-time parameters for job schedules (for example,
+					<span class="keyword parmname">startTime</span>, <span class="keyword parmname">endTime</span>, and
+					<span class="keyword parmname">time</span>) can be passed as objects , with the mandatory
+					<span class="keyword parmname">date</span> field denoting the date as a string and an optional
+					<span class="keyword parmname">format</span> field denoting a date-time format for correctly
+				parsing the user-provided date value. If the parameters are passed as strings, they
+				must be valid date representations, in either the ISO-8601 or IETF-compliant RFC
+				2822 formats. For object representations, the following rules apply:</p>
+<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_p4y_gfr_xt">
+				<li class="li"><span class="ph emphasis emphasis">Date field as input</span><p class="p">If only the date field is provided as input, the
+						string is checked against both IETF-compliant RFC 2822 time stamps and
+						ISO-8601. If the date string is of an unknown format, the parser displays an
+						error. For ISO-8601 compliant dates, calendar dates (for example,
+							<span class="q">“2013-02-08”</span>), week dates (<span class="q">“2013-W06-5”</span>), ordinal dates
+							(<span class="q">“2013-039”</span>) and time-based dates (<span class="q">“2013-02-08 09+07:00”</span>) are
+						all supported. </p>
+</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Date string format</span><p class="p">If the format of the date string is customized, an
+						optional format string can be passed. The allowed parsing tokens are as
+						described in the following table:</p>
+</li>
+
+			</ul>
+
+<div class="table-wrapper tablenoborder"><table summary="" id="loio5ef38ae037434042baf25dc79598bf8d__table_bhg_pfr_xt" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 12: Date and Time Parameters</span></caption>
+<colgroup><col width="19.011406844106464%"/><col width="23.954372623574145%"/><col width="57.034220532319395%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="19.011406844106464%" id="d992699e2831">
+								<p class="p">Input Token</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="23.954372623574148%" id="d992699e2837">
+								<p class="p">Example</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="57.03422053231939%" id="d992699e2843">
+								<p class="p">Description</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">YYYY</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">2014</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">4 digit year </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">YY</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">14</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">2 digit year </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">Q</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">1-4</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">Quarter of year. Sets month to first month in quarter </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">M MM</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">1-12</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">Month number </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">MMM MMMM</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">January- Dec</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">Month name in locale</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">D DD 1- 31</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">Day of month </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">Do</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">1st- 31st</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">Day of month with ordinal </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">DDD DDDD</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">1-365</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">Day of year</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">X</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">1410715640.579</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">Unix Timestamp </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">x</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">1410715640579</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p"> Unix Timestamp (ms) </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">gggg</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">2015</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">Locale 4 digit week year </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">gg</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">15</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">Locale 2 digit week year</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">w ww</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">1- 53</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">Locale week of year </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">e</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">1-7</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">Locale day of week </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">GGGG</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">2015</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">ISO 4-digit week year </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">GG</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">15</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">ISO 2-digit week year </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">W WW</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">1- 53</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">ISO week of year</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">E</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">1-7</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">ISO day of week</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">H HH</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">0 -23</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">24 Hour Time </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">h hh</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">1 -12</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">12 hour time used with 'a A'</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">a A</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">am pm</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">Post or ante meridiem</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">m mm</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">0 -59</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">Minutes </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">s ss</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">0 -59</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">Seconds </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">S</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">0 -9</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">Tenths of a second </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">SS</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">0 -99</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">Hundredths of a second </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">SSS</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">0 -999 </p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">Thousandths of a second</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.011406844106464%" headers="d992699e2831 ">
+								<p class="p">Z ZZ</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="23.954372623574148%" headers="d992699e2837 ">
+								<p class="p">+12:00</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="57.03422053231939%" headers="d992699e2843 ">
+								<p class="p">Offset from UTC as +-HH:mm, +-HHmm, or Z</p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+<div class="sectiondiv subsection">
+				<p class="p subsectiontitle">Date-Time Format Examples</p>
+
+				<ul class="ul" id="loio5ef38ae037434042baf25dc79598bf8d__ul_vbw_dsr_xt">
+					<li class="li"><span class="keyword parmname">startTime</span><p class="p"><samp class="ph codeph">"startTime": {"date": "2015-10-20
+								4:30 +0000", "format": "YYYY-MM-DD HH:mm Z"}</samp></p>
+<p class="p">4.30 UTC
+							on 20th Oct 2015 </p>
+</li>
+
+					<li class="li"><span class="keyword parmname">endTime</span><p class="p"><samp class="ph codeph">"endTime": {"date":
+								"2015-W06-5"}</samp>
+						</p>
+<p class="p">Friday, February 06, 2015 </p>
+</li>
+
+					<li class="li"><span class="keyword parmname">time</span><p class="p"><samp class="ph codeph">"time": {"date": "2010-10-20 4:30",
+								"format": "YYYY-MM-DD HH:mm"}</samp>
+						</p>
+<p class="p">4.30 Local Time (the timezone for the scheduler service is considered
+							here)</p>
+</li>
+
+				</ul>
+
+			</div></div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Job Scheduler REST API for XS Advanced";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

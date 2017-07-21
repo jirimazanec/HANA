@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="The Core Data Services (CDS) syntax enables you to insert comments into object definitions."/>
+<meta name="description" content="The Core Data Services (CDS) syntax enables you to insert comments into object definitions."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=6290009378177894"/>
+<title>CDS Comment Types</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio7e6f697bf2a84b9bbf0fc1c5110c1210";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio7e6f697bf2a84b9bbf0fc1c5110c1210">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">CDS Comment Types</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">The Core Data Services (CDS) syntax enables you to insert comments into object
+		definitions.</p>
+
+		<div class="example"><h2 class="exampletitle example_title">Example: </h2><div class="title authorexampletitle">Comment Formats in CDS Object Definitions</div>
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">namespace com.acme.myapp1;
+ 
+  /**
+   *  <a class="xref nopagenumber" href="default.html?7e6f697bf2a84b9bbf0fc1c5110c1210.html#loio7e6f697bf2a84b9bbf0fc1c5110c1210__section_r5k_lm2_fn" target="_top">multi-line comment</a>, 
+   *  for doxygen-style, 
+   *  comments and annotations
+   */
+  type Type1 {
+       element Fstr:       String( 5000 ); // <a class="xref nopagenumber" href="default.html?7e6f697bf2a84b9bbf0fc1c5110c1210.html#loio7e6f697bf2a84b9bbf0fc1c5110c1210__section_kxy_kp2_fn" target="_top">end-of-line comment</a>
+               Flstr:      LargeString;
+       /*<a class="xref nopagenumber" href="default.html?7e6f697bf2a84b9bbf0fc1c5110c1210.html#loio7e6f697bf2a84b9bbf0fc1c5110c1210__section_p3k_tn2_fn" target="_top">inline comment</a>*/  Fbin:       Binary( 4000 );
+       element Flbin:      LargeBinary;
+               Fint:       Integer;
+       element Fint64:     Integer64;
+               Ffixdec:    Decimal( 34, 34 /* another <a class="xref nopagenumber" href="default.html?7e6f697bf2a84b9bbf0fc1c5110c1210.html#loio7e6f697bf2a84b9bbf0fc1c5110c1210__section_p3k_tn2_fn" target="_top">inline comment</a> */);
+       element Fdec:       DecimalFloat;
+               Fflt:       BinaryFloat;
+       //<a class="xref nopagenumber" href="default.html?7e6f697bf2a84b9bbf0fc1c5110c1210.html#loio7e6f697bf2a84b9bbf0fc1c5110c1210__section_o1z_nm2_fn" target="_top">complete line comment</a> element Flocdat:    LocalDate;    LocalDate temporarily switched off
+       //<a class="xref nopagenumber" href="default.html?7e6f697bf2a84b9bbf0fc1c5110c1210.html#loio7e6f697bf2a84b9bbf0fc1c5110c1210__section_o1z_nm2_fn" target="_top">complete line comment</a>        Floctim:    LocalTime;
+       element Futcdatim:  UTCDateTime;
+               Futctstmp:  UTCTimestamp;
+  };</pre></div>
+
+		</div>
+
+		<div class="section" id="loio7e6f697bf2a84b9bbf0fc1c5110c1210__section_hck_pgk_fn"><div class="section_title">Overview</div><div type="Overview">
+			
+			<p class="p">You can use the forward slash (<samp class="ph codeph">/</samp>) and the asterisk (<samp class="ph codeph">*</samp>)
+				characters to add comments and general information to CDS object-definition files.
+				The following types of comment are allowed:</p>
+
+			<ul class="ul" id="loio7e6f697bf2a84b9bbf0fc1c5110c1210__ul_dly_br2_fn">
+				<li class="li">In-line comment</li>
+
+				<li class="li">End-of-line comment</li>
+
+				<li class="li">Complete-line comment</li>
+
+				<li class="li">Multi-line comment</li>
+
+			</ul>
+
+		</div></div>
+
+		<div class="section" id="loio7e6f697bf2a84b9bbf0fc1c5110c1210__section_p3k_tn2_fn"><div class="section_title">In-line Comments</div><div type="In-line Comments">
+			
+			<p class="p">The in-line comment enables you to insert a comment into the middle of a line of code
+				in a CDS document. To indicate the start of the in-line comment, insert a
+				forward-slash (<samp class="ph codeph">/</samp>) followed by an asterisk (<samp class="ph codeph">*</samp>)
+				before the comment text. To signal the end of the in-line comment, insert an
+				asterisk followed by a forward-slash character (<samp class="ph codeph">*/</samp>) after the
+				comment text, as illustrated by the following example:. </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">element Flocdat:  /*comment text*/  LocalDate;</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loio7e6f697bf2a84b9bbf0fc1c5110c1210__section_kxy_kp2_fn"><div class="section_title">End-of-Line Comment</div><div type="End-of-Line Comment">
+			
+			<p class="p">The end-of-line comment enables you to insert a comment at the end of a line of code
+				in a CDS document. To indicate the start of the end-of-line comment, insert two
+				forward slashes (<samp class="ph codeph">//</samp>) before the comment text, as illustrated by the
+				following example:. </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">element Flocdat:    LocalDate; // Comment text</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loio7e6f697bf2a84b9bbf0fc1c5110c1210__section_o1z_nm2_fn"><div class="section_title">Complete-Line Comment</div><div type="Complete-Line Comment">
+			
+			<p class="p">The complete-line comment enables you to tell the parser to ignore the contents of an
+				entire line of CDS code. The comment out a complete line, insert two backslashes
+					(<samp class="ph codeph">//</samp>) at the start of the line, as illustrated in the following
+				example:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">//  element Flocdat:    LocalDate;      Additional comment text</pre></div>
+
+			<p class="p"/>
+
+		</div></div>
+
+		<div class="section" id="loio7e6f697bf2a84b9bbf0fc1c5110c1210__section_r5k_lm2_fn"><div class="section_title">Multi-Line Comments</div><div type="Multi-Line Comments">
+			
+			<p class="p">The multi-line comment enables you to insert comment text that extends over multiple
+				lines of a CDS document. To indicate the start of the multi-line comment, insert a
+				forward-slash (<samp class="ph codeph">/</samp>) followed by an asterisk (<samp class="ph codeph">*</samp>) at
+				the start of the group of lines you want to use for an extended comment (for
+				example, <samp class="ph codeph">/*</samp>). To signal  the end of the multi-line comment, insert
+				an asterisk followed by a forward-slash character (<samp class="ph codeph">*/</samp>). Each line
+				between the start and end of the multi-line comment must start with an asterisk
+					(<samp class="ph codeph">*</samp>), as illustrated in the following example:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">/*
+*  multiline, 
+*  doxygen-style
+*  comments and annotations
+*/</pre></div>
+
+		</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="CDS Comment Types";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

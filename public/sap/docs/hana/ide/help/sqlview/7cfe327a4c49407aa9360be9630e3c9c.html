@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Creates a new extended store table in the extended storage."/>
+<meta name="description" content="Creates a new extended store table in the extended storage."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=09461603578140376"/>
+<title>CREATE TABLE Statement (Extended Store Table) [Dynamic Tiering]</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio7cfe327a4c49407aa9360be9630e3c9c";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio7cfe327a4c49407aa9360be9630e3c9c">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">CREATE TABLE Statement (Extended Store Table) [Dynamic Tiering]</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">Creates a new extended store table in the extended storage.</p>
+
+		<div class="section">
+			<div class="note caution"><span class="cautiontitle">Caution</span> <span class="ph">This
+                                                  information applies only for the SAP HANA option
+                                                  cited in the title of this topic. You must have
+                                                  purchased the license for it in order to use the
+                                                  information contained in this topic.</span>
+			</div>
+
+			<div class="note note"><span class="notetitle">Note</span> 
+				<span class="ph">While
+                                SAP HANA and dynamic tiering share much of the same base SQL syntax,
+                                there are some differences in supported and nonsupported clauses and
+                                parameters. The following syntax applies only to dynamic
+                                tiering.</span></div>
+
+		</div>
+
+		<div class="section"><div class="section_title">Syntax</div><div type="Syntax">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE [ COLUMN ] TABLE  <a class="xref nopagenumber" href="default.html?7cfe327a4c49407aa9360be9630e3c9c.html#loio7cfe327a4c49407aa9360be9630e3c9c__table_name" target="_top"><var class="keyword varname">&lt;table_name&gt;</var></a>
+   (<a class="xref nopagenumber" href="default.html?7cfe327a4c49407aa9360be9630e3c9c.html#loio7cfe327a4c49407aa9360be9630e3c9c__table_contents_source" target="_top"><var class="keyword varname">&lt;table_contents_source&gt;</var></a>, ...) 
+   <a class="xref nopagenumber" href="default.html?7cfe327a4c49407aa9360be9630e3c9c.html#loio7cfe327a4c49407aa9360be9630e3c9c__using_extended_storage_clause" target="_top"><var class="keyword varname">&lt;using_extended_storage_clause&gt;</var></a></pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+			
+			<div class="p" id="loio7cfe327a4c49407aa9360be9630e3c9c__sql_create_table_1create_table_table_contents_source">
+				<dl class="dl parml">
+					
+						<dt class="dt pt dlterm emphasis" id="loio7cfe327a4c49407aa9360be9630e3c9c__table_name"><var class="keyword varname">&lt;table_name&gt;</var></dt>
+
+						<dd class="dd pd">
+							<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_name&gt;</var> ::= 
+[<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;schema_name&gt;</var> ::= <var class="keyword varname">&lt;unicode_name&gt;</var></pre></div>
+
+						</dd>
+
+					
+					
+						<dt class="dt pt dlterm emphasis" id="loio7cfe327a4c49407aa9360be9630e3c9c__table_contents_source"><var class="keyword varname">&lt;table_contents_source&gt;</var></dt>
+
+						<dd class="dd pd">
+							<p class="p">You can create a table by describing the table elements, see
+								below.</p>
+
+							<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_contents_source&gt;</var> ::=
+(<var class="keyword varname">&lt;table_element&gt;</var>, ...)
+   | [(<var class="keyword varname">&lt;column_name&gt;</var>, ...)]</pre></div>
+
+							<dl class="dl">
+								
+									<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;table_element&gt;</var></dt>
+
+									<dd class="dd">
+										<div class="p">
+            Defines a table column with associated column or table constraint.
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_element&gt;</var> ::=
+ <var class="keyword varname">&lt;column_definition&gt;</var> [<var class="keyword varname">&lt;column_constraint&gt;</var>] 
+ | <var class="keyword varname">&lt;table_constraint&gt;</var></pre></div>
+</div>
+
+									</dd>
+
+								
+								
+									<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;column_definition&gt;</var></dt>
+
+									<dd class="dd">
+										<p class="p">Defines a table column.</p>
+
+										<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> <var class="keyword varname">&lt;column_definition&gt;</var> ::= <var class="keyword varname">&lt;column_name&gt;</var> {<var class="keyword varname">&lt;data_type&gt;</var> 
+   | <var class="keyword varname">&lt;lob_data_type&gt;</var>} [<var class="keyword varname">&lt;default_value_clause&gt;</var>]
+</pre></div>
+
+									</dd>
+
+								
+								
+									<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;column_constraint&gt;</var></dt>
+
+									<dd class="dd">
+										<p class="p">See <a class="xref nopagenumber" href="default.html?7cfe327a4c49407aa9360be9630e3c9c.html#loio7cfe327a4c49407aa9360be9630e3c9c__create_table_column_constraint" target="_top"><var class="keyword varname">&lt;column constraint&gt;</var></a>.</p>
+
+									</dd>
+
+								
+								
+									<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;table_constraint&gt;</var></dt>
+
+									<dd class="dd">
+										<p class="p">See <a class="xref nopagenumber" href="default.html?7cfe327a4c49407aa9360be9630e3c9c.html#loio7cfe327a4c49407aa9360be9630e3c9c__create_table_table_constraint" target="_top"><var class="keyword varname">&lt;table constraint&gt;</var></a>.</p>
+
+									</dd>
+
+								
+								
+									<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;column_name&gt;</var></dt>
+
+									<dd class="dd">
+										<div class="p">
+            Specifies the column
+            name.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+</div>
+
+									</dd>
+
+								
+								
+									<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;data_type&gt;</var></dt>
+
+									<dd class="dd">
+										<p class="p">
+            Specifies the column data type.</p>
+
+										<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;data_type&gt;</var>  ::= DATE 
+| TIME 
+| SECONDDATE 
+| TIMESTAMP 
+| TINYINT 
+| SMALLINT 
+| INTEGER 
+| BIGINT 
+| SMALLDECIMAL 
+| DECIMAL
+| REAL 
+| DOUBLE 
+| VARCHAR 
+| NVARCHAR 
+| ALPHANUM 
+| SHORTTEXT 
+| VARBINARY 
+| BINTEXT</pre></div>
+
+									</dd>
+
+								
+								
+									<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;lob_data_type&gt;</var></dt>
+
+									<dd class="dd">
+										<p class="p">Specifies the LOB data type.</p>
+
+										<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;lob_data_type&gt;</var> ::= <var class="keyword varname">&lt;lob_type_name&gt;</var> [MEMORY THRESHOLD memory_threshold_val
+ue]</pre></div>
+
+										<dl class="dl">
+											
+												<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;lob_type_name&gt;</var></dt>
+
+												<dd class="dd"><var class="keyword varname">&lt;lob_type_name&gt;</var> ::=  BLOB  |
+												CLOB  | NCLOB</dd>
+
+											
+										</dl>
+
+									</dd>
+
+								
+									<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;default_value_clause&gt;</var></dt>
+
+									<dd class="dd">
+										<p class="p">Specifies a value to be assigned to the column if an
+											INSERT statement does not provide a value for the
+											column. </p>
+
+										<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;default_value_clause&gt;</var> ::= 
+DEFAULT <var class="keyword varname">&lt;default_value_exp&gt;</var>
+
+<var class="keyword varname">&lt;default_value_exp&gt;</var> ::= 
+NULL 
+| <var class="keyword varname">&lt;string_literal&gt;</var> 
+| <var class="keyword varname">&lt;signed_numeric_literal&gt;</var>
+| <var class="keyword varname">&lt;unsigned_numeric_literal&gt;</var>
+| <var class="keyword varname">&lt;datetime_value_function&gt;</var>
+
+<var class="keyword varname">&lt;datetime_value_function&gt;</var> ::= 
+CURRENT_DATE 
+| CURRENT_TIME 
+| CURRENT_TIMESTAMP</pre></div>
+
+									</dd>
+
+								
+								
+									<dt class="dt dlterm emphasis" id="loio7cfe327a4c49407aa9360be9630e3c9c__create_table_column_constraint"><var class="keyword varname">&lt;column_constraint&gt;</var></dt>
+
+									<dd class="dd">
+										<p class="p">Specifies the column constraint rules.</p>
+
+										<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> <var class="keyword varname">&lt;column_constraint&gt;</var> ::= 
+    NULL
+    | NOT NULL
+    | <var class="keyword varname">&lt;unique_specification&gt;</var>
+</pre></div>
+
+										<dl class="dl">
+											
+												<dt class="dt dlterm emphasis">NULL</dt>
+
+												<dd class="dd">
+												<p class="p">
+            Allows NULL values in the column. If NULL is specified it is not considered a
+            constraint, it represents that a column that may contain a null value. The default is
+            NULL. </p>
+
+												</dd>
+
+											
+										</dl>
+
+									</dd>
+
+								
+								
+									<dt class="dt dlterm emphasis">NOT NULL</dt>
+
+									<dd class="dd">
+										<p class="p">
+            Prohibits NULL values in the column.</p>
+
+									</dd>
+
+								
+								
+									<dt class="dt dlterm emphasis" id="loio7cfe327a4c49407aa9360be9630e3c9c__create_table_unique_specification"><var class="keyword varname">&lt;unique_specification&gt;</var></dt>
+
+									<dd class="dd">
+										<p class="p">
+            Specifies unique constraints. </p>
+
+										<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> <var class="keyword varname">&lt;unique_specification&gt;</var> ::= UNIQUE [<var class="keyword varname">&lt;unique_tree_type_index&gt;</var>]
+                          | PRIMARY KEY [<var class="keyword varname">&lt;unique_tree_type_index&gt;</var>]
+</pre></div>
+
+										<div class="p">
+            If the index type is omitted, the <span class="ph pname">SAP HANA</span> database chooses the
+            appropriate index by considering the column data type. If the index type is not
+            specified, the <span class="ph pname">SAP HANA</span> database automatically selects an index type as
+                follows:
+<div class="table-wrapper tablenoborder"><table summary="" id="loio7cfe327a4c49407aa9360be9630e3c9c__d2994e65" class="table" frame="border" border="1" rules="all">
+                    <thead class="thead" align="left">
+                        <tr class="row">
+                            <th class="entry" valign="top" id="d26052982e404">Index type</th>
+
+                            <th class="entry" valign="top" id="d26052982e407">Criteria </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody class="tbody">
+                        <tr class="row">
+                            <td class="entry" valign="top" headers="d26052982e404 d26052982e407 ">CPBTREE</td>
+
+                            <td class="entry" valign="top" headers="d26052982e404 d26052982e407 ">
+                                <ul class="ul" id="loio7cfe327a4c49407aa9360be9630e3c9c__d2994e90">
+                                    <li class="li">character string types</li>
+
+                                    <li class="li">binary string types</li>
+
+                                    <li class="li">decimal types</li>
+
+                                    <li class="li">when the constraint is a composite key</li>
+
+                                    <li class="li">when the constraint is a non-unique constraint</li>
+
+                                </ul>
+
+                            </td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" valign="top" headers="d26052982e404 d26052982e407 ">BTREE</td>
+
+                            <td class="entry" valign="top" headers="d26052982e404 d26052982e407 ">All other cases than specified for CPBTREE </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+</div>
+</div>
+
+										<dl class="dl">
+											
+												<dt class="dt dlterm emphasis">UNIQUE</dt>
+
+												<dd class="dd">
+												<p class="p">
+            Specifies a column as a unique key. A composite unique key enables the specification of
+            multiple columns as a unique key. With a unique constraint, multiple rows cannot have
+            the same value in the same column.</p>
+
+												</dd>
+
+											
+											
+												<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;unique_tree_type_index&gt;</var></dt>
+
+												<dd class="dd">
+												<div class="p">
+            Specifies the index type.
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;unique_tree_type_index&gt;</var> ::= BTREE | CPBTREE</pre></div>
+</div>
+
+												<dl class="dl">
+												
+												<dt class="dt dlterm emphasis">BTREE</dt>
+
+												<dd class="dd">
+												<p class="p">
+            Specifies a B+-tree index. B+-tree is a tree that maintains sorted data which performs
+            efficient insertion, deletion and search of records.</p>
+
+												</dd>
+
+												
+												
+												<dt class="dt dlterm emphasis">CPTREE</dt>
+
+												<dd class="dd">Specifies a CPB+-tree index. CPB+-tree stands
+												for Compressed Prefix B+-Tree, which is based on
+												pkB-tree. CPB+-tree is a very small index because
+												it uses 'partial key' that is only part of full
+												key in index nodes. CPB+-tree shows better
+												performance than B+-Tree for larger keys.</dd>
+
+												
+												</dl>
+
+												</dd>
+
+											
+										</dl>
+
+									</dd>
+
+								
+								
+									<dt class="dt dlterm emphasis">PRIMARY KEY</dt>
+
+									<dd class="dd">
+										<p class="p">
+            Specifies a column as a unique key. A composite unique key enables the specification of
+            multiple columns as a unique key. With a unique constraint, multiple rows cannot have
+            the same value in the same column.</p>
+
+									</dd>
+
+								
+								
+									<dt class="dt dlterm emphasis" id="loio7cfe327a4c49407aa9360be9630e3c9c__create_table_table_constraint"><var class="keyword varname">&lt;table_constraint&gt;</var></dt>
+
+									<dd class="dd">
+										<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> <var class="keyword varname">&lt;table_constraint&gt;</var> ::= 
+<var class="keyword varname">&lt;unique_constraint_definition&gt;</var>
+</pre></div>
+
+										<dl class="dl">
+											
+												<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;unique_constraint_definition&gt;</var></dt>
+
+												<dd class="dd">
+												<p class="p">The unique specification. See <a class="xref nopagenumber" href="default.html?7cfe327a4c49407aa9360be9630e3c9c.html#loio7cfe327a4c49407aa9360be9630e3c9c__create_table_unique_specification" target="_top"><var class="keyword varname">&lt;unique_specification&gt;</var></a>. </p>
+
+												<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> <var class="keyword varname">&lt;unique_constraint_definition&gt;</var> ::= 
+<var class="keyword varname">&lt;unique_specification&gt;</var> (<var class="keyword varname">&lt;unique_column_name_list&gt;</var>)
+</pre></div>
+
+												</dd>
+
+											
+											
+												<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;unique_column_name_list&gt;</var></dt>
+
+												<dd class="dd">
+												<p class="p">Specifies the unique column name list which can
+												have one or more column names.</p>
+
+												<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> <var class="keyword varname">&lt;unique_column_name_list&gt;</var> ::= <var class="keyword varname">&lt;unique_column_name&gt;</var>[{, <var class="keyword varname">&lt;unique_column_name&gt;</var>}...]
+</pre></div>
+
+												</dd>
+
+											
+											
+												<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;unique_column_name&gt;</var></dt>
+
+												<dd class="dd">A column name
+												identifier.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> <var class="keyword varname">&lt;unique_column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+</pre></div>
+</dd>
+
+											
+										</dl>
+
+									</dd>
+
+								
+							</dl>
+
+						</dd>
+
+					
+					
+						<dt class="dt pt dlterm emphasis" id="loio7cfe327a4c49407aa9360be9630e3c9c__using_extended_storage_clause"><var class="keyword varname">&lt;using_extended_storage_clause&gt;</var></dt>
+
+						<dd class="dd pd">
+							<p class="p">Creates an extended store table. </p>
+
+							<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;using_extended_storage_clause&gt;</var> ::=
+   USING EXTENDED STORAGE [{ENABLE | DISABLE} DELTA]</pre></div>
+
+							<div class="note note"><span class="notetitle">Note</span> 
+								<ul class="ul" id="loio7cfe327a4c49407aa9360be9630e3c9c__ul_zjg_dpz_hp">
+									<li class="li">Extended storage must already exist.</li>
+
+									<li class="li">DBO, SYS, and PUBLIC are reserved words within extended
+										storage. Schemas with these names cannot have extended store
+										tables. </li>
+
+								</ul>
+
+							</div>
+
+							<dl class="dl">
+								
+									<dt class="dt dlterm emphasis">ENABLE | DISABLE DELTA</dt>
+
+									<dd class="dd">Enable row-level versioning (DELTA) on the extended store
+										table. Enabling DELTA facilitates faster inserts.
+											<div class="note note"><span class="notetitle">Note</span> DELTA not supported for data types BLOB, CLOB and
+											NCLOB.</div>
+</dd>
+
+								
+							</dl>
+
+						</dd>
+
+					
+				</dl>
+
+			</div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">The CREATE TABLE statement with the USING EXTENDED STORAGE clause creates an extended store
+				table. </p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">System Views</div><div type="System Views">
+			
+			<p class="p"> TABLES : Table information.</p>
+
+			<p class="p"> M_ES_TABLES : extended store table information.</p>
+
+			<p class="p"> TABLE_COLUMNS : Table column information.</p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Example</div><div type="Example">
+			
+			<div class="p">You create table t1 as an extended store table where column A and B are INTEGER-type, column A
+				is the primary key constraint, and DELTA is
+				enabled.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> CREATE TABLE t1 (A INT PRIMARY KEY, B INT) USING EXTENDED STORAGE ENABLE DELTA;
+</pre></div>
+
+			</div>
+
+			<div class="p">You create table t2 as an extended store table where columns A, B, and C are INTEGER-type,
+				columns A and B allow NULL values (default when not specified is NULL), but column C
+				does
+				not.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE t2(A INT, B INT NULL, C INT NOT NULL) USING EXTENDED STORAGE;</pre></div>
+</div>
+
+			<div class="p">You create table t3 as an extended store table where all columns are INTEGER-type, column A is
+				the primary key and columns B and C have UNIQUE
+				constraints.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE t3 (A INT PRIMARY KEY, B INT UNIQUE BTREE, C INT, UNIQUE CPBTREE(C)) USING EXTENDED STORAGE; </pre></div>
+</div>
+
+			<div class="p">You create table t4 as an extended store table where columns A, B, and C are INTEGER-type,
+				columns A and B do not allow NULL values, column C is the primary key and has a
+				UNIQUE
+				constraint.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE t4 (A INT NOT NULL, B INT NOT NULL, C INT, PRIMARY KEY CPBTREE(A, B), UNIQUE(C)) USING EXTENDED STORAGE; </pre></div>
+</div>
+
+		</div></div>
+
+	</div>
+
+<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?210197377519101481cfb213f0b84848.html" target="_top" title="Provides information about available tables.">TABLES System View</a></div>
+<div><a class="link" href="default.html?2100d33a75191014868bbcd89274199c.html" target="_top" title="Provides information about available table columns.">TABLE_COLUMNS System View</a></div>
+<div><a class="link" href="default.html?b9c32ac499534abfbd5d1d204fb79d39.html" target="_top" title="Shows information for all extended tables in extended storage.">M_ES_TABLES System View [Dynamic Tiering]</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="CREATE TABLE Statement (Extended Store Table) [Dynamic Tiering]";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

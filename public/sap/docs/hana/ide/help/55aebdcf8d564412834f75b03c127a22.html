@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="For creating static SQL analytic privileges, you use attribute columns from views to define fixed restrictions on data access. These restrictions are defined in the analytic privilege editor at design time."/>
+<meta name="description" content="For creating static SQL analytic privileges, you use attribute columns from views to define fixed restrictions on data access. These restrictions are defined in the analytic privilege editor at design time."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=4342942639764015"/>
+<title>Create Static SQL Analytic Privileges</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio55aebdcf8d564412834f75b03c127a22";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio55aebdcf8d564412834f75b03c127a22">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Create Static SQL Analytic Privileges</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">For creating static SQL analytic privileges, you use attribute columns from views to
+		define fixed restrictions on data access. These restrictions are defined in the analytic
+		privilege editor at design time.</p>
+
+		<div class="section prereq p"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Prerequisites</h2></div>
+			<ol class="ol" id="loio55aebdcf8d564412834f75b03c127a22__ol_lx1_bn1_nx">
+				<li class="li">If you want to use a SQL analytic privilege to apply data access restrictions on calculation
+					views, set the <span class="ph uicontrol">Apply Privileges</span> property for the
+					calculation view to <span class="ph uicontrol">SQL Analytic Privileges</span>.<ol class="ol" type="a" id="loio55aebdcf8d564412834f75b03c127a22__ol_ljy_bn1_nx">
+						<li class="li">Open the calculation view in the view editor. </li>
+
+						<li class="li">Select the <span class="ph uicontrol">Semantics</span> node.</li>
+
+						<li class="li">Choose the <span class="ph uicontrol">View Properties</span> tab.</li>
+
+						<li class="li">In the <span class="ph uicontrol">Apply Privileges</span> dropdown list, select
+								<span class="ph uicontrol">SQL Analytic Privileges</span>.</li>
+
+					</ol>
+</li>
+
+				<li class="li">If you want to use a SQL analytic privilege to apply data access restrictions on CDS views,
+					you have defined the referenced CDS views using the <samp class="ph codeph">WITH STRUCTURED
+						PRIVILEGE CHECK</samp> clause.</li>
+
+			</ol>
+
+		</div>
+
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+				<span class="ph cmd">Start the SAP Web IDE for SAP HANA in a browser.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">If you want to create a new project for the calculation view, do the following:</span>
+				<ol type="a" class="ol substeps" id="loio55aebdcf8d564412834f75b03c127a22__substeps_e4s_pqk_2v">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the SAP Web IDE for SAP HANA, choose <span class="ph menucascade"><img src="images/navstart.gif" alt="Start of the navigation path" title="Start of the navigation path"/> <span class="ph uicontrol">File</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">New</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">Project from Template</span> <img src="images/navend.gif" alt="End of the navigation path" title="End of the navigation path"/></span>.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Choose the project template type.</span>
+						<div class="itemgroup info">
+							<p class="p">Currently, there is only one type of project template available,
+								namely: <span class="ph uicontrol">Multi-Target Application Project</span>.
+								Select <span class="ph uicontrol">Multi-Target Application Project</span> and
+								choose <span class="ph uicontrol">Next</span>.</p>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Type a name for the new MTA project (for example,
+								<kbd class="ph userinput">myApp</kbd> and choose <span class="ph uicontrol">Next</span>
+							to confirm. </span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Specify details of the new MTA project and choose
+								<span class="ph uicontrol">Next</span> to confirm.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Create the new MTA project; choose <span class="ph uicontrol">Finish</span>.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Select the HDB module in which you want to create the analytic privilege.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Browse to the <span class="ph uicontrol">src</span> folder.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">In the context menu, choose <span class="ph menucascade"><img src="images/navstart.gif" alt="Start of the navigation path" title="Start of the navigation path"/> <span class="ph uicontrol">New</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">Analytic Privilege</span> <img src="images/navend.gif" alt="End of the navigation path" title="End of the navigation path"/></span>.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Enter details for the new analytic privilege.</span>
+				<ol type="a" class="ol substeps" id="loio55aebdcf8d564412834f75b03c127a22__substeps_ihm_hl3_2v">
+					<li class="li substep">
+						<span class="ph cmd">In the <span class="ph uicontrol">Name</span> field, enter the name of the
+							analytic privilege.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Choose <span class="ph uicontrol">Create</span>.</span>
+				<div class="itemgroup info">The tool opens the analytic privilege editor where you can define the analytic
+					privilege.</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Select models to define the scope of the analytic privilege.</span>
+				<div class="itemgroup info">
+					<p class="p">If you want to create an analytic privilege and apply the data access restrictions for
+						selected list of models, in the <span class="ph uicontrol">Secured Models</span>
+						section add the required models,</p>
+
+				</div>
+				<ol type="a" class="ol substeps" id="loio55aebdcf8d564412834f75b03c127a22__substeps_g1x_xw3_cs">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Choose <img class="image" id="loio55aebdcf8d564412834f75b03c127a22__image_w52_tgg_pv" src="loioc288fa65866c479baba60ee5378fe73e_LowRes.png"/>.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the <span class="ph uicontrol">Find Data Sources</span> dialog, search and select the models for
+							which you want apply the analytic privilege restrictions.</span>
+						<div class="itemgroup info">
+							<div class="note note"><span class="notetitle">Note</span> You can only add calculation views and CDS views to the secured models list.</div>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Choose <span class="ph uicontrol">OK</span>.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Define validity.</span>
+				<div class="itemgroup info">In the <span class="ph uicontrol">Privilege Validity</span> section, specify the time
+					period for which the analytic privilege is valid. You can specify more than one
+					time period for which the analytic privilege is valid.</div>
+				<ol type="a" class="ol substeps" id="loio55aebdcf8d564412834f75b03c127a22__substeps_tnh_pqz_mx">
+					<li class="li substep">
+						<span class="ph cmd">Choose <img class="image" id="loio55aebdcf8d564412834f75b03c127a22__image_wfj_vqz_mx" src="loiof7e61945e9c94212902399cbc977bd25_LowRes.png"/>.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">In the <span class="ph uicontrol">Operator</span> dropdown list, select the
+							required operator.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">Based on the selected operator, specify the time period (From and To) for the which the
+							analytic privilege is valid.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Define the attribute restrictions.</span>
+				<div class="itemgroup info">The tool uses the restrictions defined on the attributes to restrict data access. Each
+					attribute restriction is associated with only one attribute, but can contain
+					multiple value filters. You can define more than one attribute
+					restriction.</div>
+				<ol type="a" class="ol substeps" id="loio55aebdcf8d564412834f75b03c127a22__substeps_ysb_trz_mx">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the <span class="ph uicontrol">Assign Attribute Restrictions</span> section,
+							choose <img class="image" id="loio55aebdcf8d564412834f75b03c127a22__image_inl_5rz_mx" src="loiof7e61945e9c94212902399cbc977bd25_LowRes.png"/>.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the <span class="ph uicontrol">Restriction Type</span> dropdown list, choose
+								<img class="image" id="loio55aebdcf8d564412834f75b03c127a22__image_onm_ssz_mx" src="loiod8ed7ddf0e454dd88d842289de6b3805_LowRes.png"/>.</span>
+						<div class="itemgroup info">You can add more than one restriction for a single attribute.</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Selected the required operator to define the condition.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the <span class="ph uicontrol">Value</span> field specify the required
+							value.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Define attribute restrictions using hierarchy node column.</span>
+				<div class="itemgroup info">You can define hierarchy analytic privileges only if you have enabled SQL access to shared
+						hierarchies.<p class="p">For example, if you have enabled SQL access to shared
+						hierarchies and if <samp class="ph codeph">SalesRepHierarchyNode</samp> is the node column
+						that modeler generates for a parent-child hierarchy, then
+							<samp class="ph codeph">"SalesRepHierarchyNode" = "MAJESTIX"</samp> is a possible
+						filter expression in analytic privileges.</p>
+</div>
+				<ol type="a" class="ol substeps" id="loio55aebdcf8d564412834f75b03c127a22__substeps_e1v_wx3_cs">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the <span class="ph uicontrol">Hierarchy Privilege</span> section, choose
+								<img class="image" id="loio55aebdcf8d564412834f75b03c127a22__image_q1j_mtz_mx" src="loiof7e61945e9c94212902399cbc977bd25_LowRes.png"/>.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the <span class="ph uicontrol">Hierarchy</span> dropdown list, select a hierarchy.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the <span class="ph uicontrol">Value</span> field, provide a node column
+							value.</span>
+						<div class="itemgroup info">
+							<div class="note note"><span class="notetitle">Note</span> You can create hierarchical analytic privileges only for the following conditions: <ul class="ul" id="loio55aebdcf8d564412834f75b03c127a22__ul_jvv_rj1_nx">
+									<li class="li">All models in the <span class="ph uicontrol">Secured Models</span> are
+										star join calculation views with shared dimensions.</li>
+
+									<li class="li">You have enabled SQL access to the shared hierarchies in
+										star join calculation views.</li>
+
+								</ul>
+
+							</div>
+
+						</div>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Build an HDB module.</span>
+				<div class="itemgroup info">The build process uses the design-time database artifacts to generate the
+					corresponding actual objects in the database catalog.</div>
+				<ol type="a" class="ol substeps" id="loio55aebdcf8d564412834f75b03c127a22__substeps_y5s_kn3_2v">
+					<li class="li substep">
+						<span class="ph cmd">From the module context menu, choose <span class="ph uicontrol">Build</span>.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Assign privileges to a user.</span>
+			</li>
+</ol>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Create Static SQL Analytic Privileges";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

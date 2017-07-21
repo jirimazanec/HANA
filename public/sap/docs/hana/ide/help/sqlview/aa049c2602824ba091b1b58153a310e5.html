@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Computes the Pearson product momentum correlation coefficient between two columns."/>
+<meta name="description" content="Computes the Pearson product momentum correlation coefficient between two columns."/>
+<meta name="keywords" content="CORR"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=7850754395909173"/>
+<title>CORR Function (Aggregate)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioaa049c2602824ba091b1b58153a310e5";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioaa049c2602824ba091b1b58153a310e5">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">CORR Function (Aggregate)</h1>
+
+	
+	
+	
+	
+	<div class="body refbody"><p class="shortdesc">Computes the Pearson product momentum correlation coefficient between two
+		columns.</p>
+
+		<div class="section"><div class="section_title">Syntax</div><div type="Syntax">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CORR (<var class="keyword varname">&lt;column1&gt;</var>, <var class="keyword varname">&lt;column2&gt;</var>)
+    [OVER([PARTITION BY <var class="keyword varname">&lt;col1&gt;</var>, ...] [ORDER BY <var class="keyword varname">&lt;col1&gt;</var>, ... [<var class="keyword varname">&lt;window_frame&gt;</var>]])]</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+			
+			<dl class="dl parml">
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;column1&gt;</var> and <var class="keyword varname">&lt;column2&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specify the columns providing the input data for the correlation.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;column1&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;column2&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+						<p class="p">The values of <var class="keyword varname">&lt;column1&gt;</var> and <var class="keyword varname">&lt;column2&gt;</var>
+							can be of any numeric type. </p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;col1&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies the columns for partitioning the data.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;col1&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis">ORDER BY</dt>
+
+					<dd class="dd pd">
+						<p class="p">Orders the rows in the result set of the function.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;window_frame&gt;</var> ::= {ROWS|GROUPS} UNBOUNDED PRECEDING
+    | {ROWS|GROUPS} BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    | {ROWS|GROUPS} BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING</pre></div>
+
+						<p class="p">If ORDER BY is not specified, then the default frame is UNBOUNDED
+							PRECEEDING TO UNBOUNDED FOLLOWING; otherwise, the default frame is
+							GROUPS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW.</p>
+
+					</dd>
+
+				
+			</dl>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">Computes the Pearson product momentum correlation coefficient between two columns. </p>
+
+			<p class="p">The result ranges from -1 to 1, depending on the correlation, or NULL if a correlation cannot
+				be computed. </p>
+
+			<p class="p">The result can return NULL for one of the following reasons:</p>
+
+			<ul class="ul" id="loioaa049c2602824ba091b1b58153a310e5__ul_psx_cgc_zp">
+				<li class="li">Less than two value pairs are correlated after NULLs have been removed </li>
+
+				<li class="li">There is zero variance in at least one of the two columns </li>
+
+			</ul>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Examples</div><div type="Examples">
+			
+			<p class="p">The examples below assume that a correlation table has been created with the following values: </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE correlationTable (
+    ts_id VARCHAR(20),
+    DATE DAYDATE,
+    value1 DOUBLE,
+    value2 DOUBLE);
+
+INSERT INTO correlationTable VALUES ('A', '2014-10-01', 1, 1);
+INSERT INTO correlationTable VALUES ('A', '2014-10-02', 2, 2);
+INSERT INTO correlationTable VALUES ('A', '2014-10-04', 3, 3);
+INSERT INTO correlationTable VALUES ('B', '2014-10-07', 1, 3);
+INSERT INTO correlationTable VALUES ('B', '2014-10-11', 2, 2);
+INSERT INTO correlationTable VALUES ('B', '2014-10-21', 3, 1);</pre></div>
+
+			<ol class="ol" id="loioaa049c2602824ba091b1b58153a310e5__ol_okt_f1p_cy">
+				<li class="li">
+					<p class="p">The following aggregate function example returns the correlation between the
+							<kbd class="ph userinput">ts_id</kbd> column and the columns
+							<kbd class="ph userinput">value1</kbd> and <kbd class="ph userinput">value2</kbd>. </p>
+
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT ts_id, CORR(value1, value2) FROM correlationTable GROUP BY ts_id;</pre></div>
+
+					<p class="p">The results are as follows:</p>
+
+					
+<div class="table-wrapper tablenoborder"><table summary="" id="loioaa049c2602824ba091b1b58153a310e5__table_whx_rbp_cy" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+							
+							
+							<thead class="thead" align="left">
+								<tr class="row">
+									<th class="entry" valign="top" id="d28595965e207">
+										<p class="p">TS_ID</p>
+
+									</th>
+
+									<th class="entry" valign="top" id="d28595965e213">
+										<p class="p">CORR(VALUE1, VALUE2)</p>
+
+									</th>
+
+								</tr>
+
+							</thead>
+
+							<tbody class="tbody">
+								<tr class="row">
+									<td class="entry" valign="top" headers="d28595965e207 ">
+										<p class="p">A</p>
+
+									</td>
+
+									<td class="entry" valign="top" headers="d28595965e213 ">
+										<p class="p">1</p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" headers="d28595965e207 ">
+										<p class="p">B</p>
+
+									</td>
+
+									<td class="entry" valign="top" headers="d28595965e213 ">
+										<p class="p">-1</p>
+
+									</td>
+
+								</tr>
+
+							</tbody>
+
+						</table>
+</div>
+
+				</li>
+
+				<li class="li">
+					<p class="p">The following WHERE clause example returns the correlation between the
+							<kbd class="ph userinput">ts_id</kbd> column and the columns
+							<kbd class="ph userinput">value1</kbd> and <kbd class="ph userinput">value2</kbd> only for
+						rows where <kbd class="ph userinput">ts_id</kbd> equals <kbd class="ph userinput">A</kbd>. </p>
+
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT ts_id, CORR(value1, value2) FROM correlationTable
+    WHERE ts_id='A' GROUP BY ts_id;</pre></div>
+
+					<p class="p">The results are as follows:</p>
+
+					
+<div class="table-wrapper tablenoborder"><table summary="" id="loioaa049c2602824ba091b1b58153a310e5__table_n4p_ybp_cy" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+							
+							
+							<thead class="thead" align="left">
+								<tr class="row">
+									<th class="entry" valign="top" id="d28595965e295">
+										<p class="p">TS_ID</p>
+
+									</th>
+
+									<th class="entry" valign="top" id="d28595965e301">
+										<p class="p">CORR(VALUE1, VALUE2)</p>
+
+									</th>
+
+								</tr>
+
+							</thead>
+
+							<tbody class="tbody">
+								<tr class="row">
+									<td class="entry" valign="top" headers="d28595965e295 ">
+										<p class="p">A</p>
+
+									</td>
+
+									<td class="entry" valign="top" headers="d28595965e301 ">
+										<p class="p">1</p>
+
+									</td>
+
+								</tr>
+
+							</tbody>
+
+						</table>
+</div>
+
+				</li>
+
+				<li class="li">
+					<p class="p">The example below uses a window function. </p>
+
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT ts_id, CORR(value1, value2) OVER (PARTITION BY ts_id) FROM correlationTable;</pre></div>
+
+					<p class="p">The results are as follows:</p>
+
+					
+<div class="table-wrapper tablenoborder"><table summary="" id="loioaa049c2602824ba091b1b58153a310e5__table_q1s_bcp_cy" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+							
+							
+							<thead class="thead" align="left">
+								<tr class="row">
+									<th class="entry" valign="top" id="d28595965e353">
+										<p class="p">TS_ID</p>
+
+									</th>
+
+									<th class="entry" valign="top" id="d28595965e359">
+										<p class="p">CORR(VALUE1, VALUE2)OVER(PARTITIONBYTS_ID)</p>
+
+									</th>
+
+								</tr>
+
+							</thead>
+
+							<tbody class="tbody">
+								<tr class="row">
+									<td class="entry" valign="top" headers="d28595965e353 ">
+										<p class="p">A</p>
+
+									</td>
+
+									<td class="entry" valign="top" headers="d28595965e359 ">
+										<p class="p">1</p>
+
+									</td>
+
+								</tr>
+
+							</tbody>
+
+						</table>
+</div>
+
+				</li>
+
+				<li class="li">
+					<p class="p">The example below uses a sliding window function.</p>
+
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT ts_id, CORR(value1, value2) OVER (PARTITION BY ts_id ORDER BY date)
+    FROM correlationTable ORDER BY ts_id;</pre></div>
+
+					<p class="p">The results are as follows:</p>
+
+					
+<div class="table-wrapper tablenoborder"><table summary="" id="loioaa049c2602824ba091b1b58153a310e5__table_emc_scp_cy" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+							
+							
+							<thead class="thead" align="left">
+								<tr class="row">
+									<th class="entry" valign="top" id="d28595965e411">
+										<p class="p">TS_ID</p>
+
+									</th>
+
+									<th class="entry" valign="top" id="d28595965e417">
+										<p class="p">CORR(VALUE1, VALUE2)OVER(PARTITIONBYTS_IDORDERBYDATE)</p>
+
+									</th>
+
+								</tr>
+
+							</thead>
+
+							<tbody class="tbody">
+								<tr class="row">
+									<td class="entry" valign="top" headers="d28595965e411 ">
+										<p class="p">A</p>
+
+									</td>
+
+									<td class="entry" valign="top" headers="d28595965e417 ">
+										<p class="p">?</p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" headers="d28595965e411 ">
+										<p class="p">A</p>
+
+									</td>
+
+									<td class="entry" valign="top" headers="d28595965e417 ">
+										<p class="p">0.9999999999999998</p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" headers="d28595965e411 ">
+										<p class="p">A</p>
+
+									</td>
+
+									<td class="entry" valign="top" headers="d28595965e417 ">
+										<p class="p">0.9999999999999998</p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" headers="d28595965e411 ">
+										<p class="p">B</p>
+
+									</td>
+
+									<td class="entry" valign="top" headers="d28595965e417 ">
+										<p class="p">?</p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" headers="d28595965e411 ">
+										<p class="p">B</p>
+
+									</td>
+
+									<td class="entry" valign="top" headers="d28595965e417 ">
+										<p class="p">-0.9999999999999998</p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" headers="d28595965e411 ">
+										<p class="p">B</p>
+
+									</td>
+
+									<td class="entry" valign="top" headers="d28595965e417 ">
+										<p class="p">-0.9999999999999998</p>
+
+									</td>
+
+								</tr>
+
+							</tbody>
+
+						</table>
+</div>
+
+				</li>
+
+				<li class="li">
+					<p class="p">The example below uses a ROWS BETWEEN clause.</p>
+
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT ts_id, CORR(value1, value2) OVER (PARTITION BY ts_id ORDER BY date
+    ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) from correlationTable;</pre></div>
+
+					<p class="p">The results are as follows:</p>
+
+					
+<div class="table-wrapper tablenoborder"><table summary="" id="loioaa049c2602824ba091b1b58153a310e5__table_m2z_xcp_cy" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+							
+							
+							<thead class="thead" align="left">
+								<tr class="row">
+									<th class="entry" valign="top" id="d28595965e545">
+										<p class="p">TS_ID</p>
+
+									</th>
+
+									<th class="entry" valign="top" id="d28595965e551">
+										<p class="p">CORR(VALUE1,
+											VALUE2)OVER(PARTITIONBYTS_IDORDERBYDATEROWS)</p>
+
+									</th>
+
+								</tr>
+
+							</thead>
+
+							<tbody class="tbody">
+								<tr class="row">
+									<td class="entry" valign="top" headers="d28595965e545 ">
+										<p class="p">A</p>
+
+									</td>
+
+									<td class="entry" valign="top" headers="d28595965e551 ">
+										<p class="p">?</p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" headers="d28595965e545 ">
+										<p class="p">A</p>
+
+									</td>
+
+									<td class="entry" valign="top" headers="d28595965e551 ">
+										<p class="p">0.9999999999999998</p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" headers="d28595965e545 ">
+										<p class="p">A</p>
+
+									</td>
+
+									<td class="entry" valign="top" headers="d28595965e551 ">
+										<p class="p">0.9999999999999998</p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" headers="d28595965e545 ">
+										<p class="p">B</p>
+
+									</td>
+
+									<td class="entry" valign="top" headers="d28595965e551 ">
+										<p class="p">?</p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" headers="d28595965e545 ">
+										<p class="p">B</p>
+
+									</td>
+
+									<td class="entry" valign="top" headers="d28595965e551 ">
+										<p class="p">-0.9999999999999998</p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" headers="d28595965e545 ">
+										<p class="p">B</p>
+
+									</td>
+
+									<td class="entry" valign="top" headers="d28595965e551 ">
+										<p class="p">-0.9999999999999998</p>
+
+									</td>
+
+								</tr>
+
+							</tbody>
+
+						</table>
+</div>
+
+				</li>
+
+			</ol>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="CORR Function (Aggregate)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

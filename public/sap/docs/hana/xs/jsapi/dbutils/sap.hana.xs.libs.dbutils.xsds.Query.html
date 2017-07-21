@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: Query</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Class: Query</h1>
+    
+    
+
+
+
+<section>
+    
+<header>
+    <h2>
+        <span class="ancestors"><a href="sap.hana.xs.libs.dbutils.xsds.html">.xsds</a>.</span>
+    
+    Query
+    </h2>
+    
+</header>  
+
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+<dt>
+    <h4 class="name" id="Query"><span class="type-signature"></span>new Query<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds_queries.xsjslib, line 132
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <h4 class="name" id="$addFields"><span class="type-signature"></span>$addFields<span class="signature">(newFields)</span><span class="type-signature"> &rarr; {<a href="sap.hana.xs.libs.dbutils.xsds.Query.html">sap.hana.xs.libs.dbutils.xsds.Query</a>}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Returns a new query which is equivalent to the called query, but with additional calculated fields in the projection clause as specified in newFields.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>newFields</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">An object {p_0: expr_0, ... p_n: expr_n}. Each property p: expr ofnewFields results in one new field p added to the projection clause of the query. The value expr must be an expression as specified in the description of the $where clause.</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds_queries.xsjslib, line 1880
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    a new query with the specified field added to the projection
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type"><a href="sap.hana.xs.libs.dbutils.xsds.Query.html">sap.hana.xs.libs.dbutils.xsds.Query</a></span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>result = SOHeader.$query().$limit(10).$project({   SALESORDERID: true,   NETAMOUNT: "TotalNet",   items: {       NETAMOUNT: true   }}).$addFields({   "DaysAgo": soHeader.items.DELIVERYDATE.$prefixOp("DAYS_BETWEEN", new Date())}).$execute();// example result:// [{//    SALESORDERID: "0500000486",//    TotalNet: "273.9",//    items: {//        NETAMOUNT: "87"//    },//    DaysAgo: 681// }]</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="$aggregate"><span class="type-signature"></span>$aggregate<span class="signature">(pathSpec)</span><span class="type-signature"> &rarr; {<a href="sap.hana.xs.libs.dbutils.xsds.Query.html">sap.hana.xs.libs.dbutils.xsds.Query</a>}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Returns a new query which is equivalent to the called query, but with an additional GROUP BY section and a restricted projection clause based on the pathSpec object.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>pathSpec</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">A path expression as described in the desciption of the $project operator. pathSpec will lead to theGROUP BY clause of the generated query. In addition, the projection is overridden with the same clause. It is possibleto hide some parts of the pathSpec, so that they appear in the GROUP BY clause but not in the projection: for this, thepathSpec property needs be terminated with the constant false (instead of true or a String literal).</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds_queries.xsjslib, line 1807
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    a new query which performs the aggregation
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type"><a href="sap.hana.xs.libs.dbutils.xsds.Query.html">sap.hana.xs.libs.dbutils.xsds.Query</a></span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>var averageQuantity = soItem.$query().$limit(2).$aggregate({    SALESORDERID: true,    PRODUCTID: true}).$addFields({    averageQuantity: soItem.QUANTITY.$avg()}).$execute();// example result:// [{//     PRODUCTID: "HT-1107",//     averageQuantity: "1"// },// {//     PRODUCTID: "HT-1072",//     averageQuantity: "3"// }]</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="$defaultProject"><span class="type-signature"></span>$defaultProject<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="sap.hana.xs.libs.dbutils.xsds.Query.html">sap.hana.xs.libs.dbutils.xsds.Query</a>}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Returns a new query which is equivalent to the called query, but replaces any projection specification by the default projection. The default projectionspecifies all fields of the entity without following associations.
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds_queries.xsjslib, line 1703
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    a new query with the default projection specification added to the query
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type"><a href="sap.hana.xs.libs.dbutils.xsds.Query.html">sap.hana.xs.libs.dbutils.xsds.Query</a></span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>soHeader.$query().$defaultProject();// example result://       {//           DELIVERYSTATUS: "I",//           BILLINGSTATUS: "I",//           LIFECYCLESTATUS: "X",//           TAXAMOUNT: "52.04",//           TotalNet: "273.9",//           GROSSAMOUNT: "325.94",//           CURRENCY: "EUR",//           PARTNERID: "0100000044",//           HISTORY: {//               CHANGEDAT: "2012-05-13T22:00:00.000Z",//               CHANGEDBY: "0000000033",//               CREATEDAT: "2012-04-29T22:00:00.000Z",//               CREATEDBY: "0000000033"//           },//           SALESORDERID: "0500000486"//       }</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="$execute"><span class="type-signature"></span>$execute<span class="signature">(<span class="optional">config</span>)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Executes the query and transforms the result back into the structure imposed by the CDS/XSDS metadata.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">specifies the appearance of the result set. If this value is not set or empty, a structured result set is returned, i.e. the result set is delivered as an array or array-like object of rows, each of which contains an object. That object contains the local fields of the entity and as subobjects the requested values by association.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>$flat</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">if true, returns the data as delivered by the database as an array or array-like object of rows,                  each of which contains an object with the field (column) names as properties</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>$factorized</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">if true, summarizes the result set based on the object's key(s).</br>             Example: [{id: 1, 1_m_association: 0}, {id: 1, 1_m_association: 1}] -> [{id: 1, 1_m_association: [0, 1]}]</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds_queries.xsjslib, line 1971
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>var result = SOHeader.$query().$project({SALESORDERID: true}).$execute();    // example result:    //  [{    //    "SALESORDERID": "0500000486",    //    "items": {    //        "NETAMOUNT": "87"    //    }    //   }, {    //    "SALESORDERID": "0500000486",    //    "items": {    //        "NETAMOUNT": "29.9"    //    }    //   }]    result = SOHeader.$query().$project({SALESORDERID: true}).$execute({$factorized: true});    // example result:    // [{"SALESORDERID":"0500000486",    //      "items":[    //           {"NETAMOUNT":"87"},    //           {"NETAMOUNT":"29.9"}    //      ]    // }]    result = SOHeader.$query().$project({SALESORDERID: true}).$execute({$flat: true});    // example result:    //  [{    //    "SALESORDERID": "0500000486",    //    "items.NETAMOUNT": "87"    //   },    //   {    //    "SALESORDERID": "0500000486",    //    "items.NETAMOUNT": "29.9"    //   }    //]    //</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="$limit"><span class="type-signature"></span>$limit<span class="signature">(n, m)</span><span class="type-signature"> &rarr; {<a href="sap.hana.xs.libs.dbutils.xsds.Query.html">sap.hana.xs.libs.dbutils.xsds.Query</a>}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Returns a new query which is equivalent to the called query, but includesa LIMIT n, m specification, i.e. will return the first n result records, and skip m results
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>n</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">the number of result set elements which should be returned</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>m</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    &lt;nullable><br>
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">the offset i.e. the number of skipped rows</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds_queries.xsjslib, line 1848
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    a new query with the limit specification added
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type"><a href="sap.hana.xs.libs.dbutils.xsds.Query.html">sap.hana.xs.libs.dbutils.xsds.Query</a></span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>soHeader.$query().$limit(10, 5).$execute();</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="$matching"><span class="type-signature"></span>$matching<span class="signature">(template)</span><span class="type-signature"> &rarr; {<a href="sap.hana.xs.libs.dbutils.xsds.Query.html">sap.hana.xs.libs.dbutils.xsds.Query</a>}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Returns a new query which is equivalent to the called query, but includes a selection condition which is equivalent to the template specified as argument.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>template</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">is an object following the result set structuretogether with values specifying the allowed values of the result set. For a complete account of the syntax of template, see {{sap.hana.xs.libs.dbutils.xsds.Entity#$find}.</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds_queries.xsjslib, line 1778
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    a new query with the selection specification added to the query
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type"><a href="sap.hana.xs.libs.dbutils.xsds.Query.html">sap.hana.xs.libs.dbutils.xsds.Query</a></span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>qSelectedOrders = soHeader.$query().$limit(1).$project({         SALESORDERID: true,         NETAMOUNT: "TotalNet",         items: {             NETAMOUNT: true         }     }).$matching({         items: {             CURRENCY: 'EUR',             QUANTITY: {                 $gt: 2             }         }     });// example result: // [{//       SALESORDERID: "0500000236",//       TotalNet: "273.9",//       items: {//           NETAMOUNT: "87"//       }// }]</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="$order"><span class="type-signature"></span>$order<span class="signature">(criterion_i:)</span><span class="type-signature"> &rarr; {<a href="sap.hana.xs.libs.dbutils.xsds.Query.html">sap.hana.xs.libs.dbutils.xsds.Query</a>}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Returns a new query which is equivalent to the called query, but with an additional ordering specification. The order is specified using a number of criteria passed to the operator as arguments.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>criterion_i:</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">An object {$by: <expr> [, $desc: true|false] [, $nullsLast: true|false]}, where $byspecifies an expression (following the syntax of $where) or is a column number. If $desc is set to true the order of thereturned result set is in descending order, otherwise it is in ascending order. If $nullsLast is set to true, null valuesare at the end of the result set, if it is false they are at the beginning. If $nullsLast is not set, the default of SQL istaken (depending on ascending/descending order).</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds_queries.xsjslib, line 1836
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    a new query which performs the aggregation
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type"><a href="sap.hana.xs.libs.dbutils.xsds.Query.html">sap.hana.xs.libs.dbutils.xsds.Query</a></span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>qSelectedOrders = soHeader.$query().$limit(2).$project({     SALESORDERID: true,     NETAMOUNT: "TotalNet",     items: {         NETAMOUNT: true     } }).$order({     $by: soHeader.NETAMOUNT,     $desc: true }, {     $by: soHeader.items.NETAMOUNT }).$execute();</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="$project"><span class="type-signature"></span>$project<span class="signature">(pathSpec)</span><span class="type-signature"> &rarr; {<a href="sap.hana.xs.libs.dbutils.xsds.Query.html">sap.hana.xs.libs.dbutils.xsds.Query</a>}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Returns a new query which is equivalent to the called query, but which contains only those column valuesreachable through the specified path specification. The projection ignores (i.e. overrides) the projection in the original query.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>pathSpec</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">a JavaScript object which follows in its structure the expectedresult object structure. A navigation a.b.c following associations a and b and referring to a field c is represented by a JavaScriptobject {a: {b: {c: true}}}. The value true can also be any string expression, which results in an alias in the result set. It is also possible tomerge several path expressions into one path specification, such as{a: {b1: {c1: true}, b2: {c2: true}}} corresponding to the pathexpressions a.b1.c1 and a.b2.c2.</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds_queries.xsjslib, line 1675
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    a new query with the projection specification added to the query
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type"><a href="sap.hana.xs.libs.dbutils.xsds.Query.html">sap.hana.xs.libs.dbutils.xsds.Query</a></span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>var orderAndItemTitles = SOHeader.$query().$project({             SALESORDERID: true,             NETAMOUNT: "TotalNet",             items: {                 NETAMOUNT: true             }         }).$execute();   // example result:   //   [{   "SALESORDERID": "0500000236",   //        "TotalNet": 273.9,   //        "items": {   //             "NETAMOUNT": 29.9   //         }   //    }]</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="$sql"><span class="type-signature"></span>$sql<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        returns the SQL string represented by the query object.
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds_queries.xsjslib, line 1921
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    the query string represented by the query object
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">string</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="$where"><span class="type-signature"></span>$where<span class="signature">(cond)</span><span class="type-signature"> &rarr; {<a href="sap.hana.xs.libs.dbutils.xsds.Query.html">sap.hana.xs.libs.dbutils.xsds.Query</a>}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Returns a new query which is equivalent to the called query, but includes a selection condition cond specified using an expression API.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>cond</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">A Boolean expression specified as follows: An expression is either <ul><li>a column reference constructed using e.f where e is an entity and f is a field of e as defined in the entity definition. </li><li>a column reference following an association path using e.assoc1,assoc2....f.</li><li>a function application to an expression e, for instance e.$plus(5). All functions which can be applied are specified in the {@linkn sap.hana.xs.libs.dbutils.xsds.Expr}</li><li>a Javascript literal</li></ul>A Boolean expression is either<ul><li>e.$eq(e0), if e and e0 are expressions (representing the SQL equality operator), similar for the operators $gt, $lt, $ge, $le, $ne representing the SQL operators</li><li>e.$and(e0) if e and e0 are Boolean expressions (representing the SQL AND operator)</li><li>e.$or(e0) if e and e0 are Boolean expressions (representing the SQL OR operator)</li><li>e.$null (representing the SQL IS NULL operator)</li><li>e.$infixOp(sqlop, e0) if e and e0 are expressions and sqlop is a SQL infix operator. <li>e.$prefixOp(sqlOp, e0,...,en) if e, e0,...,en are expressions and sqlop is a SQL prefix operator</li></li></ul>For a full overview on all possible operators constructing a boolean expression, see <a href="sap.hana.xs.libs.dbutils.xsds.Expr.html">sap.hana.xs.libs.dbutils.xsds.Expr</a>Note, that due to JavaScript pecularities, the association or property names "name", "prototype", "length", "caller" need to be escaped by a $ sign. So in order to refer to an entity property "name" in E, you need to write E.$name</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds_queries.xsjslib, line 1744
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    a new query with the selection specification added to the query
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type"><a href="sap.hana.xs.libs.dbutils.xsds.Query.html">sap.hana.xs.libs.dbutils.xsds.Query</a></span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>var qSelectedOrders = soHeader.$query().$project({     SALESORDERID: true,     NETAMOUNT: "TotalNet",     items: {         NETAMOUNT: true     } }).$where(soHeader.items.NETAMOUNT.$div(soHeader.NETAMOUNT).$gt(0.5))// example result://   [{//           SALESORDERID: "0500001005",//           TotalNet: "273.9",//           items: {//               NETAMOUNT: "780"//       }]</code></pre>
+
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+</article>
+
+</section>  
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="sap.hana.xs.libs.dbutils.xsds.Entity.html">Entity</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.Expr.html">Expr</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.Query.html">Query</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.Rename.html">Rename</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.Transaction.html">Transaction</a></li></ul><h3>Namespaces</h3><ul><li><a href="sap.hana.xs.libs.dbutils.procedures.html"><span class="oblique">sap.hana.xs.libs.dbutils.</span>procedures</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.html"><span class="oblique">sap.hana.xs.libs.dbutils.</span>xsds</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    <a href="Copyright-SAP.html">Copyright</a>
+    &
+    <a href="Disclaimer-SAP.html">Disclaimer</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

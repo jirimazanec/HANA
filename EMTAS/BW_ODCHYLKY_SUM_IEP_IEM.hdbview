@@ -1,0 +1,35 @@
+schema="OTEBW_EMTAS";
+
+query = "select 	to_date(DELIVERYDAY) as DELIVERYDAY ,
+					EXTERNALVERSION,
+					PERIOD,
+			 		'MWH' as UNIT , 	 
+					sum(VOLUME_SIEP) as VOLUME_SIEP,
+					sum(VOLUME_SIEM) as VOLUME_SIEM
+			from
+			(
+			select o1.DELIVERYDAY,
+							o1.EXTERNALVERSION,
+							o1.PERIOD,
+							o1.PARTIC,
+							o1.volume as VOLUME_SIEP,
+							0 as VOLUME_SIEM
+					   from \"OTEBW_EMTAS\".\"BW_ODCHYLKY_PLATBY\" as o1
+					   where	o1.CONCEPTABRV =  'IEP'
+					
+			union all
+			select o2.DELIVERYDAY,
+							o2.EXTERNALVERSION,
+							o2.PERIOD,
+							o2.PARTIC,
+							0 as VOLUME_SIEP,
+							o2.volume as VOLUME_SIEM
+					   from \"OTEBW_EMTAS\".\"BW_ODCHYLKY_PLATBY\" as o2
+					   where	o2.CONCEPTABRV =  'IEM'
+			)
+			group by DELIVERYDAY,
+					EXTERNALVERSION,
+					PERIOD
+";
+
+depends_on_table=["OTEBW_EMTAS::BW_ODCHYLKY_PLATBY"];

@@ -1,0 +1,32 @@
+schema="OTEBW_EMTAS";
+
+query = "select to_date(dev.DELIVERYDAY) as DELIVERYDAY,
+				dev.VERSION,
+				dev.EXTERNALVERSION,
+				dev.CALCULATIONID,
+				dev.CURRENCYID,
+				dev.PERIOD,
+				dev.PARTIC,
+				dev.SYSIMBALANCE,
+				to_char(cast(dev.SETTLPRICEIMBMETHOD as int)) as SETTLPRICEIMBMETHOD,
+				dev.SETTLPRICEIMB,
+				to_char(cast(anti_dev.SETTLPRICEANTIIMBMETHOD as int)) as SETTLPRICEANTIIMBMETHOD,
+				anti_dev.SETTLPRICEANTIIMB,
+	 			T.CALMONTH as CALMONTH,
+	 			T.YEAR as CALYEAR,
+	 			T.CALWEEK as CALWEEK,
+	 			T.CALQUARTER as CALQUARTER, 
+				'MWH' as UNIT		
+		   from BW_CENA_ODCHYLKY as dev
+		        left outer join BW_CENA_PROTIODCHYLKY as anti_dev on 
+		        	dev.DELIVERYDAY = anti_dev.DELIVERYDAY and
+		        	dev.VERSION = anti_dev.VERSION and
+		        	dev.PERIOD = anti_dev.PERIOD
+		        inner join _SYS_BI.TC_DAY_CALENDAR as T on 
+                    T.DATE_SQL = dev.DELIVERYDAY            		      
+";
+
+depends_on_table=["OTEBW_EMTAS::BW_CENA_ODCHYLKY"];
+depends_on_table=["OTEBW_EMTAS::BW_CENA_PROTIODCHYLKY"];
+
+

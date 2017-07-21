@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Makes changes to a tenant database."/>
+<meta name="description" content="Makes changes to a tenant database."/>
+<meta name="keywords" content="ALTER DATABASE"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=4528750944078571"/>
+<title>ALTER DATABASE Statement (Tenant Database Management)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioee36e3441ae24a7883ab353631ecd4d6";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioee36e3441ae24a7883ab353631ecd4d6">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">ALTER DATABASE Statement (Tenant Database Management)</h1>
+
+	
+	
+	<div class="body refbody"><p class="shortdesc">Makes changes to a tenant database.</p>
+
+		<div class="section"><div class="section_title">Syntax</div><div type="Syntax">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER DATABASE <var class="keyword varname">&lt;database_name&gt;</var> 
+ (ADD '<var class="keyword varname">&lt;servicetype&gt;</var>' [AT [LOCATION] '<var class="keyword varname">&lt;hostname&gt;</var>[:<var class="keyword varname">&lt;port_number&gt;</var>]' ]) 
+ | ( REMOVE '<var class="keyword varname">&lt;servicetype&gt;</var>' AT [LOCATION] '<var class="keyword varname">&lt;hostname&gt;</var>:<var class="keyword varname">&lt;port_number&gt;</var>' ) 
+ | OS USER '<var class="keyword varname">&lt;username&gt;</var>' OS GROUP '<var class="keyword varname">&lt;groupname&gt;</var>'
+ | FINALIZE REPLICA [DROP SOURCE DATABASE]
+ | CANCEL REPLICA
+ | SYSTEM USER PASSWORD <var class="keyword varname">&lt;password&gt;</var></pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+			
+			<dl class="dl parml">
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;database_name&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies the name of the database to which the change is applied.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;database_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;servicetype&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies the service type to add. See the <cite class="cite">SAP HANA Administration Guide</cite> for
+							more details.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;servicetype&gt;</var> ::= 'indexserver' | 'xsengine' | 'scriptserver' | 'dpserver'</pre></div>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;hostname&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies the host name where the database is located.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;port_number&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies the port number for the host name where the database is
+							located.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;username&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Changes the user name.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;username&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;groupname&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Changes the OS user and OS group.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;groupname&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+						<p class="p">The database must be offline to change the user and group. The user and group must already
+							exist already. If you specify <samp class="ph codeph">OS USER '' OS GROUP ''</samp>,
+							it is interpreted as <samp class="ph codeph">OS USER 'sidadm' OS GROUP
+							'sapsys'</samp>.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis">FINALIZE REPLICA</dt>
+
+					<dd class="dd pd">
+						<p class="p">Stops a replication and finalizes the copy of the database. Use this syntax when the
+							replication status is ACTIVE.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis">DROP SOURCE DATABASE</dt>
+
+					<dd class="dd pd">
+						<p class="p">Drops the original tenant database in the source system.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis">CANCEL REPLICA</dt>
+
+					<dd class="dd pd">
+						<p class="p">Cleans up the system. Use this syntax when you cannot create a new replica because the
+							replication status of the source database is REPLICATING even though the
+							target database has been dropped. You must execute this statement from
+							the source database (the one that is being replicated).</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis">SYSTEM USER PASSWORD <var class="keyword varname">&lt;password&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies a new system user password for the tenant database.</p>
+
+					</dd>
+
+				
+			</dl>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">The use of this statement requires the DATABASE ADMIN privilege.</p>
+
+			<p class="p">Resetting of the system user password is an audited action on both systemdb and on
+				the tenant. Also, the tenant database must be shutdown before resetting the system
+				user password.</p>
+
+			<p class="p">This feature is used with restrictions and/or is extended by the following SAP HANA
+				options:</p>
+
+			<ul class="ul" id="loioee36e3441ae24a7883ab353631ecd4d6__ul_tg2_ntr_xt">
+				<li class="li">Accelerator for SAP ASE</li>
+
+				<li class="li">Dynamic Tiering</li>
+
+				<li class="li">Remote Data Sync</li>
+
+				<li class="li">Smart Data Streaming</li>
+
+			</ul>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Examples</div><div type="Examples">
+			
+			<p class="p">Add the service scriptserver to the database my_database at hostA, port 30303.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER DATABASE my_database ADD 'scriptserver' AT LOCATION 'hostA:30303';</pre></div>
+
+			<p class="p">The following example changes the system user password on fictitious database
+					<kbd class="ph userinput">my_database</kbd> to <kbd class="ph userinput">fhu37656</kbd>:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER DATABASE my_database SYSTEM USER PASSWORD fhu37656;</pre></div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="ALTER DATABASE Statement (Tenant Database Management)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

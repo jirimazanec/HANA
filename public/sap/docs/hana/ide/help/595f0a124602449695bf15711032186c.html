@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=360769732961602"/>
+<title>OData Associations</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio595f0a124602449695bf15711032186c";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio595f0a124602449695bf15711032186c">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">OData Associations</h1>
+
+	<div class="body conbody">
+		<p class="p">You can define associations between entities to express relationships between entities.
+			With associations it is possible to reflect foreign key constraints on database tables,
+			hierarchies and other relations between database objects. OSDL supports simple
+			associations, where the information about the relationship is stored in one of the
+			participating entities, and complex associations, where the relationship information is
+			stored in a separate association table. </p>
+
+		<p class="p">Associations themselves are freestanding. On top of them you can specify which of the
+			entities participating in the relationship can navigate over the association to the
+			other entity by creating <samp class="ph codeph">NavigationPropertys</samp>. </p>
+
+		<p class="p">For the examples used to illustrate OData associations, we use the tables
+				<samp class="ph codeph">customer</samp> and <samp class="ph codeph">order</samp>: </p>
+
+		<div class="p">Table definition:
+			<samp class="ph codeph">sample.odata:customer.hdbtable</samp><div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">COLUMN TABLE "sample.odata::customer" (
+	"ID" INTEGER NOT NULL,
+	"OrderID" INTEGER,
+	PRIMARY KEY ("ID")
+);  </pre></div>
+</div>
+
+		<div class="p">Table definition:
+			<samp class="ph codeph">sample.odata:order.hdbtable</samp><div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">COLUMN TABLE "sample.odata::order" (
+	"ID" INTEGER NOT NULL,
+	"CustomerID" INTEGER,
+	PRIMARY KEY ("ID")
+);  </pre></div>
+</div>
+
+		<p class="p">There is one relationship <samp class="ph codeph">order.CustomerID</samp> to
+			<samp class="ph codeph">customer.ID</samp>.</p>
+
+		<div class="section" id="loio595f0a124602449695bf15711032186c__section_N10055_N1000E_N10001"><div class="section_title">Simple Associations</div><div type="Simple Associations"><p class="p">The definition of
+				an association requires you to specify a name, which references two exposed entities
+				and whose columns keep the relationship information. To distinguish the ends of the
+				association, you must use the keywords <samp class="ph codeph">principal</samp> and
+					<samp class="ph codeph">dependent</samp>. In addition, it is necessary to denote the
+				multiplicity for each end of the association. </p>
+<div class="p">Service definition:
+					<samp class="ph codeph">sample.odata:assocsimple.xsodata</samp><div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">service {
+	"sample.odata::customer" as "Customers"; 
+	"sample.odata::order" as "Orders";
+    association "Customer_Orders" with referential constraint principal "Customers"("ID") multiplicity "1" dependent "Orders"("CustomerID") multiplicity "*"; 
+}  </pre></div>
+</div>
+<p class="p">The
+				association in the example above with the name <samp class="ph codeph">Customer_Orders</samp>
+				defines a relationship between the table <samp class="ph codeph">customer</samp>, identified by
+				its <samp class="ph codeph">EntitySet</samp> name <samp class="ph codeph">Customers</samp>, on the
+					<samp class="ph codeph">principal</samp> end, and the table <samp class="ph codeph">order</samp>, identified
+				by its entity set name <samp class="ph codeph">Orders</samp>, on the <samp class="ph codeph">dependent</samp>
+				end. Involved columns of both tables are denoted in braces ({}) after the name of
+				the corresponding entity set. The <samp class="ph codeph">multiplicity</samp> keyword on each end
+				of the association specifies their cardinality - in this example, one-to-many.
+				</p>
+<p class="p">The <samp class="ph codeph">with referential constraint</samp> syntax ensures that the
+				referential constraint check is enforced at design time, for example, when you
+				activate the service definition in the <span class="ph pname">SAP HANA</span> repository. The
+				referential constraint information appears in the metadata document.</p>
+<div class="note note"><span class="notetitle">Note</span> 
+				<p class="p">SAP strongly recommends that you use the <samp class="ph codeph">with referential
+						constraint</samp> syntax.</p>
+
+			</div>
+<p class="p">The number of columns involved in the relationship must be equal for both ends
+				of the association, and their order in the list is important. The order specifies
+				which column in one table is compared to which column in the other table. In this
+				simple example, the column <samp class="ph codeph">customer.ID</samp> is compared to
+					<samp class="ph codeph">order.CustomerID</samp> in the generated table join. </p>
+<p class="p">As a
+				result of the generation of the service definition above, an
+					<samp class="ph codeph">AssociationSet</samp> named <samp class="ph codeph">Customer_Orders</samp> and an
+					<samp class="ph codeph">Association</samp> with name <samp class="ph codeph">Customer_OrdersType</samp> are
+				generated: </p>
+<p class="p">
+				<samp class="ph codeph">http://&lt;myHANAServer&gt;:&lt;port&gt;/odata/services/&lt;myService&gt;.xsodata/$metadata</samp>
+			</p>
+<img class="image" id="loio595f0a124602449695bf15711032186c__image_g2s_fvm_5h" src="loioef46e6229d3341d094ccb5801569ad28_LowRes.png" alt="XS_examples_assoc_simple" title="XS_examples_assoc_simple"/><div class="p">The second association is similar
+				to the first one and is shown in the following
+				listing:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> association "Customer_Recruit" with referential constraint principal "Customers"("ID") multiplicity "1" dependent "Customers"("RecruitID") multiplicity "*";  </pre></div>
+
+			</div>
+</div></div>
+
+		<div class="section" id="loio595f0a124602449695bf15711032186c__section_N100CC_N1000E_N10001"><div class="section_title">Complex Associations</div><div type="Complex Associations"><p class="p">For the following
+				example of a complex association, an additional table named
+					<span class="ph filepath">knows</span> is introduced that contains a relationship between
+				customers. </p>
+<p class="p">Table definition:
+				<samp class="ph codeph">sample.odata:knows.hdbtable</samp></p>
+<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">COLUMN TABLE "sample.odata::knows" (
+	"KnowingCustomerID" INTEGER NOT NULL,
+	"KnowCustomerID" INTEGER NOT NULL,
+	PRIMARY KEY ("KnowingCustomerID","KnowCustomerID")
+);  </pre></div>
+<p class="p">Relationships
+				that are stored in association tables such as <samp class="ph codeph">knows</samp> can be
+				similarly defined as simple associations. Use the keyword <samp class="ph codeph">over</samp> to
+				specify the additional table and any required columns. </p>
+<p class="p">Service definition:
+					<samp class="ph codeph">sample.odata:assoccomplex.xsodata</samp></p>
+<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">service {
+	"sample.odata::customer" as "Customers"; 
+	"sample.odata::order" as "Orders";
+    association "Customer_Orders" 
+        principal "Customers"("ID") multiplicity "*" 
+        dependent "Customers"("ID") multiplicity "*"
+        over "sample.odata::knows" principal ("KnowingCustomerID") dependent ("KnownCustomerID"); 
+}  </pre></div>
+<p class="p">With
+				the keywords <samp class="ph codeph">principal</samp> and <samp class="ph codeph">dependent</samp> after
+					<samp class="ph codeph">over</samp> you can specify which columns from the association table
+				are joined with the <samp class="ph codeph">principal</samp> respectively dependent columns of the
+				related entities. The number of columns must be equal in pairs, and their order in
+				the list is important. </p>
+<p class="p">The generated <samp class="ph codeph">Association</samp> in the
+				metadata document is similar to the one created for a simple association except that
+				the <samp class="ph codeph">ReferentialConstraint</samp> is missing:
+					</p>
+<p class="p"><samp class="ph codeph">http://&lt;myHANAServer&gt;:&lt;port&gt;/odata/services/&lt;myService&gt;.xsodata/$metadata</samp></p>
+<img class="image" id="loio595f0a124602449695bf15711032186c__image_b4m_2vh_vh" src="loioe8521cd298274f1c9c0d95a896e529d3_LowRes.png" alt="XS_examples_assoc_complex" title="XS_examples_assoc_complex"/></div></div>
+
+		<div class="section" id="loio595f0a124602449695bf15711032186c__section_N10120_N1000E_N10001"><div class="section_title">Navigation Properties</div><div type="Navigation Properties"><p class="p">By only defining
+				an association, it is not possible to navigate from one entity to another.
+				Associations need to be bound to entities by a <samp class="ph codeph">NavigationProperty</samp>.
+				You can create them by using the keyword <samp class="ph codeph">navigates</samp>: </p>
+<p class="p">Service
+				definition: <samp class="ph codeph">sample.odata:assocnav.xsodata</samp>
+			</p>
+<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">service { 
+	"sample.odata::customer" as "Customers" navigates ("Customer_Orders" as "HisOrders"); 
+	"sample.odata::order" as "Orders";
+    association "Customer_Orders" principal "Customers"("ID") multiplicity "1" dependent "Orders"("CustomerID") multiplicity "*"; 
+}  </pre></div>
+<p class="p">The
+				example above says that it is possible to navigate from <samp class="ph codeph">Customers</samp>
+				over the association <samp class="ph codeph">Customer_Order</samp> via the
+					<samp class="ph codeph">NavigationProperty</samp> named "<samp class="ph codeph">HisOrders</samp>".
+				</p>
+<p class="p">The right association end is determined automatically by the entity set name.
+				But if both ends are bound to the same entity, it is necessary to specify the
+				starting end for the navigation. This is done by specifying either <samp class="ph codeph">from
+					principal</samp> or <samp class="ph codeph">from dependent</samp> which refer to the
+					<samp class="ph codeph">principal</samp> and <samp class="ph codeph">dependent</samp> ends in the
+				association. </p>
+<p class="p">Service definition:
+					<samp class="ph codeph">sample.odata:assocnavself.xsodata</samp>
+			</p>
+<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">service { 
+	"sample.odata::customer" as "Customers" 
+		navigates ("Customer_Orders" as "HisOrders","Customer_Recruit" as "Recruit" from principal); 
+	"sample.odata::order" as "Orders";
+    association "Customer_Orders" principal "Customers"("ID") multiplicity "1" dependent "Orders"("CustomerID") multiplicity "*";
+		association "Customer_Recruit" principal "Customers"("ID") multiplicity "1" dependent "Customers"("RecruitID") multiplicity "*"; 
+}  </pre></div>
+<p class="p">In
+				both cases a <samp class="ph codeph">NavigationProperty</samp> is added to the
+					<samp class="ph codeph">EntityType</samp>. </p>
+<p class="p">
+				<samp class="ph codeph">http://&lt;myHANAServer&gt;:&lt;port&gt;/odata/services/&lt;myService&gt;.xsodata/$metadata</samp>
+			</p>
+<img class="image" id="loio595f0a124602449695bf15711032186c__image_gtn_pwh_vh" src="loio7bbf03b2881942038e4966a63efa5c67_LowRes.png" alt="XS_examples_assoc_nav" title="XS_examples_assoc_nav"/></div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="OData Associations";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

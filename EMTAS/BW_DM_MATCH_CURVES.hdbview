@@ -1,0 +1,27 @@
+schema="OTEBW_EMTAS";
+
+query = "select T.DATE_SQL as DELIVERYDAY,
+				to_integer(PERIOD) as PERIOD,
+				BLOCK,
+				case when locate(BLOCK,'.')>0 then SUBSTR_BEFORE(BLOCK,'.') else BLOCK end as PARTICID,
+				ENERGYSELL,
+				PRICESELL,
+				ENERGYBUY,
+				PRICEBUY,
+				MATCHENERGYSELL,
+				MATCHPRICESELL,
+				MATCHENERGYBUY,
+				MATCHPRICEBUY,
+				AUCTION,
+				T.CALMONTH as CALMONTH,
+				T.YEAR as CALYEAR,
+				T.CALWEEK as CALWEEK,
+				T.CALQUARTER as CALQUARTER,
+				'MWH' as UNIT,
+				'EUR' as CURRENCY,
+				\"$rowid$\" as ROW_ID,
+				case when BLOCK='.' then '1' else '0' end as SORT				
+from BW_DM_MATCH_CURVES,
+_SYS_BI.TC_DAY_CALENDAR as T
+where T.DATE_SQL = DELIVERYDAY";
+

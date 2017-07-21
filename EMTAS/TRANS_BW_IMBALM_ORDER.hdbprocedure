@@ -1,0 +1,14 @@
+PROCEDURE "OTEBW_EMTAS"."EMTAS::TRANS_BW_IMBALM_ORDER" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA OTEBW_EMTAS
+AS
+BEGIN
+   -- BW_IMBALM_ORDER
+   t_BW_IMBALM_ORDER = select * from REMOTE_BW_IMBALM_ORDER where SYSTEMTS > (select max(SYSTEMTS) from BW_IMBALM_ORDER);
+   -- vymaz zmenenych    
+   delete from BW_IMBALM_ORDER where (OrderId, RevisionId) in (select OrderId, RevisionId from :t_BW_IMBALM_ORDER);
+   -- vlozeni - nove + menene
+   insert into BW_IMBALM_ORDER select * from :t_BW_IMBALM_ORDER;
+      
+END;

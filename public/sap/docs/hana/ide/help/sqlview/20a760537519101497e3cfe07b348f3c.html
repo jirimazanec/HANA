@@ -1,0 +1,965 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="There are some limitations to take into consideration when administering an SAP HANA database."/>
+<meta name="description" content="There are some limitations to take into consideration when administering an SAP HANA database."/>
+<meta name="keywords" content="Restrictions for the database"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=007582083944408069"/>
+<title>System Limitations</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20a760537519101497e3cfe07b348f3c";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20a760537519101497e3cfe07b348f3c">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">System Limitations</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">There are some limitations to take into consideration when administering an SAP HANA
+         database.</p>
+
+      <div class="section">
+         <p class="p">Aside from the table below, most system limits can also be viewed by querying the
+            M_SYSTEM_LIMITS system view (<samp class="ph codeph">SELECT * FROM M_SYSTEM_LIMITS;</samp>). However,
+            your values might differ depending on the hardware and software configuration your
+            system uses.</p>
+
+         <div class="p">
+            
+<div class="table-wrapper tablenoborder"><table summary="" class="table" frame="border" border="1" rules="all">
+                  <tbody class="tbody">
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">
+                              <strong class="ph b">Database Limitations</strong>
+                           </p>
+
+                        </td>
+
+                        <td class="entry" valign="top"> </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p"/>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Database size limit </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">Row Store: 1945 GB</p>
+
+                           <p class="p">Column Store: Dependent on size of physical memory</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_SIZE_OF_ROW_STORE</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of locks </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">Unlimited for record locks,</p>
+
+                           <p class="p"> 16384 for table locks </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p"/>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of sessions </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">65536 </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_NUMBER_OF_SESSIONS</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of tables in row store</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">1800000</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p"/>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of columns in a column table</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">64000
+                           </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_NUMBER_OF_COLUMNS_IN_COLUMN_TABLE</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">
+                              <strong class="ph b">Schema Limitations</strong>
+                           </p>
+
+                        </td>
+
+                        <td class="entry" valign="top"> </td>
+
+                        <td class="entry" valign="top"> </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of schemas per SAP HANA instance</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">Maximum value of BIGINT data type</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p"/>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of tables in a schema</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">131072</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_NUMBER_OF_TABLES_IN_SCHEMA</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Identifier length </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">127 characters </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_LENGTH_OF_IDENTIFIER</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Length of an alias name </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">128 characters </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_LENGTH_OF_ALIAS_NAME</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Table name length </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">Same as Identifier length</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_LENGTH_OF_IDENTIFIER</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Column name length </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">Same as Identifier length</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_LENGTH_OF_IDENTIFIER</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Length of a string literal </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">8 Megabytes </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_LENGTH_OF_STRING_LITERAL</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of hex characters in a binary literal </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">8192 Bytes </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_LENGTH_OF_BINARY_LITERAL</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top"> </td>
+
+                        <td class="entry" valign="top"> </td>
+
+                        <td class="entry" valign="top"> </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">
+                              <strong class="ph b">Tables and View Limitations</strong>
+                           </p>
+
+                        </td>
+
+                        <td class="entry" valign="top"> </td>
+
+                        <td class="entry" valign="top"> </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of columns in a table </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">1000 </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_NUMBER_OF_COLUMNS_IN_TABLE</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of columns in a column store table </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">64000</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p"/>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of columns in a view </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">64000 </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_NUMBER_OF_COLUMNS_IN_VIEW</p>
+
+                        </td>
+
+                     </tr>
+
+                     
+                     
+                     
+                     
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of rows in each table </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">Limited by storage size RS: 1945
+                              GB/sizeof(row),</p>
+
+                           <p class="p">CS: 2^31 * number of partitions </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p"/>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Length of a row </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">Limited by RS storage size (1945 GB per index server)
+                              </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p"/>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Size of a non-partitioned table </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">Limited by RS storage size (1945 GB per index server)
+                              </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p"/>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of partitions in a CS table</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">16000</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_NUMBER_OF_PARTITIONS_IN_CSTABLE</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of triggers per table per DML statement</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">1024</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_NUMBER_OF_TRIGGERS_PER_TABLE_PER_DML</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of records per (non-partitioned) table</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">2^31 (i.e. 2147384648, or 2 billion)</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p"/>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top"> </td>
+
+                        <td class="entry" valign="top"> </td>
+
+                        <td class="entry" valign="top"> </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">
+                              <strong class="ph b">Indexes and Constraints</strong>
+                           </p>
+
+                        </td>
+
+                        <td class="entry" valign="top"> </td>
+
+                        <td class="entry" valign="top"> </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of indexes for each table </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">1023 </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_NUMBER_OF_INDEXES_IN_TABLE</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of primary key columns in each table </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">16</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_NUMBER_OF_COLUMNS_IN_PRIMARY_KEY</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of primary key columns in each column store table</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">1000</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_NUMBER_OF_COLUMNS_IN_PRIMARY_KEY_IN_COLUMN_TABLE</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of columns in an index </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">16 </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_NUMBER_OF_COLUMNS_IN_INDEX</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of columns in a UNIQUE constraint </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">16 </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_NUMBER_OF_COLUMNS_IN_UNIQUE_CONSTRAINT</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Size of sum of primary key, index, UNIQUE</p>
+
+                           <p class="p">constraint </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">16384 Bytes </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_SIZE_OF_KEY_IN_INDEX</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of indexes in row store</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">256000</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p"/>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top"> </td>
+
+                        <td class="entry" valign="top"> </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p"/>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">
+                              <strong class="ph b">SQL</strong>
+                           </p>
+
+                        </td>
+
+                        <td class="entry" valign="top"> </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p"/>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Length of an SQL statement </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">2GB </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p"/>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Depth of SQL view nesting </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">128 </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_DEPTH_OF_SQL_VIEW_NESTING</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Depth of SQL parse tree </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">255 </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_DEPTH_OF_SQL_PARSE_TREE</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of joined tables in an SQL statement or view </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">255 </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_NUMBER_OF_JOIN_TABLES_IN_STATEMENT</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of columns in an ORDER BY</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">65535 </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_NUMBER_OF_COLUMNS_IN_ORDER_BY</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of columns in a GROUP BY</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">65535 </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_NUMBER_OF_COLUMNS_IN_GROUP_BY</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of elements in IN predicates </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">65535 </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_NUMBER_OF_COLUMNS_IN_IN_PREDICATE</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of elements in SELECT clause </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">65535 </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_NUMBER_OF_OUTPUT_COLUMNS_IN_STATEMENT</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Number of tables in a statement</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">4095</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">MAXIMUM_NUMBER_OF_TABLES_IN_STATEMENT</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top"> </td>
+
+                        <td class="entry" valign="top"> </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p"/>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">
+                              <strong class="ph b">SQLScript</strong>
+                           </p>
+
+                        </td>
+
+                        <td class="entry" valign="top"> </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p"/>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Size of all stored procedures </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">Equal to the row storage size limit
+                              </p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p"/>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top">
+                           <p class="p">Size of a procedure definition</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p">Equal to that of a SQL statement</p>
+
+                        </td>
+
+                        <td class="entry" valign="top">
+                           <p class="p"/>
+
+                        </td>
+
+                     </tr>
+
+                  </tbody>
+
+               </table>
+</div>
+
+         </div>
+
+      </div>
+
+   </div>
+
+   <div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?20c6023775191014be17d92c9bd287eb.html" target="_top" title="System limits information.">M_SYSTEM_LIMITS System View</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="System Limitations";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

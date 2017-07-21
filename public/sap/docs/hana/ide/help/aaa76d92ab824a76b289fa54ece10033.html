@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="The xsjob file enables you to run a service (for example, an XS JavaScript or an SQLScript) at a scheduled interval."/>
+<meta name="description" content="The xsjob file enables you to run a service (for example, an XS JavaScript or an SQLScript) at a scheduled interval."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=7096188802268955"/>
+<title>Tutorial: Schedule an XS Job</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioaaa76d92ab824a76b289fa54ece10033";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioaaa76d92ab824a76b289fa54ece10033">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Tutorial: Schedule an XS Job</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">The <span class="ph filepath">xsjob</span> file enables you to run a service (for example, an XS
+		JavaScript or an SQLScript) at a scheduled interval. </p>
+
+		<div class="section prereq p"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Prerequisites</h2></div>
+			<div class="p">
+				<ul class="ul" id="loioaaa76d92ab824a76b289fa54ece10033__ul_qmr_rd5_zl">
+					<li class="li">You have the privileges granted by the <span class="ph pname">SAP HANA</span> user role
+							<span class="ph uicontrol">sap.hana.xs.admin.roles::JobAdministrator</span>.</li>
+
+					<li class="li">You have the privileges granted by the <span class="ph pname">SAP HANA</span> user role
+							<span class="ph uicontrol">sap.hana.xs.admin.roles::HTTPDestAdministrator</span>.</li>
+
+				</ul>
+
+			</div>
+
+			<div class="note note"><span class="notetitle">Note</span> This tutorial combines tasks that are typically performed by two different roles:
+				the application developer and the database administrator. The developer would not
+				normally require the privileges granted to the
+					<span class="ph uicontrol">JobAdministrator</span> user role, the
+					<span class="ph uicontrol">sap.hana.xs.admin.roles::HTTPDestAdministrator</span> user role,
+				or the <span class="ph pname">SAP HANA</span> administrator.</div>
+
+		</div>
+
+		<div class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<p class="p">In this tutorial, you learn how to schedule a job that triggers an XS JavaScript
+				application that reads the latest value of a share price from a public financial
+				service available on the Internet. You also see how to check that the XS job is
+				working and running on schedule.</p>
+
+			<p class="p">To do this, you create a root application package called <span class="ph filepath">yahoo</span>,
+				which contains the following artifacts:</p>
+
+			<div class="p">
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">/yahoo/
+       .xsapp               // application descriptor
+       .xsaccess            // application access file
+       yahoo.xsjob          // job schedule definition
+       yahoo.xshttpdest     // HTTP destination details
+       yahoo.xsjs           // Script to run on schedule</pre></div>
+
+			</div>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps" id="loioaaa76d92ab824a76b289fa54ece10033__steps_rbk_trz_rp"><li class="li step stepexpand">
+				<span class="ph cmd">Open the <span class="ph pname">SAP HANA</span> Web-based Development Workbench Editor
+					tool.</span>
+				<div class="itemgroup info">The Editor tool is available on the <span class="ph pname">SAP HANA</span> XS Web server at the following
+					URL:
+							<span class="ph filepath">http://<var class="keyword varname">&lt;WebServerHost&gt;</var>:80<var class="keyword varname">&lt;SAPHANAinstance&gt;</var>/sap/hana/ide/editor</span></div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Create the application package structure that will contain the artifacts required to
+					complete this tutorial:</span>
+				<ol type="a" class="ol substeps" id="loioaaa76d92ab824a76b289fa54ece10033__substeps_ifj_2l1_sp">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">From the context menu of the <span class="ph uicontrol">Content</span> folder,
+							choose <span class="ph uicontrol">Create Application</span>.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Choose the <span class="ph uicontrol">Empty application (with XSAccess and  XSApp)</span>
+							template.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Enter the package name <kbd class="ph userinput">yahoo</kbd> and
+								choose<span class="ph uicontrol"> Create</span>.</span>
+						<div class="itemgroup stepresult">The system creates the <span class="ph filepath">index.html</span>,
+								<span class="ph filepath">.xsaccess</span>, and <span class="ph filepath">.xsapp</span>
+							files.</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Delete the <span class="ph filepath">index.html</span> file.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Write the XS JavaScript code that you want to run at the interval defined in an
+					XS job schedule:</span>
+				<ol type="a" class="ol substeps" id="loioaaa76d92ab824a76b289fa54ece10033__substeps_nld_f41_sp">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">From the context menu of the <span class="ph filepath">yahoo</span> folder, choose <span class="ph menucascade"><img src="images/navstart.gif" alt="Start of the navigation path" title="Start of the navigation path"/> <span class="ph uicontrol">New</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">File</span> <img src="images/navend.gif" alt="End of the navigation path" title="End of the navigation path"/></span>, enter the file name <kbd class="ph userinput">yahoo.xsjs</kbd>
+							(remember to use the <span class="ph filepath">.xsjs</span> extension), and choose
+								<span class="ph uicontrol">Create</span>.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd"> Add the application code.</span>
+						<div class="itemgroup info">The XS JavaScript code shown in the following example connects to a
+							public financial service on the Internet to check and download the
+							latest prices for stocks and shares:</div>
+						<div class="itemgroup stepxmp">
+							<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">function readStock(input) {
+    var stock = input.stock;
+    
+    var dest = $.net.http.readDestination("yahoo", "yahoo");
+    var client = new $.net.http.Client();
+    var req = new $.web.WebRequest($.net.http.GET, "/d/quotes.csv?f=a&amp;s=" + stock);
+
+    client.request(req, dest);
+    var response = client.getResponse();
+
+    var stockValue;
+    if(response.body)
+        stockValue = parseInt(response.body.asString(), 10);
+
+    var sql = "INSERT INTO stock_values VALUES (NOW(), ?)";
+    var conn = $.db.getConnection();
+    var pstmt = conn.prepareStatement(sql);
+    pstmt.setDouble(1, stockValue);
+    pstmt.execute();
+    conn.commit();
+    conn.close();
+}
+</pre></div>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Save the file.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Create an HTTP destination file to provide access to the external service (via
+					an outbound connection).</span>
+				<div class="itemgroup info">Since the financial service used in this tutorial is hosted on an external
+					server, you need to create an HTTP destination file, which provides details of
+					the server, for example, the server name and the port to use for HTTP
+					access.</div>
+				<ol type="a" class="ol substeps" id="loioaaa76d92ab824a76b289fa54ece10033__substeps_khv_hq1_sp">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Create a file as described in step 3a but enter the file name
+								<span class="ph filepath">yahoo.xshttpdest</span> (remember to use the
+								<span class="ph filepath">.xshttpdest</span> extension).</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Add the following content:</span>
+						<div class="itemgroup stepxmp">
+							<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">host = "download.finance.yahoo.com"; 
+port = 80; </pre></div>
+
+							<div class="note note"><span class="notetitle">Note</span> 
+								<p class="p">If you use a proxy, set <samp class="ph codeph">proxyType</samp> to <kbd class="ph userinput">http</kbd> and
+									enter your proxy host and port:</p>
+
+								<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">
+proxyType = http;
+proxyHost = "&lt;your_proxy_host&gt;";
+proxyPort = &lt;your_proxy_port&gt;;
+</pre></div>
+
+							</div>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Save the file.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Create the XS job file to define the details of the schedule at which the job
+					runs.</span>
+				<div class="itemgroup info">The XS job file uses a <span class="ph filepath">cron</span>-like syntax to define the
+					schedule at which the XS JavaScript must run. This job file triggers the script
+						<span class="ph filepath">yahoo.xsjs</span> on the 59th second of every minute and
+					provides the name <span class="q">“SAP.DE”</span> as the parameter for the stock value to check. </div>
+				<ol type="a" class="ol substeps" id="loioaaa76d92ab824a76b289fa54ece10033__substeps_sfs_3s1_sp">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Create a file as described in step 3a but enter the file name
+								<span class="ph filepath">yahoo.xsjob</span> (remember to use the
+								<span class="ph filepath">.xsjob</span> extension).</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Add the following code:</span>
+						<div class="itemgroup stepxmp">
+							<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{
+    "description": "Read stock value",
+    "action": "yahoo:yahoo.xsjs::readStock",
+    "schedules": [
+       {
+          "description": "Read current stock value",
+          "xscron": "* * * * * * 59",
+          "parameter": {
+             "stock": "SAP.DE"
+             }
+       }
+    ]
+}
+</pre></div>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Save the file.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Maintain the XS job's runtime configuration.</span>
+				<div class="itemgroup info">You maintain the details of an XS job's runtime configuration in the XS Job Dashboard in
+					the SAP HANA XS Administration Tool.</div>
+				<ol type="a" class="ol substeps" id="loioaaa76d92ab824a76b289fa54ece10033__substeps_ewv_1t1_sp">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Select the <span class="ph filepath">yahoo.xsjob</span> file and choose <img class="image" id="loioaaa76d92ab824a76b289fa54ece10033__image_ern_dct_hq" src="loio15de55dfaf29400a9b2d57730e086e4a_LowRes.png"/> (<span class="ph uicontrol">Maintain
+								Details</span>) in the toolbar. </span>
+						<div class="itemgroup stepresult">The XS Job Dashboard opens.</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Switch to the <span class="ph uicontrol">Configuration</span> tab to maintain the details of the XS
+							job:</span>
+						<div class="itemgroup info">
+							<ul class="ul" id="loioaaa76d92ab824a76b289fa54ece10033__ul_q1w_1t1_sp">
+								<li class="li"><span class="ph uicontrol">User</span><p class="p">The user account in which the job
+										runs, for example, <kbd class="ph userinput">SYSTEM</kbd>.</p>
+</li>
+
+								<li class="li"><span class="ph uicontrol">Password</span><p class="p">The password required for
+										user, whose account is used to run the job.</p>
+</li>
+
+								<li class="li"><span class="ph uicontrol">Locale</span><p class="p">The language encoding required
+										for the locale in which the job runs, for example,
+											<kbd class="ph userinput">en_US</kbd>.</p>
+</li>
+
+								<li class="li"><span class="ph uicontrol">Start/Stop time</span><p class="p">An optional value to
+										set the period of time during which the job runs. Enter the
+										values using the syntax used for the <span class="ph pname">SAP HANA</span>
+										data type <samp class="ph codeph">LocalDate</samp> and
+											<samp class="ph codeph">LocalTime</samp>, for example,
+											<kbd class="ph userinput">2014-11-05 00:30:00</kbd> (thirty
+										minutes past midnight on the 5th of November 2014).</p>
+</li>
+
+								<li class="li"><span class="ph uicontrol">Active</span><p class="p">Enable or disable the job
+										schedule</p>
+</li>
+
+							</ul>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Save the job.</span>
+						<div class="itemgroup stepresult">The changes to the job schedule are activated.</div>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Enable the job-scheduling feature in <span class="ph pname">SAP HANA</span> XS.</span>
+				<div class="itemgroup info">This step requires the permissions granted to the <span class="ph pname">SAP HANA</span> administrator.
+						<div class="note note"><span class="notetitle">Note</span> It is not possible to enable the scheduler for more than one host in a
+						distributed <span class="ph pname">SAP HANA</span> XS landscape.</div>
+In the XS Job
+					Dashboard set the <span class="ph uicontrol">Scheduler Enabled</span> toggle button to
+						<kbd class="ph userinput">YES</kbd>.</div>
+				<div class="itemgroup stepresult">Toggling the setting for the <span class="ph uicontrol">Scheduler Enabled</span> button changes
+					the value set for the <span class="ph pname">SAP HANA</span> configuration variable <span class="ph menucascade"><img src="images/navstart.gif" alt="Start of the navigation path" title="Start of the navigation path"/> <span class="ph uicontrol">xsengine.ini</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">scheduler</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">enabled</span> <img src="images/navend.gif" alt="End of the navigation path" title="End of the navigation path"/></span>, which is set in the <span class="ph uicontrol">Configuration</span> tab of
+					the <span class="ph pname">SAP HANA</span> studio's <span class="ph uicontrol">Administration</span>
+					perspective. If the <span class="ph uicontrol">scheduler</span> section is not already
+					there, create it and add the new parameter <kbd class="ph userinput">enabled</kbd>, and
+					assign the value <kbd class="ph userinput">true</kbd>.</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Check the job logs to ensure the XS job is active and running according to the
+					defined schedule.</span>
+				<div class="itemgroup info">You can view the <span class="ph filepath">xsjob</span> logs in the <span class="ph uicontrol">XS Job
+						Dashboard</span> tab of the <span class="ph uicontrol">SAP HANA XS Administration
+						Tool</span>. If there is a problem and the XS job fails or does not run
+					at the expected time, the information about why it failed and when is displayed
+					in the <span class="ph filepath">xsjob</span> logs.</div>
+			</li>
+</ol>
+
+	</div>
+
+<div class="related-links"> 
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Tutorial: Schedule an XS Job";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

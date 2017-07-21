@@ -1,0 +1,1338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Returns all descendants of a set of start nodes in a hierarchy."/>
+<meta name="description" content="Returns all descendants of a set of start nodes in a hierarchy."/>
+<meta name="keywords" content="HIERARCHY_DESCENDANTS"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=09283463746635678"/>
+<title>HIERARCHY_DESCENDANTS Function (Hierarchy)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio589208b0582245a782a1f3667a5b80c1";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio589208b0582245a782a1f3667a5b80c1">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">HIERARCHY_DESCENDANTS Function (Hierarchy)</h1>
+
+	
+	
+	<div class="body refbody"><p class="shortdesc">Returns all descendants of a set of start nodes in a hierarchy.</p>
+
+		<div class="section"><div class="section_title">Syntax</div><div type="Syntax">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">HIERARCHY_DESCENDANTS (
+ <a class="xref nopagenumber" href="default.html?589208b0582245a782a1f3667a5b80c1.html#loio589208b0582245a782a1f3667a5b80c1__hierarchy_navfunc_source_spec" target="_top"><var class="keyword varname">&lt;hierarchy_navfunc_source_spec&gt;</var></a> 
+ [ <a class="xref nopagenumber" href="default.html?589208b0582245a782a1f3667a5b80c1.html#loio589208b0582245a782a1f3667a5b80c1__hierarchy_navfunc_start_spec" target="_top"><var class="keyword varname">&lt;hierarchy_navfunc_start_spec&gt;</var></a> ]
+ [ <a class="xref nopagenumber" href="default.html?589208b0582245a782a1f3667a5b80c1.html#loio589208b0582245a782a1f3667a5b80c1__hierarchy_navfunc_distance_spec" target="_top"><var class="keyword varname">&lt;hierarchy_navfunc_distance_spec&gt;</var></a>] 
+)</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+			
+			<dl class="dl parml">
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;hierarchy_navfunc_source_spec&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p" id="loio589208b0582245a782a1f3667a5b80c1__hierarchy_navfunc_source_spec">Specifies a hierarchy for the function to operate
+							on.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;hierarchy_navfunc_source_spec&gt;</var> ::= SOURCE { 
+ <var class="keyword varname">&lt;table_expression&gt;</var> 
+ | <var class="keyword varname">&lt;hierarchy_generator_function&gt;</var> 
+}</pre></div>
+
+						<dl class="dl">
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;table_expression&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Specifies a view or materialized result set, such as a table,
+										containing all of the attributes computed by the HIERARCHY
+										generator function.</p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;hierarchy_generator_function&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Specifies the unfiltered results of a hierarchy generator function (for example, the
+										HIERARCHY function) containing all of the attributes
+										computed by the HIERARCHY generator function.</p>
+
+								</dd>
+
+							
+						</dl>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;hierarchy_navfunc_start_spec&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p" id="loio589208b0582245a782a1f3667a5b80c1__hierarchy_navfunc_start_spec">Specifies the start nodes as an additional input table or
+							as a filter condition on the source. If
+								<var class="keyword varname">&lt;hierarchy_navfunc_start_spec&gt;</var> is not specified,
+							then the navigation starts from all nodes in the hierarchy.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;hierarchy_navfunc_start_spec&gt;</var> ::= START { 
+ <var class="keyword varname">&lt;table_valued_expression&gt;</var> 
+ | WHERE <var class="keyword varname">&lt;condition&gt;</var> 
+}</pre></div>
+
+						<dl class="dl">
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;table_valued_expression&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Specifies a table-valued expression containing, at minimum, a column called START_RANK
+										that has a data type that can be cast to BIGINT.</p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;condition&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Specifies a starting condition that is semantically equivalent to <samp class="ph codeph">START (SELECT
+											hierarchy_rank AS start_rank FROM
+												<var class="keyword varname">&lt;source&gt;</var> WHERE
+												<var class="keyword varname">&lt;condition&gt;</var>)</samp>.</p>
+
+								</dd>
+
+							
+						</dl>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;hierarchy_navfunc_distance_spec&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p" id="loio589208b0582245a782a1f3667a5b80c1__hierarchy_navfunc_distance_spec">Specifies a distance window filtering the function
+							result.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;hierarchy_navfunc_distance_spec&gt;</var> ::= DISTANCE { 
+ <var class="keyword varname">&lt;expression&gt;</var>
+ | FROM <var class="keyword varname">&lt;expression&gt;</var> 
+ | TO <var class="keyword varname">&lt;expression&gt;</var> 
+ | FROM <var class="keyword varname">&lt;expression&gt;</var> TO <var class="keyword varname">&lt;expression&gt;</var> 
+}</pre></div>
+
+						<p class="p">If FROM <var class="keyword varname">&lt;expression&gt;</var> is not specified, then 0 is the default distance. If
+							TO <var class="keyword varname">&lt;expression&gt;</var> is not specified, then the maximum
+							depth of the hierarchy source is the default. For the descendants
+							navigation, all valid distances are greater than or equal to 0.</p>
+
+					</dd>
+
+				
+			</dl>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">The HIERARCHY_DESCENDANTS function extracts partial trees from a given hierarchy starting from
+				and including a known set of start nodes. The result can be prefiltered by a
+				distance window. </p>
+
+			<p class="p">Column-wise, the function projects all attributes of the source hierarchy plus a lateral
+				projection of the corresponding START record. Additionally, a HIERARCHY_DISTANCE
+				column is generated.</p>
+
+			<p class="p">Due to its flexibility, the HIERARCHY_DESCENDANTS function provides an efficient means for
+				several typical types of hierarchy navigation such as the determination of children,
+				subordinate leaves, subtrees, or connectivity tests.</p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Example</div><div type="Example">
+			
+			<p class="p">Execute the following statements to create a materialized hierarchy result set that
+				the subsequent examples are based on. However, typically such a hierarchy is
+				generated by a hierarchy generator function.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE h_demo ( 
+   hierarchy_rank BIGINT,
+   hierarchy_tree_size BIGINT,
+   hierarchy_parent_rank BIGINT,
+   hierarchy_level INTEGER,
+   hierarchy_is_cycle TINYINT,
+   hierarchy_is_orphan TINYINT,
+   parent_id VARCHAR(2),
+   node_id VARCHAR(2),
+   type VARCHAR(1),
+   amount INTEGER );
+				
+INSERT INTO h_demo VALUES ( 1, 10, 0, 1, 0, 0, null, 'A1', 'a', 50 );
+INSERT INTO h_demo VALUES ( 2, 3, 1, 2, 0, 0, 'A1', 'B1', 'b', 120 );
+INSERT INTO h_demo VALUES ( 3, 1, 2, 3, 0, 0, 'B1', 'C1', 'a', 40 );
+INSERT INTO h_demo VALUES ( 4, 1, 2, 3, 0, 0, 'B1', 'C2', 'b', 60 );
+INSERT INTO h_demo VALUES ( 5, 6, 1, 2, 0, 0, 'A1', 'B2', 'c', 90 );
+INSERT INTO h_demo VALUES ( 6, 3, 5, 3, 0, 0, 'B2', 'C3', 'c', 75 );
+INSERT INTO h_demo VALUES ( 7, 1, 6, 4, 0, 0, 'C3', 'D1', 'b', 10 );
+INSERT INTO h_demo VALUES ( 8, 1, 6, 4, 0, 0, 'C3', 'D2', 'c', 25 );
+INSERT INTO h_demo VALUES ( 9, 2, 5, 3, 0, 0, 'B2', 'C4', 'a', 30 );
+INSERT INTO h_demo VALUES ( 10, 1, 9, 4, 0, 0, 'C4', 'D3', 'a', 30 );
+INSERT INTO h_demo VALUES ( 11, 4, 0, 1, 0, 0, null, 'A2', 'b', 80 );
+INSERT INTO h_demo VALUES ( 12, 1, 11, 2, 0, 0, 'A2', 'B3', 'c', 45 );
+INSERT INTO h_demo VALUES ( 13, 2, 11, 2, 0, 0, 'A2', 'C4', 'a', 30 );
+INSERT INTO h_demo VALUES ( 14, 1, 13, 3, 0, 0, 'C4', 'D3', 'a', 30 );</pre></div>
+
+			<p class="p">The following example determines the set of descendants of node A1 with a depth
+				horizon of 2 (that is, down to level C):</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT node_id, HIERARCHY_DISTANCE 
+ FROM HIERARCHY_DESCENDANTS ( SOURCE h_demo
+                              START WHERE node_id = 'A1'
+                              DISTANCE FROM 1 TO 2 )
+ ORDER BY hierarchy_rank;</pre></div>
+
+			<div class="table-wrapper"><table summary="" id="loio589208b0582245a782a1f3667a5b80c1__simpletable_xkh_glt_lx" border="1" class="simpletable"><tr class="sthead">
+					<th valign="bottom" align="left" id="d23913473e267" class="stentry">
+						<p class="p">NODE_ID</p>
+
+					</th>
+
+					<th valign="bottom" align="left" id="d23913473e273" class="stentry">
+						<p class="p">HIERARCHY_DISTANCE</p>
+
+					</th>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e267" class="stentry">
+						<p class="p">B1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e273" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e267" class="stentry">
+						<p class="p">C1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e273" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e267" class="stentry">
+						<p class="p">C2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e273" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e267" class="stentry">
+						<p class="p">B2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e273" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e267" class="stentry">
+						<p class="p">C3</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e273" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e267" class="stentry">
+						<p class="p">C4</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e273" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+				</tr>
+</table></div>
+
+			<p class="p">The following example calculates the partial hierarchies with all attributes starting
+				from B1 and B2:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT hierarchy_rank AS "rank",  
+    hierarchy_tree_size AS "tree_size",
+    hierarchy_parent_rank AS "parent_rank",
+    hierarchy_level AS "level",
+    hierarchy_is_cycle AS "is_cycle",
+    hierarchy_is_orphan AS "is_orphan",
+    parent_id,
+    node_id,
+    type, 
+    amount AS "amt",
+    hierarchy_distance AS "distance",
+    start_rank AS "s_rank",
+    start_id AS "s_id"
+ FROM HIERARCHY_DESCENDANTS ( SOURCE h_demo
+       START ( SELECT hierarchy_rank AS start_rank, node_id AS start_id 
+        FROM h_demo WHERE node_id IN ('B1', 'B2') ) )
+ ORDER BY hierarchy_rank;</pre></div>
+
+			<div class="table-wrapper"><table summary="" id="loio589208b0582245a782a1f3667a5b80c1__simpletable_rnk_dmt_lx" border="1" class="simpletable"><tr class="sthead">
+					<th valign="bottom" align="left" id="d23913473e382" class="stentry">
+						<p class="p">Rank</p>
+
+					</th>
+
+					<th valign="bottom" align="left" id="d23913473e388" class="stentry">
+						<p class="p">Tree_Size</p>
+
+					</th>
+
+					<th valign="bottom" align="left" id="d23913473e394" class="stentry">
+						<p class="p">Parent_Rank</p>
+
+					</th>
+
+					<th valign="bottom" align="left" id="d23913473e400" class="stentry">
+						<p class="p">Level</p>
+
+					</th>
+
+					<th valign="bottom" align="left" id="d23913473e406" class="stentry">
+						<p class="p">Cycle</p>
+
+					</th>
+
+					<th valign="bottom" align="left" id="d23913473e413" class="stentry">
+						<p class="p">Is_Orphan</p>
+
+					</th>
+
+					<th valign="bottom" align="left" id="d23913473e419" class="stentry">
+						<p class="p">Parent</p>
+
+					</th>
+
+					<th valign="bottom" align="left" id="d23913473e425" class="stentry">
+						<p class="p">Node</p>
+
+					</th>
+
+					<th valign="bottom" align="left" id="d23913473e431" class="stentry">
+						<p class="p">TYPE</p>
+
+					</th>
+
+					<th valign="bottom" align="left" id="d23913473e437" class="stentry">
+						<p class="p">Amt</p>
+
+					</th>
+
+					<th valign="bottom" align="left" id="d23913473e443" class="stentry">
+						<p class="p">Distance</p>
+
+					</th>
+
+					<th valign="bottom" align="left" id="d23913473e450" class="stentry">
+						<p class="p">S_rank</p>
+
+					</th>
+
+					<th valign="bottom" align="left" id="d23913473e456" class="stentry">
+						<p class="p">S_id</p>
+
+					</th>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e382" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e388" class="stentry">
+						<p class="p">3</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e394" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e400" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e406" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e413" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e419" class="stentry">
+						<p class="p">A1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e425" class="stentry">
+						<p class="p">B1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e431" class="stentry">
+						<p class="p">b</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e437" class="stentry">
+						<p class="p">120</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e443" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e450" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e456" class="stentry">
+						<p class="p">B1</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e382" class="stentry">
+						<p class="p">3</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e388" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e394" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e400" class="stentry">
+						<p class="p">3</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e406" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e413" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e419" class="stentry">
+						<p class="p">B2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e425" class="stentry">
+						<p class="p">C1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e431" class="stentry">
+						<p class="p">a</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e437" class="stentry">
+						<p class="p">40</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e443" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e450" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e456" class="stentry">
+						<p class="p">B1</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e382" class="stentry">
+						<p class="p">4</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e388" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e394" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e400" class="stentry">
+						<p class="p">3</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e406" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e413" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e419" class="stentry">
+						<p class="p">B1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e425" class="stentry">
+						<p class="p">C2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e431" class="stentry">
+						<p class="p">b</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e437" class="stentry">
+						<p class="p">60</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e443" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e450" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e456" class="stentry">
+						<p class="p">B1</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e382" class="stentry">
+						<p class="p">5</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e388" class="stentry">
+						<p class="p">6</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e394" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e400" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e406" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e413" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e419" class="stentry">
+						<p class="p">A1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e425" class="stentry">
+						<p class="p">B2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e431" class="stentry">
+						<p class="p">c</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e437" class="stentry">
+						<p class="p">90</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e443" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e450" class="stentry">
+						<p class="p">5</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e456" class="stentry">
+						<p class="p">B2</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e382" class="stentry">
+						<p class="p">6</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e388" class="stentry">
+						<p class="p">3</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e394" class="stentry">
+						<p class="p">5</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e400" class="stentry">
+						<p class="p">3</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e406" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e413" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e419" class="stentry">
+						<p class="p">B2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e425" class="stentry">
+						<p class="p">C3</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e431" class="stentry">
+						<p class="p">c</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e437" class="stentry">
+						<p class="p">75</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e443" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e450" class="stentry">
+						<p class="p">5</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e456" class="stentry">
+						<p class="p">B2</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e382" class="stentry">
+						<p class="p">7</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e388" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e394" class="stentry">
+						<p class="p">6</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e400" class="stentry">
+						<p class="p">4</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e406" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e413" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e419" class="stentry">
+						<p class="p">C3</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e425" class="stentry">
+						<p class="p">D1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e431" class="stentry">
+						<p class="p">b</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e437" class="stentry">
+						<p class="p">10</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e443" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e450" class="stentry">
+						<p class="p">5</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e456" class="stentry">
+						<p class="p">B2</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e382" class="stentry">
+						<p class="p">8</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e388" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e394" class="stentry">
+						<p class="p">6</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e400" class="stentry">
+						<p class="p">4</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e406" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e413" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e419" class="stentry">
+						<p class="p">C3</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e425" class="stentry">
+						<p class="p">D2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e431" class="stentry">
+						<p class="p">c</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e437" class="stentry">
+						<p class="p">25</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e443" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e450" class="stentry">
+						<p class="p">5</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e456" class="stentry">
+						<p class="p">B2</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e382" class="stentry">
+						<p class="p">9</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e388" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e394" class="stentry">
+						<p class="p">5</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e400" class="stentry">
+						<p class="p">3</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e406" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e413" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e419" class="stentry">
+						<p class="p">B2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e425" class="stentry">
+						<p class="p">C4</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e431" class="stentry">
+						<p class="p">a</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e437" class="stentry">
+						<p class="p">30</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e443" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e450" class="stentry">
+						<p class="p">5</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e456" class="stentry">
+						<p class="p">B2</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e382" class="stentry">
+						<p class="p">10</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e388" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e394" class="stentry">
+						<p class="p">9</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e400" class="stentry">
+						<p class="p">4</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e406" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e413" class="stentry">
+						<p class="p">0</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e419" class="stentry">
+						<p class="p">C4</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e425" class="stentry">
+						<p class="p">D3</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e431" class="stentry">
+						<p class="p">a</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e437" class="stentry">
+						<p class="p">30</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e443" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e450" class="stentry">
+						<p class="p">5</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e456" class="stentry">
+						<p class="p">B2</p>
+
+					</td>
+
+				</tr>
+</table></div>
+
+			<p class="p">The following example counts the leaves below all nodes of type 'b':</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT
+    start_id AS node_id,
+    COUNT(*) AS num_leaves
+ FROM ( SELECT start_id 
+   FROM HIERARCHY_DESCENDANTS ( SOURCE h_demo
+      START ( SELECT hierarchy_rank AS start_rank, node_id AS start_id FROM h_demo WHERE type ='b' ) )
+   WHERE hierarchy_tree_size = 1 )
+ GROUP BY start_id;</pre></div>
+
+			<div class="table-wrapper"><table summary="" id="loio589208b0582245a782a1f3667a5b80c1__simpletable_old_fnt_lx" border="1" class="simpletable"><tr class="sthead">
+					<th valign="bottom" align="left" id="d23913473e1223" class="stentry">
+						<p class="p">NODE_ID</p>
+
+					</th>
+
+					<th valign="bottom" align="left" id="d23913473e1229" class="stentry">
+						<p class="p">NUM_LEAVES</p>
+
+					</th>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e1223" class="stentry">
+						<p class="p">B1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1229" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e1223" class="stentry">
+						<p class="p">C2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1229" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e1223" class="stentry">
+						<p class="p">D1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1229" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e1223" class="stentry">
+						<p class="p">A2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1229" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+				</tr>
+</table></div>
+
+			
+			<p class="p">The following examples determine all descendants of all nodes with or without a START
+				clause:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE h_mini_src ( parent_id VARCHAR(2), node_id VARCHAR(2) PRIMARY KEY );
+INSERT INTO h_mini_src VALUES ( null, 'A1' );
+INSERT INTO h_mini_src VALUES ( 'A1', 'B1' );
+INSERT INTO h_mini_src VALUES ( 'A1', 'B2' );
+INSERT INTO h_mini_src VALUES ( 'B1', 'C1' );
+INSERT INTO h_mini_src VALUES ( 'B1', 'C2' );			
+				
+SELECT start_rank, hierarchy_rank, node_id				
+ FROM HIERARCHY_DESCENDANTS( SOURCE HIERARCHY ( SOURCE h_mini_src )
+   START WHERE 1 = 1 )
+ ORDER BY start_rank, hierarchy_rank;
+
+SELECT start_rank, hierarchy_rank, node_id				
+ FROM HIERARCHY_DESCENDANTS( SOURCE HIERARCHY ( SOURCE h_mini_src ))
+ ORDER BY start_rank, hierarchy_rank;</pre></div>
+
+			<div class="table-wrapper"><table summary="" id="loio589208b0582245a782a1f3667a5b80c1__simpletable_xlq_14t_lx" border="1" class="simpletable"><tr class="sthead">
+					<th valign="bottom" align="left" id="d23913473e1309" class="stentry">
+						<p class="p">START_RANK</p>
+
+					</th>
+
+					<th valign="bottom" align="left" id="d23913473e1315" class="stentry">
+						<p class="p">HIERARCHY_LEVEL</p>
+
+					</th>
+
+					<th valign="bottom" align="left" id="d23913473e1321" class="stentry">
+						<p class="p">NODE_ID</p>
+
+					</th>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e1309" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1315" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1321" class="stentry">
+						<p class="p">A1</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e1309" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1315" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1321" class="stentry">
+						<p class="p">B1</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e1309" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1315" class="stentry">
+						<p class="p">3</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1321" class="stentry">
+						<p class="p">C1</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e1309" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1315" class="stentry">
+						<p class="p">4</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1321" class="stentry">
+						<p class="p">C2</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e1309" class="stentry">
+						<p class="p">1</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1315" class="stentry">
+						<p class="p">5</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1321" class="stentry">
+						<p class="p">B2</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e1309" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1315" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1321" class="stentry">
+						<p class="p">B1</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e1309" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1315" class="stentry">
+						<p class="p">3</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1321" class="stentry">
+						<p class="p">C1</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e1309" class="stentry">
+						<p class="p">2</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1315" class="stentry">
+						<p class="p">4</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1321" class="stentry">
+						<p class="p">C2</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e1309" class="stentry">
+						<p class="p">3</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1315" class="stentry">
+						<p class="p">3</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1321" class="stentry">
+						<p class="p">C1</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e1309" class="stentry">
+						<p class="p">4</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1315" class="stentry">
+						<p class="p">4</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1321" class="stentry">
+						<p class="p">C2</p>
+
+					</td>
+
+				</tr>
+<tr class="strow">
+					<td valign="top" headers="d23913473e1309" class="stentry">
+						<p class="p">5</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1315" class="stentry">
+						<p class="p">5</p>
+
+					</td>
+
+					<td valign="top" headers="d23913473e1321" class="stentry">
+						<p class="p">B2</p>
+
+					</td>
+
+				</tr>
+</table></div>
+
+			
+		</div></div>
+
+	</div>
+
+<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?2969da89b87f4abd85fd0b5f9f5bc395.html" target="_top" title="Hierarchy functions allow you to work with hierarchical data such as tables with rows arranged in a tree or directed graph.">Hierarchy Functions</a></div>
+<div><a class="link" href="default.html?fc59f81a5c494f399cc2ff70b9c3b4c9.html" target="_top" title="Generates a hierarchy based on recursive parent-child source data.">HIERARCHY Function (Hierarchy)</a></div>
+<div><a class="link" href="default.html?7ad8abad31894b5a9685ce914bcd7f87.html" target="_top" title="Returns all ancestors of a set of start nodes in a hierarchy.">HIERARCHY_ANCESTORS Function (Hierarchy)</a></div>
+<div><a class="link" href="default.html?ffc0d810a9274f789e6667cf0f73c388.html" target="_top" title="Returns all siblings of a set of start nodes, including the start nodes, in a hierarchy.">HIERARCHY_SIBLINGS Function (Hierarchy)</a></div>
+<div><a class="link" href="default.html?9de4bc37efd0450baf15f95f9d3dccd1.html" target="_top" title="Creates a hierarchy based on source data that has a leveled format.">HIERARCHY_LEVELED Function (Hierarchy)</a></div>
+<div><a class="link" href="default.html?ca27410e31ff4b7c9e36e38d5ee93153.html" target="_top" title="Concatenates multi-column tuple-like node identifiers into single scalar values.">HIERARCHY_COMPOSITE_ID Function (Hierarchy)</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="HIERARCHY_DESCENDANTS Function (Hierarchy)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

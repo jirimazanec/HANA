@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="The XSUnit test framework is a custom version of the JavaScript test framework Jasmine adapted to suit SAP HANA XS."/>
+<meta name="description" content="The XSUnit test framework is a custom version of the JavaScript test framework Jasmine adapted to suit SAP HANA XS."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=06750012042569042"/>
+<title>XSUnit's Enhanced Jasmine Syntax</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio433a6f176b6d490f9e39b7ac07dfec8c";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio433a6f176b6d490f9e39b7ac07dfec8c">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">XSUnit's Enhanced Jasmine Syntax</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">The XSUnit test framework is a custom version of the JavaScript test framework Jasmine
+		adapted to suit <span class="ph pname">SAP HANA</span> XS.</p>
+
+		<p class="p">A test specifications begin with a call to the global Jasmine function
+				<samp class="ph codeph">describe</samp>. The <samp class="ph codeph">describe</samp> functions define suites
+			that enable you to group together related test suites and specifications. Test-suite
+			specifications are defined by calling the global Jasmine function <samp class="ph codeph">it</samp>.
+			You can group several test suites in one test file. The following code snippet shows one
+			test suite (introduced by the function <span class="q">“<samp class="ph codeph">describe</samp>”</span>) and two test
+			specifications, indicated by the function <span class="q">“<samp class="ph codeph">it</samp>”</span>.</p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">/*jslint undef:true */
+describe('testSuiteDescription', function() {
+
+    beforeOnce(function() {
+        // beforeOnce function is called once for all specifications
+    });
+
+    beforeEach(function() {
+        // beforeEach function is called before each specification
+    });
+
+    it('testSpecDescription', function() {
+        expect(1).toEqual(1);
+    });
+
+    it('anotherTestSpecDescription', function() {
+        expect(1).not.toEqual(0);
+    });
+});</pre></div>
+
+		<p class="p">To enable a test suite to remove any duplicate setup and teardown code, Jasmine provides the
+			global functions <samp class="ph codeph">beforeEach</samp> and <samp class="ph codeph">afterEach</samp>. As the name
+			implies the <samp class="ph codeph">beforeEach</samp> function is executed <span class="ph emphasis emphasis">before</span>
+			each specification in the enclosing suite and all sub-suites; the
+				<samp class="ph codeph">afterEach</samp> function is called after each specification. Similarly,
+			the special methods <samp class="ph codeph">beforeOnce</samp> and <samp class="ph codeph">afterOnce</samp> are
+			called once per test suite.  </p>
+
+		<ul class="ul" id="loio433a6f176b6d490f9e39b7ac07dfec8c__ul_gz4_5ff_rp">
+			<li class="li"><samp class="ph codeph">beforeOnce</samp><p class="p">Executed once <span class="ph emphasis emphasis">before</span> all
+					specifications of the test suite</p>
+</li>
+
+			<li class="li"><samp class="ph codeph">afterOnce</samp><p class="p">Executed once <span class="ph emphasis emphasis">after</span> all
+					specifications of the test suite</p>
+</li>
+
+		</ul>
+
+		<div class="section"><div class="section_title">Database Connection Setup</div><div type="Database Connection Setup">
+			
+			<p class="p">The XSUnit framework provides a managed database connection called
+					<samp class="ph codeph">jasmine.dbConnection</samp>, which is globally available. You can use
+				it in the following scenarios:</p>
+
+			<ul class="ul" id="loio433a6f176b6d490f9e39b7ac07dfec8c__ul_ok3_plf_rp">
+				<li class="li">Directly (in the function <span class="q">“<samp class="ph codeph">it</samp>”</span>)</li>
+
+				<li class="li">In the functions <span class="q">“<samp class="ph codeph">beforeEach</samp>”</span> and
+					<span class="q">“<samp class="ph codeph">afterEach</samp>”</span></li>
+
+				<li class="li">In other functions defined in your test libraries</li>
+
+				<li class="li">In imported libraries (if you have moved test code to external libraries)</li>
+
+			</ul>
+
+			<p class="p">One obvious advantage of this is that you no longer have to pass the database connection as a
+				parameter or define it as a global variable. The
+					<samp class="ph codeph">jasmine.dbConnection</samp> is opened automatically and rolled back
+				(and closed). However, if you want to persist your data, you have to
+					<samp class="ph codeph">commit() jasmine.dbConnection</samp> manually.</p>
+
+			<div class="fig fignone" id="loio433a6f176b6d490f9e39b7ac07dfec8c__fig_fl3_zgf_rp"><div class="figcontainer">
+				
+				<img class="image" id="loio433a6f176b6d490f9e39b7ac07dfec8c__image_i4h_c3f_rp" src="loio04c8a48fac7649b6b1ea1fec5551fda0_HiRes.png"/>
+			<div class="figcap">Figure 1: XSUnit TestRunner Tool Flow Chart</div></div></div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="XSUnit's Enhanced Jasmine Syntax";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

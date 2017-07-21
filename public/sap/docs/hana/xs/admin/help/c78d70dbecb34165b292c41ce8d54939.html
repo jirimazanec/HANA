@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Remove an SAML Identity Provider (IDP) from the list of available identity providers."/>
+<meta name="description" content="Remove an SAML Identity Provider (IDP) from the list of available identity providers."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=17892663498047134"/>
+<title>Delete an SAML Identity Provider</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioc78d70dbecb34165b292c41ce8d54939";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioc78d70dbecb34165b292c41ce8d54939">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1"> Delete an SAML Identity Provider</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">Remove an SAML Identity Provider (IDP) from the list of available identity
+		providers.</p>
+
+		<div class="section prereq p"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Prerequisites</h2></div>
+			<p class="p">To access the <span class="ph uicontrol">SAML Identity Provider Configuration</span> tool, you require
+				the authorization scopes defined in the roles grouped together in one of the
+				following role collections:</p>
+
+			<ul class="ul" id="loioc78d70dbecb34165b292c41ce8d54939__ul_mlt_yvt_mx">
+				<li class="li">XS_AUTHORIZATION_ADMIN<p class="p">Full access: no access restrictions</p>
+</li>
+
+				<li class="li">XS_AUTHORIZATION_DISPLAY<p class="p">Read-only access <span class="ph uicontrol">SAML Identity Provider
+							Configuration</span> tool</p>
+</li>
+
+			</ul>
+
+		</div>
+
+		<div class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<p class="p">You can delete an SAML Identity Provider from the IDP list by using the <span class="ph uicontrol">SAML
+					Identity Provider Configuration</span> tool.</p>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+				<span class="ph cmd">Start the SAP HANA cockpit.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Locate the <span class="ph uicontrol">XS Advanced Administration</span> tools
+					catalog.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Start the <span class="ph uicontrol">Administration and Monitoring</span> tools.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Start the <span class="ph uicontrol">SAML Identity Provider Configuration</span>
+					tool.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Choose the SAML IDP. </span>
+				<div class="itemgroup info">
+					<p class="p">In the <span class="ph uicontrol">SAML Identity Provider List</span>, choose the SAML IDP that you want
+						to remove from the list of identity providers.</p>
+
+				</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Remove the SAML IDP.</span>
+				<div class="itemgroup info">
+					<p class="p">Choose <span class="ph uicontrol">Delete</span> to remove the SAMP IDP.</p>
+
+				</div>
+			</li>
+</ol>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?594a49cfc8504e65976deeab3f7fd735.html" target="_top" title="You can configure an SAP HANA system to act as a service provider for XS advanced applications that use Single Sign On (SSO) authentication based on Security Assertion Markup Language (SAML) certificates.">Admin Guide (HDI Plugin Reference)</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Delete an SAML Identity Provider";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

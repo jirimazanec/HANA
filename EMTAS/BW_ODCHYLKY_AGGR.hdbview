@@ -1,0 +1,83 @@
+schema="OTEBW_EMTAS";
+
+query = "select to_date(o.DELIVERYDAY) as DELIVERYDAY,
+				o.VERSION,
+				o.EXTERNALVERSION,
+				o.CALCULATIONID,
+				o.CURRENCYID,
+				o.PERIOD,
+				o.PARTIC,
+				o.VOLUME,
+				o.TOTALPRICE,
+				o.CONCEPTABRV,
+	 			T.CALMONTH as CALMONTH,
+	 			T.YEAR as CALYEAR,
+	 			T.CALWEEK as CALWEEK,
+	 			T.CALQUARTER as CALQUARTER,	 			 	 			
+	 			0 as VOLUME_AGGR,
+				'MWH' as UNIT, 
+				map(o.CONCEPTABRV, 'IEM', 'B', 'IEP', 'S') as BUYSELL			
+		   from BW_ODCHYLKY_PLATBY o,
+		   		_SYS_BI.TC_DAY_CALENDAR T
+		  where T.DATE_SQL = o.DELIVERYDAY 
+		    and not exists(select 1 from BW_ODCHYLKY_PODRIZENYCH_SZ op
+		                    where op.DELIVERYDAY = o.DELIVERYDAY
+		                      and op.partic = o.partic
+		                      and op.period = o.period
+		                      and op.version = o.version)   
+		    and VERSION in (2,3,4) 	   
+	  union all
+		 select to_date(o.DELIVERYDAY) as DELIVERYDAY,
+				o.VERSION,
+				o.EXTERNALVERSION,
+				o.CALCULATIONID,
+				o.CURRENCYID,
+				o.PERIOD,
+				o.PARTIC,
+				0 as VOLUME,
+				o.TOTALPRICE,
+				o.CONCEPTABRV,
+	 			T.CALMONTH as CALMONTH,
+	 			T.YEAR as CALYEAR,
+	 			T.CALWEEK as CALWEEK,
+	 			T.CALQUARTER as CALQUARTER,	 			 	 			
+	 			o.VOLUME as VOLUME_AGGR,
+				'MWH' as UNIT, 
+				map(o.CONCEPTABRV, 'IEM', 'B', 'IEP', 'S') as BUYSELL			
+		   from BW_ODCHYLKY_PLATBY o,
+		   		_SYS_BI.TC_DAY_CALENDAR T
+		  where T.DATE_SQL = o.DELIVERYDAY 
+		    and exists(select 1 from BW_ODCHYLKY_PODRIZENYCH_SZ op
+		                    where op.DELIVERYDAY = o.DELIVERYDAY
+		                      and op.partic = o.partic
+		                      and op.period = o.period
+		                      and op.version = o.version)   
+		    and VERSION in (2,3,4) 	   
+	  union all	  
+		 select to_date(DELIVERYDAY) as DELIVERYDAY,
+				VERSION,
+				EXTERNALVERSION,
+				CALCULATIONID,
+				CURRENCYID,
+				PERIOD,
+				PARTIC,
+				VOLUME,
+				0 as TOTALPRICE,
+				map(CONCEPTABRV, 'ISSP', 'IEP', 'ISSSP', 'IEP', 'IEM') as CONCEPTABRV,
+	 			T.CALMONTH as CALMONTH,
+	 			T.YEAR as CALYEAR,
+	 			T.CALWEEK as CALWEEK,
+	 			T.CALQUARTER as CALQUARTER, 
+				0 as VOLUME_AGGR,
+				'MWH' as UNIT,
+				map(CONCEPTABRV, 'ISSM', 'B', 'ISSP', 'S', 'ISSSM', 'B', 'ISSSP', 'S') as BUYSELL						
+		   from BW_ODCHYLKY_PODRIZENYCH_SZ,
+		   		_SYS_BI.TC_DAY_CALENDAR T
+		  where T.DATE_SQL = DELIVERYDAY     
+		    and VERSION in (2,3,4) 	      		    		      
+";
+
+depends_on_table=["OTEBW_EMTAS::BW_ODCHYLKY_PLATBY"];
+depends_on_table=["OTEBW_EMTAS::BW_ODCHYLKY_PODRIZENYCH_SZ"];
+
+

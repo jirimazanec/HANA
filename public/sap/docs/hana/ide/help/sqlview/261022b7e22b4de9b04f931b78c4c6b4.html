@@ -1,0 +1,1176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Lists service-specific load history KPIs."/>
+<meta name="description" content="Lists service-specific load history KPIs."/>
+<meta name="keywords" content="M_LOAD_HISTORY_SERVICE"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=9772818241548187"/>
+<title>M_LOAD_HISTORY_SERVICE System View</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio261022b7e22b4de9b04f931b78c4c6b4";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio261022b7e22b4de9b04f931b78c4c6b4">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">M_LOAD_HISTORY_SERVICE System View</h1>
+
+	
+	
+	<div class="body refbody"><p class="shortdesc">Lists service-specific load history KPIs.</p>
+
+		<div class="section"><div class="section_title">Structure</div><div type="Structure">
+			
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio261022b7e22b4de9b04f931b78c4c6b4__table_nws_jhk_xq" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="25%"/><col width="25%"/><col width="25%"/><col width="25%"/></colgroup>
+
+					
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" id="d20635432e56">
+								<p class="p">Column name</p>
+
+							</th>
+
+							<th class="entry" valign="top" id="d20635432e62">
+								<p class="p">Data type</p>
+
+							</th>
+
+							<th class="entry" valign="top" id="d20635432e68">
+								<p class="p">Unit</p>
+
+							</th>
+
+							<th class="entry" valign="top" id="d20635432e74">
+								<p class="p">Description</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">HOST</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">VARCHAR(64)</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The host name.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">PORT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">INTEGER</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The internal port.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">TIME</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">TIMESTAMP</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The KPI collection timestamp.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">CPU</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The CPU used by the service.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">SYSTEM_CPU</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The OS Kernel/System CPU used by the service.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">MEMORY_USED</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The memory used by the service.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">MEMORY_ALLOCATION_LIMIT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The memory allocation limit for the service.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">HANDLE_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of open handles.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">PING_TIME</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The duration of the service ping request (THREAD_METHOD=__nsWatchdog). This request
+									includes the time it takes to measure the values shown in this
+									view.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">SWAP_IN</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The bytes read from the swap by the service (column 12(majflt) in
+										/proc/<var class="keyword varname">&lt;pid&gt;</var>/stat *
+									sysconf(_SC_PAGESIZE)).</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">CONNECTION_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of open SQL connections.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">TRANSACTION_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of open SQL transactions.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">BLOCKED_TRANSACTION_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of blocked SQL transactions.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">STATEMENT_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of finished SQL statements.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">COMMIT_ID_RANGE</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The range between the newest and oldest active commit IDs.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">PENDING_SESSION_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of pending requests.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">MVCC_VERSION_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of active MVCC versions.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">RECORD_LOCK_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of acquired record locks.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">CS_READ_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of read requests (SELECT).</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">CS_WRITE_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of write requests (INSERT, UPDATE, DELETE).</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">CS_MERGE_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of merge requests.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">CS_UNLOAD_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of column unloads.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">ACTIVE_THREAD_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of active threads.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">WAITING_THREAD_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of waiting threads.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">TOTAL_THREAD_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The total number of threads.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">ACTIVE_SQL_EXECUTOR_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of active SQLExecutors.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">WAITING_SQL_EXECUTOR_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of waiting SQLExecutors.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">TOTAL_SQL_EXECUTOR_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The total number of SQLExecutors.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">DATA_WRITE_SIZE</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The bytes written to the data area.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">DATA_WRITE_TIME</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The time used for writing to the data area.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">LOG_WRITE_SIZE</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The bytes written to the log area.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">LOG_WRITE_TIME</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The time used for writing to the log area.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">DATA_READ_SIZE</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The bytes read from the data area.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">DATA_READ_TIME</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The time used for reading from the data area.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">LOG_READ_SIZE</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The bytes read from the log area.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">LOG_READ_TIME</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The time used for reading from the log area.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">DATA_BACKUP_WRITE_SIZE</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The bytes written to the data backup.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">DATA_BACKUP_WRITE_TIME</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The time used for writing to the data backup.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">LOG_BACKUP_WRITE_SIZE</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The bytes written to the log backup.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">LOG_BACKUP_WRITE_TIME</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The time used for writing to the log backup.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">MUTEX_COLLISION_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of collisions on mutexes.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">READ_WRITE_LOCK_COLLISION_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of collisions on read/write locks.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">ADMISSION_CONTROL_ADMIT_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of admission requests admitted by admission control.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">ADMISSION_CONTROL_REJECT_COUNT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of session requests rejected by admission control.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">ADMISSION_CONTROL_QUEUE_SIZE</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The number of session requests waiting in the admission control
+									queue.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d20635432e56 ">
+								<p class="p">ADMISSION_CONTROL_WAIT_TIME</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e62 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e68 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d20635432e74 ">
+								<p class="p">The total wait time of the session requests queued in the
+									admission control queue.</p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="M_LOAD_HISTORY_SERVICE System View";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

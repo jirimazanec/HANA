@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Grants the EXTENDED STORAGE ADMIN system privilege required to manage dynamic tiering and create extended storage."/>
+<meta name="description" content="Grants the EXTENDED STORAGE ADMIN system privilege required to manage dynamic tiering and create extended storage."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=549332578790482"/>
+<title>GRANT EXTENDED STORAGE ADMIN Statement [Dynamic Tiering]</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio54b714e6508245ba99a8a078f40801e5";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio54b714e6508245ba99a8a078f40801e5">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">GRANT EXTENDED STORAGE ADMIN Statement [Dynamic Tiering]</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">Grants the EXTENDED STORAGE ADMIN system privilege required to manage dynamic tiering
+		and create extended storage.</p>
+
+		<div class="section" id="loio54b714e6508245ba99a8a078f40801e5__sql_grant_1sql_grant_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+			<div class="note caution"><span class="cautiontitle">Caution</span> <span class="ph">This
+                                                  information applies only for the SAP HANA option
+                                                  cited in the title of this topic. You must have
+                                                  purchased the license for it in order to use the
+                                                  information contained in this topic.</span>
+			</div>
+
+			<div class="note note"><span class="notetitle">Note</span> 
+				<span class="ph">While
+                                SAP HANA and dynamic tiering share much of the same base SQL syntax,
+                                there are some differences in supported and nonsupported clauses and
+                                parameters. The following syntax applies only to dynamic
+                                tiering.</span></div>
+
+			
+			<div class="p">
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">GRANT EXTENDED STORAGE ADMIN TO <var class="keyword varname">&lt;grantee&gt;</var> [WITH ADMIN OPTION]</pre></div>
+
+			</div>
+
+		</div></div>
+
+		<div class="section" id="loio54b714e6508245ba99a8a078f40801e5__sql_grant_1sql_grant_syntax_elements"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+			
+			<dl class="dl parml">
+				
+					<dt class="dt pt dlterm emphasis">WITH ADMIN OPTION</dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies that the granted privileges can be granted further by the
+							specified user or by those user having the specified role. </p>
+
+					</dd>
+
+				
+			</dl>
+
+		</div></div>
+
+		<div class="section" id="loio54b714e6508245ba99a8a078f40801e5__sql_grant_1sql_grant_description"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">The EXTENDED STORAGE ADMIN system privilege is required to manage SAP HANA dynamic
+				tiering and create extended storage.</p>
+
+			<p class="p">The specified users, roles, objects, and structured privileges have to exist before
+				they can be used in the GRANT command. </p>
+
+			<p class="p"> To use the GRANT command to grant privileges to other users and roles, a user needs
+				the privilege and also the permissions required to grant that privilege.</p>
+
+			<p class="p">Users cannot grant a privilege to themselves. </p>
+
+		</div></div>
+
+		<div class="section" id="loio54b714e6508245ba99a8a078f40801e5__sql_grant_1sql_grant_system_view"><div class="section_title">System Views</div><div type="System Views">
+			
+			<p class="p"> USERS : All users, their creator, creation date and some information about their
+				current status. </p>
+
+			<p class="p"> ROLES : All roles, their creator and creation date. </p>
+
+			<p class="p"> GRANTED_ROLES : Roles that are granted to users or roles. </p>
+
+			<p class="p"> GRANTED_PRIVILEGES : Privileges that are granted to users or roles.</p>
+
+		</div></div>
+
+		<div class="section" id="loio54b714e6508245ba99a8a078f40801e5__sql_grant_1sql_grant_examples"><div class="section_title">Examples</div><div type="Examples">
+			
+			<div class="p"> You grant the EXTENDED STORAGE ADMMIN privilege to the <samp class="ph codeph">user</samp> worker.
+				You grant these privileges along with the permission for the worker user to grant
+				them further.
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">GRANT EXTENDED STORAGE ADMIN TO worker WITH ADMIN OPTION;</pre></div>
+
+			</div>
+
+		</div></div>
+
+	</div>
+
+<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?20f674e1751910148a8b990d33efbdc5.html" target="_top" title="Grants privileges and structured privileges to users and roles.">GRANT Statement (Access Control)</a></div>
+<div><a class="link" href="default.html?21026099751910148e0cdbddc75652b8.html" target="_top" title="Lists all users.">USERS System View</a></div>
+<div><a class="link" href="default.html?20cd8af175191014a538d0938ced7f6a.html" target="_top" title="Shows available roles.">ROLES System View</a></div>
+<div><a class="link" href="default.html?20a5c3b675191014b696cc4ea6ed8362.html" target="_top" title="Provides information about roles granted to users or other roles.">GRANTED_ROLES System View</a></div>
+<div><a class="link" href="default.html?20a5958e751910149536e9ab4b54dd87.html" target="_top" title="Provides information about privileges and roles granted to users.">GRANTED_PRIVILEGES System View</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="GRANT EXTENDED STORAGE ADMIN Statement [Dynamic Tiering]";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

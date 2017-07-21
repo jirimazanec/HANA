@@ -1,0 +1,14 @@
+schema="OTEBW_EMTAS";
+
+query = "select ID,
+				VERSION,
+				PERIOD,
+				SEGMENT,
+				VOLUME,
+				PRICE,
+				map(VOLINDIVISIBILITY,'Y','A','N','N') as VOLINDIVISIBILITY,
+				'EUR' as CURRENCY,
+				'MWH' as UNIT
+from BW_DM_BIDS_DETAIL";
+
+depends_on_table=["OTEBW_EMTAS::BW_DM_BIDS_HEADER"];

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Deletes backups from the backup catalog."/>
+<meta name="description" content="Deletes backups from the backup catalog."/>
+<meta name="keywords" content="BACKUP CATALOG DELETE"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=2633797798492584"/>
+<title>BACKUP CATALOG DELETE Statement (Backup and Recovery)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio22275913eb9e4a5bb539fc8df3da77f1";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio22275913eb9e4a5bb539fc8df3da77f1">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">BACKUP CATALOG DELETE Statement (Backup and Recovery)</h1>
+
+
+		
+		
+		<div class="body refbody"><p class="shortdesc">Deletes backups from the backup catalog.</p>
+
+			<div class="section" id="loio22275913eb9e4a5bb539fc8df3da77f1__sql_alter_index_1sql_alter_index_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+				
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">BACKUP CATALOG DELETE [FOR <var class="keyword varname">&lt;database_name&gt;</var>] 
+   { ALL BEFORE BACKUP_ID <var class="keyword varname">&lt;backup_id&gt;</var> [WITH FILE | WITH BACKINT | COMPLETE]
+     | BACKUP_ID <var class="keyword varname">&lt;backup_id&gt;</var> [COMPLETE] 
+   }</pre></div>
+
+			</div></div>
+
+			<div class="section" id="loio22275913eb9e4a5bb539fc8df3da77f1__sql_alter_index_1xyz_elements"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+				
+			<dl class="dl parml">
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;database_name&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies the database name for an <span class="ph pname">SAP HANA</span> multitenant database container. </p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;database_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;backup_id&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Identifies the oldest backup to be kept when used with ALL BEFORE.
+							</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis">WITH FILE</dt>
+
+					<dd class="dd pd">
+						<p class="p">Removes file-based backups from the backup catalog and from the original
+							location in the file system.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis">WITH BACKINT</dt>
+
+					<dd class="dd pd">
+						<p class="p">Deletes backups from the backup catalog and from the configured
+							third-party backup tool.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis">COMPLETE</dt>
+
+					<dd class="dd pd">
+						<p class="p">Deletes backups from the backup catalog and from the file system and the
+							third-party backup tool, depending on the backup location.</p>
+
+					</dd>
+
+				
+			</dl>
+
+			</div></div>
+
+			<div class="section" id="loio22275913eb9e4a5bb539fc8df3da77f1__sql_alter_index_1sql_alter_index_description"><div class="section_title">Description</div><div type="Description">
+				
+				<p class="p">Deletes backups from the backup catalog, and optionally deletes the physical backup from the
+				backup location.</p>
+
+			<p class="p">In multi-tenant database systems, the following requirements are needed to execute this
+				command:</p>
+
+			<ul class="ul" id="loio22275913eb9e4a5bb539fc8df3da77f1__ul_l2q_jqs_2v">
+				<li class="li">
+					<p class="p">Executed on the system database only</p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">The system database must be online</p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">If a <var class="keyword varname">&lt;database_name&gt;</var> is specified, then the specified database must be
+						online as well</p>
+
+				</li>
+
+			</ul>
+
+			<p class="p">If the selected data backup is the last and only backup, then it cannot be deleted because at
+				least one data backup must remain in the backup catalog.</p>
+
+			<p class="p">Backup catalog entries are deleted synchronously. Backups are deleted physically at the backup
+				location asynchronously, and the deletion process continues, even after a service
+				shutdown or restart.</p>
+
+			<p class="p">Only the ALL BEFORE option deletes the log backups and the log backup entries in the
+				backup catalog.</p>
+
+			</div></div>
+
+			<div class="section" id="loio22275913eb9e4a5bb539fc8df3da77f1__sql_alter_index_1sql_alter_index_examples"><div class="section_title">Example</div><div type="Example">
+				
+				<p class="p">Truncate the backup catalog and remove all backups older than the data backup specified by
+				the BACKUP_ID 13546473. Delete the affected data and log backups in the backup
+				location, regardless of whether they are located in the file system or in the
+				third-party backup tool.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">BACKUP CATALOG DELETE ALL BEFORE BACKUP_ID 13546473 COMPLETE;</pre></div>
+
+				<p class="p">Delete the data backup specified by the BACKUP_ID 13534573 in the backup catalog only. The
+				data backup itself is not affected.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">BACKUP CATALOG DELETE BACKUP_ID 13534573;</pre></div>
+
+			</div></div>
+
+		</div>
+
+	</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="BACKUP CATALOG DELETE Statement (Backup and Recovery)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

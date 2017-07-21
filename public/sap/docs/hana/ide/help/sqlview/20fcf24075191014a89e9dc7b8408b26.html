@@ -1,0 +1,1841 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Retrieves information from the database."/>
+<meta name="description" content="Retrieves information from the database."/>
+<meta name="keywords" content="SELECT"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=8151416304070522"/>
+<title>SELECT Statement (Data Manipulation)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20fcf24075191014a89e9dc7b8408b26";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20fcf24075191014a89e9dc7b8408b26">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">SELECT Statement (Data Manipulation)</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Retrieves information from the database.</p>
+
+      <div class="section" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+         
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;select_statement&gt;</var> ::= 
+ [<var class="keyword varname">&lt;with_clause&gt;</var>] <var class="keyword varname">&lt;subquery&gt;</var> [ <var class="keyword varname">&lt;for_update&gt;</var> | <var class="keyword varname">&lt;time_travel&gt;</var> ] [<var class="keyword varname">&lt;hint_clause&gt;</var>] 
+ | [<var class="keyword varname">&lt;with_clause&gt;</var>] ( <var class="keyword varname">&lt;subquery&gt;</var> ) [ <var class="keyword varname">&lt;for_update&gt;</var> | <var class="keyword varname">&lt;for_xml&gt;</var> | <var class="keyword varname">&lt;time_travel&gt;</var> ] [<var class="keyword varname">&lt;hint_clause&gt;</var>]
+ 
+<var class="keyword varname">&lt;subquery&gt;</var> ::= <var class="keyword varname">&lt;select_clause&gt;</var> <var class="keyword varname">&lt;from_clause&gt;</var> [<var class="keyword varname">&lt;where_clause&gt;</var>]
+ [<var class="keyword varname">&lt;group_by_clause&gt;</var>]
+ [<var class="keyword varname">&lt;having_clause&gt;</var>] 
+ [<var class="keyword varname">&lt;set_operator&gt;</var> <var class="keyword varname">&lt;subquery&gt;</var> [{, <var class="keyword varname">&lt;set_operator&gt;</var> <var class="keyword varname">&lt;subquery&gt;</var>}...]]
+ [<var class="keyword varname">&lt;order_by_clause&gt;</var>] 
+ [<var class="keyword varname">&lt;limit&gt;</var>] </pre></div>
+
+      </div></div>
+
+      <div class="section" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_syntax_elements"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+         
+         <dl class="dl parml">
+            
+               <dt class="dt pt dlterm emphasis"><a name="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_with_clause"><!-- --></a><var class="keyword varname">&lt;with_clause&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies an output of the subquery to be stored in a temporary result set
+                     named <var class="keyword varname">&lt;query_name&gt;</var>. </p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;with_clause&gt;</var> ::= WITH <var class="keyword varname">&lt;with_list_element&gt;</var> [{, <var class="keyword varname">&lt;with_list_element&gt;</var>}...]
+
+<var class="keyword varname">&lt;with_list_element&gt;</var> ::= <var class="keyword varname">&lt;query_name&gt;</var> [<var class="keyword varname">&lt;column_list_clause&gt;</var>] AS ( <var class="keyword varname">&lt;subquery&gt;</var> )
+
+<var class="keyword varname">&lt;query_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;column_list_clause&gt;</var> ::= ( <var class="keyword varname">&lt;column_name&gt;</var>, ... )
+
+<var class="keyword varname">&lt;column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                  <p class="p">The query name is an alias of the <var class="keyword varname">&lt;subquery&gt;</var> and it should be
+                     unique within the <var class="keyword varname">&lt;with_clause&gt;</var>. The
+                        <var class="keyword varname">&lt;with_clause&gt;</var> cannot support recursive query
+                     expressions.</p>
+
+                  <p class="p">The list of column identifiers is ordered according to the order of values in
+                     the <var class="keyword varname">&lt;subquery&gt;</var>. The column list can be omitted.</p>
+</dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><a name="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_for_update"><!-- --></a><var class="keyword varname">&lt;for_update&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Locks the selected records so that other users cannot lock or change the
+                     records until end of this transaction.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;for_update&gt;</var> ::= FOR UPDATE [OF <var class="keyword varname">&lt;update_column_name_list&gt;</var>][ <var class="keyword varname">&lt;wait_nowait&gt;</var> ]
+
+<var class="keyword varname">&lt;wait_nowait&gt;</var> ::= WAIT <var class="keyword varname">&lt;unsigned_integer&gt;</var> | NOWAIT 
+<var class="keyword varname">&lt;update_column_name_list&gt;</var>&gt; ::= ( <var class="keyword varname">&lt;column_name&gt;</var>[{, <var class="keyword varname">&lt;column_name&gt;</var>}...] )</pre></div>
+
+                  <p class="p">FOR UPDATE supports row, column, and virtual tables created from HANA remote
+                     sources. </p>
+
+                  <p class="p"><var class="keyword varname">&lt;wait_nowait&gt;</var> specifies when to return an error if a lock
+                     cannot be obtained on a record. If WAIT <var class="keyword varname">&lt;unsigned_integer&gt;</var> is
+                     specified, then the statement waits up to the specified number of seconds for
+                     each record. If the statement fails to acquire a lock after waiting, then it
+                     returns an error message indicating a timeout. If NOWAIT is specified, and the
+                     statement fails to acquire record locks, then an error is returned indicating
+                     that the resource is busy. WAIT 0 is equivalent to NOWAIT. If
+                        <var class="keyword varname">&lt;wait_nowait&gt;</var> is not specified, then the default behavior
+                     reflects the lock_wait_timeout transaction timeout setting located in
+                        <span class="ph filepath">indexserver.ini</span>.</p>
+
+                  <p class="p">If a HANA query using virtual tables cannot be entirely delegated to the remote
+                     source, the query returns the error message indicating that the FOR UPDATE
+                     feature is not supported.</p>
+
+                  <p class="p">A list of columns specifies which table or view in the FROM clause should be
+                     locked. If there is only a single table or view, then FOR UPDATE is sufficient.
+                     However, if there are two objects (such as tables, views, of subqueries), use
+                     OF.</p>
+
+                  <p class="p">A table used in a subquery cannot be locked. Also only one table/view can be
+                     currently locked. The lock is released when the corresponding transaction is
+                     finished by commit or rollback.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;for_xml&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Returns a result set as an XML document.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;for_xml&gt;</var> ::= FOR XML [ ( <var class="keyword varname">&lt;option_string_list&gt;</var> ) ] [ <var class="keyword varname">&lt;returns_clause&gt;</var> ]</pre></div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;option_string_list&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Sets options for the resulting XML. </p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;option_string_list&gt;</var> ::= <var class="keyword varname">&lt;basic_string_expression&gt;</var></pre></div>
+
+                           <p class="p"><var class="keyword varname">&lt;basic_string_expression&gt;</var> is a comma-separated string
+                              of option-value pairs (for example, <samp class="ph codeph">FOR XML
+                                 ('schemaloc'='http://thiscompany.com/schemalib',
+                                 'targetns'='http://thiscompany.com/samples',
+                                 'statement'=’yes’)</samp>. The following table defines the
+                              options and what they control.</p>
+
+                           <div class="table-wrapper"><table summary="" id="loio20fcf24075191014a89e9dc7b8408b26__simpletable_a5m_5dp_1z" border="1" class="simpletable"><tr class="sthead">
+                                 <th valign="bottom" align="left" id="d17131543e321" class="stentry">
+                                    <p class="p">Option</p>
+
+                                 </th>
+
+                                 <th valign="bottom" align="left" id="d17131543e327" class="stentry">
+                                    <p class="p">Description</p>
+
+                                 </th>
+
+                              </tr>
+<tr class="strow">
+                                 <td valign="top" headers="d17131543e321" class="stentry">
+                                    <p class="p">columnstyle</p>
+
+                                 </td>
+
+                                 <td valign="top" headers="d17131543e327" class="stentry">
+                                    <p class="p">The representation of SQL columns. Possible values are
+                                       'element' (the default), or 'attribute'. </p>
+
+                                 </td>
+
+                              </tr>
+<tr class="strow">
+                                 <td valign="top" headers="d17131543e321" class="stentry">
+                                    <p class="p">format</p>
+
+                                 </td>
+
+                                 <td valign="top" headers="d17131543e327" class="stentry">
+                                    <p class="p">Whether to insert newline and tab for elements. Possible
+                                       values are 'yes' (the default), or 'no'.</p>
+
+                                 </td>
+
+                              </tr>
+<tr class="strow">
+                                 <td valign="top" headers="d17131543e321" class="stentry">
+                                    <p class="p">header</p>
+
+                                 </td>
+
+                                 <td valign="top" headers="d17131543e327" class="stentry">
+                                    <p class="p">Whether to include the XML declaration header (&lt;?xml
+                                       version="1.0"?&gt;). Possible values are 'yes', or 'no' (the
+                                       default).</p>
+
+                                 </td>
+
+                              </tr>
+<tr class="strow">
+                                 <td valign="top" headers="d17131543e321" class="stentry">
+                                    <p class="p">incremental</p>
+
+                                 </td>
+
+                                 <td valign="top" headers="d17131543e327" class="stentry">
+                                    <p class="p">Whether to return a single row or multiple rows. Possible
+                                       values are 'yes', or 'no' (the default).</p>
+
+                                 </td>
+
+                              </tr>
+<tr class="strow">
+                                 <td valign="top" headers="d17131543e321" class="stentry">
+                                    <p class="p">nullstyle</p>
+
+                                 </td>
+
+                                 <td valign="top" headers="d17131543e327" class="stentry">
+                                    <p class="p">Whether to omit or present a null attribute for NULL values.
+                                       Possible values are 'omit' (the default), or 'attribute'.</p>
+
+                                 </td>
+
+                              </tr>
+<tr class="strow">
+                                 <td valign="top" headers="d17131543e321" class="stentry">
+                                    <p class="p">root</p>
+
+                                 </td>
+
+                                 <td valign="top" headers="d17131543e327" class="stentry">
+                                    <p class="p"> Whether to include a root element for the table name.
+                                       Possible values are 'yes' (the default), or 'no'</p>
+
+                                 </td>
+
+                              </tr>
+<tr class="strow">
+                                 <td valign="top" headers="d17131543e321" class="stentry">
+                                    <p class="p">rowname</p>
+
+                                 </td>
+
+                                 <td valign="top" headers="d17131543e327" class="stentry">
+                                    <p class="p">Sets the name of the row element. The default is 'row'.</p>
+
+                                 </td>
+
+                              </tr>
+<tr class="strow">
+                                 <td valign="top" headers="d17131543e321" class="stentry">
+                                    <p class="p">schemaloc</p>
+
+                                 </td>
+
+                                 <td valign="top" headers="d17131543e327" class="stentry">
+                                    <p class="p">Sets the &lt;schemalocation&gt; value in the root element. If
+                                       the &lt;root&gt; option is set to no, then this option is
+                                       ignored. This value is a string with a URI.</p>
+
+                                 </td>
+
+                              </tr>
+<tr class="strow">
+                                 <td valign="top" headers="d17131543e321" class="stentry">
+                                    <p class="p">tablename</p>
+
+                                 </td>
+
+                                 <td valign="top" headers="d17131543e327" class="stentry">
+                                    <p class="p">Names the root element. If the &lt;root&gt; option is set to
+                                       'no', then this option is ignored. The value is a string and
+                                       the default is 'resultset'.</p>
+
+                                 </td>
+
+                              </tr>
+<tr class="strow">
+                                 <td valign="top" headers="d17131543e321" class="stentry">
+                                    <p class="p">targetns</p>
+
+                                 </td>
+
+                                 <td valign="top" headers="d17131543e327" class="stentry">
+                                    <p class="p">Sets the &lt;targetnamespace&gt; value in the root element.
+                                       If the &lt;root&gt; option is set to 'no', then this option
+                                       is ignored.</p>
+
+                                 </td>
+
+                              </tr>
+</table></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;returns_clause&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the return type of the results. The default is CLOB.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;returns_clause&gt;</var> ::=  RETURNS { VARCHAR ( <var class="keyword varname">&lt;integer&gt;</var> ) | NVARCHAR ( <var class="keyword varname">&lt;integer&gt;</var> ) | CLOB | NCLOB }
+</pre></div>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><a name="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_time_travel"><!-- --></a><var class="keyword varname">&lt;time_travel&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies a time frame for the query.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;time_travel&gt;</var> ::= 
+ AS OF { COMMIT ID <var class="keyword varname">&lt;commit_id&gt;</var> | UTCTIMESTAMP <var class="keyword varname">&lt;timestamp&gt;</var> }</pre></div>
+
+                  <p class="p">Keywords related with time travel can be used for statement-level time travel
+                     to go back to the snapshot specified by <var class="keyword varname">&lt;commit_id&gt;</var> or
+                     UTCTIMESTAMP.</p>
+
+                  <p class="p">Time travel is possible only with a history column table.
+                        <var class="keyword varname">&lt;commit_id&gt;</var> can be obtained from
+                     m_history_index_last_commit_id after each commit and its related
+                        <var class="keyword varname">&lt;timestamp&gt;</var> can be obtained from
+                     sys.m_transaction_history.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><a name="loio20fcf24075191014a89e9dc7b8408b26__select_hint_clause"><!-- --></a><var class="keyword varname">&lt;hint_clause&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies a hint to use for the query.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;hint_clause&gt;</var> ::= 
+ WITH HINT( <var class="keyword varname">&lt;hint_element&gt;</var> [, <var class="keyword varname">&lt;hint_element&gt;</var> ...])
+
+<var class="keyword varname">&lt;hint_element&gt;</var> ::= 
+ { <var class="keyword varname">&lt;hint&gt;</var> | <var class="keyword varname">&lt;hint_with_parameters&gt;</var> }
+
+<var class="keyword varname">&lt;hint&gt;</var> ::= !! hint_name from public hint list
+
+<var class="keyword varname">&lt;hint_with_parameters&gt;</var> ::= 
+ ROUTE_TO( <var class="keyword varname">&lt;volume_id&gt;</var> [{, <var class="keyword varname">&lt;volume_id&gt;</var> }] ) 
+ | NO_ROUTE_TO( <var class="keyword varname">&lt;volume_id&gt;</var> [{, <var class="keyword varname">&lt;volume_id&gt;</var> }] ) 
+ | ROUTE_BY( <var class="keyword varname">&lt;table_name&gt;</var> [{, <var class="keyword varname">&lt;table_name&gt;</var>}] ) 
+ | ROUTE_BY_CARDINALITY( <var class="keyword varname">&lt;table_name&gt;</var> [{, <var class="keyword varname">&lt;table_name&gt;</var>}] ) 
+ | DATA_TRANSFER_COST ({0 | 1})</pre></div>
+
+                  <p class="p">When there are hint clauses in the subquery, only the most outer hint is
+                     applied. </p>
+
+                  <p class="p">Incorrect syntax or semantics generate an SQL error. </p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><a name="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_select_clause"><!-- --></a><var class="keyword varname">&lt;select_clause&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies an output to be returned either to the caller or to an outer
+                        <var class="keyword varname">&lt;select_clause&gt;</var> if one exists.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;select_clause&gt;</var> ::= 
+ SELECT [TOP <var class="keyword varname">&lt;unsigned_integer&gt;</var>] [ ALL | DISTINCT ] <var class="keyword varname">&lt;select_list&gt;</var></pre></div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis">TOP</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies that the first <var class="keyword varname">&lt;unsigned_integer&gt;</var> records
+                              from the SQL statement should be returned.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">TOP <var class="keyword varname">&lt;unsigned_integer&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">DISTINCT</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies that only one copy of each set of duplicate records selected
+                              should be returned.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">ALL</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies that all rows selected, including all copies of duplicates
+                              should be returned. This is the default option.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;select_list&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Retrieves the specified list of columns.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;select_list&gt;</var> ::= <var class="keyword varname">&lt;select_item&gt;</var>[{, <var class="keyword varname">&lt;select_item&gt;</var>}... ]
+
+<var class="keyword varname">&lt;select_item&gt;</var> ::=
+ [<var class="keyword varname">&lt;table_name&gt;</var>.]{<var class="keyword varname">&lt;asterisk&gt;</var> | <var class="keyword varname">&lt;expression&gt;</var>} [ AS <var class="keyword varname">&lt;column_alias&gt;</var> ]
+
+<var class="keyword varname">&lt;table_name&gt;</var> ::= [[<var class="keyword varname">&lt;database_name&gt;</var>.]<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;schema_name&gt;</var> ::= <var class="keyword varname">&lt;unicode_name&gt;</var>
+
+<var class="keyword varname">&lt;column_alias&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;asterisk&gt;</var> ::= *</pre></div>
+
+                           <p class="p"><var class="keyword varname">&lt;select_item&gt;</var> specifies the details of the columns to
+                              be retrieved.</p>
+
+                           <p class="p"><var class="keyword varname">&lt;table_name&gt;</var> specifies the table that is the source
+                              for the selected columns, with the optional schema name.</p>
+
+                           <p class="p">For linked database, <var class="keyword varname">&lt;database_name&gt;</var> is the name of
+                              the remote source. <var class="keyword varname">&lt;identifier&gt;</var> is the name of the
+                              table on the remote source. </p>
+
+                           <p class="p"><var class="keyword varname">&lt;column_alias&gt;</var> specifies an alias for a column.</p>
+
+                           <p class="p"><var class="keyword varname">&lt;asterisk&gt;</var> (*) selects all columns from all tables or
+                              views listed in the <var class="keyword varname">&lt;from_clause&gt;</var>. If you provide a
+                              schema name or a table name with an asterisk (*), then it limits the
+                              scope of the result set to the specified table.</p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><a name="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_from_clause"><!-- --></a><var class="keyword varname">&lt;from_clause&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies inputs such as tables, views, and subqueries to be used in the SELECT
+                     statement.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;from_clause&gt;</var> ::= FROM <var class="keyword varname">&lt;table&gt;</var> [{, <var class="keyword varname">&lt;table&gt;</var>}...]
+
+<var class="keyword varname">&lt;table&gt;</var> ::= 
+ <var class="keyword varname">&lt;table_name&gt;</var> [ <var class="keyword varname">&lt;partition_restriction&gt;</var> ] [ [AS] <var class="keyword varname">&lt;table_alias&gt;</var> ] [<var class="keyword varname">&lt;tablesample_clause&gt;</var>] 
+ | <var class="keyword varname">&lt;subquery&gt;</var> [ [AS] <var class="keyword varname">&lt;table_alias&gt;</var> ] 
+ | <var class="keyword varname">&lt;joined_table&gt;</var> 
+ | <var class="keyword varname">&lt;collection_derived_table&gt;</var>
+ | <var class="keyword varname">&lt;associated_table_expression&gt;</var>
+
+<var class="keyword varname">&lt;table_name&gt;</var> ::= [[<var class="keyword varname">&lt;database_name&gt;</var>.]<var class="keyword varname">&lt;schema.name&gt;</var>.]<var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                  <p class="p"><var class="keyword varname">&lt;table&gt;</var> specifies the table, subquery or join which is the
+                     data source for the query.</p>
+
+                  <p class="p">For linked database, <var class="keyword varname">&lt;database_name&gt;</var> is the name of the remote
+                     source. <var class="keyword varname">&lt;identifier&gt;</var> is the name of the table on the remote
+                     source. </p>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;partition_restriction&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Restricts the query to the specified partition(s) of a partitioned
+                              table. </p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;partition_restriction&gt;</var> ::= 
+ PARTITION ( <var class="keyword varname">&lt;partition_number&gt;</var> [{, <var class="keyword varname">&lt;partition_number&gt;</var>}...] )
+
+<var class="keyword varname">&lt;partition_number&gt;</var> ::= <var class="keyword varname">&lt;unsigned_integer&gt;</var></pre></div>
+
+                           <p class="p">If no partition is specified, then all partitions are the source of
+                              the SELECT. <var class="keyword varname">&lt;partition_restriction&gt;</var> can be obtained
+                              from the M_CS_PARTITIONS system view. This syntax is available for
+                              partitioned tables only. </p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;table_alias&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the alias identifier for a table, subquery, or joined
+                              table.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_alias&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;tablesample_clause&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Applies the SELECT statement to a random sample of the table data. </p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;tablesample_clause&gt;</var> ::=
+ TABLESAMPLE [BERNOULLI | SYSTEM] (<var class="keyword varname">&lt;sample_size&gt;</var>)
+
+<var class="keyword varname">&lt;sample_size&gt;</var> ::= <var class="keyword varname">&lt;exact_numeric_literal&gt;</var></pre></div>
+
+                           <p class="p"><var class="keyword varname">&lt;sample_size&gt;</var> specifies the percentage of the table
+                              to be returned as a sample.</p>
+
+                           <p class="p">Values must be greater than 0 and less than or equal to 100. (100
+                              returns the complete table). The goal of the TABLESAMPLE operator is
+                              to allow queries to be executed over ad-hoc random samples of tables.
+                              Samples are computed uniformly over rows in a columnar base table.
+                              Samples can either be uniform random samples (SYSTEM sampling) or
+                              uniform and independent random samples (BERNOULLI sampling). SYSTEM
+                              sampling exploits the lack of the independence requirement by sampling
+                              blocks of rows at a time, while SYSTEM sampling offers performance
+                              advantages over BERNOULLI sampling, it comes at the cost of larger
+                              variance in sample size.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;joined_table&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies how tables are joined.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;joined_table&gt;</var> ::= 
+ <var class="keyword varname">&lt;table&gt;</var> [<var class="keyword varname">&lt;join_type&gt;</var>] JOIN <var class="keyword varname">&lt;table&gt;</var> ON <var class="keyword varname">&lt;predicate&gt;</var>
+ | <var class="keyword varname">&lt;table&gt;</var> CROSS JOIN <var class="keyword varname">&lt;table&gt;</var> 
+ | <var class="keyword varname">&lt;joined_table&gt;</var></pre></div>
+
+                           <p class="p">ON <var class="keyword varname">&lt;predicate&gt;</var> specifies a join predicate.</p>
+
+                           <p class="p">CROSS JOIN specifies that a cross join should be performed. A cross
+                              join produces the cross-product of two tables. In many SQL dialects,
+                              including HANA SQL, a comma is symantically equivalent to the CROSS
+                              JOIN keywords (for example <samp class="ph codeph">SELECT * from table1,
+                                 table2…</samp>). However, specifying a comma is not recommended
+                              because it has a lower precedence than CROSS JOIN and can return
+                              unexpected results, especially when the query also involves outer join
+                              operators.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;join_type&gt;</var> ::= 
+ INNER  | { LEFT | RIGHT | FULL } [OUTER]</pre></div>
+
+                           <p class="p"><var class="keyword varname">&lt;join_type&gt;</var> specifies the type of join to be
+                              performed: </p>
+
+                           <ul class="ul" id="loio20fcf24075191014a89e9dc7b8408b26__ul_bzq_c4t_zv">
+                              <li class="li">
+                                 <p class="p">INNER performs an inner join.</p>
+
+                              </li>
+
+                              <li class="li">
+                                 <p class="p">LEFT defines a left outer join.</p>
+
+                              </li>
+
+                              <li class="li">
+                                 <p class="p">RIGHT defines a right outer join.</p>
+
+                              </li>
+
+                              <li class="li">
+                                 <p class="p">FULL indicates a full outer join.</p>
+
+                              </li>
+
+                              <li class="li">
+                                 <p class="p">OUTER performs an outer join.</p>
+
+                              </li>
+
+                           </ul>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;collection_derived_table&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies a collection derived table.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;collection_derived_table&gt;</var> ::= 
+ UNNEST ( <var class="keyword varname">&lt;collection_value_expression&gt;</var> [{, <var class="keyword varname">&lt;collection_value_expression&gt;</var>}...] ) 
+   [WITH ORDINALITY] AS <var class="keyword varname">&lt;table_alias&gt;</var> [ <var class="keyword varname">&lt;derived_column_list&gt;</var> ]
+
+<var class="keyword varname">&lt;collection_value_expression&gt;</var> ::= 
+ ARRAY ( <var class="keyword varname">&lt;expression&gt;</var> [{, <var class="keyword varname">&lt;expression&gt;</var>}...] | <var class="keyword varname">&lt;column_name&gt;</var> )
+
+<var class="keyword varname">&lt;derived_column_list&gt;</var> ::= ( <var class="keyword varname">&lt;column_name&gt;</var>, ... )</pre></div>
+
+                           <p class="p">Collection-derived tables are similar to lateral tables in that they
+                              can contain a reference to another element of the
+                                 <var class="keyword varname">&lt;from_clause&gt;</var> that has been specified before them.
+                              This reference has inner join characteristics, because the referenced
+                              element of the <var class="keyword varname">&lt;from_clause&gt;</var> is used as a parameter
+                              to execute the lateral subquery.</p>
+
+                           <p class="p">Collection values (Array) can be interpreted as the columns of a table
+                              by "turning them 90 degrees clockwise".</p>
+
+                           <p class="p">You can use an array constructor or a field name of ARRAY type.</p>
+
+                           <p class="p"><var class="keyword varname">&lt;derived_column_list&gt;</var> specifies a list of column
+                              identifiers, ordered in the order of values in the collection value
+                              expressions. The column list can be omitted.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;associated_table_expression&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies a table that is associated with other tables.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;associated_table_expression&gt;</var> ::=
+ <var class="keyword varname">&lt;associated_table_name&gt;</var> : <var class="keyword varname">&lt;associated_column&gt;</var>[.<var class="keyword varname">&lt;associated_column2&gt;</var>[...]]</pre></div>
+
+                           <p class="p"><var class="keyword varname">&lt;associated_column&gt;</var> specifies a column that is
+                              associated with <var class="keyword varname">&lt;associated_table_name&gt;</var>.</p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><a name="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_where_clause"><!-- --></a><var class="keyword varname">&lt;where_clause&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies predicates on inputs in the FROM clause.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;where_clause&gt;</var> ::= WHERE <var class="keyword varname">&lt;condition&gt;</var>
+
+<var class="keyword varname">&lt;condition&gt;</var> ::= 
+ <var class="keyword varname">&lt;condition&gt;</var> OR <var class="keyword varname">&lt;condition&gt;</var> 
+ | <var class="keyword varname">&lt;condition&gt;</var> AND <var class="keyword varname">&lt;condition&gt;</var>
+ | NOT <var class="keyword varname">&lt;condition&gt;</var>
+ | ( <var class="keyword varname">&lt;condition&gt;</var> )
+ | <var class="keyword varname">&lt;predicate&gt;</var>
+
+   
+<var class="keyword varname">&lt;predicate&gt;</var> ::= 
+ <var class="keyword varname">&lt;comparison_predicate&gt;</var>
+ | <var class="keyword varname">&lt;range_predicate&gt;</var>
+ | <var class="keyword varname">&lt;in_predicate&gt;</var> 
+ | <var class="keyword varname">&lt;exist_predicate&gt;</var>
+ | <var class="keyword varname">&lt;like_predicate&gt;</var> 
+ | <var class="keyword varname">&lt;null_predicate&gt;</var>
+ 
+<var class="keyword varname">&lt;comparison_predicate&gt;</var> ::= 
+ <var class="keyword varname">&lt;expression&gt;</var> { = | != | &lt;&gt; | &gt; | &lt; | &gt;= | &lt;= } [ ANY | SOME | ALL ] ({<var class="keyword varname">&lt;expression_list&gt;</var>
+ | <var class="keyword varname">&lt;subquery&gt;</var>})
+ 
+<var class="keyword varname">&lt;range_predicate&gt;</var> ::= 
+ <var class="keyword varname">&lt;expression&gt;</var> [NOT] BETWEEN <var class="keyword varname">&lt;expression&gt;</var> AND <var class="keyword varname">&lt;expression&gt;</var>
+ 
+<var class="keyword varname">&lt;in_predicate&gt;</var> ::= 
+ <var class="keyword varname">&lt;expression&gt;</var> [NOT] IN ( { <var class="keyword varname">&lt;expression_list&gt;</var> | <var class="keyword varname">&lt;subquery&gt;</var> } )
+ 
+<var class="keyword varname">&lt;exist_predicate&gt;</var> ::= 
+ [NOT] EXISTS ( <var class="keyword varname">&lt;subquery&gt;</var> )
+ 
+<var class="keyword varname">&lt;like_predicate&gt;</var> ::= 
+ <var class="keyword varname">&lt;expression&gt;</var> [NOT] LIKE <var class="keyword varname">&lt;expression&gt;</var> [ESCAPE <var class="keyword varname">&lt;expression&gt;</var>]
+ 
+<var class="keyword varname">&lt;null_predicate&gt;</var> ::= 
+ <var class="keyword varname">&lt;expression&gt;</var> IS [NOT] NULL
+
+<var class="keyword varname">&lt;expression_list&gt;</var> ::= <var class="keyword varname">&lt;expression&gt;</var> [{, <var class="keyword varname">&lt;expression&gt;</var>}...]</pre></div>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><a name="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_groupby_clause"><!-- --></a>GROUP BY</dt>
+
+               <dd class="dd pd">
+                  <p class="p">Groups the selected rows based on the values in the specified columns.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;group_by_clause&gt;</var> ::= GROUP BY <var class="keyword varname">&lt;group_by_expression_list&gt;</var>
+
+<var class="keyword varname">&lt;group_by_expression_list&gt;</var> ::= 
+ { <var class="keyword varname">&lt;expression&gt;</var>|<var class="keyword varname">&lt;grouping_set&gt;</var> } [{, <var class="keyword varname">&lt;expression&gt;</var>|<var class="keyword varname">&lt;grouping_set&gt;</var>} ...]
+
+<var class="keyword varname">&lt;grouping_set&gt;</var> ::= 
+ { GROUPING SETS | ROLLUP | CUBE }
+    [BEST <var class="keyword varname">&lt;signed_integer&gt;</var>]
+    [LIMIT <var class="keyword varname">&lt;unsigned_integer&gt;</var>[OFFSET <var class="keyword varname">&lt;unsigned_integer&gt;</var>] ]
+    [WITH SUBTOTAL] 
+    [WITH BALANCE] 
+    [WITH TOTAL]
+    [TEXT_FILTER <var class="keyword varname">&lt;filterspec&gt;</var> 
+    [FILL UP [SORT MATCHES TO TOP]]]
+    [STRUCTURED RESULT [WITH OVERVIEW] 
+    [PREFIX <var class="keyword varname">&lt;prefix_table_name&gt;</var>] | MULTIPLE RESULTSETS]
+    ( <var class="keyword varname">&lt;grouping_expression_list&gt;</var> )
+
+<var class="keyword varname">&lt;grouping_expression_list&gt;</var> ::= <var class="keyword varname">&lt;grouping_expression&gt;</var> [{, <var class="keyword varname">&lt;grouping_expression&gt;</var>}...]
+
+<var class="keyword varname">&lt;grouping_expression&gt;</var> ::= 
+ <var class="keyword varname">&lt;expression&gt;</var> 
+ | ( <var class="keyword varname">&lt;expression&gt;</var> [{, <var class="keyword varname">&lt;expression&gt;</var>}...] )
+ | ( ( <var class="keyword varname">&lt;expression&gt;</var> [{, <var class="keyword varname">&lt;expression&gt;</var>}...] ) <var class="keyword varname">&lt;order_by_clause&gt;</var> )</pre></div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis">GROUPING SETS</dt>
+
+                        <dd class="dd">
+                           <p class="p">Generates results with specified multiple groupings of data in a
+                              single statement. If no additional options are set, such as BEST and
+                              LIMIT, then the result produced is the same as a UNION ALL of the
+                              aggregation of each specified group. </p>
+
+                           <p class="p">For example:</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT col1, col2, col3, * count(*) 
+   FROM t 
+   GROUP BY GROUP SETS ( (col1, col2), (col1, col3) );</pre></div>
+
+                           <p class="p">Is equivalent to:</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * col1, col2, NULL, count(*) 
+   FROM t GROUP BY col1, col2
+   UNION ALL
+   SELECT col1, NULL, * col3, count(*) 
+   FROM t  GROUP BY col1, col3;</pre></div>
+
+                           <p class="p">In the grouping-sets query, each of (col1, col2) and (col1, col3)
+                              specifies the grouping.</p>
+
+                           <p class="p">If columns are between GROUP BY and grouping sets, then they are
+                              common columns of all grouping sets. For example:</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT col1, col2, col3, * count(*) 
+   FROM t 
+   GROUP BY col4, col5, GROUPING SETS ( (col1, col2), (col1, col3) );</pre></div>
+
+                           <p class="p">Is equivalent to:</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * col1, col2, NULL, count(*) 
+   FROM t GROUP BY col4, col5, col1, col2
+   UNION ALL
+   SELECT col1, NULL, * col3, count(*) 
+   FROM t GROUP BYcol4, col5, col1, col3;</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">ROLLUP</dt>
+
+                        <dd class="dd">
+                           <p class="p">Generates results with multiple levels of aggregation in a single
+                              statement.</p>
+
+                           <p class="p">For example:</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ROLLUP (col1, col2, col3);</pre></div>
+
+                           <p class="p">Is equivalent to the following statement, with an additional
+                              aggregation without grouping.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">GROUPING SETS ( (col1, col2, col3), (col1, col2), (col1) )</pre></div>
+
+                           <p class="p">Thus, the number of grouping sets that result set contains is the
+                              number of columns in ROLLUP list plus one for a last aggregation if
+                              there is no additional option.</p>
+
+                           <p class="p">If columns are between GROUP BY and ROLLUP, then the columns are
+                              common columns of all grouping sets. For example:</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">col4, col5, ROLLUP (col1, col2, col3)</pre></div>
+
+                           <p class="p">Is equivalent to:</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">GROUPING SETS ( (col4, col5, col1, col2, col3), (col4, col5, col1, col2), (col4, col5, col1), (col4, col5) )</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">CUBE</dt>
+
+                        <dd class="dd">
+                           <p class="p">Generates results with multiple levels of aggregations in a single
+                              statement.</p>
+
+                           <p class="p">For example:</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CUBE (col1, col2, col3)</pre></div>
+
+                           <p class="p">Is equivalent to the following statement, with an additional
+                              aggregation without grouping.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">GROUPING SETS ( (col1, col2, col3), (col1, col2), (col1, col3), (col2, col3), (col1), (col2), (col3) )</pre></div>
+
+                           <p class="p"> Thus, the number of grouping sets that result set contains is the
+                              same as all possible permutations of columns in the CUBE list plus one
+                              for the last aggregation if there is no additional option.</p>
+
+                           <p class="p">If columns are between GROUP BY and CUBE, then the columns are common
+                              columns of all grouping sets. For example:</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">col4, col5, CUBE (col1, col2, col3)</pre></div>
+
+                           <p class="p">is equivalent to:</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">GROUPING SETS( (col4, col5, col1, col2, col3), (col4, col5, col1, col2),
+   (col4, col5, col1, col3), (col4, col5, col2, col3), (col4, col5, col1), 
+   (col4, col5, col2), (col4, col5, col3), (col4, col5) )</pre></div>
+
+                           <p class="p">Any combination of expression, grouping sets, ROLLUP, and CUBE are
+                              possible according to SQL standard. Each of expression, ROLLUP, and
+                              CUBE can be converted to a grouping set. Several grouping sets also
+                              can be converted to a single grouping set by repeating to combine two
+                              successive grouping sets to a single grouping set. Two successive
+                              grouping sets are combined to a single grouping set by cross-producing
+                                 <var class="keyword varname">&lt;grouping_expression_list&gt;</var>. For example:</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT col1, col2, col3, * count(*) 
+   FROM t GROUP BY GROUPING SETS( (col1, col2), (col3) ), 
+   GROUPING SETS( (col4), (col5, col6) );</pre></div>
+
+                           <p class="p">is equivalent to:</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT col1, col2, col3, * count(*) 
+   FROM t GROUP BY GROUPING SETS( (col1, col2, col4), (col3, col4), 
+   (col1, col2, col5, col6), (col3, col5, col6 );</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">BEST <var class="keyword varname">&lt;signed_integer&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Returns only the top-n grouping sets sorted in descending order of the
+                              number of rows aggregated in each grouping set. </p>
+
+                           <p class="p"><var class="keyword varname">&lt;signed_integer&gt;</var> can be zero, positive, and negative.
+                              When n is zero, it is the same as the BEST option not being set. When
+                              n is negative, it means sorting in ascending order.</p>
+
+                           <p class="p">Can be specified for a single column table or a single OLAP view.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">LIMIT</dt>
+
+                        <dd class="dd">
+                           <p class="p">Returns the first <var class="keyword varname">&lt;unsigned_integer&gt;</var> grouped records
+                              after skipping OFFSET<var class="keyword varname">&lt;unsigned_integer&gt;</var> for each
+                              grouping set.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">LIMIT <var class="keyword varname">&lt;unsigned_integer&gt;</var> [OFFSET <var class="keyword varname">&lt;unsigned_integer&gt;</var>]</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">WITH SUBTOTAL</dt>
+
+                        <dd class="dd">
+                           <p class="p">Returns an additional subtotal for each grouping set in the returned
+                              results controlled by OFFSET or LIMIT. Unless OFFSET and LIMIT are
+                              specified, the value is the same as WITH TOTAL.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">WITH BALANCE</dt>
+
+                        <dd class="dd">
+                           <p class="p">Returns for each grouping set an additional aggregated value of the
+                              remaining values not returned by OFFSET or LIMIT.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">WITH TOTAL</dt>
+
+                        <dd class="dd">
+                           <p class="p">Returns for each grouping set an additional row that is the aggregated
+                              total value. OFFSET and LIMIT options do not change this value.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">TEXT_FILTER</dt>
+
+                        <dd class="dd">
+                           <p class="p">Performs text filtering or highlighting on the grouping columns using
+                              a single-quoted string.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">TEXT_FILTER <var class="keyword varname">&lt;filterspec&gt;</var>
+
+<var class="keyword varname">&lt;filterspec&gt;</var> ::= 
+ '[<var class="keyword varname">&lt;prefix&gt;</var>] <var class="keyword varname">&lt;element&gt;</var> <var class="keyword varname">&lt;subsequent&gt;</var> [{, <var class="keyword varname">&lt;subsequent&gt;</var>}...]'
+
+<var class="keyword varname">&lt;prefix&gt;</var> ::= + | - | NOT
+
+<var class="keyword varname">&lt;element&gt;</var> ::= 
+ <var class="keyword varname">&lt;token&gt;</var> 
+ | <var class="keyword varname">&lt;phrase&gt;</var>
+
+<var class="keyword varname">&lt;token&gt;</var> ::= 
+ !! Unicode letters or digits
+
+<var class="keyword varname">&lt;phrase&gt;</var> ::= 
+ !! double-quoted string that does not contain double quotations inside
+
+<var class="keyword varname">&lt;subsequent&gt;</var> ::= 
+ [<var class="keyword varname">&lt;prefix_subsequent&gt;</var>]<var class="keyword varname">&lt;element&gt;</var>
+
+<var class="keyword varname">&lt;prefix_subsequent&gt;</var> ::= 
+ + 
+ | - 
+ | NOT 
+ | AND 
+ | AND NOT 
+ | OR</pre></div>
+
+                           <p class="p">A filter defined by <var class="keyword varname">&lt;filterspec&gt;</var> is a token/phrase or
+                              tokens/phrases connected with logical operators such as AND, OR, and
+                              NOT. A token matches a string that contains its corresponding word in
+                              a case-insensitive manner. For example, ab matches ab cd and cd Ab but
+                              does not match abcd. A token can contain the wild card character *
+                              that matches any string and ? that matches any character. Inside a
+                              phrase, * and ? do not function as wild card characters. With tokens
+                              and phrases logical operators AND, OR, and NOT can be used together.
+                              As OR is the default operator, ab cd is the same as ab OR cd.</p>
+
+                           <p class="p">Write logical operators in uppercase characters.</p>
+
+                           <p class="p">Prefixes + and - mean inclusion (AND) and exclusion (AND NOT),
+                              respectively. For example, ab -cd is the same as ab AND NOT cd. If
+                              FILL UP is not specified, only grouped records that have matching
+                              values are returned.</p>
+
+                           <p class="p">A filter is applied only to the first grouping column in each grouping
+                              set.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">FILL UP</dt>
+
+                        <dd class="dd">
+                           <p class="p">Returns not only matched grouped records, but also non-matched
+                              records. TEXT_FILTER is useful to identify which records have been
+                              matched. See 'Related Functions' below.</p>
+
+                           <p class="p">SORT MATCHES TO TOP Returns matching values before non-matching values
+                              for each grouping set. This option cannot be used with SUBTOTAL,
+                              BALANCE and TOTAL.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">STRUCTURED RESULT</dt>
+
+                        <dd class="dd">
+                           <p class="p">Returns results as temporary tables. For each grouping set a single
+                              temporary table is created. If the WITH OVERVIEW option is set, an
+                              additional temporary table is created for the overview of the grouping
+                              sets. The names of the temporary tables are specified by the PREFIX
+                              option.</p>
+
+                           <p class="p">WITH OVERVIEW Returns an overview in a separate additional table.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">PREFIX</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies a prefix for naming the temporary tables. </p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">PREFIX <var class="keyword varname">&lt;prefix_table_name&gt;</var>
+
+<var class="keyword varname">&lt;prefix_table_name&gt;</var> ::= #<var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                           <p class="p"><var class="keyword varname">&lt;prefix_table_name&gt;</var> must start with "#", which means
+                              a temporary table. If PREFIX is not specified, the default prefix is
+                              "#GN" followed by a non-negative integer number. See 'Return Format'
+                              below.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">MULTIPLE RESULTSETS</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies that results should be returned in multiple result sets.</p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+                  <p class="p">Related Functions:</p>
+
+                  <ul class="ul" id="loio20fcf24075191014a89e9dc7b8408b26__ul_jkh_fry_zv">
+                     <li class="li">
+                        <p class="p">GROUPING_ID(column_name_list) function returns an integer number to
+                           identify which grouping set each grouped record belongs to.</p>
+
+                     </li>
+
+                     <li class="li">
+                        <p class="p">GROUPING(column) function returns 1 if the column is used for grouping.
+                           Otherwise it returns 0.</p>
+
+                     </li>
+
+                     <li class="li">
+                        <p class="p">TEXT_FILTER ( <var class="keyword varname">&lt;grouping_column&gt;</var> ) function, which is
+                           used with TEXT_FILTER, FILL UP, and SORT MATCHES TO TOP, displays
+                           matching values or NULL. NULL is displayed for non-matching values when
+                           FILL UP option is specified.</p>
+
+                     </li>
+
+                  </ul>
+
+                  <p class="p">Return Format:</p>
+
+                  <ul class="ul" id="loio20fcf24075191014a89e9dc7b8408b26__ul_aqk_gry_zv">
+                     <li class="li">
+                        <p class="p">If neither STRUCTURED RESULT nor MULTIPLE RESULTSETS is set, then the
+                           unioned result of all grouping sets is returned with NULL values filling
+                           up attributes that are not included in a specific grouping set.</p>
+
+                     </li>
+
+                     <li class="li">
+                        <p class="p">With STRUCTURED RESULT, temporary tables are created additionally which
+                           can be queried using "SELECT * FROM <var class="keyword varname">&lt;table_name&gt;</var>" in the
+                           same session. The name of the tables follows the form: </p>
+
+                        <ul class="ul" id="loio20fcf24075191014a89e9dc7b8408b26__ul_bqk_gry_zv">
+                           <li class="li">
+                              <p class="p"><var class="keyword varname">&lt;PREFIX&gt;</var>0: this table contains the overview if
+                                 WITH OVERVIEW is specified </p>
+
+                           </li>
+
+                           <li class="li">
+                              <p class="p"><var class="keyword varname">&lt;PREFIX&gt;</var>n: n-th grouping set subject to
+                                 re-ordering by the BEST parameter </p>
+
+                           </li>
+
+                        </ul>
+
+                     </li>
+
+                     <li class="li">
+                        <p class="p">With MULTIPLE RESULTSETS, multiple result sets are returned. Grouped
+                           records for each grouping set are in a single result set.</p>
+
+                     </li>
+
+                  </ul>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><a name="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_having_clause"><!-- --></a>HAVING</dt>
+
+               <dd class="dd pd">
+                  <p class="p">Selects the specified groups that satisfy the predicates.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;having_clause&gt;</var> ::= HAVING <var class="keyword varname">&lt;condition&gt;</var></pre></div>
+
+                  <p class="p"> If this clause is omitted, all groups are selected.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><a name="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_set_operators"><!-- --></a>SET OPERATORS</dt>
+
+               <dd class="dd pd">
+                  <p class="p">Enables multiple SELECT statements to be combined but return only one result
+                     set.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;set_operator&gt;</var> ::= 
+ UNION [ ALL | DISTINCT ] 
+ | INTERSECT [DISTINCT] 
+ | EXCEPT [DISTINCT]</pre></div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis">UNION ALL</dt>
+
+                        <dd class="dd">
+                           <p class="p">Selects all records from all SELECT statements. Duplicates are not
+                              removed.</p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis">UNION [DISTINCT]</dt>
+
+                        <dd class="dd">
+                           <p class="p">Selects all unique records from all SELECT statements by removing
+                              duplicates found from different SELECT statements. UNION has the same
+                              function as UNION DISTINCT.</p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis">INTERSECT [DISTINCT]</dt>
+
+                        <dd class="dd">
+                           <p class="p">Returns records that exist in all SELECT statement results.</p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis">EXCEPT [DISTINCT]</dt>
+
+                        <dd class="dd">
+                           <p class="p">Returns all unique records from the first SELECT statements after
+                              removing the duplicates in the following SELECT statements. MINUS is
+                              accepted as a synonym for EXCEPT.</p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+         </dl>
+
+         <dl class="dl parml">
+            
+               <dt class="dt pt dlterm emphasis"><a name="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_orderby_clause"><!-- --></a>ORDER BY</dt>
+
+               <dd class="dd pd">
+                  <p class="p">Sorts records by expressions or positions.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;order_by_clause&gt;</var> ::= 
+ ORDER BY { <var class="keyword varname">&lt;order_by_expression&gt;</var>, ... }
+
+<var class="keyword varname">&lt;order_by_expression&gt;</var> ::= 
+ <var class="keyword varname">&lt;expression&gt;</var> [ ASC | DESC ] [ NULLS FIRST | NULLS LAST ] 
+ | <var class="keyword varname">&lt;position&gt;</var> [ ASC | DESC ] [ NULLS FIRST | NULLS LAST ]
+
+<var class="keyword varname">&lt;position&gt;</var> ::= <var class="keyword varname">&lt;unsigned_integer&gt;</var></pre></div>
+
+                  <p class="p">ASC sorts records in ascending order and DESC sorts records in descending
+                     order. The default is ASC.</p>
+
+                  <p class="p"><samp class="ph systemoutput">[ NULLS FIRST | NULLS LAST ]</samp> specifies where in
+                     the result set NULL values should appear. For ascending ordering NULL values
+                     are returned first by default. For descending ordering, NULL values are
+                     returned last. You can override this behavior using NULLS FIRST or NULLS LAST
+                     to explicitly specify NULL value ordering.</p>
+
+                  <p class="p">
+                     <var class="keyword varname">&lt;position&gt;</var> uses the entries in the select list to define the
+                     ordering required. For example: </p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT col1, col2 FROM t ORDER BY 2;</pre></div>
+
+                  <p class="p">ORDER BY 2 indicates that ordering should be undertaken using the second
+                     expression in the select list, which in this case is col2.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><a name="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_limit"><!-- --></a>LIMIT</dt>
+
+               <dd class="dd pd">
+                  <p class="p">Limits the number of output records. </p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;limit&gt;</var> ::= 
+ LIMIT <var class="keyword varname">&lt;unsigned_integer&gt;</var> [ OFFSET <var class="keyword varname">&lt;unsigned_integer&gt;</var> ]</pre></div>
+
+                  <p class="p">The following example returns the first 3 records after skipping 5 records.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">LIMIT 3 [OFFSET 5]</pre></div>
+
+               </dd>
+
+            
+         </dl>
+
+      </div></div>
+
+      <div class="section" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_example"><div class="section_title">Examples</div><div type="Examples">
+         <div class="sectiondiv">
+            <p class="p"><strong class="ph b">Examples of WAIT and NOWAIT</strong></p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE column table x ( a int, b int );
+INSERT INTO x values (1,1);
+INSERT INTO x values (2,2);
+CREATE column table y ( a int, b int );
+INSERT INTO y values (1,1);
+INSERT INTO y values (2,2);
+SELECT * FROM x WHERE a=1 FOR UPDATE WAIT 1; --&gt; OK
+SELECT * FROM y WHERE b=1 FOR UPDATE NOWAIT; --&gt; OK
+COMMIT;
+SELECT * FROM x WHERE a=1 FOR UPDATE OF x.c; --&gt; error because c column does not exist in table x.
+SELECT * FROM x WHERE a=1 FOR UPDATE OF x.a; --&gt; OK
+COMMIT;
+SELECT * FROM x, y WHERE a=1 FOR UPDATE; --&gt; error because "OF" is not used to specify which one of x and y is locked.
+SELECT * FROM x, y WHERE a=1 FOR UPDATE OF y.b; --&gt; OK
+COMMIT;
+SELECT * FROM x, (SELECT * FROM y) WHERE a=1 FOR UPDATE OF y.b;  --&gt; error because y is inside subquery
+COMMIT;</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_time_travel_example"><strong class="ph b">Examples of TIME TRAVEL</strong></p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">create history column table x ( a int, b int ); // after turning off auto commit
+ insert into x values (1,1);
+ commit;
+ select last_commit_id from m_history_index_last_commit_id where session_id = current_connection; // for example, 10
+ insert into x values (2,2);
+ commit;
+ select last_commit_id from m_history_index_last_commit_id where session_id = current_connection; // for example, 20 
+ delete from x;
+ commit;
+ select last_commit_id from m_history_index_last_commit_id where session_id = current_connection; // for example, 30
+ 
+ select * from x as of commit id 30; // return nothing
+ select * from x as of commit id 20; // return two records (1,1) and (2,2)
+ select * from x as of commit id 10; // return one record (1,1)
+
+ select commit_time from sys.transaction_history where commit_id = 10; // for example, '2012-01-01 01:11:11'
+ select commit_time from sys.transaction_history where commit_id = 20; // for example, '2012-01-01 02:22:22'
+ select commit_time from sys.transaction_history where commit_id = 30; // for example, '2012-01-01 03:33:33'
+
+ select * from x as of utctimestamp '2012-01-02 02:00:00'; // return one record (1,1)
+ select * from x as of utctimestamp '2012-01-03 03:00:00'; // return two records (1,1) and (2,2)
+ select * from x as of utctimestamp '2012-01-04 04:00:00'; // return nothing</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_with_query_example"><strong class="ph b">Examples of WITH query</strong></p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">create table t1(a int, b int);
+ with q1 as (select * from t1) select * from q1;
+ with q1(c1, c2) as (select * from t1) select * from q1;
+ with q1(c1) as (select a+b from t1), q2(c2) as (select max(c1) from q1) select c1 from q1 union all select c2 from q2;</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_group_by_example"><strong class="ph b">Examples of GROUP BY/GROUPING
+                  SETS</strong></p>
+
+            <p class="p">You create column table t1 and populate it with some example data.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">create column table t1 ( id int primary key, customer varchar(5), year int, product varchar(5), sales int );
+ insert into t1 values(1, 'C1', 2009, 'P1', 100);
+ insert into t1 values(2, 'C1', 2009, 'P2', 200);
+ insert into t1 values(3, 'C1', 2010, 'P1', 50);
+ insert into t1 values(4, 'C1', 2010, 'P2', 150);
+ insert into t1 values(5, 'C2', 2009, 'P1', 200);
+ insert into t1 values(6, 'C2', 2009, 'P2', 300);
+ insert into t1 values(7, 'C2', 2010, 'P1', 100);
+ insert into t1 values(8, 'C2', 2010, 'P2', 150);</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p"><strong class="ph b">Example of FOR XML</strong></p>
+
+            <p class="p">The following fictious example shows what the results might look like when specifying
+               FOR XML with the schemaloc, targetns, and nullstyle options:</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT C1, C2 FROM T1
+ FOR XML ('schemaloc'='http://thiscompany.com/schemalib', 'targetns'='http://thiscompany.com/samples', 'nullstyle'='omit');</pre></div>
+
+            <div class="table-wrapper"><table summary="" id="loio20fcf24075191014a89e9dc7b8408b26__simpletable_v3m_2rr_bz" border="1" class="simpletable"><tr class="sthead">
+                  <th valign="bottom" align="left" id="d17131543e2104" class="stentry">
+                     <p class="p"/>
+
+                  </th>
+
+               </tr>
+<tr class="strow">
+                  <td valign="top" headers="d17131543e2104" class="stentry">
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;resultset schemalocation="http://thiscompany.com/schemalib" targetnamespace="http://thiscompany.com/samples"&gt;
+   &lt;row&gt;
+      &lt;C1&gt;1&lt;/C1&gt;
+      &lt;C2&gt;a&lt;/C2&gt;
+   &lt;/row&gt;
+   &lt;row&gt;
+      &lt;C1&gt;11&lt;/C1&gt;
+      &lt;C2&gt;ab&lt;/C2&gt;
+   &lt;/row&gt;
+   &lt;row&gt;
+      &lt;C1&gt;11c&lt;/C1&gt;
+   &lt;/row&gt;
+&lt;/resultset&gt;
+</pre></div>
+
+                  </td>
+
+               </tr>
+</table></div>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_group_by_example_1"><strong class="ph b">Example 1 - GROUPING SETS</strong></p>
+
+            <p class="p">Use grouping sets to analyze the customer data.</p>
+
+            <p class="p">The this query is equivalent to example 3 below.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">select customer, year, product, sum(sales)
+     from t1
+     group by GROUPING SETS
+     (
+      (customer, year),
+      (customer, product)
+     );
+
+ select customer, year, NULL, sum(sales)
+     from t1
+     group by customer, year
+ union all
+ select customer, NULL, product, sum(sales)
+     from t1
+     group by customer, product;</pre></div>
+
+            <p class="p">Observe that the two groups inside grouping sets in the first query are specified in
+               each GROUP BY clause in the second query.</p>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_group_by_example_2"><strong class="ph b">Example 2 - ROLLUP</strong></p>
+
+            <p class="p">Use ROLLUP to generates results with multiple levels of aggregation.</p>
+
+            <p class="p">The following ROLLUP query is equivalent to Example 4 below.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">select customer, year, sum(sales)
+     from t1
+     group by ROLLUP(customer, year);
+
+ select customer, year, sum(sales)
+     from t1
+     group by grouping sets
+     (
+      (customer, year),
+      (customer)
+     )
+ union all
+ select NULL, NULL, sum(sales)
+     from t1; </pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_group_by_example_3"><strong class="ph b">Example 3 - CUBE</strong></p>
+
+            <p class="p">You use CUBE to generates results with multiple levels of aggregation.</p>
+
+            <p class="p">The following CUBE query is equivalent to the query in Example 5.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">select customer, year, sum(sales)
+     from t1
+     group by CUBE(customer, year);
+
+ select customer, year, sum(sales)
+     from t1
+     group by grouping sets
+     (
+      (customer, year),
+      (customer),
+      (year)
+     )
+ union all
+ select NULL, NULL, sum(sales)
+     from t1;</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_group_by_example_4"><strong class="ph b">Example 4 - BEST 1</strong></p>
+
+            <p class="p">Use BEST 1 to return only the best group of results.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">select customer, year, product, sum(sales)
+     from t1
+     group by grouping sets BEST 1
+     (
+      (customer, year),
+      (product)
+     );</pre></div>
+
+            <p class="p">In this example, 4 records exist for (customer, year) group and 2 records exist for
+               (product) group, so the former 4 records are returned. If you used 'BEST -1' instead
+               of 'BEST 1', the latter 2 records would be returned.</p>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_group_by_example_5"><strong class="ph b">Example 5 - LIMIT</strong></p>
+
+            <p class="p">Use LIMIT 2 to limit the number of records to a maximum 2 for each group.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">select customer, year, product, sum(sales)
+     from t1
+     group by grouping sets LIMIT 2
+     (
+      (customer, year),
+      (product)
+     );</pre></div>
+
+            <p class="p">For the (customer, year) group, the number of records are 4, so only first 2 records
+               are returned. For the (product) group, the number of records are 2, in this case all
+               the records are returned.</p>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_group_by_example_6"><strong class="ph b">Example 6 - WITH SUBTOTAL</strong></p>
+
+            <p class="p">Use WITH SUBTOTAL to produce an additional record for each group that displays a
+               subtotal of returned records. These subtotal records are NULL for the customer, year,
+               product columns and the sum of sum(sales) values in the select list.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">select customer, year, product, sum(sales)
+     from t1
+     group by grouping sets LIMIT 2 WITH SUBTOTAL
+     (
+      (customer, year),
+      (product)
+     );</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_group_by_example_7"><strong class="ph b">Example 7 - WITH BALANCE</strong></p>
+
+            <p class="p">Use WITH BALANCE to produce an additional record for each group that displays a
+               subtotal of unreturned records.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">select customer, year, product, sum(sales)
+     from t1
+     group by grouping sets LIMIT 2 WITH BALANCE
+     (
+      (customer, year),
+      (product)
+     );</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_group_by_example_8"><strong class="ph b">Example 8 - WITH TOTAL</strong></p>
+
+            <p class="p">Use WITH TOTAL to produce an additional record for each group that displays a total
+               of all grouped records.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">select customer, year, product, sum(sales)
+     from t1
+     group by grouping sets LIMIT 2 WITH TOTAL
+     (
+      (customer, year),
+      (product)
+     );</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_group_by_example_9"><strong class="ph b">Example 9 - TEXT_FILTER</strong></p>
+
+            <p class="p">Use TEXT_FILTER to retrieve the first column of each group with a given
+                  <var class="keyword varname">&lt;filterspec&gt;</var>. The following query searches for columns ending
+               with '2'. This is applied to customers in the first grouping set and products in the
+               second. Only three matched records are returned.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">select customer, year, product, sum(sales), text_filter(customer), text_filter(product)
+     from t1
+     group by grouping sets TEXT_FILTER '*2'
+     (
+      (customer, year),
+      (product)
+     );</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_group_by_example_10"><strong class="ph b">Example 10 - FILL UP</strong></p>
+
+            <p class="p">Use FILL UP to return both matched and non-matched records with
+                  <var class="keyword varname">&lt;filterspec&gt;</var>. The following query returns six records whereas the
+               previous example only returned three.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">select customer, year, product, sum(sales), text_filter(customer), text_filter(product)
+     from t1
+     group by grouping sets TEXT_FILTER '*2' FILL UP
+     (
+      (customer, year),
+      (product)
+     );</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_group_by_example_11"><strong class="ph b">Example 11 - SORT MATCHES TO
+                  TOP</strong></p>
+
+            <p class="p">SORT MATCHES TO TOP is used to raise matched records up. For each grouping set, its
+               grouped records are sorted.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">select customer, year, product, sum(sales), text_filter(customer), text_filter(product)
+     from t1
+     group by grouping sets TEXT_FILTER '*2' FILL UP SORT MATCHES TO TOP
+     (
+      (customer, year),
+      (product)
+     );</pre></div>
+
+         </div>
+         <div class="sectiondiv">
+            <p class="p" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_group_by_example_12"><strong class="ph b">Example 12 - STRUCTURED
+               RESULT</strong></p>
+
+            <p class="p">Use STRUCTURED RESULT to create temporary tables, one for each grouping set and an
+               additional table for the overview table.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">select customer, year, product, sum(sales)
+     from t1
+     group by grouping sets STRUCTURED RESULT
+     (
+      (customer, year),
+      (product)
+     );
+
+ select * from "#GN1";
+ select * from "#GN2";</pre></div>
+
+            <p class="p">"#GN1" table is for (customer, year) grouping set and "#GN2" table is for (product)
+               one.</p>
+
+            <p class="p">Each table contains only related columns. That is to say, "#GN1" table does not have
+               "product" column and "#GN2" table does not have "customer" and "year" columns.</p>
+
+            <p class="p">Use WITH OVERVIEW to create a temporary table "#GN0" for the overview table.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">drop table "#G1";
+ drop table "#G2";
+
+ select customer, year, product, sum(sales)
+     from t1
+     group by grouping sets structured result WITH OVERVIEW
+     (
+      (customer, year),
+      (product)
+     );
+
+ select * from "#GN0";
+ select * from "#GN1";
+ select * from "#GN2";</pre></div>
+
+            <p class="p">Change the names of temporary tables by using the PREFIX keyword.</p>
+
+            <p class="p">The names of tables must still must start with '#' which is the prefix used for
+               temporary tables.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">select customer, year, product, sum(sales)
+     from t1
+     group by grouping sets STRUCTURED RESULT WITH OVERVIEW PREFIX '#MYTAB'
+     (
+      (customer, year),
+      (product)
+     );
+
+ select * from "#MYTAB0";
+ select * from "#MYTAB1";
+ select * from "#MYTAB2";</pre></div>
+
+            <p class="p">Temporary tables are dropped when the corresponding session is closed or when a user
+               executes a drop command. A list of temporary tables are seen in
+               m_temporary_tables.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">select * from m_temporary_tables;</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20fcf24075191014a89e9dc7b8408b26__sql_select_1sql_select_group_by_example_13"><strong class="ph b">Example 13 - MULTIPLE
+                  RESULTSETS</strong></p>
+
+            <p class="p">Use MULTIPLE RESULTSETS to return multiple result sets. The following query returns
+               three result sets, one for the overview table and two for the grouping sets.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT customer, year, product, sum(sales)
+     FROM t1
+     GROUP BY GROUPING SETS MULTIPLE RESULTSETS
+     (
+      (customer, year),
+      (product)
+     );</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p"><strong class="ph b">Example 15 - TABLESAMPLE</strong></p>
+
+            <p class="p">Use TABLESAMPLE to select a random sample of 1% of the employee table and within that
+               sample count the number of managers. </p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT count(*), avg(salary)
+    FROM employee TABLESAMPLE SYSTEM (1)
+    WHERE employee.type = ‘manager’;</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p"><strong class="ph b">Example 16 - HINTS</strong></p>
+
+            <p class="p">In the following example the use_olap_plan hint is applied.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT T2.* FROM ( SELECT MAX(COL) FROM T1 GROUP BY COL WITH HINT( NO_USE_OLAP_PLAN )) T2 WITH HINT( USE_OLAP_PLAN );</pre></div>
+
+            <p class="p">In the following example no hint is applied.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT T2.* FROM ( SELECT MAX(COL) FROM T1 GROUP BY COL WITH HINT( NO_USE_OLAP_PLAN )) T2;</pre></div>
+
+            <p class="p">Examples for cache controlling hints:</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT FROM T1 WITH HINT( IGNORE_PLAN_CACHE ); 
+SELECT FROM T1 WITH HINT( USE_REMOTE_CACHE );</pre></div>
+
+            <p class="p">Examples for the use of hints in a scale-out environment:</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT FROM T1 WITH HINT( ROUTE_TO(1));
+SELECT FROM T1 WITH HINT( NO_ROUTE_TO(2,3));
+SELECT FROM T1 WITH HINT( ROUTE_BY(T2));
+SELECT FROM T1 WITH HINT( ROUTE_BY_CARDINALITY(T1,T2,T3));
+SELECT FROM T1 WITH HINT( NO_ROUTE_TO(1), ROUTE_TO(1));   -- route to volume id = 1 ( last one is used )
+SELECT FROM T1 WITH HINT( DATA_TRANSFER_COST(0) );</pre></div>
+
+            <p class="p">Examples for execution engine selection with hints:</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT FROM T1 WITH HINT( USE_OLAP_PLAN ); 
+SELECT FROM T1 WITH HINT( NO_USE_OLAP_PLAN );</pre></div>
+
+            <p class="p">Examples for controlling the access path with hints:</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT FROM T1 WITH HINT( INDEX_SEARCH ); 
+SELECT FROM T1 WITH HINT( NO_INDEX_SEARCH );</pre></div>
+
+            <p class="p">Examples for controlling join operations with hints:</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT FROM T1, T2 WITH HINT( INDEX_JOIN ); 
+SELECT FROM T1, T2 WITH HINT( NO_INDEX_JOIN ); 
+SELECT FROM T1, T2 WITH HINT( HASH_JOIN ); 
+SELECT FROM T1, T2 WITH HINT( NO_HASH_JOIN ); 
+SELECT FROM T1, T2 WITH HINT( MIXED_INVERTED_INDEX_JOIN ); 
+SELECT FROM T1, T2 WITH HINT( NO_MIXED_INVERTED_INDEX_JOIN ); 
+SELECT FROM T1, T2 WITH HINT( OPTIMIZE_METAMODEL ); 
+SELECT FROM T1, T2 WITH HINT( NO_OPTIMIZE_METAMODEL );</pre></div>
+
+            <p class="p">Examples for query rewriting and logical transformations with hints:</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT FROM T1 WITH HINT( SUBPLAN_SHARING); 
+SELECT FROM T1 WITH HINT( NO_SUBPLAN_SHARING );</pre></div>
+
+            <p class="p">Print values from the array column C1 in table T1.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT C1 FROM T1;</pre></div>
+
+            <p class="p">Print an array value using array construction by enumeration.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT ARRAY ( 1, 2, 3, 4 ) FROM DUMMY;</pre></div>
+
+            <p class="p">Print an array value using array construction by query. </p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT ARRAY( SELECT C1 FROM T0 ) FROM DUMMY;</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p"><strong class="ph b">Example 17 - PARTITION</strong></p>
+
+            <p class="p">You use PARTITION to select the data contained in partitions 1, 3 and 4 of table
+                  <samp class="ph codeph">T0</samp>.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T0 PARTITION (1, 3, 4);</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p"><span class="ph emphasis emphasis">Example 18 - ASSOCIATIONS</span></p>
+
+            <p class="p">Create the tables EMPLOYEES, CITIES, and STATES.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE EMPLOYEES (ID INT, NAME VARCHAR(20), CITY_ID INT) WITH ASSOCIATIONS (JOIN CITIES AS CITY ON CITY.ID = CITY_ID);
+CREATE TABLE CITIES (ID INT, NAME VARCHAR(20), STATE_ID INT) WITH ASSOCIATIONS (JOIN STATES AS STATE ON STATE.ID = STATE_ID);
+CREATE TABLE STATES (ID INT, NAME VARCHAR(20));</pre></div>
+
+            <p class="p">Populate the STATES table by executing the following statements:</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">INSERT INTO STATES VALUES(1, 'California');
+INSERT INTO STATES VALUES(2, 'Washington');</pre></div>
+
+            <p class="p">Populate the CITIES table by executing the following statements:</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">INSERT INTO CITIES VALUES(1, 'San Francisco', 1);
+INSERT INTO CITIES VALUES(2, 'Los Angeles', 1);
+INSERT INTO CITIES VALUES(3, 'Oakland', 1);</pre></div>
+
+            <p class="p">Populate the EMPLOYEES table by executing the following statements:</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">INSERT INTO EMPLOYEES VALUES(1, 'Tom', 1);
+INSERT INTO EMPLOYEES VALUES(2, 'Jerry', 2);
+INSERT INTO EMPLOYEES VALUES(3, 'Mick', 1);
+INSERT INTO EMPLOYEES VALUES(4, 'Steve', 4);</pre></div>
+
+            <p class="p">Execute the following statement:</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM EMPLOYEES:CITY.STATE;</pre></div>
+
+            <p class="p">The following result set is returned:</p>
+
+            
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20fcf24075191014a89e9dc7b8408b26__table_bvv_j5q_yy" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+                  
+                  
+                  <thead class="thead" align="left">
+                     <tr class="row">
+                        <th class="entry" valign="top" width="50%" id="d17131543e2487">
+                           <p class="p">ID</p>
+
+                        </th>
+
+                        <th class="entry" valign="top" width="50%" id="d17131543e2493">
+                           <p class="p">Name</p>
+
+                        </th>
+
+                     </tr>
+
+                  </thead>
+
+                  <tbody class="tbody">
+                     <tr class="row">
+                        <td class="entry" valign="top" width="50%" headers="d17131543e2487 ">
+                           <p class="p">1</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" width="50%" headers="d17131543e2493 ">
+                           <p class="p">California</p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" width="50%" headers="d17131543e2487 ">
+                           <p class="p">2</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" width="50%" headers="d17131543e2493 ">
+                           <p class="p">Washington</p>
+
+                        </td>
+
+                     </tr>
+
+                  </tbody>
+
+               </table>
+</div>
+
+         </div></div></div>
+
+   </div>
+
+ 
+<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?f55ce8e92a6744f3a4ee9f350cfb6453.html" target="_top" title="Provides all available hints to be used in WITH HINT clauses.">HINTS System View</a></div>
+<div><a class="link" href="default.html?4ba9edce1f2347a0b9fcda99879c17a1.html" target="_top" title="The SQL Optimizer usually determines the access path (for example, index search versus table scan) on the basis of the costs (Cost-Based Optimizer). You can deactivate this mechanism and explicitly specify hints for an SQL statement, which enforces a certain access path.">HINT Details</a></div>
+<div><a class="link" href="default.html?20ad3d1075191014bce8aba8320b5b94.html" target="_top" title="Provides partition information of column tables.">M_CS_PARTITIONS System View</a></div>
+<div><a class="link" href="default.html?209f5020751910148fd8fe88aa4d79d9.html" target="_top" title="This chapter describes the SAP HANA database implementation of Structured Query Language (SQL).">Introduction to SQL</a></div>
+<div><a class="link" href="default.html?20e21cfd75191014a5cbbea031962073.html" target="_top" title="Returns an integer value to identify which grouping set each row belongs to.">GROUPING_ID Function (Miscellaneous)</a></div>
+<div><a class="link" href="default.html?d22eb360d2951014b6f0b9f1e84edce9.html" target="_top" title="Determines whether a specified column is used in grouping.">GROUPING Function (Miscellaneous)</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="SELECT Statement (Data Manipulation)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,17 @@
+schema="OTEBW_EMTAS";
+
+query = "select T.DATE_SQL as DELIVERYDAY,
+				PERIOD,
+				INAREA,
+				OUTAREA,
+				EXPORT,
+				AUCTION,
+				T.CALMONTH as CALMONTH,
+				T.YEAR as CALYEAR,
+				T.CALWEEK as CALWEEK,
+				T.CALQUARTER as CALQUARTER,
+				'MWH' as UNIT				
+		 from BW_DM_CBF,
+		_SYS_BI.TC_DAY_CALENDAR as T
+		where T.DATE_SQL = DELIVERYDAY";
+

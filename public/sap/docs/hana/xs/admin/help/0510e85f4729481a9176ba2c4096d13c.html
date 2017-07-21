@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Clean up the log entries generated in the SAP HANA database by the XS jobs that are running in the SAP HANA system."/>
+<meta name="description" content="Clean up the log entries generated in the SAP HANA database by the XS jobs that are running in the SAP HANA system."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=5836755617303768"/>
+<title>Clean up XS Job Logs</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio0510e85f4729481a9176ba2c4096d13c";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio0510e85f4729481a9176ba2c4096d13c">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Clean up XS Job Logs</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">Clean up the log entries generated in the SAP HANA database by the XS jobs that are
+		running in the SAP HANA system.</p>
+
+		<div class="section prereq p"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Prerequisites</h2></div>
+			<p class="p">To enable the XS Job schedule feature in <span class="ph pname">SAP HANA</span> XS, the following
+				prerequisites apply:</p>
+
+			<ul class="ul" id="loio0510e85f4729481a9176ba2c4096d13c__ul_id3_h2z_1m">
+				<li class="li">
+					<p class="p">You have administrator access to an <span class="ph pname">SAP HANA</span> system</p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">You have been granted the <span class="ph pname">SAP HANA</span> user role
+							<span class="ph uicontrol">sap.hana.xs.admin.roles::JobAdministrator</span></p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">You have enabled the job-scheduling feature in <span class="ph pname">SAP HANA</span> XS</p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">You have maintained details of the XS Job whose log entries you want to clean
+						up.</p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">You have enabled the XS Job
+							<span class="ph uicontrol">sap.hana.xs.admin.jobs.server.common::cleanJobLog</span>
+						that is used to clean up job-log entries</p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">You have activated the SQLCC artifact
+							<span class="ph uicontrol">sap.hana.xs.admin.jobs.server.common::
+							cleanJobLog.xssqlcc</span> that is used by the cleanup job; this
+						artifact creates a connection to SAP HANA with the
+							<span class="ph uicontrol">JobLogAdmin</span> privileges required to remove entries
+						from the XS-job log (as defined in <span class="ph uicontrol">cleanJobLog</span>)</p>
+
+				</li>
+
+			</ul>
+
+		</div>
+
+		<div class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<p class="p">XS jobs write their logs to the table <span class="ph filepath">_sys_xs.job_log</span> in the SAP HANA
+				database. Since this table can grow in size very quickly, as more and more jobs and
+				schedules are created, it is recommended to clean up the old job log entries. You
+				can set up an XS Job that runs at a defined schedule and deletes all old log file
+				entries for a particular XS job from the SAP HANA XS job-log table.</p>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+				<span class="ph cmd">Maintain the XS job's runtime configuration.</span>
+				<ol type="a" class="ol substeps" id="loio0510e85f4729481a9176ba2c4096d13c__substeps_ghk_r1y_1m">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Start the <span class="ph uicontrol">SAP HANA XS Administration Tool</span>.</span>
+						<div class="itemgroup info">The <span class="ph uicontrol">SAP HANA XS Administration Tool</span> is
+							available on the <span class="ph pname">SAP HANA</span> XS Web server at the following
+							URL:
+									<span class="ph filepath">http://<var class="keyword varname">&lt;WebServerHost&gt;</var>:80<var class="keyword varname">&lt;SAPHANAinstance&gt;</var>/sap/hana/xs/admin/</span>.</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Open the <span class="ph uicontrol">XS Job Dashboard</span>.</span>
+						<div class="itemgroup info">
+							<div class="note note"><span class="notetitle">Note</span> To maintain details of an XS job using the Web-based <span class="ph uicontrol">XS
+									Administration Tool</span> you need the privileges granted
+								in the <span class="ph pname">SAP HANA</span> user role
+									<span class="ph uicontrol">sap.hana.xs.admin.roles::JobAdministrator</span>.</div>
+
+						</div>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Configure details of the XS job schedule.</span>
+				<div class="itemgroup info">In the <span class="ph uicontrol">Job Details</span> tab, select the XS Job whose details
+					you want to maintain. In the <span class="ph uicontrol">Configuration</span> tab, you need
+					to specify the following details:<ul class="ul" id="loio0510e85f4729481a9176ba2c4096d13c__ul_jwm_hl5_zl">
+						<li class="li"><span class="ph uicontrol">User</span><p class="p">The user account in which the
+									<span class="ph filepath">xscron</span> job runs, for example,
+									<kbd class="ph userinput">SYSTEM</kbd></p>
+</li>
+
+						<li class="li"><span class="ph uicontrol">Password</span><div class="p">For security reasons, you must provide
+								a password for the specified user.<div class="note note"><span class="notetitle">Note</span> If you do not provide a user
+									password, you cannot save the changes to the XS Job object's
+									run-time configuration.</div>
+</div>
+</li>
+
+						<li class="li"><span class="ph uicontrol">Locale</span><p class="p">The language encoding required for the
+								locale in which the <span class="ph filepath">xscron</span> job runs, for
+								example, <kbd class="ph userinput">en_US</kbd></p>
+</li>
+
+						<li class="li"><span class="ph uicontrol">Start/Stop time</span><p class="p">An optional value to set time
+								during which the <span class="ph filepath">xscron</span> job runs. You must
+								enter the values using the syntax used for the SAP HANA data type
+									<samp class="ph codeph">LocalDate</samp> and <samp class="ph codeph">LocalTime</samp>, for
+								example, <kbd class="ph userinput">2013-11-05 00:30:00</kbd> (thirty minutes
+								past midnight on the 5th of November 2013.</p>
+</li>
+
+						<li class="li"><span class="ph uicontrol">Active</span><p class="p">Enable or disable the job
+							schedule.</p>
+</li>
+
+					</ul>
+</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Ensure that the old log entries written by the XS job are cleaned up.</span>
+				<div class="itemgroup info">
+					<p class="p">To enable a scheduled clean up of log entries in the SAP HANA database, you
+						need to set up the following details:</p>
+
+					<ul class="ul" id="loio0510e85f4729481a9176ba2c4096d13c__ul_f1h_j4m_y5">
+						<li class="li"><span class="ph uicontrol">Enabled</span><p class="p">Set the status of the job schedule used
+								to clean up the XS job-related log entries</p>
+</li>
+
+						<li class="li"><span class="ph uicontrol">XSCron</span><p class="p">Define the schedule using XS cron syntax (year, month,
+								day, day of the week, hour, minute, second) at which the cleanup job
+								runs.</p>
+<p class="p"><kbd class="ph userinput">* * * -1.sun 9 0 0</kbd></p>
+<p class="p">This
+								example runs the job on the last Sunday of every month at
+							9am.</p>
+</li>
+
+						<li class="li"><span class="ph uicontrol">Day</span><p class="p">Specify the number of days for which log entries should be
+									<span class="ph emphasis emphasis">retained</span>. For example, to delete all log
+								entries that are older than two days, enter the value
+										<span class="q">“<kbd class="ph userinput">2</kbd>”</span>.</p>
+</li>
+
+					</ul>
+
+				</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Save the job.</span>
+				<div class="itemgroup info">Choose <span class="ph uicontrol">Save Job</span> to save and activate the changes to the
+					job schedule.</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Check the status of the new job and schedule.</span>
+				<div class="itemgroup info">You can view the list of <span class="ph filepath">xsjob</span> schedules in the
+						<span class="ph uicontrol">Job Details</span> tab of the <span class="ph uicontrol"> XS Job
+						Details</span> window. The information displayed includes the XS cron
+					setup that defines the schedule, the current status of the job schedule, as well
+					as the start and finish times.</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Check the logs to ensure the job is running according to schedule.</span>
+				<div class="itemgroup info">
+					<div class="note tip"><span class="tiptitle">Tip</span> If the <span class="ph uicontrol">Description</span> field for a specific
+						job log is empty in the <span class="ph uicontrol">View Logs</span> list, this is
+						typically an indication that either no description was defined for the job
+						or the log has been deleted as part of the cleanup operation.  </div>
+
+				</div>
+			</li>
+</ol>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?118db9377ec546ee9abff88b512c80b6.html" target="_top" title="XS job schedules are defined by developers; the XS job-scheduling feature must be set up by a system administrator.">Maintain XS Job Details</a></div>
+<div><a class="link" href="default.html?847142e78a864a5fb7a2e35ec1bb5c29.html" target="_top" title="The XS Job Dashboard is the central point of control for monitoring and maintaining job schedules that have been defined using the XS Job syntax.">The XS Job Dashboard</a></div>
+<div><a class="link" href="default.html?df23450bb60a453293b8d4d4385e36ae.html" target="_top" title="Details of the runtime configuration of XS Job schedules and the XS jobs the schedules are used to manage.">XS Job Details</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Clean up XS Job Logs";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

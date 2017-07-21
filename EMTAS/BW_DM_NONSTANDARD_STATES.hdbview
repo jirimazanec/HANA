@@ -1,0 +1,63 @@
+schema="OTEBW_EMTAS";
+
+query = "SELECT to_date(DeliveryDay) as DeliveryDay,
+       Area, -- an area in which nonstadard state uccures
+       Period, 
+       NonStandardState, -- DADM - lower treshold, DAHM - upper treshold, NC - zero price
+       AreaPrice_CZ, -- CZ marginal price
+       AreaPrice_SK, -- SK marginal price
+       AreaPrice_HU, -- HU marginal price
+       AreaPrice_RO,  -- RO marginal price
+       'EUR' as CURRENCY
+  FROM (SELECT r.DeliveryDay DeliveryDay,
+               r.Area Area,
+               r.Period Period,
+               CASE
+                 WHEN r.Area = 'CZ' THEN
+                  CASE
+                    WHEN r.AreaPrice >= c.CZUpLimit THEN 'DAHM'
+                    WHEN r.AreaPrice <= c.CZLowLimit THEN 'DADM'
+                    WHEN r.AreaPrice = 0 THEN 'NC'
+                  END
+                 WHEN r.Area = 'SK' THEN
+                  CASE
+                    WHEN r.AreaPrice >= c.SKUpLimit THEN 'DAHM'
+                    WHEN r.AreaPrice <= c.SKLowLimit THEN 'DADM'
+                    WHEN r.AreaPrice = 0 THEN 'NC'
+                  END
+                 WHEN r.Area = 'HU' THEN
+                  CASE
+                    WHEN r.AreaPrice >= c.HUUpLimit THEN 'DAHM'
+                    WHEN r.AreaPrice <= c.HULowLimit THEN 'DADM'
+                    WHEN r.AreaPrice = 0 THEN
+                     'NC'
+                  END
+                 WHEN r.Area = 'RO' THEN
+                  CASE
+                    WHEN r.AreaPrice >= c.ROUpLimit THEN 'DAHM'
+                    WHEN r.AreaPrice <= c.ROLowLimit THEN 'DADM'
+                    WHEN r.AreaPrice = 0 THEN 'NC'
+                  END
+               END NonStandardState,
+               CZ.AreaPrice AreaPrice_CZ,
+               SK.AreaPrice AreaPrice_SK,
+               HU.AreaPrice AreaPrice_HU,
+               RO.AreaPrice AreaPrice_RO
+          FROM BW_DM_RESULTS r
+          JOIN BW_DM_CALENDAR c
+            ON (r.DeliveryDay = c.DELIVERYDAY)
+          JOIN BW_DM_RESULTS CZ
+            ON (CZ.DeliveryDay = r.DeliveryDay AND CZ.Period = r.Period AND CZ.Auction = 1 AND CZ.area = 'CZ')
+          LEFT JOIN BW_DM_RESULTS SK -- left join in case decoupling mode
+            ON (SK.DeliveryDay = r.DeliveryDay AND SK.Period = r.Period AND SK.Auction = 1 AND SK.area = 'SK')
+          LEFT JOIN BW_DM_RESULTS HU -- left join in case decoupling mode
+            ON (HU.DeliveryDay = r.DeliveryDay AND HU.Period = r.Period AND HU.Auction = 1 AND HU.area = 'HU')
+          LEFT JOIN BW_DM_RESULTS RO -- left join in case decoupling mode
+            ON (RO.DeliveryDay = r.DeliveryDay AND RO.Period = r.Period AND RO.Auction = 1 AND RO.area = 'RO')
+         WHERE r.Auction = 1)
+ WHERE NonStandardState IS NOT NULL    		    		      
+";
+
+depends_on_table=["OTEBW_EMTAS::BW_DM_RESULTS"];
+depends_on_table=["OTEBW_EMTAS::BW_DM_CALENDAR"];
+

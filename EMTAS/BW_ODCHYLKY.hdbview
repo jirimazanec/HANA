@@ -1,0 +1,153 @@
+schema="OTEBW_EMTAS";
+
+query = "select T.DATE_SQL as DELIVERYDAY, 
+				VERSION,
+				EXTERNALVERSION,
+				CALCULATIONID,
+				CURRENCYID,
+				PERIOD,
+				PARTIC,
+				to_decimal(volume,16,4) as VOLUME,
+				to_decimal(TOTALPRICE,16,4) as TOTALPRICE,
+				CONCEPTABRV,
+	 			T.CALMONTH as CALMONTH,
+	 			T.YEAR as CALYEAR,
+	 			T.CALWEEK as CALWEEK,
+	 			T.CALQUARTER as CALQUARTER, 
+				'MWH' as UNIT,
+				map(CONCEPTABRV,'IEM','B','IEP','S') as BUYSELL,
+				case when TOTALPRICE = 0 then ''
+				     else case when TOTALPRICE < 0  then 'D' else 'K' end 
+				end as CREDITDEBET								
+		   from BW_ODCHYLKY_PLATBY,
+		   		_SYS_BI.TC_DAY_CALENDAR T
+		  where T.DATE_SQL = DELIVERYDAY 
+		    and VERSION in (2,3,4) 
+	  union all
+		 select T.DATE_SQL as DELIVERYDAY,
+				VERSION,
+				EXTERNALVERSION,
+				CALCULATIONID,
+				CURRENCYID,
+				PERIOD,
+				PARTIC,
+				to_decimal(volume,16,4) as VOLUME,
+				0 as TOTALPRICE,
+				CONCEPTABRV,
+	 			T.CALMONTH as CALMONTH,
+	 			T.YEAR as CALYEAR,
+	 			T.CALWEEK as CALWEEK,
+	 			T.CALQUARTER as CALQUARTER, 
+				'MWH' as UNIT,
+				map(CONCEPTABRV,'ISSM', 'B','ISSP', 'S','ISSSM','B','ISSSP','S') as BUYSELL,
+				'' as CREDITDEBET 						
+		   from BW_ODCHYLKY_PODRIZENYCH_SZ,
+		   		_SYS_BI.TC_DAY_CALENDAR T
+		  where T.DATE_SQL = DELIVERYDAY 
+		    and VERSION in (2,3,4) 
+	  union all	  
+		 select T.DATE_SQL as DELIVERYDAY,
+				VERSION,
+				EXTERNALVERSION,
+				CALCULATIONID,
+				CURRENCYID,
+				PERIOD,
+				PARTIC,
+				to_decimal(volume,16,4) as VOLUME,
+				to_decimal(TOTALPRICE,16,4) as TOTALPRICE,
+				'REG',
+	 			T.CALMONTH as CALMONTH,
+	 			T.YEAR as CALYEAR,
+	 			T.CALWEEK as CALWEEK,
+	 			T.CALQUARTER as CALQUARTER, 
+				'MWH' as UNIT,
+				case when volume <= 0 then 'B' else 'S' end as BUYSELL,
+				case when TOTALPRICE = 0 then ''
+				     else case when TOTALPRICE < 0  then 'D' else 'K' end 
+				end as CREDITDEBET									 											
+		   from BW_ODCHYLKY_ROU,
+		   		_SYS_BI.TC_DAY_CALENDAR T
+		  where T.DATE_SQL = DELIVERYDAY     	
+		    and VERSION in (2,3,4) 	
+	  union all
+		 select T.DATE_SQL as DELIVERYDAY,
+				VERSION,
+				EXTERNALVERSION,
+				CALCULATIONID,
+				CURRENCYID,
+				PERIOD,
+				PARTIC,
+				0 as VOLUME,
+				to_decimal(TOTALPRICE,16,4) as TOTALPRICE,
+				CONCEPTABRV,
+	 			T.CALMONTH as CALMONTH,
+	 			T.YEAR as CALYEAR,
+	 			T.CALWEEK as CALWEEK,
+	 			T.CALQUARTER as CALQUARTER, 
+				'MWH' as UNIT, 
+				case when TOTALPRICE <= 0 then 'B' else 'S' end  as BUYSELL,
+				case when TOTALPRICE = 0 then ''
+				     else case when TOTALPRICE < 0  then 'D' else 'K' end
+				end as CREDITDEBET									 						
+		   from BW_ODCHYLKY_PREBYTEK_RE,
+		   		_SYS_BI.TC_DAY_CALENDAR T
+		  where T.DATE_SQL = DELIVERYDAY   
+		    and VERSION in (2,3,4)   		
+	  union all
+		 select T.DATE_SQL as DELIVERYDAY,
+				VERSION,
+				EXTERNALVERSION,
+				CALCULATIONID,
+				CURRENCYID,
+				PERIOD,
+				PARTIC,
+				to_decimal(volume,16,4) as VOLUME,
+				to_decimal(TOTALPRICE,16,4) as TOTALPRICE,
+				CONCEPTABRV,
+	 			T.CALMONTH as CALMONTH,
+	 			T.YEAR as CALYEAR,
+	 			T.CALWEEK as CALWEEK,
+	 			T.CALQUARTER as CALQUARTER, 
+				'MWH' as UNIT,
+				map(CONCEPTABRV,'AC-','B','AC+','S') as BUYSELL,
+				case when TOTALPRICE = 0 then ''
+				     else case when TOTALPRICE < 0  then 'D' else 'K' end 
+				end as CREDITDEBET															
+		   from BW_VYPORADANI_RE_PPS,
+		   		_SYS_BI.TC_DAY_CALENDAR T
+		  where T.DATE_SQL = DELIVERYDAY    
+		    and VERSION in (2,3,4)  		
+	  union all
+		 select T.DATE_SQL as DELIVERYDAY,
+				VERSION,
+				EXTERNALVERSION,
+				CALCULATIONID,
+				CURRENCYID,
+				PERIOD,
+				PARTIC,
+				to_decimal(volume,16,4) as VOLUME,
+				to_decimal(TOTALPRICE,16,4) as TOTALPRICE,
+				CONCEPTABRV,
+	 			T.CALMONTH as CALMONTH,
+	 			T.YEAR as CALYEAR,
+	 			T.CALWEEK as CALWEEK,
+	 			T.CALQUARTER as CALQUARTER, 
+				'MWH' as UNIT,
+				map(CONCEPTABRV,'VY-','B','VY+','S') as BUYSELL,
+				case when TOTALPRICE = 0 then ''
+				     else case when TOTALPRICE < 0  then 'D' else 'K' end 
+				end as CREDITDEBET														
+		   from BW_VYPORADANI_RE_VT,
+		   		_SYS_BI.TC_DAY_CALENDAR T
+		  where T.DATE_SQL = DELIVERYDAY     
+		    and VERSION in (2,3,4) 	    		    		      
+";
+
+depends_on_table=["OTEBW_EMTAS::BW_ODCHYLKY_PLATBY"];
+depends_on_table=["OTEBW_EMTAS::BW_ODCHYLKY_PODRIZENYCH_SZ"];
+depends_on_table=["OTEBW_EMTAS::BW_ODCHYLKY_ROU"];
+depends_on_table=["OTEBW_EMTAS::BW_ODCHYLKY_PREBYTEK_RE"];
+depends_on_table=["OTEBW_EMTAS::BW_VYPORADANI_RE_PPS"];
+depends_on_table=["OTEBW_EMTAS::BW_VYPORADANI_RE_VT"];
+
+

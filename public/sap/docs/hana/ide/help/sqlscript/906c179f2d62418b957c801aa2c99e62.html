@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content=""/>
+<meta name="description" content=""/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=16985956356443388"/>
+<title>ALTER FUNCTION</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio906c179f2d62418b957c801aa2c99e62";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio906c179f2d62418b957c801aa2c99e62">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">ALTER FUNCTION</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc"/>
+
+		<div class="section">
+			<p class="p">You can use <span class="keyword cmdname">ALTER FUNCTION</span> if you want to change the content and properties
+				of a function without dropping the object. </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER FUNCTION &lt;func_name&gt; RETURNS &lt;return_type&gt; [LANGUAGE &lt;lang&gt;] 
+[DEFAULT SCHEMA &lt;default_schema_name&gt;]
+AS
+BEGIN
+  &lt;function_body&gt;
+END
+</pre></div>
+
+			<p class="p">For more information about the parameters please refer to <span class="keyword cmdname">CREATE FUNCTION</span>.
+				For instance, with <span class="keyword cmdname">ALTER FUNCTION</span> you can change the content of
+				the body itself. Consider the following procedure <span class="keyword cmdname">GET_FUNCTIONS</span>
+				that returns all function names on the database. </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE FUNCTION GET_FUNCTIONS
+returns TABLE(schema_name NVARCHAR(256),
+              name        NVARCHAR(256))
+													 
+AS
+BEGIN 
+     return SELECT schema_name    AS schema_name,
+		       function_name  AS name
+		 FROM FUNCTIONS; 
+END;
+</pre></div>
+
+			<p class="p">The function <span class="keyword cmdname">GET_FUNCTIONS</span> should now be changed to return only valid
+				functions. In order to do so, we will use <span class="keyword cmdname">ALTER FUNCTION</span>:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER FUNCTION  GET_FUNCTIONS
+returns TABLE(schema_name NVARCHAR(256),
+              name        NVARCHAR(256))
+													 
+AS
+BEGIN 
+	return SELECT schema_name    AS schema_name,
+				  function_name AS name
+		  FROM FUNCTIONS
+		  WHERE IS_VALID = 'TRUE'; 
+END;
+</pre></div>
+
+			<p class="p">Besides changing the function body, you can also change the default schema
+					<var class="keyword varname">&lt;default_schema_name&gt;</var>.</p>
+
+			<div class="note note"><span class="notetitle">Note</span> 
+				<div class="p">Please note that the following properties cannot be changed with <span class="keyword cmdname">ALTER
+						FUNCTION</span>: <ul class="ul" id="loio906c179f2d62418b957c801aa2c99e62__ul_oqf_fsc_xt">
+						<li class="li">function owner </li>
+
+						<li class="li">security mode (<span class="keyword cmdname">INVOKER</span>,
+							<span class="keyword cmdname">DEFINER</span>)</li>
+
+						<li class="li">function type (table function, scalar function, procedure)</li>
+
+						<li class="li">parameter signature (parameter name, parameter type, default value)</li>
+
+					</ul>
+If you need to change these properties you have to drop and re-create the
+					procedure again by using <span class="keyword cmdname">DROP FUNCTION</span> and <span class="keyword cmdname">CREATE
+						FUNCTION</span>. </div>
+
+				<p class="p">Note that if the default schema is not explicitly specified, it will be removed. </p>
+
+			</div>
+
+			<div class="note note"><span class="notetitle">Note</span> 
+				<p class="p">Note that you need the ALTER privilege for the object you want to change.</p>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="ALTER FUNCTION";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

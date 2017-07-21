@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="You can define an artifact in one CDS document by referring to an artifact that is defined in another CDS document."/>
+<meta name="description" content="You can define an artifact in one CDS document by referring to an artifact that is defined in another CDS document."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=8349002807983091"/>
+<title>External Artifacts in CDS</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio2761f7c8d0ba42f38f0f775d88dd219e";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio2761f7c8d0ba42f38f0f775d88dd219e">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">External Artifacts in CDS</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">You can define an artifact in one CDS document by referring to an artifact that is
+		defined in another CDS document.</p>
+
+		<p class="p">The CDS syntax enables you to define a CDS artifact in one document by basing it on an
+				<span class="q">“external”</span> artifact - an artifact that is defined in a separate CDS document.
+			Each external artifact must be explicitly declared in the source CDS document with the
+				<samp class="ph codeph">using</samp> keyword, which specifies the location of the external
+			artifact, its name, and where appropriate its CDS context.  </p>
+
+		<div class="note tip"><span class="tiptitle">Tip</span> The <samp class="ph codeph">using</samp> declarations must be located in the header of the CDS
+			document between the <samp class="ph codeph">namespace</samp> declaration and the beginning of the
+			top-level artifact, for example, the <samp class="ph codeph">context</samp>. </div>
+
+		<p class="p">The external artifact can be either a single object (for example, a type, an entity, or a view)
+			or a context. You can also include an optional alias in the <samp class="ph codeph">using</samp>
+			declaration, for example, <samp class="ph codeph">ContextA.ContextA1 as ic</samp>. The alias
+				(<samp class="ph codeph">ic</samp>) can then be used in subsequent type definitions in the source
+			CDS document.</p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">//Filename = Pack1/Distributed/ContextB.hdbdd
+namespace Pack1.Distributed;
+
+using Pack1.Distributed::ContextA.T1;
+using Pack1.Distributed::ContextA.ContextAI as ic;
+
+using Pack1.Distributed::ContextA.ContextAI.T3 as ict3; 
+using Pack1.Distributed::ContextA.ContextAI.T3.a as a;  // error, is not an artifact
+
+context ContextB { 
+  type T10 {
+    a : T1;               // Integer
+    b : ic.T2;            // String(20)
+    c : ic.T3;            // structured
+    d : type of ic.T3.b;  // String(88)
+    e : ict3;             // structured
+    x : Pack1.Distributed::ContextA.T1;  // error, direct reference not allowed
+  };
+  context ContextBI {
+    type T1 : String(7);  // hides the T1 coming from the first using declaration
+    type T2 : T1;         // String(7)
+  }; 
+};</pre></div>
+
+		<p class="p">The CDS document <span class="ph filepath">ContextB.hdbdd</span> shown above uses external artifacts (data
+			types <samp class="ph codeph">T1</samp> and <samp class="ph codeph">T3</samp>) that are defined in the <span class="q">“target”</span>
+			CDS document <span class="ph filepath">ContextA.hdbdd</span> shown below. Two <samp class="ph codeph">using</samp>
+			declarations are present in the CDS document <span class="ph filepath">ContextB.hdbdd</span>; one
+			with no alias and one with an explictly specified alias (<samp class="ph codeph">ic</samp>). The first
+				<samp class="ph codeph">using</samp> declaration introduces the scalar type
+				<samp class="ph codeph">Pack1.Distributed::ContextA.T1</samp>. The second <samp class="ph codeph">using</samp>
+			declaration introduces the context
+				<samp class="ph codeph">Pack1.Distributed::ContextA.ContextAI</samp> and makes it accessible by
+			means of the explicitly specified alias <samp class="ph codeph">ic</samp>.</p>
+
+		<div class="note note"><span class="notetitle">Note</span> If no explicit alias is specified, the last part of the fully qualified name is
+			assumed as the alias, for example <samp class="ph codeph">T1</samp>. </div>
+
+		<p class="p">The <samp class="ph codeph">using</samp> keyword is the only way to refer to an externally defined artifact
+			in CDS. In the example above, the type <samp class="ph codeph">x</samp> would cause an activation
+			error; you cannot refer to an externally defined CDS artifact directly by using its
+			fully qualilfed name in an artifact definition.</p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">//Filename = Pack1/Distributed/ContextA.hdbdd
+namespace Pack1.Distributed;
+
+context ContextA { 
+  type T1 : Integer;
+
+  context ContextAI {
+    type T2 : String(20);
+    type T3 {
+      a : Integer;
+      b : String(88);
+    };
+  };
+};
+</pre></div>
+
+		<div class="note note"><span class="notetitle">Note</span> Whether you use a single or multiple CDS documents to define your data-persistence model,
+			each CDS document must contain only <span class="ph emphasis emphasis">one</span> top-level artifact, and the
+			name of the top-level artifact must correspond to the name of the CDS document. For
+			example, if the top-level artifact in a CDS document is <samp class="ph codeph">ContextA</samp>, then
+			the CDS document itself must be named <span class="ph filepath">ContextA.hdbdd</span>.</div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="External Artifacts in CDS";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

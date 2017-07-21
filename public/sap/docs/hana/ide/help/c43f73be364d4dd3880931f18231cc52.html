@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="An OData service can be used to provide the data required for display in an SAPUI5 application."/>
+<meta name="description" content="An OData service can be used to provide the data required for display in an SAPUI5 application."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=615206000769922"/>
+<title>Tutorial: Consume an OData Service from SAPUI5</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioc43f73be364d4dd3880931f18231cc52";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioc43f73be364d4dd3880931f18231cc52">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Tutorial: Consume an OData Service from SAPUI5</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">An OData service can be used to provide the data required for display in an SAPUI5
+		application.</p>
+
+		<div class="section prereq p"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Prerequisites</h2></div>
+			<ul class="ul" id="loioc43f73be364d4dd3880931f18231cc52__ul_d5n_jqc_kl">
+				<li class="li">You have installed the SAPUI5 tools included in the delivery unit (DU)
+						<span class="keyword uilabel">SAPUI5_1</span>.</li>
+
+				<li class="li">You have installed the <span class="keyword uilabel">SHINE</span> delivery unit (DU); this DU
+					contains the views (<span class="ph filepath">sap.hana.democontent.epm.models::
+						AN_SALES_OVERVIEW_WO_CURR_CONV</span> and
+						<span class="ph filepath">sap.hana.democontent.epm.models::AT_BUYER</span>) specified in
+					the OData service (<span class="ph filepath">salesOrders.xsodata</span>) that you want to
+					consume with the SAPUI5 application you build in this tutorial.</li>
+
+				<li class="li">You have generated data to populate the tables and views provided by the
+						<span class="keyword uilabel">SHINE</span> DU and used in this tutorial. You can generate the
+					data with tools included in the <span class="keyword uilabel">SHINE</span> DU.</li>
+
+			</ul>
+
+			<div class="note note"><span class="notetitle">Note</span> You might have to adjust the paths in the code examples provided to suit the
+				folder/package hierarchy in your <span class="ph pname">SAP HANA</span> repository, for example, to
+				point to the underlying content (demonstration tables and services) referenced in
+				the tutorial.</div>
+
+		</div>
+
+		<div class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<p class="p">You can bind a UI element in an SAPUI5 application to the data specified in an OData
+				service. For example, you can populate the contents of a table column displayed in
+				an SAPUI5 application with the data stored in a database table defined in an OData
+				service.</p>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps" id="loioc43f73be364d4dd3880931f18231cc52__steps_yjy_x2f_tp"><li class="li step stepexpand">
+				<span class="ph cmd">Open the <span class="ph pname">SAP HANA</span> Web-based Development Workbench Editor
+					tool.</span>
+				<div class="itemgroup info">The Editor tool is available on the <span class="ph pname">SAP HANA</span> XS Web server at
+					the following URL:
+							<span class="ph filepath">http://<var class="keyword varname">&lt;WebServerHost&gt;</var>:80<var class="keyword varname">&lt;SAPHANAinstance&gt;</var>/sap/hana/xs/ide/editor</span></div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Create the basic structure for your application:</span>
+				<ol type="a" class="ol substeps" id="loioc43f73be364d4dd3880931f18231cc52__substeps_grt_jgn_kq">
+					<li class="li substep">
+						<span class="ph cmd">Navigate to the package in which you want to create the SAPUI5
+							application and from the context menu choose <span class="ph uicontrol">Create
+								Application</span>. </span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">Choose the <span class="ph uicontrol">Empty application (with XSAccess and  XSApp)</span>
+							template.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">Enter a package name, for example, <kbd class="ph userinput">odataBasic</kbd>,
+							and choose <span class="ph uicontrol">Create</span>.</span>
+					</li>
+
+				</ol>
+
+				<div class="itemgroup stepresult">You now have a basic package structure to hold your application files.
+					The root package for your new application also contains the required application
+					descriptors, which control access to the services and data exposed by the new
+					application.</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Create a subpackage to store the SAPUI5 view and controller files:</span>
+				<ol type="a" class="ol substeps" id="loioc43f73be364d4dd3880931f18231cc52__substeps_i4d_zgn_kq">
+					<li class="li substep">
+						<span class="ph cmd">Select the <span class="ph filepath">odataBasic</span> package and from the context
+							menu, choose <span class="ph uicontrol">New Package</span>.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">Enter a name, for example, <kbd class="ph userinput">odatabasic</kbd>, and
+							choose <span class="ph uicontrol">Create</span>.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Create the SAPUI5 <span class="ph filepath">odataBasic</span> view
+						(<span class="ph filepath">view.js</span>):</span>
+				<ol type="a" class="ol substeps" id="loioc43f73be364d4dd3880931f18231cc52__substeps_ft3_lhn_kq">
+					<li class="li substep">
+						<span class="ph cmd">Select the <span class="ph filepath">odatabasic</span> package and from the context
+							menu choose <span class="ph uicontrol">New File</span>.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">Enter a name, for example, <kbd class="ph userinput">odataBasic.view.js</kbd>, and choose
+								<span class="ph uicontrol">Create</span>.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Create the SAPUI5 <span class="ph filepath">odataBasic</span> controller
+						(<span class="ph filepath">controller.js</span>):</span>
+				<ol type="a" class="ol substeps" id="loioc43f73be364d4dd3880931f18231cc52__substeps_vtz_qhn_kq">
+					<li class="li substep">
+						<span class="ph cmd">Select the <span class="ph filepath">odatabasic</span> package and from the context
+							menu choose <span class="ph uicontrol">New File</span>.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">Enter a name, for example, <kbd class="ph userinput">odataBasic.controller.js</kbd>, and choose
+								<span class="ph uicontrol">Create</span>.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Call the view from the <span class="ph filepath">index.html</span> file.</span>
+				<div class="itemgroup info">Replace the entire content of the <span class="ph filepath">index.html</span> file with
+					the following:</div>
+				<div class="itemgroup stepxmp"><div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;script src="/sap/ui5/1/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-libs="sap.ui.commons,sap.ui.table" data-sap-ui-theme="sap_bluecrystal"&gt;
+    &lt;/script&gt;
+    &lt;script&gt;
+        sap.ui.localResources("odatabasic");
+        var view = sap.ui.view({
+            id: "idodataBasic",
+            viewName: "odatabasic.odataBasic",
+            type: sap.ui.core.mvc.ViewType.JS
+        });
+        view.placeAt("content");
+    &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body class="sapUiBody" role="application"&gt;
+    &lt;div id="content"&gt;&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</pre></div>
+You
+					have added the following elements to the <span class="ph filepath">index.html</span>
+						file:<ul class="ul" id="loioc43f73be364d4dd3880931f18231cc52__ul_xj2_cyb_lq">
+						<li class="li">Bootstrap script: SAPUI5 is implemented in JavaScript, so to load the
+							SAPUI5 runtime library <span class="ph filepath">sapui-core.js</span> from the SAP
+							HANA repository folder <span class="ph filepath">/sap/ui5/1/resources/</span> on the
+							client you include its bootstrap with a <samp class="ph codeph">&lt;script&gt;</samp>
+							tag. The <samp class="ph codeph">data-sap-ui-theme</samp> attribute specifies the
+							visual design to be applied and the <samp class="ph codeph">data-sap-ui-libs</samp>
+							attribute the UI control libraries to be used.<div class="note note"><span class="notetitle">Note</span> You need to declare
+								any libraries you want the SAPUI5 application to use to render the
+								data it consumes. For this tutorial, you add
+									<samp class="ph codeph">sap.ui.table</samp> to the list of SAPUI5
+								libraries.</div>
+</li>
+
+						<li class="li">Application script: SAPUI5 is based on the model-view-controller paradigm. To create the
+							view and controller, the SAPUI5 runtime needs to know from where to load
+							the related resources (<samp class="ph codeph">sap.ui.localResources</samp>); in this
+							case from the relative sub-folder <span class="ph filepath">/odatabasic</span>. In
+							this example, you place the newly created instance of the
+								<span class="ph filepath">odataBasic</span> view from the
+								<span class="ph filepath">odatabasic</span> sub-folder in an HTML element with
+							the ID <samp class="ph codeph">content</samp>. SAPUI5 supports different view types;
+							here the JS (JavaScript) view type is used.</li>
+
+						<li class="li">HTML body: The HTML element with the ID <samp class="ph codeph">content</samp>, in
+							which you placed the view, needs to be included in the HTML page. To do
+							this, you add a <samp class="ph codeph">&lt;div&gt;</samp> block with
+								<samp class="ph codeph">id="content"</samp> to the HTML body. The
+								<samp class="ph codeph">&lt;body&gt;</samp> attribute
+								<samp class="ph codeph">class="sapUiBody"</samp> defines the SAPUI5 CSS class to
+							be used, which ensures that the page background and some other styles
+							are properly set. The attribute <samp class="ph codeph">role="application"</samp> sets
+							the WAI-ARIA landmark role.</li>
+
+					</ul>
+</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Connect the SAPUI5 table element to the OData service
+					<samp class="ph codeph">salesOrders.xsodata</samp>.</span>
+				<div class="itemgroup info">Add the following code to the SAPUI5 view controller file
+						<span class="ph filepath">odataBasic.view.js</span>.</div>
+				<div class="itemgroup stepxmp">
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">sap.ui.jsview("odatabasic.odataBasic", {
+	/** Specifies the Controller belonging to this View. 
+	* In the case that it is not implemented, or that "null" is returned, this View does not have a Controller.
+	* @memberOf databasic.odataBasic
+	*/ 
+	getControllerName : function() {
+		return "odatabasic.odataBasic";
+	},
+
+	/** Is initially called once after the Controller has been instantiated. It is the place where the UI is constructed. 
+	* Since the Controller is given to this method, its event handlers can be attached right away. 
+	* @memberOf databasic.odataBasic
+	*/ 
+	createContent : function(oController) {
+		 
+		  var oLayout = new sap.ui.commons.layout.MatrixLayout({width:"100%"});
+			
+	  	  var oModel = new sap.ui.model.odata.ODataModel("/sap/hana/democontent/epm/services/salesOrders.xsodata/", true);
+	   	  
+	      var oControl;
+	      this.oSHTable = new sap.ui.table.Table("soTable",{
+	               visibleRowCount: 10,
+	               });
+	      this.oSHTable.setTitle("SALES_ORDER_HEADERS");
+	         
+	     //Table Column Definitions
+	      oControl = new sap.ui.commons.TextView().bindProperty("text","SALESORDERID");
+	      this.oSHTable.addColumn(new sap.ui.table.Column({label:new sap.ui.commons.Label({text: "SALES_ORDER_ID"}), 
+	    	  template: oControl, sortProperty: "SALESORDERID", filterProperty: "SALESORDERID", filterOperator: sap.ui.model.FilterOperator.EQ, flexible: true }));
+	 
+
+	      oControl = new sap.ui.commons.TextView().bindProperty("text","PARTNERID.PARTNERID");
+	      this.oSHTable.addColumn(new sap.ui.table.Column({label:new sap.ui.commons.Label({text: "PARTNER_ID"}), 
+	    	  template: oControl, sortProperty: "PARTNERID", filterProperty: "PARTNERID" }));
+	      
+	      oControl = new sap.ui.commons.TextView().bindProperty("text","Buyer/COMPANYNAME");
+	      this.oSHTable.addColumn(new sap.ui.table.Column({label:new sap.ui.commons.Label({text: "COMPANY"}), 
+	    	  template: oControl, sortProperty: "Buyer/CompanyName", filterProperty: "Buyer/CompanyName", filterOperator: sap.ui.model.FilterOperator.Contains }));
+	     
+	      oControl = new sap.ui.commons.TextView().bindText("GROSSAMOUNT",oController.numericFormatter); 
+	      oControl.setTextAlign("End");
+	      this.oSHTable.addColumn(new sap.ui.table.Column({label:new sap.ui.commons.Label({text: "GROSS_AMOUNT"}), 
+	    	  template: oControl, sortProperty: "GROSSAMOUNT", filterProperty: "GROSSAMOUNT", hAlign: sap.ui.commons.layout.HAlign.End}));
+
+	      oControl = new sap.ui.commons.TextView().bindProperty("text","CURRENCY");
+	      this.oSHTable.addColumn(new sap.ui.table.Column({label:new sap.ui.commons.Label({text: "CURRENCY"}), 
+	    	  template: oControl, sortProperty: "CURRENCY", filterProperty: "CURRENCY" }));
+
+	      this.oSHTable.setModel(oModel);
+	     var sort1 = new sap.ui.model.Sorter("SALESORDERID", true);
+	     
+	     this.oSHTable.bindRows({
+	    	    path: "/SalesOrderHeader",
+	    	    parameters: {expand: "Buyer",
+	    	    	select: "SALESORDERID,CURRENCY,GROSSAMOUNT,PARTNERID.PARTNERID,Buyer/COMPANYNAME"},
+	    	    sorter: sort1
+	    	});
+		 
+		 
+		 this.oSHTable.setTitle("Sales Orders");
+		 oLayout.createRow(this.oSHTable);
+			
+		return oLayout;
+		}
+
+});
+</pre></div>
+
+				</div>
+				<div class="itemgroup stepresult">The code you insert performs the following actions: <ul class="ul" id="loioc43f73be364d4dd3880931f18231cc52__ul_ws4_xqp_lq">
+						<li class="li">Creates an object named <samp class="ph codeph">oModel</samp> of type
+								<samp class="ph codeph">sap.ui.model.odata.ODataModel</samp>:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var oModel = new sap.ui.model.odata.ODataModel("/sap/hana/democontent/epm/services/salesOrders.xsodata/", true);</pre></div>
+</li>
+
+						<li class="li">Sets the model named <samp class="ph codeph">oModel</samp> to the UI table control
+							named
+							<samp class="ph codeph">oSHTable</samp>:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">this.oSHTable.setModel(oModel);
+</pre></div>
+</li>
+
+						<li class="li">Creates a sorting mechanism (of type
+								<samp class="ph codeph">sap.ui.model.Sorter</samp>) which uses the column
+								<samp class="ph codeph">SALESORDERID</samp>:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var sort1 = new sap.ui.model.Sorter("SALESORDERID", true);
+</pre></div>
+</li>
+
+						<li class="li">Binds the table to the entity <samp class="ph codeph">SalesOrderHeader</samp> in the
+							OData service definition and adds the sorter object to the
+							binding:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">this.oSHTable.bindRows({
+	    	    path: "/SalesOrderHeader",
+	    	    parameters: {expand: "Buyer",
+	    	    	select: "SALESORDERID,CURRENCY,GROSSAMOUNT,PARTNERID.PARTNERID,Buyer/COMPANYNAME"},
+	    	    sorter: sort1
+	    	});
+</pre></div>
+</li>
+
+					</ul>
+</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Define the controller.</span>
+				<div class="itemgroup info">The <span class="ph filepath">odataBasic.controller.js</span> file contains the view
+					controller logic. In this example, the controller does not contain any methods: </div>
+				<div class="itemgroup stepxmp">
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">sap.ui.controller("odatabasic.odataBasic", {
+});</pre></div>
+
+				</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Save all files.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Test your <span class="q">“odataBasic”</span> SAPUI5 application in a Web browser.</span>
+				<div class="itemgroup info">Select the <span class="ph filepath">index.html</span> file and choose <img class="image" id="loioc43f73be364d4dd3880931f18231cc52__image_ish_qbt_hq" src="loioa77ce732d6804f7f83be457fba1a5d62_LowRes.png"/> (<span class="ph uicontrol">Run</span>)
+					in the toolbar.</div>
+				<div class="itemgroup stepresult">
+					<p class="p"><img class="image" id="loioc43f73be364d4dd3880931f18231cc52__image_tjb_k4k_4q" src="loio2f2af4fadc4643f58c514c918ebd618c_LowRes.png"/></p>
+</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd"><span class="ph emphasis emphasis">Optional</span>: Use the metadata that OData exposes to build the table
+					columns dynamically.</span>
+				<div class="itemgroup info">You do not have to hard code the column definitions in the
+						<span class="ph filepath">*.view.js</span> file. To use Odata metdata to build the
+					columns dynamically, replace the list of hard-coded table-column definitions in
+					the <span class="ph filepath">odataBasic.view.js</span> with the code that builds the table
+					columns dynamically, as shown in the following example.</div>
+				<div class="itemgroup stepxmp">
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">sap.ui.jsview("odatabasic.odataBasic", {
+    /** Specifies the Controller belonging to this View. 
+     * In the case that it is not implemented, or that "null" is returned, this View does not have a Controller.
+     * @memberOf databasic.odataBasic
+     */
+    getControllerName: function() {
+        return "odatabasic.odataBasic";
+    },
+
+    /** Is initially called once after the Controller has been instantiated. It is the place where the UI is constructed. 
+     * Since the Controller is given to this method, its event handlers can be attached right away.
+     * @memberOf databasic.odataBasic
+     */
+    createContent: function(oController) {
+
+        var oLayout = new sap.ui.commons.layout.MatrixLayout({
+            width: "100%"
+        });
+
+        var oModel = new sap.ui.model.odata.ODataModel("/sap/hana/democontent/epm/services/salesOrders.xsodata/", true);
+
+        var oControl;
+        this.oSHTable = new sap.ui.table.Table("soTable", {
+            visibleRowCount: 10,
+        });
+        this.oSHTable.setTitle("SALES_ORDER_HEADERS");
+
+        //Table Column Definitions
+        var oMeta = oModel.getServiceMetadata();
+        var oControl;
+
+        for (var i = 0; i &lt; oMeta.dataServices.schema[0].entityType[0].property.length; i++) {
+            var property = oMeta.dataServices.schema[0].entityType[0].property[i];
+
+            oControl = new sap.ui.commons.TextField().bindProperty("value", property.name);
+            this.oSHTable.addColumn(new sap.ui.table.Column({
+                label: new sap.ui.commons.Label({
+                    text: property.name
+                }),
+                template: oControl,
+                sortProperty: property.name,
+                filterProperty: property.name,
+                filterOperator: sap.ui.model.FilterOperator.EQ,
+                flexible: true,
+                width: "125px"
+            }));
+        }
+
+        this.oSHTable.setModel(oModel);
+        var sort1 = new sap.ui.model.Sorter("SALESORDERID", true);
+
+        this.oSHTable.bindRows("/SalesOrderHeader", sort1);
+
+        this.oSHTable.setTitle("Sales Orders");
+        oLayout.createRow(this.oSHTable);
+
+        return oLayout;
+    }
+
+
+});</pre></div>
+
+				</div>
+				<div class="itemgroup stepresult">The code you insert performs the following actions: <ul class="ul" id="loioc43f73be364d4dd3880931f18231cc52__ul_jzl_ncd_kl">
+						<li class="li">Uses the function <samp class="ph codeph">getServiceMetadata()</samp> to connect to
+							the OData metadata object</li>
+
+						<li class="li">Inspects the OData metadata and extracts the columns of the service
+							defined in the property
+								<samp class="ph codeph">dataServices.schema[0].entityType[0].property</samp></li>
+
+						<li class="li">Loops over this collection of OData metadata and creates a column for each
+								<samp class="ph codeph">property.name</samp> in the service dynamically</li>
+
+					</ul>
+<p class="p"><img class="image" id="loioc43f73be364d4dd3880931f18231cc52__image_glc_xhd_lq" src="loio139695a64172418eaa065fbb11f6ff88_LowRes.png"/></p>
+</div>
+			</li>
+</ol>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Tutorial: Consume an OData Service from SAPUI5";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,43 @@
+schema="OTEBW_EMTAS";
+
+query = "select 
+				T.DATE_SQL as DELIVERYDAY,
+				PERIOD,
+				case when period between 9 and 20 then 'A' else 'N' end as PEAK,
+				AUCTION,			
+				AREA,
+				VOLUMEBUY,
+				VOLUMESELL,
+				AREAPRICE,
+				T.CALMONTH as CALMONTH,
+				T.YEAR as CALYEAR,
+				T.CALWEEK as CALWEEK,
+				T.CALQUARTER as CALQUARTER,
+				'EUR' as CURRENCY,
+				'MWH' as UNIT,
+				0 as PERIOD_COUNT,
+				0 as PERIOD_COUNT_PEAK
+	from BW_DM_RESULTS,
+	 _SYS_BI.TC_DAY_CALENDAR as T
+	 where T.DATE_SQL = DELIVERYDAY
+	 union
+	 select 
+				T.DATE_SQL as DELIVERYDAY,
+				null as PERIOD,
+				null as PEAK,
+				null as AUCTION,			
+				null as AREA,
+				null as VOLUMEBUY,
+				null as VOLUMESELL,
+				null as AREAPRICE,
+				T.CALMONTH as CALMONTH,
+				T.YEAR as CALYEAR,
+				T.CALWEEK as CALWEEK,
+				T.CALQUARTER as CALQUARTER,
+				null as CURRENCY,
+				null as UNIT,	 
+	 			24 as PERIOD_COUNT,
+	 			12 as PERIOD_COUNT_PEAK 
+	  from _SYS_BI.TC_DAY_CALENDAR as T
+	 ";
+

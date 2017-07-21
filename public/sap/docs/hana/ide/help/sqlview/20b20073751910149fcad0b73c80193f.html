@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Information on the currently valid license (if any) installed on this system."/>
+<meta name="description" content="Information on the currently valid license (if any) installed on this system."/>
+<meta name="keywords" content="M_LICENSE"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=2602025800199862"/>
+<title>M_LICENSE System View</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20b20073751910149fcad0b73c80193f";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20b20073751910149fcad0b73c80193f">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">M_LICENSE System View</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Information on the currently valid license (if any) installed on this
+      system.</p>
+
+      <div class="section" id="loio20b20073751910149fcad0b73c80193f___m__l_i_c_e_n_s_e_1struct_M_LICENSE"><div class="section_title">Structure</div><div type="Structure">
+         
+         
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20b20073751910149fcad0b73c80193f__table_j34_xvn_cw" class="table" frame="border" border="1" rules="all">
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" id="d7918001e40">
+                        <p class="p">Column name</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d7918001e46">
+                        <p class="p">Data type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d7918001e52">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">HARDWARE_KEY</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">VARCHAR(11)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">Hardware key of this SAP HANA installation </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">SYSTEM_ID</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">VARCHAR(3)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">System identifier (SID) of this SAP HANA database </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">INSTALL_NO</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">VARCHAR(10)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">Installation number of this SAP HANA database </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">SYSTEM_NO</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">VARCHAR(18)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">System number of this SAP HANA database </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">PRODUCT_NAME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">VARCHAR(256)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">Name of the licensed software product, e.g. SAP HANA </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">PRODUCT_LIMIT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">Licensed amount of main memory as specified by the license </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">PRODUCT_USAGE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">Peak memory allocation since installation, measured hourly </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">START_DATE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">TIMESTAMP</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">Start date of the validity period of the license </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">EXPIRATION_DATE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">TIMESTAMP</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">Expiration date of the validity period of the license </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">LAST_SUCCESSFUL_CHECK</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">TIMESTAMP</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">Latest date on which the license was successfully checked and found valid
+                        </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">PERMANENT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">VARCHAR(5)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">TRUE if the license is a permanent one, FALSE if the license is a
+                           temporary one </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">VALID</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">VARCHAR(5)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">TRUE if the license is currently valid, otherwise FALSE </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">ENFORCED</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">VARCHAR(5)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">TRUE if the license is a memory-enforced license, otherwise FALSE </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">LOCKED_DOWN</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">VARCHAR(5)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">TRUE if the system is locked down due to license status, otherwise FALSE
+                        </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">MEASUREMENT_XML</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">CLOB</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7918001e40 d7918001e46 d7918001e52 ">
+                        <p class="p">Measurement log produced for this licensed system with current memory
+                           consumption </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div></div>
+
+   </div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="M_LICENSE System View";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

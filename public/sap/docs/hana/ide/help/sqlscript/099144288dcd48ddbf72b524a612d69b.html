@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content=""/>
+<meta name="description" content=""/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=579649684028266"/>
+<title>Declarative Logic</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio099144288dcd48ddbf72b524a612d69b";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio099144288dcd48ddbf72b524a612d69b">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Declarative Logic</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc"/>
+
+		<p class="p">Declarative logic is used for efficient execution of data-intensive computations. This logic is
+			represented internally as data flows which can be executed in a parallel manner. As a
+			consequence, operations in a data-flow graph have to be free of side effects. This means
+			they must not change any global state neither in the database, nor in the application.
+			The first condition is ensured by only allowing changes on the dataset that is passed as
+			input to the operator. The second condition is achieved by only allowing a limited
+			subset of language features to express the logic of the operator. If those prerequisites
+			are fulfilled, the following types of operators are available:</p>
+
+		<ul class="ul" id="loio099144288dcd48ddbf72b524a612d69b__ul_nxg_jrf_xh">
+			<li class="li">SQL SELECT Statement </li>
+
+			<li class="li">Custom operators provided by SAP</li>
+
+		</ul>
+
+		<p class="p">Logically each operator represents a node in the data-flow graph. Custom operators have to be
+			manually implemented by SAP.</p>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Declarative Logic";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

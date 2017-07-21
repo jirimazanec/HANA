@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="You use this SQL statement to create a procedure."/>
+<meta name="description" content="You use this SQL statement to create a procedure."/>
+<meta name="keywords" content="HANA Developer Reference Documentation API CREATE PROCEDURE"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=328290479710475"/>
+<title>CREATE PROCEDURE</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio7a2da744ce544db1814a5fff250e99f6";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio7a2da744ce544db1814a5fff250e99f6">
+<div id="wrapper"><div id="container">
+
+    <h1 class="title topictitle1">CREATE PROCEDURE</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">You use this SQL statement to create a procedure.</p>
+
+      <div class="section" id="loio7a2da744ce544db1814a5fff250e99f6__sql_create_procedure_1sql_create_procedure_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+         
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> CREATE PROCEDURE &lt;proc_name&gt; [(&lt;parameter_clause&gt;)] [LANGUAGE &lt;lang&gt;] [SQL SECURITY &lt;mode&gt;] [DEFAULT SCHEMA &lt;default_schema_name&gt;]
+ [READS SQL DATA ] AS
+ BEGIN [SEQUENTIAL EXECUTION]
+   &lt;procedure_body&gt;
+ END</pre></div>
+
+      </div></div>
+
+      <div class="section" id="loio7a2da744ce544db1814a5fff250e99f6__sql_create_procedure_1sql_create_procedure_syntax_elements"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+         
+         <div class="p">The following syntax elements are available:<ul class="ul" id="loio7a2da744ce544db1814a5fff250e99f6__ul_cq5_css_jx">
+               <li class="li">Identifier of the procedure with an optional schema
+                  name<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;proc_name&gt; ::= [&lt;schema_name&gt;.]&lt;identifier&gt;</pre></div>
+</li>
+
+               <li class="li">Input and output parameters of the
+                  procedure<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;parameter_clause&gt; ::= &lt;parameter&gt; [{, &lt;parameter&gt;}...]</pre></div>
+</li>
+
+               <li class="li">Procedure parameter with associated data
+                     type<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;param_inout&gt; ::= IN | OUT | INOUT</pre></div>
+<div class="note note"><span class="notetitle">Note</span> The
+                     default is <samp class="ph codeph">IN</samp>. Each parameter is marked using the keywords
+                        <samp class="ph codeph">IN</samp>/<samp class="ph codeph">OUT</samp>/<samp class="ph codeph">INOUT</samp>. Input and
+                     output parameters must be explicitly assigned a type (that means that tables
+                     without a type are note supported)</div>
+</li>
+
+               <li class="li">Variable name for a
+                  parameter<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;param_name&gt; ::= &lt;identifier&gt;</pre></div>
+</li>
+
+               <li class="li">The input and output parameters of a procedure can have any of the primitive SQL
+                  types or a table type. <samp class="ph codeph">INOUT</samp> parameters can only be of the scalar
+                  type.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;param_type&gt; ::= &lt;sql_type&gt; | &lt;table_type&gt; | &lt;table_type_definition&gt;</pre></div>
+</li>
+
+               <li class="li">Data type of the
+                     variable<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;sql_type&gt; ::= DATE | TIME| TIMESTAMP | SECONDDATE | TINYINT | SMALLINT | INTEGER | BIGINT | DECIMAL | SMALLDECIMAL | REAL | DOUBLE 
+              | VARCHAR | NVARCHAR | ALPHANUM | VARBINARY | CLOB | NCLOB | BLOB | ST_GEOMETRY </pre></div>
+<div class="note note"><span class="notetitle">Note</span> For
+                     more information on data types see <span class="ph uicontrol">Data Types</span> in the SAP
+                     HANA SQL and System Views Reference on the SAP Help Portal.</div>
+</li>
+
+               <li class="li">A table type previously defined with the <samp class="ph codeph">CREATE TYPE</samp> command,
+                  see <a class="xref" href="default.html?c4338e0143c14e46bf751437769cc81b.html" target="_top">CREATE
+                  TYPE</a>.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;table_type&gt; ::= &lt;identifier&gt;</pre></div>
+</li>
+
+               <li class="li">A table type implicitly defined within the
+                  signature<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;table_type_defintion&gt;   ::=  TABLE (&lt;column_list_definition&gt;)
+&lt;column_list_definition&gt; ::= &lt;column_elem&gt;[{, &lt;column_elem&gt;}...]
+&lt;column_elem&gt; ::= &lt;column_name&gt; &lt;data_type&gt;
+&lt;column_name&gt; ::= &lt;identifier&gt;
+</pre></div>
+</li>
+
+               <li class="li">Definition of the programming language in the procedure. The default is
+                     <samp class="ph codeph">SQLSCRIPT</samp>.
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> LANGUAGE &lt;lang&gt;
+ &lt;lang&gt; ::= SQLSCRIPT | R
+</pre></div>
+<div class="note tip"><span class="tiptitle">Tip</span> It is a good practice to define the language in all procedure
+                     definitions.</div>
+</li>
+
+               <li class="li">Specification of the security mode of the procedure. The default is
+                     <samp class="ph codeph">DEFINER</samp>.
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SQL SECURITY &lt;mode&gt;
+ &lt;mode&gt; ::= DEFINER | INVOKER</pre></div>
+</li>
+
+               <li class="li">Indication that that the execution of the procedure is performed with the
+                  privileges of the definer of the procedure<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">DEFINER</pre></div>
+</li>
+
+               <li class="li">Indication that the execution of the procedure is performed with the privileges
+                  of the invoker of the procedure<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">INVOKER</pre></div>
+</li>
+
+               <li class="li">Specifies the schema for unqualified objects in the procedure body; if nothing is
+                  specified, then the <samp class="ph codeph">current_schema</samp> of the session is
+                  used.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">DEFAULT SCHEMA &lt;default_schema_name&gt;
+&lt;default_schema_name&gt; ::= &lt;unicode_name&gt;
+</pre></div>
+</li>
+
+               <li class="li">Marks the procedure as being read-only and side-effect free - the procedure does
+                  not make modifications to the database data or its structure. This means that the
+                  procedure does not contain DDL or DML statements and that it only calls other
+                  read-only procedures. The advantage of using this parameter is that certain
+                  optimizations are available for read-only
+                  procedures.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">READS SQL DATA</pre></div>
+</li>
+
+               <li class="li">Defines the main body of the procedure according to the programming language
+                  selected<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;procedure_body&gt; ::= [&lt;proc_decl_list&gt;]
+                     [&lt;proc_handler_list&gt;] 
+                      &lt;proc_stmt_list&gt;
+</pre></div>
+</li>
+
+               <li class="li">This statement forces sequential execution of the procedure logic. No parallelism
+                  takes place.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SEQUENTIAL EXECUTION</pre></div>
+</li>
+
+               <li class="li">Condition handler
+                  declaration<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;proc_decl_list&gt; ::= &lt;proc_decl&gt; [{, &lt;proc_decl&gt;}…]
+&lt;proc_decl&gt; ::= DECLARE  {&lt;proc_variable&gt;|&lt;proc_table_variable&gt;|&lt;proc_cursor&gt;|&lt;proc_condition&gt;} ;
+&lt;proc_table_variable&gt; ::= &lt;variable_name_list&gt; {&lt;table_type_definition&gt;|&lt;table_type&gt;}
+&lt;proc_variable&gt;::= &lt;variable_name_list&gt; [CONSTANT] {&lt;sql_type&gt;|&lt;array_datatype&gt;}[NOT NULL][&lt;proc_default&gt;]
+&lt;variable_name_list&gt;	::= &lt;variable_name&gt;[{, &lt;variable_name}...]
+&lt;column_list_elements&gt; ::= (&lt;column_definition&gt;[{,&lt;column_definition&gt;}...])
+&lt;array_datatype&gt;	::= &lt;sql_type&gt; ARRAY [ = &lt;array_constructor&gt; ] 
+&lt;array_constructor&gt;	::= ARRAY (&lt;expression&gt; [ { , &lt;expression&gt; }...] )
+
+&lt;proc_default&gt; ::= (DEFAULT | '=' ) &lt;value&gt;|&lt;expression&gt;
+
+&lt;value&gt;	::= An element of the type specified by &lt;type&gt; or an expression
+
+&lt;proc_cursor&gt; ::= CURSOR &lt;cursor_name&gt; [ ( proc_cursor_param_list ) ] FOR &lt;subquery&gt; ;
+&lt;proc_cursor_param_list&gt; ::= &lt;proc_cursor_param&gt; [{, &lt;proc_cursor_param&gt;}...]
+&lt;variable_name&gt;          ::= &lt;identifier&gt;
+&lt;cursor_name&gt;	::= &lt;identifier&gt;
+&lt;proc_cursor_param&gt;	::= &lt;param_name&gt; &lt;datatype&gt;
+
+&lt;proc_condition&gt;	::= &lt;variable_name&gt; CONDITION | &lt;variable_name&gt; CONDITION FOR &lt;sql_error_code&gt;
+</pre></div>
+</li>
+
+               <li class="li">Declares exception handlers to catch SQL
+                  exceptions.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;proc_handler_list&gt; ::= &lt;proc_handler&gt; [{, &lt;proc_handler&gt;}...]
+&lt;proc_handler&gt;::= DECLARE EXIT HANDLER FOR &lt;proc_condition_value_list&gt; &lt;proc_stmt&gt; ;
+</pre></div>
+</li>
+
+               <li class="li">One or more condition
+                  values<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;proc_condition_value_list&gt; ::= &lt;proc_condition_value&gt; {,&lt;proc_condition_value&gt;}...]
+</pre></div>
+</li>
+
+               <li class="li">
+                  <p class="p">An error code number or a condition name declared for a condition variable</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;proc_condition_value&gt; ::= SQLEXCEPTION    
+                          | &lt;sql_error_code&gt; | &lt;condition_name&gt;
+</pre></div>
+
+               </li>
+
+               <li class="li">Procedure body
+                  statements.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;proc_stmt_list&gt; ::= {&lt;proc_stmt&gt;}...
+
+ &lt;proc_stmt&gt; ::= &lt;proc_block&gt;
+               | &lt;proc_assign&gt;
+               | &lt;proc_single_assign&gt;
+               | &lt;proc_multi_assign&gt;
+               | &lt;proc_if&gt;
+               | &lt;proc_loop&gt;
+               | &lt;proc_while&gt;
+               | &lt;proc_for&gt;
+               | &lt;proc_foreach&gt;
+               | &lt;proc_exit&gt;
+               | &lt;proc_continue&gt;
+               | &lt;proc_signal&gt;
+               | &lt;proc_resignal&gt;
+               | &lt;proc_sql&gt;
+               | &lt;proc_open&gt;
+               | &lt;proc_fetch&gt;
+               | &lt;proc_close&gt;
+               | &lt;proc_call&gt;
+               | &lt;proc_exec&gt;
+               | &lt;proc_return&gt;
+               | &lt;proc_insert&gt;
+               | &lt;proc_update&gt;
+               | &lt;proc_delete&gt;
+</pre></div>
+</li>
+
+               <li class="li"> Insert a new data record at a specific position into a table
+                     variable<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;proc_insert&gt; ::= :&lt;table_variable&gt;.INSERT((&lt;value_1&gt;,…, &lt;value_n&gt;), &lt;index&gt;)</pre></div>
+<p class="p">For
+                     more information on inserting, updating and deleting data records, see <a class="xref" href="default.html?36f718be73e745ceae0530aa80850ce3.html" target="_top">Modifying the Content of Table Variables</a>.</p>
+</li>
+
+               <li class="li">You can modify a data record at a specific position. There are two equivalent
+                  syntax
+                  options:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;proc_update&gt; ::= :&lt;table_variable&gt;.UPDATE((&lt;value_1&gt;,…, &lt;value_n&gt;), &lt;index&gt;)</pre></div>
+<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;proc_update&gt; ::= &lt;table_variable&gt;[&lt;index&gt;] = (&lt;value_1&gt;,…, &lt;value_n&gt;)</pre></div>
+</li>
+
+               <li class="li">You can delete data records from a table variable. Wth the following syntax you
+                  can delete a single
+                  record.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;proc_delete&gt; ::= :&lt;table_variable&gt;.DELETE(&lt;index&gt;)</pre></div>
+</li>
+
+               <li class="li">To delete blocks of records from table variables, you can use the following
+                  syntax:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;proc_delete&gt; ::= :&lt;table_variable&gt;.DELETE(&lt;from_index&gt;..&lt;to_index&gt;)</pre></div>
+</li>
+
+               <li class="li">Sections of your procedures can be nested using BEGIN and END
+                  terminals<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;proc_block&gt; ::= BEGIN &lt;proc_block_option&gt;
+			      [&lt;proc_decl_list&gt;]
+		      	[&lt;proc_handler_list&gt;]
+		      	&lt;proc_stmt_list&gt;
+              END ;
+
+&lt;proc_block_option&gt; ::=  [SEQUENTIAL EXECUTION ]| [AUTONOMOUS TRANSACTION] | [PARALLEL EXECUTION]
+</pre></div>
+</li>
+
+               <li class="li">
+                  <p class="p">Assignment of values to variables - an &lt;expression&gt; can be either a
+                     simple expression, such as a character, a date, or a number, or it can be a
+                     scalar function or a scalar user-defined function.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;proc_assign&gt; ::= &lt;variable_name&gt; = { &lt;expression&gt; | &lt;array_function&gt; } ;
+                 | &lt;variable_name&gt; '[' &lt;expression&gt; ']' = &lt;expression&gt;  ;
+</pre></div>
+
+               </li>
+
+               <li class="li">
+                  <p class="p">The ARRAY_AGG function returns the array by aggregating the set of elements in
+                     the specified column of the table variable. Elements can optionally be
+                     ordered.</p>
+
+                  <p class="p">The CARDINALITY function returns the number of the elements in the array,
+                     &lt;array_variable_name&gt;.</p>
+
+                  <p class="p">The TRIM_ARRAY function returns the new array by removing the given number of
+                     elements, &lt;numeric_value_expression&gt;, from the end of the array,
+                     &lt;array_value_expression&gt;.</p>
+
+                  <p class="p">The ARRAY function returns an array whose elements are specified in the list
+                     &lt;array_variable_name&gt;. For more information see the chapter <a class="xref" href="default.html?cba8ef91ba944e37beb26eb8bd995c2f.html" target="_top">ARRAY</a>.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;array_function&gt; = ARRAY_AGG   ( :&lt;table_variable&gt;.&lt;column_name&gt; [ ORDER BY &lt;sort_spec_list&gt; ] ) 
+                    | CARDINALITY ( :&lt;array_variable_name&gt;) 
+                    | TRIM_ARRAY  ( :&lt;array_variable_name&gt; , &lt;array_variable_name&gt;) 
+                    | ARRAY ( &lt;array_variable_name_list&gt; ) 
+
+ &lt;table_variable&gt;      ::= &lt;identifier&gt;
+ &lt;column_name&gt;         ::= &lt;identifier&gt;
+ &lt;array_variable_name&gt; ::= &lt;identifier&gt;
+</pre></div>
+
+               </li>
+
+               <li class="li">Assignment of values to a list of variables with only one function evaluation.
+                  For example, <samp class="ph codeph">&lt;function_expression&gt;</samp> must be a scalar
+                  user-defined function and the number of elements in
+                     <samp class="ph codeph">&lt;var_name_list&gt;</samp> must be equal to the number of output
+                  parameters of the scalar user-defined
+                  function.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;proc_multi_assign&gt; ::= (&lt;var_name_list&gt;) = &lt;function_expression&gt;</pre></div>
+<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;proc_single_assign&gt; ::= &lt;variable_name&gt; = &lt;subquery&gt; 
+                       |  &lt;variable_name&gt; = &lt;proc_ce_call&gt;
+                       |  &lt;variable_name&gt; = &lt;proc_apply_filter&gt;
+                       |  &lt;variable_name&gt; = &lt;unnest_function&gt;
+                       |  &lt;variable_name&gt; = &lt;map_merge_op&gt;</pre></div>
+</li>
+
+               <li class="li">The MAP_MERGE operator is used to apply each row of the input table to the mapper
+                  function and unite all intermediate result tables. For more information, see <a class="xref" href="default.html?84b8fa84d68d49d3a916fd02ac0d2855.html" target="_top">Map Merge</a>.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;map_merge_op&gt; ::= MAP_MERGE(&lt;table_or_table_variable&gt;, &lt;mapper_identifier&gt;(&lt;table_or_table_variable&gt;.&lt;column_name&gt; [ {, &lt;table_or_table_variable&gt;.&lt;column_name&gt;} … ] [, &lt;param_list&gt;])
+&lt;table_or_table_variable&gt; ::= &lt;table_variable_name&gt; | &lt;identifier&gt; 
+&lt;table_variable_name&gt; ::= &lt;identifier&gt; 
+&lt;mapper_identifier&gt; ::= &lt;identifier&gt;
+
+&lt;column_name&gt; ::= &lt;identifier&gt;
+&lt;param_list&gt; ::= &lt;param&gt; [{, &lt;param&gt;} …] 
+&lt;paramter&gt; = &lt;table_or_table_variable&gt; | &lt;string_literal&gt; | &lt;numeric_literal&gt; | &lt;identifier&gt;
+</pre></div>
+</li>
+
+               <li class="li">For more information about the CE operators, see <a class="xref" href="default.html?5d15e1d58cee48e79940e57cce32f6aa.html" target="_top">Calculation Engine Plan Operators</a>.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;proc_ce_call&gt; ::= TRACE ( &lt;variable_name&gt; ) ;
+                  | CE_LEFT_OUTER_JOIN ( &lt;table_variable&gt; , &lt;table_variable&gt; , '[' &lt;expr_alias_comma_list&gt; ']' [ &lt;expr_alias_vector&gt;]  ) ;
+                  | CE_RIGHT_OUTER_JOIN ( &lt;table_variable&gt; , &lt;table_variable&gt; , '[' &lt;expr_alias_comma_list&gt; ']' [ &lt;expr_alias_vector&gt;] ) ;
+                  | CE_FULL_OUTER_JOIN ( &lt;table_variable&gt; , &lt;table_variable&gt; , '[' &lt;expr_alias_comma_list&gt; ']' [ &lt;expr_alias_vector&gt;]  );
+                  | CE_JOIN ( &lt;table_variable&gt; , &lt;table_variable&gt; , '[' &lt;expr_alias_comma_list&gt; ']' [&lt;expr_alias_vector&gt;]  ) ;
+                  | CE_UNION_ALL ( &lt;table_variable&gt; , &lt;table_variable&gt; ) ;
+                  | CE_COLUMN_TABLE ( &lt;table_name&gt; [ &lt;expr_alias_vector&gt;]  ) ;
+                  | CE_JOIN_VIEW ( &lt;table_name&gt; [ &lt;expr_alias_vector&gt;] ) ;
+                  | CE_CALC_VIEW ( &lt;table_name&gt; [ &lt;expr_alias_vector&gt;] ) ;
+                  | CE_OLAP_VIEW ( &lt;table_name&gt; [ &lt;expr_alias_vector&gt;] ) ;
+                  | CE_PROJECTION ( &lt;table_variable&gt; , '[' &lt;expr_alias_comma_list&gt; ']' &lt;opt_str_const&gt; ) ;
+                  | CE_PROJECTION ( &lt;table_variable&gt; &lt;opt_str_const&gt; ) ; 
+                  | CE_AGGREGATION ( &lt;table_variable&gt; , '[' &lt;agg_alias_comma_list&gt; ']' [ &lt;expr_alias_vector&gt;] ); 
+                  | CE_CONVERSION ( &lt;table_variable&gt; , '[' &lt;proc_key_value_pair_comma_list&gt; ']' [ &lt;expr_alias_vector&gt;] ) ; 
+                  | CE_VERTICAL_UNION ( &lt;table_variable&gt; , '[' &lt;expr_alias_comma_list&gt; ']' &lt;vertical_union_param_pair_list&gt; ) ; 
+                  | CE_COMM2R ( &lt;table_variable&gt; , &lt;int_const&gt; , &lt;str_const&gt; , &lt;int_const&gt; , &lt;int_const&gt; , &lt;str_const&gt; ) ; 
+
+ &lt;table_name&gt;  ::= [&lt;schema_name&gt;.]&lt;identifier&gt;
+ </pre></div>
+</li>
+
+               <li class="li">APPLY_FILTER defines a dynamic WHERE-condition &lt;variable_name&gt; that is
+                  applied during runtime. For more information about that, see the chapter <a class="xref" href="default.html?a09d584807f84477a64d7625ca45b089.html" target="_top">APPLY_FILTER</a>.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;proc_apply_filter&gt; ::= APPLY_FILTER ( {&lt;table_name&gt; | :&lt;table_variable&gt;}, &lt;variable_name&gt; ) ;
+</pre></div>
+</li>
+
+               <li class="li">The UNNEST function returns a table including a row for each element of the
+                  specified
+                  array.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;unnest_function&gt; ::= UNNEST ( &lt;variable_name_list&gt; ) [ WITH ORDINALITY ] [&lt;as_col_names&gt;] ; 
+
+&lt;variable_name_list&gt; ::= :&lt;variable_name&gt; [{, :&lt;variable_name&gt;}...] </pre></div>
+</li>
+
+               <li class="li">
+                  <p class="p">Appends an ordinal column to the return values.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">WITH ORDINALTIY</pre></div>
+
+               </li>
+
+               <li class="li">
+                  <p class="p">Specifies the column names of the return table.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;as_col_names&gt;     ::= AS [table_name] ( &lt;column_name_list&gt; ) 
+ &lt;column_name_list&gt; ::= &lt;column_name&gt;[{, &lt;column_name&gt;}...]
+ &lt;column_name&gt;      ::= &lt;identifier&gt;
+</pre></div>
+
+               </li>
+
+               <li class="li">
+                  <p class="p">You use IF - THEN - ELSE IF to control execution flow with conditionals.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;proc_if&gt; ::= IF &lt;condition&gt; THEN [SEQUENTIAL EXECUTION][&lt;proc_decl_list&gt;] [&lt;proc_handler_list&gt;] &lt;proc_stmt_list&gt;
+               [&lt;proc_elsif_list&gt;]
+               [&lt;proc_else&gt;]
+               END IF ;
+
+ &lt;proc_elsif_list&gt; ::= ELSEIF &lt;condition&gt; THEN [SEQUENTIAL EXECUTION][&lt;proc_decl_list&gt;] [&lt;proc_handler_list&gt;] &lt;proc_stmt_list&gt; 
+
+ &lt;proc_else&gt; ::= ELSE [SEQUENTIAL EXECUTION][&lt;proc_decl_list&gt;] [&lt;proc_handler_list&gt;] &lt;proc_stmt_list&gt; 
+</pre></div>
+
+               </li>
+
+               <li class="li">
+                  <p class="p">You use loop to repeatedly execute a set of statements.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;proc_loop&gt; ::= LOOP [SEQUENTIAL EXECUTION][&lt;proc_decl_list&gt;] [&lt;proc_handler_list&gt;] &lt;proc_stmt_list&gt; END LOOP ;
+</pre></div>
+
+               </li>
+
+               <li class="li">
+                  <p class="p">You use WHILE to repeatedly call a set of trigger statements while a condition
+                     is true.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;proc_while&gt; ::= WHILE &lt;condition&gt; DO [SEQUENTIAL EXECUTION][&lt;proc_decl_list&gt;] [&lt;proc_handler_list&gt;] &lt;proc_stmt_list&gt; END WHILE ;
+</pre></div>
+
+               </li>
+
+               <li class="li">
+                  <p class="p">You use FOR - IN loops to iterate over a set of data.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;proc_for&gt; ::= FOR &lt;column_name&gt; IN [ REVERSE ] &lt;expression&gt; [...] &lt;expression&gt; 
+             DO [SEQUENTIAL EXECUTION][&lt;proc_decl_list&gt;] [&lt;proc_handler_list&gt;] &lt;proc_stmt_list&gt;
+             END FOR ;
+</pre></div>
+
+               </li>
+
+               <li class="li">
+                  <p class="p">You use FOR - EACH loops to iterate over all elements in a set of data.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;proc_foreach&gt; ::= FOR &lt;column_name&gt; AS &lt;column_name&gt; [&lt;open_param_list&gt;] DO
+                 [SEQUENTIAL EXECUTION][&lt;proc_decl_list&gt;] [&lt;proc_handler_list&gt;] &lt;proc_stmt_list&gt;
+                 END FOR ;
+
+ &lt;open_param_list&gt; ::= ( &lt;expression&gt; [ { , &lt;expression&gt; }...] )
+</pre></div>
+
+               </li>
+
+               <li class="li">Terminates a loop<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;proc_exit&gt;     ::= BREAK ;
+</pre></div>
+</li>
+
+               <li class="li">Skips a current loop iteration and continues with the next
+                  value.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;proc_continue&gt; ::= CONTINUE ;
+</pre></div>
+</li>
+
+               <li class="li">
+                  <p class="p">You use the SIGNAL statement to explicitly raise an exception from within your
+                     trigger procedures.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;proc_signal&gt;    ::=  SIGNAL &lt;signal_value&gt; [&lt;set_signal_info&gt;] ;
+</pre></div>
+
+               </li>
+
+               <li class="li">
+                  <p class="p">You use the RESIGNAL statement to raise an exception on the action statement in
+                     an exception handler. If an error code is not specified, RESIGNAL will throw
+                     the caught exception.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;proc_resignal&gt; ::= RESIGNAL [&lt;signal_value&gt;] [&lt;set_signal_info&gt;] ;
+</pre></div>
+
+               </li>
+
+               <li class="li">You can SIGNAL or RESIGNAL a signal name or an SQL error
+                  code.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;signal_value&gt;   ::= &lt;signal_name&gt; | &lt;sql_error_code&gt;
+ &lt;signal_name&gt;    ::= &lt;identifier&gt;
+ &lt;sql_error_code&gt; ::= &lt;unsigned_integer&gt;
+</pre></div>
+</li>
+
+               <li class="li">You use SET MESSAGE_TEXT to deliver an error message to users when specified
+                  error is thrown during procedure
+                  execution.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;set_signal_info&gt; ::= SET MESSAGE_TEXT = '&lt;message_string&gt;'
+ &lt;message_string&gt;  ::= &lt;any_character&gt;
+</pre></div>
+</li>
+
+               <li class="li">
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;proc_sql&gt; ::=  &lt;subquery&gt;
+               | &lt;select_into_stmt&gt;
+               | &lt;insert_stmt&gt;  
+               | &lt;delete_stmt&gt; 
+               | &lt;update_stmt&gt;           
+               | &lt;replace_stmt&gt;  
+               | &lt;call_stmt&gt;   
+               | &lt;create_table&gt; 
+               | &lt;drop_table&gt; 
+               | &lt;truncate_statement&gt;
+</pre></div>
+
+                  <p class="p">For information on <samp class="ph codeph">&lt;insert_stmt&gt;</samp>, see
+                        <samp class="ph codeph">INSERT</samp> in the SAP HANA SQL and System Views Reference.</p>
+
+                  <p class="p"> For information on <samp class="ph codeph">&lt;delete_stmt&gt;</samp>, see
+                        <samp class="ph codeph">DELETE</samp> in the SAP HANA SQL and System Views Reference.</p>
+
+                  <p class="p"> For information on <samp class="ph codeph">&lt;update_stmt&gt;</samp>, see
+                        <samp class="ph codeph">UPDATE</samp> in the SAP HANA SQL and System Views Reference.</p>
+
+                  <p class="p"> For information on <samp class="ph codeph">&lt;replace_stmt&gt;</samp> and
+                        <samp class="ph codeph">&lt;upsert_stmt&gt;</samp>, see <samp class="ph codeph">REPLACE</samp> and
+                        <samp class="ph codeph">UPSERT</samp> in the SAP HANA SQL and System Views Reference.</p>
+
+                  <p class="p"> For information on <samp class="ph codeph">&lt;truncate_stmt&gt;</samp>, see
+                        <samp class="ph codeph">TRUNCATE</samp> in the SAP HANA SQL and System Views
+                     Reference.</p>
+
+               </li>
+
+               <li class="li">
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;select_into_stmt&gt; ::= SELECT &lt;select_list&gt; INTO &lt;var_name_list&gt;
+                        &lt;from_clause &gt;
+                        [&lt;where_clause&gt;]
+                        [&lt;group_by_clause&gt;]
+                        [&lt;having_clause&gt;] 
+                        [{&lt;set_operator&gt; &lt;subquery&gt;, ... }]
+                        [&lt;order_by_clause&gt;] 
+                        [&lt;limit&gt;] ;
+</pre></div>
+
+               </li>
+
+               <li class="li"><samp class="ph codeph">&lt;var_name&gt;</samp> is a scalar variable. You can assign selected
+                  item value to this scalar
+                  variable.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> &lt;var_name_list&gt; ::= &lt;var_name&gt;[{, &lt;var_name&gt;}...]
+ &lt;var_name&gt;      ::= &lt;identifier&gt;
+</pre></div>
+</li>
+
+               <li class="li">Cursor
+                  operations<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;proc_open&gt;  ::= OPEN &lt;cursor_name&gt; [ &lt;open_param_list&gt;] ;
+
+&lt;proc_fetch&gt; ::= FETCH &lt;cursor_name&gt; INTO &lt;column_name_list&gt; ;
+
+&lt;proc_close&gt; ::= CLOSE &lt;cursor_name&gt; ;
+</pre></div>
+</li>
+
+               <li class="li">Procedure call. For more information, see <a class="xref" href="default.html?659c8ff7cfdb42c89e27c638113bb13b.html" target="_top">CALL - Internal Procedure Call</a><div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;proc_call&gt; ::= CALL &lt;proc_name&gt; (&lt;param_list&gt;) ;</pre></div>
+</li>
+
+               <li class="li">Use EXEC to make dynamic SQL
+                  calls<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;proc_exec&gt;   ::= {EXEC | EXECUTE IMMEDIATE} &lt;proc_expr&gt; ;</pre></div>
+</li>
+
+               <li class="li">Return a value from a
+                  procedure<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;proc_return&gt; ::= RETURN [&lt;proc_expr&gt;] ;</pre></div>
+</li>
+
+            </ul>
+</div>
+
+      </div></div>
+
+      <div class="section" id="loio7a2da744ce544db1814a5fff250e99f6__sql_create_procedure_1sql_create_procedure_description"><div class="section_title">Description</div><div type="Description">
+         
+         <p class="p">The CREATE PROCEDURE statement creates a procedure by using the specified programming
+            language &lt;lang&gt;.</p>
+
+      </div></div>
+
+      <div class="section" id="loio7a2da744ce544db1814a5fff250e99f6__sql_create_procedure_1sql_create_procedure_examples"><div class="section_title">Example</div><div type="Example">
+         <div class="sectiondiv"><p class="p" id="loio7a2da744ce544db1814a5fff250e99f6__sql_create_procedure_1sql_create-procedure_example_1"><span class="ph emphasis emphasis">Example: Creating
+                  a Procedure</span></p>
+You create an SQLScript procedure with the following
+               definition:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> CREATE PROCEDURE orchestrationProc
+ LANGUAGE SQLSCRIPT AS
+ BEGIN
+   DECLARE v_id BIGINT;
+   DECLARE v_name VARCHAR(30);
+   DECLARE  v_pmnt BIGINT;
+   DECLARE v_msg VARCHAR(200);
+   DECLARE CURSOR c_cursor1 (p_payment BIGINT) FOR
+     SELECT id, name, payment FROM control_tab
+       WHERE payment &gt; :p_payment ORDER BY id ASC;
+   CALL init_proc();
+   OPEN c_cursor1(250000);
+   FETCH c_cursor1 INTO v_id, v_name, v_pmnt; v_msg = :v_name || ' (id ' || :v_id || ') earns ' || :v_pmnt || ' $.';
+   CALL ins_msg_proc(:v_msg);
+   CLOSE c_cursor1;
+ END;
+</pre></div>
+<p class="p">The
+               procedure features a number of imperative constructs including the use of a cursor
+               (with associated state) and local scalar variables with
+         assignments.</p>
+</div></div></div>
+
+   </div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="CREATE PROCEDURE";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

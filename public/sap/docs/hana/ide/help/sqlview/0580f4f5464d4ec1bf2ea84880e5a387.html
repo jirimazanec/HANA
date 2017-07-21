@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="This text mining function returns the top-ranked related documents for a query document within a search request and stores these documents (including metadata) in the return table."/>
+<meta name="description" content="This text mining function returns the top-ranked related documents for a query document within a search request and stores these documents (including metadata) in the return table."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=929084695096328"/>
+<title>Text Mining: TM_GET_RELATED_DOCUMENTS</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio0580f4f5464d4ec1bf2ea84880e5a387";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio0580f4f5464d4ec1bf2ea84880e5a387">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Text Mining: TM_GET_RELATED_DOCUMENTS</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">This text mining function returns the top-ranked related documents for a query document
+		within a search request and stores these documents (including metadata) in the return table. </p>
+
+		<div class="section"><div class="section_title">Syntax</div><div type="Syntax">
+			<div class="note caution"><span class="cautiontitle">Caution</span> <span class="ph">This
+                                                  information applies only for the SAP HANA option
+                                                  cited in the title of this topic. You must have
+                                                  purchased the license for it in order to use the
+                                                  information contained in this topic.</span></div>
+
+			
+			<div class="p"><div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">TM_GET_RELATED_DOCUMENTS ( &lt;tm_document&gt; &lt;tm_search&gt; &lt;tm_return_document&gt; )</pre></div>
+Specifies
+				the document for which you want to get related documents, the search request and the
+				parameters to be returned with the documents.</div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+			
+			<p class="p">The function uses the following syntax elements:
+				<samp class="ph codeph">&lt;tm_document&gt;</samp>, <samp class="ph codeph">&lt;tm_search&gt;</samp>,
+					<samp class="ph codeph">&lt;tm_return_document&gt;</samp>.</p>
+
+			<div class="p">
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;tm_document&gt; := 
+    DOCUMENT { &lt;string&gt;  [ LANGUAGE &lt;string&gt; ] [ MIME TYPE &lt;string&gt; ]
+    | ( &lt;subquery&gt; )   [ LANGUAGE &lt;string&gt; ] [ MIME TYPE &lt;string&gt; ]
+    | IN FULLTEXT INDEX WHERE &lt;condition&gt; }
+</pre></div>
+
+			</div>
+
+			<p class="p">Specifies the document, the languages and the mime types to be used for processing.</p>
+
+			<p class="p">There are three ways to specify the query document: </p>
+
+			<div class="p">
+				<ol class="ol" id="loio0580f4f5464d4ec1bf2ea84880e5a387__ol_qsy_fjn_fs">
+					<li class="li">Specify the document text as a string. <samp class="ph codeph">LANGUAGE</samp> and <samp class="ph codeph">MIME
+							TYPE</samp> can be specified to indicate how the document is
+						processed. If nothing is specified, the default language (English) and mime
+						type (TEXT/PLAIN) will be used.</li>
+
+					<li class="li"> Specify a <samp class="ph codeph">SELECT</samp> query that returns the document text.
+							<samp class="ph codeph">LANGUAGE</samp> and <samp class="ph codeph">MIME TYPE</samp> can be
+						specified as optional parameters.</li>
+
+					<li class="li">If the query document is part of the full-text index, which was constructed for the set of
+						reference documents, it can be referred to by a <samp class="ph codeph">WHERE</samp>
+						condition. This is much more efficient
+						because
+						the processed document is used immediately.</li>
+
+				</ol>
+
+			</div>
+
+			<div class="p">
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;tm_search&gt; := 
+   SEARCH &lt;column&gt;
+   FROM &lt;table&gt;
+   [ WHERE &lt;condition&gt; ]
+   [ WITH TERM TYPE &lt;string&gt;, ... ]</pre></div>
+
+			</div>
+
+			<p class="p">Specifies the set of reference documents in <samp class="ph codeph">&lt;column&gt;</samp> and
+					<samp class="ph codeph">&lt;table&gt;</samp>. The specified column must be of type
+					<samp class="ph codeph">text</samp> or must have a full-text index. The set of reference
+				documents can be restricted by <samp class="ph codeph">WHERE &lt;condition&gt;</samp>, which means
+				that only those documents will be used in the calculations. The set of reference
+				terms can be restricted by <samp class="ph codeph">WITH TERM TYPE</samp>, which means that only
+				those terms will be used in the calculations. For example <samp class="ph codeph">WITH TERM TYPE
+					'proper*','noun'</samp> only considers terms that are proper names or nouns.
+				The <samp class="ph codeph">termTypeRestriction</samp> property in the text mining configuration
+				determines which term types are available.</p>
+
+			<div class="p">
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;tm_return_document&gt; :=
+   RETURN 
+     [ PRINCIPAL COMPONENTS &lt;pc int&gt; ] -- output FACTORS, ROTATED_FACTORS
+     [ CLUSTERING [&lt;string&gt;] ]         -- output CLUSTER_LEVEL, CLUSTER_LEFT, 
+                                       -- CLUSTER_RIGHT
+     [ CORRELATION ]                   -- output CORRELATIONS  
+     [ HIGHLIGHTED ]                   -- output HIGHLIGHTED_DOCUMENT, 
+                                       -- HIGHLIGHTED_TERMTYPES
+     TOP { &lt;top int&gt; | DEFAULT }                   
+     [ &lt;column&gt; [as &lt;alias&gt;], ... ]    -- output columns out of &lt;table&gt; in
+                                       -- &lt;tm_search&gt;</pre></div>
+
+			</div>
+
+			<p class="p">Specifies the maximum number of related documents to be returned as <samp class="ph codeph">TOP &lt;top
+					int&gt;</samp>. <samp class="ph codeph">DEFAULT</samp> means to use the value set at text
+				mining initialization. Various options can be specified to request additional
+				information about the found documents and their interrelations. </p>
+
+			<p class="p">If <samp class="ph codeph">[PRINCIPAL COMPONENTS &lt;pc int&gt;]</samp> is specified, a principal
+				components analysis (factor analysis) will be calculated on the correlation matrix
+				of the found documents. The &lt;top int&gt; factors will be returned as arrays in
+				the column FACTORS of the result table and the rotated factors will be returned as
+				ARRAYs in the column ROTATED FACTORS. If no principal components are requested or if
+				no principal components could be calculated (due to insufficient data or due to
+				linear dependencies in the correlation matrix), the respective columns of the result
+				table will contain <samp class="ph codeph">NULL</samp> values.</p>
+
+			<p class="p">If <samp class="ph codeph">[CLUSTERING &lt;string&gt;]</samp> is specified, a hierarchical bottom-up cluster
+				analysis will be performed on the found related documents. Use
+					<samp class="ph codeph">&lt;string&gt;</samp> to specify algorithm -
+					<samp class="ph codeph">'SINGLE_LINKAGE'</samp>, <samp class="ph codeph">'COMPLETE_LINKAGE'</samp>,
+					<samp class="ph codeph">'AVG_DISTANCE_WITHIN'</samp>, <samp class="ph codeph">'AVG_DISTANCE_BETWEEN'</samp>,
+				or <samp class="ph codeph">'WARD'</samp>. The result of the cluster analysis is stored in the
+				columns <samp class="ph codeph">CLUSTER_LEVEL</samp>, <samp class="ph codeph">CLUSTER_LEFT</samp>, and
+					<samp class="ph codeph">CLUSTER_RIGHT</samp> of the result table. The results of these columns
+				can be displayed to the user in the form of a tree diagram. If no cluster analysis
+				was requested or if no cluster analysis could be calculated (due to insufficient
+				data), these columns will contain <samp class="ph codeph">NULL</samp> values.</p>
+
+			<p class="p">If <samp class="ph codeph">[CORRELATION]</samp> is specified, the correlation matrix between the
+				found documents will be returned as arrays in the column
+					<samp class="ph codeph">CORRELATIONS</samp> of the result table. If this is not specified,
+				this column will contain <samp class="ph codeph">NULL</samp> values.</p>
+
+			<p class="p">If <samp class="ph codeph">[HIGHLIGHTED]</samp> is specified, the document texts will be returned with
+				highlighting information. The column <samp class="ph codeph">HIGHLIGHT_DOCUMENTS</samp> contains
+				the document texts with <samp class="ph codeph">&lt;span ..&gt;</samp> tags around the most
+				important terms. The column <samp class="ph codeph">HIGHLIGHT_TERMTYPES</samp> contains lists of
+				tag IDs for the different term types. This is useful for highlighting the different
+				term types in different ways.</p>
+
+			<div class="p">
+				<div class="note note"><span class="notetitle">Note</span> 
+					<p class="p">The <samp class="ph codeph">HIGHLIGHTED</samp> feature is deprecated. It is only available
+						in the legacy text mining implementation, which has been deprecated.</p>
+
+					<p class="p">For more information, see SAP Note <a href="http://help.sap.com/disclaimer?site=https://launchpad.support.sap.com/#/notes/2435642" target="_blank">2435642 <img src="images/sap_link.png" class="link-sap" alt="Information published on SAP site" title="Information published on SAP site" border="0"/></a>.</p>
+
+				</div>
+
+			</div>
+
+			<p class="p"><samp class="ph codeph">[ &lt;column&gt; [as &lt;alias&gt;], ... ]</samp> specifies a list of columns with
+				possible aliases. The specified columns must be present in the reference table. The
+				values of these columns will be returned for the found documents. This avoids the
+				need to have separate calls to retrieve these parameters.</p>
+
+			<div class="p">
+				<div class="note note"><span class="notetitle">Note</span> 
+					<p class="p">If specified, the options <samp class="ph codeph">PRINCIPAL COMPONENTS</samp>,
+						<samp class="ph codeph">CLUSTERING</samp>, <samp class="ph codeph">CORRELATION</samp>, and
+							<samp class="ph codeph">[HIGHLIGHTED]</samp> must be used in this order.
+							<samp class="ph codeph">TOP</samp> must always be specified as the last option.</p>
+
+				</div>
+
+			</div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">This text mining function returns the top-ranked related documents for a query document within
+				a search request and stores the documents (including metadata) in the return table. </p>
+
+			<p class="p">The return table stores the following attributes and additional columns (optional):</p>
+
+			<div class="p">
+				
+<div class="table-wrapper tablenoborder"><table summary="" id="loio0580f4f5464d4ec1bf2ea84880e5a387__table_rmf_tg5_1s" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: Return table of function TM_GET_RELATED_DOCUMENTS</span></caption>
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+						
+						
+						<thead class="thead" align="left">
+							<tr class="row">
+								<th class="entry" valign="top" width="50%" id="d459363e291">
+									<p class="p">Attribute</p>
+
+								</th>
+
+								<th class="entry" valign="top" width="50%" id="d459363e297">
+									<p class="p">Value Data Type</p>
+
+								</th>
+
+							</tr>
+
+						</thead>
+
+						<tbody class="tbody">
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d459363e291 "><samp class="ph codeph">RANK</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d459363e297 ">
+									<p class="p">integer</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d459363e291 ">
+									<p class="p">&lt;column_1&gt;, ..., &lt;column_n&gt;</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="50%" headers="d459363e297 ">
+									<p class="p"/>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d459363e291 "><samp class="ph codeph">TOTAL_TERM_COUNT</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d459363e297 ">
+									<p class="p">integer</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d459363e291 "><samp class="ph codeph">TERM_COUNT</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d459363e297 ">
+									<p class="p">integer</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d459363e291 "><samp class="ph codeph">CORRELATIONS</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d459363e297 ">
+									<p class="p">decimal array</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d459363e291 "><samp class="ph codeph">FACTORS</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d459363e297 ">
+									<p class="p">decimal array</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d459363e291 "><samp class="ph codeph">ROTATED_FACTORS</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d459363e297 ">
+									<p class="p">decimal array</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d459363e291 "><samp class="ph codeph">CLUSTER_LEVEL</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d459363e297 ">
+									<p class="p">decimal</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d459363e291 "><samp class="ph codeph">CLUSTER_LEFT</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d459363e297 ">
+									<p class="p">integer</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d459363e291 "><samp class="ph codeph">CLUSTER_RIGHT</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d459363e297 ">
+									<p class="p">integer</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d459363e291 "><samp class="ph codeph">HIGHLIGHTED_DOCUMENT</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d459363e297 ">nclob</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d459363e291 "><samp class="ph codeph">HIGHLIGHTED_TERMTYPES</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d459363e297 ">
+									<p class="p">nclob</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d459363e291 "><samp class="ph codeph">SCORE</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d459363e297 ">
+									<p class="p">decimal</p>
+
+								</td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+</div>
+
+			</div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Example</div><div type="Example">
+			
+			<p class="p">The following example returns the 20 top-ranked related documents for the document
+					<span class="ph emphasis emphasis">John Doe met local president Michael Chang yesterday...</span>
+				since 2014 with the person name <span class="ph emphasis emphasis">Chang</span> in the title from a table
+				that stores news articles.</p>
+
+			<div class="p">
+				<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">select T.AUTHOR, T.TITLE, T.CREATED_ON, T."content", T.SCORE, T.TOTAL_TERM_COUNT, T.FACTORS[1], T.FACTORS[2], T.CLUSTER_LEVEL
+  FROM TM_GET_RELATED_DOCUMENTS (
+    DOCUMENT 'John Doe met local president Michael Chang yesterday...'
+    SEARCH "content"
+      FROM "myschema"."news"
+      WHERE CREATED_ON &gt;='2014-01-01' and contains(TITLE, 'Chang')
+      WITH TERM TYPE 'PERSON'
+    RETURN
+      PRINCIPAL COMPONENTS 2
+      CLUSTERING 'COMPLETE LINKAGE'
+      TOP 20
+      AUTHOR, TITLE, CREATED_ON
+   ) AS T
+WHERE T.SCORE &gt; 0.25 and T.TOTAL_TERM_COUNT &lt; 200 and T.TOTAL_TERM_COUNT &gt; 5
+</pre></div>
+
+				</div>
+
+			</div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Text Mining: TM_GET_RELATED_DOCUMENTS";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

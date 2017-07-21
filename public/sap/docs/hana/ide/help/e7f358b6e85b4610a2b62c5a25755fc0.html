@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="A database role is a collection of privileges that can be granted to either a database user or another role in runtime."/>
+<meta name="description" content="A database role is a collection of privileges that can be granted to either a database user or another role in runtime."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=4276747942995872"/>
+<title>Database Roles</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioe7f358b6e85b4610a2b62c5a25755fc0";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioe7f358b6e85b4610a2b62c5a25755fc0">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Database Roles</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">A database role is a collection of privileges that can be granted to either a database
+		user or another role in runtime.</p>
+
+		<p class="p">A role typically contains the privileges required for a particular function or task, for
+			example:</p>
+
+		<ul class="ul" id="loioe7f358b6e85b4610a2b62c5a25755fc0__ul_q12_nfm_5h">
+			<li class="li">Business end users reading reports using client tools such as Microsoft Excel</li>
+
+			<li class="li">Modelers creating models and reports</li>
+
+			<li class="li">Database administrators operating and maintaining the database and its users</li>
+
+		</ul>
+
+		<p class="p">Privileges can be granted directly to users of the SAP HANA database. However, roles are the
+			standard mechanism of granting privileges as they allow you to implement complex,
+			reusable authorization concepts that can be modeled on business roles.</p>
+
+		<div class="section"><div class="section_title">Creation of Roles</div><div type="Creation of Roles">
+			
+			<p class="p">Roles in the SAP HANA database can exist as runtime objects only (<dfn class="term">catalog roles</dfn>),
+				or as design-time objects that become catalog objects on deployment (database
+				artifact with file suffix <span class="ph sap-technical-name sap-technical-name">.hdbrole</span>).</p>
+
+			<p class="p">In an SAP HANA XS classic environment, database roles are created in the built-in repository
+				of the SAP HANA database using either the SAP HANA Web Workbench or the SAP HANA
+				studio. These are also referred to as <dfn class="term">repository roles</dfn>. In an SAP HANA
+				XS advanced environment, design-time roles are created using the SAP Web IDE and
+				deployed using SAP HANA deployment infrastructure (SAP HANA DI). </p>
+
+			<div class="note note"><span class="notetitle">Note</span> Due to the container-based model of HDI, where each container corresponds to a
+				database schema, roles are schema specific.</div>
+
+			<p class="p">In SAP HANA XS advanced applications, database roles control access to database objects only
+				(for example, tables, views, and procedures). <dfn class="term">Application roles</dfn> and
+					<dfn class="term">role collections</dfn> are used to control and define access to
+				applications. For more information about the authorization concept of XS advanced,
+				see the <cite class="cite">SAP HANA Security Guide</cite>.</p>
+
+		</div></div>
+
+		<div class="section" id="loioe7f358b6e85b4610a2b62c5a25755fc0__section_N10031_N10012_N10001"><div class="section_title">Role Structure</div><div type="Role Structure">
+			
+			<p class="p">A role can contain any number of the following privileges:</p>
+
+			<ul class="ul" id="loioe7f358b6e85b4610a2b62c5a25755fc0__ul_rbt_5fr_rh">
+				<li class="li"><span class="ph emphasis emphasis">System privileges</span> for general system authorization, in particular
+					administration activities</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Object privileges</span> (for example, SELECT, INSERT, UPDATE) on database
+					objects (for example, schemas, tables, views, procedures, and sequences)</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Analytic privileges</span> on SAP HANA information models</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Package privileges</span> on repository packages (for example,
+						<span class="ph sap-technical-name sap-technical-name">REPO.READ</span>,
+						<span class="ph sap-technical-name sap-technical-name">REPO.EDIT_NATIVE_OBJECTS</span>,
+						<span class="ph sap-technical-name sap-technical-name">REPO.ACTIVATE_NATIVE_OBJECTS</span>)</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Application privileges</span> for enabling access to SAP HANA-based
+					applications developed in an SAP HANA XS classic environment</li>
+
+			</ul>
+
+			<p class="p">A role can also contain other roles.</p>
+
+		</div></div>
+
+		<div class="section" id="loioe7f358b6e85b4610a2b62c5a25755fc0__section_N10053_N10012_N10001"><div class="section_title">Roles Best Practices</div><div type="Roles Best Practices">
+			
+			<p class="p">For best performance of role operations, in particular, granting and revoking, keep
+				the following basic rules in mind:</p>
+
+			<ul class="ul" id="loioe7f358b6e85b4610a2b62c5a25755fc0__ul_yzk_dn3_nt">
+				<li class="li">Create roles with the smallest possible set of privileges for the smallest
+					possible group of users who can share a role (<dfn class="term">principle of least
+						privilege</dfn>)</li>
+
+				<li class="li">Avoid granting object privileges at the schema level to a role if only a few
+					objects in the schema are relevant for intended users.</li>
+
+				<li class="li">Avoid creating and maintaining all roles as a single user. Use several role
+					administrator users instead.</li>
+
+			</ul>
+</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Database Roles";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

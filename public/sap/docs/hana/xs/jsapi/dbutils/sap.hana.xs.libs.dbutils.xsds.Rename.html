@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: Rename</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Class: Rename</h1>
+    
+    
+
+
+
+<section>
+    
+<header>
+    <h2>
+        <span class="ancestors"><a href="sap.hana.xs.libs.dbutils.xsds.html">.xsds</a>.</span>
+    
+    Rename
+    </h2>
+    
+</header>  
+
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+<dt>
+    <h4 class="name" id="Rename"><span class="type-signature"></span>new Rename<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        This class provides various predefined renaming functions for mapping columnnames to field names.
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds.xsjslib, line 47
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <h4 class="name" id="$camelcase"><span class="type-signature">&lt;static> </span>$camelcase<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Convert name to camel case.
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds.xsjslib, line 98
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>$camelcase("XS_data__service") => "XsDataService"</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="$id"><span class="type-signature">&lt;static> </span>$id<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Identity function; leave name as-is.
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds.xsjslib, line 62
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="$lowercase"><span class="type-signature">&lt;static> </span>$lowercase<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Convert name to lower case.
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds.xsjslib, line 74
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>$lowercase("XS_Data__Service") => "xs_data__service"</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="$normalcase"><span class="type-signature">&lt;static> </span>$normalcase<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Capitalize first character of name only.
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds.xsjslib, line 112
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>$normalcase("xs_Data__Service") => "Xs_data__service"</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="$uppercase"><span class="type-signature">&lt;static> </span>$uppercase<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Convert name to upper case.
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds.xsjslib, line 86
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>$uppercase("XS_Data__Service") => "XS_DATA__SERVICE"</code></pre>
+
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+</article>
+
+</section>  
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="sap.hana.xs.libs.dbutils.xsds.Entity.html">Entity</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.Expr.html">Expr</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.Query.html">Query</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.Rename.html">Rename</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.Transaction.html">Transaction</a></li></ul><h3>Namespaces</h3><ul><li><a href="sap.hana.xs.libs.dbutils.procedures.html"><span class="oblique">sap.hana.xs.libs.dbutils.</span>procedures</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.html"><span class="oblique">sap.hana.xs.libs.dbutils.</span>xsds</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    <a href="Copyright-SAP.html">Copyright</a>
+    &
+    <a href="Disclaimer-SAP.html">Disclaimer</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

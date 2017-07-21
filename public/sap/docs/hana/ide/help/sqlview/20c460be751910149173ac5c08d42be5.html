@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Statistics on active services."/>
+<meta name="description" content="Statistics on active services."/>
+<meta name="keywords" content="M_SERVICE_STATISTICS"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=8391894632194783"/>
+<title>M_SERVICE_STATISTICS System View</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20c460be751910149173ac5c08d42be5";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20c460be751910149173ac5c08d42be5">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">M_SERVICE_STATISTICS System View</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Statistics on active services.</p>
+
+      <div class="section" id="loio20c460be751910149173ac5c08d42be5___m__s_e_r_v_i_c_e__s_t_a_t_i_s_t_i_c_s_1struct_M_SERVICE_STATISTICS"><div class="section_title">Structure</div><div type="Structure">
+         
+         
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20c460be751910149173ac5c08d42be5__table_dgw_hfp_dw" class="table" frame="border" border="1" rules="all">
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" id="d10256055e40">
+                        <p class="p">Column name</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d10256055e46">
+                        <p class="p">Data type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d10256055e52">
+                        <p class="p">Unit</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d10256055e58">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">HOST</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">VARCHAR(64)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the host name.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">PORT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">INTEGER</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the internal port.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">SERVICE_NAME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">VARCHAR(32)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the service name.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">PROCESS_ID</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">INTEGER</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the process ID.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">DETAIL</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">VARCHAR(128)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the detail information, similar to COORDINATOR_TYPE in
+                           M_SERVICES.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">ACTIVE_STATUS</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">VARCHAR(16)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the active status. This column contains the following values: </p>
+
+                        <ul class="ul" id="loio20c460be751910149173ac5c08d42be5__ul_ogr_tdp_dw">
+                           <li class="li">NO - Specifies that the service has not started.</li>
+
+                           <li class="li">YES - Specifies that the service has started and is ready for
+                              requests.</li>
+
+                           <li class="li">UNKNOWN - Specifies the initial state after starting a landscape, or
+                              when the state is not known (for example, after a crash). If the
+                              service does not start within a minute, this state changes to NO. </li>
+
+                           <li class="li">STARTING - Specifies that the service is starting. This state might
+                              last for several minutes on first startup or recovery.</li>
+
+                           <li class="li">STOPPING - Specifies that the service is stopping.</li>
+
+                        </ul>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">START_TIME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">TIMESTAMP</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the process start timestamp.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">SYS_TIMESTAMP</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">TIMESTAMP</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the current system timestamp.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">PROCESS_CPU</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">SMALLINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Percent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the CPU usage of the current process.  See additional notes
+                           after this table.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">PROCESS_CPU_TIME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Millisecond</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the CPU usage of the current process since the start.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">TOTAL_CPU</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">SMALLINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Percent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the CPU usage of all processes. See additional notes after this
+                           table.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">TOTAL_CPU_TIME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Millisecond</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the CPU usage of all processes since the start.  See additional
+                           notes after this table.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">PROCESS_MEMORY</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the process logical memory usage.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">PROCESS_PHYSICAL_MEMORY</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the process physical memory usage.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">TOTAL_MEMORY</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the host physical and swap memory usage.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">AVAILABLE_MEMORY</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the host physical and swap memory size.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">PHYSICAL_MEMORY</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the host physical memory size.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">REQUESTS_PER_SEC</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">DOUBLE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Rate</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the requests per second. The average is over the last 1000
+                           requests.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">RESPONSE_TIME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">INTEGER</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Millisecond</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the request response time. The average is over the last 1000
+                           requests.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">FINISHED_NON_INTERNAL_REQUEST_COUNT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Counter</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">For internal use only.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">ALL_FINISHED_REQUEST_COUNT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Counter</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">For internal use only.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">ACTIVE_REQUEST_COUNT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">INTEGER</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">For internal use only.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">PENDING_REQUEST_COUNT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">INTEGER</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">For internal use only.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">ACTIVE_THREAD_COUNT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">INTEGER</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the number of active threads.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">THREAD_COUNT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">INTEGER</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the number of total threads.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">OPEN_FILE_COUNT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">INTEGER</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10256055e40 d10256055e46 d10256055e52 d10256055e58 ">
+                        <p class="p">Specifies the number of open files.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div></div>
+
+      <div class="section" id="loio20c460be751910149173ac5c08d42be5___m__s_e_r_v_i_c_e__s_t_a_t_i_s_t_i_c_s_1fulldesc_M_SERVICE_STATISTICS"><div class="section_title">Full description</div><div type="Full description">
+         
+         <dl class="dl parml">
+            
+               <dt class="dt pt dlterm emphasis">PROCESS_CPU , TOTAL_CPU</dt>
+
+               <dd class="dd pd">
+                  <p class="p">PROCESS_CPU and TOTAL_CPU contain CPU usage in percent since last select. This
+                     select could be done by another user or another session.</p>
+
+                  <p class="p"> To calculate exact CPU usage use 2 selects and this formula:</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">process_cpu = (select2.process_cpu-time - select1.process_cpu_time) / (select2.sys_timestamp - select1.sys_timestamp)
+  total_cpu   = (select2.total_cpu_time   - select1.total_cpu_time  ) / (select2.sys_timestamp - select1.sys_timestamp)</pre></div>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis">TOTAL_CPU_TIME</dt>
+
+               <dd class="dd pd">TOTAL_CPU_TIME counts the CPU usage as if there would be 1 core.
+                  M_HOST_RESOURCE_UTILIZATION shows s imilar values multiplied by the number of
+                  cores.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">select s.host,s.total_cpu_time,(h.total_cpu_user_time+h.total_cpu_system_time)/i.value 
+from m_service_statistics s, m_host_resource_utilization h, m_host_information i
+where s.service_name='nameserver' and i.key='cpu_threads'and s.host=h.host and s.host=i.host</pre></div>
+</dd>
+
+            
+         </dl>
+
+      </div></div>
+
+   </div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="M_SERVICE_STATISTICS System View";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

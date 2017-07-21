@@ -1,0 +1,24 @@
+{
+ "metadata": {
+  "activated_at": "2017-03-16 10:45:37.261 GMT+02:00",
+  "activated_by": "SYSTEM",
+  "change_number": "4074",
+  "delivery_unit": "HANA_XS_DBUTILS",
+  "du_vendor": "sap.com",
+  "du_version": "1",
+  "du_version_patch": "8",
+  "du_version_sp": "11",
+  "edit": "false",
+  "format_version": "",
+  "object_status": "0",
+  "released_at": "2017-07-10 13:17:59.7300000",
+  "type": "1",
+  "version_id": "1"
+ },
+ "name": "sap.hana.xs.libs.dbutils.xsds.Expr",
+ "package": "public.sap.docs.hana.xs.jsapi.dbutils",
+ "suffix": "html",
+ "version": {
+  "versionType": "1"
+ }
+}

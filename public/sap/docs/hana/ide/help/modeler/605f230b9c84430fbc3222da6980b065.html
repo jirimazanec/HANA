@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Data type conversion functions are used to convert arguments from one data type to another, or to test whether a conversion is possible."/>
+<meta name="description" content="Data type conversion functions are used to convert arguments from one data type to another, or to test whether a conversion is possible."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=4436311598152013"/>
+<title>Conversion Functions</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio605f230b9c84430fbc3222da6980b065";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio605f230b9c84430fbc3222da6980b065">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Conversion Functions</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">Data type conversion functions are used to convert arguments from one data type to
+		another, or to test whether a conversion is possible. </p>
+
+		<div class="section">
+			<div class="p">
+				<div class="table-wrapper"><table summary="" id="loio605f230b9c84430fbc3222da6980b065__simpletable_u1b_5m4_sp" border="1" class="simpletable"><tr class="sthead">
+						<th valign="bottom" align="left" id="d479396e35" class="stentry">Function</th>
+
+						<th valign="bottom" align="left" id="d479396e38" class="stentry">Syntax</th>
+
+						<th valign="bottom" align="left" id="d479396e41" class="stentry">Purpose</th>
+
+						<th valign="bottom" align="left" id="d479396e44" class="stentry">Example</th>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d479396e35" class="stentry">int</td>
+
+						<td valign="top" headers="d479396e38" class="stentry">int int(arg)</td>
+
+						<td valign="top" headers="d479396e41" class="stentry">convert arg to int type</td>
+
+						<td valign="top" headers="d479396e44" class="stentry">int(2)</td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d479396e35" class="stentry">float</td>
+
+						<td valign="top" headers="d479396e38" class="stentry">
+							<p class="p">float float(arg) </p>
+
+							<p class="p"> </p>
+
+							<p class="p"> </p>
+
+						</td>
+
+						<td valign="top" headers="d479396e41" class="stentry">convert arg to float type </td>
+
+						<td valign="top" headers="d479396e44" class="stentry">float(3.0) </td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d479396e35" class="stentry">
+							<p class="p">double </p>
+
+						</td>
+
+						<td valign="top" headers="d479396e38" class="stentry">double double (arg) </td>
+
+						<td valign="top" headers="d479396e41" class="stentry">convert arg to double type </td>
+
+						<td valign="top" headers="d479396e44" class="stentry">double(3) </td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d479396e35" class="stentry">sdfloat</td>
+
+						<td valign="top" headers="d479396e38" class="stentry">
+							<p class="p">sdfloat sdfloat (arg) </p>
+
+						</td>
+
+						<td valign="top" headers="d479396e41" class="stentry">convert arg to sdfloat type </td>
+
+						<td valign="top" headers="d479396e44" class="stentry"> </td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d479396e35" class="stentry">decfloat</td>
+
+						<td valign="top" headers="d479396e38" class="stentry">
+							<p class="p">decfloat decfloat (arg) </p>
+
+						</td>
+
+						<td valign="top" headers="d479396e41" class="stentry">convert arg to decfloat type </td>
+
+						<td valign="top" headers="d479396e44" class="stentry"> </td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d479396e35" class="stentry">fixed</td>
+
+						<td valign="top" headers="d479396e38" class="stentry">fixed fixed (arg, int, int)</td>
+
+						<td valign="top" headers="d479396e41" class="stentry">arg2 and arg3 are the intDigits and fractdigits parameters,
+							respectively. Convert arg to a fixed type of either 8, 12, or 16 byte
+							length, depending on intDigits and fractDigits</td>
+
+						<td valign="top" headers="d479396e44" class="stentry">fixed(3.2, 8, 2) + fixed(2.3, 8, 3)</td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d479396e35" class="stentry">
+							<p class="p">string </p>
+
+						</td>
+
+						<td valign="top" headers="d479396e38" class="stentry">string string (arg) </td>
+
+						<td valign="top" headers="d479396e41" class="stentry">convert arg to string type </td>
+
+						<td valign="top" headers="d479396e44" class="stentry"> </td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d479396e35" class="stentry">
+							<p class="p">raw </p>
+
+						</td>
+
+						<td valign="top" headers="d479396e38" class="stentry">raw raw (arg) </td>
+
+						<td valign="top" headers="d479396e41" class="stentry">convert arg to raw type </td>
+
+						<td valign="top" headers="d479396e44" class="stentry"> </td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d479396e35" class="stentry">date</td>
+
+						<td valign="top" headers="d479396e38" class="stentry">
+							<p class="p">date date(stringarg) </p>
+
+							<p class="p">date date(fixedarg) </p>
+
+							<p class="p">date date(int, int) </p>
+
+							<p class="p">date date(int, int, int) </p>
+
+							<p class="p">date date(int, int, int, int) </p>
+
+							<p class="p">date date(int, int, int, int, int) </p>
+
+							<p class="p">date date(int, int, int, int, int, int) </p>
+
+						</td>
+
+						<td valign="top" headers="d479396e41" class="stentry">convert arg to date type. The first version parses a string in the
+							format "yyyy-mm-dd hh:mi:ss" where trailing components except for the
+							year may be omitted. The version with one fixed number arg strips digits
+							behind the comma and tries to make a date from the rest. The other
+							versions accept the individual components to be set.</td>
+
+						<td valign="top" headers="d479396e44" class="stentry">
+							<p class="p">date(2009) -&gt; date('2009') </p>
+
+							<p class="p">date(2009, 1, 2) -&gt; date('2009-01-02') </p>
+
+							<p class="p">date(fixed(20000203135026.1234567, 10, 4)) -&gt; date('2000-02-03
+								13:50:26') </p>
+
+						</td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d479396e35" class="stentry">longdate</td>
+
+						<td valign="top" headers="d479396e38" class="stentry">
+							<p class="p">longdate longdate(stringarg) </p>
+
+							<p class="p">longdate longdate(fixedarg) </p>
+
+							<p class="p">longdate longdate(int, int, int) </p>
+
+							<p class="p">longdate longdate(int, int, int, int, int) </p>
+
+							<p class="p">longdate longdate(int, int, int, int, int, int) </p>
+
+							<p class="p">longdate longdate(int, int, int, int, int, int, int) </p>
+
+						</td>
+
+						<td valign="top" headers="d479396e41" class="stentry">convert arg to longdate type, similar to date function
+							above.</td>
+
+						<td valign="top" headers="d479396e44" class="stentry">
+							<p class="p">longdate(fixed(20000203135026.1234567, 10, 5)) -&gt;
+								longdate('2000-02-03 13:50:26.1234500') </p>
+
+							<p class="p">longdate(2011, 3, 16, 9, 48, 12, 1234567) -&gt; longdate('2011-03-16
+								09:48:12.1234567') </p>
+
+						</td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d479396e35" class="stentry">time</td>
+
+						<td valign="top" headers="d479396e38" class="stentry">
+							<p class="p">time time(stringarg) </p>
+
+							<p class="p">time time(fixedarg) </p>
+
+							<p class="p">time time(int, int) </p>
+
+							<p class="p">time time(int, int, int) </p>
+
+						</td>
+
+						<td valign="top" headers="d479396e41" class="stentry">convert arg to time type, similar to date function above</td>
+
+						<td valign="top" headers="d479396e44" class="stentry"> </td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d479396e35" class="stentry">seconddate</td>
+
+						<td valign="top" headers="d479396e38" class="stentry">
+							<p class="p">seconddate(string)</p>
+
+							<p class="p">seconddate(int, int, int, int, int, int)</p>
+
+						</td>
+
+						<td valign="top" headers="d479396e41" class="stentry">Convert to seconddate. One stringargs is a string with default
+							parsing; two stringargs is a format string in the second arg, numeric
+							args are the date components.</td>
+
+						<td valign="top" headers="d479396e44" class="stentry"> </td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d479396e35" class="stentry">secondtime</td>
+
+						<td valign="top" headers="d479396e38" class="stentry">
+							<p class="p">secondtime(string) </p>
+
+							<p class="p">secondtime(string, string) </p>
+
+							<p class="p">secondtime(int, int, int)</p>
+
+						</td>
+
+						<td valign="top" headers="d479396e41" class="stentry">Converto to secondtime.</td>
+
+						<td valign="top" headers="d479396e44" class="stentry"> </td>
+
+					</tr>
+</table></div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Conversion Functions";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

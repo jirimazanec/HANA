@@ -1,0 +1,1194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Creates a procedure that uses the specified programming language."/>
+<meta name="description" content="Creates a procedure that uses the specified programming language."/>
+<meta name="keywords" content="CREATE PROCEDURE"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=5155469780983065"/>
+<title>CREATE PROCEDURE Statement (Procedural)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20d467407519101484f190f545d54b24";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20d467407519101484f190f545d54b24">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">CREATE PROCEDURE Statement (Procedural)</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Creates a procedure that uses the specified programming language.</p>
+
+      <div class="section" id="loio20d467407519101484f190f545d54b24__sql_create_procedure_1sql_create_procedure_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+         
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE PROCEDURE <var class="keyword varname">&lt;proc_name&gt;</var> [(<var class="keyword varname">&lt;parameter_clause&gt;</var>)]
+   [LANGUAGE <var class="keyword varname">&lt;lang&gt;</var>]
+   [SQL SECURITY <var class="keyword varname">&lt;mode&gt;</var>]
+   [DEFAULT SCHEMA <var class="keyword varname">&lt;default_schema_name&gt;</var>]
+   [READS SQL DATA [WITH RESULT VIEW <var class="keyword varname">&lt;view_name&gt;</var>]] AS
+      {BEGIN [SEQUENTIAL EXECUTION]
+          <var class="keyword varname">&lt;procedure_body&gt;</var>
+       END
+       | HEADER ONLY 
+      }</pre></div>
+
+      </div></div>
+
+      <div class="section" id="loio20d467407519101484f190f545d54b24__sql_create_procedure_1sql_create_procedure_syntax_elements"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+         
+         <dl class="dl parml">
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;proc_name&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">The procedure name, with optional schema name.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_name&gt;</var> ::= [<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;schema_name&gt;</var> ::= <var class="keyword varname">&lt;unicode_name&gt;</var></pre></div>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;parameter_clause&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the input and output parameters for the procedure.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;parameter_clause&gt;</var> ::= <var class="keyword varname">&lt;parameter&gt;</var> [,...]</pre></div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;parameter&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies a procedure parameter with its associated data type.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;parameter&gt;</var> ::= [<var class="keyword varname">&lt;param_inout&gt;</var>] <var class="keyword varname">&lt;param_name&gt;</var> <var class="keyword varname">&lt;datatype&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;param_inout&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the parameter type.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;param_inout&gt;</var> ::= IN | OUT | INOUT</pre></div>
+
+                           <p class="p">The default is IN. Input and output parameters must be explicitly
+                              typed; no un-typed tables are supported.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;param_name&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the parameter name.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;param_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;datatype&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the SQL type for the parameter.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;datatype&gt;</var> ::= <var class="keyword varname">&lt;sql_type&gt;</var> | <var class="keyword varname">&lt;table_type&gt;</var> | <var class="keyword varname">&lt;table_type_definition&gt;</var></pre></div>
+
+                           <p class="p">The input and output parameters of a procedure can have any of the
+                              primitive SQL types or a table type. INOUT parameters can only be of
+                              scalar type.</p>
+
+                           <dl class="dl">
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;sql_type&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Specifies the data type of the variable.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;sql_type&gt;</var> ::= 
+ DATE
+ | TIME
+ | SECONDDATE
+ | TIMESTAMP
+ | TINYINT
+ | SMALLINT
+ | INTEGER
+ | BIGINT
+ | SMALLDECIMAL
+ | REAL
+ | DOUBLE
+ | BINTEXT
+ | VARCHAR [ (<var class="keyword varname">&lt;unsigned_integer&gt;</var>) ]
+ | NVARCHAR [ (<var class="keyword varname">&lt;unsigned_integer&gt;</var>) ]
+ | ALPHANUM [ (<var class="keyword varname">&lt;unsigned_integer&gt;</var>) ]
+ | VARBINARY [ (<var class="keyword varname">&lt;unsigned_integer&gt;</var>) ]
+ | DECIMAL [ (<var class="keyword varname">&lt;unsigned_integer&gt;</var> [, <var class="keyword varname">&lt;unsigned_integer&gt;</var> ]) ]</pre></div>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;table_type&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Specifies a table type that was previously defined with the
+                                       CREATE TYPE command.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_type&gt;</var> ::= [<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;schema_name&gt;</var> ::= <var class="keyword varname">&lt;unicode_name&gt;</var></pre></div>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;table_type_definition&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Specifies a table type that is implicitly defined within the
+                                       signature.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_type_definition&gt;</var> ::= TABLE (<var class="keyword varname">&lt;column_list_definition&gt;</var>)
+
+<var class="keyword varname">&lt;column_list_definition&gt;</var> ::= <var class="keyword varname">&lt;column_elem&gt;</var>[,...]
+
+<var class="keyword varname">&lt;column_elem&gt;</var> ::= <var class="keyword varname">&lt;column_name&gt;</var> <var class="keyword varname">&lt;data_type&gt;</var>
+
+<var class="keyword varname">&lt;column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                                 </dd>
+
+                              
+                           </dl>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+         </dl>
+
+         <dl class="dl parml">
+            
+               <dt class="dt pt dlterm emphasis">LANGUAGE</dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the programming language that is used in the procedure.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">LANGUAGE <var class="keyword varname">&lt;lang&gt;</var>
+
+<var class="keyword varname">&lt;lang&gt;</var> ::= SQLSCRIPT | R | GRAPH</pre></div>
+
+                  <p class="p">The default is SQLSCRIPT. Define the language in all procedure definitions.</p>
+
+                  <p class="p">Specify GRAPH to use graph script, a domain-specific programming language for
+                     custom graph algorithms and analytics.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis">SQL SECURITY</dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the security mode for the procedure.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SQL SECURITY <var class="keyword varname">&lt;mode&gt;</var>
+
+<var class="keyword varname">&lt;mode&gt;</var> ::= DEFINER | INVOKER</pre></div>
+
+                  <p class="p">The default is DEFINER.</p>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis">DEFINER</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies that the procedure is executed with the privileges of the
+                              user who defined the procedure.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">INVOKER</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies that the procedure is executed with the privileges of the
+                              user who invoked the procedure.</p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis">DEFAULT SCHEMA</dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the schema for unqualified objects in the procedure body.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">DEFAULT SCHEMA <var class="keyword varname">&lt;default_schema_name&gt;</var>
+
+<var class="keyword varname">&lt;default_schema_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                  <p class="p">If nothing is specified, then the current_schema of the session is used.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis">READS SQL DATA</dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies that the procedure is read only and side-effect free; it does not
+                     make modifications to the database data or its structure.</p>
+
+                  <p class="p">The procedure cannot contain DDL or DML statements, and it only calls other
+                     read-only procedures. The advantage of using this parameter is that certain
+                     optimizations are available for read-only procedures.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis">WITH RESULT VIEW</dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the result view to use as the output of a read-only procedure. </p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">WITH RESULT VIEW <var class="keyword varname">&lt;view_name&gt;</var>
+
+<var class="keyword varname">&lt;view_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                  <p class="p">When a result view is defined for a procedure, it can be called by an SQL
+                     statement in the same way as a table or view. See <a class="xref" href="default.html?20d467407519101484f190f545d54b24.html#loio20d467407519101484f190f545d54b24__sql_create_procedure_1sql_create-procedure_example_2" target="_top">Example 2 - Using a result view</a> below.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis">SEQUENTIAL EXECUTION</dt>
+
+               <dd class="dd pd">
+                  <p class="p">Forces sequential execution of the procedure logic. No parallelism takes
+                     place.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><a name="loio20d467407519101484f190f545d54b24__create_procedure__procedure_body"><!-- --></a><var class="keyword varname">&lt;procedure_body&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;procedure_body&gt;</var> :=
+ [<var class="keyword varname">&lt;proc_decl_list&gt;</var>] [<var class="keyword varname">&lt;proc_handler_list&gt;</var>] <var class="keyword varname">&lt;proc_stmt_list&gt;</var></pre></div>
+
+                  <p class="p">Defines the main body of the procedure according to the programming language
+                     selected.</p>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_decl_list&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Declares the condition handler.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_decl_list&gt;</var> ::= <var class="keyword varname">&lt;proc_decl&gt;</var> [{<var class="keyword varname">&lt;proc_decl&gt;</var>}…]
+
+<var class="keyword varname">&lt;proc_decl&gt;</var> ::= 
+DECLARE {
+   <var class="keyword varname">&lt;proc_variable&gt;</var>
+   |<var class="keyword varname">&lt;proc_table_variable&gt;</var>
+   |<var class="keyword varname">&lt;proc_cursor&gt;</var>
+   |<var class="keyword varname">&lt;proc_condition&gt;</var>
+  };
+
+<var class="keyword varname">&lt;proc_table_variable&gt;</var> ::= <var class="keyword varname">&lt;variable_name_list&gt;</var> <var class="keyword varname">&lt;table_type_definition&gt;</var>
+
+<var class="keyword varname">&lt;proc_variable&gt;</var>::=
+ <var class="keyword varname">&lt;variable_name_list&gt;</var> [CONSTANT] {<var class="keyword varname">&lt;sql_type&gt;</var>|<var class="keyword varname">&lt;array_datatype&gt;</var>}
+   [NOT NULL] [<var class="keyword varname">&lt;proc_default&gt;</var>]
+
+<var class="keyword varname">&lt;variable_name_list&gt;</var> ::= <var class="keyword varname">&lt;variable_name&gt;</var>[{, <var class="keyword varname">&lt;variable_name&gt;</var>}...]
+
+<var class="keyword varname">&lt;column_list_elements&gt;</var> ::= (<var class="keyword varname">&lt;column_definition&gt;</var>[{,<var class="keyword varname">&lt;column_definition&gt;</var>}...])
+
+<var class="keyword varname">&lt;array_datatype&gt;</var> ::= <var class="keyword varname">&lt;sql_type&gt;</var> ARRAY [ := <var class="keyword varname">&lt;array_constructor&gt;</var> ]
+
+<var class="keyword varname">&lt;array_constructor&gt;</var> ::= ARRAY (<var class="keyword varname">&lt;expression&gt;</var> [ { , <var class="keyword varname">&lt;expression&gt;</var> }...] )
+
+<var class="keyword varname">&lt;proc_default&gt;</var> ::= (DEFAULT | ':=' ) <var class="keyword varname">&lt;value&gt;</var>|<var class="keyword varname">&lt;expression&gt;</var>
+
+<var class="keyword varname">&lt;value&gt;</var> ::= !! An element of the type specified by <var class="keyword varname">&lt;type&gt;</var> or an expression
+
+<var class="keyword varname">&lt;proc_cursor&gt;</var> ::= 
+ CURSOR <var class="keyword varname">&lt;cursor_name&gt;</var> [ ( proc_cursor_param_list ) ] FOR <var class="keyword varname">&lt;subquery&gt;</var>;
+
+<var class="keyword varname">&lt;proc_cursor_param_list&gt;</var> ::= <var class="keyword varname">&lt;proc_cursor_param&gt;</var> [{,<var class="keyword varname">&lt;proc_cursor_param&gt;</var>}...]
+
+<var class="keyword varname">&lt;variable_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;cursor_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;proc_cursor_param&gt;</var> ::= <var class="keyword varname">&lt;param_name&gt;</var> <var class="keyword varname">&lt;datatype&gt;</var>
+
+<var class="keyword varname">&lt;proc_condition&gt;</var> ::= 
+ <var class="keyword varname">&lt;variable_name&gt;</var> CONDITION | <var class="keyword varname">&lt;variable_name&gt;</var> CONDITION FOR <var class="keyword varname">&lt;sql_error_code&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_handler_list&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Declares exception handlers to catch SQL exceptions.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_handler_list&gt;</var> ::= <var class="keyword varname">&lt;proc_handler&gt;</var> [{, <var class="keyword varname">&lt;proc_handler&gt;</var>}...]
+
+<var class="keyword varname">&lt;proc_handler&gt;</var> ::= DECLARE EXIT HANDLER FOR <var class="keyword varname">&lt;proc_condition_value_list&gt;</var> <var class="keyword varname">&lt;proc_stmt&gt;</var>;</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_condition_value_list&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies one or more condition values.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_condition_value_list&gt;</var> ::= 
+ <var class="keyword varname">&lt;proc_condition_value&gt;</var> [{, <var class="keyword varname">&lt;proc_condition_value&gt;</var>}...]</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_condition_value&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies a specific error code number or condition name declared on
+                              condition variable.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_condition_value&gt;</var> ::=
+ SQLEXCEPTION
+ | SQLWARNING
+ | <var class="keyword varname">&lt;sql_error_code&gt;</var>
+ | <var class="keyword varname">&lt;condition_name&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_stmt_list&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies statements for the procedure body.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_stmt_list&gt;</var> := {<var class="keyword varname">&lt;proc_stmt&gt;</var>}...
+
+<var class="keyword varname">&lt;proc_stmt&gt;</var> ::= 
+ <var class="keyword varname">&lt;proc_block&gt;</var>
+ | <var class="keyword varname">&lt;proc_assign&gt;</var>
+ | <var class="keyword varname">&lt;proc_single_assign&gt;</var>
+ | <var class="keyword varname">&lt;proc_multi_assign&gt;</var>
+ | <var class="keyword varname">&lt;proc_if&gt;</var>
+ | <var class="keyword varname">&lt;proc_loop&gt;</var>
+ | <var class="keyword varname">&lt;proc_while&gt;</var>
+ | <var class="keyword varname">&lt;proc_for&gt;</var>
+ | <var class="keyword varname">&lt;proc_foreach&gt;</var>
+ | <var class="keyword varname">&lt;proc_exit&gt;</var>
+ | <var class="keyword varname">&lt;proc_continue&gt;</var>
+ | <var class="keyword varname">&lt;proc_signal&gt;</var>
+ | <var class="keyword varname">&lt;proc_resignal&gt;</var>
+ | <var class="keyword varname">&lt;proc_sql&gt;</var>
+ | <var class="keyword varname">&lt;proc_open&gt;</var>
+ | <var class="keyword varname">&lt;proc_fetch&gt;</var>
+ | <var class="keyword varname">&lt;proc_close&gt;</var>
+ | <var class="keyword varname">&lt;proc_call&gt;</var>
+ | <var class="keyword varname">&lt;proc_exec&gt;</var>
+ | <var class="keyword varname">&lt;proc_return&gt;</var>
+ | <var class="keyword varname">&lt;proc_insert&gt;</var>
+ | <var class="keyword varname">&lt;proc_update&gt;</var>
+ | <var class="keyword varname">&lt;proc_delete&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_block&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Nests a section of the procedure by using BEGIN and END terminals.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_block&gt;</var> ::=
+ BEGIN <var class="keyword varname">&lt;proc_block_option&gt;</var> 
+   [<var class="keyword varname">&lt;proc_decl_list&gt;</var>] 
+   [<var class="keyword varname">&lt;proc_handler_list&gt;</var>]
+   <var class="keyword varname">&lt;proc_stmt_list&gt;</var> 
+ END;</pre></div>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_block_option&gt;</var> ::=
+ [SEQUENTIAL EXECUTION] [AUTONOMOUS TRANSACTION]
+ | [AUTONOMOUS TRANSACTION] [SEQUENTIAL EXECUTION]</pre></div>
+
+                           <p class="p">The autonomous transaction is independent from the main procedure.
+                              Changes made and committed by an autonomous transaction can be stored
+                              in persistency regardless of commit/rollback of the main procedure
+                              transaction. The end of the autonomous transaction block has an
+                              implicit commit.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_assign&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Assigns values to variables.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_assign&gt;</var> ::= 
+ <var class="keyword varname">&lt;variable_name&gt;</var> := { <var class="keyword varname">&lt;expression&gt;</var> | <var class="keyword varname">&lt;array_function&gt;</var> };
+ | <var class="keyword varname">&lt;variable_name&gt;</var> '[' <var class="keyword varname">&lt;expression&gt;</var> ']' := <var class="keyword varname">&lt;expression&gt;</var>;</pre></div>
+
+                           <p class="p"><var class="keyword varname">&lt;expression&gt;</var> is either a simple expression such as a
+                              character, a date, or a number, or it can be a scalar function.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;array_function&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies an array function.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;array_function&gt;</var> :=
+ ARRAY_AGG ( <var class="keyword varname">&lt;table_variable&gt;</var>.<var class="keyword varname">&lt;column_name&gt;</var> [ ORDER BY <var class="keyword varname">&lt;sort_spec_list&gt;</var> ] ) 
+ | CARDINALITY ( <var class="keyword varname">&lt;array_variable_name&gt;</var>) 
+ | TRIM_ARRAY  ( <var class="keyword varname">&lt;array_variable_name&gt;</var> , <var class="keyword varname">&lt;array_variable_name&gt;</var>) 
+ | ARRAY ( <var class="keyword varname">&lt;array_variable_name_list&gt;</var> ) 
+
+<var class="keyword varname">&lt;table_variable&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;array_variable_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                           <p class="p">The ARRAY_AGG function returns the array by aggregating the set of
+                              elements in the specified column of the table variable. Elements can
+                              optionally be ordered.</p>
+
+                           <p class="p">The CARDINALITY function returns the number of the elements in the
+                              array <var class="keyword varname">&lt;array_variable_name&gt;</var>.</p>
+
+                           <p class="p">The TRIM_ARRAY function returns the new array by removing the given
+                              number of elements, <var class="keyword varname">&lt;numeric_value_expression&gt;</var>, from
+                              the end of the array, <var class="keyword varname">&lt;array_value_expression&gt;</var>.</p>
+
+                           <p class="p">The ARRAY function returns an array whose elements are specified in
+                              the list <var class="keyword varname">&lt;array_variable_name&gt;</var>. For more information,
+                              see <cite class="cite">SAP HANA SQLScript Reference</cite>.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_single_assign&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Assigns values to a list of variables with only one function
+                              evaluation.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_single_assign&gt;</var> ::= 
+ <var class="keyword varname">&lt;variable_name&gt;</var> = <var class="keyword varname">&lt;subquery&gt;</var> 
+ |  <var class="keyword varname">&lt;variable_name&gt;</var> = <var class="keyword varname">&lt;proc_ce_call&gt;</var>
+ |  <var class="keyword varname">&lt;variable_name&gt;</var> = <var class="keyword varname">&lt;proc_apply_filter&gt;</var>
+ |  <var class="keyword varname">&lt;variable_name&gt;</var> = <var class="keyword varname">&lt;unnest_function&gt;</var>
+ |  <var class="keyword varname">&lt;variable_name&gt;</var> = <var class="keyword varname">&lt;match_merge_op&gt;</var></pre></div>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_multi_assign&gt;</var> ::= (<var class="keyword varname">&lt;var_name_list&gt;</var>) := <var class="keyword varname">&lt;function_expression&gt;</var></pre></div>
+
+                           <p class="p"><var class="keyword varname">&lt;function_expression&gt;</var> is a scalar user-defined
+                              function and the number of elements in
+                                 <var class="keyword varname">&lt;var_name_list&gt;</var> must be equal to the number of
+                              output parameters of the scalar user-defined function.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_ce_call&gt;</var></dt>
+
+                        <dd class="dd">
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_ce_call&gt;</var> ::=
+ TRACE ( <var class="keyword varname">&lt;variable_name&gt;</var> );
+ | CE_LEFT_OUTER_JOIN (<var class="keyword varname">&lt;table_variable&gt;</var>, <var class="keyword varname">&lt;table_variable&gt;</var>,
+    '[' <var class="keyword varname">&lt;expr_alias_comma_list&gt;</var> ']' [ <var class="keyword varname">&lt;expr_alias_vector&gt;</var>]  );
+ | CE_RIGHT_OUTER_JOIN (<var class="keyword varname">&lt;table_variable&gt;</var>, <var class="keyword varname">&lt;table_variable&gt;</var>,
+    '[' <var class="keyword varname">&lt;expr_alias_comma_list&gt;</var> ']' [ <var class="keyword varname">&lt;expr_alias_vector&gt;</var>] );
+ | CE_FULL_OUTER_JOIN (<var class="keyword varname">&lt;table_variable&gt;</var>, <var class="keyword varname">&lt;table_variable&gt;</var>,
+    '[' <var class="keyword varname">&lt;expr_alias_comma_list&gt;</var> ']' [ <var class="keyword varname">&lt;expr_alias_vector&gt;</var>]  );
+ | CE_JOIN (<var class="keyword varname">&lt;table_variable&gt;</var>, <var class="keyword varname">&lt;table_variable&gt;</var>, 
+    '[' <var class="keyword varname">&lt;expr_alias_comma_list&gt;</var> ']' [<var class="keyword varname">&lt;expr_alias_vector&gt;</var>]  );
+ | CE_UNION_ALL (<var class="keyword varname">&lt;table_variable&gt;</var> , <var class="keyword varname">&lt;table_variable&gt;</var> );
+ | CE_COLUMN_TABLE (<var class="keyword varname">&lt;table_name&gt;</var> [ <var class="keyword varname">&lt;expr_alias_vector&gt;</var>]  );
+ | CE_JOIN_VIEW (<var class="keyword varname">&lt;table_name&gt;</var> [ <var class="keyword varname">&lt;expr_alias_vector&gt;</var>] );
+ | CE_CALC_VIEW (<var class="keyword varname">&lt;table_name&gt;</var> [ <var class="keyword varname">&lt;expr_alias_vector&gt;</var>] );
+ | CE_OLAP_VIEW (<var class="keyword varname">&lt;table_name&gt;</var> [ <var class="keyword varname">&lt;expr_alias_vector&gt;</var>] );
+ | CE_PROJECTION (<var class="keyword varname">&lt;table_variable&gt;</var>, '[' <var class="keyword varname">&lt;expr_alias_comma_list&gt;</var> ']' 
+    <var class="keyword varname">&lt;opt_str_const&gt;</var> );
+ | CE_PROJECTION (<var class="keyword varname">&lt;table_variable&gt;</var> <var class="keyword varname">&lt;opt_str_const&gt;</var> ); 
+ | CE_AGGREGATION (<var class="keyword varname">&lt;table_variable&gt;</var>, '[' <var class="keyword varname">&lt;agg_alias_comma_list&gt;</var> ']'
+    [ <var class="keyword varname">&lt;expr_alias_vector&gt;</var>] ); 
+ | CE_CONVERSION (<var class="keyword varname">&lt;table_variable&gt;</var>, '[' <var class="keyword varname">&lt;proc_key_value_pair_comma_list&gt;</var> ']'
+    [ <var class="keyword varname">&lt;expr_alias_vector&gt;</var>] ); 
+ | CE_VERTICAL_UNION (<var class="keyword varname">&lt;table_variable&gt;</var>,'[' <var class="keyword varname">&lt;expr_alias_comma_list&gt;</var> ']' 
+    <var class="keyword varname">&lt;vertical_union_param_pair_list&gt;</var> ); 
+ | CE_COMM2R (<var class="keyword varname">&lt;table_variable&gt;</var>,<var class="keyword varname">&lt;int_const&gt;</var>,<var class="keyword varname">&lt;str_const&gt;</var>,
+    <var class="keyword varname">&lt;int_const&gt;</var>,<var class="keyword varname">&lt;int_const&gt;</var>,<var class="keyword varname">&lt;str_const&gt;</var> ); 
+
+<var class="keyword varname">&lt;table_name&gt;</var> ::= [<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;schema_name&gt;</var> ::= <var class="keyword varname">&lt;unicode_name&gt;</var></pre></div>
+
+                           <p class="p">For more information about the CE-Operators, see <cite class="cite">SAP HANA
+                                 SQLScript Reference</cite>.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_apply_filter&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">APPLY_FILTER defines a dynamic WHERE condition
+                                 <var class="keyword varname">&lt;variable_name&gt;</var> that is applied during
+                              runtime.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_apply_filter&gt;</var> ::= 
+ APPLY_FILTER ( {<var class="keyword varname">&lt;table_name&gt;</var> | <var class="keyword varname">&lt;table_variable&gt;</var>}, <var class="keyword varname">&lt;variable_name&gt;</var> );</pre></div>
+
+                           <p class="p">For more information about APPLY_FILTER, see <cite class="cite">SAP HANA SQLScript
+                                 Reference</cite>.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;unnest_function&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">The UNNEST function returns a table, including a row for each element
+                              of the specified array.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;unnest_function&gt;</var> ::=
+ UNNEST ( <var class="keyword varname">&lt;variable_name_list&gt;</var> ) [ WITH ORDINALITY ] [<var class="keyword varname">&lt;as_col_names&gt;</var>];
+
+<var class="keyword varname">&lt;variable_name_list&gt;</var> ::= <var class="keyword varname">&lt;variable_name&gt;</var> [{, <var class="keyword varname">&lt;variable_name&gt;</var>}...]</pre></div>
+
+                           <dl class="dl">
+                              
+                                 <dt class="dt dlterm emphasis">[WITH ORDINALTIY]</dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Appends an ordinal column to the return values.</p>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;as_col_names&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Specifies the column names of the return table.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;as_col_names&gt;</var> ::= AS [<var class="keyword varname">&lt;table_name&gt;</var>] ( <var class="keyword varname">&lt;column_name_list&gt;</var> ) 
+
+<var class="keyword varname">&lt;column_name_list&gt;</var> ::= <var class="keyword varname">&lt;column_name&gt;</var>[{, <var class="keyword varname">&lt;column_name&gt;</var>}...]
+
+<var class="keyword varname">&lt;column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                                 </dd>
+
+                              
+                           </dl>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;map_merge_op&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Applies each row of the input table to the mapper function and unites
+                              all intermediate result tables. For more information about the
+                              MAP_MERGE operator, see the <cite class="cite">SAP HANA SQLScript
+                              Reference</cite>.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;map_merge_op&gt;</var> ::= 
+MAP_MERGE(<var class="keyword varname">&lt;table_or_table_variable&gt;</var>, <var class="keyword varname">&lt;mapper_identifier&gt;</var>(<var class="keyword varname">&lt;table_or_table_variable&gt;</var>.<var class="keyword varname">&lt;column_name&gt;</var> [ ,... ] [, <var class="keyword varname">&lt;param_list&gt;</var>])
+
+<var class="keyword varname">&lt;table_or_table_variable&gt;</var> ::= <var class="keyword varname">&lt;table_variable_name&gt;</var> | <var class="keyword varname">&lt;identifier&gt;</var> 
+<var class="keyword varname">&lt;table_variable_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var> 
+<var class="keyword varname">&lt;mapper_identifier&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+<var class="keyword varname">&lt;column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+<var class="keyword varname">&lt;param_list&gt;</var> ::= <var class="keyword varname">&lt;param&gt;</var> [,…] 
+
+<var class="keyword varname">&lt;param&gt;</var> ::= 
+ <var class="keyword varname">&lt;table_or_table_variable&gt;</var> 
+ | <var class="keyword varname">&lt;string_literal&gt;</var> 
+ | <var class="keyword varname">&lt;numeric_literal&gt;</var> 
+ | <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_if&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Controls the execution flow with conditionals.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_if&gt;</var> ::=
+ IF <var class="keyword varname">&lt;condition&gt;</var> THEN [SEQUENTIAL EXECUTION]
+    [<var class="keyword varname">&lt;proc_decl_list&gt;</var>]
+    [<var class="keyword varname">&lt;proc_handler_list&gt;</var>]
+    <var class="keyword varname">&lt;proc_stmt_list&gt;</var>
+    [<var class="keyword varname">&lt;proc_elsif_list&gt;</var>]
+    [<var class="keyword varname">&lt;proc_else&gt;</var>]
+ END IF;
+
+<var class="keyword varname">&lt;proc_elsif_list&gt;</var> ::=
+ ELSEIF <var class="keyword varname">&lt;condition&gt;</var> THEN [SEQUENTIAL EXECUTION]
+   [<var class="keyword varname">&lt;proc_decl_list&gt;</var>]
+   [<var class="keyword varname">&lt;proc_handler_list&gt;</var>]
+   <var class="keyword varname">&lt;proc_stmt_list&gt;</var> 
+
+<var class="keyword varname">&lt;proc_else&gt;</var> ::=
+ ELSE [SEQUENTIAL EXECUTION]
+   [<var class="keyword varname">&lt;proc_decl_list&gt;</var>]
+   [<var class="keyword varname">&lt;proc_handler_list&gt;</var>]
+   <var class="keyword varname">&lt;proc_stmt_list&gt;</var></pre></div>
+
+                           <dl class="dl">
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_loop&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Uses a loop to repeatedly execute a set of statements.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_loop&gt;</var> ::=
+ LOOP [SEQUENTIAL EXECUTION]
+    [<var class="keyword varname">&lt;proc_decl_list&gt;</var>]
+    [<var class="keyword varname">&lt;proc_handler_list&gt;</var>]
+    <var class="keyword varname">&lt;proc_stmt_list&gt;</var>
+ END LOOP;</pre></div>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_while&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Specifies that a set of trigger statements is repeatedly
+                                       called while a condition is true.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_while&gt;</var> ::=
+ WHILE <var class="keyword varname">&lt;condition&gt;</var> DO [SEQUENTIAL EXECUTION]
+    [<var class="keyword varname">&lt;proc_decl_list&gt;</var>]
+    [<var class="keyword varname">&lt;proc_handler_list&gt;</var>]
+    <var class="keyword varname">&lt;proc_stmt_list&gt;</var>
+ END WHILE;</pre></div>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_for&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Specifies that a FOR - IN loop iterates over a set of
+                                       data.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_for&gt;</var> ::=
+ FOR <var class="keyword varname">&lt;column_name&gt;</var> IN [ REVERSE ] <var class="keyword varname">&lt;expression&gt;</var> [...]  <var class="keyword varname">&lt;expression&gt;</var> 
+   DO [SEQUENTIAL EXECUTION]
+     [<var class="keyword varname">&lt;proc_decl_list&gt;</var>]
+     [<var class="keyword varname">&lt;proc_handler_list&gt;</var>]
+     <var class="keyword varname">&lt;proc_stmt_list&gt;</var>
+ END FOR;</pre></div>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_foreach&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Specifies that FOR - EACH loops to iterate over all elements
+                                       in a set of data.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_foreach&gt;</var> ::=
+ FOR <var class="keyword varname">&lt;column_name&gt;</var> AS <var class="keyword varname">&lt;column_name&gt;</var> [<var class="keyword varname">&lt;open_param_list&gt;</var>]
+   DO [SEQUENTIAL EXECUTION]
+     [<var class="keyword varname">&lt;proc_decl_list&gt;</var>]
+     [<var class="keyword varname">&lt;proc_handler_list&gt;</var>]
+     <var class="keyword varname">&lt;proc_stmt_list&gt;</var>
+ END FOR;
+
+<var class="keyword varname">&lt;open_param_list&gt;</var> ::= ( <var class="keyword varname">&lt;expression&gt;</var> [ { , <var class="keyword varname">&lt;expression&gt;</var> }...] )</pre></div>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_exit&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Terminates a loop.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_exit&gt;</var> ::= BREAK;</pre></div>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_continue&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Skips a current loop iteration and continues with the next
+                                       value.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_continue&gt;</var> ::= CONTINUE;</pre></div>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_signal&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_signal&gt;</var> ::=
+ SIGNAL <var class="keyword varname">&lt;signal_value&gt;</var> [<var class="keyword varname">&lt;set_signal_info&gt;</var>];</pre></div>
+
+                                    <p class="p">Explicitly raises an exception from within your trigger
+                                       procedures.</p>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_resignal&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Raises an exception on the action statement in an exception
+                                       handler.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_resignal&gt;</var> ::=
+ RESIGNAL [<var class="keyword varname">&lt;signal_value&gt;</var>] [<var class="keyword varname">&lt;set_signal_info&gt;</var>];</pre></div>
+
+                                    <p class="p">If an error code is not specified, then RESIGNAL throws the
+                                       caught exception.</p>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;signal_value&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Specifies a SIGNAL or RESIGNAL for a signal name or an SQL
+                                       error code.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;signal_value&gt;</var> ::= <var class="keyword varname">&lt;signal_name&gt;</var> | <var class="keyword varname">&lt;sql_error_code&gt;</var>
+
+<var class="keyword varname">&lt;signal_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;sql_error_code&gt;</var> ::= <var class="keyword varname">&lt;unsigned_integer&gt;</var></pre></div>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;set_signal_info&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Specifies that an error message is delivered to users when a
+                                       specified error is thrown during procedure execution.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;set_signal_info&gt;</var> ::= SET MESSAGE_TEXT = '<var class="keyword varname">&lt;message_string&gt;</var>'
+
+<var class="keyword varname">&lt;message_string&gt;</var> ::= <var class="keyword varname">&lt;any_character&gt;</var></pre></div>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_sql&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Specifies a subquery.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_sql&gt;</var> ::=
+ <var class="keyword varname">&lt;subquery&gt;</var>
+ | <var class="keyword varname">&lt;select_into_stmt&gt;</var>
+ | <var class="keyword varname">&lt;insert_stmt&gt;</var>  
+ | <var class="keyword varname">&lt;delete_stmt&gt;</var> 
+ | <var class="keyword varname">&lt;update_stmt&gt;</var>  
+ | <var class="keyword varname">&lt;replace_stmt&gt;</var>  
+ | <var class="keyword varname">&lt;call_stmt&gt;</var>   
+ | <var class="keyword varname">&lt;create_table&gt;</var> 
+ | <var class="keyword varname">&lt;drop_table&gt;</var> </pre></div>
+
+                                    <dl class="dl">
+                                       
+                                          <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;select_into_stmt&gt;</var></dt>
+
+                                          <dd class="dd">
+                                             <p class="p">Specifies a query.</p>
+
+                                             <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;select_into_stmt&gt;</var> ::=
+ SELECT <var class="keyword varname">&lt;select_list&gt;</var> INTO <var class="keyword varname">&lt;var_name_list&gt;</var> <var class="keyword varname">&lt;from_clause&gt;</var>
+   [<var class="keyword varname">&lt;where_clause&gt;</var>]
+   [<var class="keyword varname">&lt;group_by_clause&gt;</var>]
+   [<var class="keyword varname">&lt;having_clause&gt;</var>] 
+   [{<var class="keyword varname">&lt;set_operator&gt;</var> <var class="keyword varname">&lt;subquery&gt;</var>, ... }]
+   [<var class="keyword varname">&lt;order_by_clause&gt;</var>] 
+   [<var class="keyword varname">&lt;limit&gt;</var>];</pre></div>
+
+                                             <p class="p">For information on <var class="keyword varname">&lt;select_list&gt;</var>,
+                                                  <var class="keyword varname">&lt;from_clause&gt;</var>,
+                                                  <var class="keyword varname">&lt;where_clause&gt;</var>,
+                                                  <var class="keyword varname">&lt;group_by_clause&gt;</var>,
+                                                  <var class="keyword varname">&lt;having_clause&gt;</var>,
+                                                  <var class="keyword varname">&lt;set_operator&gt;</var>,
+                                                  <var class="keyword varname">&lt;subquery&gt;</var>,
+                                                  <var class="keyword varname">&lt;order_by_clause&gt;</var>, and
+                                                  <var class="keyword varname">&lt;limit&gt;</var>, see the SELECT
+                                                  statement.</p>
+
+                                          </dd>
+
+                                       
+                                    </dl>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;var_name_list&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Specifies a variable.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;var_name_list&gt;</var> ::= <var class="keyword varname">&lt;var_name&gt;</var>[{, <var class="keyword varname">&lt;var_name&gt;</var>}...]
+
+<var class="keyword varname">&lt;var_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                                    <p class="p"><var class="keyword varname">&lt;var_name&gt;</var> is scalar variable. You can
+                                       assign selected item value to this scalar variable.</p>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_open&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Controls cursor operations.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_open&gt;</var> ::=
+ OPEN <var class="keyword varname">&lt;cursor_name&gt;</var> [ <var class="keyword varname">&lt;open_param_list&gt;</var>];
+
+<var class="keyword varname">&lt;proc_fetch&gt;</var> ::=
+ FETCH <var class="keyword varname">&lt;cursor_name&gt;</var> INTO <var class="keyword varname">&lt;column_name_list&gt;</var>;
+
+<var class="keyword varname">&lt;proc_close&gt;</var> ::= CLOSE <var class="keyword varname">&lt;cursor_name&gt;</var>;</pre></div>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_exec&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Makes a dynamic SQL call.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_exec&gt;</var> ::= {EXEC | EXECUTE IMMEDIATE} <var class="keyword varname">&lt;proc_expr&gt;</var> 
+ [INTO <var class="keyword varname">&lt;var_name_list&gt;</var>] [<var class="keyword varname">&lt;USING expression_list&gt;</var>];
+
+<var class="keyword varname">&lt;var_name_list&gt;</var> ::= <var class="keyword varname">&lt;var_name&gt;</var>[,...]
+
+<var class="keyword varname">&lt;var_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;expression_list&gt;</var> ::= <var class="keyword varname">&lt;expression&gt;</var>[,...]</pre></div>
+
+                                    <p class="p">If <var class="keyword varname">&lt;proc_expr&gt;</var> returns a single row, then
+                                       you can assign the value of each column to a scalar variable
+                                       by specifying the INTO <var class="keyword varname">&lt;var_name_list&gt;</var>
+                                       clause.</p>
+
+                                    <p class="p">You can bind scalar values by specifying the USING
+                                          <var class="keyword varname">&lt;expression_list&gt;</var> clause.
+                                          <var class="keyword varname">&lt;expression&gt;</var> can be either a simple
+                                       expression, such as a character, a date, or a number, or it
+                                       can be a scalar variable. </p>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_return&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Returns a value from a procedure.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_return&gt;</var> ::= RETURN [<var class="keyword varname">&lt;proc_expr&gt;</var>];</pre></div>
+
+                                    <p class="p">For more information about SQLScript, see <cite class="cite">SAP HANA
+                                          SQLScript Reference</cite>.</p>
+
+                                    <p class="p">For more information on the R-Language, see the <cite class="cite">SAP
+                                          HANA R Integration Guide</cite>. </p>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_insert&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Inserts a new data record into table variable at a specific
+                                       position.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_insert&gt;</var> ::= :<var class="keyword varname">&lt;table_variable&gt;</var>.INSERT((<var class="keyword varname">&lt;value&gt;</var>[,…] ), <var class="keyword varname">&lt;index&gt;</var>)</pre></div>
+
+                                    <p class="p">All existing data records at the positions starting from the
+                                       given index are moved to the next position. If the index is
+                                       greater than the original table size, the records between the
+                                       inserted record and the original last record are initialized
+                                       with NULL values.</p>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_update&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Updates a data record at a specific position. There are two
+                                       syntaxes for <var class="keyword varname">&lt;proc_update&gt;</var>:</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_update&gt;</var> ::= :<var class="keyword varname">&lt;table_variable&gt;</var>.UPDATE((<var class="keyword varname">&lt;value&gt;</var>[,…] ), <var class="keyword varname">&lt;index&gt;</var>))
+or 
+<var class="keyword varname">&lt;proc_update&gt;</var> ::= :<var class="keyword varname">&lt;table_variable&gt;</var>[<var class="keyword varname">&lt;index&gt;</var>] = (<var class="keyword varname">&lt;value&gt;</var>[,…])
+</pre></div>
+
+                                    <p class="p">If <var class="keyword varname">&lt;index&gt;</var> is greater than the table size,
+                                       no operation is performed.</p>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_delete&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Deletes a data record at a specific position. </p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_delete&gt;</var> ::= :<var class="keyword varname">&lt;table_variable&gt;</var>.DELETE(<var class="keyword varname">&lt;index&gt;</var>)
+</pre></div>
+
+                                    <p class="p">If <var class="keyword varname">&lt;index&gt;</var> is greater than the table size,
+                                       no operation is performed.</p>
+
+                                 </dd>
+
+                              
+                           </dl>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis">HEADER ONLY</dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies that only the properties of the procedure are created along with the
+                     OID and no procedure dependencies exist.</p>
+
+                  <p class="p">Once the headers are replaced with full procedure definitions, dependencies are
+                     created while the procedure OID remains the same. Dependencies appear in the
+                     OBJECT_DEPENDENCIES system view. HEADER ONLY is useful when several dependent
+                     procedures need to be created.</p>
+
+               </dd>
+
+            
+         </dl>
+
+      </div></div>
+
+      <div class="section" id="loio20d467407519101484f190f545d54b24__sql_create_procedure_1sql_create_procedure_description"><div class="section_title">Description</div><div type="Description">
+         
+         <p class="p">The CREATE PROCEDURE statement creates a procedure using the specified programming
+            language <var class="keyword varname">&lt;lang&gt;</var>.</p>
+
+         <p class="p">For more information about SQLScript, see <cite class="cite">SAP HANA SQLScript Reference</cite>.</p>
+
+         <p class="p">For more information on the R-Language, see the <cite class="cite">SAP HANA R Integration
+               Guide</cite>.</p>
+
+      </div></div>
+
+      <div class="section" id="loio20d467407519101484f190f545d54b24__sql_create_procedure_1sql_create_procedure_examples"><div class="section_title">Examples</div><div type="Examples">
+         
+         <div class="sectiondiv">
+            <p class="p" id="loio20d467407519101484f190f545d54b24__sql_create_procedure_1sql_create-procedure_example_1"><strong class="ph b">Example 1 - Creating an
+                  SQL Procedure</strong></p>
+
+            <p class="p">Create an SQLScript procedure with the following definition.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE PROCEDURE orchestrationProc
+ LANGUAGE SQLSCRIPT AS
+ BEGIN
+   DECLARE v_id BIGINT;
+   DECLARE v_name VARCHAR(30);
+   DECLARE  v_pmnt BIGINT;
+   DECLARE v_msg VARCHAR(200);
+   DECLARE CURSOR c_cursor1 (p_payment BIGINT) FOR
+     SELECT id, name, payment FROM control_tab
+       WHERE payment &gt; :p_payment ORDER BY id ASC;
+   CALL init_proc();
+   OPEN c_cursor1(250000);
+   FETCH c_cursor1 INTO v_id, v_name, v_pmnt; v_msg := :v_name || ' (id ' || :v_id || ') earns ' || :v_pmnt || ' $.';
+   CALL ins_msg_proc(:v_msg);
+   CLOSE c_cursor1;
+ END;</pre></div>
+
+            <p class="p">The procedure features a number of imperative constructs including the use of a
+               cursor (with associated state) and local scalar variables with assignments.</p>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20d467407519101484f190f545d54b24__sql_create_procedure_1sql_create-procedure_example_2"><strong class="ph b">Example 2 - Using a
+                  result view</strong></p>
+
+            <p class="p">Create a procedure using a result view ProcView to return its results.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE PROCEDURE ProcWithResultView(IN id INT, OUT o1 CUSTOMER)
+ LANGUAGE SQLSCRIPT
+ READS SQL DATA WITH RESULT VIEW ProcView AS
+ BEGIN
+   o1 = SELECT * FROM CUSTOMER WHERE CUST_ID = :id;
+ END;</pre></div>
+
+            <p class="p">You call this procedure from an SQL statement as follows.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM ProcView (PLACEHOLDER."$$id$$"=&gt;'5');</pre></div>
+
+            <p class="p">Procedures and result views produced by procedures are not connected from the
+               security perspective and therefore do not inherit privileges from each other. The
+               security aspects of each object must be handled separately. For example, you must
+               grant the SELECT privilege on a result view and EXECUTE privilege on a connected
+               procedure.</p>
+
+            <p class="p">Create the procedure ProcHeader as HEADER only. Later you use ALTER PROCEDURE to
+               replace the header with the full procedure definitions.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE PROCEDURE ProcHeader (in id integer)  AS HEADER ONLY
+
+ALTER PROCEDURE ProcHeader (in id integer) 
+AS
+  BEGIN 
+    o1 = SELECT * FROM CUSTOMER WHERE CUST_ID = :id;
+  END;</pre></div>
+
+         </div></div></div>
+
+   </div>
+
+   <div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?20a1569875191014b507cf392724b7eb.html" target="_top" title="A data type defines the characteristics of a data value. A special value of NULL is included in every data type to indicate the absence of a value.">Data Types</a></div>
+<div><a class="link" href="default.html?20d5c1ed75191014a80d897035629def.html" target="_top" title="Creates a user-defined type">CREATE TYPE Statement (Procedural)</a></div>
+<div><a class="link" href="default.html?20f7f70975191014a76da70c9181720e.html" target="_top" title="Adds a record to a table.">INSERT Statement (Data Manipulation)</a></div>
+<div><a class="link" href="default.html?20d6169a75191014892db922f94abe41.html" target="_top" title="Deletes records from a table where a specified condition is met.">DELETE Statement (Data Manipulation)</a></div>
+<div><a class="link" href="default.html?20ff268675191014964add3d17700909.html" target="_top" title="Changes the values of the records of a table.">UPDATE Statement (Data Manipulation)</a></div>
+<div><a class="link" href="default.html?20fc06a7751910149892c0d09be21a38.html" target="_top" title="Updates rows in a table or inserts new rows.">REPLACE | UPSERT Statement (Data Manipulation)</a></div>
+<div><a class="link" href="default.html?20fcf24075191014a89e9dc7b8408b26.html" target="_top" title="Retrieves information from the database.">SELECT Statement (Data Manipulation)</a></div>
+<div><a class="link" href="default.html?20cbd12e7519101489c7cfcd0f32868d.html" target="_top" title="Provides information about dependencies between objects, such as which views refer to a specific table.">OBJECT_DEPENDENCIES System View</a></div>
+</div>
+</div>
+   <div class="topic reference sybref commandref nested1" id="commandref_rhd_tn1_cz">
+      <h2 class="title topictitle2"/>
+
+   </div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="CREATE PROCEDURE Statement (Procedural)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

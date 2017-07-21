@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Provides information on table delta merge statistics."/>
+<meta name="description" content="Provides information on table delta merge statistics."/>
+<meta name="keywords" content="M_DELTA_MERGE_STATISTICS"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=6563210639984632"/>
+<title>M_DELTA_MERGE_STATISTICS System View</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20aed3e475191014aae191f316692093";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20aed3e475191014aae191f316692093">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">M_DELTA_MERGE_STATISTICS System View</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Provides information on table delta merge statistics.</p>
+
+      <div class="section" id="loio20aed3e475191014aae191f316692093___m__d_e_l_t_a__m_e_r_g_e__s_t_a_t_i_s_t_i_c_s_1fulldesc_M_DELTA_MERGE_STATISTICS"><div class="section_title">Full description</div><div type="Full description">
+         
+         <p class="p">This view shows table delta merge statistics. It lists the table delta merge events
+            since the indexserver was last restarted. Table delta merges, optimize compression runs,
+            and application merge hints are listed separately.</p>
+
+      </div></div>
+
+      <div class="section" id="loio20aed3e475191014aae191f316692093___m__d_e_l_t_a__m_e_r_g_e__s_t_a_t_i_s_t_i_c_s_1struct_M_DELTA_MERGE_STATISTICS"><div class="section_title">Structure</div><div type="Structure">
+         
+         
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20aed3e475191014aae191f316692093__table_cj3_qvg_cw" class="table" frame="border" border="1" rules="all">
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" id="d7110999e51">
+                        <p class="p">Column name</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d7110999e57">
+                        <p class="p">Data type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d7110999e63">
+                        <p class="p">Unit</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d7110999e69">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">HOST</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">VARCHAR(64)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 "> </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">The host name.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">PORT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">INTEGER</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 "> </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">The internal port.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">TYPE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">VARCHAR(8)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 "> </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <div class="p">
+                           <dl class="dl">
+                              
+                                 <dt class="dt dlterm emphasis">MERGE </dt>
+
+                                 <dd class="dd">
+                                    <p class="p">The table delta merge.</p>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis">HINT</dt>
+
+                                 <dd class="dd">
+                                    <p class="p">The application merge hint.</p>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis">SPARSE </dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Optimizes compression.</p>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis">FACT</dt>
+
+                                 <dd class="dd">
+                                    <p class="p">The fact table compression.</p>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis">RECLAIM</dt>
+
+                                 <dd class="dd">
+                                    <p class="p">The table delta garbage collection.</p>
+
+                                 </dd>
+
+                              
+                           </dl>
+
+                        </div>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">SCHEMA_NAME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">NVARCHAR(256)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 "> </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">The schema name.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">TABLE_NAME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">NVARCHAR(256)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 "> </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">The table name.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">PART_ID</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">INTEGER</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 "> </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">The partition ID. This value is 0 for non-partitioned tables, 1 through
+                           the number of partitions for partitioned tables, and -1 if the whole
+                           table is unloaded. </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">HISTORY</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">VARCHAR(5)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">Boolean</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">The flag to indicate that the history part was merged: 'TRUE',
+                           'FALSE'.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">MEMORY_MERGE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">VARCHAR(5)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">Boolean</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">The flag to indicate that the table was merged in memory only: 'TRUE',
+                           'FALSE'.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">PASSPORT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">VARCHAR(256)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 "> </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">The external identifier for the table merge called by an application.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">START_TIME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">TIMESTAMP</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 "> </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">The execution start time.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">EXECUTION_TIME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">Millisecond</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">The execution duration.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">MOTIVATION</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">VARCHAR(9)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 "> </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <div class="p">
+                           <dl class="dl">
+                              
+                                 <dt class="dt dlterm emphasis">AUTO</dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Triggered based on an automatic decision function.</p>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis">SMART</dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Triggered by a HINT from the user based on a smart decision
+                                       function.</p>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis">CRITICAL</dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Triggered based on a critical decision function.</p>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis">HARD</dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Triggered via SQL based on a hard decision function.</p>
+
+                                 </dd>
+
+                              
+                              
+                                 <dt class="dt dlterm emphasis">FORCED</dt>
+
+                                 <dd class="dd">
+                                    <p class="p">A merge triggered via SQL, circumventing resource
+                                       availability checks, based on a forced decision function.</p>
+
+                                 </dd>
+
+                              
+                           </dl>
+
+                        </div>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">SUCCESS</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">VARCHAR(5)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">Boolean</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">The call success flag. This depends on the field TYPE. HINT is when the
+                           application merge hint was accepted or rejected. MERGE/SPARSE means that
+                           the delta merge/optimize compression was completed with or without
+                           success, indicated with either 'TRUE' or 'FALSE'. For example, a table
+                           delta merge call which did not result in a delta merge because the delta
+                           was empty, is indicated with 'FALSE'.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">MERGED_DELTA_RECORDS</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">INTEGER</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">Counter</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">The number of documents in delta.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">LAST_ERROR</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">INTEGER</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 "> </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">The error code of the last error that occurred. This explains why a merge
+                           did not succeed. See ERROR_DESCRIPTION for details.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">ERROR_DESCRIPTION</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">NVARCHAR(2000)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 "> </td>
+
+                     <td class="entry" valign="top" headers="d7110999e51 d7110999e57 d7110999e63 d7110999e69 ">
+                        <p class="p">The description of the last error that occurred during the merge. A
+                           failing merge does not necessarily indicate a problem.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div></div>
+
+   </div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="M_DELTA_MERGE_STATISTICS System View";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

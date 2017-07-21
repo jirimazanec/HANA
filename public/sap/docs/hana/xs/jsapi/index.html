@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SAP HANA XS JavaScript Reference Overview</title>
+<script id="sap-ui-bootstrap" src="/sap/ui5/1/resources/sap-ui-core-lean.js"></script>
+<link type="text/css" rel="stylesheet" href="base/styles/prettify-tomorrow.css">
+<link type="text/css" rel="stylesheet" href="base/styles/jsdoc-default.css">
+<style>
+        .overlay {
+            color: black;
+            background-color: rgba(245,245,245,.9);
+            position: absolute;
+            text-align:center;
+            vertical-align: middle;
+            z-index:10000;
+        }
+    </style>
+<!--[if IE]><style type="text/css">
+            .overlay { 
+                background:transparent;
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#F5F5F5E6,endColorstr=#F5F5F5E6); 
+                zoom: 1;
+            } 
+        </style><![endif]-->
+</style>
+<script>
+        $(function() {
+            $("td[du_name] a").each(function(idx, elem) {
+                $.ajax({
+                    url: elem.href,
+                    error: function() {
+                        var row = $(elem).closest("tr");
+                        var du_name = $(elem).closest("td[du_name]");
+                        var bottomWidth = row.css('width');
+                        var bottomHeight = row.css('height');
+                        var rowPos = row.position();
+                        var bottomTop = rowPos.top;
+                        var bottomLeft = rowPos.left;
+                        
+                        var div = $('<div class="overlay" for_du=' + du_name.attr("du_name") + '>To use <b>' + (elem.textContent || elem.innerText) + '</b>, please import delivery unit <b>' + du_name.attr("du_name") + '</b></div>');
+                
+                        div.css({
+                            position: 'absolute',
+                            top: bottomTop,
+                            left: bottomLeft,
+                            width: bottomWidth,
+                            height: bottomHeight,
+                            "line-height": bottomHeight
+                        });
+                
+                        $("body").append(div);
+                     }
+                });
+            });
+        });
+        
+        $( window ).resize(function() {
+            $("div.overlay").each(function(idx, elem) {
+                var row = $("td[du_name='" + $(elem).attr("for_du") + "']").closest("tr");
+                var bottomWidth = row.css('width');
+                var bottomHeight = row.css('height');
+                var rowPos = row.position();
+                var bottomTop = rowPos.top;
+                var bottomLeft = rowPos.left;
+                
+                $(elem).css({
+                    position: 'absolute',
+                    top: bottomTop,
+                    left: bottomLeft,
+                    width: bottomWidth,
+                    height: bottomHeight,
+                    "line-height": bottomHeight
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="main">
+<h1 class="page-title">SAP HANA XS JavaScript API Reference Libary</h1>
+<p>
+The documents listed in the following table describe the application programming interface (API) specification for server-side JavaScript code running
+inside SAP HANA Extended Application Services (SAP HANA XS).
+<p>
+<h3> Modules </h3>
+<p>
+<table class="params">
+<thead>
+<tr>
+<th>Name</th>
+<th class="last">Description</th>
+<th class="guide">Guide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="name"><a href="./base/index.html"><code>base</code></a></td>
+<td class="description last">Core server-side JavaScript API for SAP HANA XS</td>
+<td class="guide guide"><a href="./base/index.html">SAP HANA XS JavaScript API Reference</a></td>
+</tr>
+<tr>
+<td class="name" du_name="HANA_XS_DBUTILS"><a href="./dbutils/index.html"><code>dbutils</code></a></td>
+<td class="description last">Enables the seamless consumption of SAP HANA database artifacts, such as CDS entities and stored procedures.</td>
+<td class="guide guide"><a href="./dbutils/index.html">SAP HANA XS DB Utilities JavaScript API Reference</a></td>
+</tr>
+<tr>
+<td class="name" du_name="HANA_TEST_TOOLS"><a href="./xsunit/index.html"><code>xsunit</code></a></td>
+<td class="description last">A JavaScript test framework called XSUnit that enables automatic tests for SAP HANA XS applications</td>
+<td class="guide guide"><a href="./xsunit/index.html">SAP HANA XSUnit JavaScript API Reference</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<br clear="both">
+<footer>
+<a href="base/Copyright-SAP.html">Copyright</a> &amp; <a href="base/Disclaimer-SAP.html">Disclaimer</a>
+</footer>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Change recording in SAP HANA is the infrastructure to keep track of changes during SAP HANA development."/>
+<meta name="description" content="Change recording in SAP HANA is the infrastructure to keep track of changes during SAP HANA development."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=6848622120456852"/>
+<title>SAP HANA Change Recording</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio8486bc094b4e4b8b865418c9ea1416d8";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio8486bc094b4e4b8b865418c9ea1416d8">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">SAP HANA Change Recording</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">Change recording in <span class="ph pname">SAP HANA</span> is the infrastructure to keep track of changes during <span class="ph pname">SAP HANA</span>
+		development.</p>
+
+		<p class="p">It provides the following functions:</p>
+
+		<ul class="ul" id="loio8486bc094b4e4b8b865418c9ea1416d8__ul_m4k_yjz_hr">
+			<li class="li">
+				<p class="p"><span class="ph emphasis emphasis">Automatic Recording and Grouping of Object Changes</span></p>
+
+				<p class="p">When change recording is enabled, you are prompted to assign your changes to a changelist when you activate a repository object in
+					your development environment. You can group the objects that you want to transport together in one changelist.</p>
+
+				<p class="p">We recommend that you assign objects of only one DU to the same changelist. If you use native <span class="ph pname">SAP HANA</span> transport, you should
+					configure the transport route accordingly for the same DU, and if you use CTS transport, you should assign this DU to CTS and
+					trigger the transport of changelists for this DU. This way, you make sure that all objects that belong to packages of this DU and
+					that are part of a changelist are transported together. </p>
+
+			</li>
+
+			<li class="li">
+				<p class="p"><span class="ph emphasis emphasis">Decoupling of Activation and Transport</span></p>
+
+				<p class="p">When change recording is not enabled, a transport of a delivery unit contains all active objects that are contained in the packages of the
+					delivery unit. You can only transport the entire delivery unit, no matter whether the objects are ready for transport or not.
+					Change recording allows you to make changes to individual objects of a delivery unit and transport only these in changelists
+					whenever they are ready for transport. Only released changelists can be transported. The objects are transported in the state in
+					which they were at the point in time when the changelist was released. </p>
+
+			</li>
+
+			<li class="li">
+				<p class="p"><span class="ph emphasis emphasis">Different Transport Modes</span></p>
+
+				<p class="p">The changelist-based transport can be set up in two modes: Either all changelists that were
+					ever released in one or more delivery units or a product, or selected
+					changelists in one or more delivery units or a product can be transported.</p>
+
+				<div class="note note"><span class="notetitle">Note</span> 
+					<p class="p">Transport of products is only supported using native <span class="ph pname">SAP HANA</span> transport.</p>
+
+				</div>
+
+				<p class="p">If you use native <span class="ph pname">SAP HANA</span> transport, you configure the transport mode when
+					you register the system for a transport route. If you use CTS transport, you
+					select whether you want to attach <span class="ph uicontrol">Released changelists</span> or
+						<span class="ph uicontrol">Delivery Units</span> to a transport request when you
+					perform an export for CTS in <span class="ph pname">SAP HANA</span> Application Lifecycle
+					Management.</p>
+
+			</li>
+
+			<li class="li">
+				<p class="p"><span class="ph emphasis emphasis">Predecessor Calculation of Changes</span></p>
+
+				<p class="p">If a changelist contains objects from the same package that depend on objects in other
+					changelists that are released but not yet transported, the system detects these
+					and includes them in the transport as well.</p>
+
+			</li>
+
+			<li class="li">
+				<p class="p"><span class="ph emphasis emphasis">Team Development</span></p>
+
+				<p class="p">Multiple team members can work on the same development objects (and use the same changelist). The changelist can only be released when all team
+					members have indicated that the objects are ready for transport by approving their contribution to the changelist. The objects
+					that are part of the changelist are locked for developers who do not contribute to the changelist.</p>
+
+			</li>
+
+		</ul>
+
+		<div class="section"><div class="section_title">Integration</div><div type="Integration">
+			
+			<p class="p">The functions of change recording are integrated in the XS user interface <span class="ph pname">SAP
+					HANA</span> Application Lifecycle Management. In your development environment
+					(<span class="ph pname">SAP HANA</span> studio, or <span class="ph pname">SAP HANA</span> Web-based
+				Development Workbench), you can start this UI using the context menus. For example,
+				in the <span class="ph uicontrol">Developer Perspective</span> of <span class="ph pname">SAP HANA</span>
+				studio in the <span class="ph uicontrol">Repositories</span> view, you choose <span class="ph uicontrol">Change
+					Management</span>, and in the <span class="ph uicontrol">Project Explorer</span> view,
+				you choose <span class="ph menucascade"><img src="images/navstart.gif" alt="Start of the navigation path" title="Start of the navigation path"/> <span class="ph uicontrol">Team</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">HALM Change Management</span> <img src="images/navend.gif" alt="End of the navigation path" title="End of the navigation path"/></span>. In the <span class="ph uicontrol">Editor</span> of <span class="ph pname">SAP HANA</span>
+				Web-based Development Workbench, choose <span class="ph menucascade"><img src="images/navstart.gif" alt="Start of the navigation path" title="Start of the navigation path"/> <span class="ph uicontrol">Navigation Links</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">Lifecycle Management</span> <img src="images/navend.gif" alt="End of the navigation path" title="End of the navigation path"/></span>.</p>
+
+			<p class="p">There is an eclipse-based change view available as part of <span class="ph pname">SAP HANA</span> studio.
+				However, to benefit from all functions, we recommend that you use the XS UI using
+				the context menu. </p>
+
+		</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?711dc146ab8a4d56a8e9eff15590b9d0.html" target="_top" title="When change recording is enabled, you must choose a mode for the transport: You can either transport selected changelists in a delivery unit (DU), or all changelists in the DU.">Transport Modes in Change Recording</a></div>
+<div><a class="link" href="default.html?f32a4548961b4921972ae624314f26b9.html" target="_top" title="Before you start working with change recording you must decide how you want to set up the systems in your transport landscape.">Setup of the Transport Landscape</a></div>
+<div><a class="link" href="default.html?4f7eae746ed043268796fbc0549abe96.html" target="_top" title="You enable change recording in your development system to manage changes to repository objects.">Enable SAP HANA Change Recording</a></div>
+<div><a class="link" href="default.html?883b782f714f4771bc5a19aff598a711.html" target="_top" title="For SAP HANA application lifecycle management, predecessor changelists are those that were released earlier than the selected changelists, which were not transported yet and that contain objects from the same packages.">Predecessor Changelists in SAP HANA Change Recording</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="SAP HANA Change Recording";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

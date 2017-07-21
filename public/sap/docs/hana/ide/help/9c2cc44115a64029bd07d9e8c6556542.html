@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Package privileges authorize actions on individual packages in the SAP HANA repository."/>
+<meta name="description" content="Package privileges authorize actions on individual packages in the SAP HANA repository."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=36579502165220346"/>
+<title>Package Privileges</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio9c2cc44115a64029bd07d9e8c6556542";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio9c2cc44115a64029bd07d9e8c6556542">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Package Privileges</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">Package privileges authorize actions on individual packages in the SAP HANA
+		repository.</p>
+
+		<p class="p">Privileges granted on a repository package are implicitly assigned to the design-time objects
+			in the package, as well as to all sub-packages. Users are only allowed to maintain
+			objects in a repository package if they have the necessary privileges for the package in
+			which they want to perform an operation, for example to read or write to an object in
+			that package. To be able perform operations in all packages, a user must have privileges
+			on the root package <span class="ph sap-technical-name sap-technical-name">.REPO_PACKAGE_ROOT</span>.</p>
+
+		<p class="p">If the user authorization check establishes that a user does not have the necessary privileges
+			to perform the requested operation in a specific package, the authorization check is
+			repeated on the parent package and recursively up the package hierarchy to the root
+			level of the repository. If the user does not have the necessary privileges for any of
+			the packages in the hierarchy chain, the authorization check fails and the user is not
+			permitted to perform the requested operation. </p>
+
+		<p class="p">In the context of repository package authorizations, there is a distinction between native
+			packages and imported packages. </p>
+
+		<ul class="ul" id="loio9c2cc44115a64029bd07d9e8c6556542__ul_jd3_gpq_vh">
+			<li class="li">Native package <p class="p">A package that is created in the current system and expected to be edited
+					in the current system. Changes to packages or to objects the packages contain
+					must be performed in the original development system where they were created and
+					transported into subsequent systems. The content of native packages are
+					regularly edited by developers.</p>
+</li>
+
+			<li class="li">Imported package<p class="p">A package that is created in a remote system and imported into the current
+					system. Imported packages should not usually be modified, except when replaced
+					by new imports during an update. Otherwise, imported packages or their contents
+					should only be modified in exceptional cases, for example, to carry out
+					emergency repairs.</p>
+
+			</li>
+
+		</ul>
+
+		<div class="note note"><span class="notetitle">Note</span> 
+			<p class="p">The SAP HANA administrator can grant the following package privileges to an SAP HANA user:
+				edit, activate, and maintain.</p>
+
+		</div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?761d44ef49df4b57bc81ead4ac0fb6b1.html" target="_top" title="Package privileges authorize actions on individual packages in the SAP HANA repository. In the context of repository package authorizations, there is a distinction between native packages and imported packages.">Package Privilege Options</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Package Privileges";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

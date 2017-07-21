@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="When you develop SAP HANA applications, you must decide on the transport scenario that you want to use and its impact on the setup of the transport landscape, as well as on whether or not you want to use change recording."/>
+<meta name="description" content="When you develop SAP HANA applications, you must decide on the transport scenario that you want to use and its impact on the setup of the transport landscape, as well as on whether or not you want to use change recording."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=7816876238428893"/>
+<title>Transport Scenarios in SAP HANA Application Lifecycle Management</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio91f4bf31ae2f4457819c79c3ce741e83";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio91f4bf31ae2f4457819c79c3ce741e83">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Transport Scenarios in SAP HANA Application Lifecycle Management</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">When you develop <span class="ph pname">SAP HANA</span> applications, you must decide on the transport
+		scenario that you want to use and its impact on the setup of the transport landscape, as
+		well as on whether or not you want to use change recording.</p>
+
+		<div class="section"><div class="section_title">Transport Scenarios</div><div type="Transport Scenarios"><p class="p">A transport track often consists of a development
+				system, a test system, and one or multiple production systems. </p>
+<p class="p">The
+				development system is characterized by ongoing development, many changes, a lot of
+				versions, and so on. It is not used productively. After transporting the development
+				entities to the test system, they can be tested there. After successful testing, the
+				software can be transported to the production systems. In the production systems,
+				the software is not changed. Instead, a defined state of the development entities is
+				used productively in these systems.</p>
+<img class="image" id="loio91f4bf31ae2f4457819c79c3ce741e83__image_m2y_dzt_mr" src="loiod8591d6392794cdcb5bb689050f55495_LowRes.png"/><p class="p">There are different scenarios
+				available for transport in <span class="ph pname">SAP HANA</span> application lifecycle management:
+					<span class="ph emphasis emphasis">Native <span class="ph pname">SAP HANA</span> transport</span> and
+					<span class="ph emphasis emphasis">Change and Transport System (CTS) transport</span>. The following
+				table provides a quick overview of the scenarios available. Links to more
+				information are located in the <cite class="cite">Related Information</cite> section of this
+				topic.</p>
+
+<div class="table-wrapper tablenoborder"><table summary="" id="loio91f4bf31ae2f4457819c79c3ce741e83__table_u2y_lbl_cs" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: Transport Scenarios</span></caption>
+<colgroup><col width="22.123893805309738%"/><col width="77.87610619469027%"/></colgroup>
+
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="22.123893805309734%" id="d828451e59">
+								<p class="p">Transport Scenario</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="77.87610619469028%" id="d828451e65">
+								<p class="p">More information</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="22.123893805309734%" headers="d828451e59 ">
+								<p class="p"><span class="ph emphasis emphasis">Native <span class="ph pname">SAP HANA</span></span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="77.87610619469028%" headers="d828451e65 ">
+								<p class="p">This scenario is suitable for the transport of native <span class="ph pname">SAP
+										HANA</span> objects in which no ABAP development is
+									involved and in which no other non-<span class="ph pname">SAP HANA</span>
+									transports are done using CTS. This scenario is useful for
+									smaller transport tracks with about 3-to-5 systems.</p>
+
+								<p class="p">You can use native <span class="ph pname">SAP HANA</span> transport to transport
+									content from development to test and from test to production.
+									Using native <span class="ph pname">SAP HANA</span> transport for the entire
+									transport track, including the transport to the production
+									systems, offers the following advantages:</p>
+
+								<ul class="ul" id="loio91f4bf31ae2f4457819c79c3ce741e83__ul_mdb_wkf_wr">
+									<li class="li">
+										<p class="p">You have one tool in place that you can use for the
+											entire transport track.</p>
+
+									</li>
+
+									<li class="li">
+										<p class="p">You can transport both products and delivery units.</p>
+
+									</li>
+
+									<li class="li">
+										<p class="p">If you use change recording, you can transport very small
+											changes through this track using individual
+											changelists.</p>
+
+									</li>
+
+								</ul>
+
+								<div class="note note"><span class="notetitle">Note</span> 
+									<p class="p">With native <span class="ph pname">SAP HANA</span> transport, performing an
+										import means that you are on the target system and you pull
+										an export from the source system using a configured
+										transport route. Therefore, each import in a production
+										system triggers a separate export from the test system. If
+										you have multiple production systems, you must ensure that
+										the test system remains unchanged while you are performing
+										imports in the production systems. If the test system
+										changes during this process, then the multiple imports into
+										several production systems can result in different states of
+										the software in these systems. Bear in mind that you need to
+										trigger the import separately on each target system.</p>
+
+									<p class="p">If you cannot guarantee that the test system remains
+										unchanged, you can opt to assemble the development into an
+										installable archive on the test system, and install it in
+										the production systems, as described in the
+											<cite class="cite">Distribution using assembly and
+											installation</cite> section of this topic.</p>
+
+								</div>
+
+								<p class="p">For more information on native <span class="ph pname">SAP HANA</span> transport,
+									see <cite class="cite">Set Up and Use Native SAP HANA Transport</cite>. For
+									more information on the setup of the transport landscape, if you
+									have enabled change recording, see <cite class="cite">Setup of the Transport
+										Landscape</cite>.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="22.123893805309734%" headers="d828451e59 ">
+								<p class="p"><span class="ph emphasis emphasis">CTS</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="77.87610619469028%" headers="d828451e65 ">
+								<p class="p">This scenario is suitable for the transport of native <span class="ph pname">SAP
+										HANA</span> objects in system landscapes in which the
+									Enhanced CTS is already in use. This means that CTS is used to
+									manage transports of other non-ABAP and non-<span class="ph pname">SAP
+										HANA</span> applications. This scenario is particularly
+									well suited for transporting <span class="ph pname">SAP HANA</span> content as
+									part of an SAP solution (such as SAP BI, Mobile, and so on),
+									since you often need to create a connection between the
+										<span class="ph pname">SAP HANA</span> content and other non-ABAP and
+										non-<span class="ph pname">SAP HANA</span> development objects.</p>
+
+								<p class="p">CTS is integrated into the SAP tools for change control (Change
+									Request Management and Quality Gate Management of SAP Solution
+									Manager).</p>
+
+								<p class="p">You can use CTS transport to transport <span class="ph pname">SAP HANA</span>
+									content through the transport track, from development to test
+									and from test to production. Using CTS transport for the entire
+									transport track, including the transport to the production
+									systems, offers the following advantages:</p>
+
+								<ul class="ul" id="loio91f4bf31ae2f4457819c79c3ce741e83__ul_jsm_3d5_mr">
+									<li class="li">
+										<p class="p">You have one tool in place that you can use for the
+											entire transport track.</p>
+
+									</li>
+
+									<li class="li">
+										<p class="p">You have a defined landscape (in CTS).</p>
+
+									</li>
+
+									<li class="li">
+										<p class="p">If you use change recording, you can transport very small
+											changes through this track using individual
+											changelists.</p>
+
+									</li>
+
+								</ul>
+
+								<div class="note note"><span class="notetitle">Note</span> 
+									<p class="p">If you use CTS transport, you can only transport delivery
+										units, because CTS transport does <span class="ph emphasis emphasis">not</span>
+										support the transport of products.</p>
+
+								</div>
+
+								<p class="p">For more information on CTS transport, see <cite class="cite">Set Up and Use
+										CTS Transport</cite>. For more information on the setup of
+									the transport landscape if you have enabled change recording,
+									see <cite class="cite">Setup of the Transport Landscape</cite>.</p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+<div class="note note"><span class="notetitle">Note</span> To bundle transports of ABAP and <span class="ph pname">SAP HANA</span> objects, for
+				example, for <span class="ph pname">SAP HANA</span> content for ABAP for <span class="ph pname">SAP HANA</span>
+				applications, you can use HANA Transport Container (HTC) or <span class="ph pname">SAP HANA</span>
+				transport for ABAP (HTA), depending on your SAP NetWeaver release. For more
+				information, search for <cite class="cite">Transport Scenarios for SAP HANA Content</cite> in the
+					<span class="ph pname">SAP NetWeaver</span> documentation on SAP Help Portal at <a class="xref" href="http://help.sap.com" target="_blank" alt="http://help.sap.com" title="http://help.sap.com">http://help.sap.com</a>.</div>
+<div class="sectiondiv"><span class="ph emphasis emphasis">Distribution using assembly and
+					installation</span><p class="p">In addition to the transport scenarios available,
+						<span class="ph pname">SAP HANA</span> application lifecycle management offers the
+					possibility to assemble the developed software and install it in the production
+					systems. This way, you have a well-defined state of the software including all
+					the metadata, such as product, delivery unit, and support package versions in
+					the production systems.</p>
+<p class="p">You can use this option in the following
+					situations:</p>
+<ul class="ul" id="loio91f4bf31ae2f4457819c79c3ce741e83__ul_chv_42l_cs">
+					<li class="li">
+						<p class="p">You use CTS transport, but you need to transport products to the
+							production system.</p>
+
+					</li>
+
+					<li class="li">
+						<p class="p">You use native <span class="ph pname">SAP HANA</span> transport and you want to
+							guarantee maximum consistency in the production systems.</p>
+
+					</li>
+
+					<li class="li">
+						<p class="p">Your production systems cannot be reached using transport routes (CTS or
+								<span class="ph pname">SAP HANA</span> application lifecycle management transport
+							routes).</p>
+
+					</li>
+
+				</ul>
+<p class="p">You can assemble the software in the test system or in an additional system,
+					the consolidation system, for example. To do this, you must model the delivery
+					unit or the product in the system in which you perform the assembly to supply
+					the required metadata, such as version information and dependencies, for
+					example. Assembly is supported for delivery units and not for individual objects
+					or changelists. Once the metadata is available in the system you can perform the
+					assembly using the commandline tool <samp class="ph systemoutput">hdbalm</samp>.
+					</p>
+<p class="p">After performing installation tests, you can install the assembled
+					software in the production systems. You install the software separately in each
+					production system.</p>
+</div><div class="note sap-recommendation recommendation"><span class="recommendationtitle">Recommendation</span> If it is important for
+				you to have the information about versions in your production systems, use assembly
+				and installation to distribute software to the production systems. If you want to
+				supply your production systems with new software at regular intervals, use one of
+				the transport scenarios (CTS or native <span class="ph pname">SAP
+				HANA</span>).</div>
+</div></div>
+
+		<div class="section"><div class="section_title">Change Recording</div><div type="Change Recording">
+			
+			<p class="p">You need to decide whether you want to record your changes in the development system and
+				transport them using your transport track. The following table provides a quick
+				overview of the change recording options. Links to more information are located in
+				the <cite class="cite">Related Information</cite> section of this topic.</p>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio91f4bf31ae2f4457819c79c3ce741e83__table_tmz_j15_mr" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 2: Options for Change Recording</span></caption>
+<colgroup><col width="20.746887966804977%"/><col width="79.25311203319501%"/></colgroup>
+
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="20.746887966804977%" id="d828451e338">
+								<p class="p"><strong class="ph b">Landscape Option </strong></p>
+
+							</th>
+
+							<th class="entry" valign="top" width="79.25311203319502%" id="d828451e345">
+								<p class="p"><strong class="ph b">Description</strong></p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="20.746887966804977%" headers="d828451e338 ">
+								<p class="p">Change recording enabled</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="79.25311203319502%" headers="d828451e345 ">
+								<p class="p">The change recording function is delivered with the <span class="ph pname">SAP HANA</span> server
+									installation and provides a light-weight and out-of-the-box
+									method to keep track of your software changes. If you use change
+									recording, you use <span class="ph pname">SAP HANA</span> Web-based Development
+									Workbench or <span class="ph pname">SAP HANA</span> studio for your <span class="ph pname">SAP
+										HANA</span> development. Your software changes are recorded
+									in changelists and you use one of the transport scenarios
+									described above to transport your development entities.</p>
+
+								<p class="p">If you use change recording, see <cite class="cite">Setup of the Transport Landscape</cite> for the recommended landscape
+									scenarios.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="20.746887966804977%" headers="d828451e338 ">
+								<p class="p">Change recording not enabled</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="79.25311203319502%" headers="d828451e345 ">
+								<p class="p">If you do not use change recording, you still use <span class="ph pname">SAP HANA</span> Web-based
+									Development Workbench or <span class="ph pname">SAP HANA</span> studio for your
+										<span class="ph pname">SAP HANA</span> development and you use one of the
+									transport scenarios described above to transport your
+									development entities. However, choosing this option means that
+									you do not have any method to track changes, for example, if
+									errors occur, you need to use a different means to find the
+									source of the errors.</p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?50a00deb7663496d93ebb938bbb723ca.html" target="_top" title="You can choose to perform transports in native SAP HANA mode using transport routes or using the Change and Transport System (CTS).">Setting Up the Transport</a></div>
+<div><a class="link" href="default.html?96664bb8480f4765acc4d8b5cf49f3e5.html" target="_top" title="You use the Native SAP HANA Transport option to transport native SAP HANA objects.">Setting Up and Using Native SAP HANA Transport</a></div>
+<div><a class="link" href="default.html?88f1de06b2be4239b71e3aed03e1a617.html" target="_top" title="You use the CTS Transport option to transport SAP HANA objects in transport landscapes where CTS is already in place.">Setting Up and Using CTS Transport</a></div>
+<div><a class="link" href="default.html?8486bc094b4e4b8b865418c9ea1416d8.html" target="_top" title="Change recording in SAP HANA is the infrastructure to keep track of changes during SAP HANA development.">SAP HANA Change Recording</a></div>
+<div><a class="link" href="default.html?f32a4548961b4921972ae624314f26b9.html" target="_top" title="Before you start working with change recording you must decide how you want to set up the systems in your transport landscape.">Setup of the Transport Landscape</a></div>
+<div><a class="link" href="default.html?107cc9f8dc564620b74969d8650da2c8.html" target="_top" title="To ship SAP HANA add-on product archives or software components archives, you must bring the developed software into a format that can later be installed in another system. To do this, you use the hdbalm assemble command.">Assembling Add-On Products and Software Components</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Transport Scenarios in SAP HANA Application Lifecycle Management";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

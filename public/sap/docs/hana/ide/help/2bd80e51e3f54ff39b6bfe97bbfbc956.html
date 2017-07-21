@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="A structured type is a data type comprising a list of attributes, each of which has its own data type. The attributes of the structured type can be defined manually in the structured type itself and reused either by another structured type or an entity."/>
+<meta name="description" content="A structured type is a data type comprising a list of attributes, each of which has its own data type. The attributes of the structured type can be defined manually in the structured type itself and reused either by another structured type or an entity."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=2783530730188426"/>
+<title>CDS Structured Type Definition</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio2bd80e51e3f54ff39b6bfe97bbfbc956";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio2bd80e51e3f54ff39b6bfe97bbfbc956">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">CDS Structured Type Definition</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">A structured type is a data type comprising a list of attributes, each of which has its
+                own data type. The attributes of the structured type can be defined manually in the
+                structured type itself and reused either by another structured type or an
+                entity.</p>
+
+		<p class="p"><span class="ph pname">SAP HANA</span> Extended Application Services (<span class="ph pname">SAP HANA</span> XS)
+			enables you to create a database structured type as a design-time file in the
+			repository. All repository files including your structured-type definition can be
+			transported to other <span class="ph pname">SAP HANA</span> systems, for example, in a delivery unit.
+			You can define the structured type using CDS-compliant DDL.</p>
+
+		<div class="note note" id="loio2bd80e51e3f54ff39b6bfe97bbfbc956__note_N10028_N10016_N10001"><span class="notetitle">Note</span> A delivery unit is the medium <span class="ph pname">SAP HANA</span>
+			provides to enable you to assemble all your application-related repository artifacts
+			together into an archive that can be easily exported to other systems.</div>
+
+                <p class="p">When a CDS document is activated, the activation process generates a
+                        corresponding catalog object for each of the artifacts defined in the
+                        document; the location in the catalog is determined by the type of object
+                        generated. For example, the corresponding table type for a CDS type
+                        definition is generated in the following catalog location:</p>
+
+                <p class="p"><span class="ph menucascade"><img src="images/navstart.gif" alt="Start of the navigation path" title="Start of the navigation path"/> <span class="ph uicontrol"><var class="keyword varname">&lt;SID&gt;</var></span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">Catalog </span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol"><var class="keyword varname">&lt;MYSCHEMA&gt;</var></span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">Procedures</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">Table Types</span> <img src="images/navend.gif" alt="End of the navigation path" title="End of the navigation path"/></span></p>
+
+                <div class="section"><div class="section_title">Structured User-Defined Types</div><div type="Structured User-Defined Types">
+                        
+                        <p class="p">In a structured user-defined type, you can define original types
+                                        (<samp class="ph codeph">aNumber</samp> in the following example) or
+                                reference existing types defined elsewhere in the same type
+                                definition or another, separate type definition
+                                        (<samp class="ph codeph">MyString80</samp>). If you define multiple types
+                                in a single CDS document, for example, in a parent context, each
+                                structure-type definition must be separated by a semi-colon (;).</p>
+
+                        <p class="p">The type <samp class="ph codeph">MyString80</samp> is defined in the following CDS
+                                document:</p>
+
+                        <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">namespace Package1.Package2;
+@Schema: 'MySchema'
+type MyString80: String(80);</pre></div>
+
+                        <p class="p">A using directive is required to resolve the reference to the data type
+                                specified in <samp class="ph codeph">otherText : MyString80;</samp>, as
+                                illustrated in the following example:</p>
+
+                        <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">namespace Package1.Package2;
+using Package1.Package2::MyString80;  //contains definition of MyString80
+@Schema: 'MySchema'
+type MyStruct
+{  
+  aNumber   : Integer;  
+  someText  : String(80);  
+  otherText : MyString80;  // defined in a separate type
+};</pre></div>
+
+                        <div class="note note" id="loio2bd80e51e3f54ff39b6bfe97bbfbc956__note_N10041_N1003E_N10016_N10001"><span class="notetitle">Note</span> If you are using a
+                                CDS document to specify a single CDS-compliant data type, the name
+                                of the CDS document (<span class="ph filepath">MyStruct.hdbdd</span>) must match
+                                the name of the top-level data type defined in the CDS document, for
+                                example, with the <span class="keyword">type</span> keyword. </div>
+
+                </div></div>
+
+                <div class="section"><div class="section_title">Nested Structured Types</div><div type="Nested Structured Types">
+                        
+                        <p class="p">Since user-defined types can make use of other user-defined types, you
+                                can build nested structured types, as illustrated in the following
+                                example:</p>
+
+                        <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">namespace Package1.Package2;
+using Package1.Package2::MyString80;
+using Package1.Package2::MyStruct;
+@Schema: 'MYSCHEMA'
+context NestedStructs {
+    type MyNestedStruct
+    {
+        name : MyString80;
+        nested : MyStruct; // defined in a separate type
+    };
+    type MyDeepNestedStruct
+    {
+        text : LargeString;
+        nested : MyNestedStruct;
+    };
+    type MyOtherInt    : type of MyStruct.aNumber; // =&gt; Integer
+    type MyOtherStruct : type of MyDeepNestedStruct.nested.nested; // =&gt; MyStruct
+};
+</pre></div>
+
+                        <p class="p">You can also define a type based on an existing type that is already
+                                defined in another user-defined structured type, for example, by
+                                using the <samp class="ph codeph">type of</samp> keyword, as illustrated in the
+                                following example:</p>
+
+                        <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">
+type MyOtherInt    : type of MyStruct.aNumber;                  // =&gt; Integer 
+type MyOtherStruct : type of MyDeepNestedStruct.nested.nested;  // =&gt; MyStruct
+</pre></div>
+
+                </div></div>
+
+                <div class="section"><div class="section_title">Generated Table Types</div><div type="Generated Table Types">
+                        
+                        <p class="p">For each structured type, a <span class="ph pname">SAP HANA</span> table type is
+                                generated, whose name is built by concatenating the following
+                                elements of the CDS document containing the structured-type
+                                definition and separating the elements by a dot delimiter (.): </p>
+
+                        <ul class="ul" id="loio2bd80e51e3f54ff39b6bfe97bbfbc956__ul_ghb_vhl_fn">
+                                <li class="li">the name space (for example, <samp class="ph codeph">Pack1.Pack2</samp>)</li>
+
+                                <li class="li">the names of all artifacts that enclose the type (for example,
+                                                <samp class="ph codeph">MyModel</samp>)</li>
+
+                                <li class="li">the name of the type itself (for example,
+                                                <samp class="ph codeph">MyNestedStruct</samp>)</li>
+
+                        </ul>
+
+                        <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">create type "Pack1.Pack2::MyModel.MyNestedStruct" as table (
+  name             nvarchar(80),
+  nested.aNumber   integer,
+  nested.someText  nvarchar(80),
+  nested.otherText nvarchar(80)
+);</pre></div>
+
+                        <p class="p">The new <span class="ph pname">SAP HANA</span> table types are generated in the schema
+                                that is specified in the schema annotation of the respective
+                                top-level artifact in the CDS document containing the structured
+                                types. </p>
+
+                        <div class="note note"><span class="notetitle">Note</span>  To view the newly created objects, you must have the required SELECT
+                                privilege for the schema object in which the objects are
+                                generated.</div>
+
+                        <p class="p">The columns of the table type are built by flattening the elements of the
+                                type. Elements with structured types are mapped to one column per
+                                nested element, with the column names built by concatenating the
+                                element names and separating the names by dots ".". </p>
+
+                        <div class="note tip"><span class="tiptitle">Tip</span>  If you want to use the structured types inside a CDS
+                                document without generating table types in the catalog, use the
+                                annotation <samp class="ph codeph">@GenerateTableType : false</samp>.</div>
+
+                        <p class="p">Table types are only generated for direct structure definitions; in the
+                                following example, this would include: <samp class="ph codeph">MyStruct</samp>,
+                                        <samp class="ph codeph">MyNestedStruct</samp>, and
+                                        <samp class="ph codeph">MyDeepNestedStruct</samp>. No table types are
+                                generated for <span class="ph emphasis emphasis">derived</span> types that are based on
+                                structured types; in the following example, the derived types
+                                include: <samp class="ph codeph">MyS</samp>, <samp class="ph codeph">MyOtherInt</samp>,
+                                        <samp class="ph codeph">MyOtherStruct</samp>.</p>
+
+                </div></div>
+
+                <div class="example"><h2 class="exampletitle">Example</h2>
+                        <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">namespace Pack1."pack-age2"; 
+@Schema: 'MySchema'
+context MyModel
+{
+  type MyInteger  : Integer;
+  type MyString80 : String(80);
+  type MyDecimal  : Decimal(10,2);
+
+  type MyStruct  
+  {
+    aNumber   : Integer;
+    someText  : String(80);
+    otherText : MyString80;  // defined in example above
+  };
+
+  type MyS           : MyStruct;
+  type MyOtherInt    : type of MyStruct.aNumber;
+  type MyOtherStruct : type of MyDeepNestedStruct.nested.nested;
+
+  type MyNestedStruct
+  {
+    name   : MyString80;
+    nested : MyS;
+  };
+
+  type MyDeepNestedStruct
+  {
+    text   : LargeString;
+    nested : MyNestedStruct;
+  };
+};</pre></div>
+
+                </div>
+
+	</div>
+
+        <div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?a1a4312e106c4424b229a2c6addde003.html" target="_top" title="A structured type is a data type comprising a list of attributes, each of which has its own data type. You create a user-defined structured type as a design-time file in the SAP HANA repository.">Create a User-Defined Structured Type in CDS</a></div>
+<div><a class="link" href="default.html?631bca8ba2a84521b218d3a25e1795fd.html" target="_top" title="User-defined data types reference existing structured types (for example, user-defined) or the individual types (for example, field, type, or context) used in another data-type definition.">CDS User-Defined Data Types</a></div>
+<div><a class="link" href="default.html?7e4ee601c7404ec59c8446de79676c71.html" target="_top" title="A structured type is a data type comprising a list of attributes, each of which has its own data type. The attributes of the structured type can be defined manually in the structured type itself and reused either by another structured type or an entity.">CDS Structured Types</a></div>
+<div><a class="link" href="default.html?cf394efd3fb4400f9c09d10315028515.html" target="_top" title="In the Data Definition Language (DDL), primitive (or core) data types are the basic building blocks that you use to define entities or structure types with DDL.">CDS Primitive Data Types</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="CDS Structured Type Definition";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,22 @@
+schema="OTEBW_EMTAS";
+
+query = "select T.DATE_SQL as DELIVERYDAY,
+				C.PERIOD,
+				C.INAREA,
+				C.OUTAREA,
+				to_decimal(C.EXPORT,15,3) as EXPORT,
+				C.AUCTION,
+				to_decimal(A.ATCVALUE,15,3) as ATCVALUE,
+				T.CALMONTH as CALMONTH,
+				T.YEAR as CALYEAR,
+				T.CALWEEK as CALWEEK,
+				T.CALQUARTER as CALQUARTER,
+				'MWH' as UNIT				
+		 from BW_DM_CBF as C,
+		 	  BW_DM_ATC as A,
+		 	  _SYS_BI.TC_DAY_CALENDAR as T
+		where T.DATE_SQL = C.DELIVERYDAY
+		  and A.DELIVERYDAY = C.DELIVERYDAY
+		  and A.PERIOD = C.PERIOD
+		  and A.INAREA = C.INAREA
+		  and A.OUTAREA = C.OUTAREA";

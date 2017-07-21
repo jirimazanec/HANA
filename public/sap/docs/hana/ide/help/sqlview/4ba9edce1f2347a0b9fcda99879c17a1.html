@@ -1,0 +1,3248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="The SQL Optimizer usually determines the access path (for example, index search versus table scan) on the basis of the costs (Cost-Based Optimizer). You can deactivate this mechanism and explicitly specify hints for an SQL statement, which enforces a certain access path."/>
+<meta name="description" content="The SQL Optimizer usually determines the access path (for example, index search versus table scan) on the basis of the costs (Cost-Based Optimizer). You can deactivate this mechanism and explicitly specify hints for an SQL statement, which enforces a certain access path."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=45962900216843317"/>
+<title>HINT Details</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio4ba9edce1f2347a0b9fcda99879c17a1";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio4ba9edce1f2347a0b9fcda99879c17a1">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">HINT Details</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">The SQL Optimizer usually determines the access path (for example, index search versus
+		table scan) on the basis of the costs (Cost-Based Optimizer). You can deactivate this
+		mechanism and explicitly specify hints for an SQL statement, which enforces a certain access
+		path.</p>
+
+		<div class="section"><div class="section_title">Hint Syntax in SQL Statements</div><div type="Hint Syntax in SQL Statements">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{ SELECT | INSERT | UPDATE | DELETE } ... <var class="keyword varname">&lt;hint_clause&gt;</var>
+
+<var class="keyword varname">&lt;hint_clause&gt;</var> ::= WITH HINT( <var class="keyword varname">&lt;hint&gt;</var> [, <var class="keyword varname">&lt;hint&gt;</var> ...])
+
+<var class="keyword varname">&lt;hint&gt;</var>::= { <var class="keyword varname">&lt;hint_element&gt;</var> | <var class="keyword varname">&lt;routing_hint&gt;</var> | <var class="keyword varname">&lt;value_input&gt;</var> }
+
+<var class="keyword varname">&lt;hint_element&gt;</var> ::= <var class="keyword varname">&lt;hint_name&gt;</var> from public hint list [(<var class="keyword varname">&lt;hint_argument_list&gt;</var>)]
+
+<var class="keyword varname">&lt;hint_argument_list&gt;</var> ::= <var class="keyword varname">&lt;hint_argument&gt;</var> [, <var class="keyword varname">&lt;hint_argument&gt;</var> ...]
+
+<var class="keyword varname">&lt;hint_argument&gt;</var> ::= hint argument type according to csv file (for example, one of STR_CONST, INT_CONST,  ID, or <var class="keyword varname">&lt;table_ref&gt;</var>)
+
+<var class="keyword varname">&lt;routing_hint&gt;</var> ::=
+   ROUTE_TO(<var class="keyword varname">&lt;volumd_id&gt;</var> [{, <var class="keyword varname">&lt;volumd_id&gt;</var> }] )
+   | NO_ROUTE_TO( <var class="keyword varname">&lt;volumd_id&gt;</var> [{, <var class="keyword varname">&lt;volumd_id&gt;</var> }] )
+   | ROUTE_BY( <var class="keyword varname">&lt;table_name&gt;</var> [{, <var class="keyword varname">&lt;table_name&gt;</var> }] )
+   | ROUTE_BY_CARDINALITY( <var class="keyword varname">&lt;table_name&gt;</var> [{, <var class="keyword varname">&lt;table_name&gt;</var> }] )
+
+<var class="keyword varname">&lt;value_input&gt;</var> ::= MAX_CONCURRENCY (1) | DATA_TRANSFER_COST ({0 | 1})</pre></div>
+
+			<p class="p">When there are hint clauses in the subquery, only the outermost hint is applied. Additionally,
+				hint arguments with a framework are also applied.</p>
+
+			<p class="p">Examples:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT T2.*FROM (SELECT MAX(COL) FROM T1 GROUP BY COL WITH HINT( NO_USE_OLAP_PLAN )) T2 WITH HINT( USE_OLAP_PLAN ); -- use_olap_plan hint is applied</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT T2.*FROM (SELECT MAX(COL) FROM T1  GROUP BY COL WITH HINT( NO_USE_OLAP_PLAN )) T2; -- no hint is applied</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Hint Validation</div><div type="Hint Validation">
+			
+			<p class="p">Prior to SP09: incorrect syntax and/or semantics generates an SQL warning.</p>
+
+			<p class="p">Starting from SP09: incorrect syntax and/or semantics generates an SQL error.</p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Hints by Category</div><div type="Hints by Category">
+			
+			<p class="p">Refer to each category for a more detailed description.</p>
+
+		</div></div>
+
+		<div class="section" id="loio4ba9edce1f2347a0b9fcda99879c17a1__section_ktp_cmf_2z"><div class="section_title">Hints for Controlling Request Processing</div><div type="Hints for Controlling Request Processing">
+			
+			<dl class="dl">
+				
+					<dt class="dt dlterm emphasis">THROW_ERROR</dt>
+
+					<dd class="dd">
+						<p class="p">Blocks the execution of a given query.</p>
+
+					</dd>
+
+				
+			</dl>
+
+			<p class="p">Examples:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( THROW_ERROR );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER SYSTEM ADD STATEMENT HINT ( THROW_ERROR ) FOR SELECT * FROM T1;</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Hints for Controlling Cache Behaviors</div><div type="Hints for Controlling Cache Behaviors">
+			
+			<p class="p">SAP HANA supports different cache types.</p>
+
+			<p class="p">SQL Plan Cache saves compiled plans so that the same query does not need to be compiled every
+				time. This setting saves CPU and compilation time and enables the gathering of
+				statistics (user name, execution count, avg execution time, and so on) for each
+				plan.</p>
+
+			<dl class="dl" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_i5y_kfc_zq">
+				
+					<dt class="dt dlterm emphasis">IGNORE_PLAN_CACHE</dt>
+
+					<dd class="dd">
+						<p class="p">Ignores the existing plan cache entry (if any) and forces the query to compile and
+							execute.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">USE_REMOTE_CACHE</dt>
+
+					<dd class="dd">
+						<p class="p">Optimizes SAP HANA Hadoop and forces virtual table queries to have to a materialized result
+							set. Subsequent queries are served from the materialized view.</p>
+
+					</dd>
+
+				
+			</dl>
+
+			<p class="p">Examples:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( IGNORE_PLAN_CACHE );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( USE_REMOTE_CACHE );</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Hints for Scale-out Environment</div><div type="Hints for Scale-out Environment">
+			
+			<p class="p">In a scale-out environment, a query is routed to a certain node for execution. Query routing
+				is determined in a round-robin manner to one of the nodes that contains related
+				objects, such as tables and views.</p>
+
+			<p class="p">You may want to specify preferred nodes or objects for routing for performance or any other
+				possible issues. Volume ID or table name can be supplied to hints to enable such
+				routing.</p>
+
+			<div class="note note"><span class="notetitle">Note</span> Wrong volume IDs generate an SQL warning.</div>
+
+			<div class="note note"><span class="notetitle">Note</span> If more than one hint is listed or nested, then the order of parsing determines which hint
+				to apply. The hint that was given last takes effect.</div>
+
+			<dl class="dl" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_izl_pp3_sv">
+				
+					<dt class="dt dlterm emphasis">ROUTE_TO</dt>
+
+					<dd class="dd">
+						<p class="p">Routes the query to the specified volume ID.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">NO_ROUTE_TO</dt>
+
+					<dd class="dd">
+						<p class="p">Avoids query routing to a specified volume ID.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">ROUTE_BY</dt>
+
+					<dd class="dd">
+						<p class="p">Routes the query to the specified table location.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">ROUTE_BY_CARDINALITY</dt>
+
+					<dd class="dd">
+						<p class="p">Routes the query to the location of the table with the highest cardinality from the input
+							list.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">DATA_TRANSFER_COST (<var class="keyword varname">&lt;value&gt;</var>)</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to use the weighting factor for the data transfer cost. The value 0
+							ignores the data transfer cost.</p>
+
+					</dd>
+
+				
+			</dl>
+
+			<p class="p">For a scale-out environment, the SQL optimizer decides on the execution location for each
+				operator based on the operator cost and the data transfer cost.</p>
+
+			<p class="p">Example:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CALL P1() WITH HINT( ROUTE_TO(1)); -- route to the node with volume id = 1</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CALL P1() WITH HINT( NO_ROUTE_TO(2,3)); -- route to one of the nodes with a volume id other than 2 or 3</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CALL P1() WITH HINT( ROUTE_BY(T2)); -- route to the node which has table T2</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CALL P1() WITH HINT( ROUTE_BY_CARDINALITY(T1,T2,T3)); -- route to the node that has the highest cardinality table among T1, T2, and T3</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CALL P1() WITH HINT( NO_ROUTE_TO(1), ROUTE_TO(1)); -- route to volume id = 1 ( last one is used )</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT(DATA_TRANSFER_COST(0));</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Hints for Execution Engine Selection</div><div type="Hints for Execution Engine Selection">
+			
+			<p class="p">The Column Search execution engine is chosen automatically by the optimizer based on
+				the cost model.</p>
+
+			<dl class="dl" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_zlp_3q3_sv">
+				
+					<dt class="dt dlterm emphasis"> USE_OLAP_PLAN</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to prefer the OLAP engine over the Join engine.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">NO_USE_OLAP_PLAN</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to prefer the Join engine over the OLAP engine.</p>
+
+					</dd>
+
+				
+			</dl>
+
+			<p class="p">Examples:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( USE_OLAP_PLAN ); </pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( NO_USE_OLAP_PLAN ); </pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Hints for Join Engine Optimization</div><div type="Hints for Join Engine Optimization">
+			
+			<p class="p">The following hints force a certain join operation behavior:</p>
+
+			<dl class="dl" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_akd_tq3_sv">
+				
+					<dt class="dt dlterm emphasis">OPTIMIZE_METAMODEL</dt>
+
+					<dd class="dd">
+						<p class="p">Creates concat attributes for joins with multiple columns (if they do not already exist)
+							and uses them during the join calculation. Concat attributes need
+							additional memory as they are persisted.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">NO_OPTIMIZE_METAMODEL</dt>
+
+					<dd class="dd">
+						<p class="p">Forces the use of the native hash-based multi-column join implementation and does not use
+							concat attributes even if they should have already been created. </p>
+
+						<div class="note note"><span class="notetitle">Note</span> 
+							<p class="p">The hash-based approach might be slower than using concat
+								attributes.</p>
+
+						</div>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">MAX_CONCURRENCY (1)</dt>
+
+					<dd class="dd">
+						<p class="p">Controls concurrency. This setting only accepts the value 1 (single thread plan execution)
+							and the Join Engine determines suitable parallelism by default.</p>
+
+					</dd>
+
+				
+			</dl>
+
+			<p class="p">Examples:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( OPTIMIZE_METAMODEL );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( NO_OPTIMIZE_METAMODEL );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( MAX_CONCURRENCY(1) );</pre></div>
+
+			<dl class="dl">
+				
+					<dt class="dt dlterm emphasis">CS_JOIN_RESULT_MATERIALIZATION(<var class="keyword varname">&lt;table_name&gt;</var>)</dt>
+
+					<dd class="dd">
+						<p class="p">Specifies the table at which join materialization begins.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">CS_JOIN_REDUCTION(<var class="keyword varname">&lt;table_name&gt;</var>)</dt>
+
+					<dd class="dd">
+						<p class="p">Specifies the table at which the reduction phase begins.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">CS_JOIN_CYCLE_BREAK(<var class="keyword varname">&lt;table_name_left&gt;</var>,
+							<var class="keyword varname">&lt;table_name_right&gt;</var>)</dt>
+
+					<dd class="dd">Specifies the join edge at which a cyclic join is broken up.</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">CS_JOIN_MATERIALIZATION_BIGGEST_TABLE_FIRST</dt>
+
+					<dd class="dd">
+						<p class="p">Specifies that the materialization starts at the biggest table.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">CS_JOIN_MATERIALIZATION_SMALLEST_TABLE_FIRST</dt>
+
+					<dd class="dd">
+						<p class="p">Specifies that the materialization starts at the smallest table.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">CS_JOIN_MATERIALIZATION_CONCURRENCY(<var class="keyword varname">&lt;number&gt;</var>)</dt>
+
+					<dd class="dd">
+						<p class="p">Defines the concurrency of the join materialization.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">CS_JOIN_SHRINK_SIZE_THRESHOLD(<var class="keyword varname">&lt;number&gt;</var>)</dt>
+
+					<dd class="dd">
+						<p class="p">Specifies that the intermediate result exceeds this threshold, then tries
+							to shrink it.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">CS_JOIN_POST_CHECK_SIZE_THRESHOLD(<var class="keyword varname">&lt;number&gt;</var>)</dt>
+
+					<dd class="dd">
+						<p class="p">Specifies the intermediate result exceeds this threshold, then runs
+							post-conditions and distinct checks on it.</p>
+
+					</dd>
+
+				
+			</dl>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Hints for Controlling Access Path</div><div type="Hints for Controlling Access Path">
+			
+			<p class="p">The following hints override the cost-based decision of the optimizer in order to utilize or
+				avoid indexes for table access.</p>
+
+			<dl class="dl" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_h5v_3r3_sv">
+				
+					<dt class="dt dlterm emphasis">INDEX_SEARCH</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to access the table by using the available index.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">NO_INDEX_SEARCH</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to avoid table access by using the available index.</p>
+
+					</dd>
+
+				
+			</dl>
+
+			<p class="p">Examples:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( INDEX_SEARCH );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( NO_INDEX_SEARCH );</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Hints for Controlling Join Operations</div><div type="Hints for Controlling Join Operations">
+			
+			<p class="p">There are different join algorithms for performing join operations.</p>
+
+			<dl class="dl" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_jhk_wr3_sv">
+				
+					<dt class="dt dlterm emphasis">INDEX_JOIN</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to join input relations through index searches.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">NO_INDEX_JOIN</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to avoid joining the input relations through index searches.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">HASH_JOIN</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to join the input relations through probing the hash table.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">NO_HASH_JOIN</dt>
+
+					<dd class="dd">
+						<p class="p"/>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">MIXED_INVERTED_INDEX_JOIN </dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to join the input relations of the row store format with a column
+							table that is without a format. This conversion is done using an
+							inverted index of the column table.Guides the optimizer to avoid joining the input relations through probing the hash
+							table.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">NO_MIXED_INVERTED_INDEX_JOIN</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to avoid joining the input relations by using an inverted index of the
+							column table.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">OPTIMIZE_METAMODEL</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to avoid joining the input relations through probing the hashCreates concat attributes for joins with multiple columns (if they do not already exist)
+							and uses them during the join calculation. Concat attributes need
+							additional memory as they are persisted.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">NO_OPTIMIZE_METAMODEL</dt>
+
+					<dd class="dd">
+						<p class="p">Forces the use of the native hash-based multi-column join implementation and does not use
+							the concat attributes even if they should have already been created. </p>
+
+						<div class="note note"><span class="notetitle">Note</span> The hash-based approach might be slower than using concat
+							attributes.</div>
+
+					</dd>
+
+				
+			</dl>
+
+			<p class="p">Examples:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1, T2 WITH HINT( INDEX_JOIN );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1, T2 WITH HINT( NO_INDEX_JOIN );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1, T2 WITH HINT( HASH_JOIN );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1, T2 WITH HINT( NO_HASH_JOIN );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1, T2 WITH HINT( MIXED_INVERTED_INDEX_JOIN );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1, T2 WITH HINT( NO_MIXED_INVERTED_INDEX_JOIN );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1, T2 WITH HINT( OPTIMIZE_METAMODEL );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1, T2 WITH HINT( NO_OPTIMIZE_METAMODEL );</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Hints for Controlling Row/Column Store Operations</div><div type="Hints for Controlling Row/Column Store Operations">
+			
+			<p class="p">Most of the operations can be supported in both the row engine and the column engine. The
+				optimizer selects the best operations based on the cost-model. The hints in this
+				section can be used to control whether to prefer or avoid the use of specific engine
+				operators in the query plan.</p>
+
+			<div class="p">The following hints guide the optimizer to prefer the column engine operator:<ul class="ul" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_ktn_rs3_sv">
+					<li class="li">CS_SORT</li>
+
+					<li class="li">CS_LIMIT</li>
+
+					<li class="li">CS_FILTER</li>
+
+					<li class="li">CS_DISTINCT</li>
+
+					<li class="li">CS_AGGR</li>
+
+					<li class="li">CS_JOIN</li>
+
+					<li class="li">CS_UNION_ALL</li>
+
+				</ul>
+</div>
+
+			<div class="note note"><span class="notetitle">Note</span> 
+				<p class="p">A full list of hints to control other row engine or column engine operators can be found in
+					the HINTS view. Using hints that are not described in this section is not
+					recommended.</p>
+
+			</div>
+
+			<div class="p">The following hints guide the optimizer to prefer the row engine operator:<ul class="ul" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_ltn_rs3_sv">
+					<li class="li">NO_CS_SORT</li>
+
+					<li class="li">NO_CS_LIMIT</li>
+
+					<li class="li">NO_CS_FILTER</li>
+
+					<li class="li">NO_CS_DISTINCT</li>
+
+					<li class="li">NO_CS_AGGR</li>
+
+					<li class="li">NO_CS_JOIN</li>
+
+					<li class="li">NO_CS_UNION_ALL</li>
+
+				</ul>
+</div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Hints for Smart Data Access/Dynamic Tiering</div><div type="Hints for Smart Data Access/Dynamic Tiering">
+			
+			<p class="p">Smart Data Access/Dynamic Tiering uses two kinds of operators to read data from the remote
+				source: Remote Column Scan reads data from the remote server and stores it in ITAB
+				and Remote Row Scan reads data from the remote server and stores it in a buffer.</p>
+
+			<dl class="dl">
+				
+					<dt class="dt dlterm emphasis">REMOTE_COLUMN_SCAN</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to prefer Remote Column Scan, which returns ITAB
+							from the remote server.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">NO_REMOTE_COLUMN_SCAN</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to prefer Remote Row Scan.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">REMOTE_JOIN_RELOCATION</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to process the join at the remote server if possible
+							(default behavior).</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">NO_REMOTE_JOIN_RELOCATION</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to process the join at the HANA server if
+							possible.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">REMOTE_EXPR_MATERIALIZATION</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to prefer the expression evaluation at the remote
+							server if possible (default behavior).</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">NO_REMOTE_EXPR_MATERIALIZATION</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to prefer the expression evaluation at the HANA
+							server if possible.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">REMOTE_PREAGGR</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to generate pre-aggregation at the remote server
+							(default behavior).</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">NO_REMOTE_PREAGGR</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer not to generate pre-aggregation at the remote
+							server.</p>
+
+					</dd>
+
+				
+			</dl>
+
+			<p class="p">Examples:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( REMOTE_COLUMN_SCAN );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( REMOTE_JOIN_RELOCATION );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( REMOTE_EXPR_MATERIALIZATION );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( REMOTE_PREAGGR );</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Hints for Result Cache</div><div type="Hints for Result Cache">
+			
+			<p class="p">Use the result cache for applications that accept stale data access. Table functions and
+				SQL/Calculation views can be cached. Since the result cache shows stale data, it can
+				only be used when suitable hints are turned on.</p>
+
+			<dl class="dl" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_ynw_ggr_wt">
+				
+					<dt class="dt dlterm emphasis">RESULT_CACHE</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to utilize the result cache regardless of indexserver configuration,
+							if the result cache is available.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">RESULT_CACHE_MAX_LAG(<var class="keyword varname">&lt;seconds&gt;</var>)</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to set the retention period of the result cache to a minimum of this
+							value or the value set in the ADD CACHE configuration.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">RESULT_CACHE_NON_TRANSACTIONAL</dt>
+
+					<dd class="dd">
+						<p class="p">Allows join or union operations using the result cache entries and disregards possible
+							transaction inconsistencies.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">RESULT_CACHE_NO_REFRESH</dt>
+
+					<dd class="dd">
+						<p class="p">Accesses cached data if cached data is prepared before, without refreshing it, even when
+							its retention period is over.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">RESULT_LAG('<var class="keyword varname">&lt;name&gt;</var>'[, <var class="keyword varname">&lt;seconds&gt;</var>])</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to use specified engines if its result lag is less than the maximum
+							seconds.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">RESULT_CACHE_AFTER_ANALYTIC_PRIVILEGE</dt>
+
+					<dd class="dd">
+						<p class="p">Enforces the result cache to use separate data cached after filtering with analytic
+							privileges. This hint does not enforce using the result cache and it is
+							only effective when the query can use the result cache.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">RESULT_CACHE_BEFORE_ANALYTIC_PRIVILEGE</dt>
+
+					<dd class="dd">
+						<p class="p">Enables the result cache to use shared data cached before filtering with analytic
+							privileges. This hint does not enforce using the result cache and it is
+							only effective when the query can use the result cache.</p>
+
+					</dd>
+
+				
+			</dl>
+
+			<p class="p">Examples:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( NO_RESULT_CACHE );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( RESULT_CACHE );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( RESULT_CACHE_MAX_LAG(60) );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( RESULT_CACHE_NON_TRANSACTIONAL );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( RESULT_LAG ('hana_long') );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( RESULT_LAG ( 'hana_long', 30) );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( RESULT_CACHE_AFTER_ANALYTIC_PRIVILEGE );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( RESULT_CACHE_BEFORE_ANALYTIC_PRIVILEGE );</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loio4ba9edce1f2347a0b9fcda99879c17a1__section_ghm_kgs_dz"><div class="section_title">Hints for Dynamic Result Cache</div><div type="Hints for Dynamic Result Cache">
+			
+			<p class="p">Returns an up-to-date query result. This means that the result of the query run on
+				the dynamic result cache is always the same as the result of a query that is not
+				using the cache.</p>
+
+			<dl class="dl">
+				
+					<dt class="dt dlterm emphasis">NO_DYNAMIC_RESULT_CACHE</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer not to utilize the dynamic result cache regardless
+							of indexserver configuration, even if it is available.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">DYNAMIC_RESULT_CACHE</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to utilize the dynamic result cache if the dynamic
+							result cache is available (default).</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">NO_DYNAMIC_RESULT_CACHE_IMPLICIT_MATCH</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer not to try automatic view matching (default).</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">DYNAMIC_RESULT_CACHE_IMPLICIT_MATCH</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to try automatic view matching regardless of
+							indexserver configuration.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">DYNAMIC_RESULT_CACHE_IMPLICIT_MATCH</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to try automatic view matching only with given
+							views.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">DYNAMIC_RESULT_CACHE_IMPLICIT_MATCH(<var class="keyword varname">&lt;schema_name&gt;</var>.<var class="keyword varname">&lt;view_name&gt;</var>[,<var class="keyword varname">&lt;schema_name&gt;</var>.<var class="keyword varname">&lt;view_name&gt;</var>…]);</pre></div>
+
+					</dd>
+
+				
+			</dl>
+
+			<p class="p">Examples:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM V1 WITH HINT( NO_DYNAMIC_RESULT_CACHE );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM V1 WITH HINT( DYNAMIC_RESULT_CACHE);</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( NO_DYNAMIC_RESULT_CACHE_IMPLICIT_MATCH );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( DYNAMIC_RESULT_CACHE_IMPLICIT_MATCH );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( DYNAMIC_RESULT_CACHE_IMPLICIT_MATCH ("TEST"."V1") );</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Hints for Asynchronous Table Replication</div><div type="Hints for Asynchronous Table Replication">
+			
+			<p class="p">Used for applications that accept stale data access. Since the asynchronous table
+				shows stale data, it can only be used with suitable hints or to access the replica
+				table using the explicit replica table name.</p>
+
+			<dl class="dl">
+				
+					<dt class="dt dlterm emphasis">RESULT_LAG</dt>
+
+					<dd class="dd">Guides the optimizer to use specified engines if its result lag is less than
+						the maximum number of seconds.</dd>
+
+				
+			</dl>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">RESULT_LAG( '<var class="keyword varname">&lt;name&gt;</var>' [ , <var class="keyword varname">&lt;seconds&gt;</var> ] )</pre></div>
+
+			<p class="p">Examples:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( RESULT_LAG ('hana_short') );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( RESULT_LAG ('hana_atr') );</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Hints for Column View Cardinality Estimation</div><div type="Hints for Column View Cardinality Estimation">
+			
+			<p class="p">Column Views (Join Views, OLAP Views, and Calculation Views) are relations which can be used
+				in SQL Plans. Cardinality estimation of such view objects are necessary for the SQL
+				Optimizer to find an optimal plan.</p>
+
+			<p class="p">The optimizer has three different estimation methods, each of which has its own trade-offs in
+				terms of the quality and efficiency. The optimizer utilizes an appropriate method
+				among them, considering the complexity of a given plan. </p>
+
+			<p class="p">These hints maneuver the optimizer to use a designated method for cardinality estimation of
+				all of the related Column Views.</p>
+
+			<dl class="dl" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_pxr_b53_sv">
+				
+					<dt class="dt dlterm emphasis">NO_COLUMN_VIEW_ESTIMATION</dt>
+
+					<dd class="dd">
+						<p class="p">Gets a record count estimation of the largest base table (legacy).</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">COLUMN_VIEW_ESTIMATION(RECORD COUNT)</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to use the output record count estimation, which is done in each
+							engine layer.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">COLUMN_VIEW_ESTIMATION(SIMPLE)</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to use a comprehensive estimation method to retrieve SIMPLE histograms
+							(record count, distinct value count, and so on) for all of the requested
+							attributes.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">COLUMN_VIEW_ESTIMATION</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to utilize the latest estimation method.</p>
+
+					</dd>
+
+				
+			</dl>
+
+			<p class="p">Examples:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( NO_COLUMN_VIEW_ESTIMATION );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( COLUMN_VIEW_ESTIMATION (RECORD COUNT) );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( COLUMN_VIEW_ESTIMATION (SIMPLE) );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( COLUMN_VIEW_ESTIMATION ); </pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Hints for Access Path Optimization on Column Store Tables</div><div type="Hints for Access Path Optimization on Column Store Tables">
+			
+			<dl class="dl" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_qdj_m53_sv">
+				
+					<dt class="dt dlterm emphasis">CS_PRIMARY_KEY</dt>
+
+					<dd class="dd">
+						<p class="p">Forces the use of the primary key, even though the optimizer estimates otherwise. This hint
+							is only applicable if the key is not fully defined in the query.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">NO_CS_PRIMARY_KEY </dt>
+
+					<dd class="dd">
+						<p class="p">Forbids the use of the primary key, although the optimizer estimates otherwise. This hint
+							is only applicable if the key is not fully defined in the query.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">CS_ESTIMATION(SIMPLE | ALL)</dt>
+
+					<dd class="dd">
+						<p class="p">Controls the estimation phase of the column-store table query. ALL (default) estimates all
+							of the predicates and SIMPLE skips predicates that are too expensive to
+							estimate.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">NO_CS_ESTIMATION</dt>
+
+					<dd class="dd">
+						<p class="p">Skips the estimation phase of the column-store table query
+							completely.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">CS_FILTER_FIRST(<var class="keyword varname">&lt;column&gt;</var>)</dt>
+
+					<dd class="dd">
+						<p class="p">Specifies the preferred starting column in a conjunction. </p>
+
+					</dd>
+
+				
+			</dl>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Hints for Active/Active (Read Enabled)</div><div type="Hints for Active/Active (Read Enabled)">
+			
+			<p class="p">Routes the statement to a secondary site on an Active/Active (read enabled) system.</p>
+
+			<dl class="dl">
+				
+					<dt class="dt dlterm emphasis">RESULT_LAG</dt>
+
+					<dd class="dd">Guides the optimizer to use the secondary system. The routed statement queries data on the
+						secondary system. The lag time is the time between the commit on the primary
+						system and visibility on the secondary system. If the lag time on the
+						secondary system exceeds the specified time on the hint, then the statement
+						may be re-routed to the primary system implicitly.</dd>
+
+				
+			</dl>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">RESULT_LAG( '<var class="keyword varname">&lt;hana_sr&gt;</var>' [ , <var class="keyword varname">&lt;seconds&gt;</var> ] )</pre></div>
+
+			<p class="p">Examples:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( RESULT_LAG ('hana_sr') );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( RESULT_LAG ('hana_sr', 60) );</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loio4ba9edce1f2347a0b9fcda99879c17a1__section_nbh_c5r_dz"><div class="section_title">Hints for Workload Management</div><div type="Hints for Workload Management">
+			
+			<p class="p">Provides a method to set another workload class for a query, regardless of any
+				workload mappings.</p>
+
+			<dl class="dl">
+				
+					<dt class="dt dlterm emphasis">WORKLOAD_CLASS</dt>
+
+					<dd class="dd">Designates a certain workload class for the statement execution.<ul class="ul" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_h1q_lxr_dz">
+							<li class="li">The workload class must be created before using this hint.</li>
+
+							<li class="li">If the specified workload class does not exist, the hint is ignored
+								and the corresponding SQL warning is returned for the statement
+								execution.</li>
+
+							<li class="li">Only workload classes which have more restricted properties compared
+								to the ones set for session-wise admission control are applied.
+								Otherwise, the hint is ignored and the corresponding SQL warning is
+								returned. This hint clause only allows priority, thread limit, and
+								memory limit down-wise.</li>
+
+						</ul>
+</dd>
+
+				
+			</dl>
+
+			<p class="p">Examples:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE WORKLOAD CLASS "MY_WORKLOAD_CLASS_1" SET 'PRIORITY'='9';</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( WORKLOAD_CLASS("MY_WORKLOAD_CLASS_1") );</pre></div>
+
+			<p class="p">The following examples suppose that two workload classes are matched to the current
+				execution request:</p>
+
+			<dl class="dl">
+				
+					<dt class="dt dlterm emphasis">Case 1</dt>
+
+					<dd class="dd">
+						<ul class="ul" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_lzj_sbs_dz">
+							<li class="li">Workload class 'MY_WORKLOAD_CLASS1' fit by mapping: PRIORITY 5, THREAD 5, MEMORY
+								50GB</li>
+
+							<li class="li">Workload class 'MY_WORKLOAD_CLASS2' fit by HINT: PRIORITY 4, THREAD 4, MEMORY 30GB</li>
+
+						</ul>
+
+						<p class="p">The hint clause is applied and the effective values are: <samp class="ph codeph">PRIORITY
+								4</samp>, <samp class="ph codeph">THREAD 4</samp>, and <samp class="ph codeph">MEMORY 30
+								GB</samp>.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">Case 2</dt>
+
+					<dd class="dd">
+						<ul class="ul" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_pc4_gcs_dz">
+							<li class="li">Workload class 'MY_WORKLOAD_CLASS1' fit by mapping: PRIORITY 5, THREAD 5, MEMORY
+								50GB</li>
+
+							<li class="li">Workload class 'MY_WORKLOAD_CLASS2' fit by HINT: PRIORITY 4, THREAD undefined, MEMORY
+								30GB</li>
+
+						</ul>
+
+						<p class="p">The hint clause is ignored because the thread limit is not defined.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">Case 3</dt>
+
+					<dd class="dd">
+						<ul class="ul" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_ay1_ywm_2z">
+							<li class="li">Workload class 'MY_WORKLOAD_CLASS1' fit by mapping: PRIORITY 5,
+								THREAD undefined, MEMORY 50GB</li>
+
+							<li class="li">Workload class 'MY_WORKLOAD_CLASS2' fit by HINT: PRIORITY 4, THREAD
+								undefined, MEMORY 30GB</li>
+
+						</ul>
+
+						<p class="p">The hint clause is applied because both thread limits are not
+							defined.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">Case 4</dt>
+
+					<dd class="dd">
+						<ul class="ul" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_of4_cxm_2z">
+							<li class="li">Workload class 'MY_WORKLOAD_CLASS1' fit by mapping: PRIORITY 5,
+								THREAD undefined, MEMORY 50GB</li>
+
+							<li class="li">Workload class 'MY_WORKLOAD_CLASS2' fit by HINT: PRIORITY 4, THREAD
+								undefined, MEMORY 70GB</li>
+
+						</ul>
+
+						<p class="p">The hint clause is ignored because the memory limit exceeded the 50 GB
+							that is defined by the mapping.</p>
+
+					</dd>
+
+				
+			</dl>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Hints for Size Estimation</div><div type="Hints for Size Estimation">
+			
+			<p class="p">Size Estimations are related to the SQL Optimizer and are necessary to find an optimal
+				plan.</p>
+
+			<dl class="dl">
+				
+					<dt class="dt dlterm emphasis">ESTIMATION_SAMPLES(<var class="keyword varname">&lt;number&gt;</var>)</dt>
+
+					<dd class="dd">
+						<div class="p">
+							<ul class="ul" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_fvq_yv3_sv">
+								<li class="li">Controls the number of samples that are randomly picked from each of the base tables.
+									The samples estimate local filter selectivity, as well as join
+									condition selectivity. You can increase the number of samples to
+									increase the accuracy of the estimation in exchange for a longer
+									compilation time.</li>
+
+								<li class="li">By default, the <var class="keyword varname">&lt;number&gt;</var> value is 1000 when
+									there is no hint.</li>
+
+								<li class="li">If the <var class="keyword varname">&lt;number&gt;</var> is 0, then no sampling is done and all sampling related
+									estimation is skipped.</li>
+
+								<li class="li">A <var class="keyword varname">&lt;number&gt;</var> value which is below 0 is not
+									allowed and throws an exception.</li>
+
+							</ul>
+
+						</div>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">JOIN_SAMPLING, NO_JOIN_SAMPLING</dt>
+
+					<dd class="dd">
+						<div class="p">
+							<ul class="ul" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_vf1_hw3_sv">
+								<li class="li">Turns join selectivity sampling on or off.</li>
+
+								<li class="li">By default join sampling is enabled.</li>
+
+								<li class="li">The feature also turns off when ESTIMATION_SAMPLES(0) is specified because there are no
+									samples to use.</li>
+
+							</ul>
+
+						</div>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">JOIN_SKEW_ESTIMATION, NO_JOIN_SKEW_ESTIMATION</dt>
+
+					<dd class="dd">
+						<div class="p">
+							<ul class="ul" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_y2h_pts_nw">
+								<li class="li">Turns join skew estimation using the top k value from base tables on or off.</li>
+
+								<li class="li">By default join skew estimation is enabled, but depending on the ini configuration, it
+									can be turned off. The hint has higher priority over the ini
+									configuration settings.</li>
+
+								<li class="li">Join skew estimation is internally implemented independently from join sampling. Join
+									sampling uses randomly selected samples, whereas skew factor
+									computations use the top 10 most frequent values provided by the
+									column store. Their related issues have different
+									characteristics: Join sampling related issues are usually
+									performance related issues whereas Skew factor computation
+									issues are usually crash problems.</li>
+
+							</ul>
+
+						</div>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">TABLE_FILTER_ESTIMATION(MINIMAL | SAMPLING | ALL)</dt>
+
+					<dd class="dd">
+						<div class="p">
+							<ul class="ul" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_nbw_lw3_sv">
+								<li class="li">Controls the level of techniques used to estimate the table filter selectivity.
+									Lower-level use is a subset of techniques that are used in the
+									upper level.</li>
+
+								<li class="li">MINIMAL: uses heuristic-based selectivity estimation using only base statistics (table
+									row count and distinct count of each column).</li>
+
+								<li class="li">SAMPLING: uses basic sampling for filter estimation together
+									with heuristic-based estimation.</li>
+
+								<li class="li">ALL (default): uses table filter estimation. Newly added estimation techniques are only
+									included for this level.</li>
+
+							</ul>
+
+						</div>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">DISTRIBUTED_ESTIMATION, NO_DISTRIBUTED_ESTIMATION</dt>
+
+					<dd class="dd">
+						<div class="p">
+							<ul class="ul" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_zqm_sw3_sv">
+								<li class="li">Turns remote size statistics (row count/distinct count/filter selectivity of remote
+									tables) retrieval on or off.</li>
+
+								<li class="li">By default remote statistics retrieval is enabled, but depending on the initial
+									configuration, it can be turned off. The hint has higher
+									priority over the initial configuration setting.</li>
+
+							</ul>
+
+						</div>
+
+					</dd>
+
+				
+			</dl>
+
+			<p class="p">Examples:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( ESTIMATION_SAMPLES(0) );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( JOIN_SAMPLING );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( NO_JOIN_SKEW_ESTIMATION );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( TABLE_FILTER_ESTIMATION(SAMPLING) );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( NO_DISTRIBUTED_ESTIMATION );</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Hints for SQL Optimizer Plan Generation</div><div type="Hints for SQL Optimizer Plan Generation">
+			
+			<p class="p">There can be a plan where the same sequence of execution repeats multiple times, each with a
+				different requester. For such plans, the optimizer can perform the sequence of
+				executions only once and pass the results to all the requesters depending on the
+				cost model (called subplan sharing).</p>
+
+			<div class="note note"><span class="notetitle">Note</span> 
+				<p class="p">Subplan sharing can be beneficial if the repeated sequence uses heavy CPU, consumes a large
+					amount of memory, or takes a long time to execute.</p>
+
+			</div>
+
+			<dl class="dl">
+				
+					<dt class="dt dlterm emphasis">SUBPLAN_SHARING</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to prefer choosing the shared subplan.</p>
+
+						<ul class="ul" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_llh_kxs_nw">
+							<li class="li">Accepts view names as optional parameters to provide more granular
+								control of subplan sharing.</li>
+
+							<li class="li">Accepts aliases and nested views (optional).</li>
+
+						</ul>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">NO_SUBPLAN_SHARING</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to unfold the shared subplan.</p>
+
+						<ul class="ul" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_ul1_xxs_nw">
+							<li class="li">Accepts view names as optional parameters to provide more granular
+								control of unfolding the shared subplan.</li>
+
+							<li class="li">Accepts aliases and nested views (optional).</li>
+
+						</ul>
+
+					</dd>
+
+				
+			</dl>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( SUBPLAN_SHARING );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM VIEW1 WITH HINT( SUBPLAN_SHARING (VIEW1) );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( NO_SUBPLAN_SHARING );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM VIEW1,VIEW2 WITH HINT( NO_SUBPLAN_SHARING (VIEW1, VIEW2) );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM VIEW1,VIEW2 WITH HINT( SUBPLAN_SHARING (VIEW1), NO_SUBPLAN_SHARING (VIEW2) ); --forces subplan sharing on view1 and forces no subplan sharing on view2. The rest of the shared views are generated following default logic.</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM VIEWS WITH HINT( SUBPLAN_SHARING (VIEW1), NO_SUBPLAN_SHARING ); --forces subplan sharing on view1 and forces no subplan sharing on any other possible shared views.</pre></div>
+
+			<p class="p">Calculation views are unfolded during plan generation to enable optimization using the SQL
+				Optimizer whenever possible. Normally an unfolding calculation view is beneficial,
+				but there can be cases where it leads to a degradation in performance.</p>
+
+			<dl class="dl">
+				
+					<dt class="dt dlterm emphasis">CALC_VIEW_UNFOLDING</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to unfold calculation views.</p>
+
+						<ul class="ul" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_oz5_fzs_nw">
+							<li class="li">Accepts view names as optional parameters to provide more granular
+								control of calculation view unfolding.</li>
+
+							<li class="li">Accepts nested views but does not accept aliases (optional).</li>
+
+						</ul>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">NO_CALC_VIEW_UNFOLDING</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to preserve the calculation view (does not unfold
+							the calculation view).</p>
+
+						<ul class="ul" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_odw_4zs_nw">
+							<li class="li">Accepts view names as optional parameters to provide more granular
+								control of calculation view unfolding.</li>
+
+							<li class="li">Accepts nested views but does not accept aliases (optional).</li>
+
+						</ul>
+
+					</dd>
+
+				
+			</dl>
+
+			<p class="p">Examples:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( CALC_VIEW_UNFOLDING ); </pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM VIEW1 WITH HINT( CALC_VIEW_UNFOLDING ("SYS_BIC"."CALC_VIEW") ); </pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( NO_CALC_VIEW_UNFOLDING ); </pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM VIEW1,VIEW2 WITH HINT( NO_CALC_VIEW_UNFOLDING ("SYS_BIC"."CALC_VIEW1", "SYS_BIC"."CALC_VIEW2") );</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM VIEW1,VIEW2 WITH HINT( CALC_VIEW_UNFOLDING ("SYS_BIC"."CALC_VIEW1"), NO_CALC_VIEW_UNFOLDING ("SYS_BIC"."CALC_VIEW2") ); --forces calculation view unfolding on view1 and forces no calculation view unfolding on view2. The rest of the calculation views are generated following default logic.</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM VIEWS WITH HINT( CALC_VIEW_UNFOLDING (("SYS_BIC"."CALC_VIEW1"), NO_CALC_VIEW_UNFOLDING );  --forces calculation view unfolding on view1 and forces no calculation view unfolding on any other calculation views.</pre></div>
+
+			<p class="p">There are optimization levels created during plan generation to enable optimization using the
+				SQL Optimizer. Normally, a high optimization level is beneficial but selecting
+				another level can be useful in some cases when optimization leads to a degradation
+				in performance.</p>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio4ba9edce1f2347a0b9fcda99879c17a1__table_wkm_t1t_nw" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: OPTIMIZATION_LEVEL</span></caption>
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" id="d22865486e1893">
+								<p class="p">Hint Name</p>
+
+							</th>
+
+							<th class="entry" valign="top" id="d22865486e1899">
+								<p class="p">Description</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e1893 ">
+								<p class="p">OPTIMIZATION_LEVEL(MINIMAL)</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d22865486e1899 ">
+								<p class="p">MINIMAL: all rewriting rules.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e1893 ">
+								<p class="p">OPTIMIZATION_LEVEL(RULE_BASED)</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d22865486e1899 ">
+								<p class="p">RULE_BASED: heuristic join reordering.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e1893 ">
+								<p class="p">OPTIMIZATION_LEVEL(MINIMAL_COST_BASED)</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d22865486e1899 ">
+								<p class="p">Default option: MINIMAL_COST_BASED plus available cost-based
+									optimizations (including logical enumeration).</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e1893 ">
+								<p class="p">OPTIMIZATION_LEVEL(COST_BASED)</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d22865486e1899 ">
+								<p class="p">Disables all optimization rules, except mandatory ones, to
+									execute the user query as it is.</p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+			<ul class="ul" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_jfz_b2t_nw">
+				<li class="li">Accepts ID-type arguments (MINIMAL | RULE_BASED | MINIMAL_COST_BASED | COST_BASED).</li>
+
+				<li class="li">COST_BASED is the default optimization level which enables all optimization
+					steps.</li>
+
+				<li class="li">Other hints that enable/disable rewriting rules are applied regardless of the
+					OPTIMIZATION_LEVEL.</li>
+
+			</ul>
+
+			<p class="p">Examples:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM TABLES WITH HINT (OPTIMIZATION_LEVEL(MINIMAL))</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM TABLES WITH HINT (OPTIMIZATION_LEVEL(MINIMAL), JOIN_REMOVAL) --JOIN_REMOVAL is applied even though it is not a mandatory rule.</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM TABLES WITH HINT (OPTIMIZATION_LEVEL(RULE_BASED))</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM TABLES WITH HINT (OPTIMIZATION_LEVEL(MINIMAL_COST_BASED))</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM TABLES WITH HINT (OPTIMIZATION_LEVEL(COST_BASED), NO_JOIN_REMOVAL)</pre></div>
+
+			<p class="p">Inter-operator parallelism for multiple column search operator is decided during plan
+				generation to enable optimization using the SQL Optimizer. Normally parallelism is
+				beneficial in performance, but minimizing parallelism is useful in some cases.</p>
+
+			<dl class="dl">
+				
+					<dt class="dt dlterm emphasis">PARALLEL_COLUMN_SEARCH</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to force column search operator parallelism.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt dlterm emphasis">NO_PARALLEL_COLUMN_SEARCH</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to minimize column search operator parallelism.</p>
+
+					</dd>
+
+				
+			</dl>
+
+			<p class="p">Example:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM (SELECT t1.a, t1.b, SUM(t1.c) AS s1 , ROW_NUMBER() OVER (PARTITION by t1.b) AS rr1 FROM t1,t2 WHERE t1.a+0=t2.a+0 GROUP BY t1.a, t1.b) UNION ALL (SELECT t2.a, t2.b, SUM(t2.c) AS s2, ROW_NUMBER() OVER (PARTITION BY t2.b) AS rr2 FROM t2 GROUP BY t2.a, t2.b) WITH HINT (NO_CS_EXPR_JOIN, PARALLEL_COLUMN_SEARCH)</pre></div>
+
+			<p class="p">Generated plan:</p>
+
+			<p class="p"><img class="image" id="loio4ba9edce1f2347a0b9fcda99879c17a1__image_vnw_pzb_pw" src="loio59b3fb3cd86448fc8ac153e576ff899e_LowRes.png"/></p>
+
+			<p class="p">Without the hint, TS1 is not parallelized, which means an OLTP search may be used. However,
+				you can parallelize TS1 by using the hint PARALLEL_COLUMN_SEARCH.</p>
+
+			<p class="p">The predicate is simplified during plan generation to enable optimization using the SQL
+				Optimizer whenever possible. Normally, simplifying the predicate is beneficial but
+				there can be cases where it leads to a degradation in performance.</p>
+
+			<dl class="dl">
+				
+					<dt class="dt dlterm emphasis">NO_PREDICATE_SIMPLIFICATION</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to disable predicate simplification. This setting
+							applies to all internal predicates.</p>
+
+					</dd>
+
+				
+			</dl>
+
+			<p class="p">Example:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">Given predicate: a != 0 and a = 0 Without hint: const false With hint: a != 0 and a = 0</pre></div>
+
+			<p class="p">Constant values are pre-evaluated during plan generation to enable optimization using the SQL
+				Optimizer whenever possible. Normally pre-evaluating constant values is beneficial
+				but there can be cases where it leads to a degradation in performance.</p>
+
+			<dl class="dl">
+				
+					<dt class="dt dlterm emphasis">NO_CONST_PREEVALUATION</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to disable constant pre-evaluation. This is applied
+							to all internal constant values.</p>
+
+					</dd>
+
+				
+			</dl>
+
+			<p class="p">Example:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">Given constant value: a = 0 + 1 Without hint: a = 1 With hint: a = 0 + 1</pre></div>
+
+			<dl class="dl">
+				
+					<dt class="dt dlterm emphasis">JOIN_FILTER_REORDERING</dt>
+
+					<dd class="dd">
+						<p class="p">Guides the optimizer to reorder join predicates inside of conjunctive and
+							disjunctive conditions.</p>
+
+						<ul class="ul" id="loio4ba9edce1f2347a0b9fcda99879c17a1__ul_bxw_pgx_pw">
+							<li class="li">Reordering is done by using the estimated selectivity of each
+								predicate inside of conjunctive and disjunctive terms.</li>
+
+							<li class="li">Can only be applied to row store join operations.</li>
+
+						</ul>
+
+					</dd>
+
+				
+			</dl>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Hints for Query Rewriting and Logical Transformations</div><div type="Hints for Query Rewriting and Logical Transformations">
+			
+			<p class="p">The SQL Optimizer relies heavily on query rewriting and logical transformation rules to
+				enumerate all possible plans to find the best plan in the potential search space.
+				Using the hints below can help you manipulate the SQL Optimizer and provide a quick
+				workaround to fix various issues. For example:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM T1 WITH HINT( JOIN_REMOVAL ); SELECT * FROM T1 WITH HINT(  NO_JOIN_REMOVAL );</pre></div>
+
+			<p class="p">Refer to the below table for a list of hints and their descriptions:</p>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio4ba9edce1f2347a0b9fcda99879c17a1__table_v3f_yt1_mw" class="table" frame="border" border="1" rules="all">
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" id="d22865486e2146">
+								<p class="p">Category</p>
+
+							</th>
+
+							<th class="entry" valign="top" id="d22865486e2152">
+								<p class="p">Hint Name</p>
+
+							</th>
+
+							<th class="entry" valign="top" id="d22865486e2158">
+								<p class="p">Description</p>
+
+							</th>
+
+							<th class="entry" valign="top" id="d22865486e2164">
+								<p class="p">Available from</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">DISJ_FILTER_TRANSFORMATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers a split disjunctive filter into union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_DISJ_FILTER_TRANSFORMATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids a split disjunctive filter into union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">JOIN_SIMPLIFICATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers join simplification.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_JOIN_SIMPLIFICATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids join simplification.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">GROUPING_REMOVAL</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers unnecessary grouping removal.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_GROUPING_REMOVAL</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids unnecessary grouping removal.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">AGGR_SIMPLIFICATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers aggregation simplification.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_AGGR_SIMPLIFICATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids aggregation simplification.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">MATERIALIZED_COLUMN_REMOVAL</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers an unnecessary column removal.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_MATERIALIZED_COLUMN_REMOVAL</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids an unnecessary column removal.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">JOIN_REMOVAL</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers an unnecessary join removal.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_JOIN_REMOVAL</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids an unnecessary join removal.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">GROUPING_SIMPLIFICATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers a groupby simplification.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_GROUPING_SIMPLIFICATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids a groupby simplification.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">CONST_VIEW_UNFOLDING</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers constant view unfolding.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_CONST_VIEW_UNFOLDING</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids constant view unfolding.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">HOST_PORT_JOIN_COLOCATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers a host/port join thru union.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_HOST_PORT_JOIN_COLOCATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids a host/port join thru union.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">CALC_VIEW_UNFOLDING</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the unfold calculation view.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_CALC_VIEW_UNFOLDING</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the unfold calculation view.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">TYPE_CAST_REMOVAL</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the removal of a redundant type cast.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_TYPE_CAST_REMOVAL</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the removal of a redundant type cast.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">WINDOW_REMOVAL</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the removal of window function aggregation.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_WINDOW_REMOVAL</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the removal of window function aggregation.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">JOIN_REMOVAL_USING_CARDINALITY</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers join removal based on cardinality.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_JOIN_REMOVAL_USING_CARDINALITY</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids join removal based on cardinality.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">PARTITION_PRUNING</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers compile-time partition pruning.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP11</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_PARTITION_PRUNING</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids compile-time partition pruning.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP11</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">FILTER_RULE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers applying the filter rule.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP01</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_FILTER_RULE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids applying the filter rule.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP01</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">JOIN_RULE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers applying the join rule.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP01</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_REWRITE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_JOIN_RULE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids applying the join rule.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP01</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">AGGR_THRU_FILTER</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers push down aggregation through a filter.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_AGGR_THRU_FILTER</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids push down aggregation through a filter.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">AGGR_THRU_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers push down aggregation through join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_AGGR_THRU_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids push down aggregation through join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">DISTINCT_THRU_UNION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers push down distinct through union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_DISTINCT_THRU_UNION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids push down distinct through union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">AGGR_INTO_AGGR</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers merging two aggregations into one.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_AGGR_INTO_AGGR</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids merging two aggregations into one.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">AGGR_INTO_TABLE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers merging aggregation with table scans.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_AGGR_INTO_TABLE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids merging aggregation with table scans.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">DISTINCT_INTO_DISTINCT</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers merging two distincts into one.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_DISTINCT_INTO_DISTINCT</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids merging two distincts into one.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">DISTINCT_INTO_SEMI_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers merging a distinct with a join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_DISTINCT_INTO_SEMI_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids merging a distinct with a join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">UNION_INTO_UNION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers merge_union_all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_UNION_INTO_UNION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids merge_union_all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">UNION _INTO_UNION _THRU_AGGR</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers merge union all through aggregation.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_UNION _INTO_UNION _THRU_AGGR</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids merge union all through aggregation.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">PREAGGR_BEFORE_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers pre-aggregation before join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_PREAGGR_BEFORE_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids pre-aggregation before join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">DOUBLE_PREAGGR_BEFORE_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers pre-aggregation before join for both of the children.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_DOUBLE_PREAGGR_BEFORE_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids pre-aggregation before join for both of the children.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">PREAGGR_BEFORE_UNION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers pre-aggregation before union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_PREAGGR_BEFORE_UNION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids pre-aggregation before union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">DISJ_JOIN_INTO_UNION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers to split disjunctive join predicates into filters and making union
+								all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_DISJ_JOIN_INTO_UNION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids splittting disjunctive join predicates into filters and making union
+								all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">PREDISTINCT_BEFORE_SEMI_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers putting DISTINCT on the right child of SEMI or ANTI SEMI joins.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_PREDISTINCT_BEFORE_SEMI_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids putting DISTINCT on the right child of SEMI or ANTI SEMI joins.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">JOIN_THRU_AGGR</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers pushing down joins through aggregation.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_JOIN_THRU_AGGR</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids pushing down joins through aggregation.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">JOIN_THRU_FILTER</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers pushing down joins through the filter.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_JOIN_THRU_FILTER</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids pushing down joins through the filter.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">JOIN_THRU_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers pushing down joins through join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_JOIN_THRU_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids pushing down joins through join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">JOIN_THRU_UNION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers pushing down joins through union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_JOIN_THRU_UNION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids pushing down joins through union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SEMI_JOIN_BEFORE_UNION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers pushing down semi-joins through union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_SEMI_JOIN_BEFORE_UNION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids pushing down semi-joins through union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">FILTER_THRU_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers pushing down filters through union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_FILTER_THRU_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids pushing down filters through union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">FILTER_THRU_AGGR</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers pushing down filters through aggregation.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_FILTER_THRU_AGGR</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids pushing down filters through aggregation.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">FILTER_THRU_UNION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers pushing down filters through union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_FILTER_THRU_UNION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids pushing down filters through union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">PRELIMIT_BEFORE_UNION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers pushing down limits before union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_PRELIMIT_BEFORE_UNION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids pushing down limits before union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">LIMIT_THRU_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers pushing down limits through joins.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP11</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_LIMIT_THRU_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids pushing down limits through joins.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP11</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">PRELIMIT_BEFORE_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers LIMIT/SORT on the left child of the LEFT OUTER JOIN.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_LOGICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_PRELIMIT_BEFORE_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids LIMIT/SORT on the left child of the LEFT OUTER JOIN.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">INDEX_SEARCH</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the row engine index search.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_INDEX_SEARCH</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the row engine index search.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">INDEX_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the row engine index join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_INDEX_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the row engine index join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">HASH_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the row engine hash join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_HASH_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the row engine hash join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">RANGE_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the row engine range join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP11</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_RANGE_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the row engine range join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP11</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">HASHED_RANGE_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the row engine hashed range join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP11</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_HASHED_RANGE_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the row engine hashed range join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP11</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">JOIN_FILTER_REORDERING</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers join predicate reordering.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP11</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_JOIN_FILTER_REORDERING</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids join predicate reordering.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP11</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">MIXED_INVERTED_INDEX_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the mixed index  join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_MIXED_INVERTED_INDEX_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the mixed index join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">CS_SORT</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the column engine order by.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_CS_SORT</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the column engine order by.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">CS_LIMIT</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the column engine limit.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_CS_LIMIT</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the column engine limit.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">CS_FILTER</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the column engine filter.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_CS_FILTER</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the column engine filter.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">CS_DISTINCT</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the column engine distinct.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_CS_DISTINCT</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the column engine distinct.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">CS_AGGR</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers column engine aggregation.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_CS_AGGR</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids column engine aggregation.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">CS_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers column engine join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_CS_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the column engine join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">CS_SCALAR_SUBQUERY</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the column engine scalar subquery.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_CS_SCALAR_SUBQUERY</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the column engine scalar subquery.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">CS_ITAB_IN_SUBQUERY</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the column engine ITAB in the subquery.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9 (extended to normal column tables in SP12)</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_CS_ITAB_IN_SUBQUERY</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the column engine ITAB in the subquery.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9 (extended to normal column tables in SP12)</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">CS_ITAB_IN_PREDICATE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the column engine ITAB for multi-columns in predicates.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP12</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_CS_ITAB_IN_PREDICATE</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the column engine ITAB for multi-columns in predicates.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP12</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">CS_UNION_ALL</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the column engine union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9 (extended to utilize new column union all in SP12)</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">CS_UNION_ALL(CALC)</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the calc engine union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP12 (extended to utilize the old CE column union all in
+								SP12)</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_CS_UNION_ALL</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the column engine union all.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">CS_WINDOW</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the column engine window for row numbers only.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_CS_WINDOW</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the column engine window for row numbers only.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">CYCLIC_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers cyclic joins in a single column search.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_CYCLIC_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids cyclic joins in a single column search.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OLAP_GUIDED_NAVIGATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers OLAP engine guided navigation.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_OLAP_GUIDED_NAVIGATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids OLAP engine guided navigation.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OLAP_FEMS</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the OLAP engine fems.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_OLAP_FEMS</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the OLAP engine fems.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP9</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">CS_EXPR_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the column engine expression join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP10</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_CS_EXPR_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the column engine expression join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP10</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">CS_SEMI_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the column engine semi-join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP12</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_CS_SEMI_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the column engine semi-join.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP12</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">CS_OUTER_JOIN_WITH_FILTER</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the outer join with the filter pushed down to the column engine.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP12</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_CS_OUTER_JOIN_WITH_FILTER</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the outer join with the filter pushed down to the column engine.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP12</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">REMOTE_COLUMN_SCAN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers the ITAB-producing remote scan operator.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP10</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_REMOTE_COLUMN_SCAN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids the ITAB-producing remote scan operator.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP10</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">REMOTE_JOIN_RELOCATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers join relocation. Performs a JOIN between SAP HANA and the
+								remote table at the remote database.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP10</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_REMOTE_JOIN_RELOCATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids join relocation. Performs a JOIN between SAP HANA and the remote
+								table at the remote database.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP10</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">REMOTE_EXPR_MATERIALIZATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers expression materialization at the remote database.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP10</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_REMOTE_EXPR_MATERIALIZATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids expression materialization at the remote database.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP10 </td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">DISJUNCTIVE_HASH_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Prefers disjunctive hash join implementation.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP12</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">OPTIMIZER_PHYSICAL_ENUMERATION</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">NO_DISJUNCTIVE_HASH_JOIN</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">Avoids disjunctive hash join implementation.</td>
+
+							<td class="entry" valign="top" headers="d22865486e2146 d22865486e2152 d22865486e2158 d22865486e2164 ">SP12</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?f55ce8e92a6744f3a4ee9f350cfb6453.html" target="_top" title="Provides all available hints to be used in WITH HINT clauses.">HINTS System View</a></div>
+<div><a class="link" href="default.html?20fcf24075191014a89e9dc7b8408b26.html" target="_top" title="Retrieves information from the database.">SELECT Statement (Data Manipulation)</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="HINT Details";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

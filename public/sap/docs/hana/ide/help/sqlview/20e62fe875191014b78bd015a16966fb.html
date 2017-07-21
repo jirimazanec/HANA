@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Returns the quarter for the specified date."/>
+<meta name="description" content="Returns the quarter for the specified date."/>
+<meta name="keywords" content="QUARTER"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=13994314383164297"/>
+<title>QUARTER Function (Datetime)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20e62fe875191014b78bd015a16966fb";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20e62fe875191014b78bd015a16966fb">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">QUARTER Function (Datetime)</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Returns the quarter for the specified date.</p>
+
+      <div class="section" id="loio20e62fe875191014b78bd015a16966fb__sql_function_quarter_1sql_function_quarter_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+         
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">QUARTER (<var class="keyword varname">&lt;d&gt;</var>, [, <var class="keyword varname">&lt;start_month&gt;</var> ])</pre></div>
+
+      </div></div>
+
+      <div class="section" id="loio20e62fe875191014b78bd015a16966fb__sql_function_quarter_1sql_function_quarter_description"><div class="section_title">Description</div><div type="Description">
+         
+         <p class="p">Returns the numerical year and quarter of date <var class="keyword varname">&lt;d&gt;</var>. The first quarter
+            starts in the month specified by <var class="keyword varname">&lt;start_month&gt;</var>. If
+               <var class="keyword varname">&lt;start_month&gt;</var> is not specified, then the first quarter is assumed to
+            begin in January.</p>
+
+      </div></div>
+
+      <div class="section" id="loio20e62fe875191014b78bd015a16966fb__sql_function_quarter_1sql_function_quarter_examples"><div class="section_title">Example</div><div type="Example">
+         
+         <p class="p">The following example returns the value <samp class="ph systemoutput">2011-Q4</samp> as the year
+            and quarter for the specified date:</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT QUARTER (TO_DATE('2012-01-01', 'YYYY-MM-DD'), 2) "quarter" FROM DUMMY;</pre></div>
+
+      </div></div>
+
+   </div>
+
+<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?3f81ccc7e35d44cbbc595c7d552c202a.html" target="_top" title="Datetime data types are used to store date and time information.">Datetime Data Types</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="QUARTER Function (Datetime)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="After all contributions of changelists are approved, you can release the changelist."/>
+<meta name="description" content="After all contributions of changelists are approved, you can release the changelist."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=5210659192474568"/>
+<title>Release Changelists</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio6139d3a04d264a6cbe4492cbc6f6061a";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio6139d3a04d264a6cbe4492cbc6f6061a">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Release Changelists</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">After all contributions of changelists are approved, you can release the changelist.</p>
+
+		<div class="section prereq p"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Prerequisites</h2></div>
+			<ul class="ul" id="loio6139d3a04d264a6cbe4492cbc6f6061a__ul_wkw_d11_3r">
+				<li class="li">
+					<p class="p">Change recording is enabled in your development system.</p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">You have the priviliges granted by the SAP HANA Application Lifecycle Management
+							<samp class="ph codeph">sap.hana.xs.lm.roles::DevelopmentExpert</samp> role.</p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">The contribution status must be <span class="ph uicontrol">approved</span> for all contributors of a changelist before you can release the
+						changelist, and the changelist status must be <span class="ph uicontrol">Open</span>.</p>
+
+				</li>
+
+			</ul>
+
+		</div>
+
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+				<span class="ph cmd">Open the SAP HANA Application Lifecycle Management.</span>
+				<div class="itemgroup info">
+					<p class="p">The SAP HANA Application Lifecycle Management is available on the SAP HANA XS Web server at the following URL:
+								<span class="ph filepath">http://<var class="keyword varname">&lt;WebServerHost&gt;</var>:80<var class="keyword varname">&lt;SAPHANAinstance&gt;</var>/sap/hana/xs/lm</span>.</p>
+
+				</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Choose the <span class="ph uicontrol">CHANGES</span> tab.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">From the list of open changelists, select the changelist that you want to release.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">If all contributors have approved their contributions, you can choose <span class="ph uicontrol">Release</span>.</span>
+				<div class="itemgroup info">
+					<p class="p">If the <span class="ph uicontrol">Release</span> button is greyed out make sure that all contributions are approved and that the
+						changelist is in status <span class="ph uicontrol">Open</span>. The status of the changelist changes from <span class="ph uicontrol">Open</span> to
+							<span class="ph uicontrol">Released</span>.</p>
+
+				</div>
+			</li>
+</ol>
+
+		<div class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Results</h2></div>
+			<p class="p">The changelist is released and it is ready to be transported.</p>
+
+			<p class="p">If you have left the default filter settings unchanged, the released changelist disappears from the list of open changelists.</p>
+
+			<p class="p">To display it, change the filter settings so that released changelists also appear in the list. If you select the released changelist,
+				details are displayed, including the release date and time and the user who released it.</p>
+
+		</div>
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?9a012d6438764459a581e6af55a87c46.html" target="_top" title="SAP HANA application lifecycle management supports you in all phases of an SAP HANA application lifecycle, from modeling your product structure, through application development, transport, assemble, and install.">SAP HANA Application Lifecycle Management</a></div>
+<div><a class="link" href="default.html?1980430266744884b81fc9c32601e6d5.html" target="_top" title="The filter function allows you to filter the changelists according to different filter criteria and display all changelists that meet the criteria. If the list of displayed changelists is very long, you can search the list for specific changelists.">Filter and Search for Changelists</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Release Changelists";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Explicitly loads column store table data into memory instead of upon first access."/>
+<meta name="description" content="Explicitly loads column store table data into memory instead of upon first access."/>
+<meta name="keywords" content="LOAD"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=17001814684218441"/>
+<title>LOAD Statement (Data Manipulation)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20f83c8c75191014b215d6c8c427c91b";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20f83c8c75191014b215d6c8c427c91b">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">LOAD Statement (Data Manipulation)</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Explicitly loads column store table data into memory instead of upon first
+      access.</p>
+
+      <div class="section" id="loio20f83c8c75191014b215d6c8c427c91b__sql_load_1sql_load_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+         
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">LOAD <var class="keyword varname">&lt;table_name&gt;</var> [HISTORY]
+   { DELTA
+     | ALL
+     | (<var class="keyword varname">&lt;column_name&gt;</var>, ...)
+   }</pre></div>
+
+      </div></div>
+
+      <div class="section" id="loio20f83c8c75191014b215d6c8c427c91b__sql_unload_1sql_load_syntax_elements"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+         
+         <dl class="dl parml">
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;table_name&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the name of the table to be loaded into memory, with optional schema
+                     name.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_name&gt;</var> ::= [<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;identifier&gt;</var>
+ 
+<var class="keyword varname">&lt;schema_name&gt;</var> ::= <var class="keyword varname">&lt;unicode_name&gt;</var></pre></div>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis">HISTORY</dt>
+
+               <dd class="dd pd">
+                  <p class="p">Use the HISTORY
+                     option when <var class="keyword varname">&lt;table_name&gt;</var> is the name of a history table. The
+                     default operation of the LOAD command loads the current state of the given
+                     table into memory. If you explicitly require the table history to be loaded
+                     into memory, a separate LOAD statement with the HISTORY option enabled has to
+                     be executed. So to load a history completely into memory, two LOAD statements
+                     have to be executed, with and without HISTORY option enabled.</p>
+
+                  <p class="p">If you do not explicitly load table history into memory, then the <span class="ph pname">SAP
+                        HANA</span> database automatically loads this data upon first access.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis">DELTA</dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies that the delta part of a column store table is loaded into memory. As
+                     the column store is read, optimized, and compressed, deltas are used to
+                     optimize insert or update operations.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis">ALL</dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies that all current data of the column store table, including its delta,
+                     is loaded into memory. This option does not load the table history.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;column_name&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the name of the column to be loaded into memory.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+               </dd>
+
+            
+         </dl>
+
+      </div></div>
+
+      <div class="section" id="loio20f83c8c75191014b215d6c8c427c91b__sql_load_1sql_load_description"><div class="section_title">Description</div><div type="Description">
+         
+         <p class="p">The LOAD statement explicitly loads column store table data into memory instead of upon first access.</p>
+
+         <p class="p">A LOAD statement without HISTORY option only loads the current table data and the table
+            delta into memory, but not the history-delta and history-main.</p>
+
+         <p class="p">The use of this statement requires the UPDATE privilege.</p>
+
+      </div></div>
+
+
+      <div class="section" id="loio20f83c8c75191014b215d6c8c427c91b__sql_load_1sql_load_examples"><div class="section_title">Examples</div><div type="Examples">
+         
+         <p class="p">Create column table A.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE A (A INT, B INT);</pre></div>
+
+         <p class="p">Load table A into memory.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">LOAD A all;</pre></div>
+
+         <p class="p">Load the columns A and B of table A into memory.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">LOAD A (A,B);</pre></div>
+
+         <p class="p">Query the load status of table A using the m_cs_tables monitoring view.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT loaded FROM m_cs_tables WHERE table_name = 'A';</pre></div>
+
+      </div></div>
+
+   </div>
+
+<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?20ad60f77519101498ccb610c33c3ca6.html" target="_top" title="Provides runtime data for column tables.">M_CS_TABLES System View</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="LOAD Statement (Data Manipulation)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

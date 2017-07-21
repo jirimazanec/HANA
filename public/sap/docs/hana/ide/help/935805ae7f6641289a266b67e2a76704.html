@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Create the files required to enable a service that uses OAuth to authorize access to a resource running on a remote HTTP destination."/>
+<meta name="description" content="Create the files required to enable a service that uses OAuth to authorize access to a resource running on a remote HTTP destination."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=2657058585180778"/>
+<title>Tutorial: Create an OAuth Configuration Package</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio935805ae7f6641289a266b67e2a76704";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio935805ae7f6641289a266b67e2a76704">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Tutorial: Create an OAuth Configuration Package</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">Create the files required to enable a service that uses OAuth to authorize access to
+		a resource running on a remote HTTP destination.</p>
+
+		<div class="section prereq p"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Prerequisites</h2></div>
+			<div class="p">
+				<ul class="ul" id="loio935805ae7f6641289a266b67e2a76704__ul_s5w_mcv_gk">
+					<li class="li">An HTTP destination configuration (<span class="ph filepath">.xshttpdest</span>)</li>
+
+					<li class="li">Your SAP HANA database user has the permissions granted by the following
+							roles:<ul class="ul" id="loio935805ae7f6641289a266b67e2a76704__ul_rxd_f21_5p">
+							<li class="li"><span class="keyword uilabel">RuntimeConfAdministrator</span></li>
+
+							<li class="li"><span class="keyword uilabel">HTTPDestAdministrator</span></li>
+
+							<li class="li"><span class="keyword uilabel">oAuthAdmin</span></li>
+
+						</ul>
+</li>
+
+				</ul>
+
+			</div>
+
+		</div>
+
+		<div class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<p class="p">An OAuth configuration package is a collection of configuration files that define the
+				details of how an application uses OAuth to enable logon to a resource running on a
+				remote HTTP destination.</p>
+
+			<p class="p">An HTTP destination defines connection details for services running on specific hosts whose
+				details you want to define and distribute. Additional syntax rules that apply to the
+				contents of the HTTP destination configuration are checked when you activate the
+				configuration in the repository.</p>
+
+			<p class="p">An OAuth configuration requires the following <span class="ph emphasis emphasis">dependent</span>
+				configuration files:</p>
+
+			<ul class="ul" id="loio935805ae7f6641289a266b67e2a76704__ul_a22_dpy_tp">
+				<li class="li">OAuth application configuration
+						(<span class="ph filepath"><var class="keyword varname">&lt;filename&gt;</var>.xsoauthappconfig</span>)<p class="p">Describes
+						the configuration of the OAuth application parameters, including the name
+						and package location of the associated client configuration and any
+						mandatory or optional scopes.</p>
+</li>
+
+				<li class="li">OAuth client configuration
+						(<span class="ph filepath"><var class="keyword varname">&lt;filename&gt;</var>.xsoauthclientconfig</span>)<p class="p">Describes
+						the configuration of the OAuth client, including the client ID, the client
+						authentication type, and the name and package location of the associated
+						client <span class="ph emphasis emphasis">flavor</span>.</p>
+</li>
+
+				<li class="li">OAuth client flavor configuration
+						(<span class="ph filepath"><var class="keyword varname">&lt;filename&gt;</var>.xsoauthclientflavor</span>)<p class="p">Describes
+						the OAuth client flavor setup used by the XS OAuth client configuration,
+						including the protocol steps and the parameters to be set. Note that
+						normally you do not need to change the OAuth client flavor
+						configuration.</p>
+</li>
+
+			</ul>
+
+			<div class="note tip"><span class="tiptitle">Tip</span> You connect the OAuth configuration to the HTTP destination
+				configuration in the HTTP destination's runtime configuration. Access to the runtime
+				configuration tools requires the permissions included in an administrator
+				role.</div>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps" id="loio935805ae7f6641289a266b67e2a76704__steps_rdd_43x_xp"><li class="li step stepexpand">
+				<span class="ph cmd">Open the <span class="ph pname">SAP HANA</span> Web-based Development Workbench Editor
+					tool.</span>
+				<div class="itemgroup info">The Editor tool is available on the <span class="ph pname">SAP HANA</span> XS Web server at
+					the following URL:
+							<span class="ph filepath">http://<var class="keyword varname">&lt;WebServerHost&gt;</var>:80<var class="keyword varname">&lt;SAPHANAinstance&gt;</var>/sap/hana/ide/editor</span></div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Create an OAuth application configuration.</span>
+				<div class="itemgroup info">
+					<p class="p">You need to create the base configuration for your OAuth application in a
+						design-time file with the mandatory file-extension
+							<span class="ph filepath">.xsoauthappconfig</span>. The application configuration is
+						stored in the <span class="ph pname">SAP HANA</span> repository and must be activated to
+						create the corresponding catalog objects.</p>
+
+				</div>
+				<ol type="a" class="ol substeps" id="loio935805ae7f6641289a266b67e2a76704__substeps_ep1_gry_tp">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Create the design-time file that contains your OAuth application configuration, for
+							example, <span class="ph filepath">oauthDriveApp.xsoauthappconfig</span>.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Define the details of the new OAuth application configuration, as
+							follows:</span>
+						<div class="itemgroup stepxmp">
+							<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{ 
+ "clientConfig"    : "sap.hana.xs.oAuth.lib.providerconfig.providermodel:abap_ac", 
+ "mandatoryScopes" : ["OAUTH2_TEST_SCOPE1", "OAUTH2_TEST_SCOPE2"],
+ "description"     : "ABAP Testapplication for OAuth"
+}</pre></div>
+
+							<div class="note note"><span class="notetitle">Note</span> In this example, the OAuth client configuration is located in the
+								package
+									<span class="ph filepath">sap.hana.xs.oAuth.lib.providerconfig.providermodel</span>;
+								you can change the path to suit your own requirements.</div>
+
+						</div>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Create an OAuth client configuration (optional).</span>
+				<div class="itemgroup info">
+					<p class="p">You create the client configuration for your OAuth application in a
+						design-time file with the mandatory file-extension
+							<span class="ph filepath">.xsoauthclientconfig</span>. You can either use an
+						existing client configuration from the package
+							<span class="ph filepath">sap.hana.xs.oAuth.lib.providerconfig.providermodel</span>
+						or create your own client configuration. The application configuration is
+						stored in the <span class="ph pname">SAP HANA</span> repository and must be activated to
+						create the corresponding catalog objects.</p>
+
+				</div>
+				<ol type="a" class="ol substeps" id="loio935805ae7f6641289a266b67e2a76704__substeps_i13_4ry_tp">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Create the design-time file that contains your OAuth client configuration, for example,
+								<span class="ph filepath"> ABAPv1.xsoauthclientconfig</span>.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Define the details of the new OAuth client configuration, as
+							follows:</span>
+						<div class="itemgroup stepxmp">
+							<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{
+ "clientFlavor"             : "sap.hana.xs.oAuth.lib.providerconfig.providermodel:abap_ac",
+ "clientID"                 : "<var class="keyword varname">&lt;OAuth ClientId registered at ABAP&gt;</var>",
+ "clientAuthType"           : "basic",
+ "authorizationEndpointURL" : "/sap/bc/sec/oauth2/authorize",
+ "tokenEndpointURL"         : "/sap/bc/sec/oauth2/token",
+ "revocationEndpointURL"    : "/sap/bc/sec/oauth2/revoke",
+ "redirectURL"              : "<var class="keyword varname">&lt;External_XS_HOST&gt;</var>:<var class="keyword varname">&lt;PORT&gt;</var>/sap/hana/xs/oAuth/lib/runtime/tokenRequest.xsjs",
+ "flow"                     : "authCode",
+ "scopeReq"                 : "maxScopes",
+ "description"              : "OAuth Client for SAP Application Server ABAP - Authorization Code Flow"
+}</pre></div>
+
+						</div>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Create the OAuth client flavor (optional).</span>
+				<div class="itemgroup info">The OAuth client flavor file is a design-time artifact that provides details
+					of the OAuth protocol for a client application which uses the services provided
+					by a corresponding OAuth application. The OAuth client flavor steps are defined
+					in a design-time artifact with the mandatory file suffix
+						<span class="ph filepath">.xsoauthclientflavor</span>; the configuration file must be
+					specified using the JSON format.<div class="note tip"><span class="tiptitle">Tip</span> You do not have to create the
+						OAuth client flavor from scratch; <span class="ph pname">SAP HANA</span> provides some
+						example OAuth client flavors which you can use. The example OAuth client
+						flavors are located in the following package:
+							<span class="ph filepath">sap.hana.xs.oAuth.lib.providerconfig.providermodel</span>.</div>
+</div>
+				<div class="itemgroup stepxmp">The following example shows the required format and syntax for the contents
+					of the <span class="ph filepath">.xsoauthclientflavor</span>
+						artifact:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{ "parameters":[
+{ "flavorStep":"1Aut", "paramLocation":"uri",  "paramName":"client_id",     "paramValue":"client_id",                         "valueType":"eval", "paramMandatory":"true" },
+{ "flavorStep":"2Gra", "paramLocation":"head", "paramName":"Authorization", "paramValue":"Basic Authentication",              "valueType":"sec",  "paramMandatory":"true" },
+{ "flavorStep":"3Prc", "paramLocation":"head", "paramName":"Bearer",        "paramValue":"access_token",                      "valueType":"sec",  "paramMandatory":"true" },
+{ "flavorStep":"4Ref", "paramLocation":"head", "paramName":"Authorization", "paramValue":"Basic Authentication",              "valueType":"sec",  "paramMandatory":"true" },
+{ "flavorStep":"5Rev", "paramLocation":"para", "paramName":"token",         "paramValue":"access_token",                      "valueType":"sec",  "paramMandatory":"true" },
+] }</pre></div>
+<div class="note note"><span class="notetitle">Note</span> The
+						example above is not complete; it is intended for illustration purposes
+						only.</div>
+</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Activate all the XS OAuth configuration files.</span>
+				<div class="itemgroup info">Activating the configuration files creates the corresponding catalog
+					objects.</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Add the OAuth configuration to the runtime configuration of the HTTP
+					destination configuration that requires it.</span>
+				<div class="itemgroup info">To start the SAP HANA XS Administration Tool, select the <span class="ph filepath">xshttpdest</span>
+					file and choose <img class="image" id="loio935805ae7f6641289a266b67e2a76704__image_lrk_xxs_hq" src="loio15de55dfaf29400a9b2d57730e086e4a_LowRes.png"/> (<span class="ph uicontrol">Maintain
+						Credentials</span>) in the toolbar. The details of the HTTP destination
+					are displayed.</div>
+				<ol type="a" class="ol substeps" id="loio935805ae7f6641289a266b67e2a76704__substeps_k35_kbz_tp">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Choose the <span class="ph uicontrol">OAuth Details</span> tab.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Choose <span class="ph menucascade"><img src="images/navstart.gif" alt="Start of the navigation path" title="Start of the navigation path"/> <span class="ph uicontrol">Edit </span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">Browse OAuth App Configs</span> <img src="images/navend.gif" alt="End of the navigation path" title="End of the navigation path"/></span>.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Select an OAuth application configuration from the list
+							displayed.</span>
+						<div class="itemgroup stepresult">The name of the application configuration you choose and the absolute path to the
+							package where it is located are displayed in the appropriate fields, for
+								example:<ul class="ul" id="loio935805ae7f6641289a266b67e2a76704__ul_n3f_cfy_vp">
+								<li class="li"><span class="ph uicontrol">OAuth App Config Package:</span>
+									<samp class="ph codeph">sap.hana.test</samp></li>
+
+								<li class="li"><span class="ph uicontrol">OAuth App Config Name:</span>
+									<samp class="ph codeph">abapTest</samp></li>
+
+							</ul>
+<div class="note note"><span class="notetitle">Note</span> The values displayed here must also be present in the HTTP
+								destination configuration to which the OAuth configuration applies.
+								</div>
+<p class="p">For example, the HTTP destination corresponding to the
+								OAuth configuration you are setting up in this task must also
+								contain entries that describe the name and package location of the
+								OAuth application configuration to
+							use:</p>
+<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">oAuthAppConfigPackage = "sap.hana.test";
+oAuthAppConfig = "abapTest";
+</pre></div>
+</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Navigate to the OAuth client configuration and set the client
+							secret.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Choose <span class="ph uicontrol">Save</span> to update the runtime confguration
+							for the HTTP destination.</span>
+					</li>
+
+				</ol>
+
+			</li>
+</ol>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?e5b5d3a830ff4beea17c3efafe452065.html" target="_top" title="The format and syntax required in a design-time artifact describing an OAuth application configuration.">OAuth Application Configuration Syntax</a></div>
+<div><a class="link" href="default.html?4b9d546faeff48f2b0c3cb33abd6daeb.html" target="_top" title="The format and syntax required in a design-time artifact describing the OAuth client configuration.">OAuth Client Configuration Syntax</a></div>
+<div><a class="link" href="default.html?6757a4e3ed9f42bd86c5b5c3b264e090.html" target="_top" title="The format and syntax required in a design-time artifact that describes the OAuth client flavors.">OAuth Client Flavor Syntax</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Tutorial: Create an OAuth Configuration Package";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

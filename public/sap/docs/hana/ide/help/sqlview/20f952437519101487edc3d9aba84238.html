@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Matches a search string with the results of a subquery."/>
+<meta name="description" content="Matches a search string with the results of a subquery."/>
+<meta name="keywords" content="CONTAINS Predicate"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=6885948192366889"/>
+<title>CONTAINS Predicate</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20f952437519101487edc3d9aba84238";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20f952437519101487edc3d9aba84238">
+<div id="wrapper"><div id="container">
+
+ <h1 class="title topictitle1">CONTAINS Predicate</h1>
+
+ 
+ 
+ <div class="body refbody"><p class="shortdesc">Matches a search string with the results of a subquery.</p>
+
+  <div class="section"><div class="section_title">Syntax</div><div type="Syntax">
+   
+   <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;contains_predicate&gt;</var> ::= CONTAINS ( <var class="keyword varname">&lt;contains_columns&gt;</var> , <var class="keyword varname">&lt;search_string&gt;</var> [, <var class="keyword varname">&lt;search_specifier&gt;</var>] )</pre></div>
+
+  </div></div>
+
+  <div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+   
+   <dl class="dl parml">
+    
+     <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;contains_columns&gt;</var></dt>
+
+     <dd class="dd pd">
+      <p class="p">Specifies the columns to search.</p>
+
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;contains_columns&gt;</var> ::= 
+ * 
+ | <var class="keyword varname">&lt;column_name&gt;</var> 
+ | ( <var class="keyword varname">&lt;column_list&gt;</var> )
+
+<var class="keyword varname">&lt;column_list&gt;</var> ::=
+( <var class="keyword varname">&lt;column_name&gt;</var> [,<var class="keyword varname">&lt;..&gt;</var>] )</pre></div>
+
+     </dd>
+
+    
+    
+     <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;search_string&gt;</var></dt>
+
+     <dd class="dd pd">
+      <p class="p">Specifies the string to search for in <var class="keyword varname">&lt;contains_columns&gt;</var>, using the
+       freestyle search string format (for example, Peter "Palo Alto" OR Berlin -"SAP LABS").</p>
+
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;search_string&gt;</var> ::= <var class="keyword varname">&lt;string_const&gt;</var></pre></div>
+
+     </dd>
+
+    
+    
+     <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;search_specifier&gt;</var></dt>
+
+     <dd class="dd pd">
+      <p class="p">Defines specifications on the type of matching to perform. If
+        <var class="keyword varname">&lt;search_specifier&gt;</var> is not specified, EXACT is the default.</p>
+
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;search_specifier&gt;</var>  ::= 
+ [<var class="keyword varname">&lt;search_type&gt;</var>] [<var class="keyword varname">&lt;opt_search_specifier2_list&gt;</var>]
+ | <var class="keyword varname">&lt;search_specifier2_list&gt;</var>
+ 
+<var class="keyword varname">&lt;opt_search_specifier2_list&gt;</var> ::= 
+ (empty, nothing specified)
+ | <var class="keyword varname">&lt;search_specifier2_list&gt;</var>
+ 
+<var class="keyword varname">&lt;search_type&gt;</var> ::= 
+ <var class="keyword varname">&lt;exact_search&gt;</var> 
+ | <var class="keyword varname">&lt;fuzzy_search&gt;</var> 
+ | <var class="keyword varname">&lt;linguistic_search&gt;</var>
+ 
+<var class="keyword varname">&lt;search_specifier2_list&gt;</var> ::= 
+ <var class="keyword varname">&lt;search_specifier2&gt;</var>
+ | <var class="keyword varname">&lt;search_specifier2_list&gt;</var> , <var class="keyword varname">&lt;search_specifier2&gt;</var>
+ 
+<var class="keyword varname">&lt;search_specifier2&gt;</var> ::=  
+ <var class="keyword varname">&lt;weights&gt;</var> 
+ | <var class="keyword varname">&lt;language&gt;</var>
+ 
+<var class="keyword varname">&lt;exact_search&gt;</var> ::= 
+ EXACT 
+ | EXACT ( <var class="keyword varname">&lt;additional_params&gt;</var> )
+  
+<var class="keyword varname">&lt;fuzzy_search&gt;</var> ::= 
+ FUZZY 
+ | FUZZY ( <var class="keyword varname">&lt;fuzzy_params&gt;</var> ) 
+ | FUZZY ( <var class="keyword varname">&lt;fuzzy_params_list&gt;</var> )
+
+<var class="keyword varname">&lt;fuzzy_params_list&gt;</var>  ::= ( <var class="keyword varname">&lt;fuzzy_params&gt;</var> ) , <var class="keyword varname">&lt;fuzzy_params_list2&gt;</var>
+
+<var class="keyword varname">&lt;fuzzy_params_list2&gt;</var> ::= 
+ ( <var class="keyword varname">&lt;fuzzy_params&gt;</var> ) 
+ | <var class="keyword varname">&lt;fuzzy_params_list2&gt;</var> , ( <var class="keyword varname">&lt;fuzzy_params&gt;</var> )
+ 
+<var class="keyword varname">&lt;fuzzy_params&gt;</var> ::= 
+ <var class="keyword varname">&lt;float_const&gt;</var> 
+ | <var class="keyword varname">&lt;float_const&gt;</var> , <var class="keyword varname">&lt;additional_params&gt;</var> 
+ | NULL , <var class="keyword varname">&lt;additional_params&gt;</var>
+
+<var class="keyword varname">&lt;linguistic_search&gt;</var> ::= 
+ LINGUISTIC
+ | LINGUISTIC ( <var class="keyword varname">&lt;additional_params&gt;</var> )
+ 
+ <var class="keyword varname">&lt;weights&gt;</var> ::= WEIGHT ( <var class="keyword varname">&lt;float_const_list&gt;</var> )
+ 
+ <var class="keyword varname">&lt;language&gt;</var> ::= LANGUAGE ( <var class="keyword varname">&lt;string_const&gt;</var> )
+ 
+ <var class="keyword varname">&lt;additional_params&gt;</var> ::= <var class="keyword varname">&lt;string_const&gt;</var></pre></div>
+
+      <dl class="dl">
+       
+        <dt class="dt dlterm emphasis">FUZZINESSTHRESHOLD</dt>
+
+        <dd class="dd">
+         <p class="p">If the FUZZINESSTHRESHOLD parameter is defined in a join view, and
+           <var class="keyword varname">&lt;search_specifier&gt;</var> is not specified, a fuzzy search is performed using
+          the fuzziness threshold defined in the view. </p>
+
+        </dd>
+
+       
+       
+        <dt class="dt dlterm emphasis">EXACT</dt>
+
+        <dd class="dd">
+         <p class="p">Specifies to match the term or phrase exactly. </p>
+
+         <p class="p">EXACT returns records where exact matches of the search terms are found in the search
+          attributes.</p>
+
+        </dd>
+
+       
+       
+        <dt class="dt dlterm emphasis">FUZZY</dt>
+
+        <dd class="dd">
+         <p class="p">Specifies to return matches that are similar to <var class="keyword varname">&lt;search_string&gt;</var>
+          (spelling errors are ignored to a certain extent for example). </p>
+
+         <p class="p"> Optionally, you can control the degree of fuzziness using parameters. For example,
+           <var class="keyword varname">&lt;float_const&gt;</var> specifies the degree of fuzziness expressed as value
+          between 0.0 and 1.0, where 0.0 is very fuzzy, and 1.0 is exact. If
+           <var class="keyword varname">&lt;float_const&gt;</var> is not specified, 0.8 is the default. It is possible to
+          override this default by defining parameter FUZZINESSTHRESHOLD supported by columnstore
+          join views.</p>
+
+         <p class="p">When FUZZY is specified with more than one <var class="keyword varname">&lt;additional_params&gt;</var>
+          parameter, the number of <var class="keyword varname">&lt;float_const&gt;</var> /
+           <var class="keyword varname">&lt;additional_params&gt;</var> pairs must match the number of column names in the
+          column list.</p>
+
+        </dd>
+
+       
+       
+        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;additional_params&gt;</var></dt>
+
+        <dd class="dd">
+         <p class="p">Specifies additional search parameters in the format of key-value pairs.</p>
+
+        </dd>
+
+       
+       
+        <dt class="dt dlterm emphasis">WEIGHT</dt>
+
+        <dd class="dd">
+         <p class="p">Specifies weightings for the columns. If a weights list is specified, it must be the
+          same size as the number of (expanded) columns in <var class="keyword varname">&lt;contains_columns&gt;</var>.</p>
+
+        </dd>
+
+       
+       
+        <dt class="dt dlterm emphasis">LANGUAGE</dt>
+
+        <dd class="dd">
+         <p class="p">Specifies the language characteristics to apply when searching. LANGUAGE is used during
+          preprocessing of the search string and as a pre-search filter. Only documents which match
+          the search string and the language specified are returned.</p>
+
+        </dd>
+
+       
+       
+        <dt class="dt dlterm emphasis">LINGUISTIC</dt>
+
+        <dd class="dd">
+         <p class="p">Specifies to perform a linguistic search. A linguistic search finds all words that have
+          the same word stem as the search term. It also finds all words for which the search term
+          is the word stem. For example, searching for 'cats' also returns records that contain
+          'cat'. You can only perform linguistic searches on columns that contain text, and for
+          which the FAST_PREPROCESS parameter is specified as OFF.</p>
+
+        </dd>
+
+       
+      </dl>
+
+     </dd>
+
+    
+   </dl>
+
+  </div></div>
+
+  <div class="section"><div class="section_title">Remarks</div><div type="Remarks">
+   
+   <p class="p">The CONTAINS predicate only works on column store tables (simple tables and join views).</p>
+
+   <p class="p">If there are multiple CONTAINS predicates specified in the WHERE clause of a SELECT statement,
+    only one of the predicates can consist of more than one column in the
+     <var class="keyword varname">&lt;contains_columns&gt;</var> list.</p>
+
+   <p class="p">There are many more search parameters (as suggested previously by
+     <var class="keyword varname">&lt;additional_params&gt;</var>) and examples for full-text search using the CONTAINS
+    predicate found in the SAP HANA Search Developer Guide provided with the
+     SAP HANA Advanced Data Processing option. Be aware that you need additional
+    licenses for optional components such as the SAP HANA Advanced Data Processing
+    option.</p>
+
+  </div></div>
+
+  <div class="section"><div class="section_title">Examples</div><div type="Examples">
+   
+   <p class="p">The following example performs a fuzzy search for the term <kbd class="ph userinput">car</kbd>, and
+    returns the rows that match (<samp class="ph codeph">Blue baseball cap</samp>, and <samp class="ph codeph">Red car</samp>),
+    in descending order by score:</p>
+
+   <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE SCHEMA mySchema;
+CREATE COLUMN TABLE mySchema.SEARCH_TEXT( Content TEXT FAST PREPROCESS OFF, Descrip TEXT FAST PREPROCESS OFF, Comment TEXT FAST PREPROCESS OFF );  
+INSERT INTO mySchema.SEARCH_TEXT VALUES( 'Blue baseball cap', 'Vintage', 'Out of stock');  
+INSERT INTO mySchema.SEARCH_TEXT VALUES( 'Red car', 'Vintage', 'Taking orders' );  
+INSERT INTO mySchema.SEARCH_TEXT VALUES( 'Bluish sky', 'Retro', 'Discontinued' );
+
+SELECT SCORE() AS SCORE,*  
+   FROM mySchema.SEARCH_TEXT  
+   WHERE CONTAINS(CONTENT,'cap',FUZZY(0.0))  
+   ORDER BY SCORE DESC;</pre></div>
+
+   <div class="p">Changing SELECT statement to set the FUZZY parameter to <kbd class="ph userinput">0.9</kbd>, the
+    equivalent of making the query less fuzzy or more exact, returns only the <samp class="ph codeph">Blue baseball
+     cap</samp>
+    row:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT SCORE() AS SCORE,*  
+   FROM mySchema.SEARCH_TEXT  
+   WHERE CONTAINS(CONTENT,'cap',FUZZY(0.9))  
+   ORDER BY SCORE DESC</pre></div>
+</div>
+
+   <p class="p">Using the table created in the previous example, the following statement performs an exact
+    term search for either <kbd class="ph userinput">cap</kbd> or <kbd class="ph userinput">sky</kbd>, and returns the
+     <samp class="ph codeph">Blue baseball cap</samp> and <samp class="ph codeph">Bluish sky</samp> rows:</p>
+
+   <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM mySchema.SEARCH_TEXT WHERE CONTAINS(CONTENT,'cap OR sky');</pre></div>
+
+   <p class="p">The following statement performs an exact phrase search for either <kbd class="ph userinput">baseball
+     cap</kbd> and returns the <samp class="ph codeph">Blue baseball cap</samp> row:</p>
+
+   <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM mySchema.SEARCH_TEXT WHERE CONTAINS(CONTENT, '"baseball cap"');</pre></div>
+
+   <p class="p">The following statement shows a LINGUISTIC search. Searching for <kbd class="ph userinput">take</kbd>
+    returns the row that contains <samp class="ph codeph">Taking orders</samp> because 'take' is the stem word for
+    'taking' in English.</p>
+
+   <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM MySchema.SEARCH_TEXT WHERE CONTAINS (*, 'take', LINGUISTIC);</pre></div>
+
+   <p class="p">The following statements demonstrate ways to perform a freestyle search over multiple columns.
+    The second example is particularly helpful when you want to search across an entire table
+    without listing the rows.</p>
+
+   <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM mySchema.SEARCH_TEXT WHERE CONTAINS (( Content, Descrip ), 'vintage');
+SELECT * FROM mySchema.SEARCH_TEXT WHERE CONTAINS (*, 'vintage');</pre></div>
+
+  </div></div>
+
+ </div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="CONTAINS Predicate";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

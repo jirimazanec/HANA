@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Provides all statement executions that belong to a specified category."/>
+<meta name="description" content="Provides all statement executions that belong to a specified category."/>
+<meta name="keywords" content="M_EXECUTED_STATEMENTS"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=7821857668422894"/>
+<title>M_EXECUTED_STATEMENTS System View</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loiobb6efb92b5ba449986912af0785a7114";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loiobb6efb92b5ba449986912af0785a7114">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">M_EXECUTED_STATEMENTS System View</h1>
+<div class="body refbody"><p class="shortdesc">Provides all statement executions that belong to a specified category.</p>
+<div class="section"><div class="section_title">Structure</div><div type="Structure">
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loiobb6efb92b5ba449986912af0785a7114__table_stn_xc4_cw" class="table" frame="border" border="1" rules="all">
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" id="d29348039e31">
+								<p class="p">Column name</p>
+
+							</th>
+
+							<th class="entry" valign="top" id="d29348039e37">
+								<p class="p">Data type</p>
+
+							</th>
+
+							<th class="entry" valign="top" id="d29348039e43">
+								<p class="p">Unit</p>
+
+							</th>
+
+							<th class="entry" valign="top" id="d29348039e49">
+								<p class="p">Description</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">HOST</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">VARCHAR(64)</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The host name.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">PORT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">INTEGER</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The internal port.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">CONNECTION_ID</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">INTEGER</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The connection ID.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">TRANSACTION_ID</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">INTEGER</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The transaction object ID.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">UPDATE_TRANSACTION_ID</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The write transaction ID (this number is ever increasing).</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">STATEMENT_ID</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">VARCHAR(20)</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The statement ID.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">STATEMENT_HASH</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">VARCHAR(32)</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The unique identifier for an SQL string.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">DB_USER</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">NVARCHAR(256)</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The user name.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">SCHEMA_NAME</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">NVARCHAR(256)</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">Shows the name of the schema in whose context the statement is
+									executed.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">APP_USER</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">NVARCHAR(256)</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The application user name.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">START_TIME</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">TIMESTAMP</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The statement start time.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">DURATION_MICROSEC</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">Microsecond</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The statement duration.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">STATEMENT_STRING</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">NCLOB</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The statement string.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">ERROR_CODE</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">INTEGER</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The error code.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">ERROR_TEXT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">NVARCHAR(5000)</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The error message.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">PASSPORT_ROOT_CONTEXT_ID</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">VARCHAR(32)</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">GUID</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The SAP EPP Passport GUID that identifies the source of the
+									request.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">PASSPORT_TRANSACTION_ID</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">VARCHAR(32)</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">GUID</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The SAP EPP Passport GUID that identifies the business
+									transaction.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">PASSPORT_CONNECTION_ID</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">VARCHAR(32)</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">GUID</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The SAP EPP Passport GUID that identifies the connection.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">PASSPORT_CONNECTION_COUNTER</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">BIGINT</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The SAP EPP Passport connection counter.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">APPLICATION_SOURCE</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">NVARCHAR(256)</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The application that defines from which source file SAP HANA is called.
+									The usage is up to the application. This value is also displayed
+									in M_PREPARED_STATEMENTS.APPLICATION_SOURCE.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">APPLICATION_NAME</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">NVARCHAR(256)</p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p"/>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d29348039e31 d29348039e37 d29348039e43 d29348039e49 ">
+								<p class="p">The name of the application.</p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+			<p class="p">This view allows you to collect all of the executed statements from whichever category you
+				want to collect from. Only the DDL category is supported. The historization of DDL
+				statement executions investigates the root cause more easily when your <span class="ph pname">SAP
+					HANA</span> instance falls into the invalid metadata status. The collection
+				functionality is turned off by setting the enable_ddl parameter to OFF in the
+				[executed_statements] section of <span class="ph filepath">global.ini</span>.</p>
+
+			<p class="p">The collected history persists by generating the dedicated trace files (for example,
+					<span class="ph filepath">indexserver_selqnta3.32503.executed_statements.000.trc</span>).
+				You can adjust the consumed disk size for persisted trace files by configuring the
+				maxfiles and maxfilesize parameter, which represents the maximum number of files to
+				be generated (the default is 10) and represents the size limit of each trace file in
+				bytes (the default is 10MB) respectively, in the [executed_statements] section of
+					<span class="ph filepath">global.ini</span>.</p>
+
+			<p class="p">If the history for an executed statement is immediately persisted to the file whenever it is
+				collected, then it may degrade the performance, as the disk input/output is usually
+				more expensive (that is, it takes more times to flush) than memory input/output.
+				Therefore, each statistic is stored at the in-memory buffer instead of instant disk
+				input/output, and the buffer is flushed whenever N records are accumulated in the
+				buffer. Adjust the degree of the flush interval with the trace_flush_internal
+				parameter (the default is 10 records) in the [executed_statements] section of
+					<span class="ph filepath">global.ini</span> and turn OFF this feature by setting
+				use_in_memory_tracing to OFF in the same section.</p>
+
+			<div class="p">The following SQL commands are collected as DDL (Data Definition Language):<ul class="ul" id="loiobb6efb92b5ba449986912af0785a7114__ul_xxp_kyk_2v">
+					<li class="li">
+						<p class="p">All SQL statements starting with CREATE, DROP, ALTER, and RENAME. For
+							example, CREATE TABLE, CREATE USER and ALTER TABLE.</p>
+
+					</li>
+
+					<li class="li">All SQL statements starting with TRUNCATE, GRANT, REVOKE, LOAD, EXPORT,
+						IMPORT, and COMMENT.</li>
+
+					<li class="li">The SET SYSTEM LICENSE <var class="keyword varname">&lt;license_key&gt;</var> and UNSET SYSTEM
+						LICENSE ALL statements.</li>
+
+				</ul>
+</div>
+</div></div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="M_EXECUTED_STATEMENTS System View";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

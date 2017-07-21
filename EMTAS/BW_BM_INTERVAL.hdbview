@@ -1,0 +1,16 @@
+schema="OTEBW_EMTAS";
+
+query = "
+select 
+CONTRACTID,
+to_date(DDATE) as DDATE,
+IntervalIndx,
+SYSTEMTS,
+to_varchar(to_date(DDATE),'YYYYMM') as CALMONTH,
+to_varchar(to_date(DDATE),'YYYY') as CALYEAR
+from 
+BW_BM_INTERVAL
+
+";
+
+depends_on_table=["OTEBW_EMTAS::BW_BM_CONTRACT"];

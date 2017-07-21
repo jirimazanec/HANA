@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Current alerts of Statistics Sever"/>
+<meta name="description" content="Current alerts of Statistics Sever"/>
+<meta name="keywords" content="STATISTICS_CURRENT_ALERTS"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=11226148308831652"/>
+<title>STATISTICS_CURRENT_ALERTS System View (Embedded Statistics Service)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioceb98a03264d4efeb5c216ba4b370aba";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioceb98a03264d4efeb5c216ba4b370aba">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">STATISTICS_CURRENT_ALERTS System View (Embedded Statistics Service)</h1>
+
+	
+	
+	<div class="body refbody"><p class="shortdesc">Current alerts of Statistics Sever</p>
+
+		<div class="section" id="loioceb98a03264d4efeb5c216ba4b370aba__sys_statistics_service_1STATISTICS_CURRENT_ALERTS"><div class="section_title">Structure</div><div type="Structure">
+			
+			<div class="p">
+				
+<div class="table-wrapper tablenoborder"><table summary="" id="loioceb98a03264d4efeb5c216ba4b370aba__table_dpv_xkj_gr" class="table" frame="border" border="1" rules="all">
+						<thead class="thead" align="left">
+							<tr class="row">
+								<th class="entry" valign="top" id="d30406128e42">
+									<p class="p">Column name</p>
+
+								</th>
+
+								<th class="entry" valign="top" id="d30406128e48">
+									<p class="p">Data type</p>
+
+								</th>
+
+								<th class="entry" valign="top" id="d30406128e54">
+									<p class="p">Description </p>
+
+								</th>
+
+							</tr>
+
+						</thead>
+
+						<tbody class="tbody">
+							<tr class="row">
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">ALERT_ID</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">INTEGER</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">Alert ID </p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">INDEX</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">NVARCHAR(1024)</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">Dimension name of the array element that causes the alert
+									</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">SNAPSHOT_ID</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">TIMESTAMP</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">ID of the snapshot </p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">ALERT_DESCRIPTION</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">NVARCHAR(1024)</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">Description of the alert </p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">ALERT_DETAILS</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">NVARCHAR(1024)</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">Information on the alert </p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">ALERT_NAME</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">NVARCHAR(64)</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">Name of the Alert </p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">ALERT_RATING</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">TINYINT</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">Alert rating (1-5) </p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">ALERT_TIMESTAMP</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">TIMESTAMP</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">Timestamp of alert </p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">ALERT_USERACTION</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">NVARCHAR(1024)</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d30406128e42 d30406128e48 d30406128e54 ">
+									<p class="p">Hint to user on actions to take in response to the alert </p>
+
+								</td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+</div>
+
+			</div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="STATISTICS_CURRENT_ALERTS System View (Embedded Statistics Service)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,11 @@
+schema="OTEBW_EMTAS";
+
+query = "SELECT 
+MAP(FEECODE, 'IFF', 'PP6', 'IMF', 'PP5', 'FMD', 'PP3', 'OF', 'PP1', 'CF', 'PP2', 'AF', 'PP4', FEECODE) as FEECODE,
+to_date(DATEFROM) as DATEFROM,
+to_date(DATETO) as DATETO,
+FEEVALUE,
+SYSTEMTS,
+'CZK' as CURRENCY
+from BW_ZUCT_POPLATKY";
+

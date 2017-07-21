@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Performs a bitwise or bytewise comparison between two arguments and returns the hamming distance."/>
+<meta name="description" content="Performs a bitwise or bytewise comparison between two arguments and returns the hamming distance."/>
+<meta name="keywords" content="HAMMING_DISTANCE"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=9983811991275224"/>
+<title>HAMMING_DISTANCE Function (String)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loiod0878e31868b4f0392c71a299125148d";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loiod0878e31868b4f0392c71a299125148d">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">HAMMING_DISTANCE Function (String)</h1>
+
+	
+
+	
+
+	<div class="body refbody"><p class="shortdesc">Performs a bitwise or bytewise comparison between two arguments and returns the hamming
+		distance.</p>
+
+		<div class="section"><div class="section_title">Syntax</div><div type="Syntax">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">HAMMING_DISTANCE(<var class="keyword varname">&lt;lhs&gt;</var>, <var class="keyword varname">&lt;rhs&gt;</var>)</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+			
+			<dl class="dl parml">
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;lhs&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies a left hand side argument against which <var class="keyword varname">&lt;rhs&gt;</var> is compared.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;lhs&gt;</var> ::= <var class="keyword varname">&lt;string&gt;</var></pre></div>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;rhs&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies a right hand side argument to compare against <var class="keyword varname">&lt;lhs&gt;</var></p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;rhs&gt;</var> ::= <var class="keyword varname">&lt;string&gt;</var></pre></div>
+
+					</dd>
+
+				
+			</dl>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">Hamming distance describes differences between two specified arguments, and reflects the
+				number of corresponding positions that differ from each other across the two
+				arguments. Integer and binary arguments are compared bitwise, whereas string
+				arguments are compared byte-wise.</p>
+
+			<p class="p">The HAMMING_DISTANCE function returns -1 if the length of the two arguments is different, and
+				NULL if either of the arguments is NULL. </p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Examples</div><div type="Examples">
+			
+			<div class="sectiondiv">
+				<p class="p">The following example returns <samp class="ph systemoutput">-1</samp> because the
+					arguments are of different length: </p>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT HAMMING_DISTANCE('abc', 'ca') "hamming_distance" FROM DUMMY;</pre></div>
+
+				<p class="p">The following example returns <samp class="ph systemoutput">0</samp> because the
+					arguments are identical:</p>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT HAMMING_DISTANCE('abc', 'abc') "hamming_distance" FROM DUMMY;</pre></div>
+
+				<p class="p">The following example returns <samp class="ph systemoutput">0</samp> because the
+					arguments are identical: </p>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT HAMMING_DISTANCE(4, 4) "hamming_distance" FROM DUMMY;</pre></div>
+
+				<p class="p">The following example returns <samp class="ph systemoutput">3</samp> because all
+					positions in the two arguments are different from the other string:</p>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT HAMMING_DISTANCE('abc', 'cab') "hamming_distance" FROM DUMMY;</pre></div>
+
+				<p class="p">The following example returns <samp class="ph systemoutput">4</samp> to reflect the
+					bitwise comparison of the arguments:</p>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT HAMMING_DISTANCE(TO_BINARY('abc'), TO_BINARY('cab')) "hamming_distance" FROM DUMMY;</pre></div>
+
+				<p class="p">The following example returns <samp class="ph systemoutput">3</samp> to reflect the
+					bitwise comparison of the arguments:</p>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT HAMMING_DISTANCE(4, 9) "hamming_distance" FROM DUMMY;</pre></div>
+
+				<p class="p">The following example returns <samp class="ph systemoutput">-1</samp> because the binary
+					arguments are of different length:</p>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT HAMMING_DISTANCE(to_binary('abc'), to_binary('ca')) "hamming_distance" FROM DUMMY;</pre></div>
+
+			</div>
+		</div></div>
+
+
+	</div>
+
+<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?a33f7884b0c14c00b1a76ecd8af5feca.html" target="_top" title="Character string data types are used to store values that contain character strings. VARCHAR data types contain 7-bit ASCII character strings, and NVARCHAR are used for storing Unicode character strings.">Character String Data Types</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="HAMMING_DISTANCE Function (String)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

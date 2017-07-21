@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Namespace: xsds</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Namespace: xsds</h1>
+    
+    
+
+
+
+<section>
+    
+<header>
+    <h2>
+    xsds
+    </h2>
+    
+</header>  
+
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+            <div class="description">XS Data Services (XSDS) enable the seamless consumption of HANA database artifacts in XS-basedapplications.  The XSDS API provides a high-level abstraction of the database API ($.db, $.hdb)and gives access to HANA artifacts such as CDS entities or stored procedures.</div>
+        
+        
+        
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds.xsjslib, line 26
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+        
+        
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Classes</h3>
+        
+        <dl>
+            <dt><a href="sap.hana.xs.libs.dbutils.xsds.Entity.html">Entity</a></dt>
+            <dd></dd>
+        
+            <dt><a href="sap.hana.xs.libs.dbutils.xsds.Expr.html">Expr</a></dt>
+            <dd></dd>
+        
+            <dt><a href="sap.hana.xs.libs.dbutils.xsds.Query.html">Query</a></dt>
+            <dd></dd>
+        
+            <dt><a href="sap.hana.xs.libs.dbutils.xsds.Rename.html">Rename</a></dt>
+            <dd></dd>
+        
+            <dt><a href="sap.hana.xs.libs.dbutils.xsds.Transaction.html">Transaction</a></dt>
+            <dd></dd>
+        </dl>
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <h4 class="name" id="$defineEntity"><span class="type-signature">&lt;static> </span>$defineEntity<span class="signature">(entityName, tableName, <span class="optional">fields</span>, <span class="optional">options</span>)</span><span class="type-signature"> &rarr; {<a href="sap.hana.xs.libs.dbutils.xsds.Entity.html">sap.hana.xs.libs.dbutils.xsds.Entity</a>}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Defines new entity based on a plain HANA table.<p>Returns the constructor for new entity instances.  For details on thefield mapping, see {sap.hana.xs.libs.dbutils.xsds.$importEntity}.</p><b>Many-to-many associations</b><p>Defining many-to-many associations with $defineEntity differs slightlyfrom $importEntity in that links between source and target instances arerepresented by table records instead of entities.  The associationspecification thus looks like:</p><pre><code><i>field</i>: {  $association: {    $entity: <i>entity</i>,    $viaTable: <i>table</i>,    $source: { <i>foreign-key-spec</i> },    $target: { <i>foreign-key-spec</i> }  }}</code></pre><p><i>foreign-key-spec</i> defines the foreign key relationship between thelinking table and the source and target tables, respectively.  Please refer tothe section on one-to-one associations insap.hana.xs.libs.dbutils.xsds.$importEntity) for details.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>entityName</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">Name of the entity to define.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>tableName</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">Fully qualified name of table to import, including schema.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>fields</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">Field mapping overrides for column names, keys, and associations.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">The definition options.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>$ignoreColumns</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string[]</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">List of table columns not to import (deprecated).</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>$renameColumns</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">A function to map column to field names.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>$unmanaged</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">Import entity, but do not manage entity instances.</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds.xsjslib, line 781
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    A constructor for the new entity instance.
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type"><a href="sap.hana.xs.libs.dbutils.xsds.Entity.html">sap.hana.xs.libs.dbutils.xsds.Entity</a></span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>var Address = XSDS.$defineEntity("EPM.Address", "\"SAP_HANA_DEMO\"." +                "\"sap.hana.democontent.epm.data::EPM.MasterData.BusinessPartner\"", {    address: {        $association: {            $entity: "\"SAP_HANA_DEMO\".\"sap.hana.democontent.epm.data::EPM.MasterData.Addresses\"",        },        addressid: {            $column: "ADDRESSID"        }    }}, { $renameColumns: XSDS.Rename.$lowercase });</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="$getEntity"><span class="type-signature">&lt;static> </span>$getEntity<span class="signature">(name)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Retrieves constructor function of previously defined entity.<p>Entities must be imported exactly once.  Attempting to re-import anentity (using the same entity name) throws an exception in order to avoidconflicting imports.  The $getEntity function is used to refer to an entityimport from an external file.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The name of the entity.</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds.xsjslib, line 1910
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    Entity constructor or null if there is no entity with given name.
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">object</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>// file sample_base.xsjslibvar MyEntity = $importEntity("namespace", "entity");// file sample_util.xsjslibvar base = $.import("./sample_base.xsjslib");var MyEntity = XSDS.$getEntity("namespace::entity");</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="$importEntity"><span class="type-signature">&lt;static> </span>$importEntity<span class="signature">(cdsNamespace, cdsName, <span class="optional">fields</span>, <span class="optional">options</span>)</span><span class="type-signature"> &rarr; {<a href="sap.hana.xs.libs.dbutils.xsds.Entity.html">sap.hana.xs.libs.dbutils.xsds.Entity</a>}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Imports a CDS entity as XSDS entity.Returns constructor function creating new entity instances and manipulatingexisting instances.<h6>Field Mapping</h6><p>Imports may change field properties or add additional fields.  This feature isused to override key definitions and to define additional associations not explicitlyexpressed by the data model.</p><p>$key (boolean or string): set or unset key property for field.If set to the name of a HANA sequence then that sequence is used togenerate new key values for new entity instances.  Optional.</p><p>$init (value or function): initial value for new instances.Value to assign to fields in newly created instances.  If $init is a function,the function is passed the instance object being built, after all non-functional$init values have been assigned.  May also be used for key fields, analoguous to$key.  Optional.</p><p>$lazy (boolean): true if the associated entity or entities should be retrievedlazily.  Optional.  Defaults to false.</p><p>$cascadeDiscard (boolean): true if discarding the parent entity should alsodiscard the associated entity or entities.  Optional.  Defaults to false.</p><h6>Associations</h6><p>XSDS supports one-to-one associations by foreign key, one-to-many associationsby backlinks, many-to-many associations by entities, and unmanaged associations.Existing CDS associations are imported automatically, but additional associationsmay be added during import.</p><b>One-to-one associations (foreign key)</b><p>A one-to-one association associates a (potentially optional) target entity instancewith the source target instance.</p><pre><code><i>field</i>: {  $association: { $entity: <i>entity</i> },  key1: { $column: <i>column1</i>, [ $none: <i>value1</i> ] },  key2: { $column: <i>column2</i>, [ $none: <i>value2</i> ] }, ...}</code></pre><p><i>entity</i> refers to the associated entity type and may be theconstructor function or the name of the entity.</p><p><i>keyX</i> are the names of the fields of the target entity, and<i>columnX</i> are the names of the columns of the source entity.  The foreignkey does not have to match the primary key of the target entity.</p><p>An optional $none value specifies a dedicated value that denotes thatno instance is currently associated with the parent instance.  For CDS entities,$none defaults to <tt>undefined</tt>.</p><b>One-to-many association (backlinks)</b><p>A one-to-many association associates an arbitrary number of instances ofthe target entity to the source entity instance.  The associated instancesare stored in an array-like object in the source instance.  Each targetcannot be assigned to more than one instance.</p><pre><code><i>field</i>: {  $association: {    $entity: <i>entity</i>,    $viaBacklink: <i>field</i>  }}</code></pre><p><i>entity</i> refers to the associated entity type and may be theconstructor function or the name of the entity.</p><b>Many-to-many association (entities)</b><p>A many-to-many association associates an arbitrary number of instances ofthe target entity to the source entity instance.  The associated instancesare stored in an array-like object in the source instance.  Each targetmay have an arbitrary number of sources.  The actual links are stored inan external entity that has two one-to-one associations that will linksource and target instances.</p><pre><code><i>field</i>: {  $association: {    $entity: <i>entity</i>,    $viaEntity: <i>entity</i>,    $source: <i>field</i>,    $target: <i>field</i>  }}</code></pre><p><i>entity</i> refers to the associated entity and the linking entity, respectively,and may be the constructor functions or the names of the entities.$source and $target specify the field names of the associations in the linking entitythat denote the source and the target entities of the link, respectively.</p><b>Unmanaged association (JOIN condition)</b><p>Unmanaged associations define their JOIN condition directly.  Associated instancesare stored in a read-only array-like object that bypasses the XSDS entity cache.</p><pre><code><i>field</i>: {  $association: {    $entity: <i>entity</i>,    $on: <i>join-cond</i>  }}</code></pre><p><i>join-cond</i> is a string that defines the SQL ON-condition when joining sourceand target entity tables.  Individual path components must be fully quoted, e.g.,<tt>$SOURCE."x"."y"."z"</tt>.  The special variable <tt>$SOURCE</tt> refers tothe source entity.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>cdsNamespace</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">The context of the CDS entity to import.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>cdsName</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">The name of the CDS entity to import.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>fields</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">Additional field mappings, e.g., for associations.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">The import options.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>$entityName</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">Overrides the default entity name.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>$schemaName</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">Sets the schema name.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>$tableName</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">Forces an alternative table name.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>$ignoreFields</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string[]</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">A list of entity fields not to import (deprecated).</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>$renameFields</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">A function to map column names to field names.</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds.xsjslib, line 972
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    A constructor for the new entity instance.
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type"><a href="sap.hana.xs.libs.dbutils.xsds.Entity.html">sap.hana.xs.libs.dbutils.xsds.Entity</a></span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+        <h5>Examples</h5>
+        
+    <pre class="prettyprint"><code>// import CDS entityvar SoHeader = XSDS.$importEntity("sap.hana.democontent.epm.data", "EPM.SO.Header");</code></pre>
+
+    <pre class="prettyprint"><code>// override key settings on importvar SoHeader = XSDS.$importEntity("sap.hana.democontent.epm.data", "EPM.SO.Header", {  SALESORDERID: { $key: false }, HISTORY: { $key: true }});</code></pre>
+
+    <pre class="prettyprint"><code>// initialize fields automaticallyvar SoHeader = XSDS.$importEntity("sap.hana.democontent.epm.data", "EPM.SO.Header", {  LIFECYCLESTATUS: { $init: "A" }}); </code></pre>
+
+    <pre class="prettyprint"><code>// add one-to-many association with backlinksvar SoHeader = XSDS.$importEntity("sap.hana.democontent.epm.data", "EPM.SO.Header", {  items: {    $association: {      $entity: "sap.hana.democontent.epm.data::EPM.SO.Item",      $viaBacklink: "SALESORDERITEM"    }  }});</code></pre>
+
+    <pre class="prettyprint"><code>// unmanaged associationvar MyOrder = XSDS.$importEntity("sap.hana.democontent.epm.data", "EPM.SO.Header", {  mainItems: {    $association: {      $entity: "sap.hana.democontent.epm.data::EPM.SO.Item",      $on: "$SOURCE.\"mainItems\".\"NETAMOUNT\" >= $SOURCE.\"NETAMOUNT\" / 3"    }  }});</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="generateEntity"><span class="type-signature">&lt;static> </span>generateEntity<span class="signature">(cdsNamespace, cdsName, <span class="optional">fields</span>, <span class="optional">options</span>)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Generate XSJS code for CDS entity as XSDS entity.Returns constructor for new entity instances.  If $autoImport is set to false(default), then the generated entity will not automatically load associatedentities.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>cdsNamespace</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">context of CDS entity</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>cdsName</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">name of CDS entity</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>fields</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">additional field mappings, e.g., for associations</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">passed to importEntity, plus:        - $root: <string> name of top level identifier of constructor        - $autoImport: <boolean> automatically</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        xsds_gen.xsjslib, line 47
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+</article>
+
+</section>  
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="sap.hana.xs.libs.dbutils.xsds.Entity.html">Entity</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.Expr.html">Expr</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.Query.html">Query</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.Rename.html">Rename</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.Transaction.html">Transaction</a></li></ul><h3>Namespaces</h3><ul><li><a href="sap.hana.xs.libs.dbutils.procedures.html"><span class="oblique">sap.hana.xs.libs.dbutils.</span>procedures</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.html"><span class="oblique">sap.hana.xs.libs.dbutils.</span>xsds</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    <a href="Copyright-SAP.html">Copyright</a>
+    &
+    <a href="Disclaimer-SAP.html">Disclaimer</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

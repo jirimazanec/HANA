@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Application lifecycle management for SAP HANA XS advanced model provides functions for uninstalling products as well as individual software components of SAP HANA XS advanced."/>
+<meta name="description" content="Application lifecycle management for SAP HANA XS advanced model provides functions for uninstalling products as well as individual software components of SAP HANA XS advanced."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=18303700152065516"/>
+<title>Uninstall Products and Software Components in SAP HANA XS Advanced Model</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio00cb2571b408405091a670bffcdafdae";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio00cb2571b408405091a670bffcdafdae">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Uninstall Products and Software Components in SAP HANA XS Advanced Model</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">Application lifecycle management for <span class="ph pname">SAP HANA</span> XS advanced model provides
+		functions for uninstalling products as well as individual software components of <span class="ph pname">SAP
+			HANA</span> XS advanced.</p>
+
+		<div class="section prereq p"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Prerequisites</h2></div>
+			<ul class="ul" id="loio00cb2571b408405091a670bffcdafdae__ul_onq_blf_mw">
+				<li class="li">
+					<p class="p">The prerequisites described under <cite class="cite">Prerequisites and
+							Authorizations</cite> are fulfilled. The link to the topic is in the
+							<cite class="cite">Related Information</cite>.</p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">You have a product or software component of <span class="ph pname">SAP HANA</span> XS
+						advanced that you want to remove.</p>
+
+				</li>
+
+			</ul>
+
+		</div>
+
+		<div class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<p class="p">You can uninstall products and software components of <span class="ph pname">SAP HANA</span> XS advanced that
+				were installed using the <span class="keyword cmdname">xs install</span> command.</p>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+				<span class="ph cmd">Start the XS advanced command-line interface (CLI).</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Log on to the <span class="ph pname">SAP HANA</span> XS advanced runtime in the organization
+					and space where you want to uninstall an installed product or software
+					component.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Optional: Display the product or software component using the <span class="keyword cmdname">xs
+						list-products</span> or <span class="keyword cmdname">xs list-components</span>
+					command.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Start the uninstallation of the product or software component.</span>
+				<div class="itemgroup info">
+					<p class="p">Enter the <span class="keyword cmdname">xs uninstall</span> command and specify the name of the product or
+						software component to be uninstalled, as well as the vendor, if required. In
+						addition, you can enter options as required. The following is the default
+						syntax for the <span class="keyword cmdname">xs uninstall</span> command in the XS advanced
+						CLI: </p>
+
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><span class="ph cmdtext">xs uninstall <var class="keyword varname">&lt;NAME&gt;</var> [<var class="keyword varname">&lt;VENDOR&gt;</var>] [-pv | --PRODUCT_VERSION] [-scv | --SOFTWARE_COMPONENT_VERSION] [-f] [--ignore-scv-reuse] [--delete-services] [--delete-service-brokers]  [--ignore-lock]</span></pre></div>
+
+					<p class="p"> The following arguments are available:</p>
+
+					
+<div class="table-wrapper tablenoborder"><table summary="" id="loio00cb2571b408405091a670bffcdafdae__table_inh_y5k_tw" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: Uninstallation Arguments</span></caption>
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+							
+							
+							<thead class="thead" align="left">
+								<tr class="row">
+									<th class="entry" valign="top" width="50%" id="d66e134">
+										<p class="p">Uninstallation Argument</p>
+
+									</th>
+
+									<th class="entry" valign="top" width="50%" id="d66e140">
+										<p class="p">Description</p>
+
+									</th>
+
+								</tr>
+
+							</thead>
+
+							<tbody class="tbody">
+								<tr class="row">
+									<td class="entry" valign="top" width="50%" headers="d66e134 ">
+										<p class="p"><var class="keyword varname">&lt;NAME&gt;</var></p>
+
+									</td>
+
+									<td class="entry" valign="top" width="50%" headers="d66e140 ">
+										<p class="p">The name of an installed product version (PV) or software component version (SCV)</p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" width="50%" headers="d66e134 ">
+										<p class="p">[<var class="keyword varname">&lt;VENDOR&gt;</var>]</p>
+
+									</td>
+
+									<td class="entry" valign="top" width="50%" headers="d66e140 ">
+										<p class="p">The name of the vendor of the specified product or
+											software component version;
+												<span class="ph emphasis emphasis">optional</span>: only needed when the
+											same product or software component name exists with
+											different vendors</p>
+
+									</td>
+
+								</tr>
+
+							</tbody>
+
+						</table>
+</div>
+
+					<p class="p"> The following options are available:</p>
+
+					
+<div class="table-wrapper tablenoborder"><table summary="" id="loio00cb2571b408405091a670bffcdafdae__table_vzg_qrk_tw" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 2: Uninstallation Options</span></caption>
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+							
+							
+							<thead class="thead" align="left">
+								<tr class="row">
+									<th class="entry" valign="top" width="50%" id="d66e209">
+										<p class="p">Uninstallation Option</p>
+
+									</th>
+
+									<th class="entry" valign="top" width="50%" id="d66e215">
+										<p class="p">Description</p>
+
+									</th>
+
+								</tr>
+
+							</thead>
+
+							<tbody class="tbody">
+								<tr class="row">
+									<td class="entry" valign="top" width="50%" headers="d66e209 ">
+										<p class="p"><span class="ph cmdtext"><span class="keyword option">-pv</span> |
+												<span class="keyword option">--PRODUCT_VERSION</span></span></p>
+
+									</td>
+
+									<td class="entry" valign="top" width="50%" headers="d66e215 ">
+										<p class="p">Remove the specified product. </p>
+
+										<p class="p">To make sure that the entity you are about to uninstall
+											is a product, you can add the <samp class="ph codeph">-pv</samp>
+											option. In this case, the uninstallation is only
+											performed if you specify a product name as
+												<var class="keyword varname">&lt;NAME&gt;</var>. If you specify a software
+											component name, the uninstallation will fail.</p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" width="50%" headers="d66e209 ">
+										<p class="p"><span class="ph cmdtext"><span class="keyword option">-scv</span> |
+												<span class="keyword option">--SOFTWARE_COMPONENT_VERSION</span></span></p>
+
+									</td>
+
+									<td class="entry" valign="top" width="50%" headers="d66e215 ">
+										<p class="p">Remove the specified software component.</p>
+
+										<p class="p">To make sure that the entity you are about to uninstall
+											is a software component, you can add the
+												<samp class="ph codeph">-scv</samp> option. In this case, the
+											uninstallation is only performed if you specify a
+											software component name as <var class="keyword varname">&lt;NAME&gt;</var>. If
+											you specify a product name, the uninstallation will
+											fail.</p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" width="50%" headers="d66e209 ">
+										<p class="p"><span class="ph cmdtext"><span class="keyword option">--ignore-scv-reuse</span></span></p>
+
+									</td>
+
+									<td class="entry" valign="top" width="50%" headers="d66e215 ">
+										<p class="p">Remove the specified software component even if it is
+											used in other installed products.</p>
+
+										<div class="note note"><span class="notetitle">Note</span> You can use this option for uninstalling software
+											components only.</div>
+
+										<p class="p">By default, a software component will not be uninstalled if it is also part of another
+											installed product. You can override this behavior by
+											using the <samp class="ph codeph">--ignore-scv-reuse</samp>
+											option.</p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" width="50%" headers="d66e209 ">
+										<p class="p"><span class="ph cmdtext"><span class="keyword option">-f</span></span></p>
+
+									</td>
+
+									<td class="entry" valign="top" width="50%" headers="d66e215 ">
+										<p class="p">Remove the specified product or software component
+											without any system prompts or confirmation</p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" width="50%" headers="d66e209 ">
+										<p class="p"><span class="ph cmdtext"><span class="keyword option">-i</span>,
+												<span class="keyword option">--INSTANCES</span>
+												<var class="keyword varname">&lt;INSTANCE_1&gt;</var>[,<var class="keyword varname">&lt;INSTANCE_2&gt;</var>]</span></p>
+
+									</td>
+
+									<td class="entry" valign="top" width="50%" headers="d66e215 ">
+										<p class="p">By default all instances are uninstalled; a
+											comma-separated list of instances can be specified to
+											limit the number of instances to be uninstalled</p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" width="50%" headers="d66e209 ">
+										<p class="p"><span class="ph cmdtext"><span class="keyword option">--delete-services</span></span></p>
+
+									</td>
+
+									<td class="entry" valign="top" width="50%" headers="d66e215 ">
+										<p class="p">Recreate changed services and/or delete discontinued
+											services </p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" width="50%" headers="d66e209 ">
+										<p class="p"><span class="ph cmdtext"><span class="keyword option">--delete-service-brokers</span></span></p>
+
+									</td>
+
+									<td class="entry" valign="top" width="50%" headers="d66e215 ">
+										<p class="p">Delete discontinued service brokers </p>
+
+									</td>
+
+								</tr>
+
+								<tr class="row">
+									<td class="entry" valign="top" width="50%" headers="d66e209 ">
+										<p class="p"><span class="ph cmdtext"><span class="keyword option">--ignore-lock</span></span></p>
+
+									</td>
+
+									<td class="entry" valign="top" width="50%" headers="d66e215 ">
+										<p class="p">Force removal of the product or software component even
+											if the target space is locked</p>
+
+									</td>
+
+								</tr>
+
+							</tbody>
+
+						</table>
+</div>
+
+				</div>
+				<div class="itemgroup info">
+					<div class="p">
+						<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+							<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><span class="ph cmdtext">xs uninstall 'XSA SAMPLE PRODUCT' -pv</span></pre></div>
+
+						</div>
+
+					</div>
+
+				</div>
+				<div class="itemgroup info">
+					<p class="p">Instead of <samp class="ph codeph">xs uninstall</samp> you can also use the <samp class="ph codeph">xs unins</samp>
+						alias. For more information on the <span class="keyword cmdname">xs uninstall</span> command,
+						use the <span class="keyword cmdname">xs help uninstall</span> command.</p>
+
+				</div>
+			</li>
+</ol>
+
+		<div class="section result"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Results</h2></div>
+			<p class="p">The system undeploys and unregisters the specified product or software component from the
+					<span class="ph pname">SAP HANA</span> server in the organization and space to which you are
+				logged on. </p>
+
+			<p class="p">If errors occur during the uninstallation, an error message indicates the reason for the error
+				and the system provides a log with more detailed information. If you cannot solve
+				the problem and you need to open a customer message, ensure that you assign it to
+				the message component of the <span class="ph pname">SAP HANA</span> product or software component
+				that caused the error. Do <span class="ph emphasis emphasis">not</span> assign the message to the
+				component of <span class="ph pname">SAP HANA</span> application lifecycle management since this may
+				slow down the problem solving process. </p>
+
+			<p class="p">To display the correct log file, use the <span class="keyword cmdname">xs display-installation-logs</span>
+				command with the log ID that you find in the result of the uninstallation process
+				and one of the <samp class="ph codeph">--unins_scv</samp> or <samp class="ph codeph">--unins_pv</samp>
+				options.</p>
+
+			<div class="p">
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">xs display-installation-logs &lt;log ID&gt; --unins_scv</pre></div>
+
+			</div>
+
+		</div>
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?6b81dfe452864bfdb2d5ff375dbb92fe.html" target="_top" title="The following prerequisites have to be fulfilled when you use functions required for installing and updating SAP HANA products and software components in SAP HANA XS advanced model.">Prerequisites and Authorizations</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Uninstall Products and Software Components in SAP HANA XS Advanced Model";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="SQL based analytic privileges provides you the flexibility to create analytic privileges within the familiar SQL environment. You can create and apply SQL analytic privileges for a selected group of models or apply them to all models across packages."/>
+<meta name="description" content="SQL based analytic privileges provides you the flexibility to create analytic privileges within the familiar SQL environment. You can create and apply SQL analytic privileges for a selected group of models or apply them to all models across packages."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=6355015928190569"/>
+<title>Create SQL Analytic Privileges</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioac708f67889b4693ac2209465aab8e2b";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioac708f67889b4693ac2209465aab8e2b">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Create SQL Analytic Privileges</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">SQL based analytic privileges provides you the flexibility to create analytic
+		privileges within the familiar SQL environment. You can create and apply SQL analytic
+		privileges for a selected group of models or apply them to all models across
+		packages.</p>
+
+		<div class="section prereq p"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Prerequisites</h2></div>
+			<div class="p">If you want to use a SQL analytic privilege to apply data access restrictions on
+				information views, set the <span class="ph uicontrol">Apply Privileges</span> property for the
+				information view to <span class="ph uicontrol">SQL Analytic Privileges</span>.<ol class="ol" id="loioac708f67889b4693ac2209465aab8e2b__ol_uzw_vd3_cs">
+					<li class="li">Open the information view in the view editor. </li>
+
+					<li class="li">Select the <span class="ph uicontrol">Semantics</span> node.</li>
+
+					<li class="li">Choose the <span class="ph uicontrol">View Properties</span> tab.</li>
+
+					<li class="li">In the <span class="ph uicontrol">Apply Privileges</span> dropdown list, select
+							<span class="ph uicontrol">SQL Analytic Privileges</span>.</li>
+
+				</ol>
+</div>
+
+		</div>
+
+		<div class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<p class="p">SAP HANA modeler support types SQL analytic privileges, the static SQL analytic
+				privileges with predefined static filter conditions, and dynamic SQL analytic
+				privileges with filter conditions determined dynamically at runtime using a database
+				procedure.</p>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps" id="loioac708f67889b4693ac2209465aab8e2b__steps_znm_m5s_sv"><li class="li step stepexpand">
+				<span class="ph cmd">Open the SAP HANA Web-based Development Workbench Editor.</span>
+				<div class="itemgroup info">The Web-based Editor tool is available on the <span class="ph pname">SAP HANA</span> XS Web
+					server at the following URL:
+							<span class="ph filepath">http://<var class="keyword varname">&lt;WebServerHost&gt;</var>:80<var class="keyword varname">&lt;SAPHANAinstance&gt;</var>/sap/hana/ide/editor</span>.</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">In the navigator pane, select a package where you want to create the new
+					analytic privilege.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">In the context menu of the package, select <span class="ph menucascade"><img src="images/navstart.gif" alt="Start of the navigation path" title="Start of the navigation path"/> <span class="ph uicontrol">New</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">Analytic Privilege</span> <img src="images/navend.gif" alt="End of the navigation path" title="End of the navigation path"/></span>.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Provide a name and description.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">In the <span class="ph uicontrol">Type</span> dropdown list, select
+						<span class="ph uicontrol">SQL</span>.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Choose <span class="ph uicontrol">Create</span>.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">In the header region, select <span class="ph uicontrol">SQL Editor</span>.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Select information models.</span>
+				<div class="itemgroup info">
+					<p class="p">If you want to create an analytic privilege and apply the data access
+						restrictions for selected list of models, in the <span class="ph uicontrol">Secured
+							Models</span> section,</p>
+
+				</div>
+				<ol type="a" class="ol substeps" id="loioac708f67889b4693ac2209465aab8e2b__substeps_g1x_xw3_cs">
+					<li class="li substep">
+						<span class="ph cmd">Choose <span class="ph uicontrol">Add</span>.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">In the <span class="ph uicontrol">Find Data Sources</span> dialog, select the
+							models for which you want apply the analytic privilege
+							restrictions.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">Choose <span class="ph uicontrol">OK</span>.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Defining static SQL analytic privileges.</span>
+				<div class="itemgroup info">
+					<p class="p">If you want to define static SQL analytic privileges, then</p>
+
+				</div>
+				<ol type="a" class="ol substeps" id="loioac708f67889b4693ac2209465aab8e2b__substeps_e1v_wx3_cs">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the SQL editor, provide the attribute restrictions and its
+							validity.</span>
+						<div class="itemgroup info">For example,
+							<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">(("REGION" = 'EAST') OR ("REGION" = 'NORTH')) AND (("CUSTOMER_ID" = 'SAP')) AND ((CURRENT_DATE BETWEEN 2015-05-15 00:00:00.000 AND 2015-05-15 23:59:59.999))</pre></div>
+</div>
+						<div class="itemgroup info">
+							<div class="note note"><span class="notetitle">Note</span> 
+								<p class="p">You can also use hierarchy nodes in SQL analytic privilege
+									definitions. For example, "SalesRepHierarchyNode" =
+									"MAJESTIX".</p>
+
+							</div>
+
+						</div>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Defining dynamic SQL analytic privileges.</span>
+				<div class="itemgroup info">Dynamic SQL analytic privileges determine the filter condition string at
+					runtime. If you want to define dynamic SQL analytic privileges,</div>
+				<ol type="a" class="ol substeps" id="loioac708f67889b4693ac2209465aab8e2b__substeps_x5d_4y3_cs">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the SQL editor, specify the procedure within the CONDITION PROVIDER
+							clause.</span>
+						<div class="itemgroup info">
+							<p class="p">For example, CONDITION PROVIDER schema_name.procedure_name.</p>
+
+						</div>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Activate analytic privileges.</span>
+				<ol type="a" class="ol substeps" id="loioac708f67889b4693ac2209465aab8e2b__substeps_tb4_w43_cs">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">If you want to activate the analytic privilege, in the menu bar, choose
+								<span class="ph uicontrol">Save</span>.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">If you want to activate the analytic privilege along with all objects,
+							in the menu bar, choose <span class="ph uicontrol">Save All</span>.</span>
+						<div class="itemgroup info">
+							<div class="note note"><span class="notetitle">Note</span> 
+								<p class="p">Activate the analytic privilege only if you have defined at least
+									one restriction on attributes in the <span class="ph uicontrol"> Associated
+										Attributes Restrictions</span> section.</p>
+
+							</div>
+
+						</div>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Assign privileges to a user.</span>
+				<div class="itemgroup info">
+					<p class="p">If you want to assign privileges to an authorization role, execute the
+						following steps: </p>
+
+				</div>
+				<ol type="a" class="ol substeps" id="loioac708f67889b4693ac2209465aab8e2b__substeps_s33_sp3_cs">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the menu bar, choose <img class="image" id="loioac708f67889b4693ac2209465aab8e2b__image_e41_hzt_fs" src="loio2418d28cceb34fc090ea9c21c8d41664_LowRes.png"/>.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Select the <span class="ph uicontrol">Security</span> menu option.</span>
+						<div class="itemgroup info">
+							<p class="p">This opens a new tab in the browser where you can assign the analytic
+								privileges to users.</p>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Expand <span class="ph uicontrol">Users</span>.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Select a user.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the <span class="ph uicontrol">Analytic Privileges</span> tab page, choose the
+							add icon to add the privilege.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the editor toolbar, choose <span class="ph uicontrol">Activate</span>.</span>
+					</li>
+
+				</ol>
+
+				<div class="itemgroup info">
+					<div class="note note"><span class="notetitle">Note</span> 
+						<p class="p">For SQL analytic privileges, you can also define the attribute
+							restrictions and dynamic restrictions without using the SQL editors. If
+							you want to define attribute restrictions, select the
+								<span class="ph uicontrol">Attributes</span> radio button and define the
+							attribute restrictions. Similarly, if you want to define dynamic
+							analytic privileges, select the <span class="ph uicontrol">Dynamic</span> radio
+							button and use a repository procedure or a catalog procedure, which
+							dynamically determines the restrictions on information models.</p>
+
+					</div>
+
+				</div>
+			</li>
+</ol>
+
+	</div>
+
+<div class="related-links"> 
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Create SQL Analytic Privileges";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

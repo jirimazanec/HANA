@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content=""/>
+<meta name="description" content=""/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=6103564547000498"/>
+<title>Referencing Variables</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio605b30ed9df54f1bafb7402a4f3b77b8";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio605b30ed9df54f1bafb7402a4f3b77b8">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Referencing Variables</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc"/>
+
+		<p class="p">Bound variables are referenced by their name (for example, <var class="keyword varname">&lt;var&gt;</var>). In the
+			variable reference the variable name is prefixed by <var class="keyword varname">&lt;:&gt;</var> such as
+				<var class="keyword varname">&lt;:var&gt;</var>. The procedure or table function describe a dataflow graph
+			using their statements and the variables that connect the statements. The order in which
+			statements are written in a body can be different from the order in which statements are
+			evaluated. In case a table variable is bound multiple times, the order of these bindings
+			is consistent with the order they appear in the body. Additionally, statements are only
+			evaluated if the variables that are bound by the statement are consumed by another
+			subsequent statement. Consequently, statements whose results are not consumed are
+			removed during optimization.</p>
+
+		<p class="p"><strong class="ph b">Example:</strong></p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">lt_expensive_books = SELECT title, price, crcy FROM :it_books
+                     WHERE price &gt; :minPrice AND crcy = :currency;
+</pre></div>
+
+		<p class="p">In this assignment, the variable <var class="keyword varname">&lt;lt_expensive_books&gt;</var> is bound. The
+				<var class="keyword varname">&lt;:it_books&gt;</var> variable in the <samp class="ph codeph">FROM</samp> clause refers to
+			an <samp class="ph codeph">IN</samp> parameter of a table type. It would also be possible to consume
+			variables of type table in the <samp class="ph codeph">FROM</samp> clause which were bound by an
+			earlier statement. <var class="keyword varname">&lt;:minPrice&gt;</var> and <var class="keyword varname">&lt;:currency&gt;</var> refer
+			to <samp class="ph codeph">IN</samp> parameters of a scalar type.</p>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Referencing Variables";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

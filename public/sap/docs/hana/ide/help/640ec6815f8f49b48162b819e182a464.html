@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="HDBTable is a language syntax that can be used to define a design-time representation of the artifacts that comprise the persistent data models in SAP HANA."/>
+<meta name="description" content="HDBTable is a language syntax that can be used to define a design-time representation of the artifacts that comprise the persistent data models in SAP HANA."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=4775987895151492"/>
+<title>Creating the Persistence Model with HDBTable</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio640ec6815f8f49b48162b819e182a464";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio640ec6815f8f49b48162b819e182a464">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Creating the Persistence Model with HDBTable</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">HDBTable is a language syntax that can be used to define a design-time representation of
+		the artifacts that comprise the persistent data models in <span class="ph pname">SAP
+		HANA</span>.</p>
+
+		<p class="p">In <span class="ph pname">SAP HANA</span> Extended Application Services (<span class="ph pname">SAP HANA</span> XS), the
+			persistence model defines the schema, tables, and views that specify what data to make
+			accessible and how. The persistence model is mapped to the consumption model that is
+			exposed to client applications and users, so that data can be analyzed and displayed. </p>
+
+		<p class="p"><span class="ph pname">SAP HANA</span> XS enables you to create database schema, tables, views, and sequences
+			as design-time files in the repository. Repository files can be read by applications
+			that you develop. </p>
+
+		<div class="note note" id="loio640ec6815f8f49b48162b819e182a464__note_N10027_N10011_N10001"><span class="notetitle">Note</span> All repository files including your view definition can be
+			transported (along with tables, schema, and sequences) to other <span class="ph pname">SAP HANA</span>
+			systems, for example, in a delivery unit. A delivery unit is the medium <span class="ph pname">SAP
+				HANA</span> provides to enable you to assemble all your application-related
+			repository artifacts together into an archive that can be easily exported to other
+			systems.</div>
+
+		<p class="p">You can also set up data-provisioning rules and save them as design-time objects so that they
+			can be included in the delivery unit that you transport between systems. </p>
+
+		<p class="p">As part of the process of setting up the basic persistence model for <span class="ph pname">SAP
+				HANA</span> XS, you perform the following tasks:</p>
+
+		
+<div class="table-wrapper tablenoborder"><table summary="" id="loio640ec6815f8f49b48162b819e182a464__table_lz1_zcs_1q" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: </span></caption>
+<colgroup><col width="17.513134851138354%"/><col width="82.48686514886165%"/></colgroup>
+
+				
+				
+				<thead class="thead" align="left">
+					<tr class="row">
+						<th class="entry" valign="top" width="17.513134851138354%" id="d1570678e66">Task</th>
+
+						<th class="entry" valign="top" width="82.48686514886164%" id="d1570678e69">Description</th>
+
+					</tr>
+
+				</thead>
+
+				<tbody class="tbody">
+					<tr class="row">
+						<td class="entry" valign="top" width="17.513134851138354%" headers="d1570678e66 ">Create a schema</td>
+
+						<td class="entry" valign="top" width="82.48686514886164%" headers="d1570678e69 ">Define a design-time schema and maintain the schema definition in the repository; the
+							transportable schema has the file extension
+								<span class="ph filepath">.hdbschema</span>, for example,
+								<span class="ph filepath">MYSCHEMA.hdbschema</span>.</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="17.513134851138354%" headers="d1570678e66 ">Create a synonym</td>
+
+						<td class="entry" valign="top" width="82.48686514886164%" headers="d1570678e69 ">Define a design-time synonym and maintain the synonym definition in
+							the repository; the transportable synonym has the file extension
+								<span class="ph filepath">.hdbsynonym</span>, for example,
+								<span class="ph filepath">MySynonym.hdbsynonym</span>.</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="17.513134851138354%" headers="d1570678e66 ">Create a table</td>
+
+						<td class="entry" valign="top" width="82.48686514886164%" headers="d1570678e69 ">Define a design-time table and maintain the table definition in the repository; the
+							transportable table has the file extension
+								<span class="ph filepath">.hdbtable</span>, for example,
+								<span class="ph filepath">MYTABLE.hdbtable</span></td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="17.513134851138354%" headers="d1570678e66 ">Create a reusable table structure</td>
+
+						<td class="entry" valign="top" width="82.48686514886164%" headers="d1570678e69 ">Define the structure of a database table in a design-time file in the repository; you
+							can reuse the table-structure definition to specify the table
+								<span class="ph emphasis emphasis">type</span> when creating a new table.</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="17.513134851138354%" headers="d1570678e66 ">Create a view</td>
+
+						<td class="entry" valign="top" width="82.48686514886164%" headers="d1570678e69 ">Define a design-time view and maintain the view definition in the repository; the
+							transportable view has the file extension <span class="ph filepath">.hdbview</span>,
+							for example, <span class="ph filepath">MYVIEW.hdbview</span></td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="17.513134851138354%" headers="d1570678e66 ">Create a sequence</td>
+
+						<td class="entry" valign="top" width="82.48686514886164%" headers="d1570678e69 ">Define a design-time sequence and maintain the sequence definition in the repository;
+							the transportable sequence has the file extension
+								<span class="ph filepath">.hdbsequence</span>, for example,
+								<span class="ph filepath">MYSEQUENCE.hdbsequence</span>
+						</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="17.513134851138354%" headers="d1570678e66 ">Import table content</td>
+
+						<td class="entry" valign="top" width="82.48686514886164%" headers="d1570678e69 ">Define data-provisioning rules that enable you to import data from comma-separated
+							values (CSV) files into <span class="ph pname">SAP HANA</span> tables using the
+								<span class="ph pname">SAP HANA</span> XS table-import feature; the complete
+							configuration can be included in a delivery unit and transported between
+								<span class="ph pname">SAP HANA</span> systems.</td>
+
+					</tr>
+
+				</tbody>
+
+			</table>
+</div>
+
+		<div class="note note" id="loio640ec6815f8f49b48162b819e182a464__note_N10041_N10016_N10001"><span class="notetitle">Note</span> On activation of a repository file, the file suffix, for
+			example, <span class="ph filepath">.hdbview</span>, <span class="ph filepath">.hdbschema</span>, or
+				<span class="ph filepath">.hdbtable</span>, is used to determine which runtime plug-in to call
+			during the activation process. The plug-in reads the repository file selected for
+			activation, for example, a table, sees the object descriptions in the file, and creates
+			the appropriate runtime object.</div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Creating the Persistence Model with HDBTable";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

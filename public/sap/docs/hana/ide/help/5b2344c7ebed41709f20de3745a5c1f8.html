@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="You can use an immediate feedback session to get a better understanding of how your XSJS function works and performs."/>
+<meta name="description" content="You can use an immediate feedback session to get a better understanding of how your XSJS function works and performs."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=9379708464250219"/>
+<title>Getting Immediate Feedback</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio5b2344c7ebed41709f20de3745a5c1f8";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio5b2344c7ebed41709f20de3745a5c1f8">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Getting Immediate Feedback</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">You can use an immediate feedback session to get a better understanding of how your XSJS
+		function works and performs.</p>
+
+		<div class="section prereq p"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Prerequisites</h2></div>
+			<div class="p">You have established a web socket debug connection. To do this:<ol class="ol" id="loio5b2344c7ebed41709f20de3745a5c1f8__ol_y4p_fkw_3r">
+					<li class="li">Start the <span class="ph pname">SAP HANA</span> studio and open the
+							<span class="ph uicontrol">Administration</span> perspective.</li>
+
+					<li class="li">On the <span class="ph uicontrol">Configuration</span> tab, add a section called <span class="ph menucascade"><img src="images/navstart.gif" alt="Start of the navigation path" title="Start of the navigation path"/> <span class="ph uicontrol">xsengine.ini</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">debugger</span> <img src="images/navend.gif" alt="End of the navigation path" title="End of the navigation path"/></span> (if it does not exist) and add (or set) the following
+						parameter: <samp class="ph codeph">enabled=true</samp><p class="p"><img class="image" id="loio5b2344c7ebed41709f20de3745a5c1f8__image_vrp_fkw_3r" src="loio0ea34e07e6aa43d5bcf3c39c7bbc72e9_LowRes.png" alt="XSJS Debugger Variable Enabled" title="XSJS Debugger Variable Enabled"/></p>
+</li>
+
+				</ol>
+</div>
+
+		</div>
+
+		<div class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<div class="p">An immediate feedback session is similar to a debug session. It allows you to evaluate an XSJS
+				function by stepping through code execution, inspecting variables, and modifying
+				statements. The details of the function execution are displayed in the
+					<span class="ph uicontrol">Immediate Feedback</span> panel:<ul class="ul" id="loio5b2344c7ebed41709f20de3745a5c1f8__ul_pw4_mlr_vr">
+					<li class="li">
+						<p class="p">Function Evaluation </p>
+
+						<p class="p">The time slider indicates which steps of the function have been executed.
+							The variable list shown just below the time slider displays the values
+							of the variables in each step.</p>
+
+					</li>
+
+					<li class="li">
+						<p class="p">Called Function List </p>
+
+						<p class="p">If other functions are called by the selected function, they are listed
+							here.</p>
+
+					</li>
+
+					<li class="li">
+						<p class="p">Database Performance</p>
+
+						<p class="p">Shows the time that was required to execute any SQL queries contained in
+							the function. </p>
+
+					</li>
+
+					<li class="li">
+						<p class="p">Query Results</p>
+
+						<p class="p">Provides a preview of the data returned by the function, that is, the
+							first few records, so that you can see what a typical result set looks
+							like.</p>
+
+					</li>
+
+				</ul>
+
+			</div>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+				<span class="ph cmd">In an XSJS JavaScript file, position the cursor inside a JavaScript function declaration on
+					the top level and choose <img class="image" id="loio5b2344c7ebed41709f20de3745a5c1f8__image_tn2_hzw_5r" src="loio88c0cdfe851248c888fb36021e181a00_LowRes.png"/> (<span class="ph uicontrol">Show immediate
+						feedback</span>) in the toolbar.</span>
+				<div class="itemgroup info">
+					<div class="p">
+						<div class="note note"><span class="notetitle">Note</span> The function must be an XSJS JavaScript function that is defined as a function
+							declaration, for example, in the following form: <p class="p"><samp class="ph codeph">function x()
+									{…}</samp></p>
+<p class="p">Other types of function declarations are not
+								supported. In addition, the function to be investigated must be on
+								the top level in the XSJS file, that is, it must not be nested.</p>
+
+						</div>
+
+					</div>
+
+				</div>
+				<div class="itemgroup stepresult">
+					<p class="p">The <span class="ph uicontrol">Immediate Feedback</span> panel opens on the right and
+						shows how the function is evaluated when it is called without arguments. The
+						execution step shown on the slider reflects your current cursor position in
+						the source code.</p>
+
+				</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Choose an option.</span>
+				
+<div class="table-wrapper"><table border="1" frame="border" rules="rows" cellpadding="4" cellspacing="0" summary="" class="simpletable choicetable choicetableborder" id="loio5b2344c7ebed41709f20de3745a5c1f8__choicetable_nyc_szw_5r">
+<thead><tr><th valign="bottom" align="left" id="d1487892e142-option">To...</th>
+<th valign="bottom" align="left" id="d1487892e142-desc">Do the following...</th></tr></thead>
+<tbody>
+					
+					<tr class="strow chrow">
+						<td valign="top" headers="d1487892e142-option" id="d1487892e155" class="stentry choption" width="28.81844380403458%"><strong>Step through the execution</strong></td>
+
+						<td valign="top" headers="d1487892e142-desc d1487892e155" class="stentry chdesc" width="71.18155619596541%">In the <span class="ph uicontrol">Function Evaluation</span> panel, use the time slider to move
+							step execution forward or backward. <p class="p">The variable list shows the
+								values of the variables as evaluated in each step. Each variable
+								newly assigned in a step is marked with an asterisk
+									(<samp class="ph systemoutput">*</samp>). </p>
+<p class="p">Whichever execution
+								step is selected on the slider, the corresponding position is
+								highlighted in the source code.</p>
+</td>
+
+					</tr>
+
+					<tr class="strow chrow">
+						<td valign="top" headers="d1487892e142-option" id="d1487892e174" class="stentry choption" width="28.81844380403458%"><strong>Modify the statement with which the function is called</strong></td>
+
+						<td valign="top" headers="d1487892e142-desc d1487892e174" class="stentry chdesc" width="71.18155619596541%">
+							<ol class="ol" type="a" id="loio5b2344c7ebed41709f20de3745a5c1f8__ol_j4b_k1x_5r">
+								<li class="li">In the <span class="ph uicontrol">Function Evaluation</span> panel, choose
+										<img class="image" id="loio5b2344c7ebed41709f20de3745a5c1f8__image_ljs_l1x_5r" src="loiod3937629065649438de63a75541746a6_LowRes.png"/> (<span class="ph uicontrol">Edit</span>).</li>
+
+								<li class="li"> In the <span class="ph uicontrol">Explore Function</span> dialog box, enter a call statement that
+									will be used to invoke the function to be evaluated: <ul class="ul" id="loio5b2344c7ebed41709f20de3745a5c1f8__ul_cgr_n1x_5r">
+										<li class="li">
+											<p class="p">Select a call statement from the dropdown box.</p>
+
+										</li>
+
+										<li class="li">
+											<p class="p">Edit a JavaScript call statement.</p>
+
+										</li>
+
+									</ul>
+</li>
+
+								<li class="li">
+									<p class="p">Choose <span class="ph uicontrol">Evaluate</span> to re-start the evaluation. </p>
+
+									<p class="p">The function is called by the new statement and the
+											<span class="ph uicontrol">Immediate Feedback</span> panel updated
+										accordingly.</p>
+
+								</li>
+
+							</ol>
+
+						</td>
+
+					</tr>
+
+					<tr class="strow chrow">
+						<td valign="top" headers="d1487892e142-option" id="d1487892e232" class="stentry choption" width="28.81844380403458%"><strong>Step into called functions</strong></td>
+
+						<td valign="top" headers="d1487892e142-desc d1487892e232" class="stentry chdesc" width="71.18155619596541%">
+							<ol class="ol" type="a" id="loio5b2344c7ebed41709f20de3745a5c1f8__ol_t3f_v1x_5r">
+								<li class="li">In the <span class="ph uicontrol">Called Function List</span> pane, select
+									the checkboxes of the functions that you want to step into and
+									evaluate in the next immediate feedback run.</li>
+
+								<li class="li">
+									<p class="p">Start immediate feedback again by choosing <img class="image" id="loio5b2344c7ebed41709f20de3745a5c1f8__image_jnc_2cx_5r" src="loiod3937629065649438de63a75541746a6_LowRes.png"/> (<span class="ph uicontrol">Edit</span>)
+										and then <span class="ph uicontrol">Evaluate</span>.</p>
+
+								</li>
+
+								<li class="li">
+									<p class="p">Use the time slider to inspect the newly included steps.</p>
+
+								</li>
+
+							</ol>
+
+						</td>
+
+					</tr>
+
+				</tbody></table></div>
+
+			</li>
+</ol>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="http://help.sap.com/saphelp_hanaplatform/helpdata/en/96/850058752a410cb4c14565362d7c1e/content.htm?frameset=/en/85/d132c3f05e40a2b20c25aa5fd6331b/frameset.htm&amp;current_toc=/en/85/d132c3f05e40a2b20c25aa5fd6331b/plain.htm&amp;node_id=138" target="_blank" alt="http://help.sap.com/saphelp_hanaplatform/helpdata/en/96/850058752a410cb4c14565362d7c1e/content.htm?frameset=/en/85/d132c3f05e40a2b20c25aa5fd6331b/frameset.htm&amp;current_toc=/en/85/d132c3f05e40a2b20c25aa5fd6331b/plain.htm&amp;node_id=138" title="http://help.sap.com/saphelp_hanaplatform/helpdata/en/96/850058752a410cb4c14565362d7c1e/content.htm?frameset=/en/85/d132c3f05e40a2b20c25aa5fd6331b/frameset.htm&amp;current_toc=/en/85/d132c3f05e40a2b20c25aa5fd6331b/plain.htm&amp;node_id=138">Web-based Performance Tools</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Getting Immediate Feedback";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

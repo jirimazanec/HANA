@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Returns the MIME type of a value in a column that has a fulltext index."/>
+<meta name="description" content="Returns the MIME type of a value in a column that has a fulltext index."/>
+<meta name="keywords" content="MIMETYPE"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=12866700852179058"/>
+<title>MIMETYPE Function (Fulltext)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20e485b2751910148316cfd763478894";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20e485b2751910148316cfd763478894">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">MIMETYPE Function (Fulltext)</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Returns the MIME type of a value in a column that has a fulltext index.</p>
+
+      <div class="section" id="loio20e485b2751910148316cfd763478894__sql_function_mimetype_1sql_function_mimetype_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+         
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> MIMETYPE (<var class="keyword varname">&lt;column_name&gt;</var>)</pre></div>
+
+      </div></div>
+
+      <div class="section" id="loio20e485b2751910148316cfd763478894__sql_function_score_1xyz_syntax_elements"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+         
+         <dl class="dl parml">
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;column_name&gt;</var></dt>
+
+               <dd class="dd pd">Specifies the column values to test for the MIME
+                  type.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+</dd>
+
+            
+         </dl>
+
+      </div></div>
+
+      <div class="section" id="loio20e485b2751910148316cfd763478894__sql_function_mimetype_1sql_function_language_description"><div class="section_title">Description</div><div type="Description">
+         
+         <p class="p">Returns the MIME type of the corresponding column value. This function requires a
+            fulltext index on the input column.</p>
+
+      </div></div>
+
+      <div class="section" id="loio20e485b2751910148316cfd763478894__sql_function_mimetype_1sql_function_language_examples"><div class="section_title">Example</div><div type="Example">
+         
+         <div class="p">The following example creates a table with two differing types of text content, plain
+            text and HTML:
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE T (CONTENT TEXT FAST PREPROCESS OFF);
+ INSERT INTO T VALUES('This is an example');
+ INSERT INTO T VALUES('&lt;html&gt;This is an example&lt;/html&gt;');</pre></div>
+</div>
+
+         <p class="p">Select the content and detect the MIME type of the entries:</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT MIMETYPE(CONTENT),CONTENT FROM T;</pre></div>
+
+         <div class="table-wrapper"><table summary="" id="loio20e485b2751910148316cfd763478894__simpletable_wys_wfw_1y" border="1" class="simpletable"><tr class="sthead">
+               <th valign="bottom" align="left" id="d16109055e93" class="stentry">
+                  <p class="p">MIMETYPE(CONTENT)</p>
+
+               </th>
+
+               <th valign="bottom" align="left" id="d16109055e99" class="stentry">
+                  <p class="p">CONTENT</p>
+
+               </th>
+
+            </tr>
+<tr class="strow">
+               <td valign="top" headers="d16109055e93" class="stentry">
+                  <p class="p">text/plain</p>
+
+               </td>
+
+               <td valign="top" headers="d16109055e99" class="stentry">
+                  <p class="p">This is an example</p>
+
+               </td>
+
+            </tr>
+<tr class="strow">
+               <td valign="top" headers="d16109055e93" class="stentry">
+                  <p class="p">text/html</p>
+
+               </td>
+
+               <td valign="top" headers="d16109055e99" class="stentry">
+                  <p class="p">&lt;html&gt;This is an example&lt;/html&gt;</p>
+
+               </td>
+
+            </tr>
+</table></div>
+
+      </div></div>
+
+   </div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="MIMETYPE Function (Fulltext)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

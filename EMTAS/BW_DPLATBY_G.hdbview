@@ -1,0 +1,119 @@
+schema="OTEBW_EMTAS";
+
+query = " select to_date(DELIVERYDAY) as DELIVERYDAY,
+	 		 	 VERSION,
+	 			 EXTERNALVERSION,
+	 			 CALCULATION,
+	 			 CURRENCYID,
+	 			 PARTIC,
+	 			 VOLUME,
+	 			 TOTALPRICE,
+	 			 CONCEPTABRV,
+	 			 T.CALMONTH as CALMONTH,
+	 			 T.YEAR as CALYEAR,
+	 			 T.CALWEEK as CALWEEK,
+	 			 T.CALQUARTER as CALQUARTER,
+	 			 'MWH' as unit,
+	 			 case when TOTALPRICE < 0 then 'B' else 'S' end as BUYSELL,
+	 			 case when TOTALPRICE = 0 then '' 
+				 	else case when TOTALPRICE < 0 then 'D' else 'K' end 
+				 end as CREDITDEBET 
+			from BW_DPLATBY_G_POPL_SZ,
+	             _SYS_BI.TC_DAY_CALENDAR T 
+	       where T.DATE_SQL = DELIVERYDAY
+       UNION ALL 
+          select to_date(DELIVERYDAY) as DELIVERYDAY,
+	             VERSION,
+	             EXTERNALVERSION,
+	             CALCULATION,  
+	             CURRENCYID,
+	             PARTIC,
+	             VOLUME,
+	             TOTALPRICE,
+	             CONCEPTABRV,
+	             T.CALMONTH as CALMONTH,
+	             T.YEAR as CALYEAR,
+	             T.CALWEEK as CALWEEK,
+	             T.CALQUARTER as CALQUARTER,
+	             'MWH' as unit,
+	             case when TOTALPRICE < 0 then 'B' else 'S' end as BUYSELL,
+	             case when TOTALPRICE = 0 then '' 
+					  else case when TOTALPRICE < 0 then 'D' else 'K' end 
+				 end as CREDITDEBET 
+	        from BW_DPLATBY_G_POPL_CDS,
+	            _SYS_BI.TC_DAY_CALENDAR T 
+           where T.DATE_SQL = DELIVERYDAY
+       UNION ALL 
+          select to_date(DELIVERYDAY) as DELIVERYDAY,
+	             VERSION,
+	             EXTERNALVERSION,
+	             CALCULATION,
+	             CURRENCYID,
+	             PARTIC,
+	             VOLUME,
+	             TOTALPRICE,
+	             CONCEPTABRV,
+	             T.CALMONTH as CALMONTH,
+	             T.YEAR as CALYEAR,
+	             T.CALWEEK as CALWEEK,
+	             T.CALQUARTER as CALQUARTER,
+	             'MWH' as unit,
+	             MAP(ConceptAbrv,'VP+', 'S', 'VP-', 'B') as BUYSELL,
+	             case when TOTALPRICE = 0 then '' 
+				      else case when TOTALPRICE < 0 then 'D' else 'K' end 
+				 end as CREDITDEBET 
+			from BW_DPLATBY_VDP,
+	             _SYS_BI.TC_DAY_CALENDAR T 
+		   where T.DATE_SQL = DELIVERYDAY 
+       UNION ALL 
+          select to_date(DELIVERYDAY) as DELIVERYDAY,
+	             VERSION,
+	             EXTERNALVERSION,
+	             CALCULATION,
+	             CURRENCYID,
+	             PARTIC,
+	             VOLUME,
+	             TOTALPRICE,
+	             CONCEPTABRV,
+	             T.CALMONTH as CALMONTH,
+	             T.YEAR as CALYEAR,
+	             T.CALWEEK as CALWEEK,
+	             T.CALQUARTER as CALQUARTER,
+	             'MWH' as unit,
+	             case when TOTALPRICE < 0 then 'B' else 'S' end as BUYSELL,
+	             case when TOTALPRICE = 0 then '' 
+			          else case when TOTALPRICE < 0 then 'D' else 'K' end 
+			     end as CREDITDEBET 
+			from BW_DPLATBY_POPL_VDP,
+	            _SYS_BI.TC_DAY_CALENDAR T 
+		   where T.DATE_SQL = DELIVERYDAY
+	   UNION ALL 
+	      select to_date(DELIVERYDAY) as DELIVERYDAY,
+	             VERSION,
+	             EXTERNALVERSION,
+	             CALCULATION,
+	             CURRENCYID,
+	             PARTIC,
+	             VOLUME,
+	             TOTALPRICE,
+	             CONCEPTABRV,
+	             T.CALMONTH as CALMONTH,
+	             T.YEAR as CALYEAR,
+	             T.CALWEEK as CALWEEK,
+	             T.CALQUARTER as CALQUARTER,
+	             'MWH' as unit,
+	             case when TOTALPRICE < 0 then 'B' else 'S' end as BUYSELL,
+	             case when TOTALPRICE = 0 then '' 
+		             else case when TOTALPRICE < 0 then 'D' else 'K' end 
+		         end as CREDITDEBET 
+		    from BW_DPLATBY_G_POPL_REMIT,
+	             _SYS_BI.TC_DAY_CALENDAR T 
+		   where T.DATE_SQL = DELIVERYDAY
+				"    ;
+
+depends_on_table=["OTEBW_EMTAS::BW_DPLATBY_G_POPL_SZ"];
+depends_on_table=["OTEBW_EMTAS::BW_DPLATBY_G_POPL_CDS"];
+depends_on_table=["OTEBW_EMTAS::BW_DPLATBY_VDP"];
+depends_on_table=["OTEBW_EMTAS::BW_DPLATBY_POPL_VDP"];
+depends_on_table=["OTEBW_EMTAS::BW_DPLATBY_G_POPL_REMIT"];
+

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="An MDX SELECT statement in SAP HANA enables you to send values for variables defined within modeling views."/>
+<meta name="description" content="An MDX SELECT statement in SAP HANA enables you to send values for variables defined within modeling views."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=8083783499090487"/>
+<title>Variables in MDX</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loiof1d8b188c90647959c72ec8c7ce1a59f";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loiof1d8b188c90647959c72ec8c7ce1a59f">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Variables in MDX</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">An MDX SELECT statement in SAP HANA enables you to send values for variables defined
+    within modeling views.</p>
+
+		<p class="p">Analytic and calculation views can contain variables that can be bound to specific attributes.
+      When calling the view, you can send values for those variables. These variables can be used,
+      for example, to filter the results.</p>
+
+		<p class="p">SAP HANA supports an extension to MDX whereby you can pass values for variables defined in
+      views by adding an SAP Variables clause in your SELECT statement. Here is the syntax for a
+        <samp class="ph codeph">SELECT</samp> statement:</p>
+
+    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;select_statement&gt;</var>:
+[WITH <var class="keyword varname">&lt;formula_specification&gt;</var> ]
+SELECT [<var class="keyword varname">&lt;axis_specification&gt;</var>[,<var class="keyword varname">&lt;axis_specification&gt;</var>...]]
+   FROM <var class="keyword varname">&lt;cube_specification&gt;</var>
+   [WHERE <var class="keyword varname">&lt;slicer_specification&gt;</var>
+                    
+SAP VARIABLES: <var class="keyword varname">&lt;sap_variable&gt;</var> [[,] <var class="keyword varname">&lt;sap_variable&gt;</var>…]]
+
+<var class="keyword varname">&lt;sap_variable&gt;</var>: <var class="keyword varname">&lt;variable_name&gt;</var> <var class="keyword varname">&lt;sign&gt;</var> [<var class="keyword varname">&lt;option&gt;</var>] <var class="keyword varname">&lt;variable_value&gt;</var>
+
+<var class="keyword varname">&lt;sign&gt;</var>: INCLUDING | EXCLUDING
+
+<var class="keyword varname">&lt;option&gt;</var>: = | &gt; | &gt;= | &lt; | &lt;= | &lt;&gt;
+
+<var class="keyword varname">&lt;variable_value&gt;</var>:
+   <var class="keyword varname">&lt;unique_member_name&gt;</var>
+   | <var class="keyword varname">&lt;unsigned_numeric_literal&gt;</var>
+   | <var class="keyword varname">&lt;string_value_expression&gt;</var>
+   | <var class="keyword varname">&lt;member&gt;</var> : <var class="keyword varname">&lt;member&gt;</var>
+   | <var class="keyword varname">&lt;character_string_literal&gt;</var> : <var class="keyword varname">&lt;character_string_literal&gt;</var>
+   | <var class="keyword varname">&lt;unsigned_numeric_literal&gt;</var> : <var class="keyword varname">&lt;unsigned_numeric_literal&gt;</var></pre></div>
+
+		<div class="example"><h2 class="exampletitle">Example</h2>
+			<p class="p">The following statement specifies a single value for variables <samp class="ph codeph">VAR_VAT</samp>,
+          <samp class="ph codeph">VAR_K2</samp>, and <samp class="ph codeph">VAR_TARGET_CURRENCY</samp>.</p>
+
+			<div class="p">
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT
+FROM [SALES_DATA_VAR]
+WHERE [Measures].[M2_1_M3_CONV]
+SAP VARIABLES [VAR_VAT] including 10,
+              [VAR_K2]  including  112,
+              [VAR_TARGET_CURRENCY] including 'EUR'</pre></div>
+
+			</div>
+
+		</div>
+
+		<div class="example"><h2 class="exampletitle">Example</h2>
+			<p class="p">The following specifies an interval for variable <samp class="ph codeph">VAR_K2</samp>.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT NON EMPTY
+  {
+    [K2].[K2].Members
+  }ON ROWS
+FROM [SALES_DATA_VAR_SIMPLE]
+WHERE [Measures].[M3_CONV]
+SAP VARIABLES [VAR_K2] including [K2].[K2].&amp;[122]:[K2].[K2].&amp;[221]</pre></div>
+
+		</div>
+
+		<div class="section" id="loiof1d8b188c90647959c72ec8c7ce1a59f__section_N10057_N10011_N10001"><div class="section_title">Metadata on Variables in Views</div><div type="Metadata on Variables in Views">
+      
+      <p class="p">SAP HANA includes the following set of tables that contain information about the variables
+        defined for views:</p>
+
+      <ul class="ul" id="loiof1d8b188c90647959c72ec8c7ce1a59f__ul_c42_5qr_b3">
+        <li class="li"><samp class="ph codeph">BIMC_VARIABLE</samp></li>
+
+        <li class="li"><samp class="ph codeph">BIMC_VARIABLE_ASSIGNMENT</samp></li>
+
+        <li class="li"><samp class="ph codeph">BIMC_VARIABLE_VALUE</samp></li>
+
+      </ul>
+
+      <p class="p">The tables enable, for example, an application to retrieve the variables defined for a view
+        and create a user interface so the user can enter values.</p>
+
+    </div></div>
+
+	</div>
+
+  <div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?cfe2dd14554a4ef6a1443e809c1a9a5c.html" target="_top" title="In SAP HANA Extended Application Services (SAP HANA XS) , the persistence model (for example, tables, views and stored procedures) is mapped to the consumption model that is exposed to clients - the applications you write to extract data from the SAP HANA database.">Data Access with XMLA in SAP HANA XS</a></div>
+<div><a class="link" href="default.html?7d386a7bcc49475db72d59805696f03e.html" target="_top" title="SAP HANA supports several extensions to the MDX language, including additional predefined functions and support for variables.">MDX Extensions</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Variables in MDX";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

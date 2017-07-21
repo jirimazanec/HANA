@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Last check information for Statistics alerts"/>
+<meta name="description" content="Last check information for Statistics alerts"/>
+<meta name="keywords" content="STATISTICS_LAST_CHECKS"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=21925713978888328"/>
+<title>STATISTICS_LAST_CHECKS System View (Embedded Statistics Service)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loiod4cfcfd34e1d4f679f0b9bb1362e7b0c";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loiod4cfcfd34e1d4f679f0b9bb1362e7b0c">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">STATISTICS_LAST_CHECKS System View (Embedded Statistics Service)</h1>
+
+	
+	
+	<div class="body refbody"><p class="shortdesc">Last check information for Statistics alerts</p>
+
+		<div class="section" id="loiod4cfcfd34e1d4f679f0b9bb1362e7b0c__sys_statistics_views_1STATISTICS_LAST_CHECKS"><div class="section_title">Structure</div><div type="Structure">
+			
+			<div class="p">
+				
+<div class="table-wrapper tablenoborder"><table summary="" id="loiod4cfcfd34e1d4f679f0b9bb1362e7b0c__table_evp_dlj_gr" class="table" frame="border" border="1" rules="all">
+						<thead class="thead" align="left">
+							<tr class="row">
+								<th class="entry" valign="top" id="d31812276e42">
+									<p class="p">Column name</p>
+
+								</th>
+
+								<th class="entry" valign="top" id="d31812276e48">
+									<p class="p">Data type</p>
+
+								</th>
+
+								<th class="entry" valign="top" id="d31812276e54">
+									<p class="p">Unit</p>
+
+								</th>
+
+								<th class="entry" valign="top" id="d31812276e60">
+									<p class="p">Description </p>
+
+								</th>
+
+							</tr>
+
+						</thead>
+
+						<tbody class="tbody">
+							<tr class="row">
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">ALERT_ID</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">INTEGER</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 "> </td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">Alert ID </p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">SNAPSHOT_ID</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">TIMESTAMP</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 "> </td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">ID of the snapshot </p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">ALERT_DESCRIPTION</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">NVARCHAR(1024)</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 "> </td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">Description of the alert </p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">ALERT_NAME</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">NVARCHAR(64)</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 "> </td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">Name of the Alert </p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">ALERT_LAST_CHECK_TIMESTAMP</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">TIMESTAMP</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 "> </td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">Timestamp of last alert check </p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">ALERT_NEXT_CHECK_TIMESTAMP</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">TIMESTAMP</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 "> </td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">Timestamp of next point in time that the alert is checked
+									</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">ALERT_LAST_CHECK_RATING</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">BIGINT</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 "> </td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">Rating of last alert check </p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">ALERT_USERACTION</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">NVARCHAR(1024)</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 "> </td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">Hint to user on actions to take in response to the alert </p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">INTERVAL</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">INTEGER</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">Seconds </p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">Interval between polling </p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">INTERVAL_START_TIME</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">TIMESTAMP</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 "> </td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">The point in time that the alert was first checked </p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">ID_COUNT</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">BIGINT</p>
+
+								</td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 "> </td>
+
+								<td class="entry" valign="top" headers="d31812276e42 d31812276e48 d31812276e54 d31812276e60 ">
+									<p class="p">Aggregation of checks for this alert </p>
+
+								</td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+</div>
+
+			</div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="STATISTICS_LAST_CHECKS System View (Embedded Statistics Service)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

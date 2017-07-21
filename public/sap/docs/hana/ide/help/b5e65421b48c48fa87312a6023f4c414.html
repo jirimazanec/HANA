@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="If you choose to use server-side JavaScript to write your application code, you need to bear in mind the potential for (and risk of) external attacks such as cross-site scripting and forgery, and insufficient authentication."/>
+<meta name="description" content="If you choose to use server-side JavaScript to write your application code, you need to bear in mind the potential for (and risk of) external attacks such as cross-site scripting and forgery, and insufficient authentication."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=6092424924145363"/>
+<title>Server-Side JavaScript Security Considerations</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loiob5e65421b48c48fa87312a6023f4c414";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loiob5e65421b48c48fa87312a6023f4c414">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Server-Side JavaScript Security Considerations</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">If you choose to use server-side JavaScript to write your application code, you need to
+		bear in mind the potential for (and risk of) external attacks such as cross-site scripting
+		and forgery, and insufficient authentication.</p>
+
+		<p class="p">The following list illustrates the areas where special attention is required to avoid
+			security-related problems when writing server-side JavaScript. Each of the problems
+			highlighted in the list is described in detail in its own dedicated section:</p>
+
+		<ul class="ul" id="loiob5e65421b48c48fa87312a6023f4c414__ul_asc_y4s_p3">
+			<li class="li">SSL/HTTPS<p class="p">Enable secure HTTP (HTTPS) for inbound communication required by an <span class="ph pname">SAP
+						HANA</span> application.</p>
+</li>
+
+			<li class="li">Injection flaws<p class="p">In the context of <span class="ph pname">SAP HANA</span> Extended Application Services
+						(<span class="ph pname">SAP HANA</span> XS) injection flaws concern SQL injection that
+					modifies the URL to expand the scope of the original request.</p>
+</li>
+
+			<li class="li">Cross-site scripting (XSS)<p class="p"> Web-based vulnerability that involves an attacker
+					injecting JavaScript into a link with the intention of running the injected code
+					on the target computer.</p>
+</li>
+
+			<li class="li">Broken authentication and session management<p class="p">Leaks or flaws in the authentication
+					or session management functions allow attackers to impersonate users and gain
+					access to unauthorized systems and data.</p>
+</li>
+
+			<li class="li">Insecure direct object references<p class="p">An application lacks the proper authentication mechanism
+					for target objects.</p>
+</li>
+
+			<li class="li">Cross-site request forgery (XSRF)<p class="p">Exploits the trust boundaries that exist between
+					different Web sites running in the same web browser session.</p>
+</li>
+
+			<li class="li">Incorrect security configuration<p class="p">Attacks against the security configuration in
+					place, for example, authentication mechanisms and authorization processes.
+				</p>
+</li>
+
+			<li class="li">Insecure cryptographic storage<p class="p">Sensitive information such as logon credentials is not
+					securely stored, for example, with encryption tools.</p>
+</li>
+
+			<li class="li">Missing restrictions on URL Access<p class="p">Sensitive information such as logon credentials
+					is exposed.</p>
+</li>
+
+			<li class="li">Insufficient transport layer protection<p class="p">Network traffic can be monitored, and
+					attackers can steal sensitive information such as logon credentials or
+					credit-card data.</p>
+</li>
+
+			<li class="li">Invalid redirects and forwards<p class="p">Web applications redirect users to other pages or
+					use internal forwards in a similar manner. </p>
+</li>
+
+			<li class="li">XML processing issues<p class="p">Potential security issues related to processing XML as input
+					or to generating XML as output</p>
+</li>
+
+		</ul>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?0bfdc51943f74dde8d209506b8b582b0.html" target="_top" title="If you choose to use server-side JavaScript to write your application code, you need to bear in mind the potential for (and risk of) external attacks such as cross-site scripting and forgery, and insufficient authentication. You can set up SAP HANA to use secure HTTP (HTTPS).">SSL/HTTPS</a></div>
+<div><a class="link" href="default.html?3e9a0491d2af4b908081fbbee12bc8ba.html" target="_top" title="If you choose to use server-side JavaScript to write your application code, you need to bear in mind the potential for (and risk of) injection flaws. Typically, injection flaws concern SQL injection and involve modifying the URL to expand the scope of the original request.">Injection flaws</a></div>
+<div><a class="link" href="default.html?0e1c9fff826a4583be715386578fffc7.html" target="_top" title="If you use server-side JavaScript to write your application code, bear in mind the potential for (and risk of) cross-site scripting (XSS) attacks. Cross-site scripting is a Web-based vulnerability that involves an attacker injecting JavaScript into a link with the intention of running the injected code on the target computer.">Cross-site scripting (XSS)</a></div>
+<div><a class="link" href="default.html?2040c1b7e478448cb9904c55ac06cac8.html" target="_top" title="If you choose to use server-side JavaScript to write your application code, you need to bear in mind the potential for (and risk of) attack against authentication infrastructure. Leaks or flaws in the authentication or session management functions allow attackers to impersonate users and gain access to unauthorized systems and data.">Broken authentication and session management</a></div>
+<div><a class="link" href="default.html?67fd982246be45eea64ffef3dbef32c8.html" target="_top" title="If you choose to use server-side JavaScript to write your application code, you need to bear in mind the potential for (and risk of) attacks using insecure references to objects.">Insecure direct object references</a></div>
+<div><a class="link" href="default.html?e8a6bc904c0c48a182288604f467e84a.html" target="_top" title="If you choose to use server-side JavaScript to write your application code, you need to bear in mind the potential for (and risk of) cross-site request forgery (XSRF). Cross-site scripting is a web-based vulnerability that exploits the trust boundaries that exist between different websites running in the same web browser session.">Cross-site request forgery (XSRF)</a></div>
+<div><a class="link" href="default.html?6c70762623b54f4bb0e2d424fea5854a.html" target="_top" title="If you choose to use server-side JavaScript to write your application code, you need to bear in mind the potential for (and risk of) attacks against the security configuration in place, for example, authentication mechanisms and authorization processes.">Incorrect security configuration</a></div>
+<div><a class="link" href="default.html?9fe8df534d86419297d834570a3e99bf.html" target="_top" title="If you choose to use server-side JavaScript to write your application code, you need to bear in mind the potential for (and risk of) attacks against the insecure or lack of encryption of data assets.">Insecure cryptographic storage</a></div>
+<div><a class="link" href="default.html?f381b344b96c421597000a5c5b761c6d.html" target="_top" title="If you choose to use server-side JavaScript to write your application code, you need to bear in mind the potential for (and risk of) unauthorized access to URLs.">Missing restrictions on URL Access</a></div>
+<div><a class="link" href="default.html?f8ccfb0dee61499abc2d71831c59c2d5.html" target="_top" title="If you choose to use server-side JavaScript to write your application code, you need to bear in mind the potential for (and risk of) insufficient protection of the transport layer.">Insufficient transport layer protection</a></div>
+<div><a class="link" href="default.html?ba17dcabaa5f4297b4c5bac8dd069f37.html" target="_top" title="If you choose to use server-side JavaScript to write your application code, you need to bear in mind the potential for (and risk of) attacks aimed at the process used to parse XML input and generate the XML output.">XML processing issues</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Server-Side JavaScript Security Considerations";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

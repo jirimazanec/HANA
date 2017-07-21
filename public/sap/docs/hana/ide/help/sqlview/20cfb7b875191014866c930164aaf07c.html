@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Enables or disables an audit policy."/>
+<meta name="description" content="Enables or disables an audit policy."/>
+<meta name="keywords" content="ALTER AUDIT POLICY"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=9714026718527234"/>
+<title>ALTER AUDIT POLICY Statement (Access Control)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20cfb7b875191014866c930164aaf07c";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20cfb7b875191014866c930164aaf07c">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">ALTER AUDIT POLICY Statement (Access Control)</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Enables or disables an audit policy.</p>
+
+      <div class="section" id="loio20cfb7b875191014866c930164aaf07c__sql_alter_audit_policy_1sql_alter_audit_policy_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER AUDIT POLICY <var class="keyword varname">&lt;policy_name&gt;</var>
+   { <var class="keyword varname">&lt;audit_mode&gt;</var> | <var class="keyword varname">&lt;set_audit_trail_type&gt;</var> | <var class="keyword varname">&lt;reset_audit_trail_type&gt;</var> }</pre></div>
+</div></div>
+
+      <div class="section" id="loio20cfb7b875191014866c930164aaf07c__sql_alter_audit_policy_1sql_alter_audit_policy_syntax_elements"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+         
+         <dl class="dl parml">
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;policy_name&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <div class="p">
+            Specifies the name of the audit policy to be
+            altered.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;policy_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+</div>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;audit_mode&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <div class="p">
+            Enables or disables the audit
+            policy.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;audit_mode&gt;</var> ::= ENABLE | DISABLE</pre></div>
+</div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis">ENABLE</dt>
+
+                        <dd class="dd">
+                           <p class="p">
+            Enables the audit policy. </p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">DISABLE</dt>
+
+                        <dd class="dd">
+                           <p class="p">
+            Disables the audit policy. </p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;set_audit_trail_type&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the audit trail target types for the audit policy.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;set_audit_trail_types&gt;</var> ::= SET TRAIL TYPE <var class="keyword varname">&lt;audit_trail_type_list&gt;</var>
+
+<var class="keyword varname">&lt;audit_trail_type_list&gt;</var> ::= <var class="keyword varname">&lt;audit_trail_type_name&gt;</var>[{, <var class="keyword varname">&lt;audit_trail_type_name&gt;</var>}...]
+
+<var class="keyword varname">&lt;audit_trail_type_name&gt;</var> ::= 
+ TABLE 
+ | SYSLOG 
+ | CSV</pre></div>
+
+                  <p class="p">Specifying CSV on a production system has security implications: users with
+                     system privilege DATA ADMIN, CATALOG READ, TRACE ADMIN, or INIFILE ADMIN are
+                     able access the CSV file. The CSV file is also accessible in SAP HANA
+                     Studio.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;reset_audit_trail_type&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <div class="p">
+            Resets the audit trail target type(s) to the system
+            default.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;reset_audit_trail_type&gt;</var> ::= RESET TRAIL TYPE</pre></div>
+</div>
+
+               </dd>
+
+            
+         </dl>
+
+      </div></div>
+
+      <div class="section" id="loio20cfb7b875191014866c930164aaf07c__sql_alter_audit_policy_1sql_alter_audit_policy_description"><div class="section_title">Description</div><div type="Description"><div class="sectiondiv">
+            
+            <p class="p">The ALTER AUDIT POLICY statement enables or disables an audit policy.
+                    <var class="keyword varname">&lt;policy_name&gt;</var> must specify an existing audit policy. Only
+                database users with the system privilege AUDIT ADMIN are allowed to alter an audit
+                policy. Users with this privilege can alter any audit policy, regardless of if they
+                are the creator of the policy.</p>
+
+            <p class="p">When an audit policy is created, it is created in the disabled state. Therefore the
+                audit policy has to be enabled to make its audit actions take effect. </p>
+
+            <p class="p">An audit policy can be disabled and enabled as often as required. </p>
+
+        </div><p class="p">Specify
+            one or more audit trail targets for an audit policy at the time of creation.</p>
+<p class="p">This
+            feature is used with restrictions and/or is extended by the following SAP HANA
+            option(s):</p>
+<ul class="ul" id="loio20cfb7b875191014866c930164aaf07c__ul_ibr_d5r_xt">
+            <li class="li">Dynamic Tiering</li>
+
+         </ul>
+<div class="p">The
+            allowed audit trail targets are:<ul class="ul" id="loio20cfb7b875191014866c930164aaf07c__d971e60">
+                <li class="li">SYSLOG: uses the system syslog</li>
+
+                <li class="li">TABLE: stores audit information in database table. The audit log is accessible
+                    using AUDIT_LOG system view</li>
+
+                <li class="li">CSV: stores audit information as comma-separated values in a text file. Should
+                    be used only for testing purposes.</li>
+
+            </ul>
+</div>
+</div></div>
+
+      <div class="section" id="loio20cfb7b875191014866c930164aaf07c__sql_alter_audit_policy_1sql_alter_audit_policy_configuration_parameter"><div class="section_title">Configuration Parameters</div><div type="Configuration Parameters">
+         <div class="p">The
+            following configuration parameters for auditing are stored in global.ini, in the section
+            auditing configuration:
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">global_auditing_state ( 'true' / 'false' )</pre></div>
+Regardless of the
+            number of enabled audit policies, auditing only occurs if the global_auditing_state
+            configuration parameter is set to true. The default is 'false'.</div>
+
+         <div class="p">
+            Specifies how auditing results are
+                stored.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">default_audit_trail_type ( 'SYSLOGPROTOCOL' / 'CSTABLE' / 'CSVTEXTFILE' )</pre></div>
+<ul class="ul" id="loio20cfb7b875191014866c930164aaf07c__d971e82">
+                <li class="li">
+                    <p class="p">SYSLOGPROTOCOL: uses the system syslog.</p>
+
+                </li>
+
+                <li class="li">
+                    <p class="p">CSTABLE: stores audit information in database table. The audit log is
+                        accessible using AUDIT_LOG system view.</p>
+
+                </li>
+
+                <li class="li">
+                    <p class="p">CSVTEXTFILE: stores audit information as comma-separated values in a text
+                        file. This option should be used only for testing purposes.</p>
+
+                </li>
+
+            </ul>
+</div>
+
+         <div class="p">
+            Specifies the file path where the CSVTEXTFILE should be
+            stored.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">default_audit_trail_path</pre></div>
+</div>
+
+         <div class="p">
+            Specifies the audit trail target(s) for the events with severity
+            EMERGENCY.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">emergency_audit_trail_type</pre></div>
+</div>
+
+         <div class="p">
+            Specifies the audit trail target(s) for the events with severity
+            EMERGENCY.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">emergency_audit_trail_type</pre></div>
+</div>
+
+         <div class="p">
+            Specifies the audit trail target(s) for the events with severity
+            CRITICAL.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">critical_audit_trail_type</pre></div>
+</div>
+
+         <p class="p">Multiple
+            audit trail targets could be specified for parameters emergency_audit_trail_type,
+            alert_audit_trail_type, and critical_audit_trail_type by separating the trail type names
+            with comma. To store the auditing information for events with severity EMERGENCY to both
+            Syslog and database table, set the value of emergency_audit_trail_type to
+            'CSTABLE,SYSLOGPROTOCOL'</p>
+
+         <p class="p">The
+            parameters above can be selected in the M_INIFILE_CONTENTS monitoring view if the user
+            has the required system privileges. The parameters can only be observed in a monitoring
+            view when they have been explicitly defined.</p>
+
+         <p class="p">Only users with system privilege CATALOG READ, DATA ADMIN, or INIFILE ADMIN can view the
+            content of the M_INIFILE_CONTENTS view. For all other database users this view is
+            empty.</p>
+</div></div>
+
+      <div class="section" id="loio20cfb7b875191014866c930164aaf07c__sql_alter_audit_policy_1sql_alter_audit_policy_examples"><div class="section_title">Example</div><div type="Example">
+         
+         <p class="p">Create an audit policy called priv_audit using the following statement.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE AUDIT POLICY "priv_audit"
+   AUDITING SUCCESSFUL
+   GRANT PRIVILEGE, REVOKE PRIVILEGE, GRANT ROLE, REVOKE ROLE LEVEL CRITICAL;</pre></div>
+
+         <p class="p">Enable the priv_audit audit policy.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER AUDIT POLICY "priv_audit" ENABLE;</pre></div>
+
+         <p class="p">Set Syslog and database table as audit trail targets for the same audit policy.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER AUDIT POLICY "priv_audit" SET TRAIL TYPE SYSLOG, TABLE;</pre></div>
+
+         <p class="p">Reset audit trail targets for the same audit policy.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER AUDIT POLICY "priv_audit" RESET TRAIL TYPE;</pre></div>
+
+         <p class="p">Disable the priv_audit audit policy.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER AUDIT POLICY "priv_audit" DISABLE;</pre></div>
+
+      </div></div>
+
+   </div>
+
+<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?20d3d56075191014af43d6487fcaa603.html" target="_top" title="Creates a new audit policy.">CREATE AUDIT POLICY Statement (Access Control)</a></div>
+<div><a class="link" href="default.html?209e4d3d75191014b419a2dc6e6a202a.html" target="_top" title="Provides information about audit policies.">AUDIT_POLICIES System View</a></div>
+<div><a class="link" href="default.html?20b16a7e75191014ae4bfdef8a652a22.html" target="_top" title="Provides configuration information from INI files.">M_INIFILE_CONTENTS System View</a></div>
+<div><a class="link" href="default.html?d1fe1244d29510148f69be8b0e060dcc.html" target="_top" title="Provides information about audit records.">AUDIT_LOG System View</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="ALTER AUDIT POLICY Statement (Access Control)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

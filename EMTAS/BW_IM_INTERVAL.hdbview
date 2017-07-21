@@ -1,0 +1,11 @@
+schema="OTEBW_EMTAS";
+
+query = "select 
+CONTRACTID,
+to_date(DDATE) as DDATE,
+INTERVALINDX,
+SYSTEMTS
+from 
+BW_IM_INTERVAL";
+
+depends_on_table=["OTEBW_EMTAS::BW_IMBALM_CONTRACT"];

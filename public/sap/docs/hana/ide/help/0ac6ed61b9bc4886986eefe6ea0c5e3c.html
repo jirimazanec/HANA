@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="SAP HANA Extended Application Services (SAP HANA XS) enables you to use the hdbtable syntax to create a database table as a design-time file in the repository. The design-time artifact that contains the table definition must adhere to the .hdbtable syntax specified below."/>
+<meta name="description" content="SAP HANA Extended Application Services (SAP HANA XS) enables you to use the hdbtable syntax to create a database table as a design-time file in the repository. The design-time artifact that contains the table definition must adhere to the .hdbtable syntax specified below."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=3033791849578922"/>
+<title>Table Configuration Syntax</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio0ac6ed61b9bc4886986eefe6ea0c5e3c";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio0ac6ed61b9bc4886986eefe6ea0c5e3c">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Table Configuration Syntax</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc"><span class="ph pname">SAP HANA</span> Extended Application Services (<span class="ph pname">SAP HANA</span> XS)
+		enables you to use the <span class="ph filepath">hdbtable</span> syntax to create a database table as a
+		design-time file in the repository. The design-time artifact that contains the table
+		definition must adhere to the <span class="ph filepath">.hdbtable</span> syntax specified
+		below.</p>
+
+		<div class="section" id="loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N10112_N1001D_N10001"><div class="section_title">Table Definition</div><div type="Table Definition">
+			
+			<p class="p">The following code illustrates a simple example of a design-time table definition
+				using the <span class="ph filepath">.hdbtable</span> syntax.</p>
+
+			<div class="note note" id="loio0ac6ed61b9bc4886986eefe6ea0c5e3c__note_N10035_N10020_N1001D_N10001"><span class="notetitle">Note</span> Keywords are case-sensitive, for example,
+					<span class="keyword">tableType</span> and <span class="keyword">loggingType</span>, and the schema
+				referenced in the table definition, for example, MYSCHEMA, must already
+				exist.</div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><a class="xref nopagenumber" href="default.html?0ac6ed61b9bc4886986eefe6ea0c5e3c.html#loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N1003B_N1001D_N10001" target="_top">table.schemaName</a> = "MYSCHEMA";
+<a class="xref nopagenumber" href="default.html?0ac6ed61b9bc4886986eefe6ea0c5e3c.html#loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N1007F_N1001D_N10001" target="_top">table.temporary</a> = true;
+<a class="xref nopagenumber" href="default.html?0ac6ed61b9bc4886986eefe6ea0c5e3c.html#loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N10055_N1001D_N10001" target="_top">table.tableType</a> = COLUMNSTORE;
+<a class="xref nopagenumber" href="default.html?0ac6ed61b9bc4886986eefe6ea0c5e3c.html#loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N10054_N1001D_N10001" target="_top">table.loggingType</a> = NOLOGGING;
+<a class="xref nopagenumber" href="default.html?0ac6ed61b9bc4886986eefe6ea0c5e3c.html#loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N100F8_N1001D_N10001" target="_top">table.columns</a> = [
+	{name = "Col1"; <a class="xref nopagenumber" href="default.html?0ac6ed61b9bc4886986eefe6ea0c5e3c.html#loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N100A2_N1001D_N10001" target="_top">sqlType</a> = VARCHAR; nullable = false; length = 20; comment = "dummy comment";},
+	{name = "Col2"; <a class="xref nopagenumber" href="default.html?0ac6ed61b9bc4886986eefe6ea0c5e3c.html#loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N100A2_N1001D_N10001" target="_top">sqlType</a> = INTEGER; nullable = false;},
+	{name = "Col3"; sqlType = NVARCHAR; nullable = true; length = 20; defaultValue = "Defaultvalue";},
+	{name = "Col4"; sqlType = DECIMAL; nullable = false; precision = 2; scale = 3;}];
+<a class="xref nopagenumber" href="default.html?0ac6ed61b9bc4886986eefe6ea0c5e3c.html#loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N100DA_N1001D_N10001" target="_top">table.indexes</a> =  [
+	{name = "MYINDEX1"; unique = true; <a class="xref nopagenumber" href="default.html?0ac6ed61b9bc4886986eefe6ea0c5e3c.html#loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N10088_N1001D_N10001" target="_top">order</a> = DSC; indexColumns = ["Col2"];},
+	{name = "MYINDEX2"; unique = true; order = DSC; <a class="xref nopagenumber" href="default.html?0ac6ed61b9bc4886986eefe6ea0c5e3c.html#loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N1006E_N1001D_N10001" target="_top">indexType</a> = B_TREE; indexColumns = ["Col1", "Col4"];}];
+<a class="xref nopagenumber" href="default.html?0ac6ed61b9bc4886986eefe6ea0c5e3c.html#loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N100BC_N1001D_N10001" target="_top">table.primaryKey.pkcolumns</a> = ["Col1", "Col2"];
+</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N10043_N1001D_N10001"><div class="section_title">Table-Definition Configuration Schema</div><div type="Table-Definition Configuration Schema">
+			
+			<p class="p">The following example shows the configuration schema for tables defined using the
+					<span class="ph filepath">.hdbtable</span> syntax. Each of the entries in the
+				table-definition configuration schema is explained in more detail in a dedicated
+				section below:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">struct TableDefinition { 
+    string SchemaName;
+    optional bool temporary;
+    optional TableType tableType;
+    optional bool public;
+    optional TableLoggingType loggingType;
+    list<var class="keyword varname">&lt;ColumnDefinition&gt;</var> columns;
+    optional list<var class="keyword varname">&lt;IndexDefinition&gt;</var> indexes;
+    optional PrimaryKeyDefinition primaryKey;
+    optional string description
+}; </pre></div>
+
+		</div></div>
+
+		<div class="section" id="loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N1003B_N1001D_N10001"><div class="section_title">Schema Name</div><div type="Schema Name">
+			
+			<p class="p">To use the <span class="ph filepath">.hdbtable</span> syntax to specify the name of the schema
+				that contains the table you are defining, use the <span class="keyword">schemaName</span>
+				keyword. In the table definition, the <span class="keyword">schemaName</span> keyword must
+				adhere to the syntax shown in the following example.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">table.schemaName = "MYSCHEMA";</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N1007F_N1001D_N10001"><div class="section_title">Temporary</div><div type="Temporary">
+			
+			<p class="p">To use the <span class="ph filepath">.hdbtable</span> syntax to specify that the table you define is
+				temporary, use the boolean <span class="keyword">temporary</span> keyword. Since data in a
+				temporary table is session-specific, only the owner session of the temporary table
+				is allowed to INSERT/READ/TRUNCATE the data. Temporary tables exist for the duration
+				of the session, and data from the local temporary table is automatically dropped
+				when the session is terminated. In the table definition, the
+					<span class="keyword">temporary</span> keyword must adhere to the syntax shown in the
+				following example.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">table.temporary = true;</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N10055_N1001D_N10001"><div class="section_title">Table Type</div><div type="Table Type">
+			
+			<p class="p">To specify the table type using the <span class="ph filepath">.hdbtable</span> syntax, use the
+					<span class="keyword">tableType</span> keyword. In the table definition, the
+					<span class="keyword">TableType</span> keyword must adhere to the syntax shown in the
+				following example.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">table.tableType = [COLUMNSTORE | ROWSTORE];</pre></div>
+
+			<p class="p">The following configuration schema illustrates the parameters you can specify with
+				the <span class="keyword">tableType</span> keyword:</p>
+
+			<ul class="ul" id="loio0ac6ed61b9bc4886986eefe6ea0c5e3c__ul_rvp_z2h_np">
+				<li class="li"><samp class="ph codeph">COLUMNSTORE</samp><p class="p">Column-oriented storage, where entries of a
+						column are stored in contiguous memory locations. <span class="ph pname">SAP HANA</span> is
+						particularly optimized for column-order storage.</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">ROWSTORE</samp><p class="p">Row-oriented storage, where data is stored in a
+						table as a sequence of records</p>
+</li>
+
+			</ul>
+
+		</div></div>
+
+		<div class="section" id="loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N10054_N1001D_N10001"><div class="section_title">Table Logging Type</div><div type="Table Logging Type">
+			
+			<p class="p">To enable logging in a table definition using the <span class="ph filepath">.hdbtable</span>
+				syntax, use the <span class="keyword">tableLoggingType</span> keyword. In the table
+				definition, the <span class="keyword">tableLoggingType</span> keyword must adhere to the
+				syntax shown in the following example. </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">table.tableLoggingType = [LOGGING | NOLOGGING];</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N100F8_N1001D_N10001"><div class="section_title">Table Column Definition</div><div type="Table Column Definition">
+			
+			<p class="p">To define the column structure and type in a table definition using the
+					<span class="ph filepath">.hdbtable</span> syntax, use the <span class="keyword">columns</span>
+				keyword. In the table definition, the <span class="keyword">columns</span> keyword must adhere
+				to the syntax shown in the following example.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">table.columns = [
+	{name = "Col1"; sqlType = VARCHAR; nullable = false; length = 20; comment = "dummy comment";},
+	{name = "Col2"; sqlType = INTEGER; nullable = false;},
+	{name = "Col3"; sqlType = NVARCHAR; nullable = true; length = 20; defaultValue = "Defaultvalue";},
+	{name = "Col4"; sqlType = DECIMAL; nullable = false; precision = 2; scale = 3;}];</pre></div>
+
+			<p class="p">The following configuration schema illustrates the parameters you can specify with
+				the <span class="keyword">columns</span> keyword:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">struct ColumnDefinition { 
+	string name; 
+	SqlDataType sqlType; 
+	optional bool nullable; 
+	optional bool unique; 
+	optional int32 length; 
+	optional int32 scale; 
+	optional int32 precision; 
+	optional string defaultValue; 
+	optional string comment; 
+}; </pre></div>
+
+		</div></div>
+
+		<div class="section" id="loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N100A2_N1001D_N10001"><div class="section_title">SQL Data Type</div><div type="SQL Data Type">
+			
+			<p class="p">To define the SQL data type for a column in a table using the
+					<span class="ph filepath">.hdbtable</span> syntax, use the <span class="keyword">sqlType</span>
+				keyword. In the table definition, the <span class="keyword">sqlType</span> keyword must adhere
+				to the syntax shown in the following example.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">table.columns = [
+	{name = "Col1"; sqlType = VARCHAR; nullable = false; length = 20; comment = "dummy comment";},
+	...
+	];</pre></div>
+
+			<p class="p">The following configuration schema illustrates the data types you can specify with
+				the <span class="keyword">sqlType</span> keyword:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">enum SqlDataType { 
+	DATE; TIME; TIMESTAMP; SECONDDATE; INTEGER; TINYINT; 
+	SMALLINT; BIGINT; REAL; DOUBLE; FLOAT; SMALLDECIMAL; 
+	DECIMAL; VARCHAR; NVARCHAR; CLOB; NCLOB; 
+	ALPHANUM; TEXT; SHORTTEXT; BLOB; VARBINARY; 
+}; </pre></div>
+
+		</div></div>
+
+		<div class="section" id="loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N100BC_N1001D_N10001"><div class="section_title">Primary Key Definition</div><div type="Primary Key Definition">
+			
+			<p class="p">To define the primary key for the specified table using the
+					<span class="ph filepath">.hdbtable</span> syntax, use the <span class="keyword">primaryKey</span> and
+					<span class="keyword">pkcolumns</span> keywords.  In the table definition, the
+					<span class="keyword">primaryKey</span> and <span class="keyword">pkcolumns</span> keywords must
+				adhere to the syntax shown in the following example.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">table.primaryKey.pkcolumns = ["Col1", "Col2"];</pre></div>
+
+			<p class="p">The following configuration schema illustrates the parameters you can specify with
+				the <span class="keyword">primaryKey</span> keyword:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">struct PrimaryKeyDefinition { 
+	list<var class="keyword varname">&lt;string&gt;</var> pkcolumns; 
+	optional IndexType indexType; 
+}; </pre></div>
+
+		</div></div>
+
+		<div class="section" id="loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N100DA_N1001D_N10001"><div class="section_title">Table Index Definition</div><div type="Table Index Definition">
+			
+			<p class="p">To define the index for the specified table using the <span class="ph filepath">.hdbtable</span> syntax,
+				use the <span class="keyword">indexes</span> keyword. In the table definition, the
+					<span class="keyword">indexes</span> keyword must adhere to the syntax shown in the
+				following example.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">table.indexes =  [
+	{name = "MYINDEX1"; unique = true; order = DSC; indexColumns = ["Col2"];},
+	{name = "MYINDEX2"; unique = true; order = DSC; indexColumns = ["Col1", "Col4"];}];</pre></div>
+
+			<p class="p">You can also use the optional parameter <samp class="ph codeph">indexType</samp> to define the type of
+				index, for example, <samp class="ph codeph">B_TREE</samp> or <samp class="ph codeph">CPB_TREE</samp>, as
+				described in <a class="xref" href="default.html?0ac6ed61b9bc4886986eefe6ea0c5e3c.html#loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N1006E_N1001D_N10001" target="_top">Table Index Type</a>.</p>
+
+		</div></div>
+
+		<div class="section" id="loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N1006E_N1001D_N10001"><div class="section_title">Table Index Type</div><div type="Table Index Type">
+			
+			<p class="p">To define the index type for the specified table using the
+					<span class="ph filepath">.hdbtable</span> syntax, use the <span class="keyword">indexType</span>
+				keyword. In the table definition, the <span class="keyword">indexType</span> keyword must
+				adhere to the syntax shown in the following example.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">indexType = [B_TREE | CPB_TREE];</pre></div>
+
+			<p class="p"><samp class="ph codeph">B_TREE</samp> specifies an index tree of type <span class="keyword">B+</span>, which maintains
+				sorted data that performs the insertion, deletion, and search of records. CPB_TREE
+				stands for <span class="q">“Compressed Prefix B_TREE”</span> and specifies an index tree of type
+					<span class="keyword">CPB+</span>, which is based on pkB-tree. CPB_TREE is a very small
+				index that uses a <span class="q">“partial key”</span>, that is; a key that is only part of a full key
+				in index nodes.</p>
+
+			<div class="note note" id="loio0ac6ed61b9bc4886986eefe6ea0c5e3c__note_N100B6_N10089_N1001D_N10001"><span class="notetitle">Note</span> 
+				<p class="p">If neither the <span class="keyword">B_TREE</span> nor the <span class="keyword">CPB_TREE</span> type
+					is specified in the table-definition file, <span class="ph pname">SAP HANA</span> chooses the
+					appropriate index type based on the column data type, as follows:</p>
+
+				<ul class="ul" id="loio0ac6ed61b9bc4886986eefe6ea0c5e3c__ul_dqf_wn2_p3">
+					<li class="li">CPB_TREE<p class="p">Character string types, binary string types, decimal types, when
+							the constraint is a composite key or a non-unique constraint </p>
+</li>
+
+					<li class="li">B_TREE<p class="p">All column data types other than those specified for
+						CPB_TREE</p>
+</li>
+
+				</ul>
+
+			</div>
+
+		</div></div>
+
+		<div class="section" id="loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N10088_N1001D_N10001"><div class="section_title">Table Index Order</div><div type="Table Index Order">
+			
+			<p class="p">To define the order of the table index using the <span class="ph filepath">.hdbtable</span>
+				syntax, use the <span class="keyword">order</span> keyword. Insert the
+					<span class="keyword">order</span> with the desired value (for examaple, ascending or
+				descending) in the index type definition;  the <span class="keyword">order</span> keyword must
+				adhere to the syntax shown in the following example.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">order = [ASC | DSC];</pre></div>
+
+			<p class="p">You can choose to filter the contents of the table index either in ascending (ASC) or
+				descending (DSC) order.</p>
+
+		</div></div>
+
+		<div class="section" id="loio0ac6ed61b9bc4886986eefe6ea0c5e3c__section_N10222_N1001D_N10001"><div class="section_title">Complete Table-Definition Configuration Schema</div><div type="Complete Table-Definition Configuration Schema">
+			
+			<p class="p">The following example shows the complete configuration schema for tables defined
+				using the <span class="ph filepath">.hdbtable</span> syntax.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">enum TableType {
+    COLUMNSTORE; ROWSTORE;
+};
+enum TableLoggingType {
+    LOGGING; NOLOGGING;
+};
+enum IndexType {
+    B_TREE; CPB_TREE;
+};
+enum Order {
+    ASC; DSC;
+};
+enum SqlDataType {
+	DATE; TIME; TIMESTAMP; SECONDDATE; 
+	INTEGER; TINYINT; SMALLINT; BIGINT; 
+	REAL; DOUBLE; FLOAT; SMALLDECIMAL; DECIMAL; 
+	VARCHAR; NVARCHAR; CLOB; NCLOB; 
+	ALPHANUM; TEXT; SHORTTEXT; BLOB; VARBINARY; 
+};
+struct PrimaryKeyDefinition {
+    list<var class="keyword varname">&lt;string&gt;</var> pkcolumns;
+    optional IndexType indexType;
+};
+struct IndexDefinition {
+    string name;
+    bool unique;
+    optional Order order;
+    optional IndexType indexType;
+    list<var class="keyword varname">&lt;string&gt;</var> indexColumns;
+};
+struct ColumnDefinition {
+    string name;
+    SqlDataType sqlType;
+    optional bool nullable;
+    optional bool unique;
+    optional int32 length;
+    optional int32 scale;
+    optional int32 precision;
+    optional string defaultValue;
+    optional string comment;
+};
+struct TableDefinition {
+    string schemaName;
+    optional bool temporary;
+    optional TableType tableType;
+    optional bool public;
+    optional TableLoggingType loggingType;
+    list<var class="keyword varname">&lt;ColumnDefinition&gt;</var> columns;
+    optional list<var class="keyword varname">&lt;IndexDefinition&gt;</var> indexes;
+    optional PrimaryKeyDefinition primaryKey;
+    optional string description;
+};
+TableDefinition table;
+</pre></div>
+
+		</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?e19a2c794de549eeb065392096bc9ca3.html" target="_top" title="In the SAP HANA database, as in other relational databases, a table is a set of data elements that are organized using columns and rows. A database table has a specified number of columns, defined at the time of table creation, but can have any number of rows. Database tables also typically have meta-data associated with them; the meta-data might include constraints on the table or on the values within particular columns.">Tables</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Table Configuration Syntax";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

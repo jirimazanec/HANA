@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=23241435123695842"/>
+<title>Modifying the Content of Table Variables</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio36f718be73e745ceae0530aa80850ce3";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio36f718be73e745ceae0530aa80850ce3">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Modifying the Content of Table Variables</h1>
+
+	<div class="body conbody">
+		<p class="p">Besides the index-based table cell assignment, SQLScript offers additional operations
+			that directly modify the content of a table variable, without having to assign some
+			statement result to a new table variable. This, together with not involving the SQL
+			layer, leads to a performance improvement. On the other hand, these operations require
+			data materialization in contrary to the declarative logic.</p>
+
+		<p class="p">For all position expressions, the valid values are in the interval from 1 to 2^31-1.</p>
+
+		<div class="section" id="loio36f718be73e745ceae0530aa80850ce3__section_p5y_mz3_3z"><div class="section_title">Inserting Data Records into Table Variables</div><div type="Inserting Data Records into Table Variables">
+			
+			<div class="p">You can insert a new data record at a specific position in a table variable with the following
+        syntax:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">:&lt;table_variable&gt;.INSERT((&lt;value1,…, &lt;valueN), &lt;index&gt;)</pre></div>
+</div>
+
+			<p class="p">All existing data records at positions starting from the given index onwards are
+				moved to the next position. If the index is greater than the original table size,
+				the records between the inserted record and the original last record are initialized
+				with <samp class="ph codeph">NULL</samp> values.</p>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE TAB(K VARCHAR(20), V INT);
+
+INSERT INTO TAB VALUES('A', 7582);
+INSERT INTO TAB VALUES('B', 4730);
+INSERT INTO TAB VALUES('C', 1960);
+INSERT INTO TAB VALUES('A', 8650);
+INSERT INTO TAB VALUES('D', 1318);
+INSERT INTO TAB VALUES('C', 3836);
+INSERT INTO TAB VALUES('B', 8602);
+INSERT INTO TAB VALUES('C', 3257);
+
+CREATE PROCEDURE ADD_SUM(IN IT TAB, OUT OT TAB) AS
+BEGIN
+  DECLARE IDX INT = 0;
+  DECLARE K VARCHAR(20) = '';
+  DECLARE VSUM INT = 0;
+  
+  IF IS_EMPTY(:IT) THEN
+    RETURN;
+  END IF;
+  
+  OT = SELECT * FROM :IT ORDER BY K;
+  WHILE :OT.K[IDX + 1] IS NOT NULL DO
+    IDX = IDX + 1;
+    IF :OT.K[IDX] &lt;&gt; K THEN
+      IF K &lt;&gt; '' THEN
+        :OT.INSERT(('Sum ' || K, VSUM), IDX);
+        IDX = IDX + 1;
+      END IF;
+      :OT.INSERT(('Section ' || :OT.K[IDX], 0), IDX);
+      IDX = IDX + 1;
+      K = :OT.K[IDX];
+      VSUM = 0;
+    END IF;
+    VSUM = VSUM + :OT.V[IDX];
+  END WHILE; 
+  :OT.INSERT(('Sum ' || K, VSUM), IDX + 1);
+END
+
+CALL ADD_SUM(TAB, ?)
+
+K                V
+------------------
+Section A        0   
+A            7.582
+A            8.650
+Sum A       16.232
+Section B        0   
+B            4.730
+B            8.602
+Sum B       13.332
+Section C        0   
+C            1.960
+C            3.836
+C            3.257
+Sum C        9.053
+Section D        0   
+D            1.318
+Sum D        1.318
+</pre></div>
+
+			</div>
+
+			<p class="p">If you omit the position, the data record will be appended at the end. </p>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE SOURCE(K VARCHAR(20), PCT DECIMAL(5, 2), V DECIMAL(10, 2));
+CREATE TABLE TARGET(K VARCHAR(20), V DECIMAL(10, 2));
+
+INSERT INTO SOURCE VALUES ('A', 5.99, 734.42);
+INSERT INTO SOURCE VALUES ('A', 50.83, 422.26);
+INSERT INTO SOURCE VALUES ('B', 75.07, 362.53);
+INSERT INTO SOURCE VALUES ('C', 87.21, 134.53);
+INSERT INTO SOURCE VALUES ('C', 80.72, 2722.49);
+
+CREATE PROCEDURE SPLIT(IN IT SOURCE, OUT OT1 TARGET, OUT OT2 TARGET) AS
+BEGIN
+  DECLARE IDX INT;
+  DECLARE MAXIDX INT = RECORD_COUNT(:IT);
+
+  FOR IDX IN 1..MAXIDX DO
+    DECLARE V1 DECIMAL(10, 2) = :IT.V[IDX] * :IT.PCT[IDX] / 100;
+    DECLARE V2 DECIMAL(10, 2) = :IT.V[IDX] - V1;
+    :OT1.INSERT((:IT.K[IDX], V1));
+    :OT2.INSERT((:IT.K[IDX], V2));
+  END FOR;
+END;
+
+CALL SPLIT(SOURCE, ?, ?);
+
+OT1           OT2
+K  V          K  V    
+------------------------
+A     43,99   A  690,43
+A    214,63   A  207,64
+B    272,15   B   90,38
+C    117,32   C   17,21
+C  2.197,59   C  524,9
+</pre></div>
+
+			</div>
+
+			<p class="p">You can also provide values for a limited set of columns:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">:&lt;table_variable&gt;.(&lt;column1&gt;,…, &lt;column&gt;).INSERT((&lt;value1&gt;,…, &lt;valuen&gt;), &lt;index&gt;)</pre></div>
+
+			<div class="note note"><span class="notetitle">Note</span> The values for the omitted columns are initialized with <samp class="ph codeph">NULL</samp>
+				values.</div>
+
+		</div></div>
+
+		<div class="section" id="loio36f718be73e745ceae0530aa80850ce3__section_nq3_dbj_3z"><div class="section_title">Updating Data Records in Table Variables</div><div type="Updating Data Records in Table Variables">
+			
+			<div class="p">You can modify a data record at a specific position. There are two equivalent syntax
+					options.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">:&lt;table_variable&gt;.UPDATE((&lt;value1&gt;,…, &lt;valuen&gt;), &lt;index&gt;)
+&lt;table_variable&gt;[&lt;index&gt;] = (&lt;value1&gt;,…, &lt;valuen&gt;)
+</pre></div>
+<div class="note note"><span class="notetitle">Note</span> The
+					index must be specified.</div>
+</div>
+
+			<div class="p">You can also provide values for a limited set of
+				columns.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">:&lt;table_variable&gt;.(&lt;column1&gt;,…, &lt;column&gt;).UPDATE((&lt;value1&gt;,…, &lt;valuen&gt;), &lt;index&gt;)
+&lt;table_variable&gt;.(&lt;column1&gt;,…, &lt;column&gt;)[&lt;index&gt;] = (&lt;value1&gt;,…, &lt;valuen&gt;)
+</pre></div>
+</div>
+
+			<div class="note note"><span class="notetitle">Note</span> The values for the omitted columns remain unchanged.</div>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE TAB (V1 INT, V2 INT);
+INSERT INTO TAB VALUES(599, 7442);
+INSERT INTO TAB VALUES(5083, 4226);
+INSERT INTO TAB VALUES(7507, 3253);
+INSERT INTO TAB VALUES(8721, 1453);
+INSERT INTO TAB VALUES(8072, 2749);
+
+CREATE PROCEDURE MIRROR (IN IT TAB, OUT OT TAB) AS
+BEGIN
+  DECLARE IDX INT;
+  DECLARE MAXIDX INT = RECORD_COUNT(:IT);
+
+  FOR IDX IN 1..MAXIDX DO
+    OT[MAXIDX-IDX+1] = (:IT.V2[:IDX], :IT.V1[:IDX]);
+  END FOR;
+END;
+
+CALL MIRROR(TAB, ?);
+
+V1        V2
+------------
+2.749  8.072
+1.453  8.721
+3.253  7.507
+4.226  5.083
+7.442    599
+</pre></div>
+
+			</div>
+
+			<div class="note note"><span class="notetitle">Note</span> You can also set values at a position outside the original table size. Just like
+				with <samp class="ph codeph">INSERT</samp>, the records between the original last record and the
+				newly inserted records are initialized with <samp class="ph codeph">NULL</samp> values.</div>
+
+		</div></div>
+
+		<div class="section" id="loio36f718be73e745ceae0530aa80850ce3__section_twt_vbj_3z"><div class="section_title">Deleting Data Records from Table Variables</div><div type="Deleting Data Records from Table Variables"><p class="p">You can delete data records from a table variable.</p>
+<div class="sectiondiv subsection">
+				<p class="p subsectiontitle">Deleting a Single Record</p>
+
+				<div class="p">You can use the following
+					syntax:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">:&lt;table_variable&gt;.DELETE(&lt;index&gt;)</pre></div>
+</div>
+
+				<p class="p">If the index is outside the table size, no operation is performed.</p>
+
+				<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE HIER(PARENT VARCHAR(30), CHILD VARCHAR(30));
+INSERT INTO HIER VALUES ('root', 'A');
+INSERT INTO HIER VALUES ('root', 'B');
+INSERT INTO HIER VALUES ('A', 'C');
+INSERT INTO HIER VALUES ('C', 'D');
+INSERT INTO HIER VALUES ('A', 'E');
+INSERT INTO HIER VALUES ('E', 'F');
+INSERT INTO HIER VALUES ('E', 'G');
+
+CREATE PROCEDURE CALC_LEVEL (IN IT HIER, IN ROOT VARCHAR(30), OUT OT_LEVEL TABLE(NODE VARCHAR(30), L INT)) AS
+BEGIN
+  DECLARE STACK TABLE(NODE VARCHAR(30), L INT);
+  
+  STACK[1] = (ROOT, 1);
+  WHILE NOT IS_EMPTY(:STACK) DO
+    DECLARE I INT;
+    DECLARE NUM_CHILDREN INT;
+    DECLARE CURR_NODE VARCHAR(30) = :STACK.NODE[1];
+    DECLARE CURR_LEVEL INT = :STACK.L[1];
+    CHILDREN = SELECT CHILD FROM :IT WHERE PARENT = CURR_NODE;
+    :OT_LEVEL.INSERT((CURR_NODE, CURR_LEVEL));
+    NUM_CHILDREN = RECORD_COUNT(:CHILDREN);
+    :STACK.DELETE(1);
+    FOR I IN 1..NUM_CHILDREN DO
+      :STACK.INSERT((:CHILDREN.CHILD[I], CURR_LEVEL + 1));
+    END FOR;
+  END WHILE;
+END;
+
+CALL CALC_LEVEL(HIER, 'root', ?)
+
+NODE  L
+-------
+root  1
+A     2
+B     2
+C     3
+E     3
+D     4
+F     4
+G     4
+</pre></div>
+
+				</div>
+
+			</div><div class="sectiondiv subsection">
+				<p class="p subsectiontitle">Deleting Blocks of Records from Table Variables</p>
+
+				<div class="p">To delete blocks of records from table variables, you can use the following
+					syntax:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">:&lt;table_variable&gt;.DELETE(&lt;from_index&gt;..&lt;to_index&gt;)</pre></div>
+
+				</div>
+
+				<p class="p">If the starting index is greater than the table size, no operation is performed.
+					If the end index is smaller than the starting index, an error occurs. If the end
+					index is greater than the table size, all records from the starting index to the
+					end of the table are deleted.</p>
+
+				<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE PROD_PER_DATE (PROD_NAME VARCHAR(20), PROD_DATE DATE, NUM_DELTA INT);
+INSERT INTO PROD_PER_DATE VALUES ('PC', '20170105', 100);
+INSERT INTO PROD_PER_DATE VALUES ('PC', '20170106', 50);
+INSERT INTO PROD_PER_DATE VALUES ('PC', '20170117', 200);
+INSERT INTO PROD_PER_DATE VALUES ('Notebook', '20170320', 30);
+INSERT INTO PROD_PER_DATE VALUES ('Notebook', '20170322', 310);
+INSERT INTO PROD_PER_DATE VALUES ('Phone', '20170121', 20);
+INSERT INTO PROD_PER_DATE VALUES ('Phone', '20170205', 50);
+
+CREATE PROCEDURE TOTAL_NUM_EXCEEDS_CAPACITY (
+  IN IT PROD_PER_DATE,
+  IN CAPACITY INT,
+  OUT OT_RESULT TABLE(PROD_NAME VARCHAR(20), PROD_DATE DATE, NUM_TOTAL INT)
+) AS
+BEGIN
+  DECLARE IDX INT = 0;
+  DECLARE NUM_TOTAL INT = 0;
+  DECLARE INTERVALS TABLE(FROM_IDX INT, TO_IDX INT);
+  DECLARE FROM_IDX INT = 1;
+  DECLARE TO_IDX INT = 0;
+
+  OT_RESULT = SELECT PROD_NAME, PROD_DATE, NUM_DELTA AS NUM_TOTAL
+    FROM :IT ORDER BY PROD_NAME, PROD_DATE;
+
+  WHILE :OT_RESULT.PROD_NAME[IDX + 1] IS NOT NULL DO
+    IDX = IDX+1;
+    IF IDX &gt; 1 THEN
+      IF :OT_RESULT.PROD_NAME[IDX] &lt;&gt; :OT_RESULT.PROD_NAME[IDX - 1] THEN
+        IF TO_IDX = 0 THEN
+          TO_IDX = IDX - 1;
+        END IF;
+        IF FROM_IDX &lt;= TO_IDX THEN
+          :INTERVALS.INSERT((FROM_IDX, TO_IDX));
+        END IF;
+        NUM_TOTAL = 0;
+        FROM_IDX = IDX;
+        TO_IDX = 0;
+      END IF;
+    END IF;
+    NUM_TOTAL = NUM_TOTAL + :OT_RESULT.NUM_TOTAL[IDX];
+    OT_RESULT.NUM_TOTAL[IDX] = NUM_TOTAL;
+    IF NUM_TOTAL &gt; CAPACITY AND TO_IDX = 0 THEN
+      TO_IDX = IDX - 1;
+    END IF;
+  END WHILE;
+
+  IF TO_IDX = 0 THEN
+    TO_IDX = IDX;
+  END IF;
+  :INTERVALS.INSERT((FROM_IDX, TO_IDX));
+
+  IDX = RECORD_COUNT(:INTERVALS);
+  WHILE IDX &gt; 0 DO
+    :OT_RESULT.DELETE(:INTERVALS.FROM_IDX[IDX] .. :INTERVALS.TO_IDX[IDX]);
+    IDX = IDX - 1;
+  END WHILE;
+END;
+
+CALL TOTAL_NUM_EXCEEDS_CAPACITY(PROD_PER_DATE, 100, ?)
+
+PROD_NAME  PROD_DATE   NUM_TOTAL
+--------------------------------
+Notebook   22.03.2017        340
+PC         06.01.2017        150
+PC         17.01.2017        350
+</pre></div>
+
+				</div>
+
+				<div class="note note"><span class="notetitle">Note</span> The algorithm works with positive delta values only.</div>
+
+			</div><div class="sectiondiv subsection">
+				<p class="p subsectiontitle">Deleting Selected Records from a Table Variable</p>
+
+				<div class="p"><div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">:&lt;table_variable&gt;.DELETE(&lt;array_of_integers&gt;)</pre></div>
+ The
+					provided array expression contains indexes pointing to records which shall be
+					deleted from the table variable. If the array contains an invalid index (for
+					example, zero), an error occurs.</div>
+
+				<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE PROD_PER_DATE (PROD_NAME VARCHAR(20), PROD_DATE DATE, NUM_DELTA INT);
+INSERT INTO DATE_VALUES VALUES ('PC', '20170105', 100);
+INSERT INTO DATE_VALUES VALUES ('PC', '20170106', -50);
+INSERT INTO DATE_VALUES VALUES ('PC', '20170117', 200);
+INSERT INTO DATE_VALUES VALUES ('Notebook', '20170320', 300);
+INSERT INTO DATE_VALUES VALUES ('Notebook', '20170322', -10);
+INSERT INTO DATE_VALUES VALUES ('Phone', '20170121', 20);
+INSERT INTO DATE_VALUES VALUES ('Phone', '20170205', 50);
+ 
+CREATE PROCEDURE TOTAL_NUM_EXCEEDS_CAPACITY (
+  IN IT PROD_PER_DATE,
+  IN CAPACITY INT,
+  OUT OT_RESULT TABLE(PROD_NAME VARCHAR(20), PROD_DATE DATE, NUM_TOTAL INT)
+) AS
+BEGIN
+  DECLARE IDX INT = 0;
+  DECLARE NUM_TOTAL INT = 0;
+  DECLARE DEL_IDX INT ARRAY;
+  DECLARE ARR_IDX INT = 0;
+
+  OT_RESULT = SELECT PROD_NAME, PROD_DATE, NUM_DELTA AS NUM_TOTAL
+    FROM :IT ORDER BY PROD_NAME, PROD_DATE;
+
+  WHILE :OT_RESULT.PROD_NAME[IDX+1] IS NOT NULL DO
+    IDX = IDX+1;
+    IF IDX &gt; 1 THEN
+      IF :OT_RESULT.PROD_NAME[IDX] &lt;&gt; :OT_RESULT.PROD_NAME[IDX - 1] THEN
+        NUM_TOTAL = 0;
+      END IF;
+    END IF;
+    NUM_TOTAL = NUM_TOTAL + :OT_RESULT.NUM_TOTAL[IDX];
+    OT_RESULT.NUM_TOTAL[IDX] = NUM_TOTAL;
+    IF NUM_TOTAL &lt;= CAPACITY THEN
+      ARR_IDX = ARR_IDX + 1;
+      DEL_IDX[ARR_IDX] = IDX;
+    END IF;
+  END WHILE;
+
+  :OT_RESULT.DELETE(:DEL_IDX);
+END;
+
+CALL TOTAL_NUM_EXCEEDS_CAPACITY(PROD_PER_DATE, 60, ?)
+
+PROD_NAME  PROD_DATE   NUM_TOTAL
+--------------------------------
+Notebook   20.03.2017        300
+Notebook   22.03.2017        290
+PC         05.01.2017        100
+PC         17.01.2017        250
+Phone      05.02.2017         70
+</pre></div>
+
+				</div>
+
+				<div class="note note"><span class="notetitle">Note</span> This algorithm works also with negative delta values.</div>
+
+			</div></div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Modifying the Content of Table Variables";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

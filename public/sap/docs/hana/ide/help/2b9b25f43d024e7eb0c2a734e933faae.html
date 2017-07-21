@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="A view is a virtual table based on the dynamic results returned in response to an SQL statement. SAP HANA Extended Application Services (SAP HANA XS) enables you to create a database view as a design-time file in the repository."/>
+<meta name="description" content="A view is a virtual table based on the dynamic results returned in response to an SQL statement. SAP HANA Extended Application Services (SAP HANA XS) enables you to create a database view as a design-time file in the repository."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=820744902426572"/>
+<title>Create an SQL View</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio2b9b25f43d024e7eb0c2a734e933faae";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio2b9b25f43d024e7eb0c2a734e933faae">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Create an SQL View</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">A view is a virtual table based on the dynamic results returned in response to an SQL
+		statement. <span class="ph pname">SAP HANA</span> Extended Application Services (<span class="ph pname">SAP HANA</span>
+		XS) enables you to create a database view as a design-time file in the
+		repository.</p>
+
+		<div class="section prereq p" id="loio2b9b25f43d024e7eb0c2a734e933faae__prereq_N10015_N10012_N10001"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Prerequisites</h2></div>
+			<p class="p">You have created a schema definition, for example,
+				<span class="ph filepath">MYSCHEMA.hdbschema</span>.</p>
+
+		</div>
+
+		<div class="section context" id="loio2b9b25f43d024e7eb0c2a734e933faae__context_N1001D_N1001A_N10001"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<p class="p">An SQL view contains rows and columns, just like a real database table; the fields in
+				an SQL view are fields from one or more real tables in the database. You can add SQL
+				functions, for example, WHERE or JOIN statements, to a view and present the
+				resulting data as if it were coming from one, single table. </p>
+
+			<p class="p">To create an SQL view as a design-time object, you create a flat file that contains
+				the view definition. You save this file with the suffix
+					<span class="ph filepath">.hdbview</span>, for example, <span class="ph filepath">MYVIEW.hdbview</span>,
+				in the appropriate package for your application in the SAP HANA repository.</p>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps" id="loio2b9b25f43d024e7eb0c2a734e933faae__steps_zdc_j3z_f3"><li class="li step stepexpand">
+				<span class="ph cmd">Open the <span class="ph pname">SAP HANA</span> Web-based Development Workbench Editor
+					tool.</span>
+				<div class="itemgroup info">The Editor tool is available on the <span class="ph pname">SAP HANA</span> XS Web server at the following
+					URL:
+							<span class="ph filepath">http://<var class="keyword varname">&lt;WebServerHost&gt;</var>:80<var class="keyword varname">&lt;SAPHANAinstance&gt;</var>/sap/hana/ide/editor</span></div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Create the view definition file.</span>
+				<ol type="a" class="ol substeps" id="loio2b9b25f43d024e7eb0c2a734e933faae__substeps_kcc_dgz_f3">
+					<li class="li substep">
+						<span class="ph cmd">In the package structure, select the package where you want to create the new view
+							definition file and from the context menu choose <span class="ph menucascade"><img src="images/navstart.gif" alt="Start of the navigation path" title="Start of the navigation path"/> <span class="ph uicontrol">New</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">File</span> <img src="images/navend.gif" alt="End of the navigation path" title="End of the navigation path"/></span>. </span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">Enter the name of the view in the <span class="ph uicontrol">File Name</span>
+							field, for example, <kbd class="ph userinput">MYVIEW.hdbview</kbd>, and choose
+								<span class="ph uicontrol">Create</span>.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand" id="loio2b9b25f43d024e7eb0c2a734e933faae__step_N1008F_N10026_N1001A_N10001">
+				<span class="ph cmd">Define the view.</span>
+				<div class="itemgroup info">Add the view definition code to the file, as shown in the example below, replacing object
+					names and paths to suit your requirements.</div>
+				<div class="itemgroup stepxmp">
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">schema="MYSCHEMA";
+query="SELECT T1.\"Column2\" FROM \"MYSCHEMA\".\"acme.com.test.views::MY_VIEW1\" AS T1 LEFT JOIN \"MYSCHEMA\".\"acme.com.test.views::MY_VIEW2\" AS T2 ON T1.\"Column1\" = T2.\"Column1\"";
+depends_on=["acme.com.test.views::MY_VIEW1", "acme.com.test.views::MY_VIEW2"];
+</pre></div>
+
+					<p class="p">In an SQL view defined using the <span class="ph filepath">.hdbview</span> syntax, any
+						dependency to another table or view must be declared explicitly, for
+						example, with the <samp class="ph codeph">depends_on</samp> keyword. The target view or
+						table specified in the <samp class="ph codeph">depends_on</samp> keyword must also be
+						mentioned in the <samp class="ph codeph">SELECT</samp> query that defines the SQL view. If
+						one of more of the tables or views specified in the dependency does not
+						exist, the activation of the object in the repository fails.</p>
+
+				</div>
+				<div class="itemgroup info">
+					<p class="p">If you want to assign names to the columns in a view, use the following
+						syntax in the SQL query. In the example below, the following names are
+						specified for the columns defined in the view:</p>
+
+					<ul class="ul" id="loio2b9b25f43d024e7eb0c2a734e933faae__ul_avw_ftn_z3">
+						<li class="li"><samp class="ph codeph">idea_id</samp></li>
+
+						<li class="li"><samp class="ph codeph">identity_id</samp></li>
+
+						<li class="li"><samp class="ph codeph">role_id</samp>
+						</li>
+
+					</ul>
+
+				</div>
+				<div class="itemgroup stepxmp">
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">schema = "MYSCHEMA";
+query = "SELECT role_join.idea_id AS <strong class="ph b">idea_id</strong>, ident.member_id AS <strong class="ph b">identity_id</strong>, role_join.role_id AS <strong class="ph b">role_id</strong>
+            FROM \"acme.com.odin.db.iam::t_identity_group_member_transitive\" AS ident
+            INNER JOIN \"acme.com.odin.db.idea::t_idea_identity_role\" AS role_join 
+                  ON role_join.identity_id = ident.group_id UNION DISTINCT
+            SELECT <strong class="ph b">idea_id</strong>, <strong class="ph b">identity_id</strong>, <strong class="ph b">role_id</strong>
+            FROM \"acme.com.odin.db.idea::t_idea_identity_role\"
+            WITH read only";
+</pre></div>
+
+				</div>
+			</li>
+<li class="li step stepexpand" id="loio2b9b25f43d024e7eb0c2a734e933faae__step_N100B1_N10026_N1001A_N10001">
+				<span class="ph cmd">Save the SQL view-definition file.</span>
+				<div class="itemgroup stepresult">The view is saved and activated in the SAP HANA repository.</div>
+			</li>
+</ol>
+
+	</div>
+
+<div class="related-links"> 
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Create an SQL View";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Call stored SAP HANA procedures from XS server-side JavaScript (XSJS) and process the results of the calls in JavaScript."/>
+<meta name="description" content="Call stored SAP HANA procedures from XS server-side JavaScript (XSJS) and process the results of the calls in JavaScript."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=08289195672906768"/>
+<title>Accessing Stored Procedures from XS JavaScript</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio17c4ada7f4214d4aabdcf941e178f27b";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio17c4ada7f4214d4aabdcf941e178f27b">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Accessing Stored Procedures from XS JavaScript</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">Call stored <span class="ph pname">SAP HANA</span> procedures from XS server-side JavaScript (XSJS) and
+		process the results of the calls in JavaScript.</p>
+
+		<p class="p">XS procedures provide a convenient way to call stored procedures in <span class="ph pname">SAP HANA</span>
+			from XS server-side Javascript (XSJS) and process the results of the calls in
+			JavaScript. The XS procedures library extends the features already available with the
+				<span class="ph pname">SAP HANA</span> XS JavaScript database API. Using XS procedures, <span class="ph pname">SAP
+				HANA</span> stored procedures can be considered as simple XS JavaScript functions
+			for anyone developing XS JavaScript services. </p>
+
+		<p class="p">For example, where an <span class="ph pname">SAP HANA</span> stored procedure uses a table as input
+			parameter and a table as output, XS Procedures use JavaScript objects (or an array of
+			objects) which can be passed to the procedure. Similarly, the result of the procedure
+			call is provided as an array of JavaScript objects. You declare a stored procedure as an
+			XS JavaScript function and then call the stored procedure as if it were a JavaScript
+			function delivering a JavaScript object.</p>
+
+		<p class="p">To use a stored procedure as an XS JavaScript function, the following steps are required: </p>
+
+		
+<div class="table-wrapper tablenoborder"><table summary="" id="loio17c4ada7f4214d4aabdcf941e178f27b__table_xtx_wgl_w4" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: </span></caption>
+<colgroup><col width="14.662756598240469%"/><col width="34.75073313782991%"/><col width="50.58651026392962%"/></colgroup>
+
+				
+				
+				
+				<thead class="thead" align="left">
+					<tr class="row">
+						<th class="entry" valign="top" width="14.662756598240467%" id="d300656e56">Step</th>
+
+						<th class="entry" valign="top" width="34.75073313782991%" id="d300656e59">Action</th>
+
+						<th class="entry" valign="top" width="50.58651026392962%" id="d300656e62">Description</th>
+
+					</tr>
+
+				</thead>
+
+				<tbody class="tbody">
+					<tr class="row">
+						<td class="entry" valign="top" width="14.662756598240467%" headers="d300656e56 ">1</td>
+
+						<td class="entry" valign="top" width="34.75073313782991%" headers="d300656e59 ">Import the XS Procedures library</td>
+
+						<td class="entry" valign="top" width="50.58651026392962%" headers="d300656e62 ">Provide access to the XS procedures</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="14.662756598240467%" headers="d300656e56 ">2</td>
+
+						<td class="entry" valign="top" width="34.75073313782991%" headers="d300656e59 ">Specify a schema for temporary tables</td>
+
+						<td class="entry" valign="top" width="50.58651026392962%" headers="d300656e62 ">Temporary tables are used to store the JavaScript arguments provided
+							for the function.</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="14.662756598240467%" headers="d300656e56 ">3</td>
+
+						<td class="entry" valign="top" width="34.75073313782991%" headers="d300656e59 ">Import the procedure</td>
+
+						<td class="entry" valign="top" width="50.58651026392962%" headers="d300656e62 ">Create the XS JavaScript functions, which can later be used to call
+							the stored <span class="ph pname">SAP HANA</span> procedure. You can define functions
+							which map your call arguments to the parameters of the stored
+							procedure.</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" rowspan="3" valign="top" width="14.662756598240467%" headers="d300656e56 ">4</td>
+
+						<td class="entry" valign="top" width="34.75073313782991%" headers="d300656e59 ">Call the procedure</td>
+
+						<td class="entry" valign="top" width="50.58651026392962%" headers="d300656e62 ">Use the imported procedure in the same way as any normal JavaScript
+							function, for example, using JavaScript object argument lists. </td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="34.75073313782991%" headers="d300656e59 "><a class="xref" href="default.html?17c4ada7f4214d4aabdcf941e178f27b.html#loio17c4ada7f4214d4aabdcf941e178f27b__section_sg3_hlz_t4" target="_top">Use
+								Arguments that Reference an Existing Table</a></td>
+
+						<td class="entry" valign="top" width="50.58651026392962%" headers="d300656e62 ">(<span class="ph emphasis emphasis">Optional</span>) Write the results or a procedure call
+							into a physical table and pass the table as an argument rather than a
+							JavaScript object</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="34.75073313782991%" headers="d300656e59 "><a class="xref" href="default.html?17c4ada7f4214d4aabdcf941e178f27b.html#loio17c4ada7f4214d4aabdcf941e178f27b__section_xtn_23l_w4" target="_top">Use Table-Valued Arguments</a></td>
+
+						<td class="entry" valign="top" width="50.58651026392962%" headers="d300656e62 ">(<span class="ph emphasis emphasis">Optional</span>) Call a procedure with arguments
+							stored as values in a table</td>
+
+					</tr>
+
+				</tbody>
+
+			</table>
+</div>
+
+		<div class="section" id="loio17c4ada7f4214d4aabdcf941e178f27b__section_sg3_hlz_t4"><div class="section_title">Calling Procedures with Arguments that Reference an Existing Table</div><div type="Calling Procedures with Arguments that Reference an Existing Table">
+			
+			<p class="p">If you want to pass a table as an argument rather than a JavaScript object, you must
+				specify the name of the table (as a string) in the call statement as well as the
+				name of the schema where the table is located. The following example shows how to
+				reference the table <samp class="ph codeph">rating_table</samp>.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">getRating('schema.rating_table', 3);</pre></div>
+
+			<p class="p">The <span class="ph pname">SAP HANA</span> database enables you to materialize the results of a
+				procedure call; that is, to write the results into a physical table using the
+					<samp class="ph codeph">WITH OVERVIEW</samp> expression. In the <samp class="ph codeph">WITH OVERVIEW</samp>
+				expression, you pass a string value to the output parameter position that contains
+				the result you want to materialize. The value returned is not the rating itself, but
+				a reference to the table into which the results have been written. The results of
+				the procedure call can now be retrieved from the specified table, in this example,
+					<samp class="ph codeph">OUTPUT_TABLE</samp>.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var resCall = getRating(rating, 3, "schema.output_table"); 
+  // {"RESULT": [{"variable":"RESULT","table":"\"SCHEMA\".\"OUTPUT_TABLE\""}]}</pre></div>
+
+			<p class="p">The <samp class="ph codeph">WITH OVERVIEW</samp> expression also allows you to write the results of
+				a procedure into a global temporary table; that is, a table that is truncated at
+				session close. To use XS Procedures to write the results of a procedure into a
+				global temporary table, you do not specify a name for the result table; you include
+				an empty string (<samp class="ph codeph">''</samp>), as illustrated in the following example:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var conn = $.db.getConnection();
+resCall = getRating(rating, 3, '', conn); 
+  // {"RESULT": [{"variable":"RESULT","table":"\"SCHEMA\".\"RESULT_5270ECB8F7061B7EE10000000A379516\""}]}</pre></div>
+
+			<div class="p">The returned reference points to a global temporary table which can be queried for
+				the procedure results with the same connection. <div class="note note"><span class="notetitle">Note</span> To ensure access to the global
+					temporary table, it is necessary to specify the connection object
+						<samp class="ph codeph">conn</samp>.</div>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loio17c4ada7f4214d4aabdcf941e178f27b__section_xtn_23l_w4"><div class="section_title">Using Table-Valued Arguments</div><div type="Using Table-Valued Arguments">
+			
+			<p class="p">XS Procedures enables you to call procedures with arguments stored as values in a
+				table, as illustrated in the following example. Table-valued input arguments are
+				passed using a JavaScript array that corresponds to the rows of the table to pass.
+				These row objects must contain properties that correspond to the name of the
+				columns. Skipped columns are filled with NULL, and properties that do not correspond
+				to an identically named column are ignored. </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var XSProc = $.import("sap.hana.xs.libs.dbutils", "procedures");
+XSProc.setTempSchema($.session.getUsername().toUpperCase()); 
+
+var conn = $.db.getConnection();
+var createPurchaseOrder = XSProc.procedure("SAP_HANA_DEMO",
+    "sap.hana.democontent.epm.Procedures::poCreate", {
+        connection: conn
+    });
+var result = createPurchaseOrder([{
+    "PURCHASEORDERID": '0300009001',
+    "HISTORY.CREATEDBY": '0000000044',
+    "HISTORY.CREATEDAT": new Date(),
+    "HISTORY.CHANGEDBY": '0000000044',
+    "HISTORY.CHANGEDAT": new Date()
+}]);
+
+if (result &amp;&amp; result.ERROR.length &gt; 0) {
+    $.response.setBody(result.ERROR.length + " errors occurred.");
+} else {
+    $.response.setBody("no error occurred");
+}
+</pre></div>
+
+		</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="http://help.sap.com/hana/SAP_HANA_XS_JavaScript_API_Reference_en/index.html" target="_blank" alt="http://help.sap.com/hana/SAP_HANA_XS_JavaScript_API_Reference_en/index.html" title="http://help.sap.com/hana/SAP_HANA_XS_JavaScript_API_Reference_en/index.html">SAP HANA XS JavaScript API Reference</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Accessing Stored Procedures from XS JavaScript";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

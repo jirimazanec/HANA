@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="An OData service can be used to provide the data required for display in an SAPUI5 application."/>
+<meta name="description" content="An OData service can be used to provide the data required for display in an SAPUI5 application."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=24408605631683233"/>
+<title>Tutorial: Consume an OData Service with the CREATE Option</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio7b1aeee0bd10469bbd1e89e177030874";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio7b1aeee0bd10469bbd1e89e177030874">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">
+Tutorial: Consume an OData Service with the CREATE Option</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">An OData service can be used to provide the data required for display in an SAPUI5
+		application.</p>
+
+		<div class="section prereq p"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Prerequisites</h2></div>
+			<ul class="ul" id="loio7b1aeee0bd10469bbd1e89e177030874__ul_d5n_jqc_kl">
+				<li class="li">You have installed the SAPUI5 tools included in the delivery unit (DU)
+						<span class="keyword uilabel">SAPUI5_1</span>.</li>
+
+				<li class="li">You have installed the <span class="keyword uilabel">SHINE</span> delivery unit (DU); this DU
+					contains the tables and OData services that you want to consume with the SAPUI5
+					application you build in this tutorial.</li>
+
+				<li class="li">You have generated data to populate the tables and views provided by the
+						<span class="keyword uilabel">SHINE</span> delivery unit and used in this tutorial. You can
+					generate the data with tools included in the <span class="keyword uilabel">SHINE</span> delivery
+					unit.</li>
+
+			</ul>
+
+			<div class="note note"><span class="notetitle">Note</span> You might have to adjust the paths in the code examples provided to suit the
+				folder/package hierarchy in your <span class="ph pname">SAP HANA</span> repository, for example, to
+				point to the underlying content (demonstration tables and services) referenced in
+				the tutorial.</div>
+
+		</div>
+
+		<div class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<p class="p">You can bind a UI element in an SAPUI5 application to the data specified in an OData
+				service. For example, you can populate the contents of table columns displayed in an
+				SAPUI5 application with the data stored in a database table defined in an OData
+				service. In this tutorial, you learn how to build an SAPUI5 view that provides input
+				fields, which you can use to create a new record or update an existing record in a
+				database table, for example, using the OData create, update, and delete (CRUD)
+				features.</p>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps" id="loio7b1aeee0bd10469bbd1e89e177030874__steps_nrn_3gd_kl"><li class="li step stepexpand">
+				<span class="ph cmd">Open the <span class="ph pname">SAP HANA</span> Web-based Development Workbench Editor
+					tool.</span>
+				<div class="itemgroup info">The Editor tool is available on the <span class="ph pname">SAP HANA</span> XS Web server at
+					the following URL:
+							<span class="ph filepath">http://<var class="keyword varname">&lt;WebServerHost&gt;</var>:80<var class="keyword varname">&lt;SAPHANAinstance&gt;</var>/sap/hana/ide/editor</span></div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Create the basic structure for your application:</span>
+				<ol type="a" class="ol substeps" id="loio7b1aeee0bd10469bbd1e89e177030874__substeps_grt_jgn_kq">
+					<li class="li substep">
+						<span class="ph cmd">Navigate to the package in which you want to create the SAPUI5
+							application and from the context menu choose <span class="ph uicontrol">Create
+								Application</span>. </span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">Choose the <span class="ph uicontrol">Empty application (with XSAccess and  XSApp)</span>
+							template.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">Enter a package name, for example, <kbd class="ph userinput">userCRUD</kbd>, and
+							choose <span class="ph uicontrol">Create</span>.</span>
+					</li>
+
+				</ol>
+
+				<div class="itemgroup stepresult">You now have a basic package structure to hold your application files.
+					The root package for your new application also contains the required application
+					descriptors, which control access to the services and data exposed by the new
+					application.</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Create a subpackage to store the SAPUI5 view and controller files:</span>
+				<ol type="a" class="ol substeps" id="loio7b1aeee0bd10469bbd1e89e177030874__substeps_i4d_zgn_kq">
+					<li class="li substep">
+						<span class="ph cmd">Select the <span class="ph filepath">userCRUD</span> package and from the context menu choose
+								<span class="ph uicontrol">New Package</span>.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">Enter a name, for example, <kbd class="ph userinput">usercrud</kbd>, and choose
+								<span class="ph uicontrol">Create</span>.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Create the SAPUI5 <span class="ph filepath">userCRUD</span> view
+						(<span class="ph filepath">view.js</span>):</span>
+				<ol type="a" class="ol substeps" id="loio7b1aeee0bd10469bbd1e89e177030874__substeps_ft3_lhn_kq">
+					<li class="li substep">
+						<span class="ph cmd">Select the <span class="ph filepath">usercrud</span> package and from the context
+							menu choose <span class="ph uicontrol">New File</span>.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">Enter a name, for example, <kbd class="ph userinput">userCRUD.view.js</kbd>, and choose
+								<span class="ph uicontrol">Create</span>.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Create the SAPUI5 <span class="ph filepath">userCRUD</span> controller
+						(<span class="ph filepath">controller.js</span>):</span>
+				<ol type="a" class="ol substeps" id="loio7b1aeee0bd10469bbd1e89e177030874__substeps_vtz_qhn_kq">
+					<li class="li substep">
+						<span class="ph cmd">Select the <span class="ph filepath">usercrud</span> package and from the context
+							menu choose <span class="ph uicontrol">New File</span>.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">Enter a name, for example, <kbd class="ph userinput">userCRUD.controller.js</kbd>, and choose
+								<span class="ph uicontrol">Create</span>.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Call the view from the <span class="ph filepath">index.html</span> file.</span>
+				<div class="itemgroup info">Replace the entire content of the <span class="ph filepath">index.html</span> file with
+					the following:</div>
+				<div class="itemgroup stepxmp"><div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;script src="/sap/ui5/1/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-libs="sap.ui.commons,sap.ui.table" data-sap-ui-theme="sap_bluecrystal"&gt;
+    &lt;/script&gt;
+    &lt;script&gt;
+        sap.ui.localResources("usercrud");
+        var view = sap.ui.view({
+            id: "iduserCRUD",
+            viewName: "usercrud.userCRUD",
+            type: sap.ui.core.mvc.ViewType.JS
+        });
+        view.placeAt("content");
+    &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body class="sapUiBody" role="application"&gt;
+    &lt;div id="content"&gt;&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</pre></div>
+You
+					have added the following elements to the <span class="ph filepath">index.html</span>
+						file:<ul class="ul" id="loio7b1aeee0bd10469bbd1e89e177030874__ul_xj2_cyb_lq">
+						<li class="li">Bootstrap script: SAPUI5 is implemented in JavaScript, so to load the
+							SAPUI5 runtime library <span class="ph filepath">sapui-core.js</span> from the SAP
+							HANA repository folder <span class="ph filepath">/sap/ui5/1/resources/</span> on the
+							client you include its bootstrap with a <samp class="ph codeph">&lt;script&gt;</samp>
+							tag. The <samp class="ph codeph">data-sap-ui-theme</samp> attribute specifies the
+							visual design to be applied and the <samp class="ph codeph">data-sap-ui-libs</samp>
+							attribute the UI control libraries to be used.<div class="note note"><span class="notetitle">Note</span> You need to declare
+								any libraries you want the SAPUI5 application to use to render the
+								data it consumes. For this tutorial, you add
+									<samp class="ph codeph">sap.ui.table</samp> to the list of SAPUI5
+								libraries.</div>
+</li>
+
+						<li class="li">Application script: SAPUI5 is based on the model-view-controller paradigm. To create the
+							view and controller, the SAPUI5 runtime needs to know from where to load
+							the related resources (<samp class="ph codeph">sap.ui.localResources</samp>); in this
+							case from the relative sub-folder <span class="ph filepath">/usercrud</span>. In
+							this example, you place the newly created instance of the
+								<span class="ph filepath">userCRUD</span> view from the
+								<span class="ph filepath">helloworldx</span> sub-folder in an HTML element with
+							the ID <samp class="ph codeph">content</samp>. SAPUI5 supports different view types;
+							here the JS (JavaScript) view type is used.</li>
+
+						<li class="li">HTML body: The HTML element with the ID <samp class="ph codeph">content</samp>, in
+							which you placed the view, needs to be included in the HTML page. To do
+							this, you add a <samp class="ph codeph">&lt;div&gt;</samp> block with
+								<samp class="ph codeph">id="content"</samp> to the HTML body. The
+								<samp class="ph codeph">&lt;body&gt;</samp> attribute
+								<samp class="ph codeph">class="sapUiBody"</samp> defines the SAPUI5 CSS class to
+							be used, which ensures that the page background and some other styles
+							are properly set. The attribute <samp class="ph codeph">role="application"</samp> sets
+							the WAI-ARIA landmark role.</li>
+
+					</ul>
+</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Set up the SAPUI5 user interface and bind it to an OData service.</span>
+				<div class="itemgroup info">The code you need to add to the <span class="ph filepath">userCRUD.view.js</span> performs
+					the following actions:<ul class="ul" id="loio7b1aeee0bd10469bbd1e89e177030874__ul_j4w_dld_kl">
+						<li class="li">Adds three text-entry boxes (<samp class="ph codeph">sap.ui.commons.TextField</samp>)
+							to the SAPUI5 application interface (<span class="ph uicontrol">First Name</span>,
+								<span class="ph uicontrol">Last Name</span>, and
+							<span class="ph uicontrol">Email</span>)</li>
+
+						<li class="li">Adds a <span class="ph uicontrol">Create Record</span> button
+								(<samp class="ph codeph">sap.ui.commons.Button</samp>) to the SAPUI5 application
+							interface</li>
+
+						<li class="li">Binds the SAPUI5 view to the OData service
+								<span class="ph filepath">user.xsodata</span></li>
+
+					</ul>
+<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">sap.ui.jsview("usercrud.userCRUD", {
+
+	
+	getControllerName : function() {
+		return "usercrud.userCRUD";
+	},
+
+	 
+	createContent : function(oController) {
+  	  
+  		var oLayout = new sap.ui.commons.layout.MatrixLayout();
+  		this.oModel = new sap.ui.model.odata.ODataModel("/sap/hana/democontent/epm/services/user.xsodata/", true);
+  		  	  
+  		var updatePanel = new sap.ui.commons.Panel("updPanel").setText('New User Record Details');
+  		var layoutNew = new sap.ui.commons.layout.MatrixLayout({width:"auto"}); 
+      
+	      var oVal1 = new sap.ui.commons.<span class="ph emphasis emphasis">TextField</span>("fName",{tooltip: "<span class="ph emphasis emphasis">First Name</span>", width: "200px", editable:true});
+	      var oVal2 = new sap.ui.commons.<span class="ph emphasis emphasis">TextField</span>("lName",{tooltip: "<span class="ph emphasis emphasis">Last Name</span>", width: "200px", editable:true});
+	      var oVal3 = new sap.ui.commons.<span class="ph emphasis emphasis">TextField</span>("email",{tooltip: "<span class="ph emphasis emphasis">Email</span>", width: "200px", editable:true});   		      
+	      var oExcButton = new sap.ui.commons.Button({
+	          text : "<span class="ph emphasis emphasis">Create Record</span>",
+	          press : oController.callUserService });
+	      layoutNew.createRow(new sap.ui.commons.Label({text: "First Name: "}), oVal1 ); //oExcButton );  
+		      layoutNew.createRow(new sap.ui.commons.Label({text: "Last Name: "}), oVal2 ); //oExcButton ); 
+		      layoutNew.createRow(new sap.ui.commons.Label({text: "Email: "}), oVal3, oExcButton );    		      
+	      updatePanel.addContent(layoutNew);
+	      oLayout.createRow(updatePanel);
+		   	  
+			  
+    	  oTable = new sap.ui.table.Table("userTbl",{tableId: "tableID", 
+    	    visibleRowCount: 10}); 
+    	  oTable.setTitle("Users"); 
+    	  
+    	  //Table Column Definitions
+    	  var oMeta = this.oModel.getServiceMetadata();
+          var oControl;
+          
+	   	  for ( var i = 0; i &lt; oMeta.dataServices.schema[0].entityType[0].property.length; i++) {
+	   		  var property = oMeta.dataServices.schema[0].entityType[0].property[i];
+	   		  
+	          oControl = new sap.ui.commons.TextField({change: oController.updateService } ).bindProperty("value",property.name);
+	          if(property.name === 'PERS_NO'){
+	        	  oControl.setEditable(false);
+	          }
+	          oTable.addColumn(new sap.ui.table.Column({label:new sap.ui.commons.Label({text: property.name}), template: oControl, sortProperty: property.name, filterProperty: property.name, filterOperator: sap.ui.model.FilterOperator.EQ, flexible: true, width: "125px" }));
+	      }		   	  
+    	    	  
+    	  oTable.setModel(this.oModel); 
+
+    	  oTable.bindRows("/Users");
+    	  oTable.setTitle("Users" ); 
+    	  oTable.setEditable(true);
+    	  
+    	  		  
+	      oLayout.createRow(oTable);
+    	  return oLayout;
+    	  
+
+      }
+
+});
+</pre></div>
+</div>
+				<div class="itemgroup stepresult"> The <span class="ph filepath">userCRUD.view.js</span> file should display the UI view shown in
+					the following example:<p class="p"><img class="image" id="loio7b1aeee0bd10469bbd1e89e177030874__image_v1w_xkd_kl" src="loio5467d1a08bd0416eab29a4dd76b00f2d_LowRes.png" alt="SAPUI5 OData CRUD UI Example" title="SAPUI5 OData CRUD UI Example"/></p>
+</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Set up the UI elements that the SAPUI5 application uses to handle create and
+					update events.</span>
+				<div class="itemgroup info">The functions that handle the create and update events are defined in the
+					SAPUI5 <span class="ph filepath">controller.js</span> file.</div>
+				<ol type="a" class="ol substeps" id="loio7b1aeee0bd10469bbd1e89e177030874__substeps_tzn_jmd_kl">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Add a declaration for the <samp class="ph codeph">oModel</samp> and set it to
+								<samp class="ph codeph">null</samp>. </span>
+						<div class="itemgroup info">This code ensures that the model instance is passed from the SAPUI5 view to the SAPUI5
+							controller.
+							<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">sap.ui.controller("usercrud.userCRUD", {
+
+	oModel : null,</pre></div>
+</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Set up the <samp class="ph codeph">callUserService</samp> function to handle create events (create new
+							records in a table).</span>
+						<div class="itemgroup info">The code required for this implementation of the <samp class="ph codeph">callUserService</samp>
+							function is shown in the following
+							example:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">callUserService : function() {
+		var oModel = sap.ui.getCore().byId("userTbl").getModel();
+		var oEntry = {};
+		oEntry.PERS_NO = "0000000000";
+		oEntry.FIRSTNAME = sap.ui.getCore().byId("fName").getValue();
+		oEntry.LASTNAME = sap.ui.getCore().byId("lName").getValue();
+		oEntry.E_MAIL = sap.ui.getCore().byId("email").getValue();
+
+		oModel.setHeaders({"content-type" : "application/json;charset=utf-8"});
+		oModel.create('/Users', oEntry, null, function() {
+			alert("Create successful");
+		}, function() {
+			alert("Create failed");
+		});
+
+	},</pre></div>
+</div>
+						<div class="itemgroup stepresult">In this example, the <samp class="ph codeph">callUserService</samp> function
+							performs the following actions:<ul class="ul" id="loio7b1aeee0bd10469bbd1e89e177030874__ul_pjp_g4d_kl">
+								<li class="li">Provides access to the model object by means of the controller
+									with a call to <samp class="ph codeph">var oModel =
+										sap.ui.getCore().byId("userTbl").getModel();</samp>.</li>
+
+								<li class="li">Creates a JSON object with the service fields:
+										<samp class="ph codeph">PERS_NO</samp>, <samp class="ph codeph">FIRSTNAME,
+										LASTNAME</samp>, and <samp class="ph codeph">E_MAIL</samp>.
+										<samp class="ph codeph">PERS_NO</samp> can have a fixed value
+										<samp class="ph codeph">0000000000</samp>. The other fields should be read
+									from the screen with
+											<samp class="ph codeph">sap.ui.getCore().byId("<var class="keyword varname">&lt;insert field
+											id&gt;</var>").getValue();</samp>
+								</li>
+
+								<li class="li">Sets a custom header of <samp class="ph codeph"><span class="q">“content-type”</span></samp>
+									with the value
+										<samp class="ph codeph"><span class="q">“application/json;charset=utf-8”</span></samp> in
+									the model. This enables a call to the
+										<samp class="ph codeph">oModel.create</samp> function for the entity
+										<samp class="ph codeph">/Users</samp>.</li>
+
+							</ul>
+</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Set up the <samp class="ph codeph">updateService</samp> function to handle update events (update
+							records in a table).</span>
+						<div class="itemgroup info">The code required for this implementation of the <samp class="ph codeph">updateService</samp> function
+							is shown in the following
+							example:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">updateService: function(Event) {
+		var oModel = sap.ui.getCore().byId("userTbl").getModel();
+		var index = Event.getSource().oParent.getIndex();
+
+		var oEntry = {};
+		oEntry.PERS_NO = sap.ui.getCore().byId("__field0-col0-row"+index).getValue();
+		switch (Event.mParameters.id){
+			case "__field1-col1-row"+index:
+				oEntry.FIRSTNAME = Event.mParameters.newValue; break;
+			case "__field2-col2-row"+index:
+				oEntry.LASTNAME = Event.mParameters.newValue; break;
+			case "__field3-col3-row"+index:
+				oEntry.E_MAIL = Event.mParameters.newValue; break;						
+		}
+	
+		var oParams = {};
+		oParams.fnSuccess = function(){ alert("Update successful");};
+		oParams.fnError = function(){alert("Update failed");};
+		oParams.bMerge = true;
+		oModel.setHeaders({"content-type" : "application/json;charset=utf-8"});				
+		oModel.update("/Users('"+oEntry.PERS_NO+"')", oEntry, oParams);
+		
+	}
+
+});
+</pre></div>
+</div>
+						<div class="itemgroup stepresult">The <samp class="ph codeph">updateService</samp> performs the following
+								actions:<ul class="ul" id="loio7b1aeee0bd10469bbd1e89e177030874__ul_ejp_hpd_kl">
+								<li class="li">Accesses the model to read the index of the table for the
+									changed record using
+										<samp class="ph codeph">Event.getSource().oParent.getIndex()</samp>.</li>
+
+								<li class="li">Creates a JSON object with the service fields
+										<samp class="ph codeph">PERS_NO</samp> and whichever field was modified or
+									updated. You can access the fields in the table using the event
+									parameter ID
+												<samp class="ph codeph"><span class="q">“__field<var class="keyword varname">&lt;index&gt;</var>-col<var class="keyword varname">&lt;index&gt;</var>-row”</span>+index</samp>,
+									where <samp class="ph codeph">index</samp> is the table index you read
+									earlier, for example, <samp class="ph codeph">__field1-col1-row"+index</samp>. </li>
+
+								<li class="li">Sets a custom header of <samp class="ph codeph"><span class="q">“content-type”</span></samp>
+									with the value
+										<samp class="ph codeph"><span class="q">“application/json;charset=utf-8”</span></samp> in
+									the model. Then you can call the <samp class="ph codeph">oModel.update</samp>
+									function for the entity <samp class="ph codeph">/Users</samp>.</li>
+
+							</ul>
+</div>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Save all files.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Test your <span class="q">“userCRUD”</span> SAPUI5 application in a Web browser.</span>
+				<ol type="a" class="ol substeps" id="loio7b1aeee0bd10469bbd1e89e177030874__substeps_e5k_q12_kl">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Select the <span class="ph filepath">index.html</span> file and choose <img class="image" id="loio7b1aeee0bd10469bbd1e89e177030874__image_ay4_kvr_4q" src="loioa77ce732d6804f7f83be457fba1a5d62_LowRes.png"/>
+								(<span class="ph uicontrol">Run</span>) in the toolbar.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Create a new record in the table referenced in the OData service.</span>
+						<div class="itemgroup stepxmp">
+							<p class="p"><img class="image" id="loio7b1aeee0bd10469bbd1e89e177030874__image_kyj_ng2_kl" src="loio28e0fa1ad299437eb802084e34ea959d_LowRes.png" alt="SAPUI5-OData Create Record Success" title="SAPUI5-OData Create Record Success"/></p>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Update an existing record in the table referenced in the OData
+							service.</span>
+						<div class="itemgroup stepxmp">
+							<p class="p"><img class="image" id="loio7b1aeee0bd10469bbd1e89e177030874__image_tdl_pg2_kl" src="loioa9723fdd7e3141318de29f0eeb1dc697_LowRes.png" alt="SAPUI5-Odata Update Record Success" title="SAPUI5-Odata Update Record Success"/></p>
+
+						</div>
+					</li>
+
+				</ol>
+
+			</li>
+</ol>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Tutorial: Consume an OData Service with the CREATE Option";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

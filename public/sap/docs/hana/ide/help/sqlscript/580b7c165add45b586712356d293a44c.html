@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Best Practices: Avoid Mixing Calculation Engine Plan Operators and SQL Queries"/>
+<meta name="description" content="Best Practices: Avoid Mixing Calculation Engine Plan Operators and SQL Queries"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=582116798668225"/>
+<title>Avoid Mixing Calculation Engine Plan Operators and SQL Queries</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio580b7c165add45b586712356d293a44c";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio580b7c165add45b586712356d293a44c">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Avoid Mixing Calculation Engine Plan Operators and SQL Queries</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">Best Practices: Avoid Mixing Calculation Engine Plan Operators and SQL
+		Queries</p>
+
+		<p class="p">The semantics of relational operations as used in SQL queries and calculation engine operations
+			are different. In the calculation engine operations will be instantiated by the query
+			that is executed on top of the generated data flow graph. </p>
+
+		<p class="p">Therefore the query can significantly change the semantics of the data flow graph. For
+			example consider a calculation view that is queried using attribute publisher (but not
+			year) that contains an aggregation node ( CE_AGGREGATION) which is defined on publisher
+			and year. The grouping on year would be removed from the grouping. Evidently this
+			reduces the granularity of the grouping, and thus changes the semantics of the model. On
+			the other hand, in a nested SQL query containing a grouping on publisher and year this
+			aggregation-level would not be changed if an enclosed query only queries on
+			publisher.</p>
+
+		<p class="p"> Because of the different semantics outlined above, the optimization of a mixed data flow using
+			both types of operations is currently limited. Hence, one should avoid mixing both types
+			of operations in one procedure. </p>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Avoid Mixing Calculation Engine Plan Operators and SQL Queries";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

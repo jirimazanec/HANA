@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content=""/>
+<meta name="description" content=""/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=8598823447120651"/>
+<title>Table Variable Type Definition</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioea5065d06d14426799d879234d8e3e7b";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioea5065d06d14426799d879234d8e3e7b">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Table Variable Type Definition</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc"/>
+
+		<p class="p">The type of a table variable in the body of a procedure or a table function is either derived
+			from the SQL Query, or declared explicitly.</p>
+
+		<p class="p">If the table variable has derived its type from the SQL query, the SQLScript compiler
+			determines its type from the first assignments of the variable thus providing a lot of
+			flexibility. One disadvantage of this procedure is that it also leads to many type
+			conversions in the background because sometimes the derived table type does not match
+			the typed table parameters in the signature. This can lead to additional conversions,
+			which are unnecessary. Another disadvantage is the unnecessary internal statement
+			compilation to derive the types. To avoid this unnecessary effort, you can declare the
+			type of a table variable explicitly. A declared table variable is always initialized
+			with empty content. </p>
+
+		<div class="section"><div class="section_title">Signature</div><div type="Signature">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">DECLARE &lt;sql_identifier&gt; [{,&lt;sql_identifier&gt; }...] [CONSTANT] {TABLE (&lt;column_list_definition&gt;)|&lt;table_type&gt;} [ &lt;proc_table_default&gt; ]
+&lt;proc_table_default&gt; ::= { DEFAULT | '=' } { &lt;select_statement&gt; | &lt;proc_ce_call&gt; | &lt;proc_apply_filter&gt; | &lt;unnest_function&gt; }
+</pre></div>
+
+			<p class="p">Local table variables are declared by using the DECLARE keyword. For the referenced type, you
+				can either use a previously declared table type, or the type definition TABLE
+					(<var class="keyword varname">&lt;column_list_definition&gt;</var>). The next example illustrates both
+				variants:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">DECLARE temp TABLE (n int);
+DECLARE temp MY_TABLE_TYPE;</pre></div>
+
+			<p class="p">You can also directly assign a default value to a table variable by using the DEFAULT keyword
+				or ‘=’. By default all statements are allowed all statements that are also supported
+				for the typical table variable assignment.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">DECLARE temp MY_TABLE_TYPE = UNNEST (:arr) as (i);
+DECLARE temp MY_TABLE_TYPE DEFAULT SELECT * FROM TABLE;
+</pre></div>
+
+			<p class="p">The table variable can be also flagged as read-only by using the CONSTANT keyword. The
+				consequence is that you cannot override the variable any more. Note that in case the
+				CONSTANT keyword is used, the table variable should have a default value, it cannot
+				be NULL.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">DECLARE temp CONSTANT TABLE(I INT) DEFAULT SELECT * FROM TABLE;</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">Local table variables are declared by using the <samp class="ph codeph">DECLARE</samp> keyword. A table
+				variable <samp class="ph codeph">temp</samp> can be referenced by using <samp class="ph codeph">:temp</samp>.
+				For more information, see <a class="xref" href="default.html?605b30ed9df54f1bafb7402a4f3b77b8.html" target="_top">Referencing Variables</a>. The
+					<samp class="ph codeph">&lt;sql_identifier&gt;</samp> must be unique among all other scalar
+				variables and table variables in the same code block. However, you can use names
+				that are identical to the name of another variable in a different code block.
+				Additionally, you can reference those identifiers only in their local scope.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE PROCEDURE exampleExplicit (OUT outTab TABLE(n int))
+LANGUAGE SQLScript READS SQL DATA AS
+BEGIN
+     DECLARE temp TABLE (n int);
+     temp = SELECT 1 as n FROM DUMMY ;	
+     BEGIN
+		DECLARE temp TABLE (n int);
+		temp = SELECT 2 as n FROM DUMMY ;	
+		outTab = Select * from :temp;
+	END;
+	outTab = Select * from :temp; 
+END;
+call exampleExplicit(?);
+</pre></div>
+
+			<p class="p">In each block there are table variables declared with identical names. However, since the last
+				assignment to the output parameter <samp class="ph codeph">&lt;outTab&gt;</samp> can only have the
+				reference of variable <samp class="ph codeph">&lt;temp&gt;</samp> declared in the same block, the
+				result is the following:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> N
+----
+ 1
+</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE PROCEDURE exampleDerived (OUT outTab TABLE(n int))
+LANGUAGE SQLScript READS SQL DATA
+AS
+BEGIN
+	temp = SELECT 1 as n FROM DUMMY ;	
+	BEGIN
+		temp = SELECT 2 as n FROM DUMMY ;	
+		outTab = Select * from :temp;
+	END;
+	outTab = Select * from :temp;
+END;
+call exampleDerived (?);
+</pre></div>
+
+			<p class="p">In this code example there is no explicit table variable declaration where done, that means
+				the <samp class="ph codeph">&lt;temp&gt;</samp> variable is visible among all blocks. For this
+				reason, the result is the following:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> N
+----
+ 2
+</pre></div>
+
+			<p class="p">For every assignment of the explicitly declared table variable, the derived column names and
+				types on the right-hand side are checked against the explicitly declared type on the
+				left-hand side.</p>
+
+			<p class="p">Another difference, compared to derived types, is that a reference to a table variable without
+				an assignment, returns a warning during the compilation.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">BEGIN
+    DECLARE a TABLE (i DECIMAL(2,1), j INTEGER);
+    IF :num = 4
+    THEN
+        a = SELECT i, j FROM tab;    
+    END IF;
+END;
+</pre></div>
+
+			<div class="p">The example above returns a warning because the table variable <samp class="ph codeph">&lt;a&gt;</samp> is
+				unassigned if <samp class="ph codeph">&lt;:num&gt;</samp> is not 4. This behavior can be
+				controlled by the configuration parameter UNINITIALIZED_TAVLE_VARIABLE_USAGE.
+				Besides issuing a warning, it also offers the follwoing options: <ul class="ul" id="loioea5065d06d14426799d879234d8e3e7b__ul_mlz_dw3_wx">
+					<li class="li">
+						<p class="p">Error: an error message is issued, a procedure or a function cannot be
+							created</p>
+
+					</li>
+
+					<li class="li">Silent: no message is issued</li>
+
+				</ul>
+</div>
+
+			<p class="p">The following table shows the differences:</p>
+
+			<div class="p">
+				
+<div class="table-wrapper tablenoborder"><table summary="" id="loioea5065d06d14426799d879234d8e3e7b__table_vjj_wkj_zp" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="33.333333333333336%"/><col width="33.333333333333336%"/><col width="33.333333333333336%"/></colgroup>
+
+						
+						
+						
+						<thead class="thead" align="left">
+							<tr class="row">
+								<th class="entry" valign="top" id="d1222151e166"> </th>
+
+								<th class="entry" valign="top" id="d1222151e168">Derived Type</th>
+
+								<th class="entry" valign="top" id="d1222151e171">Explicitly Declared</th>
+
+							</tr>
+
+						</thead>
+
+						<tbody class="tbody">
+							<tr class="row">
+								<td class="entry" valign="top" headers="d1222151e166 ">Create new variable</td>
+
+								<td class="entry" valign="top" headers="d1222151e168 ">First SQL query assignment<p class="p"><samp class="ph codeph">tmp = select * from table;</samp></p>
+</td>
+
+								<td class="entry" valign="top" headers="d1222151e171 ">Table variable declaration in a block:<p class="p"><samp class="ph codeph">DECLARE tmp TABLE(i
+										int);</samp></p>
+</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d1222151e166 ">Variable scope</td>
+
+								<td class="entry" valign="top" headers="d1222151e168 ">Global scope, regardless of the block where it was first
+									declared</td>
+
+								<td class="entry" valign="top" headers="d1222151e171 ">Available in declared block only.<p class="p">Variable hiding is
+										applied.</p>
+</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d1222151e166 ">Unassigned variable check</td>
+
+								<td class="entry" valign="top" headers="d1222151e168 ">No warning during the compilation</td>
+
+								<td class="entry" valign="top" headers="d1222151e171 ">Warning during compilation if it is possible to refer to the unassigned table
+									variable. The check is perforrmed only if a table variable is
+									used.</td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+</div>
+
+			</div>
+
+			<div class="note note"><span class="notetitle">Note</span> 
+				<p class="p">The NOT NULL option is not supported (see also the information about scalar variable
+					declaration).</p>
+
+			</div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Table Variable Type Definition";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

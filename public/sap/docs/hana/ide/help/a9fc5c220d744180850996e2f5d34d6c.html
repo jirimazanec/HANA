@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="The application-access (.xsaccess) file enables you to specify whether or not to expose package content, which authentication method is used to grant access, and what content is visible."/>
+<meta name="description" content="The application-access (.xsaccess) file enables you to specify whether or not to expose package content, which authentication method is used to grant access, and what content is visible."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=04155873481040484"/>
+<title>Application-Access File Keyword Options</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioa9fc5c220d744180850996e2f5d34d6c";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioa9fc5c220d744180850996e2f5d34d6c">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Application-Access File Keyword Options</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">The application-access (<span class="ph filepath">.xsaccess</span>) file enables you to specify
+    whether or not to expose package content, which authentication method is used to grant access,
+    and what content is visible.</p>
+
+		<div class="example"><h2 class="exampletitle example_title">Example: </h2><div class="title authorexampletitle">The Application Access (<span class="ph filepath">.xsaccess</span>) File</div>
+			
+			<div class="p">
+        <div class="note note" id="loioa9fc5c220d744180850996e2f5d34d6c__note_N1002F_N10024_N10019_N10016_N10001"><span class="notetitle">Note</span> This example of the
+            <span class="ph filepath">.xsaccess</span> file is <span class="ph emphasis emphasis">not</span> a working model; it is
+          used to illustrate the syntax for all possible options.</div>
+
+      </div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> {
+     "<a class="xref nopagenumber" href="default.html?a9fc5c220d744180850996e2f5d34d6c.html#loioa9fc5c220d744180850996e2f5d34d6c__section_N1003D_N10016_N10001" target="_top">exposed</a>" : false,                    
+     "<a class="xref nopagenumber" href="default.html?a9fc5c220d744180850996e2f5d34d6c.html#loioa9fc5c220d744180850996e2f5d34d6c__section_N1004F_N10016_N10001" target="_top">authentication</a>" :                                            
+            {
+               "method": "Form"
+            },
+     "<a class="xref nopagenumber" href="default.html?a9fc5c220d744180850996e2f5d34d6c.html#loioa9fc5c220d744180850996e2f5d34d6c__section_N10087_N10016_N10001" target="_top">authorization</a>":                     
+          [
+              "sap.xse.test::Execute",    
+              "sap.xse.test::Admin"       
+          ],
+     "<a class="xref nopagenumber" href="default.html?a9fc5c220d744180850996e2f5d34d6c.html#loioa9fc5c220d744180850996e2f5d34d6c__section_N10063_N10016_N10001" target="_top">anonymous_connection</a>" : "sap.hana.sqlcon::AnonConn",
+     "<a class="xref nopagenumber" href="default.html?a9fc5c220d744180850996e2f5d34d6c.html#loioa9fc5c220d744180850996e2f5d34d6c__section_p4m_fxc_jq" target="_top">default_connection</a>" : "sap.hana.sqlcon::<span class="keyword parmname">sqlcc</span>",
+     "<a class="xref nopagenumber" href="default.html?a9fc5c220d744180850996e2f5d34d6c.html#loioa9fc5c220d744180850996e2f5d34d6c__section_N101D3_N10016_N10001" target="_top">cache_control</a>" : "no-store",
+     "<a class="xref nopagenumber" href="default.html?a9fc5c220d744180850996e2f5d34d6c.html#loioa9fc5c220d744180850996e2f5d34d6c__section_N101F1_N10016_N10001" target="_top">cors</a>" :                      
+            {
+             "enabled" : false
+            }, 
+     "<a class="xref nopagenumber" href="default.html?a9fc5c220d744180850996e2f5d34d6c.html#loioa9fc5c220d744180850996e2f5d34d6c__section_N10213_N10016_N10001" target="_top">default_file</a>" : "index_1.html",                  
+     "<a class="xref nopagenumber" href="default.html?a9fc5c220d744180850996e2f5d34d6c.html#loioa9fc5c220d744180850996e2f5d34d6c__section_N100E1_N10016_N10001" target="_top">enable_etags</a>" : false,
+     "<a class="xref nopagenumber" href="default.html?a9fc5c220d744180850996e2f5d34d6c.html#loioa9fc5c220d744180850996e2f5d34d6c__section_N100CB_N10016_N10001" target="_top">force_ssl</a>" : true,
+     "<a class="xref nopagenumber" href="default.html?a9fc5c220d744180850996e2f5d34d6c.html#loioa9fc5c220d744180850996e2f5d34d6c__section_N100AD_N10016_N10001" target="_top">mime_mapping</a>" :                     
+          [ 
+            {
+              "extension":"jpg", "mimetype":"image/jpeg"
+            } 
+          ],
+     "<a class="xref nopagenumber" href="default.html?a9fc5c220d744180850996e2f5d34d6c.html#loioa9fc5c220d744180850996e2f5d34d6c__section_N101F7_N10016_N10001" target="_top">prevent_xsrf</a>" : true,
+     "<a class="xref nopagenumber" href="default.html?a9fc5c220d744180850996e2f5d34d6c.html#loioa9fc5c220d744180850996e2f5d34d6c__section_N1007F_N10016_N10001" target="_top">rewrite_rules</a>" :                    
+          [{                               
+                "source" : "...",         
+                "target" : "..."          
+          }]                
+     "<a class="xref nopagenumber" href="default.html?a9fc5c220d744180850996e2f5d34d6c.html#loioa9fc5c220d744180850996e2f5d34d6c__section_yg5_phf_34" target="_top">headers</a>":
+          {
+           "enabled": true, 
+           "customHeaders": [ {"name":"X-Frame-Options","value":"<var class="keyword varname">&lt;VALUE&gt;</var>"} ]
+          }
+}
+ </pre></div>
+
+		</div>
+
+		<div class="section" id="loioa9fc5c220d744180850996e2f5d34d6c__section_N1003D_N10016_N10001"><div class="section_title">exposed</div><div type="exposed">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> {
+     "exposed" : false,    
+}
+ </pre></div>
+
+			<p class="p">The <samp class="ph codeph">exposed</samp> keyword enables you define if content in a package (and its
+        subpackages) is to be made available by HTTP to client requests. Values are Boolean true or
+        false. If no value is set for exposed, the default setting (false) applies. </p>
+
+      <div class="note tip"><span class="tiptitle">Tip</span> Only expose content that is absolutely necessary to enable the application to
+        run.</div>
+
+      <p class="p">Consider whether it is necessary to expose data via HTTP/S. Not exposing data via HTTP
+        enables you to keep your files accessible to other programs but prevent direct access to the
+        data via URL. Since the application's <span class="ph filepath">index.html</span> page must normally
+        remain reachable, consider storing the <span class="ph filepath">index.html</span> file separately with
+        a dedicated <span class="ph filepath">.xsaccess</span> file that enables access (<samp class="ph codeph"><span class="q">“exposed”</span>:
+          true</samp>). You can keep all other content hidden, for example, in separate package to
+        which access is denied (<samp class="ph codeph"><span class="q">“exposed”</span>: false</samp>). </p>
+
+      <p class="p">Packages without a dedicated <span class="ph filepath">.xsaccess</span> file inherit the
+        application-access settings defined in the parent folder. If an
+          <span class="ph filepath">.xsaccess</span> file exists but the <samp class="ph codeph">exposed</samp> keyword is not
+        defined, the default setting <samp class="ph codeph">false</samp> applies. </p>
+
+		</div></div>
+
+    <div class="section" id="loioa9fc5c220d744180850996e2f5d34d6c__section_N10063_N10016_N10001"><div class="section_title">anonymous_connection</div><div type="anonymous_connection">
+      
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> {
+     "anonymous_connection" : "sap.hana.sqlcon::AnonConn",    
+} </pre></div>
+
+      <p class="p">The <samp class="ph codeph">anonymous_connection</samp> keyword enables you to define the name of the
+          <span class="ph filepath">.xssqlcc</span> file that will be used for SQL access when no user
+        credentials are provided. <span class="ph pname">SAP HANA</span> XS enables you to define the configuration
+        for individual SQL connections. Each connection configuration has a unique name, for
+        example, <span class="keyword uilabel">Registration</span>, <span class="keyword uilabel">AnonConn</span>, or
+          <span class="keyword uilabel">AdminConn</span>, which is generated from the name of the corresponding
+        connection-configuration file (<span class="ph filepath">Registration.xssqlcc</span>,
+          <span class="ph filepath">AnonConn.xssqlcc</span>, or <span class="ph filepath">AdminConn.xssqlcc</span>) on
+        activation in the repository. If no value is set, the default setting is <span class="q">“null”</span>.</p>
+
+      <div class="note tip"><span class="tiptitle">Tip</span> It is not recommended to enable anonymous access. </div>
+
+      <p class="p"> If it is necessary to provide anonymous access to an application, design your application
+        in such a way that all files requiring anonymous access are placed together in the same
+        package, which you can then protect with the permissions defined in a dedicated
+          <span class="ph filepath">.xsaccess</span> file. Remember that the behavior of the anonymous
+        connection depends on the details specified in the corresponding SQL configuration file
+          (<span class="ph filepath">.xssqlcc</span>).</p>
+
+    </div></div>
+
+    <div class="section" id="loioa9fc5c220d744180850996e2f5d34d6c__section_p4m_fxc_jq"><div class="section_title">default_connection</div><div type="default_connection">
+      
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> {
+     "default_connection" : "sap.hana.sqlcon::<span class="keyword parmname">sqlcc</span>",    
+} </pre></div>
+
+      <p class="p">If the <samp class="ph codeph">default_connection</samp> is set in the <span class="ph filepath">.xsaccess</span>
+        file, the specified SQL connection configuration (for example, defined in
+          <span class="keyword parmname">sqlcc</span>) is used for <span class="ph emphasis emphasis">all</span> SQL executions in this
+        package, whether or not the requesting user is authenticated in SAP HANA or not. The
+        difference between the <samp class="ph codeph">default_connection</samp> and the
+          <samp class="ph codeph">anonymous_connection</samp> is that the anonymous SQL connection configuration
+        is only used if the requesting user is not authenticated. Like any other property of the
+          <span class="ph filepath">xsaccess</span> file, the <samp class="ph codeph">default_connection</samp> is inherited
+        down the package hierarchy, for example, from package to subpackage. The
+          <samp class="ph codeph">default_connection</samp> can also be overwritten, for example, by locating an
+          <span class="ph filepath">xsaccess</span> file with a different <samp class="ph codeph">default_connection</samp> in
+        one or more subpackages. </p>
+
+      <div class="note tip"><span class="tiptitle">Tip</span> If the requesting user is authenticated, the user name will be available in
+        the connection as the <samp class="ph codeph">APPLICATIONUSER</samp> session variable.</div>
+
+      <p class="p">The credentials to use for an SQL execution are determined according to the following order
+        of priority:</p>
+
+      <ol class="ol" id="loioa9fc5c220d744180850996e2f5d34d6c__ol_lwd_dzc_jq">
+        <li class="li">The SQL connection configuration (SQLCC) specified  in
+            <samp class="ph codeph">$.db.getConnection(sqlcc)</samp>; this applies only in XS JavaScript (not
+          OData, for example)</li>
+
+        <li class="li">The value specified in <samp class="ph codeph">default_connection</samp> (if set) </li>
+
+        <li class="li">An authenticated user </li>
+
+        <li class="li">The valued specified in <samp class="ph codeph">anonymous_connection</samp> (if set) </li>
+
+      </ol>
+
+      <p class="p">The <samp class="ph codeph">default_connection</samp> is intended for use with anonymous parts of the
+        application that require the <span class="ph emphasis emphasis">same</span> privileges for all users. If the
+        anonymous part of an application is designed to behave according to the privileges granted
+        to authenticated users, the <samp class="ph codeph">anonymous_connection</samp> should be used. This is
+        particularly important if analytic privileges are involved, for example, to restrict the
+        amount of returned rows (not overall access to the table). In most cases, the
+          <samp class="ph codeph">default_connection</samp> should be used.</p>
+
+    </div></div>
+
+		<div class="section" id="loioa9fc5c220d744180850996e2f5d34d6c__section_N1004F_N10016_N10001"><div class="section_title">authentication</div><div type="authentication">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{
+     "authentication" :                                            
+            {
+               "method": "Form"
+            },
+}
+ </pre></div>
+
+			<div class="p">The <samp class="ph codeph">authentication</samp> keyword is required in the <span class="ph filepath">.xsaccess</span>
+        file and must be set to the value "form", for example <samp class="ph codeph">"method" : "Form",</samp> to
+        ensure that form-based logon works when you enable it using the <span class="keyword uilabel">SAP HANA XS
+          Administration Tool</span>. <div class="note note" id="loioa9fc5c220d744180850996e2f5d34d6c__note_N10086_N1007F_N10063_N10016_N10001"><span class="notetitle">Note</span> Use the
+            <span class="keyword uilabel">SAP HANA XS Administration Tool</span> to configure applications to use
+          additional authentication methods, for example, basic, logon tickets, or Single Sign On
+          (SSO) providers such as SAML2 and X509. You must also enable the <span class="keyword uilabel">Form-based
+            authentication</span> checkbox, if you want your application (or applications) to use
+          form-based logon as the authentication method. Any other keywords in the authentication
+          section of the <span class="ph filepath">.xsacess</span> file are ignored.</div>
+</div>
+
+			<ul class="ul" id="loioa9fc5c220d744180850996e2f5d34d6c__ul_qwj_rzh_xh">
+				<li class="li">Form-based authentication<p class="p">Redirect the logon request to a form to fill in, for example, a
+            Web page. 
+          </p>
+<p class="p">To ensure that, during the authentication process, the password is transmitted in
+            encrypted form, it is strongly recommended to enable SSL/HTTPS for all application
+            connections to the XS engine, for example, using the <samp class="ph codeph">force_ssl</samp> keyword.
+            If you set the <span class="ph uicontrol">force_ssl</span> option, you must ensure that the SAP Web
+            Dispatcher is configured to accept and manage HTTPS requests.</p>
+<p class="p">Form-based
+            authentication requires the <span class="ph filepath">libxsauthenticator</span> library, which must
+            not only be available but also be specified in the list of trusted applications in the
+              <span class="keyword uilabel">xsengine</span> application container. The application list is displayed
+            in the <span class="ph pname">SAP HANA</span> studio's <span class="keyword uilabel">Administration Console</span>
+            perspective in the following location: <span class="ph menucascade"><img src="images/navstart.gif" alt="Start of the navigation path" title="Start of the navigation path"/> <span class="ph uicontrol">Administration</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">Configuration tab</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">xsengine.ini</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">application_container</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">application_list</span> <img src="images/navend.gif" alt="End of the navigation path" title="End of the navigation path"/></span>. If it is not displayed, ask the SAP HANA administrator to add
+            it.</p>
+<div class="note note" id="loioa9fc5c220d744180850996e2f5d34d6c__note_N100FC_N100C2_N1008B_N10063_N10016_N10001"><span class="notetitle">Note</span> If you need to
+            troubleshoot problems with form-based logon, you can configure the generation of useful
+            trace information in the <span class="keyword uilabel">XSENGINE</span> section of the database trace
+            component using the following entry: <span class="keyword uilabel">xsa:sap.hana.xs.formlogin</span>.
+          </div>
+</li>
+
+			</ul>
+
+      
+		</div></div>
+
+    <div class="section" id="loioa9fc5c220d744180850996e2f5d34d6c__section_N10087_N10016_N10001"><div class="section_title">authorization</div><div type="authorization">
+      
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{
+     "authorization":                     
+          [
+              "sap.xse.test::Execute",    
+              "sap.xse.test::Admin"       
+          ],
+}</pre></div>
+
+      <p class="p">The <samp class="ph codeph">authorization</samp> keyword in the <span class="ph filepath">.xsaccess</span> file
+        enables you to specify which authorization level is required for access to a particular
+        application package, for example, <span class="keyword option">execute</span> or <span class="keyword option">admin</span> on the
+        package <span class="ph filepath">sap.xse.text</span>.</p>
+
+      <div class="note note" id="loioa9fc5c220d744180850996e2f5d34d6c__note_N100FC_N100D7_N10016_N10001"><span class="notetitle">Note</span> The authorization levels you can choose from are
+        defined in the <span class="ph filepath">.xsprivileges</span> file for the package, for example,
+        "execute" for basic privileges, or "admin" for administrative privileges on the specified
+        package. If you do not define any authorization requirements, any user can launch the
+        application.</div>
+
+      <p class="p">If you use the <samp class="ph codeph">authorization</samp> keyword in the <span class="ph filepath">.xsaccess</span>
+        file, for example, to require <span class="q">“execute”</span> privileges for a specific application package,
+        you must create a <span class="ph filepath">.xsprivileges</span> file for the same application package
+        (or a parent package higher up the hierarchy, in which you define the <span class="q">“execute”</span>
+        privilege level declared in the <span class="ph filepath">.xsaccess</span> file.</p>
+
+      <p class="p">Authorization settings are inherited down the package hierarchy from a package to a
+        subpackage. However, you can specify different authorization levels for different
+        subpackages; this new setting is then inherited by any subpackages further down the
+        hierarchy. To disable authorization for a subpackage (for example, to prevent inheritance of
+        authorizations from the parent package), you can create a (sub)package-specific
+          <span class="ph filepath">.xsaccess</span> file with the <samp class="ph codeph">authorization</samp> keyword
+        explicitly set to <samp class="ph codeph">null</samp>, as illustrated in the following example.</p>
+
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{
+     "authorization": null
+}</pre></div>
+
+      <p class="p">Bear in mind that the <samp class="ph codeph"><span class="q">“authorization”</span>:null</samp> setting applies not only
+        to the package in which the <span class="ph filepath">.xsaccess</span> with the <samp class="ph codeph">null</samp>
+        setting is located but also to any subpackages further down the package hierarchy. You can
+        re-enable authorization in subpackage levels by creating new a
+          <span class="ph filepath">.xsaccess</span> file.</p>
+
+    </div></div>
+
+    <div class="section" id="loioa9fc5c220d744180850996e2f5d34d6c__section_N101D3_N10016_N10001"><div class="section_title">cache_control</div><div type="cache_control">
+      
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> {
+     "cache_control":"no-store",    
+}
+ </pre></div>
+
+      <p class="p">The <samp class="ph codeph">cache_control</samp> keyword enables you to override the cache-control header
+        for Web content served by the <span class="ph pname">SAP HANA</span> XS Web server. So-called cache-control
+          <span class="keyword">directives</span> (for example, <samp class="ph codeph">public</samp>,
+          <samp class="ph codeph">private</samp>, <samp class="ph codeph">no-store</samp>) enable you to control the behavior of
+        the Web browser and proxy caches, for example, whether or not to store a page, how to store
+        it, or where. For more information about the values you can use to set
+          <samp class="ph codeph">cache_control</samp>, see the HTTP standard for cache-control directives. If no
+        value for <samp class="ph codeph">code_control</samp>is set in the <span class="ph filepath">.xsaccess</span> file,
+        the default setting is <span class="q">“null”</span>.</p>
+
+      <div class="note tip"><span class="tiptitle">Tip</span> For security reason, it is recommended to set the
+          <samp class="ph codeph">cache_control</samp> keyword to <span class="q">“<samp class="ph codeph">no-cache, no-store</samp>”</span>.
+        However, if nothing is cached or stored, there is an obvious impact on application
+        performance.</div>
+
+      <p class="p">If application performance allows, the <samp class="ph codeph">no-cache, no-store</samp> setting is
+        advisable for the following reasons:</p>
+
+      <ul class="ul" id="loioa9fc5c220d744180850996e2f5d34d6c__ul_obz_wgc_qn">
+        <li class="li">From a client perspective:<p class="p">If an application is handling sensitive data, it is bad
+            practice to cache the data in the local browser since this could lead to unintended
+            disclosure of information.</p>
+
+        </li>
+
+        <li class="li">From a server perspective: <p class="p">Allowing an application to cache data can open up the
+            application to attack. For example, if attackers build a malicious page and host it on a
+            proxy server between your server and the requesting client, it would be possible to
+            steal data from the client or prevent access to the application altogether. Since the
+            risk of such an attack is small, you might want to consider allowing caching, as long as
+            it does not adversely affect performance.</p>
+</li>
+
+      </ul>
+
+    </div></div>
+
+    <div class="section" id="loioa9fc5c220d744180850996e2f5d34d6c__section_N101F1_N10016_N10001"><div class="section_title">cors</div><div type="cors">
+      
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> {
+          "cors" :                      
+            {
+             "enabled" : false
+            }, 
+}</pre></div>
+
+      <p class="p">The <samp class="ph codeph">cors</samp> keyword enables you to provide support for cross-origin requests,
+        for example, by allowing the modification of the request header. Cross-origin resource
+        sharing (CORS) permits Web pages from other domains to make HTTP requests to your
+        application domain, where normally such requests would automatically be refused by the Web
+        browser's security policy. </p>
+
+      <p class="p">If CORS support is disabled (<samp class="ph codeph">"enabled" : false</samp>), the following settings
+        apply on the Web server:</p>
+
+      <ul class="ul" id="loioa9fc5c220d744180850996e2f5d34d6c__ul_yhb_tpj_qn">
+        <li class="li">The server does not respond to any CORS preflight requests </li>
+
+        <li class="li">The server does not add CORS response headers to any CORS requests </li>
+
+        <li class="li">The server refuses to execute the resource specified in the request </li>
+
+      </ul>
+
+      <p class="p">To enable support for CORS, set the <samp class="ph codeph">cors</samp> keyword to
+          <samp class="ph codeph">{“enabled”:true}</samp>, which results in the following default
+          <samp class="ph codeph">cors</samp>configuration:</p>
+
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{"cors":{"enabled":true,"allowMethods": [“GET”,”POST”,”HEAD”,”OPTIONS”],"allowOrigin": [“*”], “maxAge”:”3600”}}</pre></div>
+
+      <p class="p">The following table describes the options that are supported with the <samp class="ph codeph">cors</samp>
+        keyword:</p>
+
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{"cors":{"enabled":true, "allowMethods":<var class="keyword varname">&lt;ALLOWED_METHODS&gt;</var>, "allowOrigin":<var class="keyword varname">&lt;ALLOWED_ORIGIN&gt;</var>, 
+“maxAge”:<var class="keyword varname">&lt;MAX_AGE&gt;</var>, “allowHeaders”:<var class="keyword varname">&lt;ALLOWED_HEADERS&gt;</var>, “exposeHeaders”:<var class="keyword varname">&lt;EXPOSED_HEADERS&gt;</var>}}</pre></div>
+
+      
+<div class="table-wrapper tablenoborder"><table summary="" id="loioa9fc5c220d744180850996e2f5d34d6c__table_mdp_rmj_qn" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: Default  Settings for CORS Options</span></caption>
+<colgroup><col width="27.47252747252747%"/><col width="72.52747252747253%"/></colgroup>
+
+          
+          
+          <thead class="thead" align="left">
+            <tr class="row">
+              <th class="entry" valign="top" width="27.47252747252747%" id="d2818570e697">CORS Option</th>
+
+              <th class="entry" valign="top" width="72.52747252747253%" id="d2818570e700">Description</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody class="tbody">
+            <tr class="row">
+              <td class="entry" valign="top" width="27.47252747252747%" headers="d2818570e697 "><samp class="ph codeph">ALLOWED_METHODS</samp></td>
+
+              <td class="entry" valign="top" width="72.52747252747253%" headers="d2818570e700 ">A single permitted method or a comma-separated list of methods that are allowed
+                by the server, for example, <samp class="ph codeph"><span class="q">“GET”</span>, <span class="q">“POST”</span></samp>. If
+                  <samp class="ph codeph">allowMethods</samp> is defined but no method is specified, the default
+                    <samp class="ph codeph"><span class="q">“GET”</span>, <span class="q">“POST”</span>, <span class="q">“HEAD”</span>, <span class="q">“OPTIONS”</span></samp> (all)
+                applies. Note that matching is case-sensitive. </td>
+
+            </tr>
+
+            <tr class="row">
+              <td class="entry" valign="top" width="27.47252747252747%" headers="d2818570e697 "><samp class="ph codeph">ALLOWED_ORIGIN</samp></td>
+
+              <td class="entry" valign="top" width="72.52747252747253%" headers="d2818570e700 ">A single host name or a comma-separated list of host names that are allowed by
+                the server, for example: <samp class="ph codeph">www.sap.com</samp> or <samp class="ph codeph">*.sap.com</samp>.
+                If <samp class="ph codeph">allowOrigin</samp> is defined but no host is specified, the default
+                    <samp class="ph codeph"><span class="q">“*”</span></samp> (all) applies. Note that matching is
+                case-sensitive.</td>
+
+            </tr>
+
+            <tr class="row">
+              <td class="entry" valign="top" width="27.47252747252747%" headers="d2818570e697 "><samp class="ph codeph">ALLOW_HEADERS</samp></td>
+
+              <td class="entry" valign="top" width="72.52747252747253%" headers="d2818570e700 ">A single header or a comma-separated list of <span class="ph emphasis emphasis">request</span>
+                headers that are allowed by the server. If <samp class="ph codeph">allowHeaders</samp> is defined
+                but no header is specified as allowed, no default value is supplied.</td>
+
+            </tr>
+
+            <tr class="row">
+              <td class="entry" valign="top" width="27.47252747252747%" headers="d2818570e697 "><samp class="ph codeph">MAX_AGE</samp></td>
+
+              <td class="entry" valign="top" width="72.52747252747253%" headers="d2818570e700 ">A single value specifying how long a preflight request should be cached for. If
+                  <samp class="ph codeph">maxAge</samp> is defined but no value is specified, the default time of
+                    <samp class="ph codeph"><span class="q">“3600”</span></samp> (seconds) applies. </td>
+
+            </tr>
+
+            <tr class="row">
+              <td class="entry" valign="top" width="27.47252747252747%" headers="d2818570e697 "><samp class="ph codeph">EXPOSE_HEADERS</samp></td>
+
+              <td class="entry" valign="top" width="72.52747252747253%" headers="d2818570e700 ">A single header or a comma-separated list of <span class="ph emphasis emphasis">response</span>
+                headers that are allowed to be exposed. If <samp class="ph codeph">exposeHeaders</samp> is defined
+                but no response header is specified for exposure, no default value is
+                supplied.</td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+</div>
+
+      
+      <p class="p">Alternatively, you can isolate the part of the application where CORS must be allowed, for
+        example, in a specific subpackage. By adding a dedicated <span class="ph filepath">.xsaccess</span> file
+        to this CORS-related subpackage, you can set the <samp class="ph codeph">cors</samp> option in the
+        dedicated <samp class="ph codeph">.xsaccess</samp> file to true. </p>
+
+    </div></div>
+
+    <div class="section" id="loioa9fc5c220d744180850996e2f5d34d6c__section_N10213_N10016_N10001"><div class="section_title">default_file</div><div type="default_file">
+      
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> {
+     "default_file" : "new_index.html",    
+}
+ </pre></div>
+
+      <p class="p">The <span class="keyword">default_file</span> keyword enables you to override the default setting for
+        application access (<span class="ph filepath">index.html</span>) when the package is accessed without
+        providing a file in the URI. If you use the <span class="keyword">default_file</span> but do not
+        specify a value, the default setting <span class="q">“<span class="ph filepath">index.html</span>”</span> is assumed.</p>
+
+      <div class="note tip"><span class="tiptitle">Tip</span> It is good practice to specify a default file name manually. Changing the
+        default from <span class="ph filepath">index.html</span> to something else can help make your
+        application less vulnerable to automated hacker tools.</div>
+
+    </div></div>
+
+		<div class="section" id="loioa9fc5c220d744180850996e2f5d34d6c__section_N1007F_N10016_N10001"><div class="section_title">rewrite_rules</div><div type="rewrite_rules">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{
+     "rewrite_rules" :                    
+        [{                               
+          "source": "...",
+          "target": "..."        
+        }],
+}
+ </pre></div>
+
+			<div class="p">The <samp class="ph codeph">rewrite_rules</samp> keyword enables you hide the details of internal URL paths
+        from external users, clients, and search engines. Any rules specified affect the local
+        application where the <span class="ph filepath">.xsaccess</span> file resides (and any subpackage,
+        assuming the subpackages do not have their own <span class="ph filepath">.xsaccess</span> files); it is
+        not possible to define global rewrite rules. URL rewrite rules are specified as a
+        source-target pair where the source is written in the JavaScript <span class="keyword cmdname">regex</span>
+        syntax and the target is a simple string where references to found groups can be inserted
+        using <span class="keyword cmdname">$groupnumber</span>.<div class="note tip"><span class="tiptitle">Tip</span> It is not recommended to rely on
+          rewrite rules to make an application secure.</div>
+
+      </div>
+
+      <p class="p">In the following example, the rule illustrated hides the <samp class="ph codeph">filename</samp>
+        parameter and, as a result, makes it harder to guess that the parameter provided after
+          <samp class="ph codeph">/go/</samp> will be used as a filename value. Note that it is still necessary to
+        validate the received input</p>
+
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{
+     "rewrite_rules" :                    
+        [{                               
+          "source": "/go/(\\d+)/",
+          "target": "/logic/users.xsjs?filename=$1"        
+        }],
+}
+ </pre></div>
+
+      <p class="p"/>
+
+		</div></div>
+
+    <div class="section" id="loioa9fc5c220d744180850996e2f5d34d6c__section_N100AD_N10016_N10001"><div class="section_title">mime_mapping</div><div type="mime_mapping">
+      
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{
+          "mime_mapping" :                     
+          [ 
+            {
+              "extension":"jpg", "mimetype":"image/jpeg"
+            } 
+          ],
+}</pre></div>
+
+      <p class="p">The <samp class="ph codeph">mime_mapping</samp> keyword enables you to define how to map certain file
+        suffixes to required MIME types. For example, you can map files with the
+          <span class="ph filepath">.jpg</span> file extension to the MIME type <samp class="ph codeph">image/jpeg</samp>.</p>
+
+      <p class="p">This list you define with the <samp class="ph codeph">mime_mapping</samp> keyword supersedes any default
+        mapping defined by the server; the Web browser uses the information to decide how to process
+        the related file types. </p>
+
+      <div class="note caution"><span class="cautiontitle">Caution</span> Make sure you do not instruct the browser to execute files that are not
+        meant to be executed, for example, by mapping <span class="ph filepath">.jpg</span> image files with the
+        MIME type <samp class="ph codeph">application/javascript</samp>. </div>
+
+      <p class="p">The default MIME mappings remain valid for any values you do not define with the
+          <samp class="ph codeph">mime_mapping</samp> keyword. Consider restricting any explicit mappings to file
+        types where the default behavior does not work as expected or where no default value exists,
+        for example, for file types specific to your application.</p>
+
+    </div></div>
+
+    <div class="section" id="loioa9fc5c220d744180850996e2f5d34d6c__section_N100CB_N10016_N10001"><div class="section_title">force_ssl</div><div type="force_ssl">
+      
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> {
+     "force_ssl" : false,                    
+} </pre></div>
+
+      <p class="p">The <samp class="ph codeph">force_ssl</samp> keyword enables you to refuse Web browser requests that do
+        not use secure HTTP (SSL/HTTPS) for client connections. If no value is set for
+          <samp class="ph codeph">force_ssl</samp>, the default setting (<samp class="ph codeph">false</samp>) applies and
+        non-secured connections (HTTP) are allowed. </p>
+
+      <div class="note tip"><span class="tiptitle">Tip</span> To ensure that, during the authentication process, passwords are transmitted
+        in encrypted form, it is strongly recommended to enable SSL/HTTPS for all application
+        connections to the XS engine. If you set the <span class="ph uicontrol">force_ssl</span> option, you
+        must ensure that the SAP Web Dispatcher is configured to accept and manage HTTPS requests.
+        For more information, see the SAP HANA XS section of the <cite class="cite">SAP HANA Administration
+          Guide</cite>.</div>
+
+      <p class="p">Enabling the<samp class="ph codeph">force_ssl</samp> option ensures that your application is reachable
+        only by means of an HTTPS connection. If your application must support standard HTTP
+        (without SSL),  make sure that no sensitive data is being sent either
+          <span class="ph emphasis emphasis">to</span> or <span class="ph emphasis emphasis">from</span> the application. Disabling the
+          <samp class="ph codeph">force_ssl</samp> option allows attackers to read whatever is sent over the
+        network. Although it is possible to use message-based encryption for sensitive data while
+        allowing HTTP,  it is much better to work with HTTPS. </p>
+
+      <div class="note caution"><span class="cautiontitle">Caution</span> If a runtime configuration exists for your application, the
+          <samp class="ph codeph">force_ssl</samp> setting in the runtime configuration supersedes the
+          <samp class="ph codeph">force_ssl</samp> in the <span class="ph filepath">.xsaccess</span>.</div>
+
+      <p class="p"/>
+
+    </div></div>
+
+    <div class="section" id="loioa9fc5c220d744180850996e2f5d34d6c__section_N100E1_N10016_N10001"><div class="section_title">enable_etags</div><div type="enable_etags">
+      
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> {
+     "enable_etags" : true, 
+} </pre></div>
+
+      <p class="p">You can allow or prevent the generation of entity tags (etags) for static Web content using
+        the <samp class="ph codeph">enable_etags</samp> keyword. If no value is set, the default setting (true)
+        applies, in which case etags are generated. Etags are used to improve caching performance,
+        for example, so that the same data is not resent from the server if no change has occurred
+        since the last time a request for the same data was made.</p>
+
+      <p class="p">If etags are enabled, the browser sends with each HTTP request the etag retrieved from its
+        cached page. If the etag from the cached page matches the etag from the server, the server
+        answers with the status code 304 (not modified) and does send the full requested page.
+        Although enabling etags has the positive side-effect of helping to prevent cache poisoning
+        attacks, there is no direct security risk associated with disabling etags from the
+        developer's perspective.</p>
+
+    </div></div>
+
+    <div class="section" id="loioa9fc5c220d744180850996e2f5d34d6c__section_N101F7_N10016_N10001"><div class="section_title">prevent_xsrf</div><div type="prevent_xsrf">
+      
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> {
+     "prevent_xsrf" : true,
+} </pre></div>
+
+      <p class="p">You can use the <samp class="ph codeph">prevent_xsrf</samp> keyword in the <span class="ph filepath">.xsaccess</span>
+        file to protect applications from cross-site request-forgery (XSRF) attacks. XSRF attacks
+        attempt to trick a user into clicking a specific hyperlink, which shows a (usually
+        well-known) Web site and performs some actions on the user’s behalf, for example, in a
+        hidden iframe. If the targeted end user is logged in and browsing using an administrator
+        account, the XSRF attack can compromise the entire Web application. There is no good reason
+        why you would explicitly set this keyword to false.</p>
+
+      <div class="note note"><span class="notetitle">Note</span> 
+        <p class="p">It is recommended to enable the <samp class="ph codeph">prevent_xsrf</samp> feature for
+            <span class="ph emphasis emphasis">all</span> applications that are not read-only.</p>
+
+      </div>
+
+      <div class="p">The <samp class="ph codeph">prevent_xsrf</samp> keyword prevents the XSRF attacks by ensuring that checks
+        are performed to establish that a valid security token is available for a given Browser
+        session. The existence of a valid security token determines if an application responds to
+        the client's request to display content; if no valid security token is available, a
+          <samp class="ph systemoutput">403 Forbidden</samp> message is displayed. A security token is
+        considered to be valid if it matches the token that <span class="ph pname">SAP HANA</span> XS generates in
+        the back end for the corresponding session. <div class="note note" id="loioa9fc5c220d744180850996e2f5d34d6c__note_N1021B_N10210_N101F7_N10016_N10001"><span class="notetitle">Note</span> The default setting is false, which means
+          there is no automatic prevention of XSRF attacks. If no value is assigned to the
+            <span class="keyword">prevent_xsrf</span> keyword, the default setting (false) applies.</div>
+</div>
+
+      <div class="p">Setting the <samp class="ph codeph">prevent_xsrf</samp> keyword to <samp class="ph codeph">true</samp> ensures XSRF
+        protection only on the server side. On the client side, to include the XSRF token in the
+        HTTP headers, you must first fetch the token as part of a GET request, as illustrated in the
+        following
+        example:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">xmlHttp.setRequestHeader("X-CSRF-Token", "Fetch");
+</pre></div>
+</div>
+
+      <div class="p">You can use the fetched XSRF token in subsequent POST requests, as illustrated in the
+        following code
+        example:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">xmlHttp.setRequestHeader("X-CSRF-Token", xsrf_token);
+</pre></div>
+</div>
+
+    </div></div>
+
+    <div class="section" id="loioa9fc5c220d744180850996e2f5d34d6c__section_yg5_phf_34"><div class="section_title">headers</div><div type="headers">
+      
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{
+"headers":
+     {
+     "enabled": true, 
+     "customHeaders": [ {"name":"X-Frame-Options","value":"<var class="keyword varname">&lt;VALUE&gt;</var>"} ]
+     }
+}
+</pre></div>
+
+      <div class="p">Enable support for the X-Frame-Options HTTP header field, which allows the server to
+        instruct the client browser whether or not to display transmitted content in frames that are
+        part of other Web pages. You can also enable this setting in the application's corresponding
+        runtime configuration file, for example, using the <span class="ph uicontrol">XS Administration
+          Tool</span>.<div class="note caution"><span class="cautiontitle">Caution</span> Runtime settings override any settings specified in
+          the design-time configuration.</div>
+</div>
+
+      <p class="p"><var class="keyword varname">&lt;VALUE&gt;</var> can be one of the following:</p>
+
+      <ul class="ul" id="loioa9fc5c220d744180850996e2f5d34d6c__ul_gfx_w2f_34">
+        <li class="li"><samp class="ph codeph">DENY</samp></li>
+
+        <li class="li"><samp class="ph codeph">SAMEORIGIN</samp></li>
+
+        <li class="li"><samp class="ph codeph">ALLOW-FROM <var class="keyword varname">&lt;URL&gt;</var></samp><p class="p">You can only specify one URL with
+            the <samp class="ph codeph">ALLOW-FROM</samp> option, for example: <samp class="ph codeph">"value":"ALLOW-FROM
+              http://www.site.com"</samp>.</p>
+<div class="note note"><span class="notetitle">Note</span> To allow an application to use custom headers,
+            you must enable the headers section.</div>
+</li>
+
+      </ul>
+
+    </div></div>
+
+	</div>
+
+  <div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?b5e65421b48c48fa87312a6023f4c414.html" target="_top" title="If you choose to use server-side JavaScript to write your application code, you need to bear in mind the potential for (and risk of) external attacks such as cross-site scripting and forgery, and insufficient authentication.">Server-Side JavaScript Security Considerations</a></div>
+<div><a class="link" href="default.html?740f8789a73340c2879246ebbaff6d5d.html" target="_top" title="The SQL-connection configuration file specifies the details of a connection to the database that enables the execution of SQL statements from inside a server-side (XS) JavaScript application with credentials that are different to the credentials of the requesting user.">The SQL Connection Configuration File</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Application-Access File Keyword Options";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

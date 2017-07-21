@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Create restricted columns to restrict values of measures based on attribute restrictions. For example, you can choose to restrict the value for the REVENUE column only for REGION = APJ, and YEAR = 2012."/>
+<meta name="description" content="Create restricted columns to restrict values of measures based on attribute restrictions. For example, you can choose to restrict the value for the REVENUE column only for REGION = APJ, and YEAR = 2012."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=916504584574677"/>
+<title>Create Restricted Columns</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio0e229f548ddd482ea009769462b96ab9";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio0e229f548ddd482ea009769462b96ab9">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Create Restricted Columns</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">Create restricted columns to restrict values of measures based on attribute
+		restrictions. For example, you can choose to restrict the value for the REVENUE column only
+		for REGION = APJ, and YEAR = 2012. </p>
+
+		<div class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<div class="p">You can apply restrictions on measures defined in the semantics node by using any of the below
+					approaches:<ul class="ul" id="loio0e229f548ddd482ea009769462b96ab9__ul_dvc_vrl_wp">
+					<li class="li">Apply restrictions on attribute values by using values from other attribute
+						columns.</li>
+
+					<li class="li">Apply restriction on attribute values using expressions.</li>
+
+				</ul>
+</div>
+
+			<div class="note note"><span class="notetitle">Note</span> For restricted columns, modeler applies the aggregation type of the base column, and you
+				can create restricted columns in the default aggregation view node or star join node
+				only.</div>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+				<span class="ph cmd">1. Open the required graphical calculation view in the editor.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Select the default aggregation node.</span>
+				<div class="itemgroup info">
+					<div class="note note"><span class="notetitle">Note</span> 
+						<p class="p">You can also create restricted columns in star join nodes.</p>
+
+					</div>
+
+				</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Choose the <span class="ph uicontrol">Restricted Columns</span> tab.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Choose <img class="image" id="loio0e229f548ddd482ea009769462b96ab9__image_lz2_42t_fs" src="loioa86848cc86e948d7b0794768c4c2d7aa_LowRes.png"/>.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">In the <span class="ph uicontrol">General</span> section, provide a name and description to the
+					restricted column.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">In the <span class="ph uicontrol">Base Measure</span> dropdown list, select a measure on which you
+					want to apply restrictions.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">If you want to hide the restricted column for data preview, select the
+						<span class="ph uicontrol">Hidden</span> checkbox. </span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Apply restrictions using column values.</span>
+				<div class="itemgroup info">You can define a condition using attribute columns to apply restrictions on
+					the base measure.</div>
+				<ol type="a" class="ol substeps" id="loio0e229f548ddd482ea009769462b96ab9__substeps_xly_gsl_wp">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Select <span class="ph uicontrol">Columns</span>.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Choose <img class="image" id="loio0e229f548ddd482ea009769462b96ab9__image_xcf_p2t_fs" src="loioa86848cc86e948d7b0794768c4c2d7aa_LowRes.png"/>.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the <span class="ph uicontrol">Column</span> dropdown list, selecte an attribute column.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the <span class="ph uicontrol">Operator</span> dropdown list, select a required operation to
+							define the condition.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the <span class="ph uicontrol">Value</span> field, select a value from the
+							value help.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">If you want to apply restrictions only for the defined conditions,
+							choose <span class="ph uicontrol">Include</span>.</span>
+						<div class="itemgroup info">
+							<div class="note note"><span class="notetitle">Note</span> 
+								<p class="p">You can apply restrictions using more than one attribute
+									column.</p>
+
+							</div>
+
+						</div>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Apply restrictions using expressions.</span>
+				<div class="itemgroup info">
+					<p class="p">If you want to use an expression to apply restrictions on the base measure,
+						then:</p>
+
+				</div>
+				<ol type="a" class="ol substeps" id="loio0e229f548ddd482ea009769462b96ab9__substeps_xxl_ssl_wp">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Select <span class="ph uicontrol">Expression</span>.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Choose <span class="ph uicontrol">Edit Expression</span>.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the expression editor, enter your expression.</span>
+						<div class="itemgroup info">
+							<div class="note note"><span class="notetitle">Note</span> You can also use input parameters in your expressions to create
+								restricted columns.</div>
+
+						</div>
+					</li>
+
+				</ol>
+
+			</li>
+</ol>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?d770825bbb5710148ca7cd47cb086923.html" target="_top" title="This section describes the functions, which you can use while creating expressions for calculated attributes and calculated measures.">Using Functions in Expressions</a></div>
+<div><a class="link" href="default.html?10372ea878964b118240585abd4ec428.html" target="_top" title="After creating a restricted column, you can view its properties or change them based on your business requirements.">Restricted Column Properties</a></div>
+<div><a class="link" href="default.html?ef992f7914db45218f4bfd2aff05a8de.html" target="_top" title="Restricted columns help you restrict measure values based on attribute restrictions.">Example: Restricted Columns</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Create Restricted Columns";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

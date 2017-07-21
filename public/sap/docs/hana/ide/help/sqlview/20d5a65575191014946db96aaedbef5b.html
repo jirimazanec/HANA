@@ -1,0 +1,1411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Creates a trigger on a table or view."/>
+<meta name="description" content="Creates a trigger on a table or view."/>
+<meta name="keywords" content="CREATE TRIGGER"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=16024383243045814"/>
+<title>CREATE TRIGGER Statement (Data Definition)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20d5a65575191014946db96aaedbef5b";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20d5a65575191014946db96aaedbef5b">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">CREATE TRIGGER Statement (Data Definition)</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Creates a trigger on a table or view.</p>
+
+      <div class="section" id="loio20d5a65575191014946db96aaedbef5b__sql_create_trigger_1sql_create_trigger_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+         
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TRIGGER <var class="keyword varname">&lt;trigger_name&gt;</var> <var class="keyword varname">&lt;trigger_action_time&gt;</var> <var class="keyword varname">&lt;trigger_event_list&gt;</var>
+   ON <var class="keyword varname">&lt;subject_table_name&gt;</var>
+   [REFERENCING <var class="keyword varname">&lt;transition_list&gt;</var>] 
+   [<var class="keyword varname">&lt;for_each_row&gt;</var>] 
+   [ <var class="keyword varname">&lt;trigger_order_clause&gt;</var> ]
+      BEGIN 
+         [<var class="keyword varname">&lt;trigger_decl_list&gt;</var>]
+         [<var class="keyword varname">&lt;proc_handler_list&gt;</var>]
+         <var class="keyword varname">&lt;trigger_stmt_list&gt;</var>
+      END</pre></div>
+
+      </div></div>
+
+      <div class="section" id="loio20d5a65575191014946db96aaedbef5b__sql_create_trigger_1sql_create_trigger_syntax_elements"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+         
+         <dl class="dl parml">
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;trigger_name&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the name of the trigger to be created, with optional schema name.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;trigger_name&gt;</var> ::= [<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;identifier&gt;</var>
+ 
+<var class="keyword varname">&lt;schema_name&gt;</var> ::= <var class="keyword varname">&lt;unicode_name&gt;</var></pre></div>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;trigger_action_time&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies when the trigger action should occur.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;trigger_action_time&gt;</var> ::= 
+ BEFORE 
+ | AFTER  
+ | INSTEAD OF</pre></div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis">BEFORE</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies that the trigger is executed before the DML operation on a
+                              table.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">AFTER</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies that the trigger is executed after the DML operation on a
+                              table.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">INSTEAD OF</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies that the trigger is executed instead of the DML operation on
+                              a view.</p>
+
+                           <p class="p">A view with an INSTEAD OF trigger becomes updatable. An INSTEAD OF
+                              trigger is only allowed for SQL views and projection views
+                              (TableLink), not for tables or column views. UPDATE with FROM clause
+                              and REPLACE DML is not allowed when an INSTEAD OF trigger exists.</p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;trigger_event_list&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the data modification command that activates the trigger action.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;trigger_event_list&gt;</var> ::= 
+ <var class="keyword varname">&lt;trigger_event&gt;</var> 
+ | <var class="keyword varname">&lt;trigger_event_list&gt;</var> OR <var class="keyword varname">&lt;trigger_event&gt;</var>
+ 
+<var class="keyword varname">&lt;trigger_event&gt;</var> ::= 
+ INSERT 
+ | DELETE 
+ | UPDATE [[EXCEPT] OF &lt;column_name_list&gt;]
+ 
+<var class="keyword varname">&lt;column_name_list&gt;</var> ::= <var class="keyword varname">&lt;column_name&gt;</var> [{, <var class="keyword varname">&lt;column_name&gt;</var>}...]
+ 
+<var class="keyword varname">&lt;column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                  <p class="p">If <var class="keyword varname">&lt;column_name_list&gt;</var> is provided with the UPDATE OF clause,
+                     then the UPDATE trigger only fires if a column specified in the list is
+                     updated. If <var class="keyword varname">&lt;column_name_list&gt;</var> is provided with the UPDATE
+                     EXCEPT OF clause, then the UPDATE trigger is not fired if a column specified in
+                     the list is updated. The UPDATE trigger is fired regardless of the UPDATE
+                     EXCEPT OF clause if columns that are not specified in the list are updated
+                     together.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;subject_table_name&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the subject table name. </p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;subject_table_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                  </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis">REFERENCING <var class="keyword varname">&lt;transition_list&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">When a trigger transition variable is declared, the trigger can access records
+                     that are being changed by the DML triggering the trigger. For more information,
+                     see <a class="xref" href="default.html?20d5a65575191014946db96aaedbef5b.html#loio20d5a65575191014946db96aaedbef5b__sql_create_trigger_1sql_create_trigger_example_transition_variable" target="_top">Transition variable</a> and <a class="xref" href="default.html?20d5a65575191014946db96aaedbef5b.html#loio20d5a65575191014946db96aaedbef5b__sql_create_trigger_1sql_create_trigger_example_transition_table" target="_top">Transition table</a>.</p>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;transition_list&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies one or more transition list entries.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;transition_list&gt;</var> ::= <var class="keyword varname">&lt;transition&gt;</var> [{, <var class="keyword varname">&lt;transition&gt;</var>}...]</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;transition&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies a transition variable or table variable.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;transition&gt;</var> ::= <var class="keyword varname">&lt;transition_variable&gt;</var> | <var class="keyword varname">&lt;transition_table&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;transition_variable&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">During row-level trigger execution,
+                                 <var class="keyword varname">&lt;trans_var_name&gt;</var>.<var class="keyword varname">&lt;column_name&gt;</var>
+                              represents a single record from the corresponding column that is being
+                              changed by the DML. </p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;transition_variable&gt;</var> ::= {OLD | NEW} ROW [AS] <var class="keyword varname">&lt;trans_var_name&gt;</var>
+ 
+<var class="keyword varname">&lt;trans_var_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                           <p class="p"><var class="keyword varname">&lt;column_name&gt;</var> is the target tables column name. Only
+                              a ROW trigger can use a transition variable.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;transition_table&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">During statement-level trigger execution,
+                                 <var class="keyword varname">&lt;trans_tab_name&gt;</var> represents records being changed
+                              by the trigger DML as a table variable.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;transition_table&gt;</var> ::= {OLD | NEW} TABLE [AS] <var class="keyword varname">&lt;trans_tab_name&gt;</var>
+ 
+<var class="keyword varname">&lt;trans_tab_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                           <p class="p">Only statement triggers can use a transition table.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">OLD</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies that you can access the old row of the DML in the trigger.
+                              This is the row that is replaced by an update or a deleted old row.
+                              UPDATE triggers and DELETE triggers can have OLD ROW transition
+                              variables or OLD TABLE transition table variables.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">NEW</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies that you can access the new record of the DML in the
+                              trigger. This is the row that is inserted or the new updated row.</p>
+
+                           <p class="p">UPDATE triggers and INSERT triggers can have NEW ROW transition
+                              variables or NEW TABLE transition table variables.</p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;for_each_row&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies whether the trigger is called in a row-wise or statement-wise
+                     fashion.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;for_each_row&gt;</var> ::= FOR EACH { ROW | STATEMENT }</pre></div>
+
+                  <p class="p">The default is ROW.</p>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis">ROW</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies that a row-level trigger is used. This is fired once for
+                              each row affected by the triggering event.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">STATEMENT</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies that a statement-level trigger is used. This is fired once
+                              for each triggering event. Row-store tables only support
+                              statement-level triggers.</p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;trigger_order_clause&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the order in which the triggers are executed.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;trigger_order_clause&gt;</var> ::= FOLLOWS | PRECEDES <var class="keyword varname">&lt;trigger_name_list&gt;</var>
+
+<var class="keyword varname">&lt;trigger_name_list&gt;</var> ::= <var class="keyword varname">&lt;trigger_name&gt;</var> [,...]</pre></div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis">FOLLOWS</dt>
+
+                        <dd class="dd">Specifies that the trigger being created is fired after the specified
+                           triggers in <var class="keyword varname">&lt;trigger_name_list&gt;</var>.</dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">PRECEDES</dt>
+
+                        <dd class="dd">Specifies that the trigger being created is fired before the specified
+                           triggers in <var class="keyword varname">&lt;trigger_name_list&gt;</var>.</dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;trigger_decl_list&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the trigger declaration.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;trigger_decl_list&gt;</var> ::= {DECLARE <var class="keyword varname">&lt;trigger_decl&gt;</var>}...</pre></div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;trigger_decl&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Declares trigger variables or trigger conditions.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;trigger_decl&gt;</var> ::= 
+ <var class="keyword varname">&lt;trigger_var_decl&gt;</var>  
+ | <var class="keyword varname">&lt;trigger_condition_decl&gt;</var></pre></div>
+
+                           <p class="p">The declared variable can be used as a scalar value assignment or
+                              referenced in a trigger SQL statement.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;trigger_var_decl&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the trigger variable declaration.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;trigger_var_decl&gt;</var> ::= 
+ <var class="keyword varname">&lt;var_name&gt;</var> [CONSTANT] <var class="keyword varname">&lt;data_type&gt;</var> [<var class="keyword varname">&lt;not_null&gt;</var>] [<var class="keyword varname">&lt;trigger_default_assign&gt;</var>];</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;var_name&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the identifier of the trigger variable.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;var_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">CONSTANT</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies that you cannot change the variable during trigger
+                              execution.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;data_type&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the data type of the trigger variable.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;data_type&gt;</var> ::= 
+ DATE 
+ | TIME 
+ | SECONDDATE 
+ | TIMESTAMP 
+ | TINYINT 
+ | SMALLINT 
+ | INTEGER 
+ | BIGINT 
+ | SMALLDECIMAL 
+ | DECIMAL 
+ | REAL 
+ | DOUBLE
+ | VARCHAR 
+ | NVARCHAR 
+ | ALPHANUM 
+ | SHORTTEXT 
+ | VARBINARY 
+ | BLOB 
+ | CLOB 
+ | NCLOB 
+ | TEXT 
+ | BINTEXT</pre></div>
+
+                           </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;not_null&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the not null condition.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;not_null&gt;</var> ::= NOT NULL</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;trigger_default_assign&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the default value of the trigger variable.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;trigger_default_assign&gt;</var> ::= DEFAULT <var class="keyword varname">&lt;expression&gt;</var> | := <var class="keyword varname">&lt;expression&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;trigger_condition_decl&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the condition handler declaration.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;trigger_condition_decl&gt;</var> ::= 
+ <var class="keyword varname">&lt;condition_name&gt;</var> CONDITION;
+ | <var class="keyword varname">&lt;condition_name&gt;</var> CONDITION FOR <var class="keyword varname">&lt;sql_error_code&gt;</var>;</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;condition_name&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies a declared condition name that you can reference in an
+                              exception handler.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;condition_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var> </pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;sql_error_code&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the error code for exception handling.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;sql_error_code&gt;</var> ::= SQL_ERROR_CODE <var class="keyword varname">&lt;int_const&gt;</var>  </pre></div>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;proc_handler_list&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Declares exception handlers to catch SQL exceptions.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_handler_list&gt;</var> ::= {<var class="keyword varname">&lt;proc_handler&gt;</var>}...
+ 
+<var class="keyword varname">&lt;proc_handler&gt;</var> ::= 
+ DECLARE EXIT HANDLER FOR <var class="keyword varname">&lt;proc_condition_value_list&gt;</var> <var class="keyword varname">&lt;trigger_stmt&gt;</var></pre></div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_condition_value_list&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies one or more condition values.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_condition_value_list&gt;</var> ::= 
+ <var class="keyword varname">&lt;proc_condition_value&gt;</var> [{, <var class="keyword varname">&lt;proc_condition_value&gt;</var>}]</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_condition_value&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">
+                              
+                           </p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_condition_value&gt;</var> ::= 
+ SQLEXCEPTION     
+ | SQLWARNING
+ | <var class="keyword varname">&lt;sql_error_code&gt;</var> 
+ | <var class="keyword varname">&lt;condition_name&gt;</var></pre></div>
+
+                           <p class="p">You can use a specific error code number or condition name declared on
+                              a condition variable.</p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;trigger_stmt_list&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies that the trigger body syntax is a subset of the procedure body
+                     syntax.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;trigger_stmt_list&gt;</var> ::= {<var class="keyword varname">&lt;trigger_stmt&gt;</var>}...
+ 
+<var class="keyword varname">&lt;trigger_stmt&gt;</var> ::= 
+ <var class="keyword varname">&lt;proc_block&gt;</var>   
+ | <var class="keyword varname">&lt;proc_assign&gt;</var>    
+ | <var class="keyword varname">&lt;proc_if&gt;</var>        
+ | <var class="keyword varname">&lt;proc_loop&gt;</var>  
+ | <var class="keyword varname">&lt;proc_while&gt;</var>     
+ | <var class="keyword varname">&lt;proc_for&gt;</var>   
+ | <var class="keyword varname">&lt;proc_foreach&gt;</var>
+ | <var class="keyword varname">&lt;proc_signal&gt;</var>    
+ | <var class="keyword varname">&lt;proc_resignal&gt;</var>
+ | <var class="keyword varname">&lt;trigger_sql&gt;</var>    
+ | <var class="keyword varname">&lt;trigger_proc_call&gt;</var>   
+ | <var class="keyword varname">&lt;proc_exit&gt;</var>
+ | <var class="keyword varname">&lt;proc_continue&gt;</var>
+ | <var class="keyword varname">&lt;proc_open&gt;</var>
+ | <var class="keyword varname">&lt;proc_fetch&gt;</var>
+ | <var class="keyword varname">&lt;proc_close&gt;</var>
+ | <var class="keyword varname">&lt;proc_return&gt;</var></pre></div>
+
+                  <p class="p">For more information, see the CREATE PROCEDURE statement.</p>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_block&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies sections of your trigger procedures that can be nested using
+                              BEGIN and END terminals.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_block&gt;</var> ::= 
+ BEGIN 
+   [<var class="keyword varname">&lt;trigger_decl_list&gt;</var>]
+   [<var class="keyword varname">&lt;proc_handler_list&gt;</var>]
+   <var class="keyword varname">&lt;trigger_stmt_list&gt;</var>
+  END;</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_assign&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Assigns values to variables.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_assign&gt;</var> ::= <var class="keyword varname">&lt;var_name&gt;</var> := <var class="keyword varname">&lt;expression&gt;</var>;
+ 
+<var class="keyword varname">&lt;var_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_if&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Controls execution flow with conditionals.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_if&gt;</var> ::= 
+ IF <var class="keyword varname">&lt;condition&gt;</var> THEN <var class="keyword varname">&lt;trigger_stmt_list&gt;</var> [<var class="keyword varname">&lt;proc_elsif_list&gt;</var>] [<var class="keyword varname">&lt;proc_else&gt;</var>]
+   END IF;
+
+<var class="keyword varname">&lt;proc_elsif_list&gt;</var> ::= 
+ ELSEIF <var class="keyword varname">&lt;condition&gt;</var> THEN <var class="keyword varname">&lt;trigger_stmt_list&gt;</var>
+
+<var class="keyword varname">&lt;proc_else&gt;</var> ::= ELSE <var class="keyword varname">&lt;trigger_stmt_list&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;condition&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the conditions where the command should be performed.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;condition&gt;</var> ::= 
+ <var class="keyword varname">&lt;condition&gt;</var> OR  <var class="keyword varname">&lt;condition&gt;</var>
+ | <var class="keyword varname">&lt;condition&gt;</var> AND <var class="keyword varname">&lt;condition&gt;</var>
+ | NOT <var class="keyword varname">&lt;condition&gt;</var>
+ | ( <var class="keyword varname">&lt;condition&gt;</var> )
+ | <var class="keyword varname">&lt;predicate&gt;</var></pre></div>
+
+                           
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_loop&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Repeatedly executes a set of trigger statements.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_loop&gt;</var> ::= 
+   LOOP 
+      <var class="keyword varname">&lt;trigger_stmt_list&gt;</var> 
+   END LOOP;</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_while&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Repeatedly calls a set of trigger statements while a condition is
+                              true.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_while&gt;</var> ::= 
+   WHILE 
+     <var class="keyword varname">&lt;condition&gt;</var>
+     DO <var class="keyword varname">&lt;trigger_stmt_list&gt;</var> 
+   END WHILE;</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_for&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Iterates over a set of data.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_for&gt;</var> ::= 
+ FOR <var class="keyword varname">&lt;column_name&gt;</var> IN [<var class="keyword varname">&lt;reverse&gt;</var>] <var class="keyword varname">&lt;expression&gt;</var> ... <var class="keyword varname">&lt;expression&gt;</var>
+   DO <var class="keyword varname">&lt;trigger_stmt_list&gt;</var>
+  END FOR;</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;column_name&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the name of the column where the data iteration is to
+                              occur.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;reverse&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies that the results should be iterated over in reverse
+                              order.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;reverse&gt;</var> ::= REVERSE</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_foreach&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Iterates over all elements in a set of data.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_foreach&gt;</var> ::= 
+ FOR <var class="keyword varname">&lt;column_name&gt;</var> AS <var class="keyword varname">&lt;column_name&gt;</var> [<var class="keyword varname">&lt;open_param_list&gt;</var>]
+   DO <var class="keyword varname">&lt;trigger_stmt_list&gt;</var>
+  END FOR;</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;open_param_list&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies one or more input expressions to be iterated over.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;open_param_list&gt;</var> ::= ( <var class="keyword varname">&lt;expr_list&gt;</var> )
+
+<var class="keyword varname">&lt;expr_list&gt;</var> ::= <var class="keyword varname">&lt;expression&gt;</var>[{, <var class="keyword varname">&lt;expression&gt;</var>}]</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_signal&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Explicitly raises an exception from within your trigger
+                              procedures.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_signal&gt;</var> ::= 
+ SIGNAL <var class="keyword varname">&lt;signal_value&gt;</var> [<var class="keyword varname">&lt;set_signal_info&gt;</var>];</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_resignal&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Raises an exception on the action statement in an exception handler. </p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_resignal&gt;</var> ::= 
+ RESIGNAL [<var class="keyword varname">&lt;signal_value&gt;</var>] [<var class="keyword varname">&lt;set_signal_info&gt;</var>];</pre></div>
+
+                           <p class="p">If an error code is not specified, then RESIGNAL throws the caught
+                              exception.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;signal_value&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies to SIGNAL or RESIGNAL a signal name or an SQL error
+                              code.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;signal_value&gt;</var> ::= <var class="keyword varname">&lt;signal_name&gt;</var> | <var class="keyword varname">&lt;sql_error_code&gt;</var>
+ 
+<var class="keyword varname">&lt;signal_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+ 
+<var class="keyword varname">&lt;sql_error_code&gt;</var> ::= <var class="keyword varname">&lt;unsigned_integer&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;set_signal_info&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Delivers an error message to users when specified error is thrown
+                              during trigger execution.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;set_signal_info&gt;</var> ::= SET MESSAGE_TEXT = '<var class="keyword varname">&lt;message_string&gt;</var>'
+
+<var class="keyword varname">&lt;message_string&gt;</var> ::= <var class="keyword varname">&lt;any_character&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;trigger_sql&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the trigger SQL.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;trigger_sql&gt;</var> ::= <var class="keyword varname">&lt;select_into_stmt&gt;</var>
+ | <var class="keyword varname">&lt;insert_stmt&gt;</var>
+ | <var class="keyword varname">&lt;delete_stmt&gt;</var>
+ | <var class="keyword varname">&lt;update_stmt&gt;</var>
+ | <var class="keyword varname">&lt;replace_stmt&gt;</var>
+ | <var class="keyword varname">&lt;upsert_stmt&gt;</var></pre></div>
+
+                           <p class="p">For information on <var class="keyword varname">&lt;insert_stmt&gt;</var>, see the INSERT statement.</p>
+
+                           <p class="p">For information on <var class="keyword varname">&lt;delete_stmt&gt;</var>, see the DELETE statement.</p>
+
+                           <p class="p">For information on <var class="keyword varname">&lt;update_stmt&gt;</var>, see the UPDATE statement.</p>
+
+                           <p class="p">For information on <var class="keyword varname">&lt;replace_stmt&gt;</var> and
+                                 <var class="keyword varname">&lt;upsert_stmt&gt;</var>, see the REPLACE | UPSERT statement.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;select_into_stmt&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">
+                              
+                           </p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;select_into_stmt&gt;</var> ::=
+ SELECT <var class="keyword varname">&lt;select_list&gt;</var> INTO <var class="keyword varname">&lt;var_name_list&gt;</var> <var class="keyword varname">&lt;from_clause&gt;</var>
+   [<var class="keyword varname">&lt;where_clause&gt;</var>]
+   [<var class="keyword varname">&lt;group_by_clause&gt;</var>]
+   [<var class="keyword varname">&lt;having_clause&gt;</var>] 
+   [{<var class="keyword varname">&lt;set_operator&gt;</var> <var class="keyword varname">&lt;subquery&gt;</var>, ... }]
+   [<var class="keyword varname">&lt;order_by_clause&gt;</var>] 
+   [<var class="keyword varname">&lt;limit&gt;</var>]</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;trigger_proc_call&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Calls a previously defined procedure. </p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;trigger_proc_call&gt;</var> ::= CALL <var class="keyword varname">&lt;procedure_name&gt;</var></pre></div>
+
+                           <p class="p">The called procedure can only include SQL statements that are suitable
+                              for triggers.</p>
+
+                           <p class="p">For information on <var class="keyword varname">&lt;select_list&gt;</var>,
+                                 <var class="keyword varname">&lt;from_clause&gt;</var>, <var class="keyword varname">&lt;where_clause&gt;</var>,
+                                 <var class="keyword varname">&lt;group_by_clause&gt;</var>,
+                                 <var class="keyword varname">&lt;having_clause&gt;</var>, <var class="keyword varname">&lt;set_operator&gt;</var>,
+                                 <var class="keyword varname">&lt;subquery&gt;</var>, <var class="keyword varname">&lt;order_by_clause&gt;</var>,
+                              and <var class="keyword varname">&lt;limit&gt;</var>, see the SELECT statement.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;var_name_list&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies a scalar variable.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;var_name_list&gt;</var> ::= <var class="keyword varname">&lt;var_name&gt;</var>[{, <var class="keyword varname">&lt;var_name&gt;</var>}]
+ 
+<var class="keyword varname">&lt;var_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                           <p class="p">You can assign a selected item value to this scalar variable.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_exit&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Terminates a loop.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_exit&gt;</var> ::= BREAK;</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_continue&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Skips current loop iteration and continues with the next value.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_continue&gt;</var> ::= CONTINUE;</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_open&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies cursor operations.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_open&gt;</var> ::= OPEN &lt;cursor_name&gt; [ <var class="keyword varname">&lt;open_param_list&gt;</var>];
+
+<var class="keyword varname">&lt;proc_fetch&gt;</var> ::= FETCH <var class="keyword varname">&lt;cursor_name&gt;</var> INTO <var class="keyword varname">&lt;column_name_list&gt;</var>;
+
+<var class="keyword varname">&lt;proc_close&gt;</var> ::= CLOSE <var class="keyword varname">&lt;cursor_name&gt;</var>;</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;proc_return&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Returns from a trigger.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_return&gt;</var> ::= RETURN;</pre></div>
+
+                           <p class="p">Cannot return a value.</p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+         </dl>
+
+      </div></div>
+
+      <div class="section" id="loio20d5a65575191014946db96aaedbef5b__sql_create_trigger_1sql_create_trigger_description"><div class="section_title">Description</div><div type="Description">
+         
+         <p class="p">A trigger is special kind of stored procedure that automatically executes when an event
+            occurs on a given table or view. The CREATE TRIGGER command defines a set of statements
+            that are executed when a given operation (INSERT/UPDATE/DELETE) takes place on a given
+            subject table or subject view. Only database users with the TRIGGER privilege for the
+            given <var class="keyword varname">&lt;subject_table_name&gt;</var> are allowed to create a trigger for that
+            table or view. </p>
+
+         <p class="p">The following limitations apply to triggers:</p>
+
+         <ul class="ul" id="loio20d5a65575191014946db96aaedbef5b__ul_p5b_3tl_zv">
+            <li class="li">
+               <p class="p">Statement-level triggers are only supported in row-store tables. You also cannot
+                  convert a row table with a statement trigger into column table by using ALTER
+                  TABLE.</p>
+
+            </li>
+
+            <li class="li">
+               <p class="p">Modification (any INSERT/UPDATE/DELETE/REPLACE) of a subject table that a trigger
+                  is defined on is not allowed in the trigger body.</p>
+
+            </li>
+
+            <li class="li">
+               <p class="p">The trigger on a partitioned table cannot access the subject table, while a
+                  trigger on a non-partitioned table can execute the SELECT statement on its subject
+                  table.</p>
+
+            </li>
+
+            <li class="li">
+               <p class="p">When a subject table is accessed in a trigger body, it does not always show
+                  row-wise result in case of batch updates due to performance reasons.</p>
+
+            </li>
+
+            <li class="li">
+               <p class="p">The maximum trigger number per single table and per DML is 1024, which means a
+                  table can have maximum 1024 INSERT triggers, 1024 UPDATE triggers, and 1024 DELETE
+                  triggers in the same time.</p>
+
+            </li>
+
+            <li class="li">
+               <p class="p">In the case of multiple triggers, trigger execution order is not guaranteed. To
+                  ensure a certain set of trigger execution order, use a single unified trigger
+                  instead of multiple triggers.</p>
+
+            </li>
+
+            <li class="li">
+               
+               <p class="p">Procedure all inside trigger action body is supported. The procedure that is
+                  called in a trigger only can have SQL statements which are suitable for a trigger
+                  body.</p>
+
+            </li>
+
+            <li class="li">
+               <p class="p">Transition variable modifications ares allowed in the BEFORE trigger. Internal
+                  column($trexkey$, $rowid$, concat column) or generated column modifications are
+                  not allowed.</p>
+
+            </li>
+
+            <li class="li">
+               <p class="p">Unsupported trigger action features:</p>
+
+               <ul class="ul" id="loio20d5a65575191014946db96aaedbef5b__ul_vn3_j1w_bs">
+                  <li class="li">
+                     <p class="p">Result-set assignment like selecting a result set assignment into a
+                        tabletype </p>
+
+                  </li>
+
+                  <li class="li">
+                     <p class="p">Dynamic SQL execution like building SQL statements dynamically at the
+                        runtime of a SQLScript </p>
+
+                  </li>
+
+               </ul>
+
+            </li>
+
+         </ul>
+
+      </div></div>
+
+      <div class="section" id="loio20d5a65575191014946db96aaedbef5b__sql_create_trigger_1sql_create_trigger_examples"><div class="section_title">Examples</div><div type="Examples">
+         
+         <div class="sectiondiv"><p class="p" id="loio20d5a65575191014946db96aaedbef5b__sql_create_trigger_1sql_create_trigger_example_basic_trigger"><strong class="ph b">Basic
+                  trigger usage</strong></p>
+ Create a table that the trigger is created for.
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE TARGET ( A INT);</pre></div>
+ Create a table that the trigger
+            accesses and modifies. <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE SAMPLE ( A INT);</pre></div>
+ Create the
+            following trigger.
+               <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TRIGGER TEST_TRIGGER
+ AFTER INSERT ON TARGET FOR EACH ROW
+ BEGIN
+     DECLARE SAMPLE_COUNT INT;
+     SELECT COUNT(*) INTO SAMPLE_COUNT FROM SAMPLE;
+     IF :SAMPLE_COUNT = 0
+     THEN
+       INSERT INTO SAMPLE VALUES(5);
+     ELSEIF :SAMPLE_COUNT = 1
+     THEN
+       INSERT INTO SAMPLE VALUES(6);
+     END IF;
+ END;</pre></div>
+<p class="p">TEST_TRIGGER
+               is executed after any record insert execution for TARGET
+               table.</p>
+<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">INSERT INTO TARGET VALUES (1);
+ SELECT * FROM SAMPLE;</pre></div>
+<p class="p">The
+               SELECT statement returns 5, since the SAMPLE table record count is zero at the first
+               insert attempt and the trigger TEST_TRIGGER inserts 5 into the SAMPLE
+               table.</p>
+<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">INSERT INTO TARGET VALUES (2);
+ SELECT * FROM SAMPLE;</pre></div>
+<p class="p">The
+               SELECT statement returns 6, since on the second insertion to the TARGET table, the
+               trigger inserts 6 into the SAMPLE table because its count is now
+            two.</p>
+</div><div class="sectiondiv">
+            <p class="p"><span class="ph emphasis emphasis">Trigger ordering</span></p>
+
+            <p class="p">Create the trigger TRIGGER_TEST_1 that is executed after an insert execution on
+               TARGET table. TRIGGER_TEST_1 is executed following the execution of TEST_TRIGGER.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TRIGGER TRIGGER_TEST_1
+AFTER INSERT ON TARGET
+FOR EACH ROW FOLLOWS TEST_TRIGGER
+BEGIN
+     DECLARE SAMPLE_COUNT INT;
+     SELECT COUNT(*) INTO SAMPLE_COUNT FROM SAMPLE;
+     IF :SAMPLE_COUNT = 0
+     THEN
+       INSERT INTO SAMPLE VALUES(5);
+     ELSEIF :SAMPLE_COUNT = 1
+     THEN
+       INSERT INTO SAMPLE VALUES(6);
+     END IF;
+ END;</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20d5a65575191014946db96aaedbef5b__sql_create_trigger_1sql_create_trigger_example_after_update"><strong class="ph b">Trigger with
+                  AFTER UPDATE and a WHILE loop</strong></p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE TARGET ( A INT);
+ CREATE TABLE SAMPLE ( A INT);
+ CREATE TRIGGER TEST_TRIGGER_WHILE_UPDATE
+ AFTER UPDATE ON TARGET
+ BEGIN
+     DECLARE found INT := 1;
+     DECLARE val INT := 1;
+     WHILE :found &lt;&gt; 0 DO
+         SELECT count(*) INTO found FROM sample WHERE a = :val;
+         IF :found = 0 THEN
+             INSERT INTO sample VALUES(:val);
+         END IF;
+         val := :val + 1;
+     END WHILE;
+ END;</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p"><strong class="ph b">UPDATE trigger with column list</strong></p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE TARGET ( A INT, B INT);
+CREATE TABLE SAMPLE ( A INT);
+CREATE TRIGGER TEST_TRIGGER_UPDATE_COLUMN_LIST
+AFTER UPDATE OF B ON TARGET
+BEGIN
+    INSERT INTO SAMPLE VALUES(1);
+END;
+INSERT INTO TARGET VALUES(1, 1);
+UPDATE TARGET SET A = 0;
+ -- does not fire the trigger
+SELECT COUNT(*) FROM SAMPLE;</pre></div>
+
+            <p class="p">The SELECT statement returns 0.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">UPDATE TARGET SET B = 0; -- does fire the trigger
+SELECT COUNT(*) FROM SAMPLE;</pre></div>
+
+            <p class="p">The SELECT statement returns 1.</p>
+
+         </div><div class="sectiondiv">
+            <p class="p"><strong class="ph b">UPDATE EXCEPT OF trigger with column list</strong></p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE TARGET ( A INT, B INT);
+CREATE TABLE SAMPLE ( A INT);
+CREATE TRIGGER TEST_TRIGGER_UPDATE_EXCEPT_OF_COLUMN_LIST
+AFTER UPDATE EXCEPT OF B ON TARGET
+BEGIN
+    INSERT INTO SAMPLE VALUES(1);
+END;
+INSERT INTO TARGET VALUES(1, 1);
+UPDATE TARGET SET B = 0; -- does not fire the trigger
+SELECT COUNT(*) FROM SAMPLE;</pre></div>
+
+            <p class="p">The SELECT statement returns 0.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">UPDATE TARGET SET A = 0; -- does fire the trigger
+SELECT COUNT(*) FROM SAMPLE;</pre></div>
+
+            <p class="p">The SELECT statement returns 1.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">UPDATE TARGET SET A = 2, B = 2; -- does fire the trigger
+SELECT COUNT(*) FROM SAMPLE;</pre></div>
+
+            <p class="p">The SELECT statement returns 2.</p>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20d5a65575191014946db96aaedbef5b__sql_create_trigger_1sql_create_trigger_example_after_insert"><strong class="ph b">Trigger with an
+                  AFTER INSERT and FOR loop</strong></p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE TARGET ( A INT);
+ CREATE TABLE control_tab(id INT PRIMARY KEY, name VARCHAR(30), payment INT);                              
+ CREATE TABLE message_box(message VARCHAR(200), log_time TIMESTAMP);                           
+
+ CREATE TRIGGER TEST_TRIGGER_FOR_INSERT                             
+ AFTER INSERT ON TARGET                                             
+ BEGIN                                                              
+     DECLARE v_id        INT := 0;                                  
+     DECLARE v_name      VARCHAR(20) := '';                         
+     DECLARE v_pay       INT := 0;                                  
+     DECLARE v_msg       VARCHAR(200) := '';                        
+     DELETE FROM message_box;                                       
+     FOR v_id IN 100 .. 103 DO                                  
+         SELECT name, payment INTO v_name, v_pay FROM control_tab WHERE id = :v_id;                                      
+         v_msg := :v_name || ' has ' || TO_VARCHAR(:v_pay);            
+         INSERT INTO message_box VALUES (:v_msg, CURRENT_TIMESTAMP);
+     END FOR;                                                       
+ END;</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20d5a65575191014946db96aaedbef5b__sql_create_trigger_1sql_create_trigger_example_exit_handler"><strong class="ph b">Trigger with EXIT
+                  HANDLER examples</strong></p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE TARGET ( A INT);
+ CREATE TABLE MYTAB (I INTEGER PRIMARY KEY);
+ 
+ CREATE TRIGGER MYTRIG_SQLEXCEPTION
+ AFTER INSERT ON TARGET 
+ BEGIN
+     DECLARE EXIT HANDLER FOR SQLEXCEPTION RESIGNAL;
+     INSERT INTO MYTAB VALUES (1);
+     INSERT INTO MYTAB VALUES (1);  -- expected unique violation error: 301
+     -- not reached
+ END;
+ 
+ CREATE TRIGGER MYTRIG_SQL_ERROR_CODE 
+ AFTER UPDATE ON TARGET 
+ BEGIN
+     DECLARE EXIT HANDLER FOR SQL_ERROR_CODE 301 RESIGNAL;
+     INSERT INTO MYTAB VALUES (1);
+     INSERT INTO MYTAB VALUES (1);  -- expected unique violation error: 301
+     -- not reached
+ END;
+ 
+ CREATE TRIGGER MYTRIG_CONDITION 
+ AFTER DELETE ON TARGET 
+ BEGIN
+     DECLARE MYCOND CONDITION FOR SQL_ERROR_CODE 301;
+     DECLARE EXIT HANDLER FOR MYCOND RESIGNAL;
+     INSERT INTO MYTAB VALUES (1);
+     INSERT INTO MYTAB VALUES (1);  -- expected unique violation error: 301
+     -- not reached
+ END;</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20d5a65575191014946db96aaedbef5b__sql_create_trigger_1sql_create_trigger_example_signal_resignal"><strong class="ph b">Trigger with
+                  SIGNAL/RESIGNAL examples</strong></p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE TARGET ( A INT);
+ CREATE TABLE MYTAB (I INTEGER PRIMARY KEY);
+ CREATE TABLE MYTAB_TRIGGER_ERR (err_code INTEGER, err_msg VARCHAR(30));
+
+ CREATE TRIGGER MYTRIG_SIGNAL 
+ AFTER INSERT ON TARGET 
+ BEGIN
+     DECLARE MYCOND CONDITION FOR SQL_ERROR_CODE 10001;
+     DECLARE EXIT HANDLER FOR MYCOND INSERT INTO MYTAB_TRIGGER_ERR VALUES (::SQL_ERROR_CODE, ::SQL_ERROR_MESSAGE);
+     INSERT INTO MYTAB VALUES (1);
+     SIGNAL MYCOND SET MESSAGE_TEXT = 'my error message1';  -- signal immediately
+     -- not reached
+     INSERT INTO MYTAB VALUES (2);
+ END;
+
+ INSERT INTO SUBJECT VALUES (1)
+
+ SELECT * FROM MYTAB_TRIGGER_ERR;
+ (10001, my error message1)
+ 
+ SELECT * FROM MYTAB;</pre></div>
+
+            <p class="p">The SELECT statement returns 1.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TRIGGER MYTRIG_RESIGNAL
+ AFTER UPDATE ON TARGET 
+ BEGIN
+     DECLARE MYCOND CONDITION FOR SQL_ERROR_CODE 10002;
+     DECLARE EXIT HANDLER FOR MYCOND RESIGNAL;  -- 2. throws error with error code 10002
+     INSERT INTO MYTAB VALUES (1);
+     SIGNAL MYCOND SET MESSAGE_TEXT = 'my error message2';  -- 1. signal immediately 
+     -- not reached
+     INSERT INTO MYTAB VALUES (2);
+ END;
+
+ UPDATE SUBJECT SET A = 100 WHERE A = 1;
+ ERR-10002
+ ERR-MSG:user-defined error: "TRIGGER_EXCEPTION"."MYTRIG_RESIGNAL": line 4 col 37 (at pos 210): [10002] (range 3) user-defined error exception: my error message2</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20d5a65575191014946db96aaedbef5b__sql_create_trigger_1sql_create_trigger_example_transition_variable"><strong class="ph b">Transition
+                  variable</strong></p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE TARGET ( A INT, B VARCHAR(10));
+ CREATE TABLE SAMPLE_OLD ( A INT, B VARCHAR(10));
+ CREATE TABLE SAMPLE_NEW ( A INT, B VARCHAR(10));
+ CREATE TABLE SAMPLE ( A INT, B VARCHAR(10));
+ INSERT INTO TARGET VALUES ( 1, 'oldvalue');
+ INSERT INTO TARGET VALUES ( 2, 'oldvalue');
+ INSERT INTO TARGET VALUES ( 5, 'oldvalue');
+
+ CREATE TRIGGER TEST_TRIGGER_VAR_UPDATE                   
+ AFTER UPDATE ON TARGET                                   
+ REFERENCING NEW ROW mynewrow, OLD ROW myoldrow          
+ FOR EACH ROW                                             
+ BEGIN                                                    
+  INSERT INTO SAMPLE_new VALUES(:mynewrow.a, :mynewrow.b); 
+  INSERT INTO SAMPLE_old VALUES(:myoldrow.a, :myoldrow.b);
+  INSERT INTO SAMPLE VALUES(0, 'trigger');
+ END;                                                     
+
+ UPDATE TARGET SET b = 'newvalue' WHERE A &lt; 3;
+ SELECT * FROM TARGET;
+ 1, 'newvalue'
+ 2, 'newvalue'
+ 5, 'oldvalue'
+ SELECT * FROM SAMPLE_NEW;
+ 1, 'newvalue'
+ 2, 'newvalue'
+ SELECT * FROM SAMPLE_OLD;
+ 1, 'oldvalue'
+ 2, 'oldvalue'
+ SELECT * FROM SAMPLE;
+ 0, 'trigger'
+ 0, 'trigger'</pre></div>
+
+         </div><div class="sectiondiv">
+            <p class="p" id="loio20d5a65575191014946db96aaedbef5b__sql_create_trigger_1sql_create_trigger_example_transition_table"><strong class="ph b">Transition
+                  table</strong></p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE TARGET ( A INT, B VARCHAR(10));
+ CREATE TABLE SAMPLE_OLD ( A INT, B VARCHAR(10));
+ CREATE TABLE SAMPLE_NEW ( A INT, B VARCHAR(10));
+ CREATE TABLE SAMPLE ( A INT, B VARCHAR(10));
+ INSERT INTO TARGET VALUES ( 1, 'oldvalue');
+ INSERT INTO TARGET VALUES ( 2, 'oldvalue');
+ INSERT INTO TARGET VALUES ( 5, 'oldvalue');
+
+ CREATE TRIGGER TEST_TRIGGER_TAB_UPDATE                   
+ AFTER UPDATE ON TARGET                                   
+ REFERENCING NEW TABLE mynewtab, OLD TABLE myoldtab
+ FOR EACH STATEMENT
+ BEGIN                                                    
+  INSERT INTO SAMPLE_new SELECT * FROM :mynewtab;
+  INSERT INTO SAMPLE_old SELECT * FROM :myoldtab; 
+  INSERT INTO SAMPLE VALUES(0, 'trigger');
+ END;                                                     
+
+ UPDATE TARGET SET b = 'newvalue' WHERE A &lt; 3;
+ SELECT * FROM TARGET;
+ 1, 'newvalue'
+ 2, 'newvalue'
+ 5, 'oldvalue'
+ SELECT * FROM SAMPLE_NEW;
+ 1, 'newvalue'
+ 2, 'newvalue'
+ SELECT * FROM SAMPLE_OLD;
+ 1, 'oldvalue'
+ 2, 'oldvalue'
+ SELECT * FROM SAMPLE;
+ 0, 'trigger'
+
+CREATE TABLE T1(A INTEGER PRIMARY KEY, B INTEGER);
+CREATE COLUMN TABLE T2(A INTEGER PRIMARY KEY, C INTEGER);
+CREATE VIEW V1 AS (SELECT T1.A A, B, C, T1.A+10 D FROM T1, T2 WHERE T1.A = T2.A);
+
+CREATE TRIGGER TR1 INSTEAD OF INSERT ON V1 REFERENCING NEW ROW NEW
+BEGIN
+    INSERT INTO T1 VALUES(:NEW.A, :NEW.B);
+    INSERT INTO T2 VALUES(:NEW.A, :NEW.C);
+END;
+
+INSERT INTO V1(A,B,C) VALUES(1,2,3);
+SELECT FROM T1 ORDER BY A, B;</pre></div>
+
+            <p class="p">The SELECT statement returns 1, 2.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT FROM T2 ORDER BY A, C;</pre></div>
+
+            <p class="p">The SELECT statement returns 1, 3.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT FROM V1 ORDER BY A, B, C, D;</pre></div>
+
+            <p class="p">The SELECT statement returns 1, 2, 3, 11</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TRIGGER TR2 INSTEAD OF UPDATE ON V1 REFERENCING OLD ROW OLD, NEW ROW NEW
+BEGIN
+    UPDATE T1 SET A=:NEW.A, B=:NEW.B WHERE A=:OLD.A;
+    UPDATE T2 SET A=:NEW.A, C=:NEW.C WHERE A=:OLD.A;
+END;
+
+UPDATE V1 SET A = 5, B = 6, C = 7 WHERE A = 1;
+SELECT FROM T1 ORDER BY A, B;</pre></div>
+
+            <p class="p">The SELECT statement returns 5, 6.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT FROM T2 ORDER BY A, C;</pre></div>
+
+            <p class="p">The SELECT statement returns 5, 7.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT FROM V1 ORDER BY A, B, C, D;</pre></div>
+
+            <p class="p">The SELECT statement returns 5, 6, 7, 11.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TRIGGER TR3 INSTEAD OF DELETE ON V1 REFERENCING OLD ROW OLD
+BEGIN
+    DELETE FROM T1 WHERE A = :OLD.A;
+    DELETE FROM T2 WHERE A = :OLD.A;
+END;
+
+DELETE FROM V1;
+SELECT FROM T1 ORDER BY A, B;
+SELECT FROM T2 ORDER BY A, C;
+SELECT FROM V1 ORDER BY A, B, C, D;</pre></div>
+
+         </div></div></div>
+
+   </div>
+
+<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?209f5020751910148fd8fe88aa4d79d9.html" target="_top" title="This chapter describes the SAP HANA database implementation of Structured Query Language (SQL).">Introduction to SQL</a></div>
+<div><a class="link" href="default.html?20a1569875191014b507cf392724b7eb.html" target="_top" title="A data type defines the characteristics of a data value. A special value of NULL is included in every data type to indicate the absence of a value.">Data Types</a></div>
+<div><a class="link" href="default.html?20a4389775191014b5a6bf2ccc0df2ed.html" target="_top" title="Describes the expression support offered in SAP HANA.">Expressions</a></div>
+<div><a class="link" href="default.html?20d467407519101484f190f545d54b24.html" target="_top" title="Creates a procedure that uses the specified programming language.">CREATE PROCEDURE Statement (Procedural)</a></div>
+<div><a class="link" href="default.html?20a2ab29751910148de0fe7189c330bc.html" target="_top">Predicates</a></div>
+<div><a class="link" href="default.html?20f7f70975191014a76da70c9181720e.html" target="_top" title="Adds a record to a table.">INSERT Statement (Data Manipulation)</a></div>
+<div><a class="link" href="default.html?20d6169a75191014892db922f94abe41.html" target="_top" title="Deletes records from a table where a specified condition is met.">DELETE Statement (Data Manipulation)</a></div>
+<div><a class="link" href="default.html?20ff268675191014964add3d17700909.html" target="_top" title="Changes the values of the records of a table.">UPDATE Statement (Data Manipulation)</a></div>
+<div><a class="link" href="default.html?20fc06a7751910149892c0d09be21a38.html" target="_top" title="Updates rows in a table or inserts new rows.">REPLACE | UPSERT Statement (Data Manipulation)</a></div>
+<div><a class="link" href="default.html?20fcf24075191014a89e9dc7b8408b26.html" target="_top" title="Retrieves information from the database.">SELECT Statement (Data Manipulation)</a></div>
+<div><a class="link" href="default.html?2101f6db7519101493d39a89898b9480.html" target="_top" title="Provides information about triggers that are defined for tables.">TRIGGERS System View</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="CREATE TRIGGER Statement (Data Definition)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

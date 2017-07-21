@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Imports catalog objects."/>
+<meta name="description" content="Imports catalog objects."/>
+<meta name="keywords" content="IMPORT"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=84522801901513"/>
+<title>IMPORT Statement (Data Import Export)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20f75ade751910148492a90e5e375b8f";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20f75ade751910148492a90e5e375b8f">
+<div id="wrapper"><div id="container">
+
+ <h1 class="title topictitle1">IMPORT Statement (Data Import Export)</h1>
+
+ 
+ 
+ <div class="body refbody"><p class="shortdesc">Imports catalog objects.</p>
+
+  <div class="section" id="loio20f75ade751910148492a90e5e375b8f__sql_import_1sql_import_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+   
+   
+   <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">IMPORT <var class="keyword varname">&lt;import_object_name_list&gt;</var> FROM <var class="keyword varname">&lt;path&gt;</var> 
+   [WITH <var class="keyword varname">&lt;import_option_list&gt;</var>] [AT [LOCATION] <var class="keyword varname">&lt;indexserver_host_port&gt;</var>]</pre></div>
+
+  </div></div>
+
+  <div class="section" id="loio20f75ade751910148492a90e5e375b8f__sql_import_1sql_import_syntax_elements"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+   
+   <dl class="dl parml">
+    
+     <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;import_object_name_list&gt;</var></dt>
+
+     <dd class="dd pd">
+      <div class="p">Specifies
+            the list of objects to be imported. The ALL and * options are only for use when
+            importing all objects from a specified
+            schema.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;import_object_name_list&gt;</var> ::= 
+ {<var class="keyword varname">&lt;import_object_name&gt;</var>[{, <var class="keyword varname">&lt;import_object_name&gt;</var>}...] } 
+ | { ALL | * }</pre></div>
+</div>
+
+     </dd>
+
+    
+    
+     <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;import_object_name&gt;</var></dt>
+
+     <dd class="dd pd">
+      <div class="p">Specifies
+            an object to import data from.
+                <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;import_object_name&gt;</var> ::= [<var class="keyword varname">&lt;schema_name&gt;</var>.]{<var class="keyword varname">&lt;identifier&gt;</var> | "*" }
+
+<var class="keyword varname">&lt;schema_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+[<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;identifier&gt;</var>
+            specifies an object in a schema for import. <var class="keyword varname">&lt;schema_name&gt;</var>."*" specifies
+            to select all objects within a schema for import.</div>
+
+     </dd>
+
+    
+    
+     <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;path&gt;</var></dt>
+
+     <dd class="dd pd">
+      <div class="p">
+            Specifies the server path where the import files are
+            stored.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;path&gt;</var> ::= <var class="keyword varname">&lt;string_literal&gt;</var></pre></div>
+</div>
+
+     </dd>
+
+    
+    
+     <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;import_option_list&gt;</var></dt>
+
+     <dd class="dd pd">
+      <p class="p">Specifies a list of import options.</p>
+
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">WITH <var class="keyword varname">&lt;import_option_list&gt;</var>
+
+<var class="keyword varname">&lt;import_option_list&gt;</var> ::= <var class="keyword varname">&lt;import_option&gt;</var> [{ <var class="keyword varname">&lt;import_option&gt;</var>}]
+
+<var class="keyword varname">&lt;import_option&gt;</var> ::=
+ REPLACE 
+ | CATALOG ONLY 
+ | DATA ONLY 
+ | NO DEPENDENCIES
+ | THREADS <var class="keyword varname">&lt;number_of_threads&gt;</var> 
+ | RENAME SCHEMA <var class="keyword varname">&lt;rename_schema_list&gt;</var> 
+ | FAIL ON INVALID DATA 
+ | IGNORE EXISTING
+ | STATISTICS ONLY
+ | NO STATISTICS
+ | LOOPBACK REMOTE SOURCE
+ | RENAME REMOTE OBEJCT</pre></div>
+
+      <dl class="dl">
+       
+        <dt class="dt dlterm emphasis">REPLACE</dt>
+
+        <dd class="dd">
+         <p class="p">Defines
+            the behavior if the import data already exists in the database. When specified, if a
+            table defined in the import data currently exists in the database, it is dropped and
+            recreated before the data is imported. If the REPLACE option is not specified an error
+            is thrown if an existing database table is defined in the import data.</p>
+
+        </dd>
+
+       
+       
+        <dt class="dt dlterm emphasis">CATALOG ONLY</dt>
+
+        <dd class="dd">
+         <p class="p">Specifies
+            that only the database catalog should be imported.</p>
+
+         <p class="p">This option interacts with the STATISTICS ONLY and NO STATISTICS options. Please see the
+          descriptions for these options to learn more.</p>
+
+        </dd>
+
+       
+       
+        <dt class="dt dlterm emphasis">DATA ONLY</dt>
+
+        <dd class="dd">
+         <p class="p">Specifies that only the data of the import file should be imported, without updating or
+          changing the metadata. This option is only valid when the specified target object has its
+          own data, such as a table or a data statistics (as opposed to procedures and views, whose
+          data is materialized from other objects at runtime). The target objects must also already
+          exist in the database and their definition must match that of the data being imported.</p>
+
+         <p class="p">When specifying <samp class="ph codeph">IMPORT <var class="keyword varname">&lt;schema_name&gt;</var>."*" ...</samp> and
+           <samp class="ph codeph">IMPORT ALL ...</samp> with DATA ONLY, other object that do not have records are
+          ignored.</p>
+
+         <p class="p">For BINARY data, the existing table data is overwritten with the imported data. For CSV
+          data without the REPLACE option, the import data is appended to the existing table
+          data.</p>
+
+         <p class="p">The DATA ONLY option interacts with the STATISTICS ONLY and NO STATISTICS option; see
+          the descriptions for these options in this topic to learn how they interact with DATA
+          ONLY.</p>
+
+         <p class="p">The DATA ONLY option is not supported for virtual tables.</p>
+
+        </dd>
+
+       
+       
+        <dt class="dt dlterm emphasis">NO DEPENDENCIES</dt>
+
+        <dd class="dd">
+         <p class="p">
+            Specifies to not import the underlying dependencies of an import object.</p>
+
+        </dd>
+
+       
+       
+        <dt class="dt dlterm emphasis"><a name="loio20f75ade751910148492a90e5e375b8f__sql_import_1sql_import_threads"><!-- --></a>THREADS <var class="keyword varname">&lt;number_of_threads&gt;</var>
+        </dt>
+
+        <dd class="dd">
+         <div class="p">Specifies how many objects are imported in parallel; the default is
+            1.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">THREADS <var class="keyword varname">&lt;number_of_threads&gt;</var>
+
+<var class="keyword varname">&lt;number_of_threads&gt;</var> ::= <var class="keyword varname">&lt;unsigned_integer&gt;</var></pre></div>
+Increasing
+            number of threads reduces import time, but can also negatively affect database system
+            performance. Following items should be considered when using this parameter:<ul class="ul" id="loio20f75ade751910148492a90e5e375b8f__d215e338">
+                <li class="li">
+                    <p class="p">When importing a single table THREADS has no effect.</p>
+
+                </li>
+
+                <li class="li">
+                    <p class="p">When importing a view or procedure 2 or more threads should be used, up to
+                        the number of dependent objects.</p>
+
+                </li>
+
+                <li class="li">
+                    <p class="p">When importing a whole schema consider using more than 10 threads. With a
+                        maximum being the number of CPU cores in the system.</p>
+
+                </li>
+
+                <li class="li">
+                    <p class="p">When importing a whole BW / ERP system database with tens of thousands of
+                        tables using the ALL keyword, a large number of threads can be used (up to
+                        256).</p>
+
+                </li>
+
+            </ul>
+</div>
+
+        </dd>
+
+       
+       
+        <dt class="dt dlterm emphasis">RENAME SCHEMA <var class="keyword varname">&lt;rename_schema_list&gt;</var></dt>
+
+        <dd class="dd">
+         <div class="p">Specifies
+            whether to rename the object's schema during the
+            import.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">RENAME SCHEMA <var class="keyword varname">&lt;rename_schema_list&gt;</var>
+
+<var class="keyword varname">&lt;rename_schema_list&gt;</var> ::= <var class="keyword varname">&lt;rename_schema_token&gt;</var> [{, <var class="keyword varname">&lt;rename_schema_list&gt;</var>}]
+
+<var class="keyword varname">&lt;rename_schema_token&gt;</var> ::= <var class="keyword varname">&lt;source_schema&gt;</var> TO <var class="keyword varname">&lt;target_schema&gt;</var></pre></div>
+
+            Multiple schemas can be renamed by specifying multiple
+                <var class="keyword varname">&lt;rename_schema_token&gt;</var>. You cannot specify the same schema as both
+                <var class="keyword varname">&lt;source_schema&gt;</var> and <var class="keyword varname">&lt;target_schema&gt;</var> in same or
+            different <var class="keyword varname">&lt;rename_schema_token&gt;</var>. </div>
+
+        </dd>
+
+       
+       
+        <dt class="dt dlterm emphasis">FAIL ON INVALID DATA</dt>
+
+        <dd class="dd">
+         <p class="p">Fails the import operation if not all data is imported successfully.</p>
+
+        </dd>
+
+       
+       
+        <dt class="dt dlterm emphasis">IGNORE EXISTING</dt>
+
+        <dd class="dd">
+         <p class="p">Specifies to skip import when the objects already exist in the database. The IGNORE
+          EXISTING option is ignored, if used in combination with REPLACE.</p>
+
+        </dd>
+
+       
+       
+        <dt class="dt dlterm emphasis">STATISTICS ONLY</dt>
+
+        <dd class="dd">
+         <p class="p">Data statistics objects are imported by default, along with the objects they reference
+          in <var class="keyword varname">&lt;import_object_name_list&gt;</var> (for example, tables). When you specify
+          STATISTICS ONLY, the metadata and data for non-statistics objects in
+           <var class="keyword varname">&lt;import_object_name_list&gt;</var> are excluded from the import.</p>
+
+         <p class="p">If you specify STATISTICS ONLY without DATA ONLY or CATALOG ONLY, then the data and
+          metadata for data statistics objects are imported.</p>
+
+         <p class="p">If you specify STATISTICS ONLY and DATA ONLY, then only the data for the data statistics
+          objects is imported.</p>
+
+         <p class="p">If you specify STATISTICS ONLY and CATALOG ONLY, then only the metadata for the data
+          statistics objects is imported.</p>
+
+        </dd>
+
+       
+       
+        <dt class="dt dlterm emphasis">NO STATISTICS</dt>
+
+        <dd class="dd">
+         <p class="p">Excludes data statistics objects from the import. Metadata and data for non-statistics
+          objects in <var class="keyword varname">&lt;import_object_name_list&gt;</var> are still imported, and impacted as
+          normal by whether CATALOG ONLY or DATA ONLY is specified.</p>
+
+        </dd>
+
+       
+       
+        <dt class="dt dlterm emphasis">LOOPBACK REMOTE SOURCE</dt>
+
+        <dd class="dd">Creates a reproduction workflow for virtual tables. When importing  tables, a loopback
+         remote source is created that points to the local SAP HANA server. For every virtual table
+         imported, a corresponding dummy local table is created with the same metadata. Virtual
+         tables are then created using this loopback remote source and the dummy local tables.</dd>
+
+       
+       
+        <dt class="dt dlterm emphasis">RENAME REMOTE OBEJCT</dt>
+
+        <dd class="dd">When importing virtual tables into another system, specify a mapping of the old remote
+         object to new remote object. </dd>
+
+       
+      </dl>
+
+     </dd>
+
+    
+    
+     <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;indexserver_host_port&gt;</var></dt>
+
+     <dd class="dd pd">
+      <p class="p">Specifies the index server on which tables are created and imported.</p>
+
+      <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">AT [LOCATION] <var class="keyword varname">&lt;indexserver_host_port&gt;</var>
+   <var class="keyword varname">&lt;indexserver_host_port&gt;</var> ::= 'host_name:port_number'</pre></div>
+
+      <p class="p">If you specify the hostname and port, then the tables are created and imported at that
+       location.</p>
+
+     </dd>
+
+    
+   </dl>
+
+  </div></div>
+
+  <div class="section" id="loio20f75ade751910148492a90e5e375b8f__sql_import_1sql_import_description"><div class="section_title">Description</div><div type="Description">
+   
+   <p class="p">The IMPORT statement imports catalog objects (tables, views, synonyms, sequences, procedures)
+    that have previously been exported with the EXPORT statement. To import external data into existing tables, use the IMPORT FROM statement.</p>
+
+   <p class="p">The file format (BINARY | CSV) of the file being imported is detected automatically.</p>
+
+   <p class="p">You can only import exported binary files that were generated on an SAP HANA system with the
+    same endianness.</p>
+
+   <p class="p">Abort an import session by using the ALTER SYSTEM CANCEL WORK IN SESSION statement and
+    specifying the connection ID from the M_IMPORT_BINARY_STATUS view: </p>
+
+   <div class="note note"><span class="notetitle">Note</span> 
+    <p class="p">When using CSV format to export/import tables that have columns of type GENERATED ALWAYS AS
+      <var class="keyword varname">&lt;expression&gt;</var>, verify that the imported records match what was exported. If
+     there are anomalies:</p>
+
+    <ul class="ul" id="loio20f75ade751910148492a90e5e375b8f__ul_ks2_fvv_1z">
+     <li class="li">
+      <p class="p">For column tables, switch to exporting/importing as BINARY. </p>
+
+     </li>
+
+     <li class="li">
+      <p class="p">For row tables, change the table to be a column table and export/import as BINARY.</p>
+
+     </li>
+
+    </ul>
+
+   </div>
+
+   <div class="p">This feature is used with restrictions and/or is extended by the following SAP HANA option:<ul class="ul" id="loio20f75ade751910148492a90e5e375b8f__ul_i3t_bjs_1r">
+     <li class="li">Dynamic Tiering</li>
+
+    </ul>
+</div>
+
+  </div></div>
+
+  <div class="section"><div class="section_title">current_schema.#IMPORT_RESULT</div><div type="current_schema.#IMPORT_RESULT">
+   <p class="p">Detailed results of the last execution of IMPORT statement are stored in the following
+    session-local temporary table at current_schema of the session. If current_schema of the session
+    is invalid, IMPORT throws an exception as it cannot create its result table of the
+    current_schema.</p>
+
+   
+   
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20f75ade751910148492a90e5e375b8f__table_lgv_gkh_tp" class="table" frame="border" border="1" rules="all">
+     <thead class="thead" align="left">
+      <tr class="row">
+       <th class="entry" valign="top" id="d16747302e539">
+        <p class="p">Column Name </p>
+
+       </th>
+
+       <th class="entry" valign="top" id="d16747302e545">
+        <p class="p">Data type </p>
+
+       </th>
+
+       <th class="entry" valign="top" id="d16747302e551">
+        <p class="p">Description </p>
+
+       </th>
+
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr class="row">
+       <td class="entry" valign="top" headers="d16747302e539 d16747302e545 d16747302e551 ">
+        <p class="p">SCHEMA_NAME </p>
+
+       </td>
+
+       <td class="entry" valign="top" headers="d16747302e539 d16747302e545 d16747302e551 ">
+        <p class="p">NVARCHAR(255) </p>
+
+       </td>
+
+       <td class="entry" valign="top" headers="d16747302e539 d16747302e545 d16747302e551 ">
+        <p class="p">The schema of the imported object </p>
+
+       </td>
+
+      </tr>
+
+      <tr class="row">
+       <td class="entry" valign="top" headers="d16747302e539 d16747302e545 d16747302e551 ">
+        <p class="p">OBJECT_NAME </p>
+
+       </td>
+
+       <td class="entry" valign="top" headers="d16747302e539 d16747302e545 d16747302e551 ">
+        <p class="p">NVARCHAR(255) </p>
+
+       </td>
+
+       <td class="entry" valign="top" headers="d16747302e539 d16747302e545 d16747302e551 ">
+        <p class="p">The name of the imported object </p>
+
+       </td>
+
+      </tr>
+
+      <tr class="row">
+       <td class="entry" valign="top" headers="d16747302e539 d16747302e545 d16747302e551 ">
+        <p class="p">OBJECT_TYPE </p>
+
+       </td>
+
+       <td class="entry" valign="top" headers="d16747302e539 d16747302e545 d16747302e551 ">
+        <p class="p">VARCHAR(16) </p>
+
+       </td>
+
+       <td class="entry" valign="top" headers="d16747302e539 d16747302e545 d16747302e551 ">
+        <p class="p">The type of the imported object (TABLE, VIEW, and so on) </p>
+
+       </td>
+
+      </tr>
+
+      <tr class="row">
+       <td class="entry" valign="top" headers="d16747302e539 d16747302e545 d16747302e551 ">
+        <p class="p">LOCATION </p>
+
+       </td>
+
+       <td class="entry" valign="top" headers="d16747302e539 d16747302e545 d16747302e551 ">
+        <p class="p">VARCHAR(32) </p>
+
+       </td>
+
+       <td class="entry" valign="top" headers="d16747302e539 d16747302e545 d16747302e551 ">
+        <p class="p">The location (host:port) where the object was imported </p>
+
+       </td>
+
+      </tr>
+
+      <tr class="row">
+       <td class="entry" valign="top" headers="d16747302e539 d16747302e545 d16747302e551 ">
+        <p class="p">STATUS </p>
+
+       </td>
+
+       <td class="entry" valign="top" headers="d16747302e539 d16747302e545 d16747302e551 ">
+        <p class="p">VARCHAR(16) </p>
+
+       </td>
+
+       <td class="entry" valign="top" headers="d16747302e539 d16747302e545 d16747302e551 ">
+        <p class="p">The import status (done, skipped, or failed) </p>
+
+       </td>
+
+      </tr>
+
+      <tr class="row">
+       <td class="entry" valign="top" headers="d16747302e539 d16747302e545 d16747302e551 ">
+        <p class="p">ERROR </p>
+
+       </td>
+
+       <td class="entry" valign="top" headers="d16747302e539 d16747302e545 d16747302e551 ">
+        <p class="p">VARCHAR(512) </p>
+
+       </td>
+
+       <td class="entry" valign="top" headers="d16747302e539 d16747302e545 d16747302e551 ">
+        <p class="p">The error text in the case of an import failure </p>
+
+       </td>
+
+      </tr>
+
+     </tbody>
+
+    </table>
+</div>
+
+  </div></div>
+
+  <div class="section" id="loio20f75ade751910148492a90e5e375b8f__sql_import_scan_1sql_import_examples"><div class="section_title">Example</div><div type="Example">
+   
+   <div class="p">You
+            import all tables from schema testsch using the REPLACE option and 10 execution
+            threads.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">IMPORT "testsch"."*" AS CSV FROM '/tmp' WITH REPLACE THREADS 10</pre></div>
+</div>
+
+  </div></div>
+
+ 
+ </div>
+
+<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?20b1476975191014aba3f30309aac550.html" target="_top" title="Provides import status information for the current session.">M_IMPORT_BINARY_STATUS System View</a></div>
+<div><a class="link" href="default.html?20da0bec751910148e69c9668ea3ccb8.html" target="_top" title="Exports catalog objects.">EXPORT Statement (Data Import Export)</a></div>
+<div><a class="link" href="default.html?20f712e175191014907393741fadcb97.html" target="_top" title="Imports external data from a file into an existing table or an existing data statistics object.">IMPORT FROM Statement (Data Import Export)</a></div>
+<div><a class="link" href="default.html?20d0eb287519101498c4ecb8114cab17.html" target="_top" title="Cancels the currently executing statement of a session.">ALTER SYSTEM CANCEL [WORK IN] SESSION Statement (System Management)</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="IMPORT Statement (Data Import Export)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

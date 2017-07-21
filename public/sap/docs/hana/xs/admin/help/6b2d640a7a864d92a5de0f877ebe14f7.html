@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="The SMTP configuration defines the details of the SMTP server that is available for use by all applications running on an SAP HANA XS server."/>
+<meta name="description" content="The SMTP configuration defines the details of the SMTP server that is available for use by all applications running on an SAP HANA XS server."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=4669867414133072"/>
+<title>SMTP Configuration Details</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio6b2d640a7a864d92a5de0f877ebe14f7";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio6b2d640a7a864d92a5de0f877ebe14f7">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">SMTP Configuration Details</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">The SMTP configuration defines the details of the SMTP server that is available for use
+		by all applications running on an SAP HANA XS server.</p>
+
+		<div class="section">
+			<p class="p">As part of the SMTP configuration, you specify the following options:</p>
+
+			<ul class="ul" id="loio6b2d640a7a864d92a5de0f877ebe14f7__ul_d4g_253_xq">
+				<li class="li"><a class="xref" href="default.html?6b2d640a7a864d92a5de0f877ebe14f7.html#loio6b2d640a7a864d92a5de0f877ebe14f7__section_okc_k53_xq" target="_top">General SMTP settings</a></li>
+
+				<li class="li"><a class="xref" href="default.html?6b2d640a7a864d92a5de0f877ebe14f7.html#loio6b2d640a7a864d92a5de0f877ebe14f7__section_gv5_l53_xq" target="_top">Logon authentication type</a>
+				</li>
+
+				<li class="li"><a class="xref" href="default.html?6b2d640a7a864d92a5de0f877ebe14f7.html#loio6b2d640a7a864d92a5de0f877ebe14f7__section_xpz_l53_xq" target="_top">Transport security type </a></li>
+
+				<li class="li"><a class="xref" href="default.html?6b2d640a7a864d92a5de0f877ebe14f7.html#loio6b2d640a7a864d92a5de0f877ebe14f7__section_tdp_m53_xq" target="_top">Socket
+						proxy settings</a></li>
+
+				<li class="li"><a class="xref" href="default.html?6b2d640a7a864d92a5de0f877ebe14f7.html#loio6b2d640a7a864d92a5de0f877ebe14f7__section_tnv_m53_xq" target="_top">Other settings</a></li>
+
+			</ul>
+
+		</div>
+
+		<div class="section" id="loio6b2d640a7a864d92a5de0f877ebe14f7__section_okc_k53_xq"><div class="section_title">General SMTP settings</div><div type="General SMTP settings">
+			
+			<p class="p">The <span class="ph uicontrol">General SMTP Settings</span> screen area of the <span class="ph uicontrol">SMTP
+					Configurations</span> tool enables you to maintain the basic details of the
+				system hosting the SMTP server that SAP HANA XS applications use to send e-mail. The
+				following table indicates which information can be maintained.</p>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio6b2d640a7a864d92a5de0f877ebe14f7__table_hxg_hs1_xq" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: </span></caption>
+<colgroup><col width="24.813895781637722%"/><col width="50.37220843672457%"/><col width="24.813895781637722%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="24.813895781637722%" id="d1482424e81">UI Element</th>
+
+							<th class="entry" valign="top" width="50.37220843672456%" id="d1482424e84">Description</th>
+
+							<th class="entry" valign="top" width="24.813895781637722%" id="d1482424e87">Example</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e81 "><span class="ph uicontrol">Mail Server Host</span></td>
+
+							<td class="entry" valign="top" width="50.37220843672456%" headers="d1482424e84 ">The name of the system hosting the SMTP server.</td>
+
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e87 ">localhost</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e81 "><span class="ph uicontrol">Mail Server Port</span></td>
+
+							<td class="entry" valign="top" width="50.37220843672456%" headers="d1482424e84 ">The port to connect to on the SMTP server; default is 25.</td>
+
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e87 ">25</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loio6b2d640a7a864d92a5de0f877ebe14f7__section_gv5_l53_xq"><div class="section_title">Authentication</div><div type="Authentication">
+			
+			<p class="p">The <span class="ph uicontrol">Authentication</span> screen area of the <span class="ph uicontrol">SMTP
+					Configurations</span> tool enables you to maintain details of the user
+				credentials required to log on to the system hosting the SMTP server and the
+				mechanism used during the logon process to carry out user authentication. The
+				following table indicates which information can be maintained.</p>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio6b2d640a7a864d92a5de0f877ebe14f7__table_q1m_xv3_xq" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 2: </span></caption>
+<colgroup><col width="24.813895781637722%"/><col width="50.37220843672457%"/><col width="24.813895781637722%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="24.813895781637722%" id="d1482424e154">UI Element</th>
+
+							<th class="entry" valign="top" width="50.37220843672456%" id="d1482424e157">Description</th>
+
+							<th class="entry" valign="top" width="24.813895781637722%" id="d1482424e160">Example</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e154 "><span class="ph uicontrol">Authentication Type</span></td>
+
+							<td class="entry" valign="top" width="50.37220843672456%" headers="d1482424e157 ">The method used by the SMTP server to authenticate the
+								credentials of the user that SAP HANA uses to establish the
+								connection</td>
+
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e160 ">None, Auto, Logon, Plain, CRAM-MD5, or Digest-MD5.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e154 "><span class="ph uicontrol">Username</span></td>
+
+							<td class="entry" valign="top" width="50.37220843672456%" headers="d1482424e157 ">For all authentication-type options except
+									<span class="ph uicontrol">None</span>, the name and password of the user
+								whose credentials SAP HANA XS uses to log on to the SMTP
+								server.</td>
+
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e160 ">johndoe</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e154 "><span class="ph uicontrol">Password</span></td>
+
+							<td class="entry" valign="top" width="50.37220843672456%" headers="d1482424e157 ">For all authentication-type options except
+									<span class="ph uicontrol">None</span>, the password of the user whose
+								credentials SAP HANA XS uses to log on to the SMTP server.</td>
+
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e160 ">*****</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loio6b2d640a7a864d92a5de0f877ebe14f7__section_xpz_l53_xq"><div class="section_title">Transport Security Settings</div><div type="Transport Security Settings">
+			
+			<p class="p">The <span class="ph uicontrol">Transport Security Settings</span> screen area of the
+					<span class="ph uicontrol">SMTP Configurations</span> tool enables you to maintain details
+				of the security type used to encrypt the transport channel between the SAP HANA XS
+				server and the SMTP server. The following table indicates which information can be
+				maintained.</p>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio6b2d640a7a864d92a5de0f877ebe14f7__table_yn3_vw3_xq" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 3: </span></caption>
+<colgroup><col width="24.813895781637722%"/><col width="50.37220843672457%"/><col width="24.813895781637722%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="24.813895781637722%" id="d1482424e246">UI Element</th>
+
+							<th class="entry" valign="top" width="50.37220843672456%" id="d1482424e249">Description</th>
+
+							<th class="entry" valign="top" width="24.813895781637722%" id="d1482424e252">Example</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e246 "><span class="ph uicontrol">Transport Security</span></td>
+
+							<td class="entry" valign="top" width="50.37220843672456%" headers="d1482424e249 ">The method used by the SMTP server to authenticate the
+								credentials of the user that SAP HANA uses to establish the
+								connection</td>
+
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e252 ">None, STARTTLS, SSL/TLS</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e246 "><span class="ph uicontrol">Trust Store</span></td>
+
+							<td class="entry" valign="top" width="50.37220843672456%" headers="d1482424e249 ">Contains the certificates used to establish trust relationships
+								between servers, for example, SAP HANA XS and the SMTP
+								server</td>
+
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e252 ">sapspv.pse</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loio6b2d640a7a864d92a5de0f877ebe14f7__section_tdp_m53_xq"><div class="section_title">Socket Proxy Settings</div><div type="Socket Proxy Settings">
+			
+			<p class="p">The <span class="ph uicontrol">Socket Proxy Settings</span> screen area of the <span class="ph uicontrol">SMTP
+					Configurations</span> tool enables you to maintain details of the system
+				hosting the proxy service used by the SMTP server for Secure Socket (SOCKS) routing.
+				The following table indicates which information can be maintained.</p>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio6b2d640a7a864d92a5de0f877ebe14f7__table_ojr_l1j_xq" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 4: </span></caption>
+<colgroup><col width="24.813895781637722%"/><col width="50.37220843672457%"/><col width="24.813895781637722%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="24.813895781637722%" id="d1482424e319">UI Element</th>
+
+							<th class="entry" valign="top" width="50.37220843672456%" id="d1482424e322">Description</th>
+
+							<th class="entry" valign="top" width="24.813895781637722%" id="d1482424e325">Example</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e319 "><span class="ph uicontrol">SOCKS Proxy</span></td>
+
+							<td class="entry" valign="top" width="50.37220843672456%" headers="d1482424e322 ">Enable/Disable Socket Secure (SOCKS) routing</td>
+
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e325 ">N/A</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e319 "><span class="ph uicontrol">Proxy Host</span></td>
+
+							<td class="entry" valign="top" width="50.37220843672456%" headers="d1482424e322 ">Name of the system hosting the proxy service for Socket Secure
+								(SOCKS) routing</td>
+
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e325 ">smtp.host.acme.com</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e319 "><span class="ph uicontrol">Proxy Port</span></td>
+
+							<td class="entry" valign="top" width="50.37220843672456%" headers="d1482424e322 ">Port number to use for connections to the proxy server</td>
+
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e325 ">1080</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e319 "><span class="ph uicontrol">Proxy Username</span></td>
+
+							<td class="entry" valign="top" width="50.37220843672456%" headers="d1482424e322 ">Name of the user required to log on to the proxy server</td>
+
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e325 ">johndoe</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e319 "><span class="ph uicontrol">Proxy Password</span></td>
+
+							<td class="entry" valign="top" width="50.37220843672456%" headers="d1482424e322 ">Password for the user required to log on to the proxy
+								server</td>
+
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e325 ">****</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loio6b2d640a7a864d92a5de0f877ebe14f7__section_tnv_m53_xq"><div class="section_title">Other Settings</div><div type="Other Settings">
+			
+			<p class="p">The <span class="ph uicontrol">Other Settings</span> screen area of the <span class="ph uicontrol">SMTP
+					Configurations</span> tool enables you to maintain additional details of
+				the SMTP server, for example, the connection timeout setting. The following table
+				indicates which information can be maintained.</p>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio6b2d640a7a864d92a5de0f877ebe14f7__table_dhd_lbj_xq" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 5: </span></caption>
+<colgroup><col width="24.813895781637722%"/><col width="50.37220843672457%"/><col width="24.813895781637722%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="24.813895781637722%" id="d1482424e432">UI Element</th>
+
+							<th class="entry" valign="top" width="50.37220843672456%" id="d1482424e435">Description</th>
+
+							<th class="entry" valign="top" width="24.813895781637722%" id="d1482424e438">Example</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e432 "><span class="ph uicontrol">Timeout</span></td>
+
+							<td class="entry" valign="top" width="50.37220843672456%" headers="d1482424e435 ">Maximum length of time (in milliseconds) that SAP HANA XS must
+								wait for a response from the SMTP server with which it is trying to
+								establish a connection</td>
+
+							<td class="entry" valign="top" width="24.813895781637722%" headers="d1482424e438 ">60,000 milliseconds (1 minute)</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?e27c22ec14e14949b66053a4dcdb7570.html" target="_top" title="Define the settings an SAP HANA XS application uses for outbound connections to an SMTP server.">Create an SMTP Configuration</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="SMTP Configuration Details";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

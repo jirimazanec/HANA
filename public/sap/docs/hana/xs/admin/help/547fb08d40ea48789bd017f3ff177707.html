@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="The trust store enables you to maintain a list of servers that you trust; the trust is based on a certificate you import into the trust store and which can be signed by a certificate authority, for example, Verisign or TCTrustCenter."/>
+<meta name="description" content="The trust store enables you to maintain a list of servers that you trust; the trust is based on a certificate you import into the trust store and which can be signed by a certificate authority, for example, Verisign or TCTrustCenter."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=03684462587307202"/>
+<title>Add/Edit a Trust Store</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio547fb08d40ea48789bd017f3ff177707";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio547fb08d40ea48789bd017f3ff177707">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Add/Edit a Trust Store</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">The trust store enables you to maintain a list of servers that you trust; the trust is
+		based on a certificate you import into the trust store and which can be signed by a
+		certificate authority, for example, Verisign or TCTrustCenter.</p>
+
+		<div class="section prereq p" id="loio547fb08d40ea48789bd017f3ff177707__prereq_N10018_N10015_N10001"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Prerequisites</h2></div><span class="ph pname">SAP HANA</span> user roles are used to
+			determine the level of access to the features provided by the <span class="ph pname">SAP HANA</span> XS
+			Administration Tool. To access the tools required to add a trust store, you must have
+			the following <span class="ph pname">SAP HANA</span> roles assigned:<ul class="ul" id="loio547fb08d40ea48789bd017f3ff177707__ul_lzs_jcw_jk">
+				<li class="li"><span class="keyword uilabel">sap.hana.xs.admin.roles::TrustStoreAdministrator</span></li>
+
+			</ul>
+</div>
+
+		<div class="section context" id="loio547fb08d40ea48789bd017f3ff177707__context_N1002E_N10011_N10001"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<p class="p">To enter the details of trust store, you can use the <span class="keyword uilabel">SAP HANA XS
+				Administration Tool</span>, as described in the following steps:</p>
+
+			<div class="note caution" id="loio547fb08d40ea48789bd017f3ff177707__note_N1003E_N10032_N10015_N10001"><span class="cautiontitle">Caution</span> To maintain the details of a
+				trust store, you must be familiar with the concepts of trust stores and the
+				certificates they contain.</div>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand" id="loio547fb08d40ea48789bd017f3ff177707__step_N10044_N10041_N10011_N10001">
+				<span class="ph cmd">Start the <span class="keyword uilabel">SAP HANA XS Administration Tool</span>.</span>
+				<div class="itemgroup info">The <span class="keyword uilabel">SAP HANA XS Administration Tool</span> tool is available on the <span class="ph pname">SAP
+						HANA</span> XS Web server at the following URL:
+							<span class="ph filepath">http://<var class="keyword varname">&lt;WebServerHost&gt;</var>:80<var class="keyword varname">&lt;SAPHANAinstance&gt;</var>/sap/hana/xs/admin/</span>.<div class="note note" id="loio547fb08d40ea48789bd017f3ff177707__note_N1003F_N1002C_N10021_N1001E_N10012_N10001"><span class="notetitle">Note</span> In the default
+						configuration, the URL redirects the request to a logon screen, which
+						requires the credentials of an authenticated <span class="ph pname">SAP HANA</span>
+						database user to complete the logon process. The user who logs on must also
+						have the privileges required to perform the administration tasks associated
+						with trust stores.</div>
+</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Start the <span class="ph uicontrol">Trust Manager</span>.</span>
+				<div class="itemgroup info">The <span class="ph uicontrol">Trust Manager</span> is available in the list of
+						<span class="ph pname">SAP HANA</span> XS administration tools.</div>
+			</li>
+<li class="li step stepexpand" id="loio547fb08d40ea48789bd017f3ff177707__step_N10086_N10041_N10011_N10001">
+				<span class="ph cmd">Create the new trust store.</span>
+				<div class="itemgroup info">In the <span class="keyword uilabel">Create Trust Store</span> dialog, you must provide a name for the new
+					trust store. </div>
+				<ol type="a" class="ol substeps" id="loio547fb08d40ea48789bd017f3ff177707__substeps_sdg_fgd_rp">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the <span class="ph uicontrol">Trust Store</span> pane, choose
+								<span class="ph uicontrol">Add</span> to open the <span class="keyword uilabel">Create Trust
+								Store</span> dialog.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Type a name for the new trust store and choose
+								<span class="ph uicontrol">OK</span>.</span>
+						<div class="itemgroup stepresult">Choose <span class="keyword uilabel">OK</span> to add the trust store to the list
+							of trust stores known to <span class="ph pname">SAP HANA</span> XS.</div>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand" id="loio547fb08d40ea48789bd017f3ff177707__step_N10071_N10041_N10011_N10001">
+				<span class="ph cmd">Define the details of the new trust store.</span>
+				<div class="itemgroup info">You can use the <span class="ph uicontrol">Own Certificate</span> and
+						<span class="ph uicontrol">Certificate List</span> to manage the certificates you
+					import for the servers that are known to and trusted by<span class="ph pname"> SAP HANA</span>
+					XS.</div>
+			</li>
+</ol>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?9842ed5227514f0ea5290803095ddb7d.html" target="_top" title="A server certificates enables you to establish a trusted relationship between SAP HANA and the server described in the server certificate. You import the certificates into the trust store.">Import a Server Certificate</a></div>
+<div><a class="link" href="default.html?fd5c8c6812ce4430a2a183e944f7fb64.html" target="_top" title="The trust store enables you to maintain a list of servers that you trust; the trust is based on a certificate you import into the trust store and which can be signed by a certificate authority, for example, Verisign or TCTrustCenter.">Create your own Certificate</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Add/Edit a Trust Store";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,24 @@
+PROCEDURE "OTEBW_EMTAS"."EMTAS::TRANS_BW_IMBALM_CONTRACT" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA OTEBW_EMTAS
+AS
+BEGIN
+   -- BW_IMBALM_CONTRACT
+   t_BW_IMBALM_CONTRACT = select * from REMOTE_BW_IMBALM_CONTRACT where SYSTEMTS > (select max(SYSTEMTS) from BW_IMBALM_CONTRACT);
+   -- vymaz zmenenych    
+   delete from BW_IMBALM_CONTRACT where ContractId in (select ContractId from :t_BW_IMBALM_CONTRACT);
+   -- vlozeni - nove + menene
+   insert into BW_IMBALM_CONTRACT select * from :t_BW_IMBALM_CONTRACT;
+   
+   -- BW_IMBALM_EVENT
+   delete from BW_IMBALM_EVENT where ContractId in (select ContractId from :t_BW_IMBALM_CONTRACT);
+   -- vlozeni
+   insert into BW_IMBALM_EVENT select * from REMOTE_BW_IMBALM_EVENT where ContractId in (select ContractId from :t_BW_IMBALM_CONTRACT);
+   
+   -- BW_IM_INTERVAL
+   delete from BW_IM_INTERVAL where ContractId in (select ContractId from :t_BW_IMBALM_CONTRACT);
+   -- vlozeni
+   insert into BW_IM_INTERVAL select * from REMOTE_BW_IM_INTERVAL where ContractId in (select ContractId from :t_BW_IMBALM_CONTRACT);
+   
+END;

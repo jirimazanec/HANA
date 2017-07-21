@@ -1,0 +1,1233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Calculates values in different currencies."/>
+<meta name="description" content="Calculates values in different currencies."/>
+<meta name="keywords" content="CONVERT_CURRENCY"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=6268614871410312"/>
+<title>CONVERT_CURRENCY Function (Miscellaneous)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loiod22d746ed2951014bb7fb0114ffdaf96";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loiod22d746ed2951014bb7fb0114ffdaf96">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">CONVERT_CURRENCY Function (Miscellaneous)</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Calculates values in different currencies.</p>
+
+      <div class="section" id="loiod22d746ed2951014bb7fb0114ffdaf96__sql_function_convert_currency_1sql_function_convert_currency_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+         
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CONVERT_CURRENCY ( <var class="keyword varname">&lt;named_parameter_value&gt;</var>[{, <var class="keyword varname">&lt;named_parameter_value&gt;</var>}...])</pre></div>
+
+      </div></div>
+
+      <div class="section" id="loiod22d746ed2951014bb7fb0114ffdaf96__sql_function_convert_currency_1sql_function_convert_currency_syntax_elements"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+         
+         <dl class="dl parml">
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;named_parameter_value&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the parameters for the conversion.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;named_parameter_value&gt;</var> ::= 
+"<var class="keyword varname">&lt;field_reference_parameter&gt;</var>" =&gt; <var class="keyword varname">&lt;expression&gt;</var> 
+ | "<var class="keyword varname">&lt;const_string_parameter&gt;</var>" =&gt; <var class="keyword varname">&lt;const_string&gt;</var></pre></div>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;field_reference_parameter&gt;</var> ::= 
+ AMOUNT 
+ | SOURCE_UNIT 
+ | TARGET_UNIT 
+ | REFERENCE_DATE 
+ | CLIENT</pre></div>
+
+                  <p class="p">You use field reference parameters to refer to table columns for the
+                     conversion.</p>
+
+                  
+<div class="table-wrapper tablenoborder"><table summary="" id="loiod22d746ed2951014bb7fb0114ffdaf96__table_mbc_3nb_yv" class="table" frame="border" border="1" rules="all">
+                        <thead class="thead" align="left">
+                           <tr class="row">
+                              <th class="entry" valign="top" id="d31251965e92">
+                                 <p class="p">Field Reference Parameter Name </p>
+
+                              </th>
+
+                              <th class="entry" valign="top" id="d31251965e98">
+                                 <p class="p">Description </p>
+
+                              </th>
+
+                              <th class="entry" valign="top" id="d31251965e104">
+                                 <p class="p">Mandatory </p>
+
+                              </th>
+
+                              <th class="entry" valign="top" id="d31251965e110">
+                                 <p class="p">Default Value </p>
+
+                              </th>
+
+                           </tr>
+
+                        </thead>
+
+                        <tbody class="tbody">
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">AMOUNT </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">The column identifier containing the values to be converted.
+                                 </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">Yes </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">None </p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">CLIENT </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">Defines a three character string that is used to separate
+                                    tenants within ERP system tables. This is used in the conversion
+                                    tables to select the correct rows for each user. A column
+                                    identifier is also accepted using double quotations.</p>
+
+                                 <p class="p">This parameter is mandatory, as the CLIENT session context
+                                    variable is not used by this command.</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">Yes </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">None </p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">SOURCE_UNIT </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">The column identifier describing the input unit. A constant
+                                    string is also accepted using single quotations.</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">Yes </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">None </p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">TARGET_UNIT </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">The column identifier describing the target unit. A constant
+                                    string is also accepted using single quotations.</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">Yes </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">None </p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">REFERENCE_DATE </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">The column identifier describing the currency reference date. A
+                                    constant string is also accepted using single quotations.</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">Yes </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e92 d31251965e98 d31251965e104 d31251965e110 ">
+                                 <p class="p">None </p>
+
+                              </td>
+
+                           </tr>
+
+                        </tbody>
+
+                     </table>
+</div>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;const_string_parameter&gt;</var> ::= 
+ SCHEMA | CONVERSION_TYPE | LOOKUP | ERROR_HANDLING | ACCURACY 
+ | DATE_FORMAT | STEPS | CONFIGURATION_TABLE | PRECISIONS_TABLE 
+ | NOTATION_TABLE | RATES_TABLE | PREFACTORS_TABLE</pre></div>
+
+                  <p class="p"><var class="keyword varname">&lt;const_string_parameter&gt;</var> defines constant parameter values
+                     used in the conversion.</p>
+
+                  
+<div class="table-wrapper tablenoborder"><table summary="" id="loiod22d746ed2951014bb7fb0114ffdaf96__table_y4f_jnb_yv" class="table" frame="border" border="1" rules="all">
+                        <thead class="thead" align="left">
+                           <tr class="row">
+                              <th class="entry" valign="top" id="d31251965e280">
+                                 <p class="p">Constant Parameter Name </p>
+
+                              </th>
+
+                              <th class="entry" valign="top" id="d31251965e286">
+                                 <p class="p">Description </p>
+
+                              </th>
+
+                              <th class="entry" valign="top" id="d31251965e292">
+                                 <p class="p">Mandatory </p>
+
+                              </th>
+
+                              <th class="entry" valign="top" id="d31251965e298">
+                                 <p class="p">Default Value </p>
+
+                              </th>
+
+                           </tr>
+
+                        </thead>
+
+                        <tbody class="tbody">
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">SCHEMA </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">Defines the schema that contains the conversion tables used for
+                                    the conversion. </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">Yes </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">None </p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">METHOD</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <div class="p">
+                                    
+<div class="table-wrapper tablenoborder"><table summary="" id="loiod22d746ed2951014bb7fb0114ffdaf96__table_o4m_st4_y5" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+                                          
+                                          
+                                          <thead class="thead" align="left">
+                                             <tr class="row">
+                                                <th class="entry" valign="top" id="d31251965e359">
+                                                  <p class="p">Value</p>
+
+                                                </th>
+
+                                                <th class="entry" valign="top" id="d31251965e365">
+                                                  <p class="p">Purpose</p>
+
+                                                </th>
+
+                                             </tr>
+
+                                          </thead>
+
+                                          <tbody class="tbody">
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e359 ">
+                                                  <p class="p">ERP</p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e365 ">
+                                                  <p class="p"/>
+
+                                                </td>
+
+                                             </tr>
+
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e359 ">
+                                                  <p class="p">Banking</p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e365 ">
+                                                  <p class="p"/>
+
+                                                </td>
+
+                                             </tr>
+
+                                          </tbody>
+
+                                       </table>
+</div>
+
+                                 </div>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">No</td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">ERP</p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">BID_ASK_TYPE</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <div class="p">
+                                    
+<div class="table-wrapper tablenoborder"><table summary="" id="loiod22d746ed2951014bb7fb0114ffdaf96__table_ch2_zt4_y5" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+                                          
+                                          
+                                          <thead class="thead" align="left">
+                                             <tr class="row">
+                                                <th class="entry" valign="top" id="d31251965e442">
+                                                  <p class="p">Value</p>
+
+                                                </th>
+
+                                                <th class="entry" valign="top" id="d31251965e448">
+                                                  <p class="p">Purpose</p>
+
+                                                </th>
+
+                                             </tr>
+
+                                          </thead>
+
+                                          <tbody class="tbody">
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e442 ">
+                                                  <p class="p">bid</p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e448 ">
+                                                  <p class="p"/>
+
+                                                </td>
+
+                                             </tr>
+
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e442 ">
+                                                  <p class="p">ask</p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e448 ">
+                                                  <p class="p"/>
+
+                                                </td>
+
+                                             </tr>
+
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e442 ">
+                                                  <p class="p">mid</p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e448 ">
+                                                  <p class="p"/>
+
+                                                </td>
+
+                                             </tr>
+
+                                          </tbody>
+
+                                       </table>
+</div>
+
+                                 </div>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">No</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">(empty string)</p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">MARKET_DATA_AREA</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">Defines the market data area as stored in the tables. This is
+                                    mandatory for banking currency conversion. </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">No</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">(empty string)</p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">SYSTEM_TIME</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">Defines the system timestamp for time travel functionality. </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">No</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">Current system timestamp in GMT</p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">CONVERSION_TYPE </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">Defines the conversion type as stored in the conversion tables.
+                                    The conversion types available in your system vary according to
+                                    the setup of your ERP system. In general, these are either M or
+                                    EURX. Contact your system administrator for the details of your
+                                    specific table configuration. </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">No </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">M </p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">LOOKUP </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">The type of lookup to be performed. </p>
+
+                                 <div class="p">
+                                    
+<div class="table-wrapper tablenoborder"><table summary="" id="loiod22d746ed2951014bb7fb0114ffdaf96__table_z4f_jnb_yv" class="table" frame="border" border="1" rules="all">
+                                          <thead class="thead" align="left">
+                                             <tr class="row">
+                                                <th class="entry" valign="top" id="d31251965e623">
+                                                  <p class="p">Value </p>
+
+                                                </th>
+
+                                                <th class="entry" valign="top" id="d31251965e629">
+                                                  <p class="p">Purpose </p>
+
+                                                </th>
+
+                                             </tr>
+
+                                          </thead>
+
+                                          <tbody class="tbody">
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e623 d31251965e629 ">
+                                                  <p class="p">Regular </p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e623 d31251965e629 ">
+                                                  <p class="p">A regular conversion is performed. </p>
+
+                                                </td>
+
+                                             </tr>
+
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e623 d31251965e629 ">
+                                                  <p class="p">Reverse </p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e623 d31251965e629 ">
+                                                  <p class="p">Performs a reverse conversion with the input
+                                                  units swapped. </p>
+
+                                                </td>
+
+                                             </tr>
+
+                                          </tbody>
+
+                                       </table>
+</div>
+
+                                 </div>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">No </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">Regular </p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">ERROR_HANDLING </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">Defines how the system handles a situation where a row could not
+                                    be converted. </p>
+
+                                 <div class="p">
+                                    
+<div class="table-wrapper tablenoborder"><table summary="" id="loiod22d746ed2951014bb7fb0114ffdaf96__table_apf_jnb_yv" class="table" frame="border" border="1" rules="all">
+                                          <thead class="thead" align="left">
+                                             <tr class="row">
+                                                <th class="entry" valign="top" id="d31251965e710">
+                                                  <p class="p">Value </p>
+
+                                                </th>
+
+                                                <th class="entry" valign="top" id="d31251965e716">
+                                                  <p class="p">Purpose</p>
+
+                                                </th>
+
+                                             </tr>
+
+                                          </thead>
+
+                                          <tbody class="tbody">
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e710 d31251965e716 ">
+                                                  <p class="p">fail on error </p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e710 d31251965e716 ">
+                                                  <p class="p">The conversion fails with an error. </p>
+
+                                                </td>
+
+                                             </tr>
+
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e710 d31251965e716 ">
+                                                  <p class="p">set to null </p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e710 d31251965e716 ">
+                                                  <p class="p">The output from the row that caused the error
+                                                  is set to NULL. </p>
+
+                                                </td>
+
+                                             </tr>
+
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e710 d31251965e716 ">
+                                                  <p class="p">keep unconverted </p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e710 d31251965e716 ">
+                                                  <p class="p">The input value is returned. </p>
+
+                                                </td>
+
+                                             </tr>
+
+                                          </tbody>
+
+                                       </table>
+</div>
+
+                                 </div>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">No </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">Fail on error </p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">ACCURACY </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">Defines the rounding behavior of the system. </p>
+
+                                 <div class="p">
+                                    
+<div class="table-wrapper tablenoborder"><table summary="" id="loiod22d746ed2951014bb7fb0114ffdaf96__table_bpf_jnb_yv" class="table" frame="border" border="1" rules="all">
+                                          <thead class="thead" align="left">
+                                             <tr class="row">
+                                                <th class="entry" valign="top" id="d31251965e812">
+                                                  <p class="p">Value </p>
+
+                                                </th>
+
+                                                <th class="entry" valign="top" id="d31251965e818">
+                                                  <p class="p">Purpose </p>
+
+                                                </th>
+
+                                             </tr>
+
+                                          </thead>
+
+                                          <tbody class="tbody">
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e812 d31251965e818 ">
+                                                  <p class="p">compatibility </p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e812 d31251965e818 ">
+                                                  <p class="p">Mimics ERP behavior by rounding the result.
+                                                  </p>
+
+                                                </td>
+
+                                             </tr>
+
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e812 d31251965e818 ">
+                                                  <p class="p">highest </p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e812 d31251965e818 ">
+                                                  <p class="p">Keeps as many digits as possible in the result.
+                                                  </p>
+
+                                                </td>
+
+                                             </tr>
+
+                                          </tbody>
+
+                                       </table>
+</div>
+
+                                 </div>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">No </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">Compatibility </p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">DATE_FORMAT </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">Defines the format in which the reference date is presented. </p>
+
+                                 <div class="p">
+                                    
+<div class="table-wrapper tablenoborder"><table summary="" id="loiod22d746ed2951014bb7fb0114ffdaf96__table_cpf_jnb_yv" class="table" frame="border" border="1" rules="all">
+                                          <thead class="thead" align="left">
+                                             <tr class="row">
+                                                <th class="entry" valign="top" id="d31251965e899">
+                                                  <p class="p">Value </p>
+
+                                                </th>
+
+                                                <th class="entry" valign="top" id="d31251965e905">
+                                                  <p class="p">Purpose </p>
+
+                                                </th>
+
+                                             </tr>
+
+                                          </thead>
+
+                                          <tbody class="tbody">
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e899 d31251965e905 ">
+                                                  <p class="p">auto detect </p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e899 d31251965e905 ">
+                                                  <p class="p">Attempt automatic detection of the date format.
+                                                  </p>
+
+                                                </td>
+
+                                             </tr>
+
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e899 d31251965e905 ">
+                                                  <p class="p">normal </p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e899 d31251965e905 ">
+                                                  <p class="p">Date is provided in a regular format </p>
+
+                                                </td>
+
+                                             </tr>
+
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e899 d31251965e905 ">
+                                                  <p class="p">inverted </p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e899 d31251965e905 ">
+                                                  <p class="p">Date is provided in inverted SAP legacy format.
+                                                  </p>
+
+                                                </td>
+
+                                             </tr>
+
+                                          </tbody>
+
+                                       </table>
+</div>
+
+                                 </div>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">No </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">Auto detect </p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">STEPS </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">Defines the steps that should be included in the conversion
+                                    process. You provide a comma delimited list of the steps to be
+                                    included, and the order of the steps is irrelevant. </p>
+
+                                 <div class="p">
+                                    
+<div class="table-wrapper tablenoborder"><table summary="" id="loiod22d746ed2951014bb7fb0114ffdaf96__table_dpf_jnb_yv" class="table" frame="border" border="1" rules="all">
+                                          <thead class="thead" align="left">
+                                             <tr class="row">
+                                                <th class="entry" valign="top" id="d31251965e1001">
+                                                  <p class="p">Value </p>
+
+                                                </th>
+
+                                                <th class="entry" valign="top" id="d31251965e1007">
+                                                  <p class="p">Purpose </p>
+
+                                                </th>
+
+                                             </tr>
+
+                                          </thead>
+
+                                          <tbody class="tbody">
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e1001 d31251965e1007 ">
+                                                  <p class="p">shift </p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e1001 d31251965e1007 ">
+                                                  <p class="p">Enables a decimal shift according to the source
+                                                  currency selected. For example, if the source
+                                                  currency has 0 valid digits according to
+                                                  PRECISIONS_TABLE, each value needs to be
+                                                  multiplied by 100 because in SAP ERP systems,
+                                                  values are stored using two digits. This has to be
+                                                  done to convert ERP values to their correct
+                                                  numerical representation. </p>
+
+                                                </td>
+
+                                             </tr>
+
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e1001 d31251965e1007 ">
+                                                  <p class="p">convert </p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e1001 d31251965e1007 ">
+                                                  <p class="p">Triggers the actual conversion from the source
+                                                  to the target currency. </p>
+
+                                                </td>
+
+                                             </tr>
+
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e1001 d31251965e1007 ">
+                                                  <p class="p">round </p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e1001 d31251965e1007 ">
+                                                  <p class="p">Rounds the converted value to the number of
+                                                  digits of the target currency. Use this step
+                                                  carefully if subsequent aggregations take place on
+                                                  the number, as rounding errors could accumulate.
+                                                  </p>
+
+                                                </td>
+
+                                             </tr>
+
+                                             <tr class="row">
+                                                <td class="entry" valign="top" headers="d31251965e1001 d31251965e1007 ">
+                                                  <p class="p">shift_back</p>
+
+                                                </td>
+
+                                                <td class="entry" valign="top" headers="d31251965e1001 d31251965e1007 ">
+                                                  <p class="p">While shift changes the decimals from two to
+                                                  the configured precision of the source currency,
+                                                  shift_back changes them back to two, but from the
+                                                  target currency. If error handling is set to
+                                                  <kbd class="ph userinput">keep unconverted</kbd> the output
+                                                  currency might be the source instead of the target
+                                                  currency. In case of an error, the rounding and
+                                                  the shift_back are done with respect to the source
+                                                  currency and the conversion is dropped. This
+                                                  renders all steps redundant, and yields the input
+                                                  value again. </p>
+
+                                                </td>
+
+                                             </tr>
+
+                                          </tbody>
+
+                                       </table>
+</div>
+
+                                 </div>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">No </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">shift, convert </p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">CONFIGURATION_TABLE </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">The table identifier of the conversion type configuration. </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">No </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">TCURV </p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">PRECISIONS_TABLE </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">The table identifier of the precision table. </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">No </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">TCURX </p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">NOTATION_TABLE </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">The table identifier of the table that stores notations. </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">No </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">TCURN </p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">RATES_TABLE </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">The table identifier of the conversion rates table. </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">No </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">TCURR </p>
+
+                              </td>
+
+                           </tr>
+
+                           <tr class="row">
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">PREFACTORS_TABLE </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">The table identifier of the pre-factors table </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">No </p>
+
+                              </td>
+
+                              <td class="entry" valign="top" headers="d31251965e280 d31251965e286 d31251965e292 d31251965e298 ">
+                                 <p class="p">TCURF </p>
+
+                              </td>
+
+                           </tr>
+
+                        </tbody>
+
+                     </table>
+</div>
+
+               </dd>
+
+            
+         </dl>
+
+      </div></div>
+
+      <div class="section" id="loiod22d746ed2951014bb7fb0114ffdaf96__sql_function_convert_currency_1sql_function_convert_currency_description"><div class="section_title">Description</div><div type="Description">
+         
+         <p class="p">The CONVERT_CURRENCY function provides an efficient method to calculate values in
+            different currencies. CONVERT_CURRENCY function is an SQL representation of the
+            SQLScript built-in function CE_CONVERSION, and internally uses CE_CONVERSION for
+            computation.</p>
+
+         <p class="p">To use the CONVERT_CURRENCY function, the currency conversion tables TCURV, TCURX,
+            TCURN, TCURR and TCURF must be available in the SAP HANA database. For other SAP HANA
+            databases, replicate the TCURV, TCURX, TCURN, TCURR and TCURF tables from an SAP ERP
+            system.</p>
+
+      </div></div>
+
+      <div class="section" id="loiod22d746ed2951014bb7fb0114ffdaf96__sql_function_convert_currency_1sql_function_convert_currency_examples"><div class="section_title">Example</div><div type="Example">
+         
+         <p class="p">Create a table and populate it with two example currency amounts.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE sample_input (price DECIMAL(15,2),
+                             source_unit VARCHAR(4),
+                             target_unit VARCHAR(4),
+                             ref_date VARCHAR(10)
+                             );
+
+ INSERT INTO sample_input VALUES (1.0, 'SRC', 'TRG', '2011-01-01');
+ INSERT INTO sample_input VALUES (1.0, 'SRC', 'TRG', '2011-02-01');</pre></div>
+
+         <p class="p">Convert the values in the currency table using conversion tables contained in the SYSTEM
+            schema.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT CONVERT_CURRENCY(amount=&gt;price, 
+                          "SOURCE_UNIT_COLUMN" =&gt;source_unit,
+                          "SCHEMA" =&gt; 'SYSTEM',
+                          "TARGET_UNIT_COLUMN" =&gt; target_unit,
+                          "REFERENCE_DATE" =&gt;'2013-09-23',
+                          "ERROR_HANDLING"=&gt;'set to null',
+                          "CLIENT" =&gt; '000') as converted
+                          FROM sample_input;</pre></div>
+
+         <div class="p">Convert the values by using the <samp class="ph systemoutput">Banking</samp>
+            <span class="keyword cmdname">method</span>.
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT *, CONVERT_CURRENCY(method=&gt;'Banking', -- new
+
+                           market_data_area=&gt;'S000’,  -- new (and mandatory for Banking)
+
+                           amount=&gt;ext_limit,
+                           source_unit =&gt;ext_limit_curr,
+
+                           schema =&gt; 'SAPCOB',
+
+                           target_unit=&gt; 'EUR',
+
+                           reference_date =&gt; business_day,
+
+                           error_handling=&gt; 'set to null',
+
+                           client =&gt; '150') as converted from v_fx_input</pre></div>
+</div>
+
+         <p class="p">Convert the values by using the <samp class="ph systemoutput">Banking</samp>
+            <span class="keyword cmdname">method</span> and <span class="keyword cmdname">system_time</span>. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT *, CONVERT_CURRENCY(method=&gt;'Banking', -- new
+
+                           market_data_area=&gt;'S000', -- mandatory (for Banking)
+
+                           bid_ask_type=&gt;'MID',   -- optional
+
+                           system_time=&gt;to_timestamp('2011-05-11 12:59.999','YYYY-MM-DD HH:SS.FF3') -- optional
+
+                           amount=&gt;ext_limit,
+
+                           source_unit =&gt;ext_limit_curr,
+
+                           schema =&gt; 'SAPCOB',
+
+                           target_unit=&gt; 'EUR',
+
+                           reference_date =&gt; business_day,
+
+                           error_handling=&gt; 'set to null',
+
+                           client =&gt; '150') as converted from v_fx_input</pre></div>
+
+      </div></div>
+
+   </div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="CONVERT_CURRENCY Function (Miscellaneous)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

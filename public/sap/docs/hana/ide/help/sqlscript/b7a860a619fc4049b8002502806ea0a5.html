@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="To eliminate the dependency of having a procedure or a function that already exist when you want to create a new procedure consuming them, you can use headers in their place."/>
+<meta name="description" content="To eliminate the dependency of having a procedure or a function that already exist when you want to create a new procedure consuming them, you can use headers in their place."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=8320902184903106"/>
+<title>Procedure and Function Headers</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loiob7a860a619fc4049b8002502806ea0a5";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loiob7a860a619fc4049b8002502806ea0a5">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Procedure and Function Headers</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">To eliminate the dependency of having a procedure or a function that already exist when
+		you want to create a new procedure consuming them, you can use headers in their
+		place.</p>
+
+		<p class="p">When creating a procedure, all nested procedures that belong to that procedure must exist
+			beforehand. If procedure <samp class="ph codeph">P1</samp> calls <samp class="ph codeph">P2</samp> internally, then
+				<samp class="ph codeph">P2</samp> must have been created earlier than <samp class="ph codeph">P1</samp>.
+			Otherwise, <samp class="ph codeph">P1</samp> creation fails with the error message,“P2 does not
+			exist”. With large application logic and no export or delivery unit available, it can be
+			difficult to determine the order in which the objects need to be created.</p>
+
+		<p class="p">To avoid this kind of dependency problem, SAP introduces <samp class="ph codeph">HEADERS</samp>.
+				<samp class="ph codeph">HEADERS</samp> allow you to create a minimum set of metadata information
+			that contains only the interface of the procedure or function.</p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">AS HEADER ONLY</pre></div>
+
+		<p class="p">You create a header for a procedure by using the <samp class="ph codeph">HEADER ONLY</samp> keyword, as in
+			the following example:</p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE PROCEDURE <var class="keyword varname">&lt;proc_name&gt;</var> [(<var class="keyword varname">&lt;parameter_clause&gt;</var>)] AS HEADER ONLY;</pre></div>
+
+		<p class="p">With this statement you are creating a procedure <var class="keyword varname">&lt;proc_name&gt;</var> with the
+			given signature <var class="keyword varname">&lt;parameter_clause&gt;</var>. The procedure
+				<var class="keyword varname">&lt;proc_name&gt;</var> has no body definition and thus has no dependent base
+			objects. Container properties (for example, <samp class="ph codeph">security mode</samp>,
+				<samp class="ph codeph">default_schema</samp>, and so on) cannot be defined with the header
+			definition. These are included in the body definition.</p>
+
+		<p class="p">The following statement creates the procedure <samp class="ph codeph">TEST_PROC</samp> with a scalar
+			input <samp class="ph codeph">INVAR</samp> and a tabular output <samp class="ph codeph">OUTTAB</samp>:</p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE PROCEDURE TEST_PROC (IN INVAR NVARCHAR(10), OUT OUTTAB TABLE(no INT)) AS HEADER ONLY</pre></div>
+
+		<p class="p">You can create a function header similarly.</p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE FUNCTION <var class="keyword varname">&lt;func_name&gt;</var> [(<var class="keyword varname">&lt;parameter_clause&gt;</var>)] RETURNS <var class="keyword varname">&lt;return_type&gt;</var> AS HEADER ONLY</pre></div>
+
+		<p class="p">By checking the <samp class="ph codeph">is_header_only</samp> field in the system view
+				<samp class="ph codeph">PROCEDURE</samp>, you can verify that a procedure only header is
+			defined.</p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT procedure_name, is_header_only from SYS.PROCEDURES</pre></div>
+
+		<p class="p">If you want to check for functions, then you need to look into the system view
+				<samp class="ph codeph">FUNCTIONS</samp>.</p>
+
+		<p class="p">Once a header of a procedure or function is defined, other procedures or functions can
+			refer to it in their procedure body. Procedures containing these headers can be compiled
+			as shown in the following example:</p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE PROCEDURE OUTERPROC (OUT OUTTAB TABLE (NO INT)) LANGUAGE SQLSCRIPT
+AS
+BEGIN
+	   DECLARE s INT;
+	   s = 1;
+      CALL TEST_PROC (:s, outtab); 
+END;
+</pre></div>
+
+		<p class="p">As long as the procedure and/or the function contain only a header definition, they
+			cannot be executed. Furthermore, all procedures and functions that use this procedure or
+			function containing headers cannot be executed because they are all invalid.</p>
+
+		<p class="p">To change this and to make a valid procedure or function from the header definition, you
+			must replace the header by the full container definition. Use the <samp class="ph codeph">ALTER</samp>
+			statement to replace the header definition of a procedure, as follows:</p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER PROCEDURE <var class="keyword varname">&lt;proc_name&gt;</var> [(<var class="keyword varname">&lt;parameter_clause&gt;</var>)] [LANGUAGE <var class="keyword varname">&lt;lang&gt;</var>] [SQL SECURITY <var class="keyword varname">&lt;mode&gt;</var>] [DEFAULT SCHEMA <var class="keyword varname">&lt;default_schema_name&gt;</var>][READS SQL DATA] AS
+BEGIN [SEQUENTIAL EXECUTION]
+  <var class="keyword varname">&lt;procedure_body&gt;</var>
+END</pre></div>
+
+		<p class="p">For a function header, the task is similar, as shown in the following example:</p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER FUNCTION <var class="keyword varname">&lt;func_name&gt;</var> RETURNS <var class="keyword varname">&lt;return_type&gt;</var> [LANGUAGE <var class="keyword varname">&lt;lang&gt;</var>] [SQL SECURITY <var class="keyword varname">&lt;mode&gt;</var>][DEFAULT SCHEMA <var class="keyword varname">&lt;default_schema_name&gt;</var>]
+AS
+BEGIN
+  <var class="keyword varname">&lt;function_body&gt;</var>
+END</pre></div>
+
+		<p class="p">For example, if you want to replace the header definition of <samp class="ph codeph">TEST_PROC</samp> that
+			was defined already, then the <samp class="ph codeph">ALTER</samp> statement might look as
+			follows:</p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER PROCEDURE TEST_PROC (IN INVAR NVARCHAR(10), OUT OUTTAB TABLE(no INT)) 
+LANGUAGE SQLSCRIPT SQL SECURITY INVOKER READS SQL DATA 
+AS
+BEGIN 
+     DECLARE tvar TABLE (no INT, name nvarchar(10));
+	  tvar = SELECT * FROM TAB WHERE name = :invar;
+	  outtab = SELECT no FROM :tvar;
+END</pre></div>
+
+		<p class="p">You cannot change the signature with the <samp class="ph codeph">ALTER</samp> statement. If the name of
+			the procedure or the function or the input and output variables do not match, you will
+			receive an error.</p>
+
+		<div class="note note"><span class="notetitle">Note</span> The <samp class="ph codeph">ALTER PROCEDURE</samp> and the <samp class="ph codeph">ALTER FUNCTION</samp> statements are
+			supported only for a procedure or a function respectively, that contain a header
+			definition.</div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Procedure and Function Headers";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

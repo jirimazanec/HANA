@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="The COMMIT and ROLLBACK commands are supported natively in SQLScript."/>
+<meta name="description" content="The COMMIT and ROLLBACK commands are supported natively in SQLScript."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=9830909689768923"/>
+<title>COMMIT and ROLLBACK</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioe4e1b570e4f04b93ae1538246894b496";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioe4e1b570e4f04b93ae1538246894b496">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">COMMIT and ROLLBACK</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">The <samp class="ph codeph">COMMIT</samp> and <samp class="ph codeph">ROLLBACK</samp> commands are supported
+		natively in SQLScript.</p>
+
+		<p class="p">The <samp class="ph codeph">COMMIT</samp> command commits the current transaction and all changes
+			before the <samp class="ph codeph">COMMIT</samp> command is written to persistence.</p>
+
+		<p class="p">The <samp class="ph codeph">ROLLBACK</samp> command rolls back the current transaction and undoes all
+			changes since the last <samp class="ph codeph">COMMIT</samp>.</p>
+
+		<p class="p"><span class="ph emphasis emphasis">Example 1:</span></p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE PROCEDURE PROC1() AS
+BEGIN
+    UPDATE B_TAB SET V = 3 WHERE ID = 1;
+    COMMIT;
+    UPDATE B_TAB SET V = 4 WHERE ID = 1;
+    ROLLBACK; 
+END;</pre></div>
+
+		<p class="p">In this example, the <samp class="ph codeph">B_TAB</samp> table has one row before the
+				<samp class="ph codeph">PROC1</samp> procedure is executed:</p>
+
+		
+<div class="table-wrapper tablenoborder"><table summary="" id="loioe4e1b570e4f04b93ae1538246894b496__table_zwk_hhp_bs" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+				
+				
+				<tbody class="tbody">
+					<tr class="row">
+						<td class="entry" valign="top">
+							<p class="p"><span class="ph emphasis emphasis">V</span></p>
+
+						</td>
+
+						<td class="entry" valign="top">
+							<p class="p"><span class="ph emphasis emphasis">ID</span></p>
+
+						</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top">
+							<p class="p">0</p>
+
+						</td>
+
+						<td class="entry" valign="top">
+							<p class="p">1</p>
+
+						</td>
+
+					</tr>
+
+				</tbody>
+
+			</table>
+</div>
+
+		<p class="p">After you execute the <samp class="ph codeph">PROC1</samp> procedure, the <samp class="ph codeph">B_TAB</samp> table
+			is updated as follows:</p>
+
+		
+<div class="table-wrapper tablenoborder"><table summary="" id="loioe4e1b570e4f04b93ae1538246894b496__table_m3m_rhp_bs" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+				
+				
+				<tbody class="tbody">
+					<tr class="row">
+						<td class="entry" valign="top">
+							<p class="p"><span class="ph emphasis emphasis">V</span></p>
+
+						</td>
+
+						<td class="entry" valign="top">
+							<p class="p"><span class="ph emphasis emphasis">ID</span></p>
+
+						</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top">
+							<p class="p">3</p>
+
+						</td>
+
+						<td class="entry" valign="top">
+							<p class="p">1</p>
+
+						</td>
+
+					</tr>
+
+				</tbody>
+
+			</table>
+</div>
+
+		<p class="p">This means only the first update in the procedure affected the <samp class="ph codeph">B_TAB</samp>
+			table. The second update does not affect the <samp class="ph codeph">B_TAB</samp> table because it was
+			rolled back.</p>
+
+		<p class="p">The following graphic provides more detail about the transactional behavior. With the
+			first <samp class="ph codeph">COMMIT</samp> command, transaction <samp class="ph codeph">tx1</samp> is committed and
+			the update on the <samp class="ph codeph">B_TAB</samp> table is written to persistence. As a result of
+			the <samp class="ph codeph">COMMIT</samp>, a new transaction starts, <samp class="ph codeph">tx2</samp>.</p>
+
+		<p class="p">By triggering <samp class="ph codeph">ROLLBACK</samp>, all changes done in transaction
+				<samp class="ph codeph">tx2</samp> are reverted. In Example 1, the second update is reverted.
+			Additionally after the rollback is performed, a new transaction starts,
+				<samp class="ph codeph">tx3</samp>.</p>
+
+		<img class="image" id="loioe4e1b570e4f04b93ae1538246894b496__image_m1h_1kp_bs" src="loio1eb7f5fac4884632b897dd311fdda694_LowRes.png"/>
+		<p class="p">The transaction boundary is not tied to the procedure block. This means that if a nested
+			procedure contains a <samp class="ph codeph">COMMIT</samp>/<samp class="ph codeph">ROLLBACK</samp>, then all
+			statements of the top-level procedure are affected.</p>
+
+		<p class="p"><span class="ph emphasis emphasis">Example 2:</span></p>
+
+		<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE PROCEDURE PROC2() AS
+BEGIN
+    UPDATE B_TAB SET V = 3 WHERE ID = 1;
+    COMMIT;
+END;
+
+
+CREATE PROCEDURE PROC1() AS
+BEGIN
+    UPDATE A_TAB SET V = 2 WHERE ID = 1;
+    CALL PROC2();
+    UPDATE A_TAB SET V = 3 WHERE ID = 1;
+    ROLLBACK;
+END;</pre></div>
+
+		<p class="p">In Example 2, the <samp class="ph codeph">PROC1</samp> procedure calls the
+			<samp class="ph codeph">PROC2</samp>procedure. The <samp class="ph codeph">COMMIT</samp> in <samp class="ph codeph">PROC2</samp>
+			commits all changes done in the <samp class="ph codeph">tx1</samp> transaction (see the following
+			graphic). This includes the first update statement in the <samp class="ph codeph">PROC1</samp>
+			procedure as well as the update statement in the <samp class="ph codeph">PROC2</samp> procedure. With
+				<samp class="ph codeph">COMMIT</samp> a new transaction starts implicitly,
+			<samp class="ph codeph">tx2</samp>.</p>
+
+		<p class="p">Therefore the <samp class="ph codeph">ROLLBACK</samp> command in <samp class="ph codeph">PROC1</samp> only affects
+			the previous update statement; all other updates were committed with the
+				<samp class="ph codeph">tx1</samp> transaction.</p>
+
+		<img class="image" id="loioe4e1b570e4f04b93ae1538246894b496__image_hfn_hnp_bs" src="loio0a41d45f14d44c36aefe2c9e51a0a051_LowRes.png"/>
+		<div class="note note"><span class="notetitle">Note</span> 
+			<ul class="ul" id="loioe4e1b570e4f04b93ae1538246894b496__ul_ssn_lnp_bs">
+				<li class="li">
+					<p class="p">If you used DSQL in the past to execute these commands (for example,
+							<samp class="ph codeph">EXEC ‘COMMIT’</samp>, <samp class="ph codeph">EXEC ’ROLLBACK’</samp>), SAP
+						recommends that you replace all occurrences with the native commands
+							<samp class="ph codeph">COMMIT</samp>/<samp class="ph codeph">ROLLBACK</samp> because they are more
+						secure.</p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">The <samp class="ph codeph">COMMIT</samp>/<samp class="ph codeph">ROLLBACK</samp> commands are
+							<span class="ph emphasis emphasis">not</span> supported in Scalar UDF or in Table UDF.</p>
+
+				</li>
+
+			</ul>
+
+		</div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="COMMIT and ROLLBACK";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="This text mining function returns the top-ranked terms that match an initial substring. This function can be used for type-ahead or auto-completion functions."/>
+<meta name="description" content="This text mining function returns the top-ranked terms that match an initial substring. This function can be used for type-ahead or auto-completion functions."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=4837669276258516"/>
+<title>Text Mining: TM_GET_SUGGESTED_TERMS</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio6c6e7f7309b244188dcfe023e2d3605f";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio6c6e7f7309b244188dcfe023e2d3605f">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Text Mining: TM_GET_SUGGESTED_TERMS</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">This text mining function returns the top-ranked terms that match an initial substring.
+		This function can be used for type-ahead or auto-completion functions.</p>
+
+		<div class="section"><div class="section_title">Syntax</div><div type="Syntax">
+			<div class="note caution"><span class="cautiontitle">Caution</span> <span class="ph">This
+                                                  information applies only for the SAP HANA option
+                                                  cited in the title of this topic. You must have
+                                                  purchased the license for it in order to use the
+                                                  information contained in this topic.</span></div>
+
+			
+			<div class="p">
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">TM_GET_SUGGESTED_TERMS ( &lt;tm_term&gt; &lt;tm_search&gt; &lt;tm_return_top&gt; )</pre></div>
+
+			</div>
+
+			<p class="p">Specifies the initial substring for which you want to find suggested terms, the search request
+				and the number of returned terms.</p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+			
+			<p class="p">The function uses the following syntax elements: <samp class="ph codeph">&lt;tm_term&gt;</samp>,
+					<samp class="ph codeph">&lt;tm_search&gt;</samp>, <samp class="ph codeph">&lt;tm_return_top&gt;</samp>.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;tm_term&gt; := 
+   TERM &lt;string&gt;
+   [ LANGUAGE &lt;string&gt; ]</pre></div>
+
+			<p class="p">Specifies the term and the language to be processed. If no language is specified, the default
+				language (English) is used. The specified term is always normalized. For example,
+				the related terms for <span class="ph emphasis emphasis">Mouse</span> are the same as the related terms
+				for <span class="ph emphasis emphasis">mouse</span> in English. <span class="ph emphasis emphasis">Häuser</span> and
+					<span class="ph emphasis emphasis">Haeuser</span> are also treated as equivalents in German.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;tm_search&gt; := 
+   SEARCH &lt;column&gt;
+   FROM &lt;table&gt;
+   [ WHERE &lt;condition&gt; ]
+   [ WITH TERM TYPE &lt;string&gt;, ... ]</pre></div>
+
+			<p class="p">Specifies the set of reference documents in <samp class="ph codeph">&lt;column&gt;</samp> and
+					<samp class="ph codeph">&lt;table&gt;</samp>. The specified column must be of type text or must
+				have a full-text index. The set of reference documents can be restricted by
+					<samp class="ph codeph">WHERE &lt;condition&gt;</samp>, which means that only those documents
+				will be used in the calculations. The set of reference terms can be restricted by
+					<samp class="ph codeph">WITH TERM TYPE</samp>, which means that only those terms will be used
+				in the calculations. For example <samp class="ph codeph">WITH TERM TYPE 'proper*','noun'</samp>
+				only considers terms that are proper names or nouns. The
+					<samp class="ph codeph">termTypeRestriction</samp> property in the text mining configuration
+				determines which term types are available.</p>
+
+			<div class="p">
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;tm_return_top&gt; :=
+   RETURN TOP { &lt;top int&gt; | DEFAULT }</pre></div>
+
+			</div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Description</div><div type="Description">
+			<p class="p">Specifies the number of top returned terms. <samp class="ph codeph">DEFAULT</samp> means to use the value
+				set at text mining initialization.</p>
+
+			
+			<p class="p">This text mining function returns the top-ranked terms that match an initial substring. You
+				might know this behavior from the type-ahead function or auto-completion within
+				(search) input fields.</p>
+
+			<div class="p">
+				
+<div class="table-wrapper tablenoborder"><table summary="" id="loio6c6e7f7309b244188dcfe023e2d3605f__table_rmf_tg5_1s" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: Return table of function TM_GET_SUGGESTED_TERMS</span></caption>
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+						
+						
+						<thead class="thead" align="left">
+							<tr class="row">
+								<th class="entry" valign="top" width="50%" id="d25071909e134">
+									<p class="p">Attribute</p>
+
+								</th>
+
+								<th class="entry" valign="top" width="50%" id="d25071909e140">
+									<p class="p">Value Data Type</p>
+
+								</th>
+
+							</tr>
+
+						</thead>
+
+						<tbody class="tbody">
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d25071909e134 "><samp class="ph codeph">RANK</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d25071909e140 ">
+									<p class="p">integer</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d25071909e134 "><samp class="ph codeph">TERM</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d25071909e140 ">
+									<p class="p">nvarchar(2000) </p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d25071909e134 "><samp class="ph codeph">NORMALIZED_TERM</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d25071909e140 ">
+									<p class="p">nvarchar(2000)</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d25071909e134 "><samp class="ph codeph">TERM_TYPE</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d25071909e140 ">
+									<p class="p">nvarchar(256)</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d25071909e134 "><samp class="ph codeph">TERM_FREQUENCY</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d25071909e140 ">
+									<p class="p">integer</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d25071909e134 "><samp class="ph codeph">DOCUMENT_FREQUENCY</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d25071909e140 ">
+									<p class="p">integer</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="50%" headers="d25071909e134 "><samp class="ph codeph">SCORE</samp></td>
+
+								<td class="entry" valign="top" width="50%" headers="d25071909e140 ">
+									<p class="p">decimal</p>
+
+								</td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+</div>
+
+			</div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Example</div><div type="Example">
+			
+			<p class="p">The following example returns terms starting with <span class="ph emphasis emphasis">john</span> from a news table.
+				Single-word terms and multi-word terms are returned. </p>
+
+			<div class="p">
+				<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">select T.RANK, T.TERM, T.NORMALIZED_TERM, T.TERM_TYPE, 
+       T.TERM_FREQUENCY, T.DOCUMENT_FREQUENCY, T.SCORE
+  FROM TM_GET_SUGGESTED_TERMS (
+    TERM 'john'
+    SEARCH "content"
+      FROM "myschema"."news"
+    RETURN
+      TOP 5 
+   ) AS T
+WHERE T.SCORE &gt; 0.1 and T.TERM_FREQUENCY &gt; 5</pre></div>
+
+				</div>
+
+			</div>
+
+			<div class="p">
+				
+<div class="table-wrapper tablenoborder"><table summary="" id="loio6c6e7f7309b244188dcfe023e2d3605f__table_k11_3ln_fs" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 2: Example Return Table</span></caption>
+<colgroup><col width="14.285714285714286%"/><col width="14.285714285714286%"/><col width="14.285714285714286%"/><col width="14.285714285714286%"/><col width="14.285714285714286%"/><col width="14.285714285714286%"/><col width="14.285714285714286%"/></colgroup>
+
+						
+						
+						
+						
+						
+						
+						
+						<thead class="thead" align="left">
+							<tr class="row">
+								<th class="entry" valign="top" width="14.285714285714285%" id="d25071909e295">
+									<p class="p">RANK</p>
+
+								</th>
+
+								<th class="entry" valign="top" width="14.285714285714285%" id="d25071909e301">
+									<p class="p">TERM</p>
+
+								</th>
+
+								<th class="entry" valign="top" width="14.285714285714285%" id="d25071909e307">
+									<p class="p">NORMALIZED_TERM</p>
+
+								</th>
+
+								<th class="entry" valign="top" width="14.285714285714285%" id="d25071909e313">
+									<p class="p">TERM_TYPE</p>
+
+								</th>
+
+								<th class="entry" valign="top" width="14.285714285714285%" id="d25071909e319">
+									<p class="p">TERM_FREQUENCY</p>
+
+								</th>
+
+								<th class="entry" valign="top" width="14.285714285714285%" id="d25071909e326">
+									<p class="p">DOCUMENT_FREQUENCY</p>
+
+								</th>
+
+								<th class="entry" valign="top" width="14.285714285714285%" id="d25071909e332">
+									<p class="p">SCORE</p>
+
+								</th>
+
+							</tr>
+
+						</thead>
+
+						<tbody class="tbody">
+							<tr class="row">
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e295 ">
+									<p class="p">1</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e301 ">
+									<p class="p">John</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e307 ">
+									<p class="p">john </p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e313 ">
+									<p class="p">Proper </p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e319 ">
+									<p class="p">25</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e326 ">
+									<p class="p">11</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e332 ">
+									<p class="p">0.86</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e295 ">
+									<p class="p">2</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e301 ">
+									<p class="p">John Doe</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e307 ">
+									<p class="p">john doe</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e313 ">
+									<p class="p">Proper </p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e319 ">
+									<p class="p">12</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e326 ">
+									<p class="p">8</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e332 ">
+									<p class="p">0.24</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e295 ">
+									<p class="p">3</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e301 ">
+									<p class="p">John Miller</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e307 ">
+									<p class="p">john miller</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e313 ">
+									<p class="p">Proper</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e319 ">
+									<p class="p">5</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e326 ">
+									<p class="p">3</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e332 ">
+									<p class="p">0.21</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e295 ">
+									<p class="p">4</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e301 ">
+									<p class="p">Johny</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e307 ">
+									<p class="p">johnny</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e313 ">
+									<p class="p">Proper </p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e319 ">
+									<p class="p">7</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e326 ">
+									<p class="p">7</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e332 ">
+									<p class="p">0.15</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e295 ">
+									<p class="p">5</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e301 ">
+									<p class="p">Johnson and Sons</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e307 ">
+									<p class="p">johnson and son</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e313 ">
+									<p class="p">Organization </p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e319 ">
+									<p class="p">5</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e326 ">
+									<p class="p">2</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="14.285714285714285%" headers="d25071909e332 ">
+									<p class="p">0.09</p>
+
+								</td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+</div>
+
+			</div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Text Mining: TM_GET_SUGGESTED_TERMS";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

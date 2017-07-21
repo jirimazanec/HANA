@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Use XSUnit tools to test JavaScript code that depends on functions in your code, for example: dependencies on functions, libraries, or to database tables."/>
+<meta name="description" content="Use XSUnit tools to test JavaScript code that depends on functions in your code, for example: dependencies on functions, libraries, or to database tables."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=9330923817240685"/>
+<title>Testing JavaScript Functions with XSUnit</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio9f7a9c9a6e0f453f808d271f07f9688c";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio9f7a9c9a6e0f453f808d271f07f9688c">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Testing JavaScript Functions with XSUnit</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">Use XSUnit tools to test JavaScript code that depends on functions in your code, for
+        example: dependencies on functions, libraries, or to database tables.</p>
+
+		<p class="p">In JavaScript it is possible to overwrite anything that is visible in a context, for example:
+            public data, public functions, or even the whole class. With XSUnit, you can make use of
+            a simulation framework that is included with Jasmine. The simulation framework provides
+            a mechanism that enables you to create and install a test double (so-called Jasmine
+                <span class="q">“Spy”</span>), which can help you to reduce some of the basic code and keep the code
+            more concise. Jasmine Spies should be created in the test setup, before you define any
+                <dfn class="term">expectations</dfn>. The Spies can then be checked, using the standard Jasmine
+            expectation syntax. You can check if a Spy is called (or not) and find out what (if any)
+            parameters were used in the call. Spies are removed at the end of every test
+            specification.</p>
+
+		<div class="note note"><span class="notetitle">Note</span>  Each dependency increases the complexity of testing involved for a function or a
+			component. </div>
+
+		<p class="p">The Average Component Dependency (ACD) is the number of dependencies to other components,
+			averaged over all components; it indicates whether your system is loosely coupled. If
+			you prefer to implement JavaScript in an object-oriented way, you can apply dependency
+			management aspects by following object-oriented design principles (OOD).</p>
+
+		<p class="p">The information in this topic covers the following test scenarios:</p>
+
+		<ul class="ul" id="loio9f7a9c9a6e0f453f808d271f07f9688c__ul_a25_hdm_rp">
+			<li class="li"><a class="xref" href="default.html?9f7a9c9a6e0f453f808d271f07f9688c.html#loio9f7a9c9a6e0f453f808d271f07f9688c__section_ihb_bbm_rp" target="_top">Dependencies on Function Libraries</a></li>
+
+			<li class="li"><a class="xref" href="default.html?9f7a9c9a6e0f453f808d271f07f9688c.html#loio9f7a9c9a6e0f453f808d271f07f9688c__section_tzk_2dm_rp" target="_top">Dependency on Database Table</a></li>
+
+		</ul>
+
+		<div class="section" id="loio9f7a9c9a6e0f453f808d271f07f9688c__section_ihb_bbm_rp"><div class="section_title">Dependencies on Function Libraries</div><div type="Dependencies on Function Libraries">
+			
+			<p class="p">The following code snippet defines a controller that you want to test; the controller
+				depends on a <samp class="ph codeph">Date</samp> object. The accompanying code snippet shows how
+				you can test this code.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var Controller = null; 
+(function() {     
+    //constructor function          
+    Controller = function(dataModel) {         
+        this.model = dataModel;     
+    };
+    function updateModelWithTimestamp(newData) {         
+        this.model.updateData(newData, this.getCurrentDate());     
+    }     
+    Controller.prototype.updateModel = function(newData) {         
+        //bind 'this' to the private function                   
+        updateModelWithTimestamp.call(this, newData);     
+    };     
+    Controller.prototype.getCurrentDate = function() {         
+        return new Date(Date.now());     
+    }; 
+}());
+
+function DataModel() {     
+    var modifiedAt = null;     
+    var modifiedBy = null;     
+    var data = null;          
+    this.updateData = function(newData, modifiedAtDate) {         
+        data = newData;         
+        modifiedAt = modifiedAtDate;         
+        modifiedBy = $.session.getUsername();     
+    };          
+    this.getModificationDate = function() {         
+        return modifiedAt;     
+    }; 
+}</pre></div>
+
+			<p class="p">The following code snippets shows an example of the test code you could run; the code
+				uses a Jasmine Spy ensures the dependencies on the <samp class="ph codeph">Date</samp> object are
+				replaced and tested as expected. </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var Controller = $.import("sap.hana.testtools.demo.objects.xs_javascript", "javascriptOO").Controller; 
+var DataModel= $.import("sap.hana.testtools.demo.objects.xs_javascript", "javascriptOO").DataModel;
+
+describe('Controller', function() {     
+    var controller = null;     
+    var model = null;     
+    var anyDate = new Date(2013, 8, 27, 11, 0, 0, 0);       
+ 
+    beforeEach(function() {   
+        model = new DataModel();      
+        controller = new Controller(model);  
+    });    
+
+    it('should set current date when data is modified (replace Date.now() using jasmine spies)', function() {      
+        spyOn(Date, 'now').and.returnValue(anyDate.getTime());            
+        oController.updateModel({data : [1,2,3]});   
+        expect(model.getModificationDate()).toEqual(anyDate);  
+    }); 
+});</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loio9f7a9c9a6e0f453f808d271f07f9688c__section_tzk_2dm_rp"><div class="section_title">Dependency on Database Table</div><div type="Dependency on Database Table">
+			
+			<p class="p">It is important to try to avoid mixing business logic that is implemented in
+				JavaScript with the data base interaction. We recommend moving the database
+				persistency logic into a dedicated persistency class, so that just the business
+				logic remains for testing. The goal of the test is to be able to test both normal
+				and special cases without interacting with the data base at all.</p>
+
+			<p class="p">To unit test the persistency class, you can parameterize the schema and use a schema
+				for testing, for example, the user schema where you have all authorizations required
+				to create, modify, and drop objects, and cannot mess things up with the test. Last
+				of all, you can offer a small set of integration tests, that just ensure that the
+				productive classes, the <samp class="ph codeph">AnyService</samp> class, and the
+					<samp class="ph codeph">Persistency</samp> class, integrate well.</p>
+
+			<div class="note note"><span class="notetitle">Note</span> For sake of conciseness, resource closing and error handling is missing from the
+				following code example.</div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">function Persistency(dbConnection, schema) {
+     var dbSchema = schema !== undefined ? schema : 'SAP_HANA_TEST_DEMO';   
+     this.existsEntry = function(key) {
+         var pstmt = dbConnection.prepareStatement('SELECT key FROM "' + dbSchema + '"."Table" WHERE KEY=?');
+         pstmt.setString(1, key);
+         if (pstmt.executeQuery().next()) {
+             return true;   
+         );
+         return false;  
+     };       
+     this.insertEntry = function(newEntry) {
+         var pstmt = dbConnection.prepareStatement('INSERT INTO "' + dbSchema + '"."Table" VALUES(?,?)');
+         pstmt.setString(1, newEntry.Id); 
+         pstmt.setString(2, newEntry.Value); 
+         pstmt.execute();
+     };
+}
+function AnyService(persistency) {      
+     this.execute = function(input) {         
+         //validate input
+         if (!persistency.existsEntry(input.Id)) {
+             //calculate newEntry   
+             persistency.insertEntry(newEntry);
+         }  
+     };        
+}</pre></div>
+
+			<p class="p">The following code snippets shows an example of the test code you could run to test
+				the dependencies. </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var Persistency = $.import("package.of.persistency", "persistency").Persistency; 
+describe('Persistency test', function() {  
+    var SqlExecutor = $.import('sap.hana.testtools.unit.util', 'sqlExecutor').SqlExecutor;  
+    var TableUtils = $.import('sap.hana.testtools.unit.util', 'tableUtils').TableUtils;    
+    var originTable = 'TableName';  
+    var testTable = null;    
+    var originSchema = 'SAP_HANA_TEST_DEMO';  
+    var userSchema = $.session.getUsername().toUpperCase();      
+    beforeOnce(function(){   
+        var tableUtils = new TableUtils(jasmine.dbConnection);   
+        testTable = tableUtils.copyIntoUserSchema(originSchema, originTable);  
+    });           
+    it('should insert one entry into table', function() {   
+        var persistency = new Persistency(jasmine.dbConnection, userSchema); 
+        persistency.insertEntry({ Id : '0815', Value : 1});      
+        expect(persistency.existsEntry('0815');   
+        expect(selectAllFromTable().getRowCount()).toBe(1);  
+    });    
+    function selectAllFromTable() {   
+        var sqlExecutor = new SqlExecutor(jasmine.dbConnection); 
+        return sqlExecutor.execQuery('select * from ' + testTable);  
+    } 
+});</pre></div>
+
+		</div></div>
+
+        <div class="section"><div class="section_title">Testing a Self-Contained JavaScript Function</div><div type="Testing a Self-Contained JavaScript Function">
+            
+            <p class="p"> The following code snippet show how to use XSUnit to test a self-contained
+                JavaScript function (<samp class="ph codeph">mathlib</samp>); a self-contained function has no
+                dependencies to other JavaScript functions, database tables or session
+                parameters.</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var mathlib = $.import("package.of.your.library", "math");
+
+describe('The math XS JavaScript library', function() {
+     it('should calculate "7" as maximum value of "3, 7"', function() {
+          var maxValue = mathlib.max(3, 7);
+          expect(maxValue).toBe(7);
+     });
+     it('should calculate "-10" as maximum value of "-10, -20"', function() {
+          var maxValue = mathlib.max(-10, -20);
+          expect(maxValue).toBe(-10);
+     });
+});</pre></div>
+
+        </div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Testing JavaScript Functions with XSUnit";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

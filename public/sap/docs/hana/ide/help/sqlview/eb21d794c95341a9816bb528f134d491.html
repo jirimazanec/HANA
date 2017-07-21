@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Returns the one-based series element number that the given period value is associated with."/>
+<meta name="description" content="Returns the one-based series element number that the given period value is associated with."/>
+<meta name="keywords" content="SERIES_PERIOD_TO_ELEMENT"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=01302965265570788"/>
+<title>SERIES_PERIOD_TO_ELEMENT Function (Series Data)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioeb21d794c95341a9816bb528f134d491";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioeb21d794c95341a9816bb528f134d491">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">SERIES_PERIOD_TO_ELEMENT Function (Series Data)</h1>
+
+	
+	
+	
+	
+	<div class="body refbody"><p class="shortdesc">Returns the one-based series element number that the given period value is associated
+		with.</p>
+
+		<div class="section"><div class="section_title">Syntax</div><div type="Syntax">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SERIES_PERIOD_TO_ELEMENT (<var class="keyword varname">&lt;value&gt;</var>, 
+    {<var class="keyword varname">&lt;increment_by&gt;</var>, <var class="keyword varname">&lt;min_value&gt;</var>, <var class="keyword varname">&lt;max_value&gt;</var> [, <var class="keyword varname">&lt;rounding_mode&gt;</var>]
+        | SERIES TABLE <var class="keyword varname">&lt;series_table&gt;</var> [, <var class="keyword varname">&lt;rounding_mode&gt;</var>]})</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+			
+			<dl class="dl parml">
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;value&gt;</var></dt>
+
+					<dd class="dd pd">Specifies that the <var class="keyword varname">&lt;value&gt;</var> parameter can either be a
+						numeric value or a date/time
+						type.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;value&gt;</var> ::= INTEGER | DOUBLE | TIMESTAMP</pre></div>
+</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;increment_by&gt;</var></dt>
+
+					<dd class="dd pd">Sets the increment value.
+							<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;increment_by&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+<p class="p">If
+							the <var class="keyword varname">&lt;value&gt;</var> parameter is a date/time type, then the
+								<var class="keyword varname">&lt;increment_by&gt;</var> parameter should be a string in the
+							form "INTERVAL number units" where units is either YEAR, MONTH, DAY,
+							HOUR, MINUTE, or SECOND and the number must be an integer, unless the
+							units type is SECOND and the associated data type is TIMESTAMP. If the
+							value is numeric, then the <var class="keyword varname">&lt;increment_by&gt;</var> parameter
+							should be a numeric value that defines the period of the
+						series.</p>
+</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;min_value&gt;</var></dt>
+
+					<dd class="dd pd">Sets the minimum period
+						value.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;min_value&gt;</var> ::= <var class="keyword varname">&lt;integer&gt;</var></pre></div>
+For
+						an equidistant series, there is a mapping between periods and elements. The
+						periods are in the space of the period columns, usually timestamps. The
+						elements are always BIGINT. The element 1 represents the first period,
+						associated with <var class="keyword varname">&lt;min_value&gt;</var>. </dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;max_value&gt;</var></dt>
+
+					<dd class="dd pd">Sets the maximum period
+						value.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;max_value&gt;</var> ::= <var class="keyword varname">&lt;integer&gt;</var></pre></div>
+</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;rounding_mode&gt;</var></dt>
+
+					<dd class="dd pd">Specifies that if the period value is not on a series period value, then it is rounded to
+						the nearest series period value, which returns the associated element
+						number.
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;rounding_mode&gt;</var> ::= ROUND_HALF_UP
+ | ROUND_HALF_DOWN
+ | ROUND_HALF_EVEN
+ | ROUND_UP
+ | ROUND_DOWN
+ | ROUND_CEILING
+ | ROUND_FLOOR</pre></div>
+The
+						supported rounding modes are:
+<div class="table-wrapper tablenoborder"><table summary="" id="loioeb21d794c95341a9816bb528f134d491__table_gsz_dw1_zp" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+								
+								
+								<tbody class="tbody">
+									<tr class="row">
+										<td class="entry" valign="top"><strong class="ph b">Rounding mode </strong></td>
+
+										<td class="entry" valign="top"><strong class="ph b">Description </strong></td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top">ROUND_HALF_UP </td>
+
+										<td class="entry" valign="top">
+											<p class="p"> Specifies that the value is rounded to the nearest
+												series value. Values that fall halfway between two
+												series values are rounded up away from zero. </p>
+
+											<p class="p">This is the default value.</p>
+
+										</td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top">ROUND_HALF_DOWN </td>
+
+										<td class="entry" valign="top">Specifies that the value is rounded to the nearest
+											series value. Values that fall halfway between two round
+											values are rounded down toward zero. </td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top">ROUND_HALF_EVEN </td>
+
+										<td class="entry" valign="top">Specifies that the value is rounded to the nearest
+											series value. Values that fall halfway between two
+											rounded values are rounded to the even series value
+											based on element number. </td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top">ROUND_UP </td>
+
+										<td class="entry" valign="top">Specifies that the value is always rounded away from
+											zero to the larger series value. </td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top">ROUND_DOWN </td>
+
+										<td class="entry" valign="top">Specifies that the value is always rounded towards
+											zero to the smaller series value. </td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top">ROUND_CEILING </td>
+
+										<td class="entry" valign="top">Specifies that the value is always rounded in a
+											positive direction to the larger series value. </td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top">ROUND_FLOOR </td>
+
+										<td class="entry" valign="top">Specifies that the value is always rounded in a
+											negative direction to the smaller series value. </td>
+
+									</tr>
+
+								</tbody>
+
+							</table>
+</div>
+</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;series_table&gt;</var></dt>
+
+					<dd class="dd pd">If a series table reference is used, then this specifies that the values for
+							<var class="keyword varname">&lt;increment_by&gt;</var>, <var class="keyword varname">&lt;min_value&gt;</var>, and
+							<var class="keyword varname">&lt;max_value&gt;</var> from the SERIES TABLE definition are used
+						as the parameters for this
+						function.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;series_table&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+</dd>
+
+				
+			</dl>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">Returns the one-based series element number with which the given period value is
+				associated, where period = min_value + ( element - 1 ) * interval. </p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Examples</div><div type="Examples">
+			
+			<p class="p">The following example returns the result 4:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT SERIES_PERIOD_TO_ELEMENT(5, 2, 0, 10, ROUND_HALF_UP) "element" FROM DUMMY;</pre></div>
+
+			<p class="p">The following example returns the result 3:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT SERIES_PERIOD_TO_ELEMENT(5, 2, 0, 10, ROUND_HALF_DOWN) "element" FROM DUMMY;</pre></div>
+
+			<p class="p">The example below picks the next element rounded down from 2014-01-05 12:00:00 from a date
+				series from 2014-01-01 to 2014-12-32 in increments of 1 day. It returns the result
+				5:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT SERIES_PERIOD_TO_ELEMENT(
+    '2014-01-05 12:00:00',
+    'INTERVAL 1 DAY',
+    '2014-01-01',
+    '2014-12-31',
+    ROUND_HALF_DOWN) "element" FROM DUMMY;</pre></div>
+
+			<p class="p">The previous example could be written like the following fictitious example to refer to an
+				equidistant series table:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE ExampleSeriesTable(id INTEGER, ts TIMESTAMP)
+ SERIES(SERIES KEY(id) EQUIDISTANT INCREMENT BY INTERVAL 1 DAY
+ MINVALUE '2014-01-01' MAXVALUE '2014-12-31' PERIOD FOR SERIES(ts));  
+
+SELECT SERIES_PERIOD_TO_ELEMENT('2014-01-05 12:00:00', SERIES TABLE ExampleSeriesTable, ROUND_HALF_DOWN) "element" FROM DUMMY;</pre></div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="SERIES_PERIOD_TO_ELEMENT Function (Series Data)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Shows the dbspace configured in extended storage."/>
+<meta name="description" content="Shows the dbspace configured in extended storage."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=8462981910717181"/>
+<title>M_ES_DBSPACES System Views [Dynamic Tiering]</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio8b52fb655bff4d7a9622335252755c5a";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio8b52fb655bff4d7a9622335252755c5a">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">M_ES_DBSPACES System Views [Dynamic Tiering]</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">Shows the dbspace configured in extended storage.</p>
+
+		<div class="section">
+			<div class="note caution"><span class="cautiontitle">Caution</span> <span class="ph">This
+                                                  information applies only for the SAP HANA option
+                                                  cited in the title of this topic. You must have
+                                                  purchased the license for it in order to use the
+                                                  information contained in this topic.</span></div>
+
+			<p class="p">System and user data for the extended storage is managed
+				in dbspaces, which can contain one or more files.
+				  This monitoring view
+				provides information for the extended storage corresponding to the connected HANA
+				database. </p>
+
+			<p class="p">Only users with CATALOG READ, DATA ADMIN, or EXTENDED STORAGE ADMIN system privilege
+				can view the content of the M_ES_DBSPACE view. The view is empty for all other
+				database users.</p>
+
+		</div>
+
+		<div class="section"><div class="section_title">Structure</div><div type="Structure">
+			
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio8b52fb655bff4d7a9622335252755c5a__table_m5j_mk2_cp" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="25.595238095238095%"/><col width="20.238095238095237%"/><col width="54.166666666666664%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="25.595238095238095%" id="d26978490e48">Column name</th>
+
+							<th class="entry" valign="top" width="20.238095238095237%" id="d26978490e51">Data type</th>
+
+							<th class="entry" valign="top" width="54.166666666666664%" id="d26978490e54">Description</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="25.595238095238095%" headers="d26978490e48 ">Column name</td>
+
+							<td class="entry" valign="top" width="20.238095238095237%" headers="d26978490e51 ">Data type</td>
+
+							<td class="entry" valign="top" width="54.166666666666664%" headers="d26978490e54 ">Description.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.595238095238095%" headers="d26978490e48 ">HOST</td>
+
+							<td class="entry" valign="top" width="20.238095238095237%" headers="d26978490e51 ">VARCHAR(64)</td>
+
+							<td class="entry" valign="top" width="54.166666666666664%" headers="d26978490e54 ">Host name.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.595238095238095%" headers="d26978490e48 ">PORT</td>
+
+							<td class="entry" valign="top" width="20.238095238095237%" headers="d26978490e51 ">INTEGER</td>
+
+							<td class="entry" valign="top" width="54.166666666666664%" headers="d26978490e54 ">Internal port.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.595238095238095%" headers="d26978490e48 ">VOLUME_ID</td>
+
+							<td class="entry" valign="top" width="20.238095238095237%" headers="d26978490e51 ">INTEGER</td>
+
+							<td class="entry" valign="top" width="54.166666666666664%" headers="d26978490e54 ">Volume ID.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.595238095238095%" headers="d26978490e48 ">DBSPACE_NAME</td>
+
+							<td class="entry" valign="top" width="20.238095238095237%" headers="d26978490e51 ">VARCHAR(128)</td>
+
+							<td class="entry" valign="top" width="54.166666666666664%" headers="d26978490e54 ">Name of the dbspace.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.595238095238095%" headers="d26978490e48 ">TYPE</td>
+
+							<td class="entry" valign="top" width="20.238095238095237%" headers="d26978490e51 ">VARCHAR(11)</td>
+
+							<td class="entry" valign="top" width="54.166666666666664%" headers="d26978490e54 ">Type of the dbspace: <ul class="ul" id="loio8b52fb655bff4d7a9622335252755c5a__ul_jb1_m42_cp">
+									<li class="li">MAIN</li>
+
+									<li class="li">TEMPORARY</li>
+
+									<li class="li">SHARED_TEMP</li>
+
+									<li class="li">RLV</li>
+
+									<li class="li">CACHE</li>
+
+									<li class="li">CATALOG</li>
+
+								</ul>
+'</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.595238095238095%" headers="d26978490e48 ">STATUS</td>
+
+							<td class="entry" valign="top" width="20.238095238095237%" headers="d26978490e51 ">VARCHAR(7)</td>
+
+							<td class="entry" valign="top" width="54.166666666666664%" headers="d26978490e54 ">Status of the dbspace: <ul class="ul" id="loio8b52fb655bff4d7a9622335252755c5a__ul_bbx_442_cp">
+									<li class="li">OFFLINE</li>
+
+									<li class="li">ONLINE</li>
+
+								</ul>
+'</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.595238095238095%" headers="d26978490e48 ">MODE</td>
+
+							<td class="entry" valign="top" width="20.238095238095237%" headers="d26978490e51 ">VARCHAR(9)</td>
+
+							<td class="entry" valign="top" width="54.166666666666664%" headers="d26978490e54 ">Mode of the dbspace:<ul class="ul" id="loio8b52fb655bff4d7a9622335252755c5a__ul_c3s_p42_cp">
+									<li class="li">READONLY</li>
+
+									<li class="li">READWRITE</li>
+
+								</ul>
+</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.595238095238095%" headers="d26978490e48 ">USAGE</td>
+
+							<td class="entry" valign="top" width="20.238095238095237%" headers="d26978490e51 ">DOUBLE</td>
+
+							<td class="entry" valign="top" width="54.166666666666664%" headers="d26978490e54 ">Percent of dbspace in use.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.595238095238095%" headers="d26978490e48 ">TOTAL_SIZE</td>
+
+							<td class="entry" valign="top" width="20.238095238095237%" headers="d26978490e51 ">BIGINT</td>
+
+							<td class="entry" valign="top" width="54.166666666666664%" headers="d26978490e54 ">Total size of the dbspace in bytes.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.595238095238095%" headers="d26978490e48 ">RESERVED_SIZE</td>
+
+							<td class="entry" valign="top" width="20.238095238095237%" headers="d26978490e51 ">BIGINT</td>
+
+							<td class="entry" valign="top" width="54.166666666666664%" headers="d26978490e54 ">Total reserved space in bytes that can be added to dbfiles in the
+								dbspace.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.595238095238095%" headers="d26978490e48 ">FILE_COUNT</td>
+
+							<td class="entry" valign="top" width="20.238095238095237%" headers="d26978490e51 ">INTEGER</td>
+
+							<td class="entry" valign="top" width="54.166666666666664%" headers="d26978490e54 ">Total number of files in the dbspace.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.595238095238095%" headers="d26978490e48 ">READWRITE_FILE_COUNT</td>
+
+							<td class="entry" valign="top" width="20.238095238095237%" headers="d26978490e51 ">INTEGER</td>
+
+							<td class="entry" valign="top" width="54.166666666666664%" headers="d26978490e54 ">Total number of read-write files in the dbspace.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.595238095238095%" headers="d26978490e48 ">IS_DISK_STRIPING_ENABLED</td>
+
+							<td class="entry" valign="top" width="20.238095238095237%" headers="d26978490e51 ">VARCHAR(5)</td>
+
+							<td class="entry" valign="top" width="54.166666666666664%" headers="d26978490e54 ">TRUE if disk striping is enabled for the dbspace, else
+								FALSE.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25.595238095238095%" headers="d26978490e48 ">DISK_STRIPE_SIZE</td>
+
+							<td class="entry" valign="top" width="20.238095238095237%" headers="d26978490e51 ">BIGINT</td>
+
+							<td class="entry" valign="top" width="54.166666666666664%" headers="d26978490e54 ">Disk stripe size in byte.</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="M_ES_DBSPACES System Views [Dynamic Tiering]";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

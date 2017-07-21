@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Show an overview of the host, application, and space pinning in XS advanced."/>
+<meta name="description" content="Show an overview of the host, application, and space pinning in XS advanced."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=019866625517438674"/>
+<title>Display Details of Host Pinnings in XS Advanced</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio843ed1b1b9b340edb69c04c5ea45e023";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio843ed1b1b9b340edb69c04c5ea45e023">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Display Details of Host Pinnings in XS Advanced</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">Show an overview of the host, application, and space pinning in XS advanced.</p>
+
+		<div class="section prereq p"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Prerequisites</h2></div>
+			<p class="p">To access the XS advanced administration <span class="ph uicontrol">Host Management</span> tool, a user
+				requires the authorization scopes defined in the roles grouped together in one of
+				the following role collections:</p>
+
+			<ul class="ul" id="loio843ed1b1b9b340edb69c04c5ea45e023__ul_fx2_vfd_xt">
+				<li class="li">XS_CONTROLLER_ADMIN<p class="p">Full access: no access restrictions</p>
+</li>
+
+				<li class="li">XS_CONTROLLER_USER<p class="p">Modify and read-only access within an assigned organization
+						or space</p>
+</li>
+
+				<li class="li">XS_CONTROLLER_AUDITOR<p class="p">Read-only access within an assigned organization or
+						space</p>
+</li>
+
+			</ul>
+
+			<div class="note tip"><span class="tiptitle">Tip</span> Role collections can be assigned to an SAP HANA user in SAP HANA studio
+				by means of user parameters, for example,
+					<span class="keyword parmname">XS_RC_XS_CONTROLLER_ADMIN</span> or
+					<span class="keyword parmname">XS_RC_XS_CONTROLLER_USER</span>, or
+					<span class="keyword parmname">XS_RC_XS_CONTROLLER_AUDITOR</span>.</div>
+
+		</div>
+
+		<div class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<p class="p">To display information about host pinnings in XS advanced, perform the following steps:</p>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps" id="loio843ed1b1b9b340edb69c04c5ea45e023__steps_nbn_ywk_jx"><li class="li step">
+				<span class="ph cmd">Start the SAP HANA cockpit.</span>
+			</li>
+<li class="li step">
+				<span class="ph cmd">Locate the <span class="ph uicontrol">XS Advanced Administration</span> tools
+					catalog.</span>
+			</li>
+<li class="li step">
+				<span class="ph cmd">Start the <span class="ph uicontrol">Administration and Monitoring</span> tools.</span>
+			</li>
+<li class="li step">
+				<span class="ph cmd">Start the <span class="ph uicontrol">Host Management</span> tool.</span>
+			</li>
+<li class="li step">
+				<span class="ph cmd">Display a list of the hosts you are managing in the XS advanced run-time
+					environment along with any application and space pinning.</span>
+			</li>
+</ol>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?bd95ba5d42f048baa8eb030cc9cb5365.html" target="_top" title="View and maintain system hosts in XS advanced.">Managing Hosts in XS Advanced</a></div>
+<div><a class="link" href="default.html?88d92aaa18184b6ab98d6060c3302864.html" target="_top" title="Display an overview of the hosts where XS advanced applications are running and, if required, more specific details of the applications and spaces pinned to a selected host.">Host Management Details</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Display Details of Host Pinnings in XS Advanced";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

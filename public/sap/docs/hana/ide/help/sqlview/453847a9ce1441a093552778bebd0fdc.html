@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="The ALTER AGENT statement changes an agent's host name and/or port and SSL property if it uses the TCP protocol. It can also assign an agent to an agent group."/>
+<meta name="description" content="The ALTER AGENT statement changes an agent's host name and/or port and SSL property if it uses the TCP protocol. It can also assign an agent to an agent group."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=3008786724199689"/>
+<title>ALTER AGENT Statement [Smart Data Integration]</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio453847a9ce1441a093552778bebd0fdc";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio453847a9ce1441a093552778bebd0fdc">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">ALTER AGENT Statement [<span class="ph pname">Smart Data Integration</span>]</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">The ALTER AGENT statement changes an agent's host name and/or port and SSL property if
+		it uses the TCP protocol. It can also assign an agent to an agent group.</p>
+
+		<div class="section">
+			<div class="note caution"><span class="cautiontitle">Caution</span> <span class="ph">This
+                                                  information applies only for the SAP HANA option
+                                                  cited in the title of this topic. You must have
+                                                  purchased the license for it in order to use the
+                                                  information contained in this topic.</span></div>
+	</div>
+
+		<div class="section"><div class="section_title">Syntax</div><div type="Syntax">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER AGENT <var class="keyword varname">&lt;agent_name&gt;</var> HOST <var class="keyword varname">&lt;agent_hostname&gt;</var> [ PORT <var class="keyword varname">&lt;agent_port_number&gt;</var> ] 
+            [ {ENABLE | DISABLE} SSL ]
+ALTER AGENT <var class="keyword varname">&lt;agent_name&gt;</var> PORT <var class="keyword varname">&lt;agent_port_number&gt;</var> [ {ENABLE | DISABLE} SSL ]
+ALTER AGENT <var class="keyword varname">&lt;agent_name&gt;</var> {ENABLE | DISABLE} SSL
+ALTER AGENT <var class="keyword varname">&lt;agent_name&gt;</var> SET AGENT GROUP <var class="keyword varname">&lt;agent_group_name&gt;</var>
+ALTER AGENT <var class="keyword varname">&lt;agent_name&gt;</var> UNSET AGENT GROUP <var class="keyword varname">&lt;agent_group_name&gt;</var></pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;agent_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var> </pre></div>
+
+			<p class="p">The name of the agent to be altered. </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;agent_hostname&gt;</var> ::= <var class="keyword varname">&lt;string_literal&gt;</var> 
+<var class="keyword varname">&lt;agent_port_number&gt;</var> ::= <var class="keyword varname">&lt;integer_literal&gt;</var>  {ENABLE | DISABLE} SSL</pre></div>
+
+			<p class="p">Specifies if agent's TCP listener on the specified port uses SSL. </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;agent_group_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+			<p class="p">The name of the agent clustering group to which the agent should be attached.</p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">The ALTER AGENT statement changes an agent's host name and/or port if it uses the TCP
+				protocol. It can also assign an agent to an agent group.</p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Examples</div><div type="Examples">
+			
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio453847a9ce1441a093552778bebd0fdc__table_hhq_ghc_pp" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="100%"/></colgroup>
+
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="100%" id="d22516287e134">Alter TEST_AGENT's hostname test_host and port to 5051, if it
+								uses 'TCP' protocol</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="100%" headers="d22516287e134 ">
+								<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER AGENT TEST_AGENT HOST 'test_host' PORT 5051;</pre></div>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio453847a9ce1441a093552778bebd0fdc__table_wwq_ghc_pp" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="100%"/></colgroup>
+
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="100%" id="d22516287e163">Alter TEST_AGENT's hostname test_host, if it uses 'TCP'
+								protocol</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="100%" headers="d22516287e163 ">
+								<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER AGENT TEST_AGENT HOST 'test_host';</pre></div>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio453847a9ce1441a093552778bebd0fdc__table_m4g_ghc_pp" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="100%"/></colgroup>
+
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="100%" id="d22516287e192">Alter TEST_AGENT's port to 5051, if it uses 'TCP'
+								protocol</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="100%" headers="d22516287e192 ">
+								<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER AGENT TEST_AGENT PORT 5051;</pre></div>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio453847a9ce1441a093552778bebd0fdc__table_o3p_qjl_2s" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="100%"/></colgroup>
+
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="100%" id="d22516287e221">Assign TEST_AGENT to agent group TEST_GROUP</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="100%" headers="d22516287e221 ">
+								<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER AGENT TEST_AGENT SET AGENT GROUP TEST_GROUP;</pre></div>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio453847a9ce1441a093552778bebd0fdc__table_ixz_ykl_2s" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="100%"/></colgroup>
+
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="100%" id="d22516287e251">Remove TEST_AGENT from agent group TEST_GROUP</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="100%" headers="d22516287e251 ">
+								<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER AGENT TEST_AGENT UNSET AGENT GROUP TEST_GROUP;</pre></div>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="ALTER AGENT Statement [Smart Data Integration]";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,979 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Queries a JSON text and presents it as a relational table."/>
+<meta name="description" content="Queries a JSON text and presents it as a relational table."/>
+<meta name="keywords" content="JSON_TABLE"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=5398775551825821"/>
+<title>JSON_TABLE Function (Miscellaneous)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loiof8f6916b5c434a6fbd1bb7e0dc65acd4";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loiof8f6916b5c434a6fbd1bb7e0dc65acd4">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">JSON_TABLE Function (Miscellaneous)</h1>
+
+	
+	
+	<div class="body refbody"><p class="shortdesc">Queries a JSON text and presents it as a relational table.</p>
+
+		<div class="section" id="loiof8f6916b5c434a6fbd1bb7e0dc65acd4__json_table_function_1sql_json_table_function"><div class="section_title">Syntax</div><div type="Syntax">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">JSON_TABLE (
+ <var class="keyword varname">&lt;JSON_API_common_syntax&gt;</var>
+ <var class="keyword varname">&lt;JSON_table_columns_clause&gt;</var>
+ [ <var class="keyword varname">&lt;JSON_table_error_behavior&gt;</var> ON ERROR ]
+ )</pre></div>
+
+		</div></div>
+
+        <div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+            
+            <dl class="dl parml">
+                
+                    <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;JSON_API_common_syntax&gt;</var></dt>
+
+                    <dd class="dd pd">
+                        <p class="p">Specifies a JSON context item and a path to the context item, using
+                            common syntax for the JSON API.</p>
+
+                        <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;JSON_API_common_syntax&gt;</var> ::= <var class="keyword varname">&lt;JSON_context_item&gt;</var>, <var class="keyword varname">&lt;JSON_path_specification&gt;</var></pre></div>
+
+                        <dl class="dl">
+                            
+                                <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;JSON_context_item&gt;</var></dt>
+
+                                <dd class="dd">
+                                    <p class="p">Specifies the JSON document to operate on.</p>
+
+                                </dd>
+
+                            
+                            
+                                <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;JSON_path_specification&gt;</var></dt>
+
+                                <dd class="dd">
+                                    <p class="p">Specifies the path to
+                                        <var class="keyword varname">&lt;JSON_context_item&gt;</var>.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;JSON_path_specification&gt;</var> ::= <var class="keyword varname">&lt;JSON_path_mode&gt;</var> <var class="keyword varname">&lt;JSON_path_wff&gt;</var>
+
+<var class="keyword varname">&lt;JSON_path_mode&gt;</var> ::= STRICT | LAX</pre></div>
+
+                                    <p class="p">If a structural error occurs within a JSON filter expression
+                                        and <var class="keyword varname">&lt;JSON_path_mode&gt;</var> is set to STRICT, then
+                                        the error handling of a JSON filter expression applies.
+                                        Otherwise, a structural error is an unhandled error.</p>
+
+                                    <p class="p">When the path is set to LAX, one of the following options
+                                        occurs:</p>
+
+                                    <ul class="ul" id="loiof8f6916b5c434a6fbd1bb7e0dc65acd4__ul_c2m_zg1_fx">
+                                        <li class="li">If an operation requires an SQL/JSON array but the
+                                            operand is not an SQL/JSON array, then the operand is
+                                            wrapped in an SQL/JSON array prior to performing the
+                                            operation.</li>
+
+                                        <li class="li">If an operation requires something other than an
+                                            SQL/JSON array, but the operand is an SQL/JSON array,
+                                            then the operand is unwrapped by converting its elements
+                                            into an SQL/JSON sequence prior to performing the
+                                            operation.</li>
+
+                                    </ul>
+
+                                    <p class="p"> If there is still a structural error after applying these
+                                        resolutions, then the result is an empty SQL/JSON
+                                        sequence.</p>
+
+                                    <p class="p"><var class="keyword varname">&lt;JSON_path_wff&gt;</var> indicates an actual JSON
+                                        path (for example, <samp class="ph codeph">'$.item1'</samp>).</p>
+
+                                </dd>
+
+                            
+                        </dl>
+
+                    </dd>
+
+                
+                
+                    <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;JSON_table_columns_clause&gt;</var></dt>
+
+                    <dd class="dd pd">
+                        <p class="p">Specifies the columns that are created.</p>
+
+                        <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;JSON_table_columns_clause&gt;</var> ::= 
+ COLUMNS ( <var class="keyword varname">&lt;JSON_table_column_definition&gt;</var> [,... ] )
+ 
+<var class="keyword varname">&lt;JSON_table_column_definition&gt;</var> ::= 
+<var class="keyword varname">&lt;JSON_table_ordinality_column_definition&gt;</var>
+ | <var class="keyword varname">&lt;JSON_table_regular_column_definition&gt;</var>
+ | <var class="keyword varname">&lt;JSON_table_formatted_column_definition&gt;</var>
+ | <var class="keyword varname">&lt;JSON_table_nested_columns&gt;</var></pre></div>
+
+                        <dl class="dl">
+                            
+                                <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;JSON_table_column_definition&gt;</var></dt>
+
+                                <dd class="dd">
+                                    <p class="p">Defines the columns generated.</p>
+
+                                </dd>
+
+                            
+                            
+                                <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;JSON_table_ordinality_column_definition&gt;</var></dt>
+
+                                <dd class="dd">
+                                    <p class="p">Defines an ordinality column. An ordinality column is similar
+                                        to a column defined using the ROW_NUMBER window
+                                        function.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;JSON_table_ordinality_column_definition&gt;</var> ::= <var class="keyword varname">&lt;column_name&gt;</var> FOR ORDINALITY</pre></div>
+
+                                </dd>
+
+                            
+                            
+                                <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;JSON_table_regular_column_definition&gt;</var></dt>
+
+                                <dd class="dd">
+                                    <p class="p">Defines the regular columns. Each result (row) of a regular
+                                        JSON table column is equivalent to a JSON_VALUE function
+                                        result.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;JSON_table_regular_column_definition&gt;</var> ::= <var class="keyword varname">&lt;column_name&gt;</var> <var class="keyword varname">&lt;data_type&gt;</var>
+ [ PATH <var class="keyword varname">&lt;JSON_table_column_path_specification&gt;</var> ]
+ [ JSON <var class="keyword varname">&lt;table_column_empty_behavior&gt;</var> ON EMPTY ]
+ [ <var class="keyword varname">&lt;JSON_table_column_error_behavior&gt;</var> ON ERROR ]
+
+<var class="keyword varname">&lt;JSON_table_column_path_specification&gt;</var> ::= <var class="keyword varname">&lt;JSON_path_specification&gt;</var>
+ 
+<var class="keyword varname">&lt;JSON_table_column_empty_behavior&gt;</var> ::=
+ERROR
+ | NULL
+ | DEFAULT <var class="keyword varname">&lt;value_expression&gt;</var>
+ 
+<var class="keyword varname">&lt;JSON_table_column_error_behavior&gt;</var> ::=
+ERROR
+ | NULL
+ | DEFAULT <var class="keyword varname">&lt;value_expression&gt;</var></pre></div>
+
+                                    <dl class="dl">
+                                        
+                                            <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;column_name&gt;</var></dt>
+
+                                            <dd class="dd">
+                                                <p class="p">Specifies the name of the column.</p>
+
+                                            </dd>
+
+                                        
+                                        
+                                            <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;data_type&gt;</var></dt>
+
+                                            <dd class="dd">
+                                                <p class="p">Specifies the data type. Supported data types for
+                                                  regular columns are VARCHAR(<var class="keyword varname">&lt;n&gt;</var>),
+                                                  NVARCHAR(<var class="keyword varname">&lt;n&gt;</var>), INT, BIGINT, and
+                                                  DECIMAL.</p>
+
+                                            </dd>
+
+                                        
+                                        
+                                            <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;JSON_table_column_path_specification&gt;</var></dt>
+
+                                            <dd class="dd">
+                                                <p class="p">Specifies the JSON path that specifies which JSON
+                                                  value the JSON context item is extracted from.</p>
+
+                                            </dd>
+
+                                        
+                                        
+                                            <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;table_column_empty_behavior&gt;</var> ON
+                                                EMPTY</dt>
+
+                                            <dd class="dd">
+                                                <p class="p">Specifies the behavior of the function when the
+                                                  created column is empty.  The default is DEFAULT
+                                                  <var class="keyword varname">&lt;value_expression&gt;</var> ON EMPTY.</p>
+
+                                                <p class="p">ERROR ON EMPTY returns an error when the created
+                                                  column is empty. NULL ON EMPTY returns a NULL when
+                                                  the created column is empty. DEFAULT
+                                                  <var class="keyword varname">&lt;value_expression&gt;</var> ON EMPTY
+                                                  returns <var class="keyword varname">&lt;value_expression&gt;</var> when
+                                                  the created column is empty.</p>
+
+                                            </dd>
+
+                                        
+                                        
+                                            <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;JSON_table_column_error_behavior&gt;</var>
+                                                ON ERROR</dt>
+
+                                            <dd class="dd">
+                                                <p class="p">Specifies the behavior of the function when there
+                                                  is an error during column creation. The default is
+                                                  DEFAULT <var class="keyword varname">&lt;value_expression&gt;</var> ON
+                                                  ERROR.</p>
+
+                                                <p class="p">ERROR ON ERROR results in an error being thrown
+                                                  if the function result includes an error. NULL ON
+                                                  ERROR returns a NULL if the function result
+                                                  includes an error. DEFAULT
+                                                  <var class="keyword varname">&lt;value_expression&gt;</var> ON ERROR
+                                                  returns <var class="keyword varname">&lt;value_expression&gt;</var> if the
+                                                  function result includes an error.</p>
+
+                                            </dd>
+
+                                        
+                                    </dl>
+
+                                </dd>
+
+                            
+                            
+                                <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;JSON_table_formatted_column_definition&gt;</var></dt>
+
+                                <dd class="dd">
+                                    <p class="p">Specifies the column definition for formatted columns where
+                                        the records in the column are formatted in JSON syntax. Each
+                                        result (row) of a regular JSON table column is equivalent to
+                                        a JSON_QUERY function result.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;JSON_table_formatted_column_definition&gt;</var> ::= 
+ <var class="keyword varname">&lt;column_name&gt;</var> <var class="keyword varname">&lt;data_type&gt;</var>
+ FORMAT <var class="keyword varname">&lt;JSON_representation&gt;</var>
+ [ PATH <var class="keyword varname">&lt;JSON_table_column_path_specification&gt;</var> ]
+ [ <var class="keyword varname">&lt;JSON_table_formatted_column_wrapper_behavior&gt;</var> WRAPPER ]
+ [ <var class="keyword varname">&lt;JSON_table_formatted_column_empty_behavior&gt;</var> ON EMPTY ]
+ [ <var class="keyword varname">&lt;JSON_table_formatted_column_error_behavior&gt;</var> ON ERROR ]</pre></div>
+
+                                </dd>
+
+                            
+                            
+                                <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;column_name&gt;</var></dt>
+
+                                <dd class="dd">
+                                    <p class="p">Specifies the name of the column.</p>
+
+                                </dd>
+
+                            
+                            
+                                <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;data_type&gt;</var></dt>
+
+                                <dd class="dd">
+                                    <p class="p">Specifies the data type to be set as the return type of the
+                                        function. Supported data types for formatted columns are
+                                            VARCHAR(<var class="keyword varname">&lt;n&gt;</var>) and
+                                            NVARCHAR(<var class="keyword varname">&lt;n&gt;</var>).</p>
+
+                                </dd>
+
+                            
+                            
+                                <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;JSON_representation&gt;</var></dt>
+
+                                <dd class="dd">
+                                    <p class="p">Specifies the JSON encoding to use.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;JSON_representation&gt;</var> ::=
+'JSON'
+ | 'JSON ENCODING { UTF8 }'
+ | 'JSON ENCODING { UTF16 }'
+ | 'JSON ENCODING { UTF32 }'</pre></div>
+
+                                </dd>
+
+                            
+                            
+                                <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;JSON_table_column_path_specification&gt;</var></dt>
+
+                                <dd class="dd">
+                                    <p class="p">Specifies the JSON path that specifies which JSON value the
+                                        JSON context item is extracted from.</p>
+
+                                </dd>
+
+                            
+                            
+                                <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;JSON_table_formatted_column_wrapper_behavior&gt;</var>
+                                    WRAPPER</dt>
+
+                                <dd class="dd">
+                                    <p class="p">Specifies the wrapper behavior of the formatted column. </p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;JSON_table_formatted_column_wrapper_behavior&gt;</var> ::=
+WITHOUT [ ARRAY ]
+ | WITH [ CONDITIONAL | UNCONDITIONAL ] [ ARRAY ]</pre></div>
+
+                                    <p class="p">When WITHOUT [ ARRAY ] WRAPPER is specified, the formatted
+                                        column is not represented as a JSON array. When WITH [
+                                        CONDITIONAL | UNCONDITIONAL ] [ ARRAY ] WRAPPER is
+                                        specified, the formatted column is set with a
+                                        conditional/unconditional array. With an unconditional
+                                        array, the result is always formatted as a JSON array. With
+                                        a conditional array, the result is formatted as a JSON array
+                                        if the result is neither a JSON array nor a JSON object.</p>
+
+                                </dd>
+
+                            
+                            
+                                <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;JSON_table_formatted_column_empty_behavior&gt;</var> ON
+                                    EMPTY</dt>
+
+                                <dd class="dd">
+                                    <p class="p">Specifies the JSON behavior if the related data is not in the
+                                        context item. </p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;JSON_table_formatted_column_empty_behavior&gt;</var> ::=
+ERROR
+ | NULL
+ | EMPTY ARRAY
+ | EMPTY OBJECT</pre></div>
+
+                                    <p class="p">ERROR ON EMPTY returns an error if the related data is not in
+                                        the context item. NULL ON EMPTY returns a NULL if the
+                                        related data is not in the context item. EMPTY ARRAY ON
+                                        EMPTY returns an empty array if the related data is not in
+                                        the context item. EMPTY OBJECT ON EMPTY returns an empty
+                                        JSON object if the related data is not in the context
+                                        item.</p>
+
+                                </dd>
+
+                            
+                            
+                                <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;JSON_table_formatted_column_error_behavior&gt;</var> ON
+                                    ERROR</dt>
+
+                                <dd class="dd">
+                                    <p class="p">Specifies the behavior when the formatted column throws an
+                                        error. </p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;JSON_table_formatted_column_error_behavior&gt;</var> ::=
+ERROR
+ | NULL
+ | EMPTY ARRAY
+ | EMPTY OBJECT</pre></div>
+
+                                    <p class="p">ERROR ON ERROR returns an error if the function returns no
+                                        result. NULL ON ERROR returns a NULL if the function returns
+                                        no result. EMPTY ARRAY ON ERROR returns an empty array if
+                                        the result of the formatted column is empty. EMPTY OBJECT ON
+                                        ERROR  returns an empty JSON object if the result of the
+                                        formatted column is empty.</p>
+
+                                </dd>
+
+                            
+                            
+                                <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;JSON_table_nested_columns&gt;</var></dt>
+
+                                <dd class="dd">
+                                    <p class="p">Defines nested columns.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;JSON_table_nested_columns&gt;</var> ::= NESTED [ PATH ] <var class="keyword varname">&lt;JSON_table_nested_path_specification&gt;</var>
+ <var class="keyword varname">&lt;JSON_table_columns_clause&gt;</var>
+
+<var class="keyword varname">&lt;JSON_table_nested_path_specification&gt;</var> ::= <var class="keyword varname">&lt;JSON_path_specification&gt;</var></pre></div>
+
+                                    <ul class="ul" id="loiof8f6916b5c434a6fbd1bb7e0dc65acd4__ul_ylq_xn2_lx">
+                                        <li class="li">
+                                            <p class="p"><var class="keyword varname">&lt;JSON_table_columns_clause&gt;</var>:
+                                                Specifies the columns that are created with the
+                                                function.</p>
+
+                                        </li>
+
+                                        <li class="li">
+                                            <p class="p"><var class="keyword varname">&lt;JSON_path_specification&gt;</var>: The JSON
+                                                path which specifies which JSON value from the JSON
+                                                context item is extracted.</p>
+
+                                        </li>
+
+                                    </ul>
+
+                                </dd>
+
+                            
+                        </dl>
+
+                    </dd>
+
+                
+                
+                    <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;JSON_table_error_behavior&gt;</var></dt>
+
+                    <dd class="dd pd">
+                        <p class="p">Specifies the behavior of the function when an error occurs.</p>
+
+                        <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;JSON_table_error_behavior&gt;</var> ::=
+ERROR
+ | EMPTY</pre></div>
+
+                        <dl class="dl">
+                            
+                                <dt class="dt dlterm emphasis">ERROR</dt>
+
+                                <dd class="dd">
+                                    <p class="p">If the function result includes an error, the the error is
+                                        returned.</p>
+
+                                </dd>
+
+                            
+                            
+                                <dt class="dt dlterm emphasis">EMPTY</dt>
+
+                                <dd class="dd">
+                                    <p class="p">If the function result is empty, then it returns empty.</p>
+
+                                </dd>
+
+                            
+                        </dl>
+
+                    </dd>
+
+                
+            </dl>
+
+        </div></div>
+
+		<div class="section" id="loiof8f6916b5c434a6fbd1bb7e0dc65acd4__json_table_function_1sql_json_table_function_description"><div class="section_title">Description</div><div type="Description">
+			
+            <p class="p">Queries a JSON text and presents it as a relational table.</p>
+
+            <p class="p">The following tokens are supported in <var class="keyword varname">&lt;JSON_API_common_syntax&gt;</var>:</p>
+
+            
+<div class="table-wrapper tablenoborder"><table summary="" id="loiof8f6916b5c434a6fbd1bb7e0dc65acd4__table_xqy_231_fx" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="33.333333333333336%"/><col width="33.333333333333336%"/><col width="33.333333333333336%"/></colgroup>
+
+                    
+                    
+                    
+                    <thead class="thead" align="left">
+                        <tr class="row">
+                            <th class="entry" valign="top" width="33.33333333333333%" id="d33473671e674">
+                                <p class="p">Token</p>
+
+                            </th>
+
+                            <th class="entry" valign="top" width="33.33333333333333%" id="d33473671e680">
+                                <p class="p">Description</p>
+
+                            </th>
+
+                            <th class="entry" valign="top" width="33.33333333333333%" id="d33473671e686">
+                                <p class="p">Example</p>
+
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody class="tbody">
+                        <tr class="row">
+                            <td class="entry" valign="top" width="33.33333333333333%" headers="d33473671e674 ">
+                                <p class="p">$</p>
+
+                            </td>
+
+                            <td class="entry" valign="top" width="33.33333333333333%" headers="d33473671e680 ">
+                                <p class="p">The context item (the first argument of the function).</p>
+
+                            </td>
+
+                            <td class="entry" valign="top" width="33.33333333333333%" headers="d33473671e686 ">
+                                <p class="p"><samp class="ph codeph">'$'</samp></p>
+
+                            </td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" valign="top" width="33.33333333333333%" headers="d33473671e674 ">
+                                <p class="p">.</p>
+
+                            </td>
+
+                            <td class="entry" valign="top" width="33.33333333333333%" headers="d33473671e680 ">
+                                <p class="p">The member of an object.</p>
+
+                            </td>
+
+                            <td class="entry" valign="top" width="33.33333333333333%" headers="d33473671e686 ">
+                                <p class="p"><samp class="ph codeph">'$.item.description'</samp></p>
+
+                            </td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" valign="top" width="33.33333333333333%" headers="d33473671e674 ">
+                                <p class="p">[</p>
+
+                            </td>
+
+                            <td class="entry" valign="top" width="33.33333333333333%" headers="d33473671e680 ">
+                                <p class="p">The array index specifier (open).</p>
+
+                            </td>
+
+                            <td class="entry" valign="top" width="33.33333333333333%" headers="d33473671e686 ">
+                                <p class="p"/>
+
+                            </td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" valign="top" width="33.33333333333333%" headers="d33473671e674 ">
+                                <p class="p">]</p>
+
+                            </td>
+
+                            <td class="entry" valign="top" width="33.33333333333333%" headers="d33473671e680 ">
+                                <p class="p">The array index specifier (closed).</p>
+
+                            </td>
+
+                            <td class="entry" valign="top" width="33.33333333333333%" headers="d33473671e686 ">
+                                <p class="p"><samp class="ph codeph">'$[1]'</samp></p>
+
+                                <p class="p"><samp class="ph codeph">'$.item.list[1]'</samp></p>
+
+                            </td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" valign="top" width="33.33333333333333%" headers="d33473671e674 ">
+                                <p class="p">to</p>
+
+                            </td>
+
+                            <td class="entry" valign="top" width="33.33333333333333%" headers="d33473671e680 ">
+                                <p class="p">The array index range.</p>
+
+                            </td>
+
+                            <td class="entry" valign="top" width="33.33333333333333%" headers="d33473671e686 ">
+                                <p class="p"><samp class="ph codeph">'$[3 to 5]'</samp></p>
+
+                                <p class="p"><samp class="ph codeph">= '$[3,4,5]'</samp></p>
+
+                            </td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" valign="top" width="33.33333333333333%" headers="d33473671e674 ">
+                                <p class="p">*</p>
+
+                            </td>
+
+                            <td class="entry" valign="top" width="33.33333333333333%" headers="d33473671e680 ">
+                                <p class="p">The wild card.</p>
+
+                            </td>
+
+                            <td class="entry" valign="top" width="33.33333333333333%" headers="d33473671e686 ">
+                                <p class="p"><samp class="ph codeph">'$.*.description'</samp></p>
+
+                                <p class="p"><samp class="ph codeph">'$.item.list[*]'</samp></p>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loiof8f6916b5c434a6fbd1bb7e0dc65acd4__json_table_function_1sql_function_map_examples"><div class="section_title">Example</div><div type="Example">
+			
+			<p class="p">The following examples use the table created below:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE T1 (A INT, B NVARCHAR(5000));
+INSERT INTO T1 VALUES (1, '
+{
+        "PONumber": 1,
+        "Reference": "BSMITH-74635645",
+        "Requestor": "Barb Smith",
+        "User": "BSMITH",
+        "CostCenter": "A50",
+        "ShippingInstructions":
+               {
+                       "name": "Barb Smith",
+                       "Address":
+                               {
+                                      "street": "100 Fairchild Ave",
+                                      "city": "San Diego",
+                                       "state": "CA",
+                                      "zipCode": 23345,
+                                      "country": "USA"
+                               },
+                       "Phone": [{"type": "Office", "number": "519-555-6310"}]
+               },
+        "SpecialInstructions": "Surface Mail",
+        "LineItems": [
+               {"ItemNumber": 1, "Part": {"Description": "Basic Kit", "UnitPrice": 19.95, "UPCCode": 73649587162}, "Quantity": 7},
+               {"ItemNumber": 2, "Part": {"Description": "Base Kit 2", "UnitPrice": 29.95, "UPCCode": 83600229374}, "Quantity": 1},
+               {"ItemNumber": 3, "Part": {"Description": "Professional", "UnitPrice": 39.95, "UPCCode": 33298003521}, "Quantity": 8},
+               {"ItemNumber": 4, "Part": {"Description": "Enterprise", "UnitPrice": 49.95, "UPCCode": 91827739856}, "Quantity": 8},
+               {"ItemNumber": 5, "Part": {"Description": "Unlimited", "UnitPrice": 59.95, "UPCCode": 22983303876}, "Quantity": 8}
+        ]
+}
+');</pre></div>
+
+            <p class="p">The following example selects from an ordinality column and a regular column:</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT JT.*
+FROM JSON_TABLE(T1.B, '$.LineItems[*]'
+COLUMNS
+    (
+        RN FOR ORDINALITY,
+        ITEM_NUMBER INT PATH '$.ItemNumber',
+        UPC_CODE BIGINT PATH '$.Part.UPCCode'
+    )
+) AS JT;</pre></div>
+
+            <div class="table-wrapper"><table summary="" id="loiof8f6916b5c434a6fbd1bb7e0dc65acd4__simpletable_jd2_h2j_px" border="1" class="simpletable"><tr class="sthead">
+                    <th valign="bottom" align="left" id="d33473671e865" class="stentry">
+                        <p class="p">RN</p>
+
+                    </th>
+
+                    <th valign="bottom" align="left" id="d33473671e871" class="stentry">
+                        <p class="p">ITEM_NUMBER</p>
+
+                    </th>
+
+                    <th valign="bottom" align="left" id="d33473671e877" class="stentry">
+                        <p class="p">UPC_CODE</p>
+
+                    </th>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" headers="d33473671e865" class="stentry">
+                        <p class="p">1</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e871" class="stentry">
+                        <p class="p">1</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e877" class="stentry">
+                        <p class="p">73649587162</p>
+
+                    </td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" headers="d33473671e865" class="stentry">
+                        <p class="p">2</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e871" class="stentry">
+                        <p class="p">2</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e877" class="stentry">
+                        <p class="p">83600229374</p>
+
+                    </td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" headers="d33473671e865" class="stentry">
+                        <p class="p">3</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e871" class="stentry">
+                        <p class="p">3</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e877" class="stentry">
+                        <p class="p">33298003521</p>
+
+                    </td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" headers="d33473671e865" class="stentry">
+                        <p class="p">4</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e871" class="stentry">
+                        <p class="p">4</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e877" class="stentry">
+                        <p class="p">91827739856</p>
+
+                    </td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" headers="d33473671e865" class="stentry">
+                        <p class="p">5</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e871" class="stentry">
+                        <p class="p">5</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e877" class="stentry">
+                        <p class="p">22983303876</p>
+
+                    </td>
+
+                </tr>
+</table></div>
+
+            <p class="p">The following example selects from a formatted column:</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT *
+FROM JSON_TABLE(T1.B, '$.ShippingInstructions'
+COLUMNS
+    (
+        PHONE VARCHAR(Fairchild Ave) FORMAT JSON PATH '$.Phone'
+    )
+) AS JT;</pre></div>
+
+            <div class="table-wrapper"><table summary="" id="loiof8f6916b5c434a6fbd1bb7e0dc65acd4__simpletable_uvx_b2j_px" border="1" class="simpletable"><tr class="sthead">
+                    <th valign="bottom" align="left" id="d33473671e1001" class="stentry" width="100%">
+                        <p class="p">PHONE</p>
+
+                    </th>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" headers="d33473671e1001" class="stentry">
+                        <p class="p">PHONE [{"number":"519-555-6310","type":"Office"}]</p>
+
+                    </td>
+
+                </tr>
+</table></div>
+
+            <p class="p">The following example selects from a nested column:</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT *
+FROM JSON_TABLE(T1.B, '$.ShippingInstructions'
+COLUMNS
+    (
+        NESTED PATH '$.Address'
+        COLUMNS
+        (
+            STREET NVARCHAR(50) PATH '$.street',
+            CITY NVARCHAR(50) PATH '$.city'
+        )
+    )
+) AS JT;</pre></div>
+
+            <div class="table-wrapper"><table summary="" id="loiof8f6916b5c434a6fbd1bb7e0dc65acd4__simpletable_uhy_3td_px" border="1" class="simpletable"><tr class="sthead">
+                    <th valign="bottom" align="left" id="d33473671e1029" class="stentry">
+                        <p class="p">STREET</p>
+
+                    </th>
+
+                    <th valign="bottom" align="left" id="d33473671e1035" class="stentry">
+                        <p class="p">CITY</p>
+
+                    </th>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" headers="d33473671e1029" class="stentry">
+                        <p class="p">100 Fairchild Ave</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e1035" class="stentry">
+                        <p class="p">San Diego</p>
+
+                    </td>
+
+                </tr>
+</table></div>
+
+            <p class="p">The following example selects from an ordinality column with nested columns:</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT *
+FROM JSON_TABLE(T1.B, '$'
+    COLUMNS
+    (
+        RN FOR ORDINALITY,
+        USER_NAME NVARCHAR(20) PATH '$.User',
+        NESTED PATH '$.LineItems[1,2]'
+        COLUMNS
+        (
+            ORDER_NUMBER FOR ORDINALITY,
+            ITEM_NUMBER INT PATH '$.ItemNumber',
+            QUANTITY INT PATH '$.Quantity'
+        )
+    )
+) AS JT;</pre></div>
+
+            <div class="table-wrapper"><table summary="" id="loiof8f6916b5c434a6fbd1bb7e0dc65acd4__simpletable_wtp_htd_px" border="1" class="simpletable"><tr class="sthead">
+                    <th valign="bottom" align="left" id="d33473671e1068" class="stentry">
+                        <p class="p">RN</p>
+
+                    </th>
+
+                    <th valign="bottom" align="left" id="d33473671e1074" class="stentry">
+                        <p class="p">USER_NAME</p>
+
+                    </th>
+
+                    <th valign="bottom" align="left" id="d33473671e1080" class="stentry">
+                        <p class="p">ORDER_NUMBER</p>
+
+                    </th>
+
+                    <th valign="bottom" align="left" id="d33473671e1086" class="stentry">
+                        <p class="p">ITEM_NUMBER</p>
+
+                    </th>
+
+                    <th valign="bottom" align="left" id="d33473671e1092" class="stentry">
+                        <p class="p">QUANTITY</p>
+
+                    </th>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" headers="d33473671e1068" class="stentry">
+                        <p class="p">1</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e1074" class="stentry">
+                        <p class="p">BSMITH</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e1080" class="stentry">
+                        <p class="p">1</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e1086" class="stentry">
+                        <p class="p">2</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e1092" class="stentry">
+                        <p class="p">1</p>
+
+                    </td>
+
+                </tr>
+<tr class="strow">
+                    <td valign="top" headers="d33473671e1068" class="stentry">
+                        <p class="p">1</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e1074" class="stentry">
+                        <p class="p">BSMITH</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e1080" class="stentry">
+                        <p class="p">2</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e1086" class="stentry">
+                        <p class="p">3</p>
+
+                    </td>
+
+                    <td valign="top" headers="d33473671e1092" class="stentry">
+                        <p class="p">8</p>
+
+                    </td>
+
+                </tr>
+</table></div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="JSON_TABLE Function (Miscellaneous)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

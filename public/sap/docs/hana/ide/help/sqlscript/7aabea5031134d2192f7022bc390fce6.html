@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=5466450369831809"/>
+<title>EXPLAIN PLAN FOR Call</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio7aabea5031134d2192f7022bc390fce6";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio7aabea5031134d2192f7022bc390fce6">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">EXPLAIN PLAN FOR Call</h1>
+
+	<div class="body conbody">
+		<div class="section" id="loio7aabea5031134d2192f7022bc390fce6__section_mrj_gqj_dz"><div class="section_title">Syntax</div><div type="Syntax">
+			
+			<p class="p"><samp class="ph codeph">EXPLAIN PLAN [SET STATEMENT_NAME = &lt;statement_name&gt;] FOR
+					&lt;explain_plan_entry&gt;</samp></p>
+
+		</div></div>
+
+		<div class="section" id="loio7aabea5031134d2192f7022bc390fce6__section_nqx_gqj_dz"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+			
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio7aabea5031134d2192f7022bc390fce6__table_xd5_yqj_dz" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" id="d641559e51">Syntax Element</th>
+
+							<th class="entry" valign="top" id="d641559e54">Description</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" headers="d641559e51 "><samp class="ph codeph">&lt;statement_name&gt; ::=
+								&lt;string_literal&gt;</samp></td>
+
+							<td class="entry" valign="top" headers="d641559e54 ">Specifies the name of a specific execution plan in the output
+								table for a given SQL statement</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d641559e51 "><samp class="ph codeph">&lt;explain_plan_entry&gt;</samp></td>
+
+							<td class="entry" valign="top" headers="d641559e54 ">Specifies the entry to explain</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d641559e51 ">
+								<p class="p"><samp class="ph codeph">&lt;explain_plan_entry&gt; ::= &lt;call_statement&gt; | SQL
+										PLAN CACHE ENTRY &lt;plan_id&gt;</samp></p>
+
+								<p class="p"><samp class="ph codeph">&lt;plan_id&gt; ::= &lt;integer_literal&gt;</samp></p>
+
+							</td>
+
+							<td class="entry" valign="top" headers="d641559e54 ">
+								<p class="p">
+									<samp class="ph codeph">&lt;plan_id&gt;</samp> specifies the identifier of the
+									entry in the SQL plan cache to be explained. Refer to the
+									M_SQL_PLAN_CACHE monitoring view to find the
+										<samp class="ph codeph">&lt;plan_id&gt;</samp> for the desired cache
+									entry.</p>
+
+								<p class="p"><samp class="ph codeph">&lt;call_statement&gt;</samp> specifies the procedure call
+									to explain the plan for. For more information about subqueries,
+									see the CALL statement.</p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+			<div class="note note"><span class="notetitle">Note</span> The <samp class="ph codeph">EXPLAIN PLAN [SET STATEMENT_NAME = &lt;statement_name&gt;] FOR SQL PLAN
+					CACHE ENTRY &lt;plan_id&gt;</samp> command can only be run by users with the
+				OPTIMIZER_ADMIN privilege.</div>
+
+		</div></div>
+
+		<div class="section" id="loio7aabea5031134d2192f7022bc390fce6__section_inc_hqj_dz"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p"><samp class="ph codeph">EXPLAIN PLAN</samp> provides information about the compiled plan of a given
+				procedure. It inserts each piece of information into a system global temporary table
+				named <samp class="ph codeph">EXPLAIN_CALL_PLANS</samp>. The result is visible only within the
+				session where the <samp class="ph codeph">EXPLAIN PLAN</samp> call is executed. </p>
+
+			<p class="p"><samp class="ph codeph">EXPLAIN PLAN</samp> generates the plan information by using the given
+				SQLScript Engine Plan structure. It traverses the plan structure and records each
+				information corresponding to the current SQLScript Engine Operator.</p>
+
+			<p class="p">In the case of invoking another procedure inside of a procedure, <samp class="ph codeph">EXPLAIN
+					PLAN</samp> inserts the results of the invoked procedure (callee) under the
+				invoke operator (caller) although the actual invoked procedure is a sub-plan which
+				is not located under the invoke operator.</p>
+
+			<p class="p">Another case is  the <samp class="ph codeph">else</samp> operator. <samp class="ph codeph">EXPLAIN PLAN</samp>
+				generates a dummy <samp class="ph codeph">else</samp> operator to represent alternative operators
+				in the condition operator.</p>
+
+		</div></div>
+
+		<div class="section" id="loio7aabea5031134d2192f7022bc390fce6__section_ilq_ttj_dz"><div class="section_title">Example</div><div type="Example">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE PROCEDURE proc_p1(a int) as
+begin
+    declare i int default 0;    
+    create table tab1 (attr1 int);
+    if a &gt; 0 then
+        select 5 from dummy;
+    else
+        select 10 from dummy;
+    end if;
+    while i &lt; 10 do
+        insert into tab1 values (1);
+        i := i + 1;
+    end while;
+    drop table tab1;
+end;
+</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">EXPLAIN PLAN SET STATEMENT_NAME = 'test' FOR CALL proc_p1(1);</pre></div>
+
+			<p class="p">You can retrieve the result by selecting from the table
+					<samp class="ph codeph">EXPLAIN_CALL_PLANS</samp>.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM EXPLAIN_CALL_PLANS WHERE STATEMENT_NAME = 'test';</pre></div>
+
+			<p class="p">EXPLAIN PLAN FOR select query deletes its temporary table by HDB client but in the
+				case of EXPLAIN PLAN FOR call, it is not yet supported. To delete rows in the table,
+				execute a delete query from EXPLAIN_CALL_PLANS table or close current session.</p>
+
+		</div></div>
+
+		<div class="section" id="loio7aabea5031134d2192f7022bc390fce6__section_rgt_ttj_dz">
+			<div class="note note"><span class="notetitle">Note</span> Client integration is not available yet. You need to use the SQL statement above
+				to retrieve the plan information.</div>
+
+		</div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="EXPLAIN PLAN FOR Call";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

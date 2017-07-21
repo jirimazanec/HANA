@@ -1,0 +1,23 @@
+schema="OTEBW_EMTAS";
+
+query = 
+"select to_date(DDATE) as DDATE,
+        to_date(UTCTOLOCAL(GCT_DDD_M,'CET')) as GCT_DDD_M_DATE,
+        to_time(UTCTOLOCAL(GCT_DDD_M,'CET')) as GCT_DDD_M_TIME,
+        to_date(UTCTOLOCAL(GCT_DDD_C,'CET')) as GCT_DDD_C_DATE,
+        to_time(UTCTOLOCAL(GCT_DDD_C,'CET')) as GCT_DDD_C_TIME,
+        to_date(UTCTOLOCAL(GCT_ZDL,'CET')) as GCT_ZDL_DATE,
+        to_time(UTCTOLOCAL(GCT_ZDL,'CET')) as GCT_ZDL_TIME,
+        to_date(UTCTOLOCAL(GCT_ZDD,'CET')) as GCT_ZDD_DATE,
+        to_time(UTCTOLOCAL(GCT_ZDD,'CET')) as GCT_ZDD_TIME,
+        to_date(UTCTOLOCAL(GCT_ZVD,'CET')) as GCT_ZVD_DATE,
+        to_time(UTCTOLOCAL(GCT_ZVD,'CET')) as GCT_ZVD_TIME,
+		T.CALMONTH as CALMONTH,
+		T.YEAR as CALYEAR,
+		T.CALWEEK as CALWEEK,
+		T.CALQUARTER as CALQUARTER
+from BW_RRD_UZAVERKY,
+     _SYS_BI.TC_DAY_CALENDAR T
+where T.DATE_SQL = DDATE  ";
+
+depends_on_table=["OTEBW_EMTAS::BW_RRD_UZAVERKY"];

@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="The responsibility for the tasks you perform with the SAP HANA Application Lifecycle Management is shared between dedicated lifecycle management roles."/>
+<meta name="description" content="The responsibility for the tasks you perform with the SAP HANA Application Lifecycle Management is shared between dedicated lifecycle management roles."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=25615654969151347"/>
+<title>SAP HANA Application Lifecycle Management Tasks</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio842cf92247ec42ddbb0136187235237e";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio842cf92247ec42ddbb0136187235237e">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">SAP HANA Application Lifecycle Management Tasks</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">The responsibility for the tasks you perform with the <span class="ph pname">SAP HANA</span>
+		Application Lifecycle Management is shared between dedicated lifecycle management
+		roles.</p>
+
+		<p class="p">The responsibility for common application-lifecycle management performed with the <span class="ph pname">SAP
+				HANA</span> Application Lifecycle Management is shared between the various
+			lifecycle management roles, which must be assigned to the SAP HANA users who start the
+				<span class="ph pname">SAP HANA</span> Application Lifecycle Management. For example, the
+				<span class="keyword uilabel">Administrator</span> role enables access to all options and tools in the
+				<span class="ph pname">SAP HANA</span> Application Lifecycle Management. To start a transport
+			operation based on a defined route, you only need the privileges assigned with the user
+			role <span class="keyword uilabel">ExecuteTransport</span>. The <span class="keyword uilabel">Display</span> role enables a
+			user to view details of the delivery units, routes, and transports, but cannot make any
+			changes.</p>
+
+		<div class="p">The following table provides an overview of the most common tasks performed with the <span class="ph pname">SAP
+				HANA</span> Application Lifecycle Management and which user role is required to
+			perform the specified task.<div class="note note"><span class="notetitle">Note</span> The <span class="ph pname">SAP HANA</span> systems you use as
+				destination for delivery unit (DU) transport operations as well as the <span class="ph pname">SAP
+					HANA</span> users required to complete the operation must be set up by an
+					<span class="ph pname">SAP HANA</span> administrator.</div>
+</div>
+
+		
+<div class="table-wrapper tablenoborder"><table summary="" id="loio842cf92247ec42ddbb0136187235237e__table_spq_pqb_mk" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: SAP HANA Application Lifecycle Management Task/Role Matrix</span></caption>
+<colgroup><col width="16.666666666666668%"/><col width="16.666666666666668%"/><col width="16.666666666666668%"/><col width="16.666666666666668%"/><col width="16.666666666666668%"/><col width="16.666666666666668%"/></colgroup>
+
+				
+				
+				
+				
+				
+				
+				
+				
+				<thead class="thead" align="left">
+					<tr class="row">
+						<th class="entry" valign="top" width="16.666666666666664%" id="d685970e84">Task</th>
+
+						<th class="entry" valign="top" width="16.666666666666664%" id="d685970e87">Administrator</th>
+
+						<th class="entry" valign="top" width="16.666666666666664%" id="d685970e90">Execute Transport</th>
+
+						<th class="entry" valign="top" width="16.666666666666664%" id="d685970e93">Display</th>
+
+						<th class="entry" valign="top" width="16.666666666666664%" id="d685970e96">Developer</th>
+
+						<th class="entry" valign="top" width="16.666666666666664%" id="d685970e100">Development Expert</th>
+
+					</tr>
+
+				</thead>
+
+				<tbody class="tbody">
+					<tr class="row">
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e84 ">Create product, DU, and so on</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e87 ">X</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e90 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e93 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e96 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e100 "> </td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e84 ">Export DU</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e87 ">X</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e90 ">X</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e93 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e96 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e100 "> </td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e84 ">Import DU</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e87 ">X</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e90 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e93 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e96 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e100 "> </td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e84 ">Add transport destination</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e87 ">X</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e90 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e93 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e96 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e100 "> </td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e84 ">Setup transport route</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e87 ">X<div class="note note"><span class="notetitle">Note</span> 
+								<p class="p">For this task, you need additional roles as described in <cite class="cite">SAP HANA Application Lifecycle Management Roles</cite>.</p>
+
+							</div>
+</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e90 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e93 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e96 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e100 "> </td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e84 ">Execute transport</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e87 ">X</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e90 ">X</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e93 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e96 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e100 "> </td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e84 ">View log files for transport, export, import operations</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e87 ">X</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e90 ">X</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e93 ">X</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e96 ">X</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e100 ">X</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e84 ">Configure change recording</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e87 ">X</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e90 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e93 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e96 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e100 "> </td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e84 ">Create / delete changelists</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e87 ">X</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e90 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e93 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e96 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e100 ">X</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e84 ">Assign objects to changelists</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e87 ">X</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e90 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e93 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e96 ">X </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e100 ">X</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e84 ">Approve contributions to changelists</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e87 ">X</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e90 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e93 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e96 ">X (your own contributions)</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e100 ">X (your own and foreign contributions)</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e84 ">Release changelists</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e87 ">X</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e90 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e93 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e96 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e100 ">X</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e84 ">Add / delete contributors to changelists</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e87 ">X</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e90 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e93 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e96 "> </td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e100 ">X</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e84 ">
+							<p class="p">Install/Update <span class="ph pname">SAP HANA</span> products and software components</p>
+
+						</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e87 ">
+							<p class="p">X</p>
+
+						</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e90 ">
+							<p class="p"/>
+
+						</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e93 ">
+							<p class="p"/>
+
+						</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e96 ">
+							<p class="p"/>
+
+						</td>
+
+						<td class="entry" valign="top" width="16.666666666666664%" headers="d685970e100 ">
+							<p class="p"/>
+
+						</td>
+
+					</tr>
+
+				</tbody>
+
+			</table>
+</div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?af092a4dd0f2422193af9e9295ca18a0.html" target="_top" title="To grant users the privileges they require to perform tasks with the SAP HANA Application Lifecycle Management, you must assign them one or more dedicated application lifecycle management roles.">SAP HANA Application Lifecycle Management Roles</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="SAP HANA Application Lifecycle Management Tasks";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

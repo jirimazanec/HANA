@@ -1,0 +1,984 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="SAP HANA Extended Application Services (SAP HANA XS) provides a set of server-side JavaScript application programming interfaces (API) that enable you to configure your applications to interact with SAP HANA."/>
+<meta name="description" content="SAP HANA Extended Application Services (SAP HANA XS) provides a set of server-side JavaScript application programming interfaces (API) that enable you to configure your applications to interact with SAP HANA."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=07069605112092336"/>
+<title>Using the Server-Side JavaScript APIs</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioc6bbca35b7734168ac585c0aef9bb527";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioc6bbca35b7734168ac585c0aef9bb527">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Using the Server-Side JavaScript APIs</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc"><span class="ph pname">SAP HANA</span> Extended Application Services (<span class="ph pname">SAP HANA</span> XS)
+		provides a set of server-side JavaScript application programming interfaces (API) that
+		enable you to configure your applications to interact with <span class="ph pname">SAP
+		HANA</span>.</p>
+
+		<p class="p">The <cite class="cite"><span class="ph pname">SAP HANA</span> XS JavaScript Reference</cite> lists all the functions that
+			are available for use when programing interaction between your application and SAP HANA.
+			For example, you can use the database API to invoke SQL statements from inside your
+			application, or access details of the current HTTP request for <span class="ph pname">SAP HANA</span>
+			data with the request-processing API.<span class="ph pname">SAP HANA</span> XS includes the following
+			set of server-side JavaScript APIs:</p>
+
+		
+<div class="table-wrapper tablenoborder"><table summary="" id="loioc6bbca35b7734168ac585c0aef9bb527__table_zz1_tf3_zm" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: XS JavaScript Application Programming Interfaces</span></caption>
+<colgroup><col width="21.50537634408602%"/><col width="78.49462365591397%"/></colgroup>
+
+				
+				
+				<thead class="thead" align="left">
+					<tr class="row">
+						<th class="entry" valign="top" width="21.50537634408602%" id="d3357199e53">API </th>
+
+						<th class="entry" valign="top" width="78.49462365591397%" id="d3357199e56">Description</th>
+
+					</tr>
+
+				</thead>
+
+				<tbody class="tbody">
+					<tr class="row">
+						<td class="entry" valign="top" width="21.50537634408602%" headers="d3357199e53 "><a class="xref nopagenumber" href="default.html?c6bbca35b7734168ac585c0aef9bb527.html#loioc6bbca35b7734168ac585c0aef9bb527__section_N10059_N10012_N10001" target="_top">Database</a></td>
+
+						<td class="entry" valign="top" width="78.49462365591397%" headers="d3357199e56 ">Enables access to the <span class="ph pname">SAP HANA</span> by means of SQL
+							statements. For example, you can open a connection to commit or rollback
+							changes in <span class="ph pname">SAP HANA</span>, to prepare stored procedures (or SQL
+							statements) for execution or to return details of a result set or a
+							result set's metadata.  </td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="21.50537634408602%" headers="d3357199e53 "><a class="xref nopagenumber" href="default.html?c6bbca35b7734168ac585c0aef9bb527.html#loioc6bbca35b7734168ac585c0aef9bb527__section_N10095_N1001D_N10001" target="_top">Outbound connectivity</a></td>
+
+						<td class="entry" valign="top" width="78.49462365591397%" headers="d3357199e56 ">Enables outbound access to a defined HTTP destination that provides services which an
+							application can use. For example, you can read the connection details
+							for an HTTP destination, request data, and set details of the response
+							body. You can also set up an SMTP connection for use by outgoing
+							multipart e-mails.</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="21.50537634408602%" headers="d3357199e53 "><a class="xref nopagenumber" href="default.html?c6bbca35b7734168ac585c0aef9bb527.html#loioc6bbca35b7734168ac585c0aef9bb527__section_N100B3_N1001D_N10001" target="_top">Request processing</a></td>
+
+						<td class="entry" valign="top" width="78.49462365591397%" headers="d3357199e56 ">Enables access to the context of the current HTTP request, for
+							example, for read requests and write responses. You can use the
+							functions provided by this API to manipulate the content of the request
+							and the response.</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="21.50537634408602%" headers="d3357199e53 "><a class="xref nopagenumber" href="default.html?c6bbca35b7734168ac585c0aef9bb527.html#loioc6bbca35b7734168ac585c0aef9bb527__section_c5l_yjv_b4" target="_top">Session</a></td>
+
+						<td class="entry" valign="top" width="78.49462365591397%" headers="d3357199e56 ">Enables access to the <span class="ph pname">SAP HANA</span> XS session, for
+							example, to determine the language used in the session or if a user has
+							the privileges required to run an application.</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="21.50537634408602%" headers="d3357199e53 "><a class="xref nopagenumber" href="default.html?c6bbca35b7734168ac585c0aef9bb527.html#loioc6bbca35b7734168ac585c0aef9bb527__section_okj_ng3_zm" target="_top">Job Schedule</a></td>
+
+						<td class="entry" valign="top" width="78.49462365591397%" headers="d3357199e56 ">Enables access to the job-scheduling interface which allows you to
+							define and trigger recurring tasks that run in the background. The XS
+							jobs API allows you to add and remove schedules from jobs.</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="21.50537634408602%" headers="d3357199e53 "><a class="xref nopagenumber" href="default.html?c6bbca35b7734168ac585c0aef9bb527.html#loioc6bbca35b7734168ac585c0aef9bb527__section_nm5_gjc_vp" target="_top">Security</a></td>
+
+						<td class="entry" valign="top" width="78.49462365591397%" headers="d3357199e56 ">Enables access to the <samp class="ph codeph">$.security.crypto</samp> namespace and the classes
+								<samp class="ph codeph">AntiVirus</samp> and <samp class="ph codeph">Store</samp>, which provide
+							tools that allow you to configure a secure store, set up anti-virus
+							scans, and generate hashes..</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="21.50537634408602%" headers="d3357199e53 "><a class="xref nopagenumber" href="default.html?c6bbca35b7734168ac585c0aef9bb527.html#loioc6bbca35b7734168ac585c0aef9bb527__section_u1f_4g3_zm" target="_top">Trace</a></td>
+
+						<td class="entry" valign="top" width="78.49462365591397%" headers="d3357199e56 ">Enables access to the various trace levels you can use to generate
+							and log information about application activity. You can view trace files
+							in the <span class="keyword uilabel">diagnosis Files</span> tab of the <span class="ph pname">SAP
+								HANA</span> studio's <span class="keyword uilabel">Administration</span>
+							perspective.</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="21.50537634408602%" headers="d3357199e53 "><a class="xref nopagenumber" href="default.html?c6bbca35b7734168ac585c0aef9bb527.html#loioc6bbca35b7734168ac585c0aef9bb527__section_nwk_nr5_yp" target="_top">Utilities</a></td>
+
+						<td class="entry" valign="top" width="78.49462365591397%" headers="d3357199e56 ">Enables access to utilities that you can use to parse XML and manipulate Zip archives,
+							for example, to zip and unzip files, add and remove entries from Zip
+							archives, and encrypt Zip archives with password protection.</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="21.50537634408602%" headers="d3357199e53 "><a class="xref nopagenumber" href="default.html?c6bbca35b7734168ac585c0aef9bb527.html#loioc6bbca35b7734168ac585c0aef9bb527__section_o5f_yyk_vp" target="_top">XS Data Services</a></td>
+
+						<td class="entry" valign="top" width="78.49462365591397%" headers="d3357199e56 ">Provides access to a library of JavaScript utilities, which can be
+							used to enable server-side JavaScript applications to consume data
+							models that are defined using Core Data Services. </td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" width="21.50537634408602%" headers="d3357199e53 "><a class="xref nopagenumber" href="default.html?c6bbca35b7734168ac585c0aef9bb527.html#loioc6bbca35b7734168ac585c0aef9bb527__section_rtf_5pq_vp" target="_top">XS Procedures</a></td>
+
+						<td class="entry" valign="top" width="78.49462365591397%" headers="d3357199e56 ">Provides access to a library of JavaScript utilities, which can be used to enable
+							server-side JavaScript applications to call SAP HANA stored procedures
+							as if the procedures were JavaScript functions.</td>
+
+					</tr>
+
+				</tbody>
+
+			</table>
+</div>
+
+		<div class="section" id="loioc6bbca35b7734168ac585c0aef9bb527__section_N10059_N10012_N10001"><div class="section_title">Database API</div><div type="Database API">
+			
+			<p class="p">The SAP HANA XS Database API (<samp class="ph codeph">$.hdb</samp>) provides tools that enable
+				simple and convenient access to the database.</p>
+
+			<div class="note caution"><span class="cautiontitle">Caution</span> The <samp class="ph codeph">$.hdb</samp> namespace is intended as a replacement for the
+				older <samp class="ph codeph">$.db</samp> namespace. Since different database connections are used
+				for the <samp class="ph codeph">$.hdb</samp> and <samp class="ph codeph">$.db</samp> APIs, avoid using both APIs
+				in a single http-request, for example, to update the same tables as this can lead to
+				problems, including deadlocks. </div>
+
+			<p class="p">You can use the Database API for the following operations</p>
+
+			<ul class="ul" id="loioc6bbca35b7734168ac585c0aef9bb527__ul_ngn_vrw_zp">
+				<li class="li"><samp class="ph codeph">$.hdb.Connection</samp><p class="p">Estalish a connection to the <span class="ph pname">SAP
+							HANA</span> database</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">$.hdb.ProcedureResult</samp><p class="p">Represents the result of a stored
+						procedure call to the <span class="ph pname">SAP HANA</span> database</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">$.hdb.ResultSet</samp><p class="p">Represents the result of a database
+					query</p>
+</li>
+
+			</ul>
+
+			<p class="p">The following example shows how to use the database API to connect to the <span class="ph pname">SAP
+					HANA</span> database, commit some changes, and end the current transaction.</p>
+
+			<div class="note note"><span class="notetitle">Note</span> By default, auto-commit mode is disabled, which means that all database changes
+				must be explicitly commited.</div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var connection = $.hdb.getConnection();
+connection.executeUpdate('UPDATE "DB_EXAMPLE"."ICECREAM" SET QUANTITY=? WHERE FLAVOR=?', 9, 'CHOCOLATE');
+connection.commit();</pre></div>
+
+			<p class="p">The following example of usage of the <span class="ph pname">SAP HANA</span> XS database API shows
+				how to establish a connection with <span class="ph pname">SAP HANA</span> and return a result set
+				from the specified procedure call. The example code assumes that a procedure exists
+				with the following signature: </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">PROCEDURE 'DB_EXAMPLE'.icecream.shop::sell(
+     IN flavor VARCHAR, 
+     IN quantity INTEGER, 
+     IN payment DECIMAL, 
+     OUT change DECIMAL) </pre></div>
+
+			<p class="p">Note that the result can be accessed as if it were a JSON object with a structure
+				similar to the following example: <samp class="ph codeph">{change: 1.50, $resultSets:[....]}
+				</samp>.</p>
+
+			<div class="note tip"><span class="tiptitle">Tip</span> <samp class="ph codeph">$resultSets</samp> is not enumerable; it does not show up in
+				a <samp class="ph codeph">for</samp>-<samp class="ph codeph">each</samp> loop.</div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var fnSell = connection.loadProcedure('DB_EXAMPLE', 'icecream.shop::sell');
+var result = fnSell('CHOCOLATE', 3, 30.0);
+// value of output parameter 'change'
+var change = result['change'];
+// array of $.hdb.ResultSet returned by the stored procedure
+var resultSets = result['$resultSets'];
+// iterate over all output parameters. 
+var params;
+for (var outputParam in result) {
+    params += outputParam + ' ';
+}
+</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loioc6bbca35b7734168ac585c0aef9bb527__section_N10095_N1001D_N10001"><div class="section_title">Outbound API</div><div type="Outbound API"><p class="p">The Outbound API
+					(<samp class="ph codeph">$.net</samp>) provides tools that you can use to perform the
+				following actions:</p>
+<ul class="ul" id="loioc6bbca35b7734168ac585c0aef9bb527__ul_dst_gv1_zp">
+				<li class="li"><samp class="ph codeph">$.net.SMTPConnection</samp><p class="p">For sending <samp class="ph codeph">$.net.Mail</samp>
+						objects by means of an SMTP connection</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">$.net.Mail</samp><p class="p">For constructing and sending multipart e-mails</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">$.net.http</samp><p class="p">HTTP(s) client (and request) classes for outbound
+						connectivity and an HTTP(s) destination class that hold metadata, for
+						example: host, port, useSSL.</p>
+</li>
+
+			</ul>
+<div class="sectiondiv">
+				<p class="p">The following example shows how to use the <samp class="ph codeph">$.net.SMTPConnection</samp>
+					class to send e-mail objects (<samp class="ph codeph">$.net.Mail</samp>) by means of an SMTP
+					connection object:</p>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">subscribers = ["kofi@sap.com", "kwaku@sap.com"];
+smtpConnection = new SMTPConnection();
+var mail = new $.net.Mail({ sender: "manager@sap.com",
+    subject: "Promotion Notice",
+    subjectEncoding: "UTF-8",
+    parts: [new $.net.Mail.Part({
+                type: $.net.Mail.Part.TYPE_TEXT,
+                contentType: "text/html",
+                encoding: "UTF-8"
+           })]
+    });
+for (var i = 0; i &lt; subscribers.length; ++i) {
+     mail.to = subscribers[i];
+     mail.parts[0].text = "Dear " + subscribers[i].split("@")[0] + ", \
+                           you have been promoted. Congratulations!";
+     smtpConnection.send(mail); 
+}
+smtpConnection.close();</pre></div>
+
+			</div><div class="sectiondiv">
+				<p class="p">The following example shows how to use the <samp class="ph codeph">$.net.Mail</samp> class to
+					create an e-mail from an XS JavaScript object and send it to the named
+					recipients:</p>
+
+				<div class="note note"><span class="notetitle">Note</span> If mandatory information is missing or an error occurs during the send operation, the
+						<samp class="ph codeph">mail.send()</samp> call fails and returns an error.</div>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var mail = new $.net.Mail({
+    sender: {address: "sender@sap.com"},
+    to: [{ name: "John Doe", address: "john.doe@sap.com", nameEncoding: "US-ASCII"}, \
+         {name: "Jane Doe", address: "jane.doe@sap.com"}],
+    cc: ["cc1@sap.com", {address: "cc2@sap.com"}],
+    bcc: [{ name: "Jonnie Doe", address: "jonnie.doe@sap.com"}],
+    subject: "subject",
+    subjectEncoding: "UTF-8",
+    parts: [ new $.net.Mail.Part({
+        type: $.net.Mail.Part.TYPE_TEXT,
+        text: "The body of the mail.",
+        contentType: "text/plain",
+        encoding: "UTF-8",
+    })]
+});
+var returnValue = mail.send(); 
+var response = "MessageId = " + returnValue.messageId + ", final reply = " + returnValue.finalReply;
+$.response.status = $.net.http.OK; 
+$.response.contentType = "text/html";
+$.response.setBody(response);</pre></div>
+
+			</div><div class="sectiondiv">
+				<p class="p">The following example of server-side JavaScript shows how to use the outbound API to get
+					(read) an HTTP destination. You can also set the contents of the response, for
+					example, to include details of the header, body, and any cookies. For HTTPs
+					connections you need to maintain a certificate (CA or explicit server
+					certificate) in a Trust Store; you use the certificate to check the connection
+					against.</p>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var dest = $.net.http.readDestination("inject", "ipsec");
+var client = new $.net.http.Client();
+var req = new $.web.WebRequest($.net.http.GET, "");
+
+client.request(req, dest);
+var response = client.getResponse();
+
+var co = [], he = []; 
+for(var c in response.cookies) {
+    co.push(response.cookies[c]);
+}
+
+for(var c in response.headers) {
+     he.push(response.headers[c]);
+}
+
+var body = undefined;
+if(response.body)
+    var body = response.body.asString();
+
+$.response.contentType = "application/json";
+</pre></div>
+
+				<div class="note tip" id="loioc6bbca35b7734168ac585c0aef9bb527__note_N100A2_N10091_N1001D_N10001"><span class="tiptitle">Tip</span> You define the HTTP
+					destination in a text file using <samp class="ph codeph">keyword=value</samp> pairs. You must
+					activate the HTTP destination in the <span class="ph pname">SAP HANA</span> repository. After
+					activation, you can view details of the HTTP destination in the <span class="ph pname">SAP
+						HANA</span> XS Administration tool. </div>
+
+			</div></div></div>
+
+		<div class="section" id="loioc6bbca35b7734168ac585c0aef9bb527__section_N100B3_N1001D_N10001"><div class="section_title">Request-Processing API</div><div type="Request-Processing API">
+			
+			<p class="p">The Request-Processing API (<samp class="ph codeph">$.web</samp>) provides access to the body of
+				HTTP request and response entities. For example, you can use the following
+				classes:</p>
+
+			<ul class="ul" id="loioc6bbca35b7734168ac585c0aef9bb527__ul_pjt_v4s_1q">
+				<li class="li"><samp class="ph codeph">$.web.Body</samp><p class="p">Represents the body of an HTTP request entity and
+						provides access to the data included in the body of the HTTP request
+						entity</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">$.web.EntityList</samp><p class="p">Represents a list of request or response
+						entities; the <samp class="ph codeph">EntityList</samp> holds
+							<samp class="ph codeph">WebEntityRequest</samp> or <samp class="ph codeph">WebEntityResponse</samp>
+						objects.</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">$.web.TupelList</samp><p class="p">Represents a list of name-value pairs. The
+							<samp class="ph codeph">TupelList</samp> is a container that provides tuples for
+						cookies, headers, and parameters. A <span class="q">“tuple”</span> is a JavaScript object with
+						the properties <span class="q">“<span class="keyword parmname">name</span>”</span> and
+								<span class="q">“<span class="keyword parmname">value</span>”</span>.</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">$.web.WebRequest</samp><p class="p">Enables access to the client HTTP request
+						currently being processed</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">$.web.WebResponse</samp><p class="p">Enables access to the client HTTP response
+						currently being processed for the corresponding request object (</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">$.web.WebEntityRequest</samp><p class="p">Represents an HTTP request entity and
+						provides access to the entity's metadata and (body) content.</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">$.web.WebEntityResponse</samp><p class="p">Represents the HTTP response
+						currently being populated</p>
+</li>
+
+			</ul>
+
+			<p class="p">The following example shows how to use the request-processing API to display the
+				message <span class="q">“Hello World”</span> in a browser. </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">$.response.contentType = "text/plain";
+$.response.setBody( "Hello, World !");
+</pre></div>
+
+			<p class="p">In the following example, you can see how to use the request-processing API to get
+				the value of parameters describing the name and vendor ID of a delivery unit (DU)
+				and return the result set in JSON-compliant form. </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var duName = $.request.parameters.get("du_name");
+var duVendor =  $.request.parameters.get("du_vendor");
+
+result = {
+		content_id : contentId.toString()
+};
+$.response.status = $.net.http.OK;
+$.response.contentType = 'application/json';
+$.response.setBody(JSON.stringify(result));
+</pre></div>
+
+			<p class="p">In the following example of use of the request-processing API, we show how to access
+				to the request's meta data (and body) and, in addition, how to set and send the
+				response. </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">if($.request.method === $.net.http.GET) {
+    // get query parameter named id
+    var qpId = $.request.parameters.get("id");
+    
+    // handle request for the given id parameter...
+    var result = handleRequest(qpId);
+    
+    // send response
+    $.response.contentType = "plain/test";
+    $.response.setBody("result: " + result);
+    $.response.status = $.net.http.OK;
+} else {
+    // unsupported method
+    $.response.status = $.net.http.INTERNAL_SERVER_ERROR;
+}
+</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loioc6bbca35b7734168ac585c0aef9bb527__section_c5l_yjv_b4"><div class="section_title">Session API</div><div type="Session API">
+			
+			<p class="p">Enables access to the <span class="ph pname">SAP HANA</span> XS session, for example, to determine the
+				language used in the session or check if a user has the privileges required to run
+				an application.</p>
+
+			<p class="p">You can use the XS JavaScript <samp class="ph codeph">$.session</samp> API to request and check
+				information about the currently open sessions. For example, you can find out the
+				name of a user who is currently logged on to the database or get the
+				session-specific security token. The <samp class="ph codeph">$.session</samp> API also enables you
+				to check if a user has sufficient privileges to call an application. The following
+				example checks if the user has the <samp class="ph codeph">execute</samp> privilege that is
+				required to run an application. If the check reveals that the user does not have the
+				required privilege, an error message is generated indicating the name of the missing
+				privilege.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">if (!$.session.hasAppPrivilege("sap.xse.test::Execute")) {
+    $.response.setBody("Privilege sap.xse.test::Execute is missing"); 
+    $.response.status = $.net.http.INTERNAL_SERVER_ERROR;
+}</pre></div>
+
+			<p class="p"/>
+
+		</div></div>
+
+		<div class="section" id="loioc6bbca35b7734168ac585c0aef9bb527__section_okj_ng3_zm"><div class="section_title">Job Schedule API</div><div type="Job Schedule API">
+			
+			<p class="p">In <span class="ph pname">SAP HANA</span> XS, a scheduled job is created by means of an
+					<span class="ph filepath">.xsjob</span> file, a design-time file you commit to (and activate
+				in) the <span class="ph pname">SAP HANA</span> repository. The <span class="ph filepath">.xsjob</span> file can
+				be used to define recurring tasks that run in the background; the Job Schedule API
+				allows developers to add and remove schedules from such jobs.</p>
+
+			<p class="p">The Job Schedule API provides the following tools:</p>
+
+			<ul class="ul" id="loioc6bbca35b7734168ac585c0aef9bb527__ul_h2c_t5w_zp">
+				<li class="li"><samp class="ph codeph">Job</samp><p class="p"><samp class="ph codeph">$.jobs.Job</samp> represents a scheduled XS
+						job</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">JobLog</samp><p class="p"><samp class="ph codeph">$.jobs.JobLog</samp> provide access to the
+						log entries of a scheduled job</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">JobSchedules</samp><p class="p"><samp class="ph codeph">$.jobs.JobSchedules</samp> enables
+						control of an XS job's schedules.</p>
+</li>
+
+			</ul>
+
+			<div class="note note"><span class="notetitle">Note</span> It is not possible to call the <samp class="ph codeph">$.request</samp> and
+					<samp class="ph codeph">$.response</samp> objects as part of an XS job.</div>
+
+			<p class="p">The XS jobs API <samp class="ph codeph">$.jobs.Job</samp> enables you to add schedules to (and
+				remove schedules from) jobs defined in an <span class="ph filepath">.xsjob</span> file.</p>
+
+			<p class="p">The following example of server-side JavaScript shows how to use the Job Schedule API
+				to add a schedule to a existing job and delete a schedule from an existing job.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var myjob = new $.jobs.Job({uri:"myJob.xsjob", sqlcc:"sqlcc/otheruser.xssqlcc"});
+
+// add schedule to a job
+var id = myjob.schedules.add({
+    description: "Added at runtime, run every 10 minutes",
+    xscron: "* * * * * */10 0",
+    parameter: {
+        a: "c"
+    }
+});
+// delete a schedule from a job
+myjob.schedules.delete({id: id});
+</pre></div>
+
+			<p class="p">If the XS job file referred to in the URI is not in the same package as the XS
+				JavaScript or SQLScript function being called, you must add the full package path to
+				the XS job file specified in the URI illustrated in line 1 of the example above, for
+				example, <span class="ph filepath"><var class="keyword varname">&lt;/path/to/package.&gt;</var>MyXSjob.xsjob</span>.</p>
+
+			<div class="note note"><span class="notetitle">Note</span> The path specified in <var class="keyword varname">&lt;/path/to/package.&gt;</var> can be either absolute
+				or relative.</div>
+
+			<p class="p">In addition, the SQL connection defined in <samp class="ph codeph">sqlcc/otheruser.xssqlcc</samp>
+				is used to modify the job; it is not used to execute the job specified in
+					<samp class="ph codeph">myJob.xsjob</samp>.</p>
+
+			<p class="p">To understand the <samp class="ph codeph">cron</samp>-like syntax required by the
+					<samp class="ph codeph">xscron</samp> job scheduler, use the following examples:</p>
+
+			<ul class="ul" id="loioc6bbca35b7734168ac585c0aef9bb527__ul_uhn_cxn_xl">
+				<li class="li"><samp class="ph codeph">2013 * * fri 12 0 0</samp><p class="p"> Run the job every Friday in 2013 at
+						12:00.</p>
+</li>
+
+				<li class="li">
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">* * 3:-2 * 12:14 0 0</pre></div>
+
+					<p class="p">Run every hour between 12:00 and 14:00 every day between the third and
+						second-to-last day of the month.</p>
+
+				</li>
+
+				<li class="li"><samp class="ph codeph">* * * -1.sun 9 0 0</samp><p class="p"> Run the job on the last Sunday of every
+						month at 09:00.</p>
+</li>
+
+			</ul>
+
+		</div></div>
+
+		<div class="section" id="loioc6bbca35b7734168ac585c0aef9bb527__section_nm5_gjc_vp"><div class="section_title">Security API</div><div type="Security API">
+			
+			<p class="p">The <span class="ph pname">SAP HANA</span> XS JavaScript security API <samp class="ph codeph">$.security</samp> includes
+				the <samp class="ph codeph">$.security.crypto</samp> namespace and the following classes:</p>
+
+			<ul class="ul" id="loioc6bbca35b7734168ac585c0aef9bb527__ul_uvd_sqs_1q">
+				<li class="li"><samp class="ph codeph">$.security.AntiVirus</samp>
+					<p class="p">Scan data with a <span class="ph emphasis emphasis">supported</span> external anti-virus
+						engine</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">$.security.Store</samp><p class="p">Store data securely in name-value
+					form</p>
+</li>
+
+			</ul>
+
+			<p class="p"> The <samp class="ph codeph">$.security.crypto</samp> namespace includes methods (for example,
+					<samp class="ph codeph">md5()</samp>, <samp class="ph codeph">sha1()</samp>, and <samp class="ph codeph">sha256()</samp>)
+				that enable you to compute an MD5 or SHA1/256 hash (or HMAC-MD5, HMAC-SHA1, and
+				HMAC-SHA256). </p>
+
+			<p class="p">The <samp class="ph codeph">AntiVirus</samp> class includes a method <samp class="ph codeph">scan()</samp> that
+				enables you to set up a scan instance using one of the supported anti-virus engines.
+				The <samp class="ph codeph">Store</samp> class enables you to set up a secure store for an
+					<span class="ph pname">SAP HANA</span> XS application; the secure store can be used to store
+				sensitive information either at the application level (<samp class="ph codeph">store()</samp>) or
+				per user (<samp class="ph codeph">storeForUser()</samp>).</p>
+
+			<p class="p">The following code example shows how to use the <span class="ph pname">SAP HANA</span> XS virus-scan
+				interface (VSI) to scan a specific object type: a Microsoft Word document.</p>
+
+			<div class="note note"><span class="notetitle">Note</span> For more information about which antivirus engines <span class="ph pname">SAP HANA</span>
+				supports, see <cite class="cite">SAP Note 786179</cite>.</div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var data = //Some data to be checked
+var av = new $.security.AntiVirus();
+
+//AV scan data as Word document
+av.scan(data, "myDocument.docx");</pre></div>
+
+			<p class="p">The following code example shows how to set up a simple scan for data uploads using the
+					<span class="ph pname">SAP HANA</span> XS virus-scan interface.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">//scan a buffer with own "upload" profile
+var av = new $.security.AntiVirus("upload");
+av.scan(buffer);</pre></div>
+
+			<p class="p">The <span class="ph pname">SAP HANA</span> XS <samp class="ph codeph">$.security.Store</samp> API can be used to store data
+				safely and securely in name-value form. The security API enables you to define a
+				secure store (in a design-time artifact) for each application and refer to this
+				design time object in the application coding. </p>
+
+			<div class="note note"><span class="notetitle">Note</span> The design-time secure store is a file with the file extension
+						<span class="q">“<span class="ph filepath">.xssecurestore</span>”</span>, for example,
+					<span class="ph filepath">localStore.xssecurestore</span>; the secure-store file must
+				include only the following mandatory content: <samp class="ph codeph">{}</samp>.</div>
+
+			<p class="p"><span class="ph pname">SAP HANA</span> XS looks after the encryption and decryption of data and also ensures
+				the persistency of the data. For the stored data, you can choose between the
+				following visibility options:</p>
+
+			<ul class="ul" id="loioc6bbca35b7734168ac585c0aef9bb527__ul_kd1_xwc_vp">
+				<li class="li">Application-wide data visibility<p class="p">Use
+								<samp class="ph codeph">store(<var class="keyword varname">&lt;parameters&gt;</var>)</samp> to ensure that
+						all users of the corresponding application have access to one secure store
+						where they can share the same data and can decrypt or encrypt data, for
+						example, passwords for a remote system.</p>
+</li>
+
+				<li class="li">Application-wide data visibility but with user-specific stores separation<p class="p">Use
+								<samp class="ph codeph">storeForUser(<var class="keyword varname">&lt;parameters&gt;</var>)</samp> to
+						ensures that <span class="ph emphasis emphasis">each</span> user of the corresponding application
+						has a separate container to securely store personal, encrypted data, for
+						example, credit card numbers or personal-information-number (PIN) codes; the
+						encrypted data can only be decrypted by the owner of the secure store; the
+						user who encrypted it. </p>
+</li>
+
+			</ul>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">function store() {
+  var config = {
+    name: “foo”,
+    value: “bar”
+  };
+
+  var aStore = new $.security.Store("localStore.xssecurestore");
+  aStore.store(config);
+}
+
+function read() {
+  var config = {
+    name: “foo”
+  };
+
+  try {
+    var store = new $.security.Store("localStore.xssecurestore");
+    var value = store.read(config);
+  }
+  catch(ex) {
+    //do some error handling
+  } 
+}</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loioc6bbca35b7734168ac585c0aef9bb527__section_u1f_4g3_zm"><div class="section_title">Trace API</div><div type="Trace API">
+			
+			<p class="p">Enables access to the various trace levels you can use to generate and log
+				information about application activity. The specified error message is written to
+				the appropriate trace file.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">$.trace.error("This is an error message")</pre></div>
+
+			<div class="p">You can set the following trace levels:<ul class="ul" id="loioc6bbca35b7734168ac585c0aef9bb527__ul_epy_tyn_xl">
+					<li class="li"><samp class="ph codeph">$.trace.debug(message)</samp><p class="p">Writes the string defined in
+								<samp class="ph codeph">(message)</samp> to the application trace with
+								<span class="ph emphasis emphasis">debug</span> level </p>
+</li>
+
+					<li class="li"><samp class="ph codeph">$.trace.error(message)</samp><p class="p">Writes the string defined in
+								<samp class="ph codeph">(message)</samp> to the application trace with
+								<span class="ph emphasis emphasis">error</span> level </p>
+</li>
+
+					<li class="li"><samp class="ph codeph">$.trace.fatal(message)</samp><p class="p">Writes the string defined in
+								<samp class="ph codeph">(message)</samp> to the application trace with
+								<span class="ph emphasis emphasis">fatal</span> level </p>
+</li>
+
+					<li class="li"><samp class="ph codeph">$.trace.info(message)</samp><p class="p">Writes the string defined in
+								<samp class="ph codeph">(message)</samp> to the application trace with
+								<span class="ph emphasis emphasis">info</span> level </p>
+</li>
+
+					<li class="li"><samp class="ph codeph">$.trace.warning(message)</samp><p class="p">Writes the string defined in
+								<samp class="ph codeph">(message)</samp> to the application trace with
+								<span class="ph emphasis emphasis">warning</span> level </p>
+</li>
+
+				</ul>
+</div>
+
+			<div class="note note"><span class="notetitle">Note</span> If tracing is enable, messages generated by the <samp class="ph codeph">$.trace</samp> API are
+				logged in the <span class="ph pname">SAP HANA</span> trace file
+						<span class="ph filepath">xsengine_<var class="keyword varname">&lt;host&gt;</var>_<var class="keyword varname">&lt;Instance&gt;</var>_<var class="keyword varname">&lt;#&gt;</var>.trc</span>
+				on the SAP HANA server, for example, in
+						<span class="ph filepath"><var class="keyword varname">&lt;installation_path&gt;</var>/<var class="keyword varname">&lt;SID&gt;</var>/HDB<var class="keyword varname">&lt;nn&gt;</var>/<var class="keyword varname">&lt;hostname&gt;</var>/trace</span>.
+				Trace messages with severity status <span class="q">“warning”</span>, <span class="q">“error”</span> and <span class="q">“fatal”</span>
+				are also written to a similarly named alert file, for example,
+						<span class="ph filepath">xsengine_alert_<var class="keyword varname">&lt;host&gt;</var>.trc</span>.</div>
+
+		</div></div>
+
+		<div class="section" id="loioc6bbca35b7734168ac585c0aef9bb527__section_nwk_nr5_yp"><div class="section_title">Utilities API</div><div type="Utilities API"><div class="p">The <span class="ph pname">SAP HANA</span> XS
+				JavaScript Utilities API includes the <samp class="ph codeph">$.util</samp> namespace, which
+				contains the following classes <ul class="ul" id="loioc6bbca35b7734168ac585c0aef9bb527__ul_pqt_cd1_zp">
+					<li class="li"><samp class="ph codeph">$.util.SAXParser</samp><p class="p">Tools for parsing XML content (for
+							example, strings, array buffers, and the content of Web response body
+							objects)</p>
+</li>
+
+					<li class="li"><samp class="ph codeph">$.util.Zip</samp><p class="p">Compression tools for building, modifying,
+							extracting, and encrypting archives</p>
+</li>
+
+				</ul>
+</div>
+<div class="sectiondiv">
+				<p class="p">With the XS JavaScript Utilities API<samp class="ph codeph">$.util.SAXParser</samp> class, you
+					can create a new parser object and parse the XML content of an XMLstring, an XML
+					array buffer, or a <samp class="ph codeph">$.web.Body</samp> object. The following example
+					shows how to use the XML parsing capabiliites of the
+						<samp class="ph codeph">$.util.SAXParser</samp> class:</p>
+
+				<div class="note note"><span class="notetitle">Note</span> You can <span class="ph emphasis emphasis">stop</span>, <span class="ph emphasis emphasis">reset</span>, and
+						<span class="ph emphasis emphasis">resume</span> a parsing operation. If the content to be parsed
+					does not contain XML, the parser throws an error.</div>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var parser = new $.util.SAXParser();
+var xml = "&lt;?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?&gt;\n\
+           &lt;!-- this is a note --&gt;\n\
+           &lt;note noteName='NoteName'&gt;\n\
+               &lt;to&gt;To&lt;/to&gt;\n\
+               &lt;from&gt;From&lt;/from&gt;\n\
+               &lt;heading&gt;Note heading&lt;/heading&gt;\n\
+               &lt;body&gt;Note body&lt;/body&gt;\n\
+           &lt;note&gt;\n";
+var startElementHandlerConcat = "";
+var endElementHandlerConcat = "";
+var characterDataHandlerConcat = "";
+parser.startElementHandler = function(name, atts) {
+    startElementHandlerConcat += name;
+    if (name === "note") {
+        startElementHandlerConcat += " noteName = '" + atts.noteName + "'";
+    }
+    startElementHandlerConcat += "\n";
+};
+parser.endElementHandler = function(name) {
+    endElementHandlerConcat += name + "\n";
+};
+parser.characterDataHandler = function(s) {
+    characterDataHandlerConcat += s;
+};
+parser.parse(xml);
+...</pre></div>
+
+				<p class="p">The following code snippet shows how to use the <samp class="ph codeph">$.util.SAXParser</samp>
+					tools to parse the content of a <samp class="ph codeph">$.web.Body</samp> object. </p>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var body = $.request.body
+var parser = new $.util.SAXParser()
+//... set handlers
+parser.parse(body);</pre></div>
+
+				<p class="p">The following encodings are supported:</p>
+
+				<ul class="ul" id="loioc6bbca35b7734168ac585c0aef9bb527__ul_trh_k3z_yp">
+					<li class="li">UTF-8 (<span class="ph emphasis emphasis">default</span>)</li>
+
+					<li class="li">UTF-16</li>
+
+					<li class="li">US-ASCII</li>
+
+				</ul>
+
+			</div><div class="sectiondiv">
+				<p class="p">The <span class="ph pname">SAP HANA</span> XS JavaScript Utilities API also includes
+						the<samp class="ph codeph">$.util.Zip</samp> tool, which enables you to perform a series
+					of actions on Zip archives, for example:</p>
+
+				<ul class="ul" id="loioc6bbca35b7734168ac585c0aef9bb527__ul_i22_y55_yp">
+					<li class="li">Compress files into (zip) and extract files from (unzip) a Zip archive</li>
+
+					<li class="li">Add new entries to, update existing entries in, and remove entries from a
+						Zip archive</li>
+
+					<li class="li">Encrypt Zip archives with password protection</li>
+
+				</ul>
+
+				<p class="p">The following code illustrates a simple usage of the Zip tool: </p>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var zip = new $.util.Zip("myPassword");
+zip["entry.txt"] = "Two fish are in a tank. One turns to the other and asks 'How do you drive this thing?'";
+$.response.status = $.net.http.OK;
+$.response.contentType = "application/zip";
+$.response.headers.set("Content-Disposition", "attachment; filename = Encrypted.zip");
+$.response.setBody(zip.asArrayBuffer());</pre></div>
+
+				<p class="p">The following code snippets show how to use the <samp class="ph codeph">$.util.Zip</samp> tools
+					to work with Zip file content, for example, by adding, updating, extracting, and
+					deleting entries. When modeling folder hierarchies, the Zip object behaves like
+					an associative array; the entry names are the <span class="keyword">keys</span> (the full
+					paths to the indicated files). In the following example, we add an entry to a
+					Zip file:</p>
+
+				<div class="note note"><span class="notetitle">Note</span> <span class="q">“<samp class="ph codeph">zip["entry1"]</samp>”</span> is equivalent to
+							<span class="q">“<samp class="ph codeph">zip.entry1</samp>”</span>.</div>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var zip = new $.util.Zip();
+zip["entry1"] = "old entry"; </pre></div>
+
+				<p class="p">In the following example, we <span class="ph emphasis emphasis">update</span> an entry in a Zip
+					file:</p>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var zip = new $.util.Zip();
+zip["entry1"] = "new entry";</pre></div>
+
+				<p class="p">In the following example, we <span class="ph emphasis emphasis">extract</span> an entry from a Zip
+					file: if the entry does not exist, this returns undefined.</p>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var zip = new $.util.Zip();
+ var content = zip["entry1"]; </pre></div>
+
+				<p class="p">In the following example, we <span class="ph emphasis emphasis">delete</span> an entry from a Zip
+					file: if the entry does not exist, nothing happens.</p>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var zip = new $.util.Zip();
+delete zip["entry1"]; </pre></div>
+
+				<div class="note note"><span class="notetitle">Note</span> There is a restriction on the amount of uncompressed data that can be
+					extracted from a Zip archive using the XS JS utilities API.</div>
+
+				<p class="p">When using the XS JS utilities API to extract data from a Zip archive, the
+					maximum amount of uncompressed data allowed during the extraction process is
+					defined with the parameter <span class="keyword parmname">max_uncompressed_size_in_bytes</span>,
+					which you can set in the <samp class="ph codeph">zip</samp> section of the
+						<samp class="ph codeph">xsengine.ini</samp> configuration file for a given SAP HANA
+					system. If the <samp class="ph codeph">zip</samp> section does not already exist, you must
+					create it and add the parameter to it, for example, using the <span class="ph uicontrol">SAP
+						HANA Administration Console</span> in SAP HANA studio. If the parameter
+						<span class="keyword parmname">max_uncompressed_size_in_bytes</span> is
+						<span class="ph emphasis emphasis">not</span> set, a default value is assumed. The default value
+					is the value assigned to the property <span class="keyword parmname">max_runtime_bytes</span> in
+					section <samp class="ph codeph">jsvm</samp> section of the <samp class="ph codeph">xsengine.ini</samp>
+					file.</p>
+
+				<p class="p">You can deactivate the global check on the amount of uncompressed data. If  the
+					global system parameter<span class="keyword parmname">max_uncompressed_size_in_bytes</span> is
+					set to <kbd class="ph userinput">-1</kbd>, no check is performed on the amount of
+					uncompressed data generated by an extraction process using the Utilities API,
+					unless there is a specific user limitation in the XS JavaScript code, for
+					example, with the <span class="keyword parmname">maxUncompressedSizeInBytes</span> parameter.</p>
+
+				<p class="p">With the <samp class="ph codeph">$.util.Zip</samp> class or the
+						<samp class="ph codeph">$.util.compression</samp> namespace, you can use the property
+						<samp class="ph codeph">maxUncompressedSizeInBytes</samp> to override the global setting
+					and reduce the amount of uncompressed data allowed. </p>
+
+				<div class="note note"><span class="notetitle">Note</span> Note that the parameter <span class="keyword parmname">max_uncompressed_size_in_bytes</span>
+					cannot be used to increase the amount of uncompressed data allowed beyond the
+					value specified in the global setting. </div>
+
+			</div></div></div>
+
+		<div class="section" id="loioc6bbca35b7734168ac585c0aef9bb527__section_o5f_yyk_vp"><div class="section_title">XS Data Services API</div><div type="XS Data Services API">
+			
+			<p class="p"><span class="ph pname">SAP HANA</span> XS Data Services (XSDS) is a collection of tools that includes a
+				native client for Core Data Services (CDS) and a query builder for <span class="ph pname">SAP
+					HANA</span> Extended Application Services (<span class="ph pname">SAP HANA</span> XS)
+				JavaScript. The XSDS API provides a high-level abstraction of the database API
+					(<samp class="ph codeph">$.db</samp>, <samp class="ph codeph">$.hdb</samp>) and gives access to <span class="ph pname">SAP
+					HANA</span> artifacts such as CDS entities or stored procedures. XSDS enables
+				server-side JavaScript applications to consume data models that are defined using
+				Core Data Services more efficiently.</p>
+
+			<p class="p">The following example shows how to import a CDS entity and how to update a given
+				entity instance in XSDS <span class="ph emphasis emphasis">managed</span> mode.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">// import CDS client library
+var XSDS = $.import("sap.hana.xs.libs.dbutils", "xsds");
+
+// import CDS entity
+var MyEntity = XSDS.$importEntity("cds.namespace", "cds_context.cds_entity");
+
+// retrieve entity instance
+var instance = MyEntity.$get({ id: 69 });
+
+// update instance
+instance.stringProp = "new value";
+instance.intProp++;
+instance.assocProp.dateProp = new Date();
+
+// persist changes
+instance.$save();
+</pre></div>
+
+			<p class="p">The following example shows how to query the database using CDS model data in XSDS
+				unmanaged mode.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">// import CDS client library
+var XSDS = $.import("sap.hana.xs.libs.dbutils", "xsds");
+
+// import CDS entity
+var MyEntity = XSDS.$importEntity("cds.namespace", "cds_context.cds_entity");
+
+// build query
+var query = MyEntity.$query();
+var projection = query.$project({
+        stringProp: true,
+aliasProp: "aliasName",
+        assocProp: { dateProp: true }
+});
+var filter = query.$where({ stringProp: { $like: "A%" } });
+
+// retrieve result
+var result = projection.$execute();
+
+// process result
+for (var i = 0; i &lt; result.length; i++) {
+    var diff = result[i].assocProp.dateProp – Date.now();
+    // ...
+}
+</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loioc6bbca35b7734168ac585c0aef9bb527__section_rtf_5pq_vp"><div class="section_title">XS Procedures API</div><div type="XS Procedures API">
+			
+			<p class="p"><span class="ph pname">SAP HANA</span> XS Procedures is a library of JavaScript tools which enable
+				you to call <span class="ph pname">SAP HANA</span> stored procedures from server-side JavaScript
+				(XS JS) as if the stored procedures were native JavaScript functions. The following
+				example shows how to consume a stored procedure using the XS Procedures API. </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">// import XS Procedures library
+var XSProc = $.import("sap.hana.xs.libs.dbutils", "procedures");
+
+// set a schema where temporary tables can be created for passing table-valued parameters to the procedure
+XSProc.setTempSchema($.session.getUsername().toUpperCase());
+
+// load the procedure
+var proc = XSProc.procedure("schema", "namespace", "procedureName”);
+
+// call the procedure
+var result = proc(1, [{col1: 0, col2:1}, {col1: 1, col2:2}]);
+
+// result is a JavaScript object
+</pre></div>
+
+		</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="http://help.sap.com/hana/SAP_HANA_XS_JavaScript_Reference_en/index.html" target="_blank" alt="http://help.sap.com/hana/SAP_HANA_XS_JavaScript_Reference_en/index.html" title="http://help.sap.com/hana/SAP_HANA_XS_JavaScript_Reference_en/index.html">SAP HANA XS JavaScript API Reference</a></div>
+<div><a class="link" href="default.html?ca340c09551c40b7837e773b9d051821.html" target="_top" title="An HTTP destination defines connection details for services running on specific hosts whose details you want to define and distribute. The definition can be referenced by an application.">Maintaining HTTP Destinations</a></div>
+<div><a class="link" href="default.html?15e72de0ed4a4ce1aa1ad7483dbe6b37.html" target="_top" title="The XS job file .xsjob uses a number of keywords to define the job that must be run at a scheduled interval.">XS Job File Keyword Options</a></div>
+<div><a class="extlink" href="http://help.sap.com/disclaimer?site=http://service.sap.com/sap/support/notes/786179" target="_blank" alt="http://service.sap.com/sap/support/notes/786179" title="http://service.sap.com/sap/support/notes/786179">SAP Note 786179<img src="images/sap_link.png" class="link-sap" alt="Information published on SAP site" title="Information published on SAP site" border="0"/></a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Using the Server-Side JavaScript APIs";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Best Practices: Reduce Complexity of SQL Statements"/>
+<meta name="description" content="Best Practices: Reduce Complexity of SQL Statements"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=916572677396706"/>
+<title>Reduce Complexity of SQL Statements</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioaea3021952d8419493993e68b491fee1";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioaea3021952d8419493993e68b491fee1">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Reduce Complexity of SQL Statements </h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">Best Practices: Reduce Complexity of SQL Statements</p>
+
+		<div class="p">Variables in SQLScript enable you to arbitrarily break up a complex SQL statement into many
+			simpler ones. This makes a SQLScript procedure easier to comprehend. To illustrate this
+			point, consider the following
+			query:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> books_per_publisher = SELECT publisher, COUNT (*) AS cnt 
+FROM :books GROUP BY publisher; 
+largest_publishers = SELECT * FROM :books_per_publisher 
+WHERE cnt &gt;= (SELECT MAX (cnt) 
+FROM :books_per_publisher);</pre></div>
+Writing
+			this query as a single SQL statement either requires the definition of a temporary view
+			(using WITH) or repeating a sub query multiple times. The two statements above break the
+			complex query into two simpler SQL statements that are linked via table variables. This
+			query is much easier to comprehend because the names of the table variables convey the
+			meaning of the query and they also break the complex query into smaller logical pieces. </div>
+
+		<p class="p">The SQLScript compiler will combine these statements into a single query or identify the
+			common sub-expression using the table variables as hints. The resulting application
+			program is easier to understand without sacrificing performance. </p>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Reduce Complexity of SQL Statements";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

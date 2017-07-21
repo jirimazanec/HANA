@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="A basic example of the syntax required to set up the Mockstar test environment."/>
+<meta name="description" content="A basic example of the syntax required to set up the Mockstar test environment."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=3767149753440078"/>
+<title>Mockstar Environment Example Syntax</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio2c83d76fa6044659b53f9eab318b424b";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio2c83d76fa6044659b53f9eab318b424b">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Mockstar Environment Example Syntax</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">A basic example of the syntax required to set up the Mockstar test
+		environment.</p>
+
+		<div class="section">
+			<p class="p">The following example shows a simple setup using standard locations.</p>
+
+      <div class="note note"><span class="notetitle">Note</span> The names of schemas, tables, and views used in the following code example are intended
+        to be for illustration purposes only.</div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">var mockstarEnvironment = $.import('sap.hana.testtools.mockstar', 'mockstarEnvironment');
+describe('testSuiteDescription', function() {
+  var testEnvironment = null;
+
+    beforeOnce(function() {
+      var definition = {
+        schema : 'SCHEMA',
+        model : {
+          schema : '_SYS_BIC',
+          name : 'modelName' //e.g. package/MODEL
+        },
+        substituteTables : {
+          "table" : { name : 'package::TABLE' }
+        },
+        substituteViews : {
+          "view" : {
+            schema : '_SYS_BIC',
+            name : 'package/VIEW'
+          }
+        }
+      };
+      testEnvironment = mockstarEnvironment.defineAndCreate(definition);
+    });
+});</pre></div>
+
+		</div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Mockstar Environment Example Syntax";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

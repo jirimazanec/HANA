@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="SAP HANA application lifecycle management supports you in all phases of an SAP HANA application lifecycle, from modeling your product structure, through application development, transport, assemble, and install."/>
+<meta name="description" content="SAP HANA application lifecycle management supports you in all phases of an SAP HANA application lifecycle, from modeling your product structure, through application development, transport, assemble, and install."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=30680037769713864"/>
+<title>SAP HANA Application Lifecycle Management</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio9a012d6438764459a581e6af55a87c46";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio9a012d6438764459a581e6af55a87c46">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">SAP HANA Application Lifecycle Management</h1>
+
+	
+	<div class="body"><p class="shortdesc"><span class="ph pname">SAP HANA</span> application lifecycle management supports you in all phases of
+		an <span class="ph pname">SAP HANA</span> application lifecycle, from modeling your product structure,
+		through application development, transport, assemble, and install.</p>
+
+		<p class="p">The following graphic illustrates the phases in a product lifecycle of an <span class="ph pname">SAP HANA</span> application:</p>
+
+		<p class="p"><img class="image" id="loio9a012d6438764459a581e6af55a87c46__image_scw_c3c_vp" src="loioafbe199dee7e43fc925a8fe5ab9cfd7c_LowRes.png"/></p>
+
+		<div class="section"><div class="section_title">Phases of SAP HANA Application Lifecycle Management</div><div type="Phases of SAP HANA Application Lifecycle Management">
+			
+			<ul class="ul" id="loio9a012d6438764459a581e6af55a87c46__ul_vlx_qgy_vp">
+				<li class="li"><span class="ph emphasis emphasis">Model</span><p class="p">You define your product structure to provide a framework for efficient software development. This
+						includes creating delivery units and assigning packages to delivery units. The delivery units are then bundled in products.
+					</p>
+</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Develop</span><p class="p">You perform software development in repository packages. <span class="ph pname">SAP HANA</span> application
+						lifecycle management supports you with change tracking functions.</p>
+</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Transport</span><p class="p">You can transport your developed content in different ways according to your needs. You can
+						choose between transporting products or delivery units, based on changelists or complete entities. The transport type can be
+						native <span class="ph pname">SAP HANA</span> transport or transport using Change and Transport System (CTS). You can also export delivery
+						units, and import them into another system.</p>
+</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Assemble</span><p class="p">The developed software plus the metadata defined when modeling your product structure as well as
+						possible translation delivery units are the basis for assembling your add-on product. You can also build Support Packages and
+						patches for your product.</p>
+</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Install</span><p class="p">You can install <span class="ph pname">SAP HANA</span> products that you downloaded from SAP Support Portal or
+						that you assembled yourself.</p>
+</li>
+
+				<li class="li"><span class="ph emphasis emphasis">Configure</span><p class="p">If the <span class="ph pname">SAP HANA</span> product delivers configuration content, you can use the process
+						engine of <span class="ph pname">SAP HANA</span> application lifecycle management to automate configuration tasks.</p>
+</li>
+
+			</ul>
+
+			<p class="p">All phases of <span class="ph pname">SAP HANA</span> application lifecycle management are documented in the <cite class="cite">SAP HANA Application Lifecycle
+					Management Guide</cite>. The tasks related to the <span class="ph emphasis emphasis">Install</span> and <span class="ph emphasis emphasis">Configure</span> phases of
+					<span class="ph pname">SAP HANA</span> application lifecycle management are relevant for system administrators and are therefore also documented
+				in the <cite class="cite">SAP HANA Administration Guide</cite>. The tasks related to software development are documented in the <cite class="cite">SAP HANA
+					Developer Guide (For SAP HANA Studio)</cite>.</p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Availability of SAP HANA Application Lifecycle Management</div><div type="Availability of SAP HANA Application Lifecycle Management">
+			
+			<p class="p"><span class="ph pname">SAP HANA</span> application lifecycle management is installed with <span class="ph pname">SAP HANA</span> as automated content. You can access
+				the <span class="ph pname">SAP HANA</span> application lifecycle management functions in different ways:</p>
+
+			<ul class="ul" id="loio9a012d6438764459a581e6af55a87c46__ul_wwv_xs4_np">
+				<li class="li">Using the <span class="ph emphasis emphasis">XS user interface <span class="ph pname">SAP HANA</span> Application Lifecycle Management</span> which is available in
+					the following places:<ul class="ul" id="loio9a012d6438764459a581e6af55a87c46__ul_kk5_rc3_5r">
+						<li class="li">
+							<p class="p">On the <span class="ph pname">SAP HANA</span> XS Web server at the following URL:
+										<span class="ph filepath">http://<var class="keyword varname">&lt;WebServerHost&gt;</var>:80<var class="keyword varname">&lt;SAPHANAinstance&gt;</var>/sap/hana/xs/lm</span>.</p>
+
+						</li>
+
+						<li class="li">Using a link in <span class="ph pname">SAP HANA</span> Web-based Development Workbench.<p class="p">For example, to open the home screen, choose <span class="ph menucascade"><img src="images/navstart.gif" alt="Start of the navigation path" title="Start of the navigation path"/> <span class="ph uicontrol">Navigation Links</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">Lifecycle Management</span> <img src="images/navend.gif" alt="End of the navigation path" title="End of the navigation path"/></span> in the <span class="ph pname">SAP HANA</span> Web-based Development Workbench Editor tool.</p>
+</li>
+
+						<li class="li">Using the context menu in <span class="ph pname">SAP HANA</span> studio.<p class="p">For example, to open the home screen from, choose <span class="ph menucascade"><img src="images/navstart.gif" alt="Start of the navigation path" title="Start of the navigation path"/> <span class="ph uicontrol">Lifecycle Management</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">Application Lifecycle Management</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">Home Screen</span> <img src="images/navend.gif" alt="End of the navigation path" title="End of the navigation path"/></span> from the context menu for a particular system in the <span class="ph uicontrol">SAP HANA Administration
+									Console</span> perspective in <span class="ph pname">SAP HANA</span> studio.</p>
+</li>
+
+						<li class="li">Using the tile catalog in <span class="ph pname">SAP HANA</span> cockpit.<p class="p">There are tiles available both in the <span class="ph uicontrol">SAP HANA
+									Application Lifecycle Management</span> and in the <span class="ph uicontrol">SAP HANA Application Installation and
+									Update</span> groups in <span class="ph pname">SAP HANA</span> cockpit that you can customize according to your
+							needs.</p>
+</li>
+
+					</ul>
+</li>
+
+				<li class="li">Using the <span class="ph emphasis emphasis">command line tool <samp class="ph systemoutput">hdbalm</samp></span>. <p class="p">The file is shipped with the <span class="ph pname">SAP
+							HANA</span> client installation. If you leave the default installation options unchanged
+							<samp class="ph systemoutput">hdbalm</samp> is located in the <span class="ph filepath">..\sap\hdbclient</span> directory.</p>
+</li>
+
+			</ul>
+
+			<p class="p">You cannot perform all application lifecycle management tasks with one tool. For example, assembling products and software components
+				can only be done using the <samp class="ph systemoutput">hdbalm</samp> tool, whereas the full set of transport functions is available only in
+				the XS user interface. Whenever a function is available in the XS user interface it is documented there. When used in <span class="ph pname">SAP
+					HANA</span> studio, the functions are the same as in the XS user interface. Therefore, these options are not separately
+				documented.</p>
+
+		</div></div>
+
+		<div class="note note"><span class="notetitle">Note</span> For information about the <span class="ph pname">SAP HANA</span> platform lifecycle management tools, see the <cite class="cite">SAP HANA Server Installation and Update
+				Guide</cite> and <cite class="cite">SAP HANA Platform Lifecycle Management</cite> in the <cite class="cite">SAP HANA Administration Guide</cite>.</div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?b92b9bdc457c42ba920e3ed6b09e4463.html" target="_top" title="SAP HANA provides the hdbalm command line tool to perform application lifecycle-management tasks.">Using hdbalm</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="SAP HANA Application Lifecycle Management";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

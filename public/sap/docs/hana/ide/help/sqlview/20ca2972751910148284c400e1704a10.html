@@ -1,0 +1,2967 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Deprecated. Please use M_VOLUME_IO_TOTAL_STATISTICS instead."/>
+<meta name="description" content="Deprecated. Please use M_VOLUME_IO_TOTAL_STATISTICS instead."/>
+<meta name="keywords" content="M_VOLUME_IO_PERFORMANCE_STATISTICS"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=836409989128968"/>
+<title>M_VOLUME_IO_PERFORMANCE_STATISTICS System View</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20ca2972751910148284c400e1704a10";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20ca2972751910148284c400e1704a10">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">M_VOLUME_IO_PERFORMANCE_STATISTICS System View</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Deprecated. Please use M_VOLUME_IO_TOTAL_STATISTICS instead. </p>
+
+      <div class="section"><div class="section_title">Structure</div><div type="Structure">
+         
+         <div class="p">
+            
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20ca2972751910148284c400e1704a10__table_tfz_c1z_5y" class="table" frame="border" border="1" rules="all">
+                  <thead class="thead" align="left">
+                     <tr class="row">
+                        <th class="entry" valign="top" id="d11734820e42">
+                           <p class="p">Column name</p>
+
+                        </th>
+
+                        <th class="entry" valign="top" id="d11734820e48">
+                           <p class="p">Data type</p>
+
+                        </th>
+
+                        <th class="entry" valign="top" id="d11734820e54">
+                           <p class="p">Description</p>
+
+                        </th>
+
+                     </tr>
+
+                  </thead>
+
+                  <tbody class="tbody">
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">HOST</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">VARCHAR(64)</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Host name </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">PORT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">INTEGER</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Internal port </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">VOLUME_ID</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">INTEGER</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Persistence Volume ID </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">PATH</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">VARCHAR(512)</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Filesystem path </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">FILESYSTEM_TYPE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">VARCHAR(32)</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Filesystem type </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">TYPE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">VARCHAR(16)</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Type of contained files </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MAX_IO_BUFFER</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Max. I/O buffer size </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">READ_SYNC</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Count of synchronous reads </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">WRITE_SYNC</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Count of synchronous writes </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">READ_REQUESTS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Count of read requests </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">WRITE_REQUESTS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Count of write requests </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">READ_COMPLETIONS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Count of read completions </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">FAILED_READS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Count of failed reads </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">WRITE_COMPLETIONS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Count of write completions </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">FAILED_WRITES</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Count of failed writes </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">FULL_RETRY_READS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Count of full retry reads </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">FULL_RETRY_WRITES</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Count of full retry writes </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">SHORT_READS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Count of short reads </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">SHORT_WRITES</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Count of short writes </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">DELAYED_READ_REQUESTS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Count of delayed read requests </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">DELAYED_WRITE_REQUESTS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Count of delayed write requests </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">DEQUEUED_DELAYED_REQUESTS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Count of dequeued delayed requests </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">RESUBMITTED_DELAYED_REQUESTS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Count of resubmitted delayed requests </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">RESUBMITTED_DELAYED_REQUESTS_DELAYED_AGAIN</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Count of resubmitted delayed requests delayed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">ITEMS_IN_DELAY_QUEUE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Count of items in delay queue </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MAX_ITEMS_IN_DELAY_QUEUE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Maximum size of delay queue </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">LAST_READ_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for synchronous reads (last) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MAX_READ_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for synchronous reads (max) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MIN_READ_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for synchronous reads (min) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">SUM_READ_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for synchronous reads (total) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">AVG_READ_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for synchronous reads (avg) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">LAST_WRITE_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for synchronous writes (last) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MAX_WRITE_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for synchronous writes (max) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MIN_WRITE_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for synchronous writes (min) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">SUM_WRITE_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for synchronous writes (total) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">AVG_WRITE_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for synchronous writes (avg) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">LAST_READ_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for read events (last) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MAX_READ_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for read events (max) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MIN_READ_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for read events (min) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">SUM_READ_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for read events (total) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">AVG_READ_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for read events (avg) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">LAST_WRITE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for write events (last) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MAX_WRITE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for write events (max) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MIN_WRITE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for write events (min) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">SUM_WRITE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for write events (total) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">AVG_WRITE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for write events (avg) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">LAST_READ_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for enqueuing read I/O events (last) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MAX_READ_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for enqueuing read I/O events (max) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MIN_READ_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for enqueuing read I/O events (min) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">SUM_READ_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for enqueuing read I/O events (total) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">AVG_READ_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for enqueuing read I/O events (avg) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">LAST_WRITE_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for enqueuing write I/O events (last) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MAX_WRITE_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for enqueuing write I/O events (max) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MIN_WRITE_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for enqueuing write I/O events (min) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">SUM_WRITE_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for enqueuing write I/O events (total) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">AVG_WRITE_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Time for enqueuing write I/O events (avg) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">LAST_READ_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of read data (last) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MAX_READ_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of read data (max) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MIN_READ_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of read data (min) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">SUM_READ_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of read data (total) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">AVG_READ_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of read data (avg) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">LAST_WRITE_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of written data (last) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MAX_WRITE_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of written data (max) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MIN_WRITE_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of written data (min) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">SUM_WRITE_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of written data (total) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">AVG_WRITE_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of written data (avg) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">LAST_READ_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of synchronously read data (last) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MAX_READ_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of synchronously read data (max) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MIN_READ_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of synchronously read data (min) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">SUM_READ_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of synchronously read data (total) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">AVG_READ_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of synchronously read data (avg) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">LAST_WRITE_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of synchronously written data (last) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MAX_WRITE_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of synchronously written data (max) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">MIN_WRITE_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of synchronously written data (min) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">SUM_WRITE_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of synchronously written data (total) </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">AVG_WRITE_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">BIGINT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e42 d11734820e48 d11734820e54 ">
+                           <p class="p">Size of synchronously written data (avg) </p>
+
+                        </td>
+
+                     </tr>
+
+                  </tbody>
+
+               </table>
+</div>
+
+         </div>
+
+      </div></div>
+
+      <div class="section" id="loio20ca2972751910148284c400e1704a10___m__v_o_l_u_m_e__i_o__p_e_r_f_o_r_m_a_n_c_e__s_t_a_t_i_s_t_i_c_s_1fulldesc_M_VOLUME_IO_PERFORMANCE_STATISTICS"><div class="section_title">Full description</div><div type="Full description"><div class="sectiondiv">
+            <p class="p">This view has a resettable counterpart. This means you can also see the values since
+               the last reset in the dependent view M_VOLUME_IO_PERFORMANCE_STATISTICS_RESET. To
+               reset the values, use the SQL command: ALTER SYSTEM RESET MONITORING VIEW
+               SYS.M_VOLUME_IO_PERFORMANCE_STATISTICS_RESET or the management console command:
+               monitor reset -n M_VOLUME_IO_PERFORMANCE_STATISTICS_RESET.</p>
+
+         </div><p class="p">This view shows information about I/O
+            operations for various buffer sizes</p>
+<p class="p">Resetting this view implicitly resets
+            M_VOLUME_IO_DETAILED_STATISTICS and M_VOLUME_IO_DETAILED/RETRY_STATISTICS.</p>
+<p class="p">The
+            following table shows the differences between M_VOLUME_IO_PERFORMANCE_STATISTICS and
+            M_VOLUME_IO_DETAILED/RETRY_STATISTICS. Columns that are only valid in
+            M_VOLUME_IO_DETAILED/RETRY_STATISTICS are not shown.</p>
+<div class="p">
+            
+<div class="table-wrapper tablenoborder"><table summary="" class="table" frame="border" border="1" rules="all">
+                  <thead class="thead" align="left">
+                     <tr class="row">
+                        <th class="entry" valign="top" id="d11734820e1701">
+                           <p class="p">M_VOLUME_IO_PERFORMANCE_STATISTICS</p>
+
+                        </th>
+
+                        <th class="entry" valign="top" id="d11734820e1707">
+                           <p class="p">M_VOLUME_IO_DETAILED_STATISTICS</p>
+
+                        </th>
+
+                        <th class="entry" valign="top" id="d11734820e1713">
+                           <p class="p">M_VOLUME_IO_RETRY_STATISTICS</p>
+
+                        </th>
+
+                        <th class="entry" valign="top" id="d11734820e1719">
+                           <p class="p">Change </p>
+
+                        </th>
+
+                     </tr>
+
+                  </thead>
+
+                  <tbody class="tbody">
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">HOST</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">HOST</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">HOST</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">PORT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">PORT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">PORT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">VOLUME_ID</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">VOLUME_ID</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">VOLUME_ID</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">PATH</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">PATH</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">PATH</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">FILESYSTEM_TYPE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">FILESYSTEM_TYPE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">FILESYSTEM_TYPE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">TYPE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">TYPE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">TYPE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_IO_BUFFER</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_IO_BUFFER</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_IO_BUFFER</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">READ_SYNC</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">READ_COUNT + ACTIVE_READ_COUNT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">derived </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">WRITE_SYNC</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">WRITE_COUNT + ACTIVE_WRITE_COUNT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">derived </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">READ_REQUESTS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">TRIGGER_ASYNC_READ_COUNT + ACTIVE_TRIGGER_ASYNC_READ_COUNT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">derived </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">WRITE_REQUESTS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">TRIGGER_ASYNC_WRITE_COUNT + ACTIVE_TRIGGER_ASYNC_WRITE_COUNT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">derived </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">READ_COMPLETIONS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">TRIGGER_ASYNC_READ_COUNT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">renamed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">FAILED_READS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">FAILED_READS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">WRITE_COMPLETIONS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">TRIGGER_ASYNC_WRITE_COUNT</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">renamed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">FAILED_WRITES</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">FAILED_WRITES</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">FULL_RETRY_READS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">FULL_RETRY_READS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">FULL_RETRY_WRITES</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">FULL_RETRY_WRITES</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">SHORT_READS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">SHORT_READS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">SHORT_WRITES</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">SHORT_WRITES</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">DELAYED_READ_REQUESTS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">DELAYED_WRITE_REQUESTS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">DEQUEUED_DELAYED_REQUESTS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">RESUBMITTED_DELAYED_REQUESTS</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">RESUBMITTED_DELAYED_REQUESTS_DELAYED_AGAIN</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">ITEMS_IN_DELAY_QUEUE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_ITEMS_IN_DELAY_QUEUE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">LAST_READ_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_READ_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_READ_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">renamed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MIN_READ_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MIN_READ_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">renamed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">SUM_READ_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">AVG_READ_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">AVG_READ_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">renamed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">LAST_WRITE_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_WRITE_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_WRITE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">renamed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MIN_WRITE_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MIN_WRITE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">renamed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">SUM_WRITE_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">AVG_WRITE_SYNC_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">AVG_WRITE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">renamed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">LAST_READ_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_READ_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_READ_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MIN_READ_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MIN_READ_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">SUM_READ_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">AVG_READ_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">AVG_READ_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">renamed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">LAST_WRITE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_WRITE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_WRITE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MIN_WRITE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MIN_WRITE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">SUM_WRITE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">AVG_WRITE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">AVG_WRITE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">LAST_READ_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_READ_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MIN_READ_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">SUM_READ_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">AVG_READ_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">LAST_WRITE_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_WRITE_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MIN_WRITE_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">SUM_WRITE_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">AVG_WRITE_ENQUEUE_TIME</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">LAST_READ_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_READ_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_READ_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MIN_READ_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MIN_READ_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">SUM_READ_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">AVG_READ_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">AVG_READ_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">LAST_WRITE_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_WRITE_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_WRITE_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MIN_WRITE_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MIN_WRITE_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">SUM_WRITE_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">AVG_WRITE_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">AVG_WRITE_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">none </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">LAST_READ_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_READ_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_READ_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">renamed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MIN_READ_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MIN_READ_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">renamed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">SUM_READ_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">AVG_READ_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">AVG_READ_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">renamed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">LAST_WRITE_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_WRITE_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MAX_WRITE_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">renamed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MIN_WRITE_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">MIN_WRITE_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">renamed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">SUM_WRITE_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">removed </p>
+
+                        </td>
+
+                     </tr>
+
+                     <tr class="row">
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">AVG_WRITE_SYNC_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">AVG_WRITE_SIZE</p>
+
+                        </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 "> </td>
+
+                        <td class="entry" valign="top" headers="d11734820e1701 d11734820e1707 d11734820e1713 d11734820e1719 ">
+                           <p class="p">renamed </p>
+
+                        </td>
+
+                     </tr>
+
+                  </tbody>
+
+               </table>
+</div>
+
+         </div>
+</div></div>
+
+   </div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="M_VOLUME_IO_PERFORMANCE_STATISTICS System View";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

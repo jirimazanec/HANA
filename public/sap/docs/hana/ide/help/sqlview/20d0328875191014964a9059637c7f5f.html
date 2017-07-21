@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Alters a procedure or manually triggers a recompilation of a procedure by generating an updated execution plan."/>
+<meta name="description" content="Alters a procedure or manually triggers a recompilation of a procedure by generating an updated execution plan."/>
+<meta name="keywords" content="ALTER PROCEDURE, ALTER PROCEDURE RECOMPILE"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=07049413815459804"/>
+<title>ALTER PROCEDURE Statement (Procedural)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20d0328875191014964a9059637c7f5f";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20d0328875191014964a9059637c7f5f">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">ALTER PROCEDURE Statement (Procedural)</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Alters a procedure or manually triggers a recompilation of a procedure by generating
+      an updated execution plan.</p>
+
+      <div class="section" id="loio20d0328875191014964a9059637c7f5f__sql_alter_procedure_recompile_1sql_alter_procedure_recompile_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+         
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER PROCEDURE <var class="keyword varname">&lt;proc_name&gt;</var> [ ( <var class="keyword varname">&lt;parameter_clause&gt;</var> ) ] [ LANGUAGE <var class="keyword varname">&lt;lang&gt;</var> ] 
+   [ DEFAULT SCHEMA <var class="keyword varname">&lt;default_schema_name&gt;</var> ]
+   [ READS SQL DATA ] AS
+   BEGIN [ SEQUENTIAL EXECUTION ]
+     <var class="keyword varname">&lt;procedure_body&gt;</var>
+   END
+
+| ALTER PROCEDURE <var class="keyword varname">&lt;proc_name&gt;</var> RECOMPILE [ WITH PLAN ]</pre></div>
+
+      </div></div>
+
+      <div class="section" id="loio20d0328875191014964a9059637c7f5f__sql_alter_procedure_recompile_1sql_alter_procedure_recompile_syntax_elements"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+         
+         <dl class="dl parml">
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;proc_name&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the procedure to be altered, with an optional schema name.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;proc_name&gt;</var> ::= [<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;schema_name&gt;</var> ::= <var class="keyword varname">&lt;unicode_name&gt;</var></pre></div>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;parameter_clause&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the input and output parameters of the procedure.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;lang&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the programming language in the procedure. The default is
+                        <samp class="ph codeph">SQLSCRIPT</samp>.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;default_schema_name&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the default schema for unqualified objects in the procedure body; if
+                     nothing is specified, then the <samp class="ph codeph">current_schema</samp> of the session
+                     is used.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis">READS SQL DATA</dt>
+
+               <dd class="dd pd">
+                  <p class="p">Marks the procedure as being read-only and side-effect free. That is, the
+                     procedure does not make changes to the database data or its structure (such as
+                     DDL or DML statements) and it only calls other read-only procedures.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;procedure_body&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Defines the main body of the procedure according to the programming language
+                     selected.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis">SEQUENTIAL EXECUTION</dt>
+
+               <dd class="dd pd">
+                  <p class="p">Forces sequential execution of the procedure logic. No parallelism takes
+                     place.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis">WITH PLAN</dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies that internal debug information should be created during execution of
+                     the procedure.</p>
+
+               </dd>
+
+            
+         </dl>
+
+      </div></div>
+
+      <div class="section" id="loio20d0328875191014964a9059637c7f5f__sql_alter_procedure_recompile_1sql_alter_procedure_recompile_description"><div class="section_title">Description</div><div type="Description">
+         
+         <p class="p">For full description of the clauses for the ALTER PROCEDURE statement, including
+            examples, refer to the CREATE PROCEDURE and ALTER PROCEDURE statements in the HANA
+            SQLScript Guide.</p>
+
+         <p class="p">For production code, a procedure should be compiled without the WITH PLAN option to
+            avoid overhead during compilation and execution of the procedure.</p>
+
+      </div></div>
+
+      <div class="section" id="loio20d0328875191014964a9059637c7f5f__sql_alter_procedure_recompile_1sql_alter_procedure_recompile_examples"><div class="section_title">Example</div><div type="Example">
+         
+         <p class="p">Trigger the recompilation of the my_proc procedure to produce debugging information. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER PROCEDURE my_proc RECOMPILE WITH PLAN;</pre></div>
+
+      </div></div>
+
+   </div>
+
+   <div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="ALTER PROCEDURE Statement (Procedural)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

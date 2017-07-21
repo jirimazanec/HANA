@@ -1,0 +1,11 @@
+PROCEDURE "OTEBW"."COMMON::Install"( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	--DEFAULT SCHEMA <default_schema_name>
+AS BEGIN
+
+drop table OTEBW."Log";
+create column table OTEBW."Log" ("Log_ID" bigint generated always as identity not null, "TST" timestamp default current_timestamp not null, "CurrSchema" nvarchar(20), "CurrObject" nvarchar(40), "ErrorCode" integer, "ErrorMess" nvarchar(255), "Cnt" integer);
+
+
+END;

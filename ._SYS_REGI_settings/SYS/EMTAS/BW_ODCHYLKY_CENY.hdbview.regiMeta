@@ -1,0 +1,24 @@
+{
+ "metadata": {
+  "activated_at": "2017-06-30 14:27:42.399 GMT+02:00",
+  "activated_by": "SNEIDEROVAI",
+  "change_number": "4074",
+  "delivery_unit": "",
+  "du_vendor": "",
+  "du_version": "",
+  "du_version_patch": "",
+  "du_version_sp": "",
+  "edit": "true",
+  "format_version": "",
+  "object_status": "0",
+  "released_at": "2017-07-10 13:17:59.7300000",
+  "type": "1",
+  "version_id": "6"
+ },
+ "name": "BW_ODCHYLKY_CENY",
+ "package": "EMTAS",
+ "suffix": "hdbview",
+ "version": {
+  "versionType": "1"
+ }
+}

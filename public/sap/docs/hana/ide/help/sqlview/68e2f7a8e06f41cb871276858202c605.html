@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Provides a runtime mechanism to bind the target query and hints to the Hint Table to force the compilation of the target query with the hint."/>
+<meta name="description" content="Provides a runtime mechanism to bind the target query and hints to the Hint Table to force the compilation of the target query with the hint."/>
+<meta name="keywords" content="ALTER SYSTEM UNPIN SQL PLAN CACHE ENTRY, ALTER SYSTEM PIN SQL PLAN CACHE ENTRY"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=18623117444350878"/>
+<title>ALTER SYSTEM [UN]PIN SQL PLAN CACHE ENTRY Statement (System Management)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio68e2f7a8e06f41cb871276858202c605";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio68e2f7a8e06f41cb871276858202c605">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">ALTER SYSTEM [UN]PIN SQL PLAN CACHE ENTRY Statement (System Management)</h1>
+
+		
+		
+		
+		
+		<div class="body refbody"><p class="shortdesc">Provides a runtime mechanism to bind the target query and hints to the Hint Table to
+		force the compilation of the target query with the hint. </p>
+
+			<div class="section"><div class="section_title">Syntax</div><div type="Syntax">
+				
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER SYSTEM PIN SQL PLAN CACHE ENTRY <var class="keyword varname">&lt;plan_id&gt;</var> 
+ | ALTER SYSTEM PIN SQL PLAN CACHE ENTRY <var class="keyword varname">&lt;plan_id&gt;</var> WITH HINT ( <var class="keyword varname">&lt;hint_items&gt;</var> ) 
+ | ALTER SYSTEM UNPIN SQL PLAN CACHE ENTRY <var class="keyword varname">&lt;plan_id&gt;</var>
+ | ALTER SYSTEM PIN SQL PLAN CACHE ENTRY LIKE <var class="keyword varname">&lt;plan_id&gt;</var> WITH HINT ( <var class="keyword varname">&lt;hint_items&gt;</var> )
+ | ALTER SYSTEM UNPIN SQL PLAN CACHE ENTRY LIKE <var class="keyword varname">&lt;plan_id&gt;</var></pre></div>
+
+			</div></div>
+
+			<div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+				
+			<dl class="dl parml">
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;plan_id&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies the identifier of the plan to be pinned. </p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;plan_id&gt;</var> ::= <var class="keyword varname">&lt;integer_literal&gt;</var></pre></div>
+
+						<p class="p">Refer to the M_SQL_PLAN_CACHE view to find the <var class="keyword varname">&lt;plan_id&gt;</var> for the desired
+							plan cache entry.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis">WITH HINT <var class="keyword varname">&lt;hint_items&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies one or more hints (comma-separated list) to apply to the query. Refer to the
+							HINTS system view for list of available hint items. </p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;hint_items&gt;</var> ::= <var class="keyword varname">&lt;string_literal&gt;</var></pre></div>
+
+						<p class="p">Pinning a plan with a WITH HINT clause binds the target query to the HINT
+							table.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis">PIN</dt>
+
+					<dd class="dd pd">
+						<p class="p">PIN specifies to preserve a plan.</p>
+
+						<p class="p">ALTER SYSTEM PIN...WITH HINT clause binds the target query to the HINT
+							table. </p>
+
+						<p class="p">ALTER SYSTEM PIN without a WITH HINT clause pins a plan to the SQL plan
+							cache so that the pinned plan will not be evicted from the SQL plan
+							cach, even after an ALTER SYSTEM CLEAR SQL PLAN CACHE is executed.
+							SESSION LOCAL plans are pinned for the duration of the connection, and
+							are evicted when the connection is closed.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis">UNPIN</dt>
+
+					<dd class="dd pd">
+						<p class="p">UNPIN reverts a pinned plan to a state where it may be evicted following
+							the normal Last Recently Used (LRU) eviction scheme, as follows:</p>
+
+						<ul class="ul" id="loio68e2f7a8e06f41cb871276858202c605__ul_btf_ykj_wy">
+							<li class="li">
+								<p class="p">If the plan was compiled with a WITH HINT clause but not pinned,
+									the WITH HINT clause is removed (equivalent to ALTER SYSTEM
+									REMOVE STATEMENT HINT). The plan is already eligible for
+									eviction as per the LRU scheme because it was not pinned.</p>
+
+							</li>
+
+							<li class="li">
+								<p class="p">If the plan was compiled with a WITH HINT clause and pinned to
+									the plan cache (ALTER SYSTEM PIN...WITH HINT), then UNPIN
+									removes the hint, unpins the plan, and the plan will be evicted
+									as per the LRU scheme. </p>
+
+							</li>
+
+							<li class="li">
+								<p class="p">If the plan was compiled without a WITH HINT clause and pinned
+									(ALTER SYSTEM PIN), then the plan is unpinned and will be
+									evicted as per the LRU scheme. </p>
+
+							</li>
+
+						</ul>
+
+					</dd>
+
+				
+			</dl>
+
+			</div></div>
+
+			<div class="section"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">Pinning preserves a plan even after the database is restarted. Such binding can only
+				be removed by the UNPIN command.  </p>
+
+			<p class="p">Refer to the PINNED_SQL_PLANS view to verify the list of currently pinned
+				queries.</p>
+
+			<p class="p">Check whether the hints in <var class="keyword varname">&lt;hint_items&gt;</var> affect the query plan by
+				using the EXPLAIN PLAN command with the <var class="keyword varname">&lt;plan_id&gt;</var> parameter. </p>
+
+			<p class="p">You must have the OPTIMIZER_ADMIN privilege to execute the statements listed in the
+				syntax section.</p>
+
+			<p class="p">You must have the OPTIMIZER_ADMIN or SYSTEM privilege to access the PINNED_SQL_PLANS
+				view.</p>
+
+			<p class="p">Typical pinning scenario:</p>
+
+			<ol class="ol" id="loio68e2f7a8e06f41cb871276858202c605__ol_emg_wmj_wy">
+				<li class="li">
+					<p class="p">Identify the problematic query from the system.</p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">Try to append applicable hints to the query to find the target hint.</p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">Look for the corresponding cache entry from the M_SQL_PLAN_CACHE view and
+						identify the <var class="keyword varname">&lt;plan_id&gt;</var>.</p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">Bind the query and the hint using the ALTER SYSTEM PIN statement. Subsequent
+						execution of the query should use the newly compiled/cached plan.</p>
+
+				</li>
+
+			</ol>
+
+			<p class="p">If WITH HINT is specified, then during indexserver start-up, pinned queries are restored using
+				information from the PINNED_SQL_PLANS view. For each pair of SQL Plan Cache key and
+				hints in the PINNED_SQL_PLANS view, a plan with the respective hint is compiled and
+				inserted into the SQL Plan cache. If WITH HINT is not specified, then pinned plans
+				are no longer pinned after an indexserver restart.</p>
+
+		</div></div>
+
+			<div class="section"><div class="section_title">Examples</div><div type="Examples">
+			
+			<p class="p">The following statement pins a fictitious plan  <kbd class="ph userinput">20170203150455</kbd>:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER SYSTEM PIN SQL PLAN CACHE ENTRY 'ID 20170203150455';</pre></div>
+
+			<p class="p">The following statement unpins the fictitious plan  <kbd class="ph userinput">20170203150455</kbd>:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER SYSTEM UNPIN SQL PLAN CACHE ENTRY 'ID 20170203150455';</pre></div>
+
+			<p class="p">The following statement pins the fictitious plan <kbd class="ph userinput">1000003</kbd>, and
+				specifes the USE_OLAP_PLAN hint:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER SYSTEM PIN SQL PLAN CACHE ENTRY '1000003' WITH HINT (USE_OLAP_PLAN);</pre></div>
+
+		</div></div>
+
+		</div>
+
+
+		
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?3a827da524694d00a9d5f66e12935396.html" target="_top" title="Provides information on currently pinned SQL plans and corresponding hints.">PINNED_SQL_PLANS System View</a></div>
+<div><a class="link" href="default.html?20d9ec5575191014a251e58ecf90997a.html" target="_top" title="Evaluates the execution plan that the database follows when executing an SQL statement.">EXPLAIN PLAN Statement (Data Manipulation)</a></div>
+<div><a class="link" href="default.html?f55ce8e92a6744f3a4ee9f350cfb6453.html" target="_top" title="Provides all available hints to be used in WITH HINT clauses.">HINTS System View</a></div>
+<div><a class="link" href="default.html?20c57b8e75191014b22fcc8222b15970.html" target="_top" title="Provides statistics of an individual execution plan.">M_SQL_PLAN_CACHE System View</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="ALTER SYSTEM [UN]PIN SQL PLAN CACHE ENTRY Statement (System Management)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="The default HTTP port settings for SAP HANA XS include an SAP HANA instance number, for example, 80SAP HANA instance (8000). You can change the default settings, for example, to ensure that standard ports 80 and 443 are used for client access to the SAP HANA XS Web server by HTTP or HTTPS."/>
+<meta name="description" content="The default HTTP port settings for SAP HANA XS include an SAP HANA instance number, for example, 80SAP HANA instance (8000). You can change the default settings, for example, to ensure that standard ports 80 and 443 are used for client access to the SAP HANA XS Web server by HTTP or HTTPS."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=353325478207957"/>
+<title>Maintain Standard HTTP Port Numbers with SAP HANA XS</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio116cc3f3f3f645159ee138c3ba50a48b";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio116cc3f3f3f645159ee138c3ba50a48b">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Maintain Standard HTTP Port Numbers with SAP HANA XS</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">The default HTTP port settings for <span class="ph pname">SAP HANA</span> XS include an <span class="ph pname">SAP
+			HANA</span> instance number, for example, <samp class="ph codeph">80<var class="keyword varname">&lt;SAP HANA
+				instance&gt;</var></samp> (8000). You can change the default settings, for
+		example, to ensure that standard ports 80 and 443 are used for client access to the
+			<span class="ph pname">SAP HANA</span> XS Web server by HTTP or HTTPS.</p>
+
+		<div class="section prereq p"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Prerequisites</h2></div> To configure the <span class="ph pname">SAP HANA</span> XS server to use the standard HTTP ports
+				<samp class="ph codeph">80</samp> and <samp class="ph codeph">443</samp>, bear in mind the following
+				prerequisites:<ul class="ul" id="loio116cc3f3f3f645159ee138c3ba50a48b__ul_grb_ts4_jm">
+				<li class="li">Superuser authorization is required to bind ports with a number less that (&lt;)
+					1024 (well-known ports) on a UNIX system</li>
+
+				<li class="li">Neither the ICM process nor the SAP Web Dispatcher has the superuser
+					authorization.</li>
+
+			</ul>
+</div>
+
+		<div class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<p class="p">By default, the <span class="ph pname">SAP HANA</span> XS Web server is configured to use the port numbers
+						<samp class="ph codeph">80<var class="keyword varname">&lt;SAP HANA instance number&gt;</var></samp> for HTTP and
+						<samp class="ph codeph">43<var class="keyword varname">&lt;SAP HANA instance number&gt;</var></samp> for HTTPS
+				requests from clients. You can change this behavior, for example, to configure the
+					<span class="ph pname">SAP HANA</span> XS server to use the standard HTTP ports
+					<samp class="ph codeph">80</samp> and <samp class="ph codeph">443</samp>, as follows:</p>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand" id="loio116cc3f3f3f645159ee138c3ba50a48b__step_N10050_N1003F_N10016_N10001">
+				<span class="ph cmd">Open the instance profile of your SAP Web Dispatcher.</span>
+				<div class="itemgroup info">The SAP Web Dispatcher profile can be found in the following location in the <span class="ph pname">SAP
+						HANA</span> studio:<p class="p"><span class="ph menucascade"><img src="images/navstart.gif" alt="Start of the navigation path" title="Start of the navigation path"/> <span class="ph uicontrol">SAP HANA Administration Console</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">Configuration</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">webdispatcher</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">[profile]</span> <img src="images/navend.gif" alt="End of the navigation path" title="End of the navigation path"/></span></p>
+</div>
+			</li>
+<li class="li step stepexpand" id="loio116cc3f3f3f645159ee138c3ba50a48b__step_N10073_N1003F_N10016_N10001">
+				<span class="ph cmd">Check and, if necessary, modify the HTTP/S port settings in the SAP Web Dispatcher profile,
+					as follows:</span>
+				<div class="itemgroup stepxmp">
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">icm/server_port_0 = PROT=HTTP, PORT=80, PROCTIMEOUT=600, EXTBIND=1
+icm/server_port_1 = PROT=HTTPS, PORT=443, PROCTIMEOUT=600, EXTBIND=1
+</pre></div>
+
+					<p class="p">Save the changes to the SAP Web Dispatcher profile.</p>
+
+				</div>
+			</li>
+<li class="li step stepexpand" id="loio116cc3f3f3f645159ee138c3ba50a48b__step_N101FE_N1003F_N10016_N10001">
+				<span class="ph cmd">Bind the default SSL port to use.</span>
+				<div class="itemgroup info">Since only users with superuser authorization rights can bind ports with a number less
+					that (&lt;) 1024 (well-known ports) on a UNIX system, and the ICM process or the
+					SAP Web Dispatcher should not have these rights (and ICM cannot have them for
+					technical reasons), the port must be bound by an external program and the listen
+					socket then transferred to the calling process. You can use the
+						<span class="keyword cmdname">icmbnd</span> command.<div class="note note" id="loio116cc3f3f3f645159ee138c3ba50a48b__note_N10323_N1031C_N10314_N1003B_N10012_N10001"><span class="notetitle">Note</span> The installation process
+						creates the file <span class="ph filepath">icmbnd.new</span>, which you must rename to
+							<span class="ph filepath">icmbnd</span> and configure as described below. This
+						applies after a system update, too. </div>
+<p class="p">Since superuser privileges are
+						required to bind ports with a number lower than 1024, you must change the
+						owner and permissions of the <span class="keyword cmdname">icmbnd</span> command, for example,
+						from <samp class="ph codeph"><var class="keyword varname">&lt;SID&gt;</var>adm</samp> to user
+							<samp class="ph codeph">root</samp>.</p>
+</div>
+				<ol type="a" class="ol substeps" id="loio116cc3f3f3f645159ee138c3ba50a48b__substeps_ngq_1mk_dj">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Change the owner of the <span class="keyword cmdname">icmbnd</span> command:</span>
+						<div class="itemgroup stepxmp">
+							<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">$&gt; chown root:sapsys icmbnd</pre></div>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Change the permissions for the <span class="keyword cmdname">icmbnd</span> command:</span>
+						<div class="itemgroup stepxmp">
+							<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">$&gt; chmod 4750 icmbnd</pre></div>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Check the new permissions for the <span class="keyword cmdname">icmbnd</span>
+							command:</span>
+						<div class="itemgroup stepxmp">
+							<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">$&gt; ls -al
+rwsr-x 1 root sapsys 1048044 Feb 13 16:19 icmbnd</pre></div>
+
+						</div>
+					</li>
+
+				</ol>
+
+			</li>
+</ol>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="http://help.sap.com/saphelp_nw74/helpdata/de/48/3f047b75d431cbe10000000a42189d/content.htm?frameset=/de/48/3f047b75d431cbe10000000a42189d/frameset.htm" target="_blank" alt="http://help.sap.com/saphelp_nw74/helpdata/de/48/3f047b75d431cbe10000000a42189d/content.htm?frameset=/de/48/3f047b75d431cbe10000000a42189d/frameset.htm" title="http://help.sap.com/saphelp_nw74/helpdata/de/48/3f047b75d431cbe10000000a42189d/content.htm?frameset=/de/48/3f047b75d431cbe10000000a42189d/frameset.htm">SAP Web Dispatcher: Binding Ports &lt; 1024 on UNIX</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Maintain Standard HTTP Port Numbers with SAP HANA XS";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

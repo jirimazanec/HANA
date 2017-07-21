@@ -1,0 +1,88 @@
+schema="OTEBW_EMTAS";
+
+query = "SELECT A.PARTICID,
+               A.BUYSELLTYPE,
+               A.MARKETTYPE,
+               A.TRADEID,
+				A.DDATE,
+				A.CURRENCY,
+				A.DDATEFROM,
+				A.DDATETO,
+               A.INTERVALTYPE,
+               MIN(A.INTERVALINDX) AS BLOCKFROM,
+               MAX(A.INTERVALINDX) AS BLOCKTO,
+			   ROUND(A.VOLUME,1) AS VOLUME,                              
+               ROUND(A.TOTALBLOCKVOLUME,1) AS TOTALBLOCKVOLUME,
+               A.UNIT,
+               A.PRICE,
+               A.TOTALPRICE,
+               A.TRADETS, 
+               A.TRADEDATE,
+        		A.TRADETIME,
+               A.AGGRESSOR,
+ 				A.CALMONTH,
+				A.CALYEAR,
+				A.CALWEEK,
+				A.CALQUARTER,
+               'B' as IMMARKETTYPE
+          FROM (SELECT O.PARTICID,
+					   O.BUYSELLTYPE,
+					   T.MARKETTYPE,
+					   T.TRADEID,
+						to_date(T.DDATE) as DDATE,
+						C.CURRENCY,
+						T.DDATE as DDATEFROM,
+						T.DDATE as DDATETO,
+					   C.INTERVALTYPE,
+					   BI.INTERVALINDX,
+					   T.VOLUME,
+					   T.TOTALBLOCKVOLUME,
+					   T.UNIT,
+					   T.PRICE,
+					   T.TOTALPRICE,
+					   T.TRADETS,
+   					   	T.TRADEDATE,
+						T.TRADETIME,
+					   T.BUYSELLTYPEA as AGGRESSOR,
+						T.CALMONTH,
+						T.CALYEAR,
+						T.CALWEEK,
+						T.CALQUARTER
+				  FROM OTEBW_EMTAS.\"EMTAS::BW_IMBALM_ORDER\"   as O,
+					   OTEBW_EMTAS.\"EMTAS::BW_IMBALM_TRADE\"   as T,
+					   OTEBW_EMTAS.\"EMTAS::BW_IMBALM_CONTRACT\" as C,
+					   OTEBW_EMTAS.\"EMTAS::BW_IM_INTERVAL\"     as BI
+				 WHERE O.CONTRACTID = C.CONTRACTID
+				   AND C.CONTRACTID = BI.CONTRACTID
+				   AND C.CONTRACTTYPE = 'UD'       
+				   AND ((T.ORDERIDA = O.ORDERID AND
+					   T.REVISIONIDA = O.REVISIONID) OR
+					   (T.ORDERIDB = O.ORDERID AND
+					   T.REVISIONIDB = O.REVISIONID))) as A
+  GROUP BY A.PARTICID,
+           A.BUYSELLTYPE,
+           A.MARKETTYPE,
+           A.TRADEID,
+			A.DDATE,
+			A.CURRENCY,
+			A.DDATEFROM,
+			A.DDATETO,
+           A.INTERVALTYPE,
+           A.VOLUME,
+           A.TOTALBLOCKVOLUME,
+           A.UNIT,
+           A.PRICE,
+           A.TOTALPRICE,
+           A.TRADETS,
+           A.TRADEDATE,
+           A.TRADETIME,
+           A.AGGRESSOR,
+		   A.CALMONTH,
+			A.CALYEAR,
+			A.CALWEEK,
+			A.CALQUARTER";
+
+depends_on_table=["OTEBW_EMTAS::BW_IMBALM_ORDER"];         		
+depends_on_table=["OTEBW_EMTAS::BW_IMBALM_TRADE"];
+depends_on_table=["OTEBW_EMTAS::BW_IMBALM_CONTRACT"];
+depends_on_table=["OTEBW_EMTAS::BW_IM_INTERVAL"];

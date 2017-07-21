@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Namespace: procedures</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Namespace: procedures</h1>
+    
+    
+
+
+
+<section>
+    
+<header>
+    <h2>
+    procedures
+    </h2>
+    
+</header>  
+
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+            <div class="description">XS Procedures is a library to call stored procedures in HANA from XS as if they were Javascript functions.</div>
+        
+        
+        
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        procedures.xsjslib, line 26
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+        
+        
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Members</h3>
+        
+        <dl>
+            
+<dt>
+    <h4 class="name" id="configuration"><span class="type-signature">&lt;static> </span>configuration<span class="type-signature"> :Object</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        A global configuration object specifying tracing, schema into which temporary tables are written, and argument passing mode.
+    </div>
+    
+    
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>trace</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                    notrace
+                
+                </td>
+            
+            
+            <td class="description last">trace - a method to be used for tracing procedure calls
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>debug</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">called for debug level logs</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>warning</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">called for warning level logs</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>info</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">called for info level logs</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+            </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>argumentPassingMode</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                    'ltt'
+                
+                </td>
+            
+            
+            <td class="description last">can be either 'ltt' or 'gtt'. 'ltt' will create local temporary tables, 'gtt' will create global temporary tables</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>tempSchema</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">indicates a schema used for creating temporary tables</td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        procedures.xsjslib, line 1263
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="notrace"><span class="type-signature">&lt;static> </span>notrace<span class="type-signature"> :Object</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        A constant to be used configuration.trace if no tracing is required
+    </div>
+    
+    
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        procedures.xsjslib, line 1283
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="simpletrace"><span class="type-signature">&lt;static> </span>simpletrace<span class="type-signature"> :Object</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        A constant to be used in configuration.trace if simple tracing to default $.trace is required
+    </div>
+    
+    
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        procedures.xsjslib, line 1276
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <h4 class="name" id="allProcedures"><span class="type-signature">&lt;static> </span>allProcedures<span class="signature">(schema, package)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Returns an object with properties for all stored procedures and values containing functionswhich calls these stored procedure
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>schema</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">the schema name where the stored procedures are located</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>package</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">the package name where the stored procedures are located</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        procedures.xsjslib, line 1221
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    - an object with a property for each of the procedures available for the given schema and procedure name.
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Object</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>var XSProc = $.import("sap.hana.xs.libs.dbutils", "procedures"); // import the libraryXSProc.setTempSchema("MYSCHEMA"); // specify a temporary schemavar getRating = XSProc.allProcedures("MYSCHEMA","my.package").RATINGPROC; // create a function as proxy for the procedure// the procedure RATINGPROC has the signature (in IN_RATING ACTIVITYRATING, in FACTOR INTEGER, out RESULT USERRATING) with // types:  type ACTIVITYRATING {ACTIVITYID: Integer; USERID: Integer; RATING: Integer;}; //         type USERRATING { USERID: Integer; RATING: Integer;}; var result = getRating([{ACTIVITYID: 1001, USERID: 1, RATING: 3}, {ACTIVITYID: 1011, USERID: 1, RATING: 1}], 3); // call the procedure// result === {"RESULT":[{"USERID":1,"RATING":6},{"USERID":2,"RATING":6}]}</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="procedure"><span class="type-signature">&lt;static> </span>procedure<span class="signature">(schema, package, proc, <span class="optional">config</span>)</span><span class="type-signature"> &rarr; {procedures~procedurecaller}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Returns a function which calls a stored procedure.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>schema</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">the schema name where the stored procedure is located</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>package</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">the package name of the stored procedure</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>proc</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">the name of the stored procedure</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">a configuration object containing one or several of the following properties
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>connection</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">$.db.Connection</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">a connection object to be used for calling the procedure</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>input</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">an array of functions each of which is applied to the corresponding element in the array of input arguments before invoking the procedure</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>output</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+|
+
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">an array of functions each of which is applied to the corresponding element in the array of output objects. It can also be the string 'raw' if the unmodified ResultSet should be returned</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        procedures.xsjslib, line 1197
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    - a function which calls a stored procedure.
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">procedures~procedurecaller</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>var XSProc = $.import("sap.hana.xs.libs.dbutils", "procedures"); // import the libraryXSProc.setTempSchema("MYSCHEMA"); // specify a temporary schemavar getRating = XSProc.procedure("MYSCHEMA","my.package", "RATINGPROC"); // create a function as proxy for the procedure// the procedure RATINGPROC has the signature (in IN_RATING ACTIVITYRATING, in FACTOR INTEGER, out RESULT USERRATING) with // types:  type ACTIVITYRATING {ACTIVITYID: Integer; USERID: Integer; RATING: Integer;}; //         type USERRATING { USERID: Integer; RATING: Integer;}; var result = getRating([{ACTIVITYID: 1001, USERID: 1, RATING: 3}, {ACTIVITYID: 1011, USERID: 1, RATING: 1}], 3); // call the procedure// result === {"RESULT":[{"USERID":1,"RATING":6},{"USERID":2,"RATING":6}]}</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="procedureOfSchema"><span class="type-signature">&lt;static> </span>procedureOfSchema<span class="signature">(schema, proc, <span class="optional">config</span>)</span><span class="type-signature"> &rarr; {procedures~procedurecaller}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        procedureOfSchema - Returns a function which calls a stored procedure
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>schema</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">the schema name where the stored procedure is located</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>proc</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">the name of the stored procedure</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">a configuration object containing one or several of the following properties
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>connection</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">$.db.Connection</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">a connection object to be used for calling the procedure</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>input</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">an array of functions each of which is applied to the corresponding element in the array of input arguments before invoking the procedure</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>output</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+|
+
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">an array of functions each of which is applied to the corresponding element in the array of output objects. It can also be the string 'raw' if the unmodified ResultSet should be returned</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        procedures.xsjslib, line 1241
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    - a function which calls a stored procedure.
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">procedures~procedurecaller</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>var XSProc = $.import("sap.hana.xs.libs.dbutils", "procedures"); // import the libraryXSProc.setTempSchema("MYSCHEMA"); // specify a temporary schemavar getRating = XSProc.procedure("MYSCHEMA", "RATINGPROC"); // create a function as proxy for the procedure// the procedure RATINGPROC has the signature (in IN_RATING ACTIVITYRATING, in FACTOR INTEGER, out RESULT USERRATING) with // types:  type ACTIVITYRATING {ACTIVITYID: Integer; USERID: Integer; RATING: Integer;}; //         type USERRATING { USERID: Integer; RATING: Integer;}; var result = getRating([{ACTIVITYID: 1001, USERID: 1, RATING: 3}, {ACTIVITYID: 1011, USERID: 1, RATING: 1}], 3); // call the procedure// result === {"RESULT":[{"USERID":1,"RATING":6},{"USERID":2,"RATING":6}]}</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="setTempSchema"><span class="type-signature">&lt;static> </span>setTempSchema<span class="signature">(schemaName)</span><span class="type-signature"> &rarr; {procedures}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Sets the name of the schema into which temporary tables are written during procedure calls
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>schemaName</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">the name of the schema</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        procedures.xsjslib, line 1290
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    - this object so that the function can be called in a fluent style
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">procedures</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+        
+        <dl>
+                
+<dt>
+    <h4 class="name" id="procedurecaller"><span class="type-signature"></span>procedurecaller<span class="signature">(IN1, IN2)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>IN1</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+|
+
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">a Javascript scalar send to a scalar input parameter named IN1 of the stored procedures</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>IN2</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">a Javascript array containing the rows sent to an input table-valued parameter named IN2 of the stored procedure</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+<!-- DON'T SHOW SOURCE OF DOCU   
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        procedures.xsjslib, line 1190
+    </li></ul></dd>
+    
+-->
+
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    OUT  - a Javascript array containing as properties the output parameters of the stored procedure. Each property contains either a scalar (if the output parameter is scalar) or an array containing objects representing the rows (if the output parameter is table-valued).  In the latter case, each row contains an object with properties for each column. If the procedure returns a result set which is not declared, such as an unassigned SELECT, the OUT additionally contains numbered items which correspond to these result sets.
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Object</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+            </dl>
+    
+    
+    
+</article>
+
+</section>  
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="sap.hana.xs.libs.dbutils.xsds.Entity.html">Entity</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.Expr.html">Expr</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.Query.html">Query</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.Rename.html">Rename</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.Transaction.html">Transaction</a></li></ul><h3>Namespaces</h3><ul><li><a href="sap.hana.xs.libs.dbutils.procedures.html"><span class="oblique">sap.hana.xs.libs.dbutils.</span>procedures</a></li><li><a href="sap.hana.xs.libs.dbutils.xsds.html"><span class="oblique">sap.hana.xs.libs.dbutils.</span>xsds</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    <a href="Copyright-SAP.html">Copyright</a>
+    &
+    <a href="Disclaimer-SAP.html">Disclaimer</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

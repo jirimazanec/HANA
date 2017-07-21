@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Active transactions in SAP HANA dynamic tiering."/>
+<meta name="description" content="Active transactions in SAP HANA dynamic tiering."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=7895573885443664"/>
+<title>M_ES_TRANSACTIONS System View [Dynamic Tiering]</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioc4248984bbb4423eb80f54818dce1725";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioc4248984bbb4423eb80f54818dce1725">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">M_ES_TRANSACTIONS System View [Dynamic Tiering]</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">Active transactions in <span class="ph pname">SAP HANA dynamic tiering</span>.</p>
+
+		<div class="section">
+			<div class="note caution"><span class="cautiontitle">Caution</span> <span class="ph">This
+                                                  information applies only for the SAP HANA option
+                                                  cited in the title of this topic. You must have
+                                                  purchased the license for it in order to use the
+                                                  information contained in this topic.</span></div>
+
+		</div>
+
+		<div class="section"><div class="section_title">Structure</div><div type="Structure">
+			
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loioc4248984bbb4423eb80f54818dce1725__table_qxp_vmd_sr" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="28.627450980392158%"/><col width="28.23529411764706%"/><col width="43.13725490196079%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="28.62745098039216%" id="d29811342e45">Column name</th>
+
+							<th class="entry" valign="top" width="28.235294117647065%" id="d29811342e48">Data type</th>
+
+							<th class="entry" valign="top" width="43.13725490196079%" id="d29811342e51">Description</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 "> TRANSACTION_ID</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">BIGINT</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">The transaction ID of this transaction. It is assigned during
+								begin transaction. It appears in the esserver.trc file by the
+								BeginTxn, CmtTxn, and PostCmtTxn messages, and is the same as the
+								Txn ID Seq that is logged when the database is opened.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">CONNECTION_ID</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">BIGINT</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">Connection Id. This connection id can join with
+								REMOTE_CONNECTION_ID of M_REMOTE_STATEMENTS</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">INTERNAL_CONNECTION_ID</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">BIGINT</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">The ten-digit connection ID that is included as part of all
+								messages in the eserver.trc file. This is a monotonically increasing
+								integer unique within a server session.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">APPLICATION_NAME</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">VARCHAR(255)</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">The name of the application.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">USER_ID</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">VARCHAR(255)</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">The user ID for the connection.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">COMMIT_ID</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">BIGINT</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">The ID assigned by the transaction manager when the transaction
+								commits. For active transactions, the COMMIT_ID is zero.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">VERSION_ID</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">BIGINT</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">A value of 0 indicates that the transaction is unversioned, and
+								the VERSION_D has not been assigned.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">TRANSACTION_STATE</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">VARCHAR(16)</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">The state of the transaction. Currently, transaction states are
+								NONE, ACTIVE, ROLLING_BACK,ROLLED_BACK, COMMITTING, COMMITTED, and
+								APPLIED. NONE, ROLLING_BACK, ROLLED_BACK, COMMITTING and APPLIED are
+								transient states with a very small life span.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">MAIN_TABLE_USED_SIZE</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">BIGINT</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">The number of MBs of ES_USER space created by this
+								transaction.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">MAIN_TABLE_FREED_SIZE</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">BIGINT</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">The number of MBs of ES_USER space dropped by this transaction,
+								but which persist on disk in the store because the space is visible
+								in other database versions or other savepoints of this
+								transaction.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">TEMP_TABLE_USED_SIZE</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">BIGINT</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">The number of MBs of ES_TEMP space created by this transaction
+								for storage of DT temporary table data.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">TEMP_TABLE_FREED_SIZE</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">BIGINT</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">The number of MBs of ESP_TEMP space dropped by this transaction,
+								but which persist on disk in the DT temporary store because the
+								space is visible to DT cursors or is owned by other savepoints of
+								this transaction.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">TEMP_WORKSPACE_SIZE</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">BIGINT</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">For ACTIVE transactions, a snapshot of the work space in MBs in
+								use at this instant by this transaction, such as sorts, hashes, and
+								temporary bitmaps. This number changes depending on the usage as
+								memory is allocated and freed. When the transaction is no longer
+								active, this column is zero. </td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">TRANSACTION_CREATE_TIME</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">TIMESTAMP</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">The time the transaction began.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">CURSOR_COUNT</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">INTEGER</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">The number of open DT cursors that reference this transaction
+								control block. If the transaction is ACTIVE, it indicates the number
+								of open cursors created within the transaction. If the transaction
+								is COMMITTED, it indicates the number of hold cursors that reference
+								a database version owned by this transaction.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">INTERNAL_SAVEPOINT_COUNT</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">INTEGER</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">The number of savepoint structures that exist within the
+								transaction control block. Savepoints may be created and released
+								implicitly. Therefore, this number does not indicate the number of
+								user-created savepoints within the transaction.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">INTERNAL_SAVEPOINT_NUMBER</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">INTEGER</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">The active savepoint number of the transaction. This is an
+								implementation detail and might not reflect a user-created
+								savepoint.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">GLOBAL_TRANSACTION_ID</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">BIG_INT</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">The global transaction id associated with the current
+								transaction, 0 (zero) if none.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">VERSIONING_TYPE</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">VARCHAR(32)</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">The snapshot versioning type of the transaction; either
+								table-level (the default), or row-level. Row-level snapshot
+								versioning (DELTA) applies only to DELTA-enabled tables. Once a
+								transaction is started, this value cannot change.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">IS_BLOCKED</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">VARCHAR(5)</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">Indicates if connection blocking is enabled (TRUE) or disabled
+								(FALSE). You set connection blocking using theBLOCKING database
+								option. If true, the transaction blocks, meaning it waits for a
+								conflicting lock to release before it attempts to retry the lock
+								request.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="28.62745098039216%" headers="d29811342e45 ">BLOCKING_TIME_OUT</td>
+
+							<td class="entry" valign="top" width="28.235294117647065%" headers="d29811342e48 ">INTEGER</td>
+
+							<td class="entry" valign="top" width="43.13725490196079%" headers="d29811342e51 ">Indicates the time, in milliseconds, a transaction waits for a
+								locking conflict to clear. You set the timeout threshold using the
+								BLOCKING_TIMEOUT database option. A value of 0 (default) indicates
+								that the transaction waits indefinitely.</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="M_ES_TRANSACTIONS System View [Dynamic Tiering]";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content=""/>
+<meta name="description" content=""/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=3933545689530966"/>
+<title>Calculation Engine Plan Operators</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio5d15e1d58cee48e79940e57cce32f6aa";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio5d15e1d58cee48e79940e57cce32f6aa">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Calculation Engine Plan Operators</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc"/>
+
+		<div class="note sap-recommendation recommendation"><span class="recommendationtitle">Recommendation</span> 
+			<p class="p">SAP recommends that you use SQL rather than Calculation Engine Plan Operators with
+				SQLScript.</p>
+
+			<p class="p">The execution of Calculation Engine Plan Operators currently is bound to processing
+				within the calculation engine and does not allow a possibility to use alternative
+				execution engines, such as L native execution. As most Calculation Engine Plan
+				Operators are converted internally and treated as SQL operations, the conversion
+				requires multiple layers of optimizations. This can be avoided by direct SQL use.
+				Depending on your system configuration and the version you use, mixing Calculation
+				Engine Plan Operators and SQL can lead to significant performance penalties when
+				compared to to plain SQL implementation.</p>
+
+		</div>
+
+		
+<div class="table-wrapper tablenoborder"><table summary="" id="loio5d15e1d58cee48e79940e57cce32f6aa__table_cfz_2cs_1q" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: Overview: Mapping between CE_* Operators and SQL</span></caption>
+<colgroup><col width="33.333333333333336%"/><col width="33.333333333333336%"/><col width="33.333333333333336%"/></colgroup>
+
+				
+				
+				
+				<thead class="thead" align="left">
+					<tr class="row">
+						<th class="entry" valign="top" id="d428140e52">CE Operator</th>
+
+						<th class="entry" valign="top" id="d428140e55">CE Syntax</th>
+
+						<th class="entry" valign="top" id="d428140e58">SQL Equivalent</th>
+
+					</tr>
+
+				</thead>
+
+				<tbody class="tbody">
+					<tr class="row">
+						<td class="entry" valign="top" headers="d428140e52 "><samp class="ph codeph">CE_COLUMN_TABLE</samp></td>
+
+						<td class="entry" valign="top" headers="d428140e55 "><samp class="ph codeph">CE_COLUMN_TABLE(&lt;table_name&gt;[,&lt;attributes&gt;])</samp></td>
+
+						<td class="entry" valign="top" headers="d428140e58 "><samp class="ph codeph">SELECT [&lt;attributes&gt;] FROM
+							&lt;table_name&gt;</samp></td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" headers="d428140e52 "><samp class="ph codeph">CE_JOIN_VIEW</samp></td>
+
+						<td class="entry" valign="top" headers="d428140e55 "><samp class="ph codeph">CE_JOIN_VIEW(&lt;column_view_name&gt;[,&lt;attributes&gt;])</samp><p class="p"><samp class="ph codeph">out
+									= CE_JOIN_VIEW("PRODUCT_SALES", ["PRODUCT_KEY", "PRODUCT_TEXT",
+									"SALES"]);</samp></p>
+</td>
+
+						<td class="entry" valign="top" headers="d428140e58 "><samp class="ph codeph">SELECT [&lt;attributes&gt;] FROM
+								&lt;column_view_name&gt;</samp><p class="p"><samp class="ph codeph">out = SELECT
+									product_key, product_text, sales FROM
+								product_sales;</samp></p>
+</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" headers="d428140e52 "><samp class="ph codeph">CE_OLAP_VIEW</samp></td>
+
+						<td class="entry" valign="top" headers="d428140e55 "><samp class="ph codeph">CE_OLAP_VIEW
+								(&lt;olap_view_name&gt;[,&lt;attributes&gt;])</samp><p class="p"><samp class="ph codeph">out
+									= CE_OLAP_VIEW("OLAP_view", ["DIM1",
+							SUM("KF")]);</samp></p>
+</td>
+
+						<td class="entry" valign="top" headers="d428140e58 "><samp class="ph codeph">SELECT [&lt;attributes&gt;] FROM
+								&lt;olap_view_name&gt;</samp><p class="p"><samp class="ph codeph">out = select dim1, SUM(kf)
+									FROM OLAP_view GROUP BY dim1;</samp></p>
+</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" headers="d428140e52 "><samp class="ph codeph">CE_CALC_VIEW</samp></td>
+
+						<td class="entry" valign="top" headers="d428140e55 "><samp class="ph codeph">CE_CALC_VIEW(&lt;calc_view_name&gt;,[&lt;attributes&gt;])</samp><p class="p"><samp class="ph codeph">out
+									= CE_CALC_VIEW("TESTCECTABLE", ["CID",
+							"CNAME"]);</samp></p>
+</td>
+
+						<td class="entry" valign="top" headers="d428140e58 "><samp class="ph codeph">SELECT [&lt;attributes&gt;] FROM
+								&lt;calc_view_name&gt;</samp><p class="p"><samp class="ph codeph">out = SELECT cid, cname
+									FROM "TESTCECTABLE";</samp></p>
+</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" headers="d428140e52 "><samp class="ph codeph">CE_JOIN</samp></td>
+
+						<td class="entry" valign="top" headers="d428140e55 "><samp class="ph codeph">CE_JOIN(&lt;left_table&gt;,&lt;right_table&gt;,&lt;join_attributes&gt;[&lt;projection_list&gt;])</samp><p class="p"><samp class="ph codeph">ot_pubs_books1
+									= CE_JOIN (:lt_pubs,
+							:it_books,["PUBLISHER"]);</samp></p>
+</td>
+
+						<td class="entry" valign="top" headers="d428140e58 "><samp class="ph codeph">SELECT [&lt;projection_list&gt;] FROM
+								&lt;left_table&gt;,&lt;right_table&gt; WHERE
+								&lt;join_attributes&gt;</samp><p class="p"><samp class="ph codeph">ot_pubs_books1 = SELECT
+									P.publisher AS publisher, name, street,post_code, city, country,
+									isbn, title, edition, year, price, crcy FROM :lt_pubs AS P,
+									:it_books AS B WHERE P.publisher =
+							B.publisher;</samp></p>
+</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" headers="d428140e52 "><samp class="ph codeph">CE_LEFT_OUTER_JOIN</samp></td>
+
+						<td class="entry" valign="top" headers="d428140e55 "><samp class="ph codeph">CE_LEFT_OUTER_JOIN(&lt;left_table&gt;,&lt;right_table&gt;,&lt;join_attributes&gt;[&lt;projection_list&gt;])</samp></td>
+
+						<td class="entry" valign="top" headers="d428140e58 "><samp class="ph codeph">SELECT [&lt;projection_list&gt;] FROM &lt;left_table&gt; LEFT
+								OUTER JOIN &lt;right_table&gt; ON
+							&lt;join_attributes&gt;</samp></td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" headers="d428140e52 "><samp class="ph codeph">CE_RIGHT_OUTER_JOIN</samp></td>
+
+						<td class="entry" valign="top" headers="d428140e55 "><samp class="ph codeph">CE_RIGHT_OUTER_JOIN(&lt;left_table&gt;,&lt;right_table&gt;,&lt;join_attributes&gt;[&lt;projection_list&gt;])</samp></td>
+
+						<td class="entry" valign="top" headers="d428140e58 "><samp class="ph codeph">SELECT [&lt;projection_list&gt;] FROM &lt;left_table&gt;
+								RIGHT OUTER JOIN &lt;right_table&gt; ON
+								&lt;join_attributes&gt;</samp></td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" headers="d428140e52 "><samp class="ph codeph">CE_PROJECTION</samp></td>
+
+						<td class="entry" valign="top" headers="d428140e55 "><samp class="ph codeph">CE_PROJECTION(&lt;table_variable&gt;,&lt;projection_list&gt;[,&lt;filter&gt;])</samp><p class="p"><samp class="ph codeph">ot_books1
+									= CE_PROJECTION (:it_books,["TITLE","PRICE", "CRCY" AS
+									"CURRENCY"], '"PRICE" &gt; 50');</samp></p>
+</td>
+
+						<td class="entry" valign="top" headers="d428140e58 "><samp class="ph codeph">SELECT &lt;projection_list&gt; FROM &lt;table_variable&gt;
+								where [&lt;filter&gt;]</samp><p class="p"><samp class="ph codeph">ot_book2= SELECT title,
+									price, crcy AS currency FROM :it_b ooks WHERE price &gt;
+									50;</samp></p>
+</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" headers="d428140e52 "><samp class="ph codeph">CE_UNION_ALL</samp></td>
+
+						<td class="entry" valign="top" headers="d428140e55 "><samp class="ph codeph">CE_UNION_ALL(&lt;table_variable1&gt;,&lt;table_variable2&gt;)</samp><p class="p"><samp class="ph codeph">ot_all_books1
+									= CE_UNION_ALL (:lt_books, :it_audiobooks);</samp></p>
+</td>
+
+						<td class="entry" valign="top" headers="d428140e58 "><samp class="ph codeph">SELECT * FROM &lt;table_variable1&gt; UNION ALL SELECT * FROM
+								&lt;table_variable2&gt;</samp><p class="p"><samp class="ph codeph">ot_all_books2 = SELECT *
+									FROM :lt_books UNION ALL SELECT * FROM
+								:it_audiobooks;</samp></p>
+</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" headers="d428140e52 "><samp class="ph codeph">CE_CONVERSION</samp></td>
+
+						<td class="entry" valign="top" headers="d428140e55 "><samp class="ph codeph">CE_CONVERSION(&lt;table_variable&gt;,&lt;conversion_params&gt;,[&lt;rename_clause&gt;])</samp></td>
+
+						<td class="entry" valign="top" headers="d428140e58 "><samp class="ph codeph">SQL-Function CONVERT_CURRENCY</samp></td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" headers="d428140e52 "><samp class="ph codeph">CE_AGGREGATION</samp></td>
+
+						<td class="entry" valign="top" headers="d428140e55 "><samp class="ph codeph">CE_AGGREGATION(&lt;table_variable&gt;,&lt;aggregate_list&gt;
+								[,&lt;group_columns&gt;])</samp><p class="p"><samp class="ph codeph">ot_books1 =
+									CE_AGGREGATION (:it_books, [COUNT ("PUBLISHER") AS "CNT"],
+									["YEAR"]);</samp></p>
+</td>
+
+						<td class="entry" valign="top" headers="d428140e58 "><samp class="ph codeph">SELECT &lt;aggregate_list&gt; FROM &lt;table_variable&gt;
+								[GROUP BY &lt;group_columns&gt;]</samp><p class="p"><samp class="ph codeph">ot_books2 =
+									SELECT COUNT (publisher) AS cnt, year FROM :it_books GROUP BY
+									year;</samp></p>
+</td>
+
+					</tr>
+
+					<tr class="row">
+						<td class="entry" valign="top" headers="d428140e52 "><samp class="ph codeph">CE_CALC</samp></td>
+
+						<td class="entry" valign="top" headers="d428140e55 "><samp class="ph codeph">CE_CALC(‘&lt;expr&gt;’,
+									&lt;result_type&gt;)</samp><p class="p"><samp class="ph codeph">TEMP =
+									CE_PROJECTION(:table_var, ["ID" AS "KEY", CE_CALC('rownum()',
+									INTEGER) AS "T_ID"] );</samp></p>
+</td>
+
+						<td class="entry" valign="top" headers="d428140e58 ">SQL Function<p class="p"><samp class="ph codeph">TEMP = SELECT "ID" AS "KEY", ROW_NUMBER() OVER
+									() AS "T_ID" FROM :table_var</samp></p>
+</td>
+
+					</tr>
+
+				</tbody>
+
+			</table>
+</div>
+
+		<p class="p">Calculation engine plan operators encapsulate data-transformation functions and can be used in
+			the definition of a procedure or a table user-defined function. They constitute a no
+			longer recommended alternative to using SQL statements. Their logic is directly
+			implemented in the calculation engine, which is the execution environments of
+			SQLScript.</p>
+
+		<p class="p">There are different categories of operators. </p>
+
+		<ul class="ul" id="loio5d15e1d58cee48e79940e57cce32f6aa__ul_udj_yln_xh">
+			<li class="li">Data Source Access operators that bind a column table or a column view to a table
+				variable.  </li>
+
+			<li class="li">Relational operators that allow a user to bypass the SQL processor during evaluation
+				and to directly interact with the calculation engine. </li>
+
+			<li class="li">Special extensions that implement functions.</li>
+
+		</ul>
+
+	</div>
+
+<div class="related-links"> 
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Calculation Engine Plan Operators";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

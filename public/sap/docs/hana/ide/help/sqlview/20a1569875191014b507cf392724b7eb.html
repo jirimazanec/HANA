@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="A data type defines the characteristics of a data value. A special value of NULL is included in every data type to indicate the absence of a value."/>
+<meta name="description" content="A data type defines the characteristics of a data value. A special value of NULL is included in every data type to indicate the absence of a value."/>
+<meta name="keywords" content="SAP Data Types"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=41211713307373155"/>
+<title>Data Types</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20a1569875191014b507cf392724b7eb";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20a1569875191014b507cf392724b7eb">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">Data Types</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">A data type defines the characteristics of a data value. A special value of NULL is
+      included in every data type to indicate the absence of a value.</p>
+
+      <div class="section" id="loio20a1569875191014b507cf392724b7eb___csql_data_types_1sql_data_types_introduction_classification"><div class="section_title">Classification of Data Types</div><div type="Classification of Data Types">
+         
+         <p class="p">In the SAP HANA database, each data type can be classified by its characteristics as
+            follows:</p>
+
+         
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20a1569875191014b507cf392724b7eb__table_zgc_vll_gy" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: Classification of data types</span></caption>
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" id="d1967754e46">
+                        <p class="p">Classification</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d1967754e52">
+                        <p class="p">Data Type </p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d1967754e46 d1967754e52 ">
+                        <p class="p">Datetime types </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d1967754e46 d1967754e52 ">
+                        <p class="p">DATE, TIME, SECONDDATE, TIMESTAMP </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d1967754e46 d1967754e52 ">
+                        <p class="p">Numeric types </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d1967754e46 d1967754e52 ">
+                        <p class="p">TINYINT, SMALLINT, INTEGER, BIGINT, SMALLDECIMAL, DECIMAL, REAL, DOUBLE
+                        </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d1967754e46 d1967754e52 ">
+                        <p class="p">Boolean type</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d1967754e46 d1967754e52 ">
+                        <p class="p">BOOLEAN</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d1967754e46 d1967754e52 ">
+                        <p class="p">Character string types </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d1967754e46 d1967754e52 ">
+                        <p class="p">VARCHAR, NVARCHAR, ALPHANUM, SHORTTEXT </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d1967754e46 d1967754e52 ">
+                        <p class="p">Binary types </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d1967754e46 d1967754e52 ">
+                        <p class="p">VARBINARY </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d1967754e46 d1967754e52 ">
+                        <p class="p">Large Object types </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d1967754e46 d1967754e52 ">
+                        <p class="p">BLOB, CLOB, NCLOB, TEXT </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d1967754e46 d1967754e52 ">
+                        <p class="p">Multi-valued types</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d1967754e46 d1967754e52 ">
+                        <p class="p">ARRAY</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d1967754e46 d1967754e52 ">
+                        <p class="p">Spatial types</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d1967754e46 d1967754e52 ">
+                        <p class="p">ST_GEOMETRY, ST_POINT</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div></div>
+
+      <div class="section" id="loio20a1569875191014b507cf392724b7eb___csql_data_types_1sql_data_types_typed_constant"><div class="section_title">Typed Constants</div><div type="Typed Constants">
+         
+         <p class="p">A constant is a symbol that represents a specific fixed data value.</p>
+
+         <dl class="dl">
+            
+               <dt class="dt dlterm emphasis">Character string constant</dt>
+
+               <dd class="dd">
+                  <p class="p">A character string constant is enclosed in single quotation marks, for example:
+                     'Brian' or '100'.</p>
+
+                  <p class="p">Unicode strings have a similar format to character strings but are preceded by
+                     an N identifier (N stands for National Language in the SQL-92 standard). The N
+                     prefix must be uppercase, for example N'abc'.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT 'Brian' "character string 1", '100' "character string 2", N'abc' "unicode string" FROM DUMMY;</pre></div>
+
+                  <p class="p">The example above returns the following results:</p>
+
+                  
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20a1569875191014b507cf392724b7eb__table_rp1_c4l_gy" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="33.333333333333336%"/><col width="33.333333333333336%"/><col width="33.333333333333336%"/></colgroup>
+
+                        
+                        
+                        
+                        <thead class="thead" align="left">
+                           <tr class="row">
+                              <th class="entry" valign="top" width="33.33333333333333%" id="d1967754e230">
+                                 <p class="p">character String 1</p>
+
+                              </th>
+
+                              <th class="entry" valign="top" width="33.33333333333333%" id="d1967754e236">
+                                 <p class="p">character String 2</p>
+
+                              </th>
+
+                              <th class="entry" valign="top" width="33.33333333333333%" id="d1967754e242">
+                                 <p class="p">unicode string</p>
+
+                              </th>
+
+                           </tr>
+
+                        </thead>
+
+                        <tbody class="tbody">
+                           <tr class="row">
+                              <td class="entry" valign="top" width="33.33333333333333%" headers="d1967754e230 ">
+                                 <p class="p">Brian</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" width="33.33333333333333%" headers="d1967754e236 ">
+                                 <p class="p">100</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" width="33.33333333333333%" headers="d1967754e242 ">
+                                 <p class="p">abc</p>
+
+                              </td>
+
+                           </tr>
+
+                        </tbody>
+
+                     </table>
+</div>
+
+               </dd>
+
+            
+            
+               <dt class="dt dlterm emphasis">Number constant</dt>
+
+               <dd class="dd">
+                  <p class="p">A number constant is represented by a string of numbers that are not enclosed
+                     in quotation marks. Numbers may contain a decimal point or a scientific
+                     notation. For example, 123, 123.4, or 1.234e2.</p>
+
+                  <p class="p">A hexadecimal number constant is a string of hexadecimal numbers and has the
+                     prefix 0x. For example, 0x0abc.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT 123 "integer", 123.4 "decimal1", 1.234e2 "decimal2", 0x0abc "hexadecimal" FROM DUMMY;</pre></div>
+
+                  <p class="p">The example above returns the following results:</p>
+
+                  
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20a1569875191014b507cf392724b7eb__table_drz_jql_gy" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="25%"/><col width="25%"/><col width="25%"/><col width="25%"/></colgroup>
+
+                        
+                        
+                        
+                        
+                        <thead class="thead" align="left">
+                           <tr class="row">
+                              <th class="entry" valign="top" width="25%" id="d1967754e313">
+                                 <p class="p">integer</p>
+
+                              </th>
+
+                              <th class="entry" valign="top" width="25%" id="d1967754e319">
+                                 <p class="p">decimal1</p>
+
+                              </th>
+
+                              <th class="entry" valign="top" width="25%" id="d1967754e325">
+                                 <p class="p">decimal2</p>
+
+                              </th>
+
+                              <th class="entry" valign="top" width="25%" id="d1967754e331">
+                                 <p class="p">hexadecimal</p>
+
+                              </th>
+
+                           </tr>
+
+                        </thead>
+
+                        <tbody class="tbody">
+                           <tr class="row">
+                              <td class="entry" valign="top" width="25%" headers="d1967754e313 ">
+                                 <p class="p">123</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" width="25%" headers="d1967754e319 ">
+                                 <p class="p">123.4</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" width="25%" headers="d1967754e325 ">
+                                 <p class="p">123.4</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" width="25%" headers="d1967754e331 ">
+                                 <p class="p">2,748</p>
+
+                              </td>
+
+                           </tr>
+
+                        </tbody>
+
+                     </table>
+</div>
+
+               </dd>
+
+            
+            
+               <dt class="dt dlterm emphasis">Binary string constant</dt>
+
+               <dd class="dd">
+                  <p class="p">A binary string has the prefix X and is a string of hexadecimal numbers that
+                     are enclosed in quotation marks. For example, X'00abcd' or x'dcba00'.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT X'00abcd' "binary string 1", x'dcba00' "binary string 2" FROM DUMMY;</pre></div>
+
+                  <p class="p">The example above returns the following results:</p>
+
+                  
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20a1569875191014b507cf392724b7eb__table_hjg_1rl_gy" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+                        
+                        
+                        <thead class="thead" align="left">
+                           <tr class="row">
+                              <th class="entry" valign="top" width="50%" id="d1967754e402">
+                                 <p class="p">binary string 1</p>
+
+                              </th>
+
+                              <th class="entry" valign="top" width="50%" id="d1967754e408">
+                                 <p class="p">binary string 2</p>
+
+                              </th>
+
+                           </tr>
+
+                        </thead>
+
+                        <tbody class="tbody">
+                           <tr class="row">
+                              <td class="entry" valign="top" width="50%" headers="d1967754e402 ">
+                                 <p class="p">00ABCD</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" width="50%" headers="d1967754e408 ">
+                                 <p class="p">DCBA00</p>
+
+                              </td>
+
+                           </tr>
+
+                        </tbody>
+
+                     </table>
+</div>
+
+               </dd>
+
+            
+            
+               <dt class="dt dlterm emphasis">Date/Time/Timestamp constant</dt>
+
+               <dd class="dd">
+                  <p class="p">Date, Time, and Timestamp each have the following prefixes:</p>
+
+                  <ul class="ul" id="loio20a1569875191014b507cf392724b7eb__ul_lvn_1ql_gy">
+                     <li class="li">
+                        <p class="p">date'2010-01-01'</p>
+
+                     </li>
+
+                     <li class="li">
+                        <p class="p">time'11:00:00.001'</p>
+
+                     </li>
+
+                     <li class="li">
+                        <p class="p">timestamp'2011-12-31 23:59:59' </p>
+
+                     </li>
+
+                  </ul>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT date'2010-01-01' "date", time'11:00:00.001' "time", timestamp'2011-12-31 23:59:59' "timestamp" FROM DUMMY;</pre></div>
+
+                  <p class="p">The example above returns the following results:</p>
+
+                  
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20a1569875191014b507cf392724b7eb__table_uvl_jrl_gy" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="33.333333333333336%"/><col width="33.333333333333336%"/><col width="33.333333333333336%"/></colgroup>
+
+                        
+                        
+                        
+                        <thead class="thead" align="left">
+                           <tr class="row">
+                              <th class="entry" valign="top" width="33.33333333333333%" id="d1967754e489">
+                                 <p class="p">date</p>
+
+                              </th>
+
+                              <th class="entry" valign="top" width="33.33333333333333%" id="d1967754e495">
+                                 <p class="p">time</p>
+
+                              </th>
+
+                              <th class="entry" valign="top" width="33.33333333333333%" id="d1967754e501">
+                                 <p class="p">timestamp</p>
+
+                              </th>
+
+                           </tr>
+
+                        </thead>
+
+                        <tbody class="tbody">
+                           <tr class="row">
+                              <td class="entry" valign="top" width="33.33333333333333%" headers="d1967754e489 ">
+                                 <p class="p">Jan 1, 2010</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" width="33.33333333333333%" headers="d1967754e495 ">
+                                 <p class="p">11:00:00 AM</p>
+
+                              </td>
+
+                              <td class="entry" valign="top" width="33.33333333333333%" headers="d1967754e501 ">
+                                 <p class="p">Dec 31, 2011 11:59:59.0 PM</p>
+
+                              </td>
+
+                           </tr>
+
+                        </tbody>
+
+                     </table>
+</div>
+
+               </dd>
+
+            
+         </dl>
+
+      </div></div>
+
+   </div>
+
+<div class="related-links"> 
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Data Types";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

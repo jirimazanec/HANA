@@ -1,0 +1,2678 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Creates a new table in the database. Not for use when creating a virtual table."/>
+<meta name="description" content="Creates a new table in the database. Not for use when creating a virtual table."/>
+<meta name="keywords" content="CREATE TABLE"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=07485476034391836"/>
+<title>CREATE TABLE Statement (Data Definition)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20d58a5f75191014b2fe92141b7df228";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20d58a5f75191014b2fe92141b7df228">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">CREATE TABLE Statement (Data Definition)</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Creates a new table in the database. Not for use when creating a virtual
+         table.</p>
+
+      <div class="section" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1sql_create_table_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+         
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE [<var class="keyword varname">&lt;table_type&gt;</var>] TABLE <var class="keyword varname">&lt;table_name&gt;</var>        
+   [<a class="xref nopagenumber" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_contents_source" target="_top"><var class="keyword varname">&lt;table_contents_source&gt;</var></a>]
+   [<a class="xref nopagenumber" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_with_association" target="_top"><var class="keyword varname">&lt;with_association_clause&gt;</var></a>]        
+   [<a class="xref nopagenumber" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_logging_option" target="_top"><var class="keyword varname">&lt;logging_option&gt;</var></a>] 
+   [<a class="xref nopagenumber" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_auto_merge_option" target="_top"><var class="keyword varname">&lt;auto_merge_option&gt;</var></a>]
+   [<a class="xref nopagenumber" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_unload_priority_clause" target="_top"><var class="keyword varname">&lt;unload_priority_clause&gt;</var></a>] 
+   [<a class="xref nopagenumber" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_schema_flexibility_option" target="_top"><var class="keyword varname">&lt;schema_flexibility_option&gt;</var></a>] 
+   [<a class="xref nopagenumber" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_partition_clause" target="_top"><var class="keyword varname">&lt;partition_clause&gt;</var></a>] 
+   [<a class="xref nopagenumber" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_group_option" target="_top"><var class="keyword varname">&lt;group_option&gt;</var></a>]
+   [<a class="xref nopagenumber" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_location_clause" target="_top"><var class="keyword varname">&lt;location_clause&gt;</var></a>] 
+   [<a class="xref nopagenumber" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_replica_clause" target="_top"><var class="keyword varname">&lt;replica_clause&gt;</var></a>] 
+   [<a class="xref nopagenumber" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_global_temporary_option" target="_top"><var class="keyword varname">&lt;global_temporary_option&gt;</var></a>] 
+   [<a class="xref nopagenumber" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__sql_create_table_series_clause" target="_top"><var class="keyword varname">&lt;series_clause&gt;</var></a>] 
+   [<a class="xref nopagenumber" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__create_table_unused_retention_period_option" target="_top"><var class="keyword varname">&lt;unused_retention_period_option&gt;</var></a>] 
+   [COMMENT <a class="xref nopagenumber" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__table_comment_string" target="_top"><var class="keyword varname">&lt;table_comment_string&gt;</var></a>]
+
+ | CREATE TABLE <a class="xref nopagenumber" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__async_replica_clause" target="_top"><var class="keyword varname">&lt;asynchronous_replica_clause&gt;</var></a></pre></div>
+
+ 
+      </div></div>
+
+      <div class="section" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1sql_create_table_syntax_elements"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+         
+
+            <dl class="dl parml">
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;table_type&gt;</var></dt>
+
+                  <dd class="dd pd">
+                     <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_table_type">Defines the type of table storage organization.</p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_type&gt;</var> ::= 
+ COLUMN
+ | ROW
+ | HISTORY COLUMN
+ | GLOBAL TEMPORARY
+ | GLOBAL TEMPORARY COLUMN
+ | LOCAL TEMPORARY
+ | LOCAL TEMPORARY COLUMN</pre></div>
+
+                     <p class="p">The default value is ROW.</p>
+
+                     <dl class="dl">
+                        
+                           <dt class="dt dlterm emphasis">COLUMN, ROW </dt>
+
+                           <dd class="dd">
+                              <p class="p">If the majority of table access is through a large number of tables
+                              with only a few selected attributes, then use COLUMN-based storage. If
+                              the majority of table access involves selecting a few records with all
+                              attributes selected, then ROW-based storage is preferable. The
+                                 SAP HANA database uses a combination of table types
+                              to enable storage and interpretation in both ROW and COLUMN forms.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis">HISTORY COLUMN</dt>
+
+                           <dd class="dd">
+                              <p class="p">Creates a table with a particular transaction session type called
+                              HISTORY. Tables with session type HISTORY support time travel queries.
+                              Time travel queries are queries against historical states of the
+                              database.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis">GLOBAL TEMPORARY</dt>
+
+                           <dd class="dd">
+                              <p class="p">Makes the table definition globally available while data is visible
+                              only to the current session.</p>
+
+                              <p class="p">The table is truncated at the end of the session. Metadata in a
+                              global temporary table is persistent, meaning the metadata exists
+                              until the table is dropped and the metadata is shared across sessions.
+                              Data in a global temporary table is session specific, meaning that
+                              only the session owner of the global temporary table can
+                              insert/read/truncate the data, the data exists for the duration of the
+                              session, and data from the global temporary table is automatically
+                              dropped when the session is terminated. You can only drop global
+                              temporary tables when they do not contain any records.</p>
+
+                              <p class="p">Supported operations on global temporary tables are:</p>
+
+                              <ul class="ul" id="loio20d58a5f75191014b2fe92141b7df228__ol_xl5_hvk_zv">
+                                 <li class="li">Create with or without a primary key</li>
+
+                                 <li class="li">Add or drop a primary key</li>
+
+                                 <li class="li">Add or drop unique</li>
+
+                                 <li class="li">Rename table</li>
+
+                                 <li class="li">Add, alter, rename, or drop column</li>
+
+                                 <li class="li">Truncate</li>
+
+                                 <li class="li">Drop</li>
+
+                                 <li class="li">Create or drop a view on a global temporary table</li>
+
+                                 <li class="li">Create synonym</li>
+
+                                 <li class="li">Select</li>
+
+                                 <li class="li">Select into or insert</li>
+
+                                 <li class="li">Delete</li>
+
+                                 <li class="li">Update</li>
+
+                                 <li class="li">Upsert or replace</li>
+
+                              </ul>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis">GLOBAL TEMPORARY COLUMN</dt>
+
+                           <dd class="dd">
+                              <p class="p">Makes the table definition globally available while data is visible
+                              only to the current session.</p>
+
+                              <p class="p">The table is truncated at the end of the session. Metadata in a
+                              global temporary column table is persistent, meaning the metadata
+                              exists until the table is dropped and the metadata is shared across
+                              sessions. Data in a global temporary column table is session specific,
+                              meaning only the session owner of the global temporary column can
+                              insert/read/truncate the data, the data exists for the duration of the
+                              session, and data from the global temporary column table is
+                              automatically dropped when the session is terminated. You can only
+                              drop global temporary column tables when the table does not contain
+                              any records.</p>
+
+                              <p class="p">Supported operations on global temporary column tables are: </p>
+
+                              <ul class="ul" id="loio20d58a5f75191014b2fe92141b7df228__ol_rqw_jvk_zv">
+                                 <li class="li">
+                                    <p class="p">Create without a primary key </p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Truncate </p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Drop </p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Create or drop a view on a global temporary column table </p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Create synonym </p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Select </p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Select into or insert </p>
+
+                                 </li>
+
+                              </ul>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis">LOCAL TEMPORARY</dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies that the table definition and data are visible only to
+                              the current session.</p>
+
+                              <p class="p">The table is truncated at the end of the session. Metadata exists
+                              for the duration of the session and is session specific, meaning only
+                              the  session owner of the local temporary table can see it. Data in a
+                              local temporary table is session specific, meaning only the session
+                              owner of the local temporary table can insert/read/truncate the data.
+                              The data exists for the duration of the session, and data from the
+                              local temporary table is automatically dropped when the session is
+                              terminated.</p>
+
+                              <p class="p">Supported operations on local temporary tables are: </p>
+
+                              <ul class="ul" id="loio20d58a5f75191014b2fe92141b7df228__ol_q4d_mvk_zv">
+                                 <li class="li">
+                                    <p class="p">Create without a primary key </p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Truncate </p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Drop </p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Select </p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Select into or insert </p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Delete </p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Update </p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Upsert or replace </p>
+
+                                 </li>
+
+                              </ul>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis">LOCAL TEMPORARY COLUMN</dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies that the table definition and data are visible only to
+                              the current session.</p>
+
+                              <p class="p">The table is truncated at the end of the session. Metadata exists
+                              for the duration of the session and is session-specific, meaning only
+                              the owner session of the local temporary column table can see. Data in
+                              a local temporary column table is session-specific, meaning only the
+                              owner session of the local temporary column table can
+                              insert/read/truncate the data, exists for the duration of the session
+                              and data from the local temporary column table is automatically
+                              dropped when the session is terminated.</p>
+
+                              <p class="p">Supported operations on local temporary tables are: </p>
+
+                              <ul class="ul" id="loio20d58a5f75191014b2fe92141b7df228__ol_hfd_4vk_zv">
+                                 <li class="li">
+                                    <p class="p">Create without a primary key </p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Truncate </p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Drop </p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Select </p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Select into or insert </p>
+
+                                 </li>
+
+                              </ul>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis">VIRTUAL</dt>
+
+                           <dd class="dd">
+                              <p class="p">Creates a virtual table based on an existing table/view inside a
+                              remote source.</p>
+
+                           </dd>
+
+                        
+                     </dl>
+
+                  </dd>
+
+               
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;table_name&gt;</var></dt>
+
+                  <dd class="dd pd">
+                  <p class="p">Specifies the table name.</p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_name&gt;</var> ::= [<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;schema_name&gt;</var> ::= <var class="keyword varname">&lt;unicode_name&gt;</var></pre></div>
+
+                    </dd>
+
+               
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;table_contents_source&gt;</var></dt>
+
+                  <dd class="dd pd">
+                     <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_contents_source">Specifies the source
+                     from which the table definition is derived.</p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_contents_source&gt;</var> ::= 
+ (<var class="keyword varname">&lt;table_element&gt;</var>, ...) [<var class="keyword varname">&lt;with_association_clause&gt;</var>]
+ | <var class="keyword varname">&lt;like_table_clause&gt;</var>
+ | [(<var class="keyword varname">&lt;column_name&gt;</var>, ...)] <var class="keyword varname">&lt;as_table_subquery&gt;</var></pre></div>
+
+                     <p class="p">You can create a table in the following ways: </p>
+
+                     <ul class="ul" id="loio20d58a5f75191014b2fe92141b7df228__ul_jt1_rvk_zv">
+                        <li class="li">
+                           <p class="p">Describing the table elements. See below.</p>
+
+                        </li>
+
+                        <li class="li">
+                           <p class="p">Basing the new table on an existing table (<a class="xref" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_like_clause" target="_top">CREATE TABLE LIKE</a>).</p>
+
+                        </li>
+
+                        <li class="li">
+                           <p class="p">From the result of a subquery (<a class="xref" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_as_subquery" target="_top">CREATE TABLE AS
+                              <var class="keyword varname">&lt;subquery&gt;</var></a>).</p>
+
+                        </li>
+
+                     </ul>
+
+                     <dl class="dl">
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;table_element&gt;</var></dt>
+
+                           <dd class="dd">
+                              <div class="p">
+            Defines a table column with associated column or table constraint.
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_element&gt;</var> ::=
+ <var class="keyword varname">&lt;column_definition&gt;</var> [<var class="keyword varname">&lt;column_constraint&gt;</var>] 
+ | <var class="keyword varname">&lt;table_constraint&gt;</var></pre></div>
+</div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;column_definition&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_column_defintion"> Defines a
+                                 table column. </p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;column_definition&gt;</var> ::= <var class="keyword varname">&lt;column_name&gt;</var> {<var class="keyword varname">&lt;data_type&gt;</var> | <var class="keyword varname">&lt;lob_data_type&gt;</var>}
+   [<var class="keyword varname">&lt;ddic_data_type&gt;</var>] [<var class="keyword varname">&lt;default_value_clause&gt;</var>]
+   [<var class="keyword varname">&lt;col_gen_as_expression&gt;</var> | <var class="keyword varname">&lt;col_gen_as_ident&gt;</var>]
+   [<var class="keyword varname">&lt;col_calculated_field&gt;</var>]
+   [<var class="keyword varname">&lt;schema_flexibility&gt;</var>]
+   [<var class="keyword varname">&lt;fuzzy_search_index&gt;</var>]
+   [<var class="keyword varname">&lt;fuzzy_search_mode&gt;</var>] 
+   [<var class="keyword varname">&lt;load_unit&gt;</var>]
+   [COMMENT <var class="keyword varname">&lt;column_comment_string&gt;</var>]</pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;column_constraint&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">See column constraint.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;table_constraint&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">See table constraint.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;column_name&gt;</var></dt>
+
+                           <dd class="dd">
+                              <div class="p">
+            Specifies the column
+            name.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+</div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;data_type&gt;</var></dt>
+
+                           <dd class="dd">
+                           <p class="p">
+            Specifies the column data type.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;data_type&gt;</var> ::=
+ DATE 
+ | TIME 
+ | SECONDDATE 
+ | TIMESTAMP 
+ | TINYINT 
+ | SMALLINT 
+ | INTEGER 
+ | BIGINT 
+ | SMALLDECIMAL 
+ | REAL 
+ | DOUBLE 
+ | TEXT 
+ | BINTEXT 
+ | VARCHAR [ (<var class="keyword varname">&lt;unsigned_integer&gt;</var>) ] 
+ | NVARCHAR [ (<var class="keyword varname">&lt;unsigned_integer&gt;</var>) ] 
+ | ALPHANUM [ (<var class="keyword varname">&lt;unsigned_integer&gt;</var>) ] 
+ | VARBINARY [ (<var class="keyword varname">&lt;unsigned_integer&gt;</var>) ] 
+ | SHORTTEXT [ (<var class="keyword varname">&lt;unsigned_integer&gt;</var>) ] 
+ | DECIMAL [ (<var class="keyword varname">&lt;unsigned_integer&gt;</var> [, <var class="keyword varname">&lt;unsigned_integer&gt;</var> ]) ] 
+ | FLOAT [ (<var class="keyword varname">&lt;unsigned_integer&gt;</var>) ] 
+ | BOOLEAN</pre></div>
+
+                           </dd>
+
+                        
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;lob_data_type&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the LOB data type.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;lob_data_type&gt;</var> ::=
+ <var class="keyword varname">&lt;lob_type_name&gt;</var> [MEMORY THRESHOLD memory_threshold_value]</pre></div>
+
+                           <dl class="dl">
+                              
+                                 <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;lob_type_name&gt;</var></dt>
+
+                                 <dd class="dd">
+                                    <p class="p">Specifies the type of LOB.</p>
+
+                                    <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;lob_type_name&gt;</var> ::= BLOB | CLOB | NCLOB</pre></div>
+
+                                 </dd>
+
+                              
+                           </dl>
+
+                        </dd>
+
+                     
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;ddic_data_type&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">The available data types.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;ddic_data_type&gt;</var> ::= 
+ DDIC_ACCP | DDIC_ALNM | DDIC_CHAR | DDIC_CDAY | DDIC_CLNT | DDIC_CUKY | DDIC_CURR | DDIC_D16D
+ | DDIC_D34D | DDIC_D16R | DDIC_D34R | DDIC_D16S | DDIC_D34S | DDIC_DATS | DDIC_DAY  | DDIC_DEC
+ | DDIC_FLTP | DDIC_GUID | DDIC_INT1 | DDIC_INT2 | DDIC_INT4 | DDIC_INT8 | DDIC_LANG | DDIC_LCHR
+ | DDIC_MIN  | DDIC_MON  | DDIC_LRAW | DDIC_NUMC | DDIC_PREC | DDIC_QUAN | DDIC_RAW  | DDIC_RSTR
+ | DDIC_SEC  | DDIC_SRST | DDIC_SSTR | DDIC_STRG | DDIC_STXT | DDIC_TIMS | DDIC_UNIT | DDIC_UTCM
+ | DDIC_UTCL | DDIC_UTCS | DDIC_TEXT | DDIC_VARC | DDIC_WEEK</pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;memory_threshold_value&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies whether LOB data should be stored in memory.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;memory_threshold_value&gt;</var> ::= <var class="keyword varname">&lt;unsigned_integer&gt;</var> | NULL</pre></div>
+
+                              <ul class="ul" id="loio20d58a5f75191014b2fe92141b7df228__ul_gvk_rrs_qv">
+                                 <li class="li">
+                                    <p class="p">If <var class="keyword varname">&lt;memory_threshold_value&gt;</var> is not provided,
+                                    then a hybrid LOB with a memory threshold of 1000 is created by
+                                    default.</p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">If <var class="keyword varname">&lt;memory_threshold_value&gt;</var> is provided and
+                                    its LOB size is bigger than the memory threshold value, then the
+                                    LOB data is stored on disk.</p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">If <var class="keyword varname">&lt;memory_threshold_value&gt;</var> is provided and
+                                    its LOB size is equal or less than the memory threshold value,
+                                    then the LOB data is stored in memory.</p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">If <var class="keyword varname">&lt;memory_threshold_value&gt;</var> is NULL, then
+                                    all LOB data is stored in memory.</p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">If <var class="keyword varname">&lt;memory_table lobthreshold_value&gt;</var> is 0,
+                                    then all LOB data is stored in disk.</p>
+
+                                 </li>
+
+                              </ul>
+
+                              <p class="p">The available LOB data types are BLOB, CLOB, and NCLOB. If the
+                              MEMORY THRESHOLD option is not given, then the LOB is stored in memory
+                              by default. If MEMORY THRESHOLD is given and its LOB size is bigger
+                              than the memory threshold value, then the LOB data is stored on disk.
+                              If MEMORY THRESHOLD is given and its LOB size is equal or less than
+                              memory threshold value, then the LOB data is stored in memory. If the
+                              memory threshold is NULL, then all LOB data is stored in memory. If
+                              the memory threshold is 0, then all LOB data is stored on disk.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;default_value_clause&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p"> Specifies a value to be assigned to the column if an INSERT
+                                 statement does not provide a value for the column.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;default_value_clause&gt;</var> ::= DEFAULT <var class="keyword varname">&lt;default_value_exp&gt;</var>
+
+<var class="keyword varname">&lt;default_value_exp&gt;</var> ::= 
+ NULL 
+ | <var class="keyword varname">&lt;string_literal&gt;</var> 
+ | <var class="keyword varname">&lt;signed_numeric_literal&gt;</var> 
+ | <var class="keyword varname">&lt;unsigned_numeric_literal&gt;</var> 
+ | <var class="keyword varname">&lt;datetime_value_function&gt;</var>
+
+<var class="keyword varname">&lt;datetime_value_function&gt;</var> ::= 
+ CURRENT_DATE 
+ | CURRENT_TIME 
+ | CURRENT_TIMESTAMP 
+ | CURRENT_UTCDATE 
+ | CURRENT_UTCTIME 
+ | CURRENT_UTCTIMESTAMP</pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;col_gen_as_expression&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies the expression to generate the column value at
+                              runtime.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;col_gen_as_expression&gt;</var> ::= 
+ GENERATED ALWAYS AS <var class="keyword varname">&lt;expression&gt;</var></pre></div>
+
+                           <p class="p">The following limitations apply to generated columns:</p>
+
+                              <ul class="ul" id="loio20d58a5f75191014b2fe92141b7df228__ul_ggc_zvk_zv">
+                                 <li class="li">
+                                    <p class="p">They are not supported for row tables.</p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">They can reference only columns that are defined prior to
+                                    then (left of its own definition in the DDL).</p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Generated columns can reference only base columns; they
+                                    cannot reference generated columns.</p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Specifying default values on generated columns is not
+                                       possible.</p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Generated columns cannot be as part of a primary key or a
+                                       unique constraint.</p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Dropping the base columns of generated columns is not
+                                    possible.</p>
+
+                                 </li>
+
+                              </ul>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;col_gen_as_ident&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies an identity column.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;col_gen_as_ident&gt;</var> ::= 
+ GENERATED {ALWAYS | BY DEFAULT} AS IDENTITY [(<var class="keyword varname">&lt;sequence_option&gt;</var>)]
+ 
+<var class="keyword varname">&lt;sequence_option&gt;</var> ::= 
+ <var class="keyword varname">&lt;sequence_param_list&gt;</var> 
+ | RESET BY <var class="keyword varname">&lt;subquery&gt;</var> 
+ | <var class="keyword varname">&lt;sequence_param_list&gt;</var> RESET BY <var class="keyword varname">&lt;subquery&gt;</var>
+ 
+<var class="keyword varname">&lt;sequence_param_list&gt;</var> ::= <var class="keyword varname">&lt;sequence_parameter&gt;</var>[{,<var class="keyword varname">&lt;sequence_parameter&gt;</var>}...]
+ 
+<var class="keyword varname">&lt;sequence_parameter&gt;</var> ::= 
+ START WITH <var class="keyword varname">&lt;start_value&gt;</var>
+ | INCREMENT BY <var class="keyword varname">&lt;increment_value&gt;</var>
+ | MAXVALUE <var class="keyword varname">&lt;max_value&gt;</var>
+ | NO MAXVALUE
+ | MINVALUE <var class="keyword varname">&lt;min_value&gt;</var>
+ | NO MINVALUE
+ | CYCLE
+ | NO CYCLE
+ | CACHE <var class="keyword varname">&lt;cache_size&gt;</var>
+ | NO CACHE
+ | RESET BY <var class="keyword varname">&lt;subquery&gt;</var></pre></div>
+
+                           <p class="p">If ALWAYS is specified, then values are always generated. If BY
+                              DEFAULT is specified, then values are generated by default.</p>
+
+                              <p class="p">For more information on sequence parameters, see the CREATE SEQUENCE statement. For more
+                                 information on subqueries, see the SELECT statement.</p>
+
+                             
+                           
+                              <p class="p">The available LOB data types are BLOB, CLOB, and NCLOB.</p>
+
+                              <p class="p">If the MEMORY THRESHOLD option is not given, then the LOB is stored
+                              in memory by default.</p>
+
+                              <p class="p">If MEMORY THRESHOLD is given and its LOB size is bigger than memory
+                              threshold value, then LOB data is stored on disk. If MEMORY THRESHOLD
+                              is given and its LOB size is equal to or less than the memory
+                              threshold value, then the LOB data is stored in memory. If MEMORY
+                              THRESHOLD is NULL, then all LOB data is stored in memory. If MEMORY
+                              THRESHOLD is 0, then all LOB data is stored on disk.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;col_calculated_field&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies the expression to generate the column.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;col_calculated_field&gt;</var> ::= AS <var class="keyword varname">&lt;expression&gt;</var></pre></div>
+
+                              <ul class="ul" id="loio20d58a5f75191014b2fe92141b7df228__ul_qcz_1ss_qv">
+                                 <li class="li">
+                                    <p class="p">The data type of a calculated field column can be a default
+                                    value.</p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">The calculated field column can reference not only base
+                                    columns, but also other calculated field columns.</p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">The maximum of recursive calculated field is 16.</p>
+
+                                 
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">Dropping or altering the base columns of a calculated field
+                                    is not possible.</p>
+
+                                 </li>
+
+                              </ul>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;schema_flexibility&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies whether the column is dynamic.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;schema_flexibility&gt;</var> ::= {ENABLE | DISABLE} SCHEMA FLEXIBILITY</pre></div>
+
+                              <ul class="ul" id="loio20d58a5f75191014b2fe92141b7df228__ul_gkf_frl_tt">
+                                 <li class="li">
+                                    <p class="p">ENABLE changes the column into a dynamic column.</p>
+
+                                 </li>
+
+                                 <li class="li">
+                                    <p class="p">DISABLE (default value) changes the column into a static
+                                       column.</p>
+
+                                 </li>
+
+                              </ul>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;fuzzy_search_index&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Turns a fuzzy search index on or off (the default).</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;fuzzy_search_index&gt;</var> ::= FUZZY SEARCH INDEX {ON | OFF}</pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;fuzzy_search_mode&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Sets the fuzzy search mode with the value of
+                                 <var class="keyword varname">&lt;string_literal&gt;</var>.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;fuzzy_search_mode&gt;</var> ::= 
+ FUZZY SEARCH MODE [<var class="keyword varname">&lt;string_literal&gt;</var> | NULL]</pre></div>
+
+                           <p class="p">If NULL is specified, then the fuzzy search mode is reset.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;load_unit&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies the data loading unit for column-store tables.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;load_unit&gt;</var> ::= {PAGE | COLUMN} LOADABLE</pre></div>
+
+                           <p class="p">The default unit is COLUMN. For row-store tables, you cannot specify a
+                              load unit as row-store tables are always loaded completely.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;load_unit&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies the data loading unit for column-store tables.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;load_unit&gt;</var> ::= {PAGE | COLUMN} LOADABLE</pre></div>
+
+                           <p class="p">The default unit is COLUMN. For row-store tables, no load unit can be
+                              specified as row-store tables are always loaded completely.</p>
+
+                           </dd>
+
+                        
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;column_comment_string&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies a descriptive comment for the column. </p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;column_comment_string&gt;</var> ::= <var class="keyword varname">&lt;string_literal&gt;</var></pre></div>
+
+                           <p class="p">Specifying COMMENT <var class="keyword varname">&lt;column_comment_string&gt;</var> saves you
+                              from having to execute a separate COMMENT ON statement for a column
+                              after table creation.</p>
+
+                        </dd>
+
+                     
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;column_constraint&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_column_constraint">Specifies the column constraint rules.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;column_constraint&gt;</var> ::= 
+ NULL
+ | NOT NULL
+ | [<var class="keyword varname">&lt;constraint_name_definition&gt;</var>] <var class="keyword varname">&lt;unique_specification&gt;</var>
+ | [<var class="keyword varname">&lt;constraint_name_definition&gt;</var>] <var class="keyword varname">&lt;references_specification&gt;</var></pre></div>
+
+                              <dl class="dl">
+                                 
+                                    <dt class="dt dlterm emphasis">NULL</dt>
+
+                                    <dd class="dd">
+                                       <p class="p">
+            Allows NULL values in the column. If NULL is specified it is not considered a
+            constraint, it represents that a column that may contain a null value. The default is
+            NULL. </p>
+
+                                    </dd>
+
+                                 
+                                 
+                                    <dt class="dt dlterm emphasis">NOT NULL</dt>
+
+                                    <dd class="dd">
+                                       <p class="p">
+            Prohibits NULL values in the column.</p>
+
+                                    </dd>
+
+                                 
+                                 
+                                    <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;unique_specification&gt;</var></dt>
+
+                                    <dd class="dd">
+                                       <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_unique_specification">
+            Specifies unique constraints. </p>
+
+                                       <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;unique_specification&gt;</var> ::=
+ UNIQUE [<var class="keyword varname">&lt;unique_tree_type_index&gt;</var>]
+ | PRIMARY KEY [<var class="keyword varname">&lt;unique_tree_type_index&gt;</var>
+ | <var class="keyword varname">&lt;unique_inverted_type_index&gt;</var>]</pre></div>
+
+                                       <div class="p">
+            If the index type is omitted, the <span class="ph pname">SAP HANA</span> database chooses the
+            appropriate index by considering the column data type. If the index type is not
+            specified, the <span class="ph pname">SAP HANA</span> database automatically selects an index type as
+                follows:
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20d58a5f75191014b2fe92141b7df228__d2994e65" class="table" frame="border" border="1" rules="all">
+                    <thead class="thead" align="left">
+                        <tr class="row">
+                            <th class="entry" valign="top" id="d14714656e1333">Index type</th>
+
+                            <th class="entry" valign="top" id="d14714656e1336">Criteria </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody class="tbody">
+                        <tr class="row">
+                            <td class="entry" valign="top" headers="d14714656e1333 d14714656e1336 ">CPBTREE</td>
+
+                            <td class="entry" valign="top" headers="d14714656e1333 d14714656e1336 ">
+                                <ul class="ul" id="loio20d58a5f75191014b2fe92141b7df228__d2994e90">
+                                    <li class="li">character string types</li>
+
+                                    <li class="li">binary string types</li>
+
+                                    <li class="li">decimal types</li>
+
+                                    <li class="li">when the constraint is a composite key</li>
+
+                                    <li class="li">when the constraint is a non-unique constraint</li>
+
+                                </ul>
+
+                            </td>
+
+                        </tr>
+
+                        <tr class="row">
+                            <td class="entry" valign="top" headers="d14714656e1333 d14714656e1336 ">BTREE</td>
+
+                            <td class="entry" valign="top" headers="d14714656e1333 d14714656e1336 ">All other cases than specified for CPBTREE </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+</div>
+</div>
+
+                                       <dl class="dl">
+                                          
+                                          <dt class="dt dlterm emphasis">UNIQUE</dt>
+
+                                          <dd class="dd">
+                                             <p class="p">
+            Specifies a column as a unique key. A composite unique key enables the specification of
+            multiple columns as a unique key. With a unique constraint, multiple rows cannot have
+            the same value in the same column.</p>
+
+                                             <p class="p">A UNIQUE column can contain multiple NULL
+                                                values.</p>
+
+                                          </dd>
+
+                                       
+                                          
+                                             <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;unique_tree_type_index&gt;</var></dt>
+
+                                             <dd class="dd">
+                                                <div class="p">
+            Specifies the index type.
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;unique_tree_type_index&gt;</var> ::= BTREE | CPBTREE</pre></div>
+</div>
+
+                                             <dl class="dl">
+                                                
+                                                  <dt class="dt dlterm emphasis">BTREE</dt>
+
+                                                  <dd class="dd">
+                                                  <p class="p">
+            Specifies a B+-tree index. B+-tree is a tree that maintains sorted data which performs
+            efficient insertion, deletion and search of records.</p>
+
+                                                  </dd>
+
+                                                
+                                                
+                                                  <dt class="dt dlterm emphasis">CBTREE</dt>
+
+                                                  <dd class="dd">
+                                                  <p class="p">
+            Specifies a CPB+-tree index. CPB+-tree stands for Compressed Prefix B+-Tree, which is
+            based on pkB-tree. CPB+-tree is a very small index because it uses 'partial key' that is
+            only part of full key in index nodes. CPB+-tree shows better performance than B+-Tree
+            for larger keys. </p>
+
+                                                  </dd>
+
+                                                
+                                             </dl>
+
+                                             </dd>
+
+                                          
+                                          
+                                             <dt class="dt dlterm emphasis">PRIMARY KEY</dt>
+
+                                             <dd class="dd">
+                                                <p class="p">
+            Specifies a primary key constraint, which is a combination of a NOT NULL constraint and
+            a UNIQUE constraint.</p>
+
+                                             </dd>
+
+                                          
+                                          
+                                             <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;unique_inverted_type_index&gt;</var></dt>
+
+                                             <dd class="dd">
+                                                <p class="p">Specifies the inverted index type.</p>
+
+                                                <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;unique_inverted_type_index&gt;</var> ::= INVERTED [<var class="keyword varname">&lt;composite_type&gt;</var>]
+
+<var class="keyword varname">&lt;composite_type&gt;</var> ::= HASH | VALUE</pre></div>
+
+                                             <dl class="dl">
+                                                
+                                                  <dt class="dt dlterm emphasis">INVERTED HASH</dt>
+
+                                                  <dd class="dd">
+                                                  <p class="p">Specifies that a hash encodes the composite key
+                                                  in a condensed manner. This option allows for
+                                                  faster equality queries over the composite keys,
+                                                  as well as reduced memory requirements for storage
+                                                  of the composite key.</p>
+
+                                                  <p class="p">HASH should not be used as a composite type in
+                                                  cases where range queries or similar queries on
+                                                  the composite keys are a significant part of the
+                                                  workload. In these cases, use VALUE or VALUE
+                                                  COMPRESSED instead.</p>
+
+                                                  </dd>
+
+                                                
+                                                
+                                                  <dt class="dt dlterm emphasis">INVERTED VALUE</dt>
+
+                                                  <dd class="dd">
+                                                  <p class="p">VALUE is the default composite key type.</p>
+
+                                                  
+                                                  </dd>
+
+                                                
+                                             </dl>
+
+                                             </dd>
+
+                                          
+                                       </dl>
+
+                                    </dd>
+
+                                 
+                                 
+                                    <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;references_specification&gt;</var></dt>
+
+                                    <dd class="dd">
+                                       <p class="p">For <var class="keyword varname">&lt;references_specification&gt;</var>, see <a class="xref" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_references_specification" target="_top">References Specification</a>.</p>
+
+                                    </dd>
+
+                                 
+                              </dl>
+
+                           </dd>
+
+                        
+                     </dl>
+
+                  </dd>
+
+               
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;table_constraint&gt;</var></dt>
+
+                  <dd class="dd pd">
+                     <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_table_constraint">The table constraint can be either a unique constraint, a referential
+                     constraint, or a check constraint.</p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_constraint&gt;</var> ::= 
+ <var class="keyword varname">&lt;unique_constraint_definition&gt;</var> 
+ | <var class="keyword varname">&lt;referential_constraint_definition&gt;</var>  
+ | <var class="keyword varname">&lt;check_constraint_definition&gt;</var></pre></div>
+
+                     <dl class="dl">
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;unique_constraint_definition&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">The unique specification. See <a class="xref" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_unique_specification" target="_top">Unique specification</a>.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;unique_constraint_definition&gt;</var> ::= 
+ <var class="keyword varname">&lt;unique_specification&gt;</var> (<var class="keyword varname">&lt;unique_column_name_list&gt;</var>)</pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;unique_column_name_list&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies the unique column name list of one or more column
+                              names.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;unique_column_name_list&gt;</var> ::= 
+ <var class="keyword varname">&lt;unique_column_name&gt;</var>[{, <var class="keyword varname">&lt;unique_column_name&gt;</var>}...]</pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;unique_column_name&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies a column name identifier.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;unique_column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;referential_constraint_definition&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies a referential constraint.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;referential_constraint_definition&gt;</var> ::= 
+ FOREIGN KEY (<var class="keyword varname">&lt;referencing_column_name_list&gt;</var>) <var class="keyword varname">&lt;references_specification&gt;</var></pre></div>
+
+                           <p class="p">Foreign key constraints over unique key columns are not supported.
+                              Self-referencing foreign key constraints are supported.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;referencing_column_name_list&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies that the referencing column name list that can have one
+                              or more column names.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;referencing_column_name_list&gt;</var> ::= 
+ <var class="keyword varname">&lt;referencing_column_name&gt;</var>[{, <var class="keyword varname">&lt;referencing_column_name&gt;</var>}...]</pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;referencing_column_name&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">The identifier of a referencing column.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;referencing_column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;references_specification&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_references_specification">
+                              Specifies the referenced table, with optional column=name list and
+                              trigger action. </p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;references_specification&gt;</var> ::= 
+  REFERENCES <var class="keyword varname">&lt;referenced_table&gt;</var> [(<var class="keyword varname">&lt;referenced_column_name_list&gt;</var>)]
+  [<var class="keyword varname">&lt;referential_triggered_action&gt;</var>]</pre></div>
+
+                              <p class="p">If <var class="keyword varname">&lt;referenced_column_name_list&gt;</var> is specified,
+                              then there is a one-to-one correspondence between
+                                 <var class="keyword varname">&lt;column_name&gt;</var> of
+                                 <var class="keyword varname">&lt;column_definition&gt;</var> (see <a class="xref" href="default.html?20d58a5f75191014b2fe92141b7df228.html#loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_column_defintion" target="_top">column definition</a>) and
+                                 <var class="keyword varname">&lt;referenced_column_name&gt;</var>. If it is not specified,
+                              then there is a one-to-one correspondence between
+                                 <var class="keyword varname">&lt;column_name&gt;</var> of
+                                 <var class="keyword varname">&lt;column_definition&gt;</var> and the column name of the
+                              referenced table's primary key.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;referenced_column_name_list&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies the referenced column name list, which can have one or
+                                 more column names.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;referenced_column_name_list&gt;</var> ::= 
+ <var class="keyword varname">&lt;referenced_column_name&gt;</var>[{, <var class="keyword varname">&lt;referenced_column_name&gt;</var>}...]</pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;referenced_table&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies the identifier of a table to be referenced.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;referenced_table&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;referenced_column_name&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies the identifier of the column name to be referenced.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;referenced_column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                           </dd>
+
+                        
+                     </dl>
+
+                  </dd>
+
+               
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;referential_triggered_action&gt;</var></dt>
+
+                  <dd class="dd pd">
+                     <p class="p">Specifies an update rule with an optional delete rule or a delete rule with
+                     an optional update rule. The order in which they are specified provides an
+                     order of precedence for execution.</p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;referential_triggered_action&gt;</var> ::= 
+ <var class="keyword varname">&lt;update_rule&gt;</var> [<var class="keyword varname">&lt;delete_rule&gt;</var>]
+ | <var class="keyword varname">&lt;delete_rule&gt;</var> [<var class="keyword varname">&lt;update_rule&gt;</var>]</pre></div>
+
+                     <dl class="dl">
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;update_rule&gt;</var></dt>
+
+                           <dd class="dd">
+                           <p class="p">Specifies the update rule.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;update_rule&gt;</var> ::= ON UPDATE <var class="keyword varname">&lt;referential_action&gt;</var>
+
+<var class="keyword varname">&lt;referential_action&gt;</var> ::= 
+ CASCADE 
+ | RESTRICT 
+ | SET DEFAULT 
+ | SET NULL</pre></div>
+
+                              <p class="p">The following UPDATE referential actions are possible: </p>
+
+                              
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20d58a5f75191014b2fe92141b7df228__table_tbk_zwk_zv" class="table" frame="border" border="1" rules="all">
+                                    <thead class="thead" align="left">
+                                       <tr class="row">
+                                          <th class="entry" valign="top" id="d14714656e1893">
+                                             <p class="p">Action Name</p>
+
+                                          </th>
+
+                                          <th class="entry" valign="top" id="d14714656e1899">
+                                             <p class="p">Update Action </p>
+
+                                          </th>
+
+                                       </tr>
+
+                                    </thead>
+
+                                    <tbody class="tbody">
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d14714656e1893 d14714656e1899 ">
+                                             <p class="p">RESTRICT</p>
+
+                                          </td>
+
+                                          <td class="entry" valign="top" headers="d14714656e1893 d14714656e1899 ">
+                                             <p class="p">Any updates to a referenced table are prohibited if
+                                             there are any matched records in the referencing table.
+                                             This is the default action. </p>
+
+                                          </td>
+
+                                       </tr>
+
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d14714656e1893 d14714656e1899 ">
+                                             <p class="p">CASCADE</p>
+
+                                          </td>
+
+                                          <td class="entry" valign="top" headers="d14714656e1893 d14714656e1899 ">
+                                             <p class="p">If a record is updated in the referenced table, then
+                                             the corresponding records in the referencing table are
+                                             also updated with the same values. Any updates to a referenced table are prohibited if
+                                                there are any matched records in the referencing
+                                                table. This is the default action. </p>
+
+                                          </td>
+
+                                       </tr>
+
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d14714656e1893 d14714656e1899 ">
+                                             <p class="p">SET NULL</p>
+
+                                          </td>
+
+                                          <td class="entry" valign="top" headers="d14714656e1893 d14714656e1899 ">
+                                             <p class="p">If a record is updated in the referenced table, then
+                                             the corresponding records in the referencing table are
+                                             also updated with null values. </p>
+
+                                          </td>
+
+                                       </tr>
+
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d14714656e1893 d14714656e1899 ">
+                                             <p class="p">SET DEFAULT</p>
+
+                                          </td>
+
+                                          <td class="entry" valign="top" headers="d14714656e1893 d14714656e1899 ">
+                                             <p class="p">If a record is updated in the referenced table, then
+                                             the corresponding records in the referencing table are
+                                             also updated with their default values </p>
+
+                                          </td>
+
+                                       </tr>
+
+                                    </tbody>
+
+                                 </table>
+</div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;check_constraint_definition&gt;</var></dt>
+
+                           <dd class="dd">
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;check_constraint_definition&gt;</var> ::= CHECK (<var class="keyword varname">&lt;search_condition&gt;</var>)</pre></div>
+
+                              <p class="p">Specifies a predicate to use as a table check constraint. A table check constraint is satisfied if
+                                    <var class="keyword varname">&lt;search_condition&gt;</var> evaluates to true.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;delete_rule&gt;</var></dt>
+
+                           <dd class="dd">
+                           <p class="p">Specifies the delete rule.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;delete_rule&gt;</var> ::= ON DELETE <var class="keyword varname">&lt;referential_action&gt;</var></pre></div>
+
+                              <p class="p">The following DELETE referential actions are possible: </p>
+
+                              
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20d58a5f75191014b2fe92141b7df228__table_pyb_cxk_zv" class="table" frame="border" border="1" rules="all">
+                                    <thead class="thead" align="left">
+                                       <tr class="row">
+                                          <th class="entry" valign="top" id="d14714656e2027">
+                                             <p class="p">Action Name</p>
+
+                                          </th>
+
+                                          <th class="entry" valign="top" id="d14714656e2033">
+                                             <p class="p">Delete Action </p>
+
+                                          </th>
+
+                                       </tr>
+
+                                    </thead>
+
+                                    <tbody class="tbody">
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d14714656e2027 d14714656e2033 ">
+                                             <p class="p">RESTRICT</p>
+
+                                          </td>
+
+                                          <td class="entry" valign="top" headers="d14714656e2027 d14714656e2033 ">
+                                             <p class="p">Any deletions to a referenced table are prohibited
+                                             if there are any matched records in the referencing
+                                             table. This is the default action. </p>
+
+                                          </td>
+
+                                       </tr>
+
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d14714656e2027 d14714656e2033 ">
+                                             <p class="p">CASCADE</p>
+
+                                          </td>
+
+                                          <td class="entry" valign="top" headers="d14714656e2027 d14714656e2033 ">
+                                             <p class="p">If a record in the referenced table is deleted,
+                                             then the corresponding records in the referencing table
+                                             are also deleted. </p>
+
+                                          </td>
+
+                                       </tr>
+
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d14714656e2027 d14714656e2033 ">
+                                             <p class="p">SET NULL</p>
+
+                                          </td>
+
+                                          <td class="entry" valign="top" headers="d14714656e2027 d14714656e2033 ">
+                                             <p class="p">If a record in the referenced table is deleted, then
+                                             the corresponding records in the referencing table are
+                                             set to null. </p>
+
+                                          </td>
+
+                                       </tr>
+
+                                       <tr class="row">
+                                          <td class="entry" valign="top" headers="d14714656e2027 d14714656e2033 ">
+                                             <p class="p">SET DEFAULT</p>
+
+                                          </td>
+
+                                          <td class="entry" valign="top" headers="d14714656e2027 d14714656e2033 ">
+                                             <p class="p">If a record in the referenced table is deleted, then
+                                             the corresponding records in the referencing table are
+                                             set to their default values. </p>
+
+                                          </td>
+
+                                       </tr>
+
+                                    </tbody>
+
+                                 </table>
+</div>
+
+                           </dd>
+
+                        
+                     </dl>
+
+                  </dd>
+
+               
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;with_association_clause&gt;</var></dt>
+
+                  <dd class="dd pd">
+                  <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_with_association">Creates a relationship
+                     between the table being created and one or more existing tables.</p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;with_association_clause&gt;</var> ::= 
+ WITH ASSOCIATIONS (<var class="keyword varname">&lt;association_def_list&gt;</var>)
+
+<var class="keyword varname">&lt;association_def_list&gt;</var> ::= <var class="keyword varname">&lt;association_def&gt;</var>, ...</pre></div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;association_def&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the association relationship, including the join cardinality
+                              and DDL statement.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;association_def&gt;</var> ::= 
+ [<var class="keyword varname">&lt;join_cardinality&gt;</var>] JOIN <var class="keyword varname">&lt;table_name&gt;</var> [AS <var class="keyword varname">&lt;identifier&gt;</var>] ON <var class="keyword varname">&lt;predicate&gt;</var>
+
+<var class="keyword varname">&lt;join_cardinality&gt;</var> ::= 
+ MANY TO ONE
+ | MANY TO MANY
+ | ONE TO ONE
+ | ONE TO MANY
+
+<var class="keyword varname">&lt;table_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                  </dl>
+
+                  </dd>
+
+               
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;like_table_clause&gt;</var></dt>
+
+                  <dd class="dd pd">
+                     <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_like_clause">Creates a table that has the
+                     same definition as <var class="keyword varname">&lt;like_table_name&gt;</var> unless a corresponding
+                     property or WITHOUT option is specified. </p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;like_table_clause&gt;</var> ::= 
+ LIKE <var class="keyword varname">&lt;like_table_name&gt;</var> [WITH [NO] DATA] [<var class="keyword varname">&lt;like_without_option&gt;</var>]</pre></div>
+
+                     <p class="p">All the column definitions with constraints, default values, and other
+                     properties, such as generated columns, schema flexibility, and so on, are
+                     copied from the table <var class="keyword varname">&lt;like_table_name&gt;</var>. All table
+                     constraints, indexes, fulltext indexes, and the table location are also
+                     copied.</p>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;like_table_name&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the name of the table being duplicated. </p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;like_table_name&gt;</var> ::= 
+ [[<var class="keyword varname">&lt;database_name&gt;</var>.]<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;table_name&gt;</var>
+
+<var class="keyword varname">&lt;table_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                           <p class="p">Schema name and database name are optional. A database name can only
+                              be specified in a multitenant system where cross-database access is
+                              enabled for the given database name.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">WITH [NO] DATA</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies that data is copied from the
+                                 <var class="keyword varname">&lt;like_table_name&gt;</var> table. The default value of WITH
+                              NO DATA does not copy the table data.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;like_without_option&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies which properties are not copied from the
+                                 <var class="keyword varname">&lt;like_table_name&gt;</var> table. For example, when WITHOUT
+                              PARTITION is specified, the table is not partitioned.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;like_without_option&gt;</var> ::= 
+ WITHOUT AUTO MERGE 
+ | WITHOUT HISTORY 
+ | WITHOUT NO LOGGING 
+ | WITHOUT PARTITION 
+ | WITHOUT SCHEMA FLEXIBILITY 
+ | WITHOUT UNLOAD 
+ | WITHOUT PRELOAD 
+ | WITHOUT UNLOAD PRIORITY 
+ | WITHOUT INDEX 
+ | WITHOUT FUZZY SEARCH INDEX 
+ | WITHOUT FUZZY SEARCH MODE 
+ | WITHOUT GLOBAL TEMPORARY 
+ | WITHOUT LOCAL TEMPORARY
+ | WITHOUT CONSTRAINT</pre></div>
+
+                           <p class="p">When you specify WITHOUT CONSTRAINT, the following restraints are not
+                              copied to the new table: PRIMARY KEY, UNIQUE, NOT NULL, CHECK
+                              constraints, and REFERENTIAL CONSTRAINT (foreign keys).</p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+                  </dd>
+
+               
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;as_table_subquery&gt;</var></dt>
+
+                  <dd class="dd pd">
+                     <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_as_subquery">Creates a table and fills it
+                     with the data computed by the <var class="keyword varname">&lt;subquery&gt;</var>. For more information
+                     about subqueries, see the SELECT Statement topic.</p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;as_table_subquery&gt;</var> ::= AS (<var class="keyword varname">&lt;subquery&gt;</var>) [WITH [NO] DATA]</pre></div>
+
+                     <p class="p">Only NOT NULL constraints are copied by this clause. If column_names are
+                     specified, then specified column_names override the column names from
+                        <var class="keyword varname">&lt;subquery&gt;</var>. If the table type is a history column, global
+                     temporary [column], or local temporary [column], then the memory threshold
+                     values of LOB columns are reset to NULL to store all LOB data in memory. </p>
+
+                     <p class="p">The WITH DATA option specifies that data is copied from
+                        <var class="keyword varname">&lt;subquery&gt;</var>; this is the default. The WITH NO DATA option
+                     does not copy the data from <var class="keyword varname">&lt;subquery&gt;</var>.</p>
+
+                  </dd>
+
+               
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;logging_option&gt;</var></dt>
+
+                  <dd class="dd pd">
+                     <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_logging_option">Specifies logging options
+                     for the created table.</p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;logging_option&gt;</var> ::= 
+   LOGGING | NO LOGGING
+   [RETENTION <var class="keyword varname">&lt;retention_period&gt;</var>]</pre></div>
+
+                     <dl class="dl">
+                        
+                           <dt class="dt dlterm emphasis">LOGGING</dt>
+
+                           <dd class="dd">
+                              <p class="p">Activates table logging. This is the default logging option.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis">NO LOGGING</dt>
+
+                           <dd class="dd">
+                              <p class="p">Deactivates logging. A NO LOGGING table means that the definition
+                              of the table is persistent and globally available with data that is
+                              temporary and global.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis">RETENTION</dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies the retention time in seconds of the column table created
+                              by NO LOGGING.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">RETENTION <var class="keyword varname">&lt;retention_period&gt;</var>
+
+<var class="keyword varname">&lt;retention_period&gt;</var> ::= <var class="keyword varname">&lt;unsigned_integer&gt;</var></pre></div>
+
+                           <p class="p">After the specified retention period elapses, the table is dropped if
+                              the used physical memory on the host is above 80%.</p>
+
+                           <div class="note note"><span class="notetitle">Note</span> A NO LOGGING retention table can also be created on an
+                              Active/Active (read enabled) secondary system.</div>
+
+                           </dd>
+
+                        
+                     </dl>
+
+                  </dd>
+
+               
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;auto_merge_option&gt;</var></dt>
+
+                  <dd class="dd pd">
+                     <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_auto_merge_option">Specifies that an
+                     automatic delta merge is triggered; this is the default.</p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;auto_merge_option&gt;</var> ::= [NO] AUTO MERGE</pre></div>
+
+                  <p class="p">NO AUTO MERGE disables automatic delta merging.</p>
+
+                  </dd>
+
+               
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;unload_priority_clause&gt;</var></dt>
+
+                  <dd class="dd pd">
+                     <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_unload_priority_clause">Specifies the
+                     priority of the table to be unloaded from memory. </p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;unload_priority_clause&gt;</var> ::= UNLOAD PRIORITY <var class="keyword varname">&lt;unload_priority&gt;</var></pre></div>
+
+                     <p class="p"><var class="keyword varname">&lt;unload_priority&gt;</var> is a number from 0 and 9, inclusive,
+                     where 0 means not-unloadable and 9 means earliest unload.</p>
+
+                  </dd>
+
+               
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;schema_flexibility_option&gt;</var></dt>
+
+                  <dd class="dd pd">
+                     <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_schema_flexibility_option">Specifies that
+                        the table schema is flexible. The flexibility option is available for column
+                        tables. </p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;schema_flexibility_option&gt;</var> ::= 
+ WITH SCHEMA FLEXIBILITY [(<var class="keyword varname">&lt;flexibility_option&gt;</var>...)]
+
+<var class="keyword varname">&lt;flexibility_option&gt;</var> ::= 
+ RECLAIM 
+ | NO RECLAIM 
+ | DEFAULT DATA TYPE <var class="keyword varname">&lt;default_data_type&gt;</var> 
+ | NO DEFAULT DATA TYPE 
+ | AUTO DATA TYPE PROMOTION 
+ | NO AUTO DATA TYPE PROMOTION</pre></div>
+
+                     <p class="p">Dynamic columns in flexible tables allow you to implicitly add columns and
+                     change column data types with INSERT, UPDATE, and REPLACE/UPSERT
+                     operations.</p>
+
+                     <p class="p">Dynamic columns can be created automatically during a data insertion
+                     operation, an update operation, or a replace/upsert operation. Spatial and text
+                     data types are not available in the dynamic schema of flexible tables. The
+                     deletion of automatically created columns is done asynchronously in the
+                     background through a dedicated garbage collection mechanism. </p>
+
+                  <p class="p">Implicit DDL operations during DML operations are auto-committed and cannot be
+                     rolled back.</p>
+
+                     <dl class="dl">
+                        
+                           <dt class="dt dlterm emphasis">RECLAIM</dt>
+
+                           <dd class="dd">
+                              <p class="p">Enables garbage collection for a flexible table. If it is enabled,
+                              then dynamic columns are automatically dropped when no values are left
+                              for all rows in the column. The garbage collection runs periodically
+                              according to the interval specified as
+                                 <span class="keyword cmdname">reclaim_interval</span> in the
+                                 <span class="keyword cmdname">flexible_table</span> section of the
+                                 <span class="ph filepath">indexserver.ini</span> file. Trigger garbage
+                              collection manually with the ALTER SYSTEM RECLAIM FLEXIBLE TABLES
+                              statement.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis">NO RECLAIM</dt>
+
+                           <dd class="dd">
+                              <p class="p">Turns off garbage collection.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis">DEFAULT DATA TYPE</dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies the default data type.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">DEFAULT DATA TYPE {<var class="keyword varname">&lt;default_data_type&gt;</var> | *}</pre></div>
+
+                           <p class="p">By default an NVARCHAR with a maximum length of 5000 is chosen as the
+                              data type for new dynamic columns in flexible tables. This default
+                              behavior of a flexible table can be changed by explicitly specifying a
+                              default data type. To let the database automatically detect and choose
+                              the best matching data type, specify * as a wildcard for the default
+                              data type.</p>
+
+                           <p class="p">Database automatic data type detection is only supported for constant
+                              values (expressions are not supported).</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis">NO DEFAULT DATA TYPE</dt>
+
+                           <dd class="dd">
+                              <p class="p">Explicitly forces the use of the system default for the default
+                                 data type (NVARCHAR(5000)).</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis">AUTO DATA TYPE PROMOTION</dt>
+
+                           <dd class="dd">
+                              <p class="p">Alters the column type of a dynamic column to a more generic data
+                              type that is able to store the old and the new data without any loss
+                              of information when new data is inserted. Automatic data type
+                              promotion can be combined with setting a default data type.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis">NO AUTO DATA TYPE PROMOTION</dt>
+
+                           <dd class="dd">
+                              <p class="p">Explicitly disables auto data type promotion.</p>
+
+                           </dd>
+
+                        
+                     </dl>
+
+                  </dd>
+
+               
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;partition_clause&gt;</var></dt>
+
+                  <dd class="dd pd">
+                     <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_partition_clause"> Partitions the table
+                     by using the specified rules. </p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;partition_clause&gt;</var> ::= 
+ PARTITION BY <var class="keyword varname">&lt;hash_partition&gt;</var> [, <var class="keyword varname">&lt;range_partition&gt;</var> | , <var class="keyword varname">&lt;hash_partition&gt;</var>]
+ | PARTITION BY <var class="keyword varname">&lt;range_partition&gt;</var> [,<var class="keyword varname">&lt;range_partition&gt;</var>]
+ | PARTITION BY <var class="keyword varname">&lt;roundrobin_partition&gt;</var> [,<var class="keyword varname">&lt;range_partition&gt;</var>]</pre></div>
+
+                     <p class="p">Partitioning by date values requires the format YYYYMMDD, YYYY-MM-DD, or
+                     YYYY/MM/DD. Date is the most granular date time value that you can use for
+                     partitioning.</p>
+
+                     <p class="p">You can find more information about table partitioning in the <cite class="cite">SAP HANA
+                        Administration Guide</cite>.</p>
+
+                     <dl class="dl">
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;hash_partition&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Partitions the created table by using a hash partitioning
+                              scheme.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;hash_partition&gt;</var> ::= 
+ HASH (<var class="keyword varname">&lt;partition_expression&gt;</var> [{<var class="keyword varname">&lt;partition_expression&gt;</var>,}...]) 
+   PARTITIONS {<var class="keyword varname">&lt;num_partitions&gt;</var> | GET_NUM_SERVERS()}</pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;range_partition&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Partitions the created table by using a range partitioning
+                              scheme.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;range_partition&gt;</var> ::= 
+ RANGE (<var class="keyword varname">&lt;partition_expression&gt;</var>) (<var class="keyword varname">&lt;range_spec&gt;</var>, ...)</pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;roundrobin_partition&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Partitions the created table by using a round-robin partitioning
+                              scheme.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;roundrobin_partition&gt;</var> ::= 
+ ROUNDROBIN PARTITIONS {<var class="keyword varname">&lt;num_partitions&gt;</var> | GET_NUM_SERVERS()} [, <var class="keyword varname">&lt;range_partition&gt;</var>]</pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis">GET_NUM_SERVERS()</dt>
+
+                           <dd class="dd">
+                              <p class="p">Returns the number of servers/partitions according to table
+                              placement. You can find more information on table placement in the
+                                 <cite class="cite">SAP HANA Administration Guide</cite>.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;range_spec&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies the range specifier for a partition. Ranges can be
+                              specified for positive values.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;range_spec&gt;</var> ::= 
+ {<var class="keyword varname">&lt;from_to_spec&gt;</var> | <var class="keyword varname">&lt;single_spec&gt;</var>} 
+   [{ {<var class="keyword varname">&lt;from_to_spec&gt;</var> | <var class="keyword varname">&lt;single_spec&gt;</var>},} ...]
+   [, PARTITION OTHERS]</pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;from_to_spec&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies a partition by using the lower and upper values of a
+                                 <var class="keyword varname">&lt;partition_expression&gt;</var>.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;from_to_spec&gt;</var> ::= 
+ PARTITION <var class="keyword varname">&lt;lower_value&gt;</var> &lt;= VALUES &lt; <var class="keyword varname">&lt;upper_value&gt;</var></pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;single_spec&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies a partition by using a single value of a
+                                 <var class="keyword varname">&lt;partition_expression&gt;</var>.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;single_spec&gt;</var> ::= 
+ PARTITION VALUE = <var class="keyword varname">&lt;target_value&gt;</var></pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis">PARTITION OTHERS</dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies that all other values that are not covered by the
+                              partition specification are gathered into one partition.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;partition_expression&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Declares the specifier that segregates data into partitions.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;partition_expression&gt;</var> ::= 
+ <var class="keyword varname">&lt;column_name&gt;</var> 
+ | YEAR(<var class="keyword varname">&lt;column_name&gt;</var>) 
+ | MONTH(<var class="keyword varname">&lt;column_name&gt;</var>)</pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;lower_value&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies the lower value of a partition specifier.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;lower_value&gt;</var> ::= 
+ <var class="keyword varname">&lt;string_literal&gt;</var> 
+ |<var class="keyword varname">&lt;unsigned_numeric_literal&gt;</var></pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;upper_value&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies the upper value of a partition specifier.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;upper_value&gt;</var> ::= 
+ <var class="keyword varname">&lt;string_literal&gt;</var> 
+ |<var class="keyword varname">&lt;unsigned_numeric_literal&gt;</var></pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;target_value&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies the target value of a single partition specifier.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;target_value&gt;</var> ::= 
+ <var class="keyword varname">&lt;string_literal&gt;</var> 
+ | <var class="keyword varname">&lt;unsigned_numeric_literal&gt;</var></pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;num_partitions&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies the number of partitions to create for the table.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;num_partitions&gt;</var> ::= <var class="keyword varname">&lt;unsigned_integer&gt;</var></pre></div>
+
+                           </dd>
+
+                        
+                     </dl>
+
+                  </dd>
+
+               
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;group_option_list&gt;</var></dt>
+
+                  <dd class="dd pd">
+                     <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_group_option">Specifies the group type,
+                     subtype, and name, and whether the table is the leader of the table group. </p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;group_option_list&gt;</var> ::= <var class="keyword varname">&lt;group_option&gt;</var> [<var class="keyword varname">&lt;group_option&gt;</var> ...]
+
+<var class="keyword varname">&lt;group_option&gt;</var> ::= 
+ GROUP TYPE <var class="keyword varname">&lt;identifier&gt;</var> 
+ | GROUP SUBTYPE <var class="keyword varname">&lt;identifier&gt;</var> 
+ | GROUP NAME <var class="keyword varname">&lt;identifier&gt;</var> [ GROUP LEAD ]</pre></div>
+
+                  <p class="p">GROUP LEAD sets the table as the leader of the table group it belongs to.</p>
+
+                  </dd>
+
+               
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;location_clause&gt;</var></dt>
+
+                  <dd class="dd pd">
+                     <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_location_clause">Specifies the index
+                     servers on which the partitions are created in a round-robin scheme.</p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;location_clause&gt;</var> ::= 
+ AT [LOCATION] {<var class="keyword varname">&lt;indexserver_host_port&gt;</var>
+ | (<var class="keyword varname">&lt;indexserver_host_port&gt;</var>, ...)}
+
+<var class="keyword varname">&lt;indexserver_host_port&gt;</var> ::= '<var class="keyword varname">&lt;hostname&gt;</var>:<var class="keyword varname">&lt;port_number&gt;</var>'</pre></div>
+
+                     <p class="p">You candetermine the index servers on which the partitions are created. If
+                     you specify the LOCATION, the partitions are created on these instances by
+                     using a round-robin scheme. Duplicates in the list are removed. If you specify
+                     exactly the same number of instances as partitions in the partition
+                     specification, then each partition is assigned to the respective instance in
+                     the list. All index servers in the list must belong to the same instance.</p>
+
+                     <p class="p">If no locations are specified, then existing table placement settings (if
+                     configured) are used to decide the location. If table placement settings are
+                     not configured, then partition locations are decided randomly. If the number of
+                     partitions matches the number of servers (for example by using the
+                     GET_NUM_SERVERS function), then multiple CREATE TABLE calls are distributed
+                     across all servers evenly. In the case of a multi-level partitioning, this
+                     behavior applies for the number of partitions of the first level.</p>
+
+                     <p class="p">This mechanism is useful if several tables are being created that have a
+                     semantic relationship to each other. A table can be created in the specified
+                     location with <var class="keyword varname">&lt;hostname&gt;</var>:<var class="keyword varname">&lt;port_number&gt;</var>.
+                        <var class="keyword varname">&lt;location_clause&gt;</var> can be specified when creating
+                     partitioned tables that are distributed on multiple instances. When
+                        <var class="keyword varname">&lt;location_clause&gt;</var> is provided without
+                        <var class="keyword varname">&lt;partition_clause&gt;</var>, the table is created on the first
+                     location specified. If location information is not provided, then the table is
+                     automatically assigned to one node. This option can be used for both row-store
+                     and column-store tables in a distributed environment. Even if you specify a
+                     location for a global temporary table, the table is always created in the
+                     master instance.</p>
+
+                  </dd>
+
+               
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;replica_clause&gt;</var></dt>
+
+                  <dd class="dd pd">
+                     <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_replica_clause">Creates a replica.</p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;replica_clause&gt;</var> ::= 
+ [<var class="keyword varname">&lt;replication_type&gt;</var>] [<var class="keyword varname">&lt;column_or_row&gt;</var>] REPLICA [<var class="keyword varname">&lt;replica_partition&gt;</var>] 
+   AT {<var class="keyword varname">&lt;num_replicas&gt;</var> LOCATIONS | <var class="keyword varname">&lt;replica_locations&gt;</var>}
+
+<var class="keyword varname">&lt;replication_type&gt;</var> ::= SYNCHRONOUS | ASYNCHRONOUS
+
+<var class="keyword varname">&lt;column_or_row&gt;</var> ::= COLUMN | ROW
+
+<var class="keyword varname">&lt;replica_partition&gt;</var> ::= <var class="keyword varname">&lt;partition_clause&gt;</var>
+
+<var class="keyword varname">&lt;num_replicas&gt;</var> ::= ALL | <var class="keyword varname">&lt;unsigned_integer&gt;</var>
+
+<var class="keyword varname">&lt;replica_locations&gt;</var> ::=
+ [LOCATION] {<var class="keyword varname">&lt;indexserver_host_port&gt;</var>
+ | (<var class="keyword varname">&lt;indexserver_host_port&gt;</var>, ...)}
+
+<var class="keyword varname">&lt;indexserver_host_port&gt;</var> ::= 'hostname:port_number'</pre></div>
+
+                     <p class="p">The replica type can be SYNCHRONOUS (the default) or ASYNCHRONOUS and it is
+                     specified by <var class="keyword varname">&lt;column_or_row&gt;</var>. If the replica type is not
+                     specified, then the type is the same as that of table. Row tables can have a
+                     partitioned column replica (specified by <var class="keyword varname">&lt;replica_partition&gt;</var>).
+                     ALL LOCATIONS creates replicas in all indexservers.
+                        <var class="keyword varname">&lt;unsigned_integer&gt;</var> LOCATIONS creates replicas in the
+                     specified number of indexservers. <var class="keyword varname">&lt;replica_locations&gt;</var> creates
+                     replicas in the specified indexserver.</p>
+
+                  </dd>
+
+               
+               
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;global_temporary_option&gt;</var></dt>
+
+                  <dd class="dd pd">
+                     <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1create_table_global_temporary_option">Sets data
+                     availability of global temporary tables within session or transaction level.
+                     Only global temporary tables can use this option. </p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;global_temporary_option&gt;</var> ::= 
+ <var class="keyword varname">&lt;global_temporary_preserve&gt;</var> 
+ | <var class="keyword varname">&lt;global_temporary_delete&gt;</var></pre></div>
+
+                     <dl class="dl">
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;global_temporary_preserve&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Causes data to remain available within a session. The data is
+                              deleted when the session is terminated. </p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;global_temporary_preserve&gt;</var> ::= ON COMMIT PRESERVE ROWS</pre></div>
+
+                              <p class="p">PRESERVE is the default value. Therefore, global temporary tables
+                              use session data without this option.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;global_temporary_preserve&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Causes data to remain available within a transaction. The data is
+                              deleted when the transaction is committed.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;global_temporary_delete&gt;</var> ::= ON COMMIT DELETE ROWS</pre></div>
+
+                           </dd>
+
+                        
+                     </dl>
+
+                  </dd>
+
+               
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;series_clause&gt;</var></dt>
+
+                  <dd class="dd pd">
+                     <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_series_clause">Specifies settings for a table that
+                        contains series data.</p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;series_clause&gt;</var> ::= 
+ SERIES ( [<var class="keyword varname">&lt;series_key&gt;</var>] [<var class="keyword varname">&lt;series_equidistant_definition&gt;</var>] [<var class="keyword varname">&lt;series_minvalue&gt;</var>] [<var class="keyword varname">&lt;series_maxvalue&gt;</var>] 
+   <var class="keyword varname">&lt;series_period&gt;</var> [<var class="keyword varname">&lt;alternate_series&gt;</var>] )</pre></div>
+
+                     <dl class="dl">
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;series_key&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Defines one or more columns that uniquely identify a particular
+                                 series within the table. The table stores a single series when no
+                                 series key columns are defined. For series tables that do not allow
+                                 duplicate entries, a PRIMARY KEY can be defined with the SERIES_KEY
+                                 columns and a period column. </p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;series_key&gt;</var> ::= SERIES KEY (<var class="keyword varname">&lt;series_key_column&gt;</var> [{,<var class="keyword varname">&lt;series_key_column&gt;</var>...}])</pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;series_equidistant_definition&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies whether the table is equidistant.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;series_equidistant_definition&gt;</var> ::= 
+ NOT EQUIDISTANT
+ | EQUIDISTANT PIECEWISE
+ | EQUIDISTANT INCREMENT BY <var class="keyword varname">&lt;increment_by&gt;</var>
+ [<var class="keyword varname">&lt;missing_elements&gt;</var>]</pre></div>
+
+                              <p class="p">When using an equidistant series for table partitioning, use HASH
+                                 or RANGE partitioning so that records with the same series key are
+                                 in the same partition.</p>
+
+                              <p class="p">EQUIDISTANT PIECEWISE indicates that the timestamps are piecewise
+                              linear with a little possibility of jitter. The timestamps do not have
+                              a single offset throughout the table, but can change within and among
+                              the series in the table.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;increment_by&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Defines the distance between adjacent elements. </p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;increment_by&gt;</var> ::= <var class="keyword varname">&lt;real_const&gt;</var> | <var class="keyword varname">&lt;datetime_const&gt;</var></pre></div>
+
+                              <p class="p">The delta is defined by an integer constant, an interval constant,
+                              or a defined number of elements between a minimum and maximum. The
+                              delta is used in the physical storage representation to optimize an
+                              equidistant series table. For numeric series, the increment_by value
+                              defines the period boundaries with respect to numeric zero (0). For
+                              example, if the increment_by is 3, then valid period boundaries
+                              include 0, 3, 6, ... Define <var class="keyword varname">&lt;Increment_by&gt;</var> as a
+                              real_const or an datetime_const. It is either an integer constant, an
+                              interval constant, or a defined number of elements between a minimum
+                              and maximum, so it can be an integer or a real. If the period type is
+                              a DATETIME, then the number needs to be preceded by INTERVAL followed
+                              by a unit, such as YEAR, MONTH, DAY, HOUR, MINUTE, or SECOND.
+                              Exponential notation is allowed.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;missing_elements&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Indicates whether missing elements are allowed. </p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;missing_elements&gt;</var> ::= MISSING ELEMENTS [NOT] ALLOWED</pre></div>
+
+                              <p class="p">Equidistant series define a mapping from the series data type to
+                              elements. A series table has no missing elements when there is a
+                              single contiguous range of elements where every element has a matching
+                              row. Otherwise, the table has missing elements.</p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;series_minvalue and series_maxvalue&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies a minimum or maximum value.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;series_minvalue&gt;</var> ::= 
+ NO MINVALUE 
+ | MINVALUE <var class="keyword varname">&lt;datetime_literal&gt;</var> 
+
+<var class="keyword varname">&lt;series_maxvalue&gt;</var> ::= 
+ NO MAXVALUE 
+ | MAXVALUE <var class="keyword varname">&lt;datetime_literal&gt;</var></pre></div>
+
+                              <p class="p">For a non-equidistant series, any representable value between the
+                              minimum and maximum values is permitted. When a minimum or maximum
+                              value is specified for an equidistant series, the value must be
+                              aligned with the increment_by value with respect to the natural zero.
+                              For example, a numeric series with an increment_by value of 2 requires
+                              the minimum and maximum value to be an even number. For date/time
+                              types with an increment_by unit of DAY or smaller, the zero is
+                              considered to be midnight. For a unit of MONTH, the zero is the first
+                              day of the month, and for a unit of YEAR, the zero is the first day of
+                              the year. </p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;constant_literal&gt;</var> ::= <var class="keyword varname">&lt;real_const&gt;</var> | <var class="keyword varname">&lt;datetime_const&gt;</var>
+
+<var class="keyword varname">&lt;interval_const&gt;</var> ::= INTERVAL <var class="keyword varname">&lt;integer&gt;</var> <var class="keyword varname">&lt;unit&gt;</var>
+
+<var class="keyword varname">&lt;unit&gt;</var> ::= 
+ YEAR 
+ | MONTH 
+ | DAY 
+ | HOUR 
+ | MINUTE 
+ | SECOND</pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;series_period&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Specifies the period of validity in each row that represents the
+                              period of time that the row applies to.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;series_period&gt;</var> ::= PERIOD FOR SERIES <var class="keyword varname">&lt;series_period_columns&gt;</var>
+
+<var class="keyword varname">&lt;series_period_columns&gt;</var> ::= 
+ (<var class="keyword varname">&lt;series_instant_column&gt;</var>)
+ | (<var class="keyword varname">&lt;series_period_start_column&gt;</var>, <var class="keyword varname">&lt;series_period_end_column&gt;</var>)</pre></div>
+
+                              <p class="p">There is a single period column when the series table represents
+                                 instants. For intervals, there can be one or two columns. </p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;series_instant_column&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Represents the instant in time that the single period row applies
+                                 to. </p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;series_instant_column&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;series_period_start_column&gt;</var> and
+                              <var class="keyword varname">&lt;series_period_end_column&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Defines an interval series table. </p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;series_period_start_column&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var> | NULL 
+
+<var class="keyword varname">&lt;series_period_end_column&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var> | NULL</pre></div>
+
+                              <p class="p">The start and end of the interval are maintained separately. For an
+                              equidistant series, INCREMENT_BY allows the user to find either end
+                              point given the other, so you can omit either start or end from the
+                              series table without loss of information. In all cases for an
+                              interval, the interval is defined with closed-open semantics. </p>
+
+                           </dd>
+
+                        
+                        
+                           <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;alternate_series&gt;</var></dt>
+
+                           <dd class="dd">
+                              <p class="p">Represents one or more columns expected to be offset from the start
+                                 time by an offset that changes infrequently, such as local-time
+                                 columns reflecting changes in daylight savings time.</p>
+
+                              <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;alternate_series&gt;</var> ::= 
+ALTERNATE PERIOD FOR SERIES (<var class="keyword varname">&lt;column1&gt;</var> [, <var class="keyword varname">&lt;column2&gt;</var> ...])</pre></div>
+
+                           </dd>
+
+                        
+                     </dl>
+
+                  </dd>
+
+               
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;unused_retention_period_option&gt;</var></dt>
+
+                  <dd class="dd pd">
+                     <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__create_table_unused_retention_period_option">Defines the retention
+                     period for a table or table partitions. </p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;unused_retention_period_option&gt;</var> ::= 
+ UNUSED RETENTION PERIOD { <var class="keyword varname">&lt;retention_period&gt;</var> | (<var class="keyword varname">&lt;retention_period&gt;</var>, ...)}
+
+<var class="keyword varname">&lt;retention_period&gt;</var> ::= <var class="keyword varname">&lt;unsigned_integer&gt;</var></pre></div>
+
+                     <p class="p">A single value specifies the retention period at table-level, including all
+                     of the table partitions. Multiple values specify individual retention periods
+                     for each of the table partitions. If multiple values are specified, then the
+                     number of values must match the number of table partitions.</p>
+
+                  <p class="p">The default value and behavior of UNUSED_RETENTION_PERIOD is 0 (inactive). To
+                     activate UNUSED_RETENTION_PERIOD, change the value to something other than 0.
+                     However, use of the UNUSED_RETENTION_PERIOD setting on a table requires that
+                     the global unused_retention_period setting in the
+                        <span class="ph filepath">global.ini</span> configuration file be set to something other
+                     than 0.</p>
+
+                  </dd>
+
+               
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;table_comment_string&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__table_comment_string">Specifies a descriptive comment for the table. </p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_comment_string&gt;</var> ::= <var class="keyword varname">&lt;string_literal&gt;</var></pre></div>
+
+                  <p class="p">Specifying COMMENT <var class="keyword varname">&lt;table_comment_string&gt;</var> saves you from
+                     having to execute a separate COMMENT ON statement for the table after table
+                     creation.</p>
+
+               </dd>
+
+            
+               
+                  <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;asynchronous_replica_clause&gt;</var></dt>
+
+                  <dd class="dd pd">
+                     <p class="p" id="loio20d58a5f75191014b2fe92141b7df228__async_replica_clause">Creates the first replica table named
+                           <var class="keyword varname">&lt;replica_schema_name&gt;</var>.<var class="keyword varname">&lt;source_table_name&gt;</var>
+                        for
+                           <var class="keyword varname">&lt;source_schema_name&gt;</var>.<var class="keyword varname">&lt;source_table_name&gt;</var>. </p>
+
+                     <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;asynchronous_replica_clause&gt;</var> ::= 
+ <var class="keyword varname">&lt;replica_schema_name&gt;</var>.<var class="keyword varname">&lt;source_table_name&gt;</var> LIKE <var class="keyword varname">&lt;source_schema_name&gt;</var>.<var class="keyword varname">&lt;source_table_name&gt;</var>
+   ASYNCHRONOUS REPLICA [ AT '<var class="keyword varname">&lt;replica_host&gt;</var>:<var class="keyword varname">&lt;replica_port&gt;</var>' ]
+
+<var class="keyword varname">&lt;replica_schema_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+<var class="keyword varname">&lt;source_table_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+<var class="keyword varname">&lt;source_schema_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+<var class="keyword varname">&lt;source_table_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+<var class="keyword varname">&lt;replica_host&gt;</var> ::= <var class="keyword varname">&lt;hostname&gt;</var>
+<var class="keyword varname">&lt;replica_port&gt;</var> ::= <var class="keyword varname">&lt;port_number&gt;</var></pre></div>
+
+                     <p class="p">You may create the first replica table on the specified location with the AT
+                     clause. If you do not specify it, then the first replica table is created based
+                     on the table placement rule. If no table placement rule is also defined, then
+                     the first replica table is created on one of slave nodes which is not a source
+                     table location. This command does not activate its replication (the replica is
+                     created in an empty state). To activate replication, execute ALTER SYSTEM
+                     ENABLE ALL ASYNCHRONOUS TABLE REPLICAS.</p>
+
+                  </dd>
+
+               
+            </dl>
+
+
+      </div></div>
+
+      <div class="section" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1sql_create_table_description"><div class="section_title">Description</div><div type="Description">
+         
+         <p class="p">Tables are created without data except when <var class="keyword varname">&lt;as_table_subquery&gt;</var> or
+               <var class="keyword varname">&lt;like_table_clause&gt;</var> is used along with the WITH DATA option.</p>
+
+         <p class="p">This feature is used with restrictions and/or is extended by the following <span class="ph pname">SAP
+               HANA</span> option:</p>
+
+         <ul class="ul" id="loio20d58a5f75191014b2fe92141b7df228__ul_bdb_phs_1r">
+            <li class="li">Dynamic Tiering</li>
+
+         </ul>
+
+      </div></div>
+
+      <div class="section" id="loio20d58a5f75191014b2fe92141b7df228__sql_create_table_1sql_create_table_examples"><div class="section_title">Examples</div><div type="Examples">
+         
+         <p class="p">Create table t1 with an asynchronous replica at indexserver seltera17:30040.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE t1(a INT) ASYNCHRONOUS REPLICA AT 'seltera17:30040';</pre></div>
+
+         <p class="p">Create Table A that has INTEGER-type for columns A and B. Column A has a primary key
+            constraint.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE A (A INT PRIMARY KEY, B INT);</pre></div>
+
+         <p class="p">Create a partitioned table P1 that has a DATE-type column U. Column U has a primary key
+            constraint and is used as a RANGE-partitioning column. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE P1 (U DATE PRIMARY KEY) PARTITION BY RANGE (U) (PARTITION '2010-02-03' &lt;= VALUES &lt; '2011-01-01', PARTITION VALUE = '2011-05-01');</pre></div>
+
+         <p class="p">Create a partitioned table P2 that has INTEGER-type column I, J and K. Columns I and J
+            make the primary key constraint and are used as HASH-partitioning columns. Column K is
+            used as a sub HASH-partitioning column. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE P2 (I INT, J INT, K INT, PRIMARY KEY(I, J)) PARTITION BY HASH (I, J) PARTITIONS 2, HASH (K) PARTITIONS 2;</pre></div>
+
+         <p class="p">Create table C1 that has the same definition as table A. Table C1 also has the same
+            records as table A. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE C1 LIKE A WITH DATA;</pre></div>
+
+         <p class="p">Create table H1 that has the same definition as table H. Table H1 also has the same
+            records as table H. You create a column table H2 from the definition of table H without
+            the history property and without any records. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE HISTORY COLUMN TABLE H (A INT);
+ CREATE TABLE H1 LIKE H WITH DATA;
+ CREATE TABLE H2 LIKE H WITH NO DATA WITHOUT HISTORY;</pre></div>
+
+         <p class="p">Create table C2 that has the same column data types and NOT NULL constraints as table A
+            without any data. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE C2 AS (SELECT * FROM A) WITH NO DATA;</pre></div>
+
+         <p class="p">Create table F that has a foreign key that references column A of table R with update
+            cascade option. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE R (A INT PRIMARY KEY, B NVARCHAR(10));
+ CREATE TABLE F (FK INT, B NVARCHAR(10), FOREIGN KEY(FK) REFERENCES R ON UPDATE CASCADE);</pre></div>
+
+         <p class="p">Create a self-referencing foreign key. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE SELF(A INTEGER PRIMARY KEY, B INTEGER);
+ALTER TABLE SELF ADD CONSTRAINT FK_T1 FOREIGN KEY(B) REFERENCES SELF(A);</pre></div>
+
+         <p class="p">Create a cyclic foreign key.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE GRAND_PARENT (A INT, I INT, B INT, PRIMARY KEY (A) );
+CREATE TABLE PARENT (A INT, I INT, B INT, PRIMARY KEY (A) );
+ALTER TABLE PARENT ADD CONSTRAINT FK_CONSTRAINT_FROM_PARENT_TO_GRAND_PARENT FOREIGN KEY (B) REFERENCES GRAND_PARENT (A) ON DELETE CASCADE;
+ALTER TABLE GRAND_PARENT ADD CONSTRAINT FK_CONSTRAINT_FROM_GRAND_PARENT_TO_PARENT FOREIGN KEY (B) REFERENCES PARENT (A) ON DELETE CASCADE;</pre></div>
+
+         <p class="p">Create a flexible table, T. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE T(A INT) WITH SCHEMA FLEXIBILITY;</pre></div>
+
+         <p class="p">Create table T2 with a fuzzy search index and a fuzzy search mode. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE T2 (KEY INT, COL1 VARCHAR(10) FUZZY SEARCH INDEX ON, COL2 NVARCHAR(10) FUZZY SEARCH MODE 'POSTCODE');</pre></div>
+
+         <p class="p">Create table T3 with page loadable columns C3, C4, and C5. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE T3 (C1 INT PRIMARY KEY, C2 DATE, C3 VARCHAR(80) PAGE LOADABLE NOT NULL, C4 VARCHAR(5000) PAGE LOADABLE, C5 VARCHAR(5000) PAGE LOADABLE NOT NULL, C6 VARCHAR(5000)); </pre></div>
+
+         <p class="p">Create table T4 with group type and name. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE T4 (C1 INT PRIMARY KEY, C2 DATE) GROUP TYPE group_type1 GROUP NAME group_name1;</pre></div>
+
+         <p class="p">Create an extended storage location and then create an extended table on the extended
+            storage. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE EXTENDED STORAGE CONFIGURATION 'Driver=libdbodbc16_r.so;ServerName=iqstore;CommLinks=tcpip(host=localhost:30014)'
+   WITH CREDENTIAL TYPE 'PASSWORD' USING  'user=iquser;password=iqpwd;hanauser=SYSTEM;hanapassword=manager';
+   
+ CREATE TABLE T (C1 INT PRIMARY KEY, C2 DATE) USING EXTENDED STORAGE;</pre></div>
+
+         <p class="p">Create a delta-enabled extended table on extended storage. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE T (C1 INT PRIMARY KEY, C2 DATE) USING EXTENDED STORAGE ENABLE DELTA;</pre></div>
+
+         <p class="p">Create table T4 with replicas in all indexservers. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE T4 (C1 INT PRIMARY KEY) REPLICA AT ALL LOCATIONS;</pre></div>
+
+         <p class="p">Create a session-level global temporary table. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE GLOBAL TEMPORARY TABLE T (C1 INT, C2 INT) ON COMMIT PRESERVE ROWS;</pre></div>
+
+         <p class="p">Create a transaction-level global temporary table. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE GLOBAL TEMPORARY TABLE T (C1 INT, C2 INT) ON COMMIT DELETE ROWS;</pre></div>
+
+         <p class="p">Create table T5 with identity column B that has a start value of 100 and increments by
+            10. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE T (A INT, B INT GENERATED ALWAYS AS IDENTITY (START WITH 100 INCREMENT BY 10));</pre></div>
+
+         <p class="p">Create a session-level global temporary table. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE GLOBAL TEMPORARY TABLE T (C1 INT, C2 INT) ON COMMIT PRESERVE ROWS;</pre></div>
+
+         <p class="p">Create transaction-level global temporary table. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE GLOBAL TEMPORARY TABLE T (C1 INT, C2 INT) ON COMMIT DELETE ROWS;</pre></div>
+
+         <p class="p">Create a non-equidistant series that records stock market trade price and volume for one
+            year.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE ExampleStockTrades(
+     ticker_symbol VARCHAR(5),
+     trade_time TIMESTAMP,
+     price DECIMAL(10,2),
+     volume INTEGER)
+     SERIES(SERIES KEY(ticker_symbol) NOT EQUIDISTANT
+         MINVALUE '2013-01-01'
+         MAXVALUE '2014-01-01'
+         PERIOD FOR SERIES(trade_time));</pre></div>
+
+         <p class="p">Create an equidistant series that covers one day intervals over a ten year period. The
+            example table stores maximum and minimum temperatures for each day for a number of
+            cities (identified by city_id). </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE ExampleCityTemperature(
+     city_id INTEGER,
+     day_start TIMESTAMP,
+     day_end TIMESTAMP,
+     min_temperature DECIMAL(5,2),
+     max_temperature DECIMAL(5,2))
+     SERIES(SERIES KEY(city_id) EQUIDISTANT INCREMENT BY INTERVAL 1 DAY
+         MINVALUE '2010-01-01'
+         MAXVALUE '2020-01-01'
+         PERIOD FOR SERIES (day_start, day_end));</pre></div>
+
+         <p class="p">Create an asynchronous table replica REP_SCHEMA.TAB1 from the existing table
+            SRC_SCHEMA.TAB1.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE REP_SCHEMA.TAB1 LIKE SRC_SCHEMA.TAB1 ASYNCHRONOUS REPLICA;</pre></div>
+
+         <p class="p">Create a new column table with an ARRAY column.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE T1 ( ID INT PRIMARY KEY, C1 INT ARRAY );</pre></div>
+
+         <p class="p">Create a new column table with an ARRAY column that restricts the minimum number(1) and
+            the maximum number(10) of elements.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE T2 ( ID INT PRIMARY KEY, C1 INT ARRAY (1, 10) );</pre></div>
+
+         <p class="p">Create a new column table with an ARRAY column that restricts the maximum number(10) of
+            elements.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE T3 ( ID INT PRIMARY KEY, C1 INT ARRAY (10) );</pre></div>
+
+         <p class="p">Create a new column table with an ARRAY column that restricts the minimum number(1) of
+            elements.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE T4 ( ID INT PRIMARY KEY, C1 INT ARRAY (1, *) );</pre></div>
+
+         <p class="p">Create a new column table with an ARRAY column that doesn't allow duplicates.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE T5 ( ID INT PRIMARY KEY, C1 INT ARRAY (1, 5) WITHOUT DUPLICATES );</pre></div>
+
+         <p class="p">Create a new column table with an ARRAY column that has a default value.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE T6 ( ID INT PRIMARY KEY, C1 INT ARRAY DEFAULT ARRAY() );</pre></div>
+
+         <p class="p">Create a table MyData that has an NVARCHAR(10) column called My_Field, and specify a
+            comment for both the table and the column.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE MyData ( My_Field NVARCHAR(10) COMMENT 'My data values') COMMENT 'Table for data';</pre></div>
+
+      </div></div>
+
+   </div>
+
+<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?209f5020751910148fd8fe88aa4d79d9.html" target="_top" title="This chapter describes the SAP HANA database implementation of Structured Query Language (SQL).">Introduction to SQL</a></div>
+<div><a class="link" href="default.html?20d509277519101489029c064d468c5d.html" target="_top" title="Creates a sequence that generates primary key values that are unique across multiple tables, and for generating default values for a table.">CREATE SEQUENCE Statement (Data Definition)</a></div>
+<div><a class="link" href="default.html?20fcf24075191014a89e9dc7b8408b26.html" target="_top" title="Retrieves information from the database.">SELECT Statement (Data Manipulation)</a></div>
+<div><a class="link" href="default.html?20a2ab29751910148de0fe7189c330bc.html" target="_top">Predicates</a></div>
+<div><a class="link" href="default.html?20d56cd075191014b7ea9e4e77477aae.html" target="_top" title="Creates a history-enabled column for use with the time travel feature.">HISTORY COLUMN Option (Time Travel)</a></div>
+<div><a class="link" href="default.html?20d48343751910149985a2c925e12190.html" target="_top" title="Defines an external data source connected to the SAP HANA database.">CREATE REMOTE SOURCE Statement (Access Control)</a></div>
+<div><a class="link" href="default.html?a7c98c3d71e4465f85770118cfa5f4ef.html" target="_top" title="Runs garbage collection for flexible tables.">ALTER SYSTEM RECLAIM FLEXIBLE TABLES Statement (System Management)</a></div>
+<div><a class="link" href="default.html?20a1569875191014b507cf392724b7eb.html" target="_top" title="A data type defines the characteristics of a data value. A special value of NULL is included in every data type to indicate the absence of a value.">Data Types</a></div>
+<div><a class="link" href="default.html?20fcf24075191014a89e9dc7b8408b26.html" target="_top" title="Retrieves information from the database.">SELECT Statement (Data Manipulation)</a></div>
+<div><a class="link" href="default.html?210197377519101481cfb213f0b84848.html" target="_top" title="Provides information about available tables.">TABLES System View</a></div>
+<div><a class="link" href="default.html?2100d33a75191014868bbcd89274199c.html" target="_top" title="Provides information about available table columns.">TABLE_COLUMNS System View</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="CREATE TABLE Statement (Data Definition)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

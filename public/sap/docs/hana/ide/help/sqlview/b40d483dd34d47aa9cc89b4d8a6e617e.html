@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Performs regular expression matching."/>
+<meta name="description" content="Performs regular expression matching."/>
+<meta name="keywords" content="LIKE_REGEXPR"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=6611433864096041"/>
+<title>LIKE_REGEXPR Function (String)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loiob40d483dd34d47aa9cc89b4d8a6e617e";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loiob40d483dd34d47aa9cc89b4d8a6e617e">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">LIKE_REGEXPR Function (String)</h1>
+
+	
+	
+	
+	
+	<div class="body refbody"><p class="shortdesc">Performs regular expression matching.</p>
+
+		<div class="section"><div class="section_title">Syntax</div><div type="Syntax">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;regex_subject_string&gt;</var> LIKE_REGEXPR <var class="keyword varname">&lt;pattern&gt;</var> [ FLAG <var class="keyword varname">&lt;flag&gt;</var> ]</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+			
+			<dl class="dl parml">
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;regex_subject_string&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies the string that the search pattern should be applied to. If
+								<var class="keyword varname">&lt;regex_subject_string&gt;</var> is empty, then the result is
+							empty.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;regex_subject_string&gt;</var> ::= <var class="keyword varname">&lt;string&gt;</var></pre></div>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;pattern&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies a search pattern based on Perl Compatible Regular Expression
+							(PCRE).</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;pattern&gt;</var> ::= !!Perl Compatible Regular Expression</pre></div>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;flag&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies the matching behavior of the function.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;flag&gt;</var> ::= i | m | s | x</pre></div>
+
+						
+<div class="table-wrapper tablenoborder"><table summary="" id="loiob40d483dd34d47aa9cc89b4d8a6e617e__table_b2j_v3z_yp" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: Flag options</span></caption>
+<colgroup><col width="17.605633802816904%"/><col width="82.3943661971831%"/></colgroup>
+
+                
+                
+                <thead class="thead" align="left">
+                    <tr class="row">
+                        <th class="entry" valign="top" width="17.605633802816904%" id="d28996028e123">Flag option</th>
+
+                        <th class="entry" valign="top" width="82.3943661971831%" id="d28996028e126">Description</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody class="tbody">
+                    <tr class="row">
+                        <td class="entry" valign="top" width="17.605633802816904%" headers="d28996028e123 ">i</td>
+
+                        <td class="entry" valign="top" width="82.3943661971831%" headers="d28996028e126 ">Enables case-insensitive matching</td>
+
+                    </tr>
+
+                    <tr class="row">
+                        <td class="entry" valign="top" width="17.605633802816904%" headers="d28996028e123 ">m</td>
+
+                        <td class="entry" valign="top" width="82.3943661971831%" headers="d28996028e126 ">Enables multiline mode, where the <var class="keyword varname">&lt;subject_string&gt;</var>
+                            will be treated as multiple lines and the expression ^ and $ match just
+                            after or just before, respectively, a line terminator or the end of the
+                            input sequence</td>
+
+                    </tr>
+
+                    <tr class="row">
+                        <td class="entry" valign="top" width="17.605633802816904%" headers="d28996028e123 ">s</td>
+
+                        <td class="entry" valign="top" width="82.3943661971831%" headers="d28996028e126 ">Enables the expression <var class="keyword varname">&lt;.&gt;</var> as a wildcard to match
+                            any character, including a line terminator</td>
+
+                    </tr>
+
+                    <tr class="row">
+                        <td class="entry" valign="top" width="17.605633802816904%" headers="d28996028e123 ">x</td>
+
+                        <td class="entry" valign="top" width="82.3943661971831%" headers="d28996028e126 ">Permits whitespace and comments in the pattern</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+</div>
+
+					</dd>
+
+				
+			</dl>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">This function performs regular expression matching.</p>
+
+			<p class="p">If any of the following parameters is NULL: <var class="keyword varname">&lt;pattern&gt;</var>,
+					<var class="keyword varname">&lt;flag&gt;</var> or <var class="keyword varname">&lt;regex_subject_string&gt;</var>, then the
+				function returns FALSE.</p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Example</div><div type="Example">
+			
+			<p class="p">This fictitious example searches for text like <kbd class="ph userinput">them</kbd> or
+					<kbd class="ph userinput">this</kbd> in the table <kbd class="ph userinput">mytab</kbd>:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT * FROM  mytab  WHERE text  LIKE_REGEXPR ' them|this ';</pre></div>
+
+		</div></div>
+
+	</div>
+
+<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?a33f7884b0c14c00b1a76ecd8af5feca.html" target="_top" title="Character string data types are used to store values that contain character strings. VARCHAR data types contain 7-bit ASCII character strings, and NVARCHAR are used for storing Unicode character strings.">Character String Data Types</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="LIKE_REGEXPR Function (String)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

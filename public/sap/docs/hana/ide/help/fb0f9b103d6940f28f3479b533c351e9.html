@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Several privilege types are used in SAP HANA (system, object, analytic, package, and application)."/>
+<meta name="description" content="Several privilege types are used in SAP HANA (system, object, analytic, package, and application)."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=2337605804929267"/>
+<title>Privileges</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loiofb0f9b103d6940f28f3479b533c351e9";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loiofb0f9b103d6940f28f3479b533c351e9">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Privileges</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">Several privilege types are used in SAP HANA (system, object, analytic, package, and
+		application).</p>
+
+		<div class="section">
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loiofb0f9b103d6940f28f3479b533c351e9__table_hyy_dwt_3n" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="20%"/><col width="20%"/><col width="20%"/><col width="40%"/></colgroup>
+
+					
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="20%" id="d4305943e34">Privilege Type </th>
+
+							<th class="entry" valign="top" width="20%" id="d4305943e37">Applicable To</th>
+
+							<th class="entry" valign="top" width="20%" id="d4305943e40">Target User</th>
+
+							<th class="entry" valign="top" width="40%" id="d4305943e43">Description </th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="20%" headers="d4305943e34 ">System privilege</td>
+
+							<td class="entry" valign="top" width="20%" headers="d4305943e37 ">System, database</td>
+
+							<td class="entry" valign="top" width="20%" headers="d4305943e40 ">Administrators, developers</td>
+
+							<td class="entry" valign="top" width="40%" headers="d4305943e43 ">System privileges control general system activities. They are mainly used for
+								administrative purposes, such as creating schemas, creating and
+								changing users and roles, performing data backups, managing
+								licenses, and so on. <p class="p">System privileges are also used to authorize
+									basic repository operations.</p>
+<p class="p">System
+									privileges granted to users in a particular tenant database
+									authorize operations in that database only. The only exception
+									is the system privilege DATABASE ADMIN. This system privilege
+									can only be granted to users of the system database. It
+									authorizes the execution of operations on individual tenant
+									databases. For example, a user with DATABASE ADMIN can create
+									and drop tenant databases, change the database-specific
+									properties in configuration (*.ini) files, and perform
+									database-specific
+								backups.</p>
+</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="20%" headers="d4305943e34 ">Object privilege</td>
+
+							<td class="entry" valign="top" width="20%" headers="d4305943e37 ">Database objects (schemas, tables, views, procedures and so
+								on)</td>
+
+							<td class="entry" valign="top" width="20%" headers="d4305943e40 ">End users, technical users</td>
+
+							<td class="entry" valign="top" width="40%" headers="d4305943e43 ">Object privileges are used to allow access to and modification of database objects,
+								such as tables and views. Depending on the object type, different
+								actions can be authorized (for example, SELECT, CREATE ANY, ALTER,
+								DROP, and so on).<p class="p">Schema privileges are object privileges that are
+									used to allow access to and modification of schemas and the
+									objects that they contain.</p>
+<p class="p">Source privileges are object
+									privileges that are used to restrict access to and modification
+									of remote data sources, which are connected through SAP HANA
+									smart data access.</p>
+<p class="p">Object privileges granted to users in
+									a particular database authorize access to and modification of
+									database objects in that database only. That is, unless
+									cross-database access has been enabled for the user. This is
+									made possible through the association of the requesting user
+									with a remote identity on the remote database. For more
+									information, see <cite class="cite">Cross-Database Authorization  in Tenant
+										Databases</cite> in the <cite class="cite">SAP HANA Security
+									Guide</cite>.
+								</p>
+</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="20%" headers="d4305943e34 ">Analytic privilege</td>
+
+							<td class="entry" valign="top" width="20%" headers="d4305943e37 ">Analytic views</td>
+
+							<td class="entry" valign="top" width="20%" headers="d4305943e40 ">End users</td>
+
+							<td class="entry" valign="top" width="40%" headers="d4305943e43 ">Analytic privileges are used to allow read access to data in SAP HANA information
+								models (that is, analytic views, attribute views, and calculation
+								views) depending on certain values or combinations of values.
+								Analytic privileges are evaluated during query processing.<p class="p">Analytic
+									privileges granted to users in a particular database authorize
+									access to information models in that database only.
+								</p>
+</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="20%" headers="d4305943e34 ">Package privilege</td>
+
+							<td class="entry" valign="top" width="20%" headers="d4305943e37 ">Packages in the classic repository of the SAP HANA database</td>
+
+							<td class="entry" valign="top" width="20%" headers="d4305943e40 ">Application and content developers working in the classic SAP HANA repository</td>
+
+							<td class="entry" valign="top" width="40%" headers="d4305943e43 ">Package privileges are used to allow access to and the ability to work in packages in
+								the classic repository of the SAP HANA database.<p class="p">Packages contain
+									design time versions of various objects, such as analytic views,
+									attribute views, calculation views, and analytic
+									privileges.</p>
+<p class="p">Package privileges granted to users
+									in a particular database authorize access to and the ability to
+									work in packages in the repository of that database
+									only.</p>
+<div class="note note"><span class="notetitle">Note</span> With
+									SAP HANA XS advanced, source code and web content are not
+									versioned and stored in the SAP HANA database, so package
+									privileges are not used in this context. For more information,
+									see <cite class="cite">Authorization in SAP HANA XS
+								Advanced</cite>.</div>
+</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="20%" headers="d4305943e34 ">Application privilege</td>
+
+							<td class="entry" valign="top" width="20%" headers="d4305943e37 ">SAP HANA XS classic applications</td>
+
+							<td class="entry" valign="top" width="20%" headers="d4305943e40 ">Application end users, technical users (for SQL connection
+								configurations)</td>
+
+							<td class="entry" valign="top" width="40%" headers="d4305943e43 ">Developers of SAP HANA XS classic applications can create application privileges to
+								authorize user and client access to their application. They apply in
+								addition to other privileges, for example, object privileges on
+									tables.<div class="p">Application privileges can be granted directly to
+									users or roles in runtime in the SAP HANA studio. However, it is
+									recommended that you grant application privileges to roles
+									created in the repository in design time.<div class="note note"><span class="notetitle">Note</span> With SAP HANA XS
+										advanced, application privileges are not used.
+										Application-level authorization is implemented using OAuth
+										and authorization scopes and attributes. For more
+										information, see <cite class="cite">Authorization in SAP HANA XS
+											Advanced</cite>.</div>
+</div>
+</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+			<div class="note note"><span class="notetitle">Note</span> 
+				<p class="p">In the SAP HANA studio, an additional privilege type can be granted. <dfn class="term">Privileges on
+						users</dfn> are SQL privileges that users can grant on their user. ATTACH
+					DEBUGGER is the only privilege that can be granted on a user.</p>
+
+				<p class="p">For example, User A can grant User B the privilege ATTACH DEBUGGER to allow User B debug
+					SQLScript code in User A's session. User A is only user who can grant this
+					privilege. Note that User B also needs the object privilege DEBUG on the
+					relevant SQLScript procedure.</p>
+
+				<p class="p">For more information, see <cite class="cite">Debug an External Session</cite> in the <cite class="cite">SAP HANA
+						Developer Guide</cite>
+					.</p>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Privileges";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

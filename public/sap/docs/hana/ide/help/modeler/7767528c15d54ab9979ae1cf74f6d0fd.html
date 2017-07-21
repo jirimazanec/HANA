@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="After modeling calculation views based on your requirements, deploy them within SAP HANA modeler to preview and analyze the output data. You can also view the SQL query that modeler generates for the deployed calculation view."/>
+<meta name="description" content="After modeling calculation views based on your requirements, deploy them within SAP HANA modeler to preview and analyze the output data. You can also view the SQL query that modeler generates for the deployed calculation view."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=48548391159841897"/>
+<title>Preview Calculation View Output</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio7767528c15d54ab9979ae1cf74f6d0fd";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio7767528c15d54ab9979ae1cf74f6d0fd">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Preview Calculation View Output</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">After modeling calculation views based on your requirements, deploy them within SAP HANA
+		modeler to preview and analyze the output data. You can also view the SQL query that modeler
+		generates for the deployed calculation view.</p>
+
+		<div class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<div class="p">Data preview refers to visualizing the output of calculation views in graphical or tabular
+				format. You can preview output of information views within SAP HANA modeler using
+				any of the following preview options:<ul class="ul" id="loio7767528c15d54ab9979ae1cf74f6d0fd__ul_o3t_4cp_cs">
+					<li class="li">Preview raw data output and the SQL query</li>
+
+					<li class="li">Preview output in SAP BusinessObjects Design Studio</li>
+
+				</ul>
+</div>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+				<span class="ph cmd">Open the SAP HANA Web-based Development Workbench Editor.</span>
+				<div class="itemgroup info">The Web-based Editor tool is available on the <span class="ph pname">SAP HANA</span> XS Web server at the
+					following URL:
+							<span class="ph filepath">http://<var class="keyword varname">&lt;WebServerHost&gt;</var>:80<var class="keyword varname">&lt;SAPHANAinstance&gt;</var>/sap/hana/ide/editor</span>.</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Open the required calculation view in the view editor.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Preview raw data.</span>
+				<ol type="a" class="ol substeps" id="loio7767528c15d54ab9979ae1cf74f6d0fd__substeps_v4l_3dp_cs">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the view editor menu bar, choose <img class="image" id="loio7767528c15d54ab9979ae1cf74f6d0fd__image_lwm_j1t_fs" src="loio3784ad9e378d4bbc9286ad544fe014a9_LowRes.png"/>.</span>
+						<div class="itemgroup info">
+							<p class="p">If you have not used any input parameters or variables, this
+								operation opens a new editor and displays the raw data output of all
+								attributes along with its data in a simple table format.</p>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the menu bar, choose the icon <img class="image" id="loio7767528c15d54ab9979ae1cf74f6d0fd__image_jbh_x1t_fs" src="loio9270bb80a7744d4ea81128c8fcfc3195_LowRes.png"/> dropdown.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Choose <span class="ph uicontrol">Open Content</span> to view raw data
+							output.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Provide values to input parameters and variables.</span>
+				<div class="itemgroup info">
+					<p class="p">If you have defined any variables or input parameters, provide your
+						values.</p>
+
+				</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Apply filters.</span>
+				<ol type="a" class="ol substeps" id="loio7767528c15d54ab9979ae1cf74f6d0fd__substeps_jhv_tdp_cs">
+					<li class="li substep">
+						<span class="ph cmd">If you want to apply filters and view filtered data, choose <img class="image" id="loio7767528c15d54ab9979ae1cf74f6d0fd__image_slh_lbt_fs" src="loioeff186cebf2a437e8381ca8c4ffcc337_LowRes.png"/>.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">Choose <span class="ph uicontrol">Add Filters</span>.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">Choose a column and define filter conditions.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Export output data.</span>
+				<div class="itemgroup info">
+					<p class="p">If you want to export the raw data output to a .csv file, choose <img class="image" id="loio7767528c15d54ab9979ae1cf74f6d0fd__image_ahy_5dt_fs" src="loioa0431a7eb4c240ac98b3df9d4d03fbd2_LowRes.png"/>.</p>
+
+				</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">View SQL query for the calculation view.</span>
+				<ol type="a" class="ol substeps" id="loio7767528c15d54ab9979ae1cf74f6d0fd__substeps_mjg_b2p_cs">
+					<li class="li substep">
+						<span class="ph cmd">If you want to view the SQL query that modeler generates for the deployed calculation
+							view, choose <img class="image" id="loio7767528c15d54ab9979ae1cf74f6d0fd__image_od5_ydt_fs" src="loio7d77560ac849472a96b4a188080d18a2_LowRes.png"/>.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">If you want to modify the SQL query and view output accordingly, modify the query in SQL
+							console and choose <img class="image" id="loio7767528c15d54ab9979ae1cf74f6d0fd__image_lf2_41t_fs" src="loio3784ad9e378d4bbc9286ad544fe014a9_LowRes.png"/> to see output for the modified query.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Preview output in SAP BusinessObjects Design Studio.</span>
+				<div class="itemgroup info">
+					<p class="p">Launch SAP BusinessObjects Design Studio, which is integrated within the SAP
+						HANA Web-based Development Workbench Editor to preview and analyze the
+						output of your calculation view.</p>
+
+				</div>
+				<ol type="a" class="ol substeps" id="loio7767528c15d54ab9979ae1cf74f6d0fd__substeps_blm_22p_cs">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the view editor menu bar, choose <img class="image" id="loio7767528c15d54ab9979ae1cf74f6d0fd__image_mby_c2t_fs" src="loio16e91a5266734afc96c739b7fb0fd463_LowRes.png"/>.</span>
+						<div class="itemgroup info">
+							<p class="p">This launches SAP BusinessObjects Design Studio in a new tab of your
+								browser.</p>
+
+						</div>
+					</li>
+
+				</ol>
+
+				<div class="itemgroup info">
+					<div class="note note"><span class="notetitle">Note</span> 
+						<p class="p">If there are inconsistencies in runtime information (that is, calculation
+							views in catalog or in tables related to runtime) of an calculation
+							view, you get invalidated view error. In such cases, you need to
+							redeploy the view in order to correct the inconsistencies of runtime
+							information.</p>
+
+					</div>
+
+				</div>
+			</li>
+</ol>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?71ba86c33a854a39b91f726f30571297.html" target="_top" title="Create script-based calculation views to depict complex calculation scenarios by writing SQL script statements. It is a viable alternative to depict complex business scenarios, which you cannot achieve by creating graphical calculation views.">Create Script-Based Calculation Views</a></div>
+<div><a class="link" href="default.html?ff5c31e99ae1484f9648330f553ae341.html" target="_top" title="Create graphical calculation views using a graphical editor to depict a complex business scenario with ease. You can create graphical calculation views to include layers of calculation logic and with measures from multiple data sources.">Create Graphical Calculation Views</a></div>
+<div><a class="link" href="default.html?fdaa17d49b124e329e867678cc8cc3e7.html" target="_top" title="Use SAP BusinessObjects Design Studio to view output data with rich visualizations, and to perform advanced analysis using the labels and value axis. For example, to analyze the sales on a country basis, add Country to the labels axis and Sales to the value axis.">SAP BusinessObjects Design Studio</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Preview Calculation View Output";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

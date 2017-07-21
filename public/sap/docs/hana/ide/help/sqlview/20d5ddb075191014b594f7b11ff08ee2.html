@@ -1,0 +1,752 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Creates a new database user."/>
+<meta name="description" content="Creates a new database user."/>
+<meta name="keywords" content="CREATE USER"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=38496977852799286"/>
+<title>CREATE USER Statement (Access Control)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20d5ddb075191014b594f7b11ff08ee2";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20d5ddb075191014b594f7b11ff08ee2">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">CREATE USER Statement (Access Control)</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Creates a new database user. </p>
+
+      <div class="section" id="loio20d5ddb075191014b594f7b11ff08ee2__sql_create_user_1sql_create_user_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+         
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE [RESTRICTED] USER <var class="keyword varname">&lt;user_name&gt;</var> 
+   [<a class="xref nopagenumber" href="default.html?20d5ddb075191014b594f7b11ff08ee2.html#loio20d5ddb075191014b594f7b11ff08ee2__create_user_with_remote_identity" target="_top"><var class="keyword varname">&lt;remote_identity_option&gt;</var></a>]
+   [<a class="xref nopagenumber" href="default.html?20d5ddb075191014b594f7b11ff08ee2.html#loio20d5ddb075191014b594f7b11ff08ee2__sql_create_user_1sql_create_user_password_option" target="_top"><var class="keyword varname">&lt;password_option&gt;</var></a> ] 
+   [<a class="xref nopagenumber" href="default.html?20d5ddb075191014b594f7b11ff08ee2.html#loio20d5ddb075191014b594f7b11ff08ee2__sql_create_user_1sql_create_user_external_ident" target="_top"><var class="keyword varname">&lt;external_ident&gt;</var></a> ] 
+   [<a class="xref nopagenumber" href="default.html?20d5ddb075191014b594f7b11ff08ee2.html#loio20d5ddb075191014b594f7b11ff08ee2__sql_create_user_1sql_create_user_with_ident_opts" target="_top"><var class="keyword varname">&lt;with_ident_opts&gt;</var></a> ]
+   [<a class="xref nopagenumber" href="default.html?20d5ddb075191014b594f7b11ff08ee2.html#loio20d5ddb075191014b594f7b11ff08ee2__sql_create_user_1sql_create_user_validity_specification" target="_top"><var class="keyword varname">&lt;validity_specification&gt;</var></a> ] 
+   [<a class="xref nopagenumber" href="default.html?20d5ddb075191014b594f7b11ff08ee2.html#loio20d5ddb075191014b594f7b11ff08ee2__sql_create_user_1sql_create_user_set_user_parameter_option" target="_top"><var class="keyword varname">&lt;set_user_parameters&gt;</var></a> ] 
+   [<a class="xref nopagenumber" href="default.html?20d5ddb075191014b594f7b11ff08ee2.html#loio20d5ddb075191014b594f7b11ff08ee2__ldap_group_authorization" target="_top"><var class="keyword varname">&lt;ldap_group_authorization&gt;</var></a>] 
+</pre></div>
+
+      </div></div>
+
+      <div class="section" id="loio20d5ddb075191014b594f7b11ff08ee2__sql_create_user_1sql_create_user_syntax_elements"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+         
+         <dl class="dl parml">
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;user_name&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the user name of the user to be created.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;user_name&gt;</var> ::= <var class="keyword varname">&lt;unicode_name&gt;</var></pre></div>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;remote_identity_option&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p" id="loio20d5ddb075191014b594f7b11ff08ee2__create_user_with_remote_identity">Specifies a database user in another tenant database as the remote identity of
+                     the database user being created.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;remote_identity_option&gt;</var> ::= 
+WITH REMOTE IDENTITY <var class="keyword varname">&lt;user_name&gt;</var> AT DATABASE <var class="keyword varname">&lt;database_name&gt;</var> 
+| WITH REMOTE IDENTITY [<var class="keyword varname">&lt;remote_database_identity&gt;</var>]... 
+
+<var class="keyword varname">&lt;remote_database_identity&gt;</var> ::= <var class="keyword varname">&lt;remote_user_name&gt;</var> AT DATABASE <var class="keyword varname">&lt;database_name&gt;</var>
+
+<var class="keyword varname">&lt;remote_user_name&gt;</var> ::= <var class="keyword varname">&lt;simple_identifier&gt;</var>
+
+<var class="keyword varname">&lt;database_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;password_option&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p" id="loio20d5ddb075191014b594f7b11ff08ee2__sql_create_user_1sql_create_user_password_option">Specifies the user password of the user being created.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;password_option&gt;</var> ::= PASSWORD <var class="keyword varname">&lt;password&gt;</var> [NO FORCE_FIRST_PASSWORD_CHANGE ]</pre></div>
+
+                  <p class="p">The option NO FORCE_FIRST_PASSWORD_CHANGE overrules the setting of the password
+                     policy parameter force_first_password_change and allows the final password to
+                     be specified during user creation.</p>
+
+                  <div class="note note"><span class="notetitle">Note</span> The password must follow the rules defined for the current <span class="ph pname">SAP
+                     HANA</span> instance. The password rules include a minimal password length and a
+                     definition of which character types (lower, upper, digit, special characters)
+                     have to be part of the password.</div>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;external_ident&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p" id="loio20d5ddb075191014b594f7b11ff08ee2__sql_create_user_1sql_create_user_external_ident">Defines an external identification mechanism.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;external_ident&gt;</var> ::= IDENTIFIED EXTERNALLY AS <var class="keyword varname">&lt;external_identity&gt;</var></pre></div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;external_identity&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Defines an external identity that is used to authenticate the
+                              user.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;external_identity&gt;</var> ::= 
+ <var class="keyword varname">&lt;simple_identifier&gt;</var> 
+ | <var class="keyword varname">&lt;string_literal&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;with_ident_opts&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p" id="loio20d5ddb075191014b594f7b11ff08ee2__sql_create_user_1sql_create_user_with_ident_opts">Defines a method for authenticating the user.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;with_ident_opts&gt;</var> ::= WITH IDENTITY <var class="keyword varname">&lt;provider_identity&gt;</var>...
+
+<var class="keyword varname">&lt;provider_identity&gt;</var> ::= 
+<var class="keyword varname">&lt;saml_provider_ident&gt;</var> 
+ | <var class="keyword varname">&lt;x509_provider_ident&gt;</var> 
+ | <var class="keyword varname">&lt;kerberos_provider_ident&gt;</var>
+ | <var class="keyword varname">&lt;logon_ticket_ident&gt;</var>  
+ | <var class="keyword varname">&lt;assertion_ticket_ident&gt;</var>
+ | <var class="keyword varname">&lt;jwt_provider_ident&gt;</var></pre></div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;saml_provider_ident&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Defines a SAML provider.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;saml_provider_ident&gt;</var> ::= <var class="keyword varname">&lt;mapped_user_name&gt;</var> FOR SAML PROVIDER <var class="keyword varname">&lt;saml_provider_name&gt;</var>
+
+<var class="keyword varname">&lt;mapped_user_name&gt;</var> ::= ANY | <var class="keyword varname">&lt;string_literal&gt;</var>
+
+<var class="keyword varname">&lt;saml_provider_name&gt;</var> ::= <var class="keyword varname">&lt;simple_identifier&gt;</var></pre></div>
+
+                           <p class="p"><var class="keyword varname">&lt;mapped_user_name&gt;</var> specifies the mapped SAML user
+                              name to use. If the keyword ANY is used, then the SAML assertion
+                              contains the name of the database user that the assertion is valid
+                              for.</p>
+
+                           <p class="p"><var class="keyword varname">&lt;saml_provider_name&gt;</var>specifies the identifier of a
+                              SAML provider already existing in the system.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;x509_provider_ident&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Defines an x509 certificate issuer.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;x509_provider_ident&gt;</var> ::= 
+ <var class="keyword varname">&lt;subject_distinguished_name&gt;</var> ISSUER <var class="keyword varname">&lt;issuer_distinguished_name&gt;</var> FOR X509
+
+<var class="keyword varname">&lt;subject_distinguished_name&gt;</var> ::= <var class="keyword varname">&lt;string_literal&gt;</var>
+
+<var class="keyword varname">&lt;issuer_distinguished_name&gt;</var> ::= <var class="keyword varname">&lt;string_literal&gt;</var></pre></div>
+
+                           <p class="p"><var class="keyword varname">&lt;subject_distinguished_name&gt;</var> specifies the subject
+                              name provided in the certificate of the SAML identity provider.</p>
+
+                           <p class="p"><var class="keyword varname">&lt;issuer_distinguished_name&gt;</var> specifies the issuer name
+                              provided in the certificate of the SAML identity provider.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;kerberos_provider_ident&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Defines a KERBEROS identity.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;kerberos_provider_ident&gt;</var> ::= <var class="keyword varname">&lt;kerberos_principal_name&gt;</var> FOR KERBEROS
+
+<var class="keyword varname">&lt;kerberos_principal_name&gt;</var> ::= <var class="keyword varname">&lt;string_literal&gt;</var></pre></div>
+
+                           <p class="p"><var class="keyword varname">&lt;kerberos_principal_name&gt;</var> specifies an identity
+                              within an external authentication system.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;logon_ticket_ident&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Defines that an SAP Logon Ticket is used as the authentication
+                              method.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;logon_ticket_ident&gt;</var> ::= FOR SAP LOGON TICKET</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;assertion_ticket_ident&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Defines that an SAP Assertion Ticket is used as the authentication
+                              method.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;assertion_ticket_ident&gt;</var> ::= FOR SAP ASSERTION TICKET</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;jwt_provider_ident&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Defines a JWT provider-user-mapping.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;jwt_provider_ident&gt;</var> ::= <var class="keyword varname">&lt;mapped_user_name&gt;</var> FOR JWT PROVIDER <var class="keyword varname">&lt;jwt_provider_name&gt;</var>
+                              
+                              <var class="keyword varname">&lt;mapped_user_name&gt;</var> ::= ANY | <var class="keyword varname">&lt;string_literal&gt;</var>
+                              
+                              <var class="keyword varname">&lt;jwt_provider_name&gt;</var> ::= <var class="keyword varname">&lt;simple_identifier&gt;</var></pre></div>
+
+                           <p class="p"><var class="keyword varname">&lt;mapped_user_name&gt;</var> specifies the mapped JWT user name
+                              to use. If the keyword ANY is used the JWT token will contain the name
+                              of the database user that the token is valid for.</p>
+
+                           <p class="p"><var class="keyword varname">&lt;jwt_provider_name&gt;</var> specifies the identifier of a JWT
+                              provider already existing in the system.</p>
+
+                        </dd>
+
+                     
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;validity_specification&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p" id="loio20d5ddb075191014b594f7b11ff08ee2__sql_create_user_1sql_create_user_validity_specification">Defines the validity specification with optional user parameter option.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;validity_specification&gt;</var> ::= VALID <var class="keyword varname">&lt;validity_opts&gt;</var></pre></div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;validity_opts&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Configures the user's temporal validity.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;validity_opts&gt;</var> ::= 
+ <var class="keyword varname">&lt;from_specification&gt;</var> [<var class="keyword varname">&lt;until_specification&gt;</var>] 
+ | <var class="keyword varname">&lt;until_specification&gt;</var></pre></div>
+
+                           <p class="p">The specified user is only allowed to connect within the given date
+                              range. Using this feature, you can create users in advance or restrict
+                              the period users can connect to the SAP HANA database.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;from_specification&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Sets when the user is valid from. </p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;from_specification&gt;</var> ::= FROM {<var class="keyword varname">&lt;timestamp&gt;</var> | NOW}</pre></div>
+
+                           <p class="p">Use the NOW keyword to configure the user account to be valid from the
+                              current time.</p>
+
+                           <p class="p">The default value is NOW.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;until_specification&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Sets when the user is valid until.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;until_specification&gt;</var> ::= 
+ UNTIL {<var class="keyword varname">&lt;timestamp&gt;</var> 
+ | FOREVER}</pre></div>
+
+                           <p class="p">Use the FOREVER keyword to configure the user account to never
+                              expire.</p>
+
+                           <p class="p">The default value is FOREVER.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;timestamp&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies a timestamp.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;timestamp&gt;</var> ::= <var class="keyword varname">&lt;string_literal&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;set_user_parameters&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p" id="loio20d5ddb075191014b594f7b11ff08ee2__sql_create_user_1sql_create_user_set_user_parameter_option">Sets parameters in the user parameter list.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;set_user_parameters&gt;</var> ::= 
+ SET PARAMETER <var class="keyword varname">&lt;user_parameter_list&gt;</var></pre></div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;user_parameter_list&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies a list of user parameters.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;user_parameter_list&gt;</var> ::= 
+ <var class="keyword varname">&lt;user_parameter&gt;</var> [{, <var class="keyword varname">&lt;user_parameter&gt;</var>} ...]</pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis"><var class="keyword varname">&lt;user_parameter&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Defines user parameters.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;user_parameter&gt;</var> ::= 
+ CLIENT = <var class="keyword varname">&lt;string_literal&gt;</var>
+ | LOCALE = <var class="keyword varname">&lt;string_literal&gt;</var> 
+ | TIME ZONE  = <var class="keyword varname">&lt;string_literal&gt;</var>
+ | EMAIL ADDRESS = <var class="keyword varname">&lt;string_literal&gt;</var>
+ | STATEMENT MEMORY LIMIT = '<var class="keyword varname">&lt;integer&gt;</var>'
+ | STATEMENT THREAD LIMIT = '<var class="keyword varname">&lt;integer&gt;</var>'</pre></div>
+
+                           
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20d5ddb075191014b594f7b11ff08ee2__table_gvd_3bq_xp" class="table" frame="border" border="1" rules="all">
+                                 <thead class="thead" align="left">
+                                    <tr class="row">
+                                       <th class="entry" valign="top" id="d15197054e697">
+                                          <p class="p">User Parameter</p>
+
+                                       </th>
+
+                                       <th class="entry" valign="top" id="d15197054e703">
+                                          <p class="p">Purpose </p>
+
+                                       </th>
+
+                                    </tr>
+
+                                 </thead>
+
+                                 <tbody class="tbody">
+                                    <tr class="row">
+                                       <td class="entry" valign="top" headers="d15197054e697 d15197054e703 ">
+                                          <p class="p">CLIENT </p>
+
+                                       </td>
+
+                                       <td class="entry" valign="top" headers="d15197054e697 d15197054e703 ">
+                                          <p class="p">When you define column store views, the user parameter
+                                             CLIENT restricts the access of the user to the
+                                             specified client.</p>
+
+                                          <p class="p">This parameter cannot be specified by the user
+                                             themselves. </p>
+
+                                       </td>
+
+                                    </tr>
+
+                                    <tr class="row">
+                                       <td class="entry" valign="top" headers="d15197054e697 d15197054e703 ">
+                                          <p class="p">LOCALE </p>
+
+                                       </td>
+
+                                       <td class="entry" valign="top" headers="d15197054e697 d15197054e703 ">
+                                          <p class="p">When you define column store views, the user parameter
+                                             LOCALE can be used to translate information according
+                                             to the user's locale. </p>
+
+                                       </td>
+
+                                    </tr>
+
+                                    <tr class="row">
+                                       <td class="entry" valign="top" headers="d15197054e697 d15197054e703 ">
+                                          <p class="p">TIME ZONE </p>
+
+                                       </td>
+
+                                       <td class="entry" valign="top" headers="d15197054e697 d15197054e703 ">
+                                          <p class="p">Not used by the SAP HANA database, but
+                                             can be read by external applications. </p>
+
+                                       </td>
+
+                                    </tr>
+
+                                    <tr class="row">
+                                       <td class="entry" valign="top" headers="d15197054e697 d15197054e703 ">
+                                          <p class="p">EMAIL ADDRESS </p>
+
+                                       </td>
+
+                                       <td class="entry" valign="top" headers="d15197054e697 d15197054e703 ">
+                                          <p class="p">Not currently used by the SAP HANA
+                                             database, but can be read by external applications.
+                                             This value must be unique.</p>
+
+                                       </td>
+
+                                    </tr>
+
+                                    <tr class="row">
+                                       <td class="entry" valign="top" headers="d15197054e697 d15197054e703 ">
+                                          <p class="p">STATEMENT MEMORY LIMIT</p>
+
+                                       </td>
+
+                                       <td class="entry" valign="top" headers="d15197054e697 d15197054e703 ">
+                                          <p class="p">Sets a user specific statement memory limit in
+                                             gigabytes.</p>
+
+                                          <ul class="ul" id="loio20d5ddb075191014b594f7b11ff08ee2__ul_ivq_24m_2w">
+                                             <li class="li">
+                                                <p class="p">If both a global and a user statement memory
+                                                  limit are set, then the user specific limit takes
+                                                  precedence, regardless of whether it is higher or
+                                                  lower than the global statement memory limit.</p>
+
+                                             </li>
+
+                                             <li class="li">
+                                                <p class="p">If the user specific statement memory limit is
+                                                  removed, then the global limit takes effect for
+                                                  the user.</p>
+
+                                             </li>
+
+                                             <li class="li">
+                                                <p class="p">Setting the statement memory limit to 0 disables
+                                                  any statement memory limit for the user.</p>
+
+                                             </li>
+
+                                             <li class="li">
+                                                <p class="p">For STATEMENT MEMORY LIMIT to take effect,
+                                                  resource_tracking and memory_tracking must be
+                                                  active.</p>
+
+                                             </li>
+
+                                          </ul>
+
+                                       </td>
+
+                                    </tr>
+
+                                    <tr class="row">
+                                       <td class="entry" valign="top" headers="d15197054e697 d15197054e703 ">
+                                          <p class="p">STATEMENT THREAD LIMIT</p>
+
+                                       </td>
+
+                                       <td class="entry" valign="top" headers="d15197054e697 d15197054e703 ">
+                                          <p class="p">Sets a user specific concurrency limit on statements
+                                             (despite the name, STATEMENT THREAD LIMIT is not an
+                                             actual thread limit). Similar behaviors to STATEMENT
+                                             MEMORY LIMIT apply for STATEMENT THREAD LIMIT.</p>
+
+                                       </td>
+
+                                    </tr>
+
+                                 </tbody>
+
+                              </table>
+</div>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;ldap_group_authorization&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p" id="loio20d5ddb075191014b594f7b11ff08ee2__ldap_group_authorization">Specifies the LDAP group authorization mode for the user.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;ldap_group_authorization&gt;</var> ::= AUTHORIZATION {LOCAL | LDAP}</pre></div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis">LOCAL</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the use of local authorization mode for the user. This is
+                              the default.</p>
+
+                           <p class="p">When changing the LDAP authorization mode from LDAP to LOCAL for a
+                              user, roles that were granted using LDAP are revoked, and the DN value
+                              for the HANA user is cleared. </p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">LDAP</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the use of LDAP authorization mode for the user.</p>
+
+                           <p class="p">Users with LDAP authorization mode cannot be granted permissions
+                              directly, and canâ€™t have local roles granted to them.</p>
+
+                           <p class="p">When changing the LDAP authorization mode from LOCAL authorization to
+                              LDAP for a user, LDAP roles are evaluated and activated upon next
+                              login. Also, local roles and privileges granted to the user are
+                              revoked except for roles that are granted by SYS--for example, the
+                              PUBLIC role--and the CREATE ANY privilege on the userâ€™s own
+                              schema.</p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+         </dl>
+
+      </div></div>
+
+      <div class="section" id="loio20d5ddb075191014b594f7b11ff08ee2__sql_create_user_1sql_create_user_description"><div class="section_title">Description</div><div type="Description">
+         
+         <p class="p">Only database users with the system privilege USER ADMIN are allowed to create another
+            database user.</p>
+
+         <p class="p">The specified user name must not be identical to the name of an existing user, role, or schema.</p>
+
+         <p class="p">There are some users that are delivered with the SAP HANA database: SYS, SYSTEM, and a
+            number of users with _SYS_ prefix.</p>
+
+         <p class="p">Users in the database can be authenticated by varying mechanisms:</p>
+
+         <ul class="ul" id="loio20d5ddb075191014b594f7b11ff08ee2__ul_nvt_snt_zv">
+            <li class="li">
+               <p class="p">Internal authentication mechanism using a password.</p>
+
+            </li>
+
+            <li class="li">
+               <p class="p">External mechanisms such as Kerberos, SAML, SAP Logon Ticket, SAP Assertion
+                  Ticket, or X.509.</p>
+
+            </li>
+
+         </ul>
+
+         <p class="p">A user can be authenticated by more than one mechanism at a time; however, only one
+            password and one principal name for Kerberos can be valid at any one time.</p>
+
+         <p class="p">Specify at least one authentication mechanism to allow the user to connect and work with
+            the database instance. For backwards compatibility, the IDENTIFIED EXTERNALLY AS
+               <var class="keyword varname">&lt;external_identity&gt;</var> syntax is maintained. This syntax essentially
+            performs the same function as the <var class="keyword varname">&lt;kerberos_principal_name&gt;</var> FOR
+            KERBEROS syntax.</p>
+
+         <p class="p">External users are authenticated using an external system, for example a Kerberos system. For detailed information about external identities, contact your domain administrator.</p>
+
+         <p class="p">A schema with the user's name is created for each database user: this schema cannot be
+            explicitly dropped. The user's schema is automatically dropped when the user is deleted.
+            The database user owns this schema and it is used as their default schema when they
+            execute a command without explicitly specifying a schema name.</p>
+
+         <p class="p">Users created without the RESTRICTED option can create any object in their own schema
+            and they are granted the role PUBLIC allowing them to select any system view. Users
+            created with the option RESTRICTED have no privileges, not even the ability to create
+            objects in their own schema. These users are meant for using specific applications only.
+            All privileges needed for the application have to be granted to such users, preferably
+            using a role combined with the application. </p>
+
+      </div></div>
+
+      <div class="section" id="loio20d5ddb075191014b594f7b11ff08ee2__sql_create_user_1sql_create_user_configuration_parameter"><div class="section_title">Configuration Parameters</div><div type="Configuration Parameters">
+         
+         <p class="p">Configuration parameters concerning the user's password can be observed with the
+            monitoring view M_PASSWORD_POLICY. These parameters are stored in , the 'password
+            policy' section of the <span class="ph filepath">indexserver.ini</span> file.</p>
+
+         <p class="p">The description of the parameters concerned can be found in the Appendix of the SAP HANA Security Guide under Password Policy Parameters.</p>
+
+      </div></div>
+
+      <div class="section" id="loio20d5ddb075191014b594f7b11ff08ee2__sql_create_user_1sql_create_user_examples"><div class="section_title">Examples</div><div type="Examples">
+         
+         
+      </div></div>
+
+      <div class="section" id="loio20d5ddb075191014b594f7b11ff08ee2__sql_create_user_1sql_create_user_example_1"><div class="section_title">Example 1 - Create user with password</div><div type="Example 1 - Create user with password">
+         
+         <p class="p">The following code example shows you how to create a user <kbd class="ph userinput">T12345</kbd>
+            with a password <kbd class="ph userinput">Password123</kbd>.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE USER T12345 PASSWORD Password123</pre></div>
+
+      </div></div>
+
+      <div class="section" id="loio20d5ddb075191014b594f7b11ff08ee2__sql_create_user_1sql_create_user_example_2"><div class="section_title">Example 2 - Create user that uses an external authentication mechanism</div><div type="Example 2 - Create user that uses an external authentication mechanism">
+         
+         <p class="p">The following code example shows you how to create a SAML provider named
+               <kbd class="ph userinput">ac_saml_provider</kbd> in the database, specifying a subject and
+            issuer for <kbd class="ph userinput">ACompany</kbd>.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE SAML PROVIDER ac_saml_provider 
+    WITH SUBJECT 'CN = wiki.detroit.ACompany.corp,OU = ACNet,O = ACompany,C = EN' 
+    ISSUER 'E = John.Do@acompany.com,CN = ACNetCA,OU = ACNet,O = ACompany,C = EN';</pre></div>
+
+         <p class="p">The following code example shows you how to create a new user called
+               <kbd class="ph userinput">new_user</kbd> with password <kbd class="ph userinput">Password1</kbd>. The
+            user can connect to the system using the given password and with an assertion of the
+            existing SAML provider <kbd class="ph userinput">ac_saml_provider</kbd>. The
+               <var class="keyword varname">&lt;mapped_user_name&gt;</var> is set to <kbd class="ph userinput">ANY</kbd> as the
+            assertion provides the database user name.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE USER new_user PASSWORD Password1 WITH IDENTITY ANY FOR SAML PROVIDER ac_saml_provider;</pre></div>
+
+         <p class="p">The following example demonstrates how to create a user that is only allowed to log in
+            using X509:</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE USER testuser WITH IDENTITY 'C=US, ST=VA, L=Fairfax, O=example.com, CN=testuser' ISSUER 'C=US, ST=VA, L=Fairfax, O=example.com, CN=Root CA' FOR X509;</pre></div>
+
+         <p class="p">The following example demonstrates how to create a user that is only allowed to log in
+            using password or X509:</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE USER testuser PASSWORD BadPassword5 WITH IDENTITY 'C=US, ST=VA, L=Fairfax, O=example.com, CN=testuser' ISSUER 'C=US, ST=VA, L=Fairfax, O=example.com, CN=Root CA' FOR X509; </pre></div>
+
+         <p class="p">The following example demonstrates how to create a user that is only allowed to login
+            using X509 and whose account is deactivated on Jan 1, 2028:</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE USER testuser WITH IDENTITY 'C=US, ST=VA, L=Fairfax, O=example.com, CN=testuser' ISSUER 'C=US, ST=VA, L=Fairfax, O=example.com, CN=Root CA' FOR X509 VALID UNTIL '2028-01-01';</pre></div>
+
+         <p class="p">The following example demonstrates how to create a user that is only allowed to login
+            using SAML (this statement actually throws an error if the SAML provider does not
+            exist):</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE USER testuser WITH IDENTITY ANY FOR SAML PROVIDER nonexistandsamlprovider;</pre></div>
+
+      </div></div>
+
+      <div class="section"><div class="section_title">Example 3 - Create user that is associated to remote user</div><div type="Example 3 - Create user that is associated to remote user">
+         
+         <p class="p">This example demonstrates how to create a new user called <kbd class="ph userinput">USER1</kbd>
+            associated with the user <kbd class="ph userinput">USER2</kbd> at the remote database
+               <kbd class="ph userinput">DB2</kbd>.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE USER USER1 WITH REMOTE IDENTITY USER2 AT DATATABASE DB2;</pre></div>
+
+      </div></div>
+
+   </div>
+
+<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?20d4cca075191014824eeda2cbba6445.html" target="_top" title="Defines a SAML provider in the SAP HANA database.">CREATE SAML PROVIDER Statement (Access Control)</a></div>
+<div><a class="link" href="default.html?20a1569875191014b507cf392724b7eb.html" target="_top" title="A data type defines the characteristics of a data value. A special value of NULL is included in every data type to indicate the absence of a value.">Data Types</a></div>
+<div><a class="link" href="default.html?bfe3daf744324bc390902251817a1fcc.html" target="_top" title="Defines a JWT provider in the SAP HANA database.">CREATE JWT PROVIDER Statement (Access Control)</a></div>
+<div><a class="link" href="default.html?20b6e99275191014a861df9fb6abb5f5.html" target="_top" title="Defines effective password policy settings.">M_PASSWORD_POLICY System View</a></div>
+<div><a class="link" href="default.html?21026099751910148e0cdbddc75652b8.html" target="_top" title="Lists all users.">USERS System View</a></div>
+<div><a class="link" href="default.html?2102244575191014a7bde2c7e6b52081.html" target="_top" title="Lists all parameters and their values, which have been assigned to users in the system (using CREATE USER ... SET PARAMETER or ALTER USER ... SET PARAMETER).">USER_PARAMETERS System View</a></div>
+<div><a class="link" href="default.html?ea60f23498704b6ea225f44595151f61.html" target="_top" title="Provides the number of invalid connect attempts for a user between two successful connections.">INVALID_CONNECT_ATTEMPTS System View</a></div>
+<div><a class="link" href="default.html?20cda7b5751910149d0ef5e67ff1a947.html" target="_top" title="Shows available SAML providers.">SAML_PROVIDER System View</a></div>
+<div><a class="link" href="default.html?20cdc48e75191014b2cc9d2872477297.html" target="_top" title="Shows the SAML providers known for each user.">SAML_USER_MAPPINGS System View</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="CREATE USER Statement (Access Control)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

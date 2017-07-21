@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Extracts JSON text from a JSON context item by using a SQL/JSON path expression."/>
+<meta name="description" content="Extracts JSON text from a JSON context item by using a SQL/JSON path expression."/>
+<meta name="keywords" content="JSON_QUERY"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=6927152485861521"/>
+<title>JSON_QUERY Function (Miscellaneous)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio3126ea33d50d42d19517a08fe22ec5a1";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio3126ea33d50d42d19517a08fe22ec5a1">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">JSON_QUERY Function (Miscellaneous)</h1>
+
+	
+	
+	<div class="body refbody"><p class="shortdesc">Extracts JSON text from a JSON context item by using a SQL/JSON path
+			expression.</p>
+
+		<div class="section" id="loio3126ea33d50d42d19517a08fe22ec5a1__sql_function_json_query_1sql_function_json_query_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">JSON_QUERY (
+ <var class="keyword varname">&lt;JSON_API_common_syntax&gt;</var>
+ [ <var class="keyword varname">&lt;JSON_output_clause&gt;</var> ]
+ [ <var class="keyword varname">&lt;JSON_query_wrapper_behavior&gt;</var> ]
+ [ <var class="keyword varname">&lt;JSON_query_empty_behavior&gt;</var> ON EMPTY ]
+ [ <var class="keyword varname">&lt;JSON_query_error_behavior&gt;</var> ON ERROR ]
+ )</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+			
+			<dl class="dl parml">
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;JSON_API_common_syntax&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies a JSON context item and a path to the context item, using
+							common syntax for the JSON API.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;JSON_API_common_syntax&gt;</var> ::= <var class="keyword varname">&lt;JSON_context_item&gt;</var>, <var class="keyword varname">&lt;JSON_path_specification&gt;</var></pre></div>
+
+						<dl class="dl">
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;JSON_context_item&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Specifies the JSON document to operate on.</p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;JSON_path_specification&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Specifies the path to
+										<var class="keyword varname">&lt;JSON_context_item&gt;</var>.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;JSON_path_specification&gt;</var> ::= <var class="keyword varname">&lt;JSON_path_mode&gt;</var> <var class="keyword varname">&lt;JSON_path_wff&gt;</var>
+
+<var class="keyword varname">&lt;JSON_path_mode&gt;</var> ::= STRICT | LAX</pre></div>
+
+									<p class="p">If a structural error occurs within a JSON filter expression and
+											<var class="keyword varname">&lt;JSON_path_mode&gt;</var> is set to STRICT,
+										then the error handling of a JSON filter expression applies.
+										Otherwise, a structural error is an unhandled error.</p>
+
+									<p class="p">When the path is set to LAX, one of the following options
+										occurs:</p>
+
+									<ul class="ul" id="loio3126ea33d50d42d19517a08fe22ec5a1__ul_c2m_zg1_fx">
+										<li class="li">If an operation requires an SQL/JSON array but the operand is not an SQL/JSON array,
+											then the operand is wrapped in an SQL/JSON array prior
+											to performing the operation.</li>
+
+										<li class="li">If an operation requires something other than an
+											SQL/JSON array, but the operand is an SQL/JSON array,
+											then the operand is unwrapped by converting its elements
+											into an SQL/JSON sequence prior to performing the
+											operation.</li>
+
+									</ul>
+
+									<p class="p"> If there is still a structural error after applying these resolutions, then the result
+										is an empty SQL/JSON sequence.</p>
+
+									<p class="p"><var class="keyword varname">&lt;JSON_path_wff&gt;</var> indicates an actual JSON path (for example,
+											<samp class="ph codeph">'$.item1'</samp>).</p>
+
+								</dd>
+
+							
+						</dl>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;JSON_output_clause&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies the output created by the JSON_QUERY function.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;JSON_output_clause&gt;</var> ::= RETURNING <var class="keyword varname">&lt;data_type&gt;</var></pre></div>
+
+						<dl class="dl">
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;data_type&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Specifies the data type to be set as the return type of the JSON QUERY function.
+										Supported data types: NVARCHAR(<var class="keyword varname">&lt;length&gt;</var>),
+											VARCHAR(<var class="keyword varname">&lt;length&gt;</var>).</p>
+
+								</dd>
+
+							
+						</dl>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;JSON_query_wrapper_behavior&gt;</var> WRAPPER</dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies the wrapper behavior of the JSON query.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;JSON_query_wrapper_behavior&gt;</var> WRAPPER
+
+<var class="keyword varname">&lt;JSON_query_wrapper_behavior&gt;</var> ::=
+WITHOUT [ ARRAY ]
+ | WITH [ CONDITIONAL | UNCONDITIONAL ] [ ARRAY ]</pre></div>
+
+						<p class="p">The default is WITHOUT ARRAY WRAPPER. However, if WITH is specified, then the default is
+							UNCONDITIONAL ARRAY WRAPPER.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;JSON_query_empty_behavior&gt;</var> ON EMPTY</dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies the behavior of the function if the related data is not in the context item. The
+							default is NULL ON EMPTY.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;JSON_query_empty_behavior&gt;</var> ON EMPTY
+
+<var class="keyword varname">&lt;JSON_query_empty_behavior&gt;</var> ::=
+ERROR
+ | NULL
+ | EMPTY ARRAY
+ | EMPTY OBJECT</pre></div>
+
+						<p class="p">ERROR ON EMPTY returns an error if the related data is not in the context
+							item. NULL ON EMPTY returns a NULL if the related data is not in the
+							context item. EMPTY ARRAY ON EMPTY returns an empty array if the related
+							data is not in the context item. EMPTY OBJECT ON EMPTY returns an empty
+							JSON object if the related data is not in the context item.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;JSON_query_error_behavior&gt;</var> ON ERROR</dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies the behavior of the function when the query throws an error. The default is NULL
+							ON ERROR.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;JSON_query_error_behavior&gt;</var> ON ERROR
+
+<var class="keyword varname">&lt;JSON_query_error_behavior&gt;</var> ::= 
+ERROR
+ | NULL
+ | EMPTY ARRAY
+ | EMPTY OBJECT</pre></div>
+
+						<p class="p">ERROR ON ERROR returns an error if the function result includes an error.
+							NULL ON ERROR returns a NULL if the function result includes an error.
+							EMPTY ARRAY ON ERROR returns an empty array if the function result
+							includes an error. EMPTY OBJECT ON ERROR  returns an empty JSON object
+							if the function result includes an error.</p>
+
+					</dd>
+
+				
+			</dl>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">Extracts JSON text from a JSON context item using a SQL/JSON path expression.</p>
+
+			<p class="p">The following tokens are supported in <var class="keyword varname">&lt;JSON_API_common_syntax&gt;</var>:</p>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio3126ea33d50d42d19517a08fe22ec5a1__table_xqy_231_fx" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="33.333333333333336%"/><col width="33.333333333333336%"/><col width="33.333333333333336%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="33.33333333333333%" id="d21328463e306">
+								<p class="p">Token</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="33.33333333333333%" id="d21328463e312">
+								<p class="p">Description</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="33.33333333333333%" id="d21328463e318">
+								<p class="p">Example</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d21328463e306 ">
+								<p class="p">$</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d21328463e312 ">
+								<p class="p">The context item (the first argument of the function).</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d21328463e318 ">
+								<p class="p"><samp class="ph codeph">'$'</samp></p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d21328463e306 ">
+								<p class="p">.</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d21328463e312 ">
+								<p class="p">The member of an object.</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d21328463e318 ">
+								<p class="p"><samp class="ph codeph">'$.item.description'</samp></p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d21328463e306 ">
+								<p class="p">[</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d21328463e312 ">
+								<p class="p">The array index specifier (open).</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d21328463e318 ">
+								<p class="p"/>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d21328463e306 ">
+								<p class="p">]</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d21328463e312 ">
+								<p class="p">The array index specifier (closed).</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d21328463e318 ">
+								<p class="p"><samp class="ph codeph">'$[1]'</samp></p>
+
+								<p class="p"><samp class="ph codeph">'$.item.list[1]'</samp></p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d21328463e306 ">
+								<p class="p">to</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d21328463e312 ">
+								<p class="p">The array index range.</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d21328463e318 ">
+								<p class="p"><samp class="ph codeph">'$[3 to 5]'</samp></p>
+
+								<p class="p"><samp class="ph codeph">= '$[3,4,5]'</samp></p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d21328463e306 ">
+								<p class="p">*</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d21328463e312 ">
+								<p class="p">The wild card.</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d21328463e318 ">
+								<p class="p"><samp class="ph codeph">'$.*.description'</samp></p>
+
+								<p class="p"><samp class="ph codeph">'$.item.list[*]'</samp></p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loio3126ea33d50d42d19517a08fe22ec5a1__json_query_function_1sql_json_query_function_examples"><div class="section_title">Example</div><div type="Example">
+			
+			<p class="p">The following query returns the value
+					<samp class="ph systemoutput">{"item1":1,"item2":2,"item3":3}</samp>.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT JSON_QUERY('{"item1":1, "item2":2, "item3":3}', '$') AS JSONQUERY FROM DUMMY;</pre></div>
+
+			<p class="p">The following query returns the value <samp class="ph systemoutput">[1]</samp>.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT JSON_QUERY('{"item1":1, "item2":2, "item3":3}', '$.item1' WITH WRAPPER ) AS JSONQUERY  FROM DUMMY;</pre></div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="JSON_QUERY Function (Miscellaneous)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

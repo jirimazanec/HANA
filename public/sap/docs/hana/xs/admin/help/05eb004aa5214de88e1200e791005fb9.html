@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Roles are used to define the type of access granted to an application."/>
+<meta name="description" content="Roles are used to define the type of access granted to an application."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=25757218109531055"/>
+<title>Maintain Roles for XS Advanced Applications</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio05eb004aa5214de88e1200e791005fb9";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio05eb004aa5214de88e1200e791005fb9">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Maintain Roles for XS Advanced Applications</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">Roles are used to define the type of access granted to an application.</p>
+
+		<div class="section prereq p"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Prerequisites</h2></div>
+			<p class="p">To access the <span class="ph uicontrol">Application Role Builder</span> tool, a user requires
+				the authorization scopes defined in the roles grouped together in one of the
+				following role collections:</p>
+
+			<ul class="ul" id="loio05eb004aa5214de88e1200e791005fb9__ul_fx2_vfd_xt">
+				<li class="li">XS_AUTHORIZATION_ADMIN<p class="p">Full access: no access restrictions</p>
+</li>
+
+				<li class="li">XS_AUTHORIZATION_DISPLAY<p class="p">Read-only access to the <span class="ph uicontrol">Application Role
+							Builder</span> tool</p>
+</li>
+
+			</ul>
+
+			<div class="note tip"><span class="tiptitle">Tip</span> 
+				<p class="p">Role collections can be assigned to an SAP HANA user in SAP HANA studio by means of user
+					parameters, for example, <span class="keyword parmname">XS_RC_XS_CONTROLLER_ADMIN</span> or
+						<span class="keyword parmname">XS_RC_XS_CONTROLLER_USER</span>, or
+						<span class="keyword parmname">XS_RC_XS_CONTROLLER_AUDITOR</span>.</p>
+
+			</div>
+
+		</div>
+
+		<div class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<p class="p"> A role is an instance of a role template; you can build a role based on a role template and
+				assign the role to a role collection. Role collections are then assigned to SAP HANA
+				users or SAML 2.0 groups. The role template defines the type of access permitted for
+				an application, for example: the authorization scope, and any attributes that need
+				to be applied. Attributes define information that comes with the respective user,
+				for example 'cost center' or 'country'. This information can only be resolved at run
+				time.</p>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+				<span class="ph cmd">Start the SAP HANA cockpit.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Locate the <span class="ph uicontrol">XS Advanced Administration</span> tools catalog.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Start the <span class="ph uicontrol">Administration and Monitoring</span> tools.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Start the <span class="ph uicontrol">Application Role Builder</span> tool.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Select the application for which you want to create a role.</span>
+				<div class="itemgroup info">
+					<p class="p">In the <span class="ph uicontrol">Applications</span> list, choose the application  to
+						which you want to add a new role.</p>
+
+				</div>
+				<div class="itemgroup stepresult">
+					<p class="p">The <span class="ph uicontrol">Application</span> pane displays information about the
+						selected application in four tabs:</p>
+
+					<div class="note note"><span class="notetitle">Note</span> 
+						<p class="p">The information displayed is defined in the application's security
+							description file (<span class="ph filepath">xs-security.json</span>).</p>
+
+					</div>
+
+					<ul class="ul" id="loio05eb004aa5214de88e1200e791005fb9__ul_qkh_pwt_rt">
+						<li class="li"><span class="ph uicontrol">Roles</span><p class="p">The roles that have been built</p>
+<div class="note note"><span class="notetitle">Note</span> 
+								<p class="p">Roles are derived from role templates defined in the corresponding application's security
+									description (<span class="ph filepath">xs-security.json</span>)</p>
+
+							</div>
+</li>
+
+						<li class="li"><span class="ph uicontrol">Scopes</span><p class="p">A list of the authorization scopes defined in the
+								application's <span class="ph filepath">xs-security.json</span> file</p>
+</li>
+
+						<li class="li"><span class="ph uicontrol">Attributes</span><p class="p">A list of the attributes defined in the application's
+									<span class="ph filepath">xs-security.json</span> file and that are applied
+								to the selected role</p>
+</li>
+
+						<li class="li"><span class="ph uicontrol">Templates</span><p class="p">A list of the role templates defined in the
+								application's <span class="ph filepath">xs-security.json</span> file</p>
+</li>
+
+					</ul>
+
+				</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Create a new role.</span>
+				<ol type="a" class="ol substeps" id="loio05eb004aa5214de88e1200e791005fb9__substeps_nc1_cyt_rt">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the <span class="ph uicontrol">Application</span> details pane, choose a list of the role
+							templates defined in the application's
+							<span class="ph uicontrol">Roles</span>.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Choose <span class="ph uicontrol">Create Role</span>.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Type a name for the new role.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Select a role template (from the drop-down list) to use to create the new role.</span>
+						<div class="itemgroup info">
+							<p class="p">The list of the role templates is derived from the selected application's
+									<span class="ph filepath">xs-security.json</span> file.</p>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Type a short description of the new role.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Choose a source type for any attributes that need to be applied to the
+							role.</span>
+						<div class="itemgroup info">
+							<p class="p">Attributes are defined in the corresponding application's
+									<span class="ph filepath">xs-security.json</span> file. You can choose
+								between the following attribute source
+								<span class="ph uicontrol">type</span>:</p>
+
+							<ul class="ul" id="loio05eb004aa5214de88e1200e791005fb9__ul_tcb_mpd_tt">
+								<li class="li"><span class="ph uicontrol">Static</span><p class="p">Enter an attribute value manually.</p>
+</li>
+
+								<li class="li"><span class="ph uicontrol">SAML Attribute</span><p class="p">The value of the attribute must be obtained from
+										a SAML 2.0 token.</p>
+</li>
+
+							</ul>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Save your changes.</span>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Add the new role to a role <span class="ph emphasis emphasis">collection.</span> (optional)</span>
+				<div class="itemgroup info">
+					<p class="p">You can either add the role to an <span class="ph emphasis emphasis">existing</span> role
+						collection or create a <span class="ph emphasis emphasis">new</span> role collection to which you
+						add the new role, too.</p>
+
+					<p class="p">To add the new role to an existing role collection, perform the following
+						steps:</p>
+
+				</div>
+				<ol type="a" class="ol substeps" id="loio05eb004aa5214de88e1200e791005fb9__substeps_gtf_ryt_rt">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Display the list of roles available for the selected application.</span>
+						<div class="itemgroup info">
+							<p class="p">In the <span class="ph uicontrol">Application</span> pane, choose
+									<span class="ph uicontrol">Roles</span>.</p>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Select the role that you want to add to a role collection.</span>
+						<div class="itemgroup info">
+							<p class="p">In the <span class="ph uicontrol">Role Name</span> list, you can choose one or
+								more roles to add to one (or multiple) role collection(s).</p>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Add the selected role(s) to a role collection.</span>
+						<div class="itemgroup info">
+							<p class="p">Choose <span class="ph uicontrol">Add to Role Collection</span>. In the <span class="ph uicontrol">Select Role
+									Collections</span> dialog, select one or more role
+								collections to which you want add the new role, and choose
+									<span class="ph uicontrol">OK</span>.</p>
+
+						</div>
+					</li>
+
+				</ol>
+
+				<div class="itemgroup stepresult">
+					<div class="note tip"><span class="tiptitle">Tip</span> 
+						<p class="p">To add a role to a <span class="ph emphasis emphasis">new</span> role collection, use the <span class="ph uicontrol">Configure
+								Role Collections</span> tool; in the <span class="ph uicontrol">Role
+								Collections</span> pane, choose <span class="ph uicontrol">[+]</span> to
+							add a new role collection; in <span class="ph uicontrol">Roles </span> choose
+								<span class="ph uicontrol">[+] Add Application Role</span> to select the
+							application role(s) you want to add, and save the changes.</p>
+
+					</div>
+
+				</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Confirm that the new role has been successfully added to the role
+					collection.</span>
+				<ol type="a" class="ol substeps" id="loio05eb004aa5214de88e1200e791005fb9__substeps_xht_2zt_rt">
+					<li class="li substep">
+						<span class="ph cmd">Switch to the <span class="ph uicontrol">Role Collection</span> tool.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">In the <span class="ph uicontrol">Role Collections</span> pane, select the role
+							collection that you want to check.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">In the <span class="ph uicontrol">Role Collections</span> details pane, confirm
+							that the role you added appears in the list of roles assigned to the
+							role collection.</span>
+					</li>
+
+				</ol>
+
+			</li>
+</ol>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?31985c96b710448e92736b53d2b3bdf1.html" target="_top" title="The Application Role Builder tool for XS advanced model run-time administrators displays detailed information concerning application roles and access.">Application Role Builder Details</a></div>
+<div><a class="link" href="default.html?6ddec3d5f3494e28a5aff6ee60e3554e.html" target="_top" title="Maintain the SAP HANA XS advanced model run-time environment.">Maintaining the SAP HANA XS Advanced Model Run Time</a></div>
+<div><a class="link" href="default.html?03c86bc93d55435b999065c1d4e6689d.html" target="_top" title="Access to XS advanced administration tools is granted by means of authorization scopes contained in roles that are grouped into role collections.">Role Collections for XS Advanced Administrators</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Maintain Roles for XS Advanced Applications";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,20 @@
+schema="OTEBW_EMTAS";
+
+query = "select T.DATE_SQL as DELIVERYDAY,
+				PERIOD,
+				PRICE,
+				ENERGY,
+				ENERGYMATCHED,
+				BIDTYPE,
+				AUCTION,
+				T.CALMONTH as CALMONTH,
+				T.YEAR as CALYEAR,
+				T.CALWEEK as CALWEEK,
+				T.CALQUARTER as CALQUARTER,
+				'MWH' as UNIT,
+				'EUR' as CURRENCY,
+				\"$rowid$\" as ROW_ID
+from BW_DM_AGGR_CURVES,
+_SYS_BI.TC_DAY_CALENDAR as T
+where T.DATE_SQL = DELIVERYDAY";
+

@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Provides backup configuration statistics."/>
+<meta name="description" content="Provides backup configuration statistics."/>
+<meta name="keywords" content="M_BACKUP_CONFIGURATION"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=41069829890123055"/>
+<title>M_BACKUP_CONFIGURATION System View</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20a8891d7519101492c2bcf835d1c119";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20a8891d7519101492c2bcf835d1c119">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">M_BACKUP_CONFIGURATION System View</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Provides backup configuration statistics.</p>
+
+      <div class="section" id="loio20a8891d7519101492c2bcf835d1c119___m__b_a_c_k_u_p__c_o_n_f_i_g_u_r_a_t_i_o_n_1struct_M_BACKUP_CONFIGURATION"><div class="section_title">Structure</div><div type="Structure">
+         
+         
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20a8891d7519101492c2bcf835d1c119__table_ejb_ftn_cw" class="table" frame="border" border="1" rules="all">
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" id="d5759725e42">
+                        <p class="p">Column name</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d5759725e48">
+                        <p class="p">Data type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d5759725e54">
+                        <p class="p">Unit</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d5759725e60">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">MAX_RECOVERY_FILE_AGE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">Second</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">Max recovery file age </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">LOG_REPLAY_STEP_SIZE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">Byte</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">Log replay step size in bytes </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">MAX_RECOVERY_BACKINT_CHANNELS</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 "> </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">Maximum number of parallel backint channels per request during recovery
+                        </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">BACKINT_EXECUTABLE_LINK</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">VARCHAR(256)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 "> </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">Linkname of the backint executable </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">BACKINT_EXECUTABLE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">VARCHAR(256)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 "> </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">Real filename of the backint executable </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">BACKINT_DATA_BACKUP_PATH</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">VARCHAR(256)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 "> </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">Data backup directory for backint </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">BACKINT_LOG_BACKUP_PATH</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">VARCHAR(256)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 "> </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">Log backup directory for backint </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">BACKINT_CATALOG_BACKUP_PATH</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">VARCHAR(256)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p"/>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">Directory for backint-based catalog backups</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">FILE_DATA_BACKUP_PATH</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">VARCHAR(256)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 "> </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">Default directory for file-based data backups</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">FILE_LOG_BACKUP_PATH</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">VARCHAR(256)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 "> </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">Current directory for file-based log backups</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">FILE_CATALOG_BACKUP_PATH</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">VARCHAR(256)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p"/>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">Directory for file-based catalog backups</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">LOG_BACKUP_TIMEOUT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">Second</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">Log backup timeout</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">LOG_BACKUP_INTERVAL_MODE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">VARCHAR(16)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p"/>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5759725e42 d5759725e48 d5759725e54 d5759725e60 ">
+                        <p class="p">Log backup interval mode</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div></div>
+
+   </div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="M_BACKUP_CONFIGURATION System View";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=5515888391245178"/>
+<title>Watchpoints</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loiodaccaa442d8547d898907a0ef3bff96a";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loiodaccaa442d8547d898907a0ef3bff96a">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Watchpoints</h1>
+
+	<div class="body refbody">
+		<div class="section">
+			<p class="p">Watchpoints give you the possibility to watch  the values of variables or complex
+				expressions and break the debugger if certain conditions are met. </p>
+
+			<p class="p">For each watchpoint an arbitrary number of conditions can be defined. The conditions
+				can either contain an expression that results in true or false or contain a single
+				variable or complex expression without restrictions in the return type. </p>
+
+			<p class="p">When setting a watchpoint, the debugger will check all conditions for potential
+				syntax errors.  It checks for:</p>
+
+			<ul class="ul" id="loiodaccaa442d8547d898907a0ef3bff96a__ul_hzw_vsc_sv">
+				<li class="li">
+					<p class="p">syntax errors like missing brackets or misuse of operators </p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">unknown or wrong function calls</p>
+
+				</li>
+
+			</ul>
+
+			<p class="p">At execution time the debugger will check and evaluate the conditions of the
+				watchpoints, but with the given variables and its values. A watchpoint will be
+				skipped, if the value of a variable in a condition is not accessible. But in case
+				the return type of the condition is wrong , the debugger will send a warning to the
+				user and will break for the watchpoint anyway. </p>
+
+			<div class="note note"><span class="notetitle">Note</span> 
+				<p class="p">If a variable value changes to <span class="keyword cmdname">NULL</span>, the debugger will not
+					break since it cannot evaluate the expression anymore.</p>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Watchpoints";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

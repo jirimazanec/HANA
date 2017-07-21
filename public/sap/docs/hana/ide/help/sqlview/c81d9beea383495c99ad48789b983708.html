@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Partition-specific information for partitioned tables."/>
+<meta name="description" content="Partition-specific information for partitioned tables."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=5505283459714252"/>
+<title>TABLE_PARTITIONS System View</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioc81d9beea383495c99ad48789b983708";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioc81d9beea383495c99ad48789b983708">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">TABLE_PARTITIONS System View </h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">Partition-specific information for partitioned tables.</p>
+
+		<div class="section">
+			<p class="p"/>
+
+			<p class="p">You need the DATA ADMIN system privilege to see table information, unless you own or have
+				SELECT permission on the tables.</p>
+
+		</div>
+
+		<div class="section"><div class="section_title">Structure</div><div type="Structure">
+			
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loioc81d9beea383495c99ad48789b983708__table_amr_hmj_55" class="table" frame="border" border="1" rules="all">
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" id="d30069394e37">Column Name</th>
+
+							<th class="entry" valign="top" id="d30069394e40">Data Type</th>
+
+							<th class="entry" valign="top" id="d30069394e43">Description</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">SCHEMA_NAME</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">NVARCHAR(256)</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">Schema name.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">TABLE_NAME</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">NVARCHAR(256)</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">Table name.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">PART_ID</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">INTEGER</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">Logical partition ID. 1 through number of partitions for
+								partitioned tables. This is the ID shown in all monitoring views.
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">LEVEL_1_PARTITION</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">INTEGER</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">First level partition ID. 1 through number of first-level partitions. First-level
+								partitions (those used in ALTER TABLE... MOVE) may have
+								subpartitions. </td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">LEVEL_2_PARTITION</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">INTEGER</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">Subpartition ID. 0 for tables without multilevel partitioning and 1 through number of
+								subpartitions for partitioned tables with multilevel partitioning. </td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">LEVEL_1_RANGE_MIN_VALUE</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">NVARCHAR(5000)</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">Minimum value of the range partition at first level for a range-partitioned table;
+								empty otherwise.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">LEVEL_1_RANGE_MAX_VALUE</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">NVARCHAR(5000)</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">Maximum value of the range partition at first level for a range-partitioned table;
+								empty otherwise.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">LEVEL_2_RANGE_MIN_VALUE</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">NVARCHAR(5000)</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">Minimum value of the range partition at second level for a range-partitioned table;
+								empty otherwise.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">LEVEL_2_RANGE_MAX_VALUE</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">NVARCHAR(5000)</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">Maximum value of the range partition at second level for a range-partitioned table;
+								empty otherwise.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">IS_CURRENT</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">VARCHAR(5)</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">Indicates the partition is current partition.  Valid values are: ''TRUE' or
+								'FALSE'.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">UNIQUE_CONSTRAINTS</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">VARCHAR(5)</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">Indicates if unique constraints will be checked for this partition or not. Valid
+								values are: ''TRUE' or 'FALSE'.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">LOAD_UNIT</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">VARCHAR(6)</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">Valid values are: 'PAGE' or  'COLUMN'.  Specify 'PAGE' when partition uses paged
+								attributes, 'COLUMN' otherwise.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">STORAGE_TYPE</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">VARCHAR(8)</td>
+
+							<td class="entry" valign="top" headers="d30069394e37 d30069394e40 d30069394e43 ">'DEFAULT' or 'EXTENDED'</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="TABLE_PARTITIONS System View";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

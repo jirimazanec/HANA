@@ -1,0 +1,18 @@
+schema="OTEBW_EMTAS";
+
+query = "
+select 
+CONTRACTID,
+to_date(DDATE) as DDATE,
+to_int(IntervalIndx) as IntervalIndx,
+SYSTEMTS,
+T.CALMONTH as CALMONTH,
+T.YEAR as CALYEAR,
+T.CALWEEK as CALWEEK,
+T.CALQUARTER as CALQUARTER 
+from BW_IMG_INTERVAL,
+     _SYS_BI.TC_DAY_CALENDAR T
+where T.DATE_SQL = DDATE  ";
+
+depends_on_table=["OTEBW_EMTAS::BW_IMG_INTERVAL"];
+

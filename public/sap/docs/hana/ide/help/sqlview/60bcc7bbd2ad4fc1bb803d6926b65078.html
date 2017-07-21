@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Details about tasks."/>
+<meta name="description" content="Details about tasks."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=8837297213326658"/>
+<title>TASKS System View [Smart Data Integration]</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio60bcc7bbd2ad4fc1bb803d6926b65078";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio60bcc7bbd2ad4fc1bb803d6926b65078">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">TASKS System View [<span class="ph pname">Smart Data Integration</span>]</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">Details about tasks.</p>
+
+		<div class="section">
+			<div class="note caution"><span class="cautiontitle">Caution</span> <span class="ph">This
+                                                  information applies only for the SAP HANA option
+                                                  cited in the title of this topic. You must have
+                                                  purchased the license for it in order to use the
+                                                  information contained in this topic.</span></div>
+</div>
+
+		<div class="section"><div class="section_title">Structure</div><div type="Structure">
+			
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio60bcc7bbd2ad4fc1bb803d6926b65078__table_b5w_xcc_np" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="33.333333333333336%"/><col width="22.22222222222222%"/><col width="44.44444444444444%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="33.33333333333333%" id="d24438795e44">Column</th>
+
+							<th class="entry" valign="top" width="22.22222222222222%" id="d24438795e47">Data type</th>
+
+							<th class="entry" valign="top" width="44.44444444444444%" id="d24438795e50">Description</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">TASK_OID</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">BIGINT</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">Unique identifier for a task</td>
+
+						</tr>
+<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">TASK_NAME</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">NVARCHAR(256)</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">Name of task</td>
+
+						</tr>
+
+						
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">SCHEMA_NAME</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">NVARCHAR(256)</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">Schema the task was created in</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">OWNER_NAME</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">NVARCHAR(256)</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">Owner of the task</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">CREATE_TIME</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">TIMESTAMP</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">Creation time</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">MEMORY_SIZE</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">BIGINT</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">Memory size of loaded task</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">TASK_TYPE</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">NVARCHAR(64)</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">Type of task ('PLAN' or 'PROCEDURE'), based on how the task was created</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">PLAN_VERSION</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">NVARCHAR(32)</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">Version of the task plan</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">PLAN</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">NCLOB</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">Task plan used to define the task, or task plan generated to call the
+								procedure</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">COMMENTS</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">NVARCHAR(256)</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">Description of the task, from the task plan</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">HAS_TABLE_TYPE_INPUT</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">VARCHAR(5)</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">'TRUE' if the task is modeled with a table type as input, meaning
+								data would need to be passed at execution time</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">HAS SDQ</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">VARCHAR(5)</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">'TRUE' if the task contains SDQ (<span class="ph pname">smart data quality</span>) functionality</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">IS_REALTIME_TASK</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">VARCHAR(5)</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">'TRUE' if the task is a realtime task, else 'FALSE'</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">IS_VALID</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">VARCHAR(5)</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">'TRUE' if the task is in a valid state; 'FALSE if it has been
+								invalidated by a dependency</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">IS_READ_ONLY</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">VARCHAR(5)</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">'TRUE' if the task is read only (has only table type outputs),
+								'FALSE' if it writes to non-table-type outputs</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">PROCEDURE_SCHEMA</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">NVARCHAR(256)</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">If the task was created with a procedure instead of a plan, this
+								attribute will contain the schema name of the stored
+								procedure</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">PROCEDURE_NAME</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">NVARCHAR(256)</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">If the task was created with a procedure instead of a plan, this
+								attribute will contain the name of the name of the stored
+								procedure</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">INPUT_PARAMETER_COUNT</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">SMALLINT</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">Number of input (tableType) parameters</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">OUTPUT_PARAMETER</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">SMALLINT</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">Number of output (tableType) parameters</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d24438795e44 ">SQL_SECURITY</td>
+
+							<td class="entry" valign="top" width="22.22222222222222%" headers="d24438795e47 ">VARCHAR(7)</td>
+
+							<td class="entry" valign="top" width="44.44444444444444%" headers="d24438795e50 ">Security model for the task, either 'DEFINER' or
+								'INVOKER'</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+		<div class="section">
+			<p class="p">
+				
+			</p>
+
+		</div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="TASKS System View [Smart Data Integration]";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

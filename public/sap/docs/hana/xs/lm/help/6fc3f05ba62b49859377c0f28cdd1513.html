@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="You can secure the communication between hdbalm and the SAP HANA system using the Secure Sockets Layer (SSL) protocol and certificates."/>
+<meta name="description" content="You can secure the communication between hdbalm and the SAP HANA system using the Secure Sockets Layer (SSL) protocol and certificates."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=6357169191088121"/>
+<title>Enable SSL for hdbalm</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio6fc3f05ba62b49859377c0f28cdd1513";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio6fc3f05ba62b49859377c0f28cdd1513">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Enable SSL for hdbalm</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">You can secure the communication between <samp class="ph systemoutput">hdbalm</samp> and the <span class="ph pname">SAP HANA</span> system using the Secure
+		Sockets Layer (SSL) protocol and certificates.</p>
+
+		<div class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<p class="p"><samp class="ph systemoutput">hdbalm</samp> is written in the programming language
+					<span class="ph pname">Python</span>, and it comes with a preconfigured <span class="ph pname">Python</span>
+				interpreter so that <samp class="ph systemoutput">hdbalm</samp> can be used immediately.
+				However, the <span class="ph pname">Python</span> interpreter shipped by SAP does not support
+				secure HTTPS connections.</p>
+
+			<p class="p">To enable SSL, you must use an alternative <span class="ph pname">Python</span> version that includes SSL libraries.</p>
+
+			<div class="note note"><span class="notetitle">Note</span> For general information on how to use SSL and certificates to secure the <span class="ph pname">SAP
+					HANA</span> server, see <cite class="cite">Securing Data Communication</cite> in the
+					<cite class="cite">SAP HANA Security Guide</cite>.</div>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+				<span class="ph cmd">On Linux, <span class="ph pname">Python</span> is usually installed as part of the operating system, or it
+					can be installed using the package management provided by the system. For
+					Microsoft Windows, you can download a suitable <span class="ph pname">Python</span> version
+					from the <span class="ph pname">Python</span> web site. The link is in the <cite class="cite">Related
+						Information</cite> section. Supported <span class="ph pname">Python</span> versions are 2.6
+					and 2.7. SAP recommends that you use the current version.</span>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">To make sure that <samp class="ph systemoutput">hdbalm</samp> uses the correct <span class="ph pname">Python</span> version, set the environment variable
+						<samp class="ph codeph">PYTHON_HOME</samp> to the location of the correct <span class="ph pname">Python</span> installation.</span>
+				<div class="itemgroup stepxmp">On Windows, you can set the environment variable as shown in the following
+						example:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">set PYTHON_HOME="c:\Program Files\Python27"</pre></div>
+<div class="note note"><span class="notetitle">Note</span> Make
+						sure you set the value for this environment variable in quotation
+						marks.</div>
+On Unix (bourne shell), you can set the environment variable as
+					shown in the following
+					example:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">export PYTHON_HOME=/usr/python27</pre></div>
+</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">To enable secure communication in <samp class="ph systemoutput">hdbalm</samp>, set the <samp class="ph systemoutput">hdbalm</samp> option <samp class="ph codeph">-s</samp>
+					or <samp class="ph codeph">--https</samp> and provide a valid certificate using the <samp class="ph codeph">-c <var class="keyword varname">&lt;certificate&gt;</var></samp> or
+							<samp class="ph codeph">--certs=<var class="keyword varname">&lt;certificate&gt;</var></samp> options. The certificate is used to validate the identity of the
+						<span class="ph pname">SAP HANA</span> server. The certificate needs to be stored in a file in X.509 PEM format.</span>
+				<div class="itemgroup info">
+					<div class="note note"><span class="notetitle">Note</span> If you use these options without switching the <span class="ph pname">Python</span> version, you receive
+						an error message.</div>
+
+				</div>
+				<div class="itemgroup info">
+					<div class="note note"><span class="notetitle">Note</span> If you use proxies for communication, the proxy settings might also be relevant when you
+						enable SSL. For more information, see <cite class="cite">Proxy Support for
+						hdbalm</cite>.</div>
+
+				</div>
+			</li>
+</ol>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="extlink" href="http://help.sap.com/disclaimer?site=http://www.python.org/download" target="_blank" alt="http://www.python.org/download" title="http://www.python.org/download">http://www.python.org/download<img src="images/3rd_link.png" class="link-external" alt="Information published on non-SAP site" title="Information published on non-SAP site" border="0"/></a></div>
+<div><a class="link" href="default.html?37be2f0d13e343ef8a3d3998361ea883.html" target="_top" title="With hdbalm you can use a selection of commands and their options to perform application lifecycle-mangement tasks in SAP HANA.">hdbalm Commands, Options, and Variables</a></div>
+<div><a class="link" href="default.html?436ad0bd6b4e4ece9d44184c83ab90ac.html" target="_top" title="hdbalm supports proxies both for HTTP and HTTPS communication.">Proxy Support for hdbalm</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Enable SSL for hdbalm";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

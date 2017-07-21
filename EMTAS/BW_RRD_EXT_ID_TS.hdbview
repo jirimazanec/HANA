@@ -1,0 +1,21 @@
+schema="OTEBW_EMTAS";
+
+query = 
+"select FSREJECT,
+		cast(ID as number(16,0)) as ID,
+		cast(ID as number(16,0)) as DOCID,
+		TSID,
+		TSVERSION,
+		BUSSTYPE,
+		PRODUCT,
+		INAREA,
+		OUTAREA,
+		INPARTY,
+		OUTPARTY,
+		VOLUNIT,
+		RESOLUTION,
+		STATE,
+		FSFLAG
+from BW_RRD_EXT_ID_TS ";
+
+depends_on_table=["OTEBW_EMTAS::BW_RRD_EXT_ID_TS"];

@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Imports external data from a file into an existing table or an existing data statistics object."/>
+<meta name="description" content="Imports external data from a file into an existing table or an existing data statistics object."/>
+<meta name="keywords" content="IMPORT FROM"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=2917289836149727"/>
+<title>IMPORT FROM Statement (Data Import Export)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20f712e175191014907393741fadcb97";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20f712e175191014907393741fadcb97">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">IMPORT FROM Statement (Data Import Export)</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Imports external data from a file into an existing table or an existing data
+      statistics object.</p>
+
+      <div class="section" id="loio20f712e175191014907393741fadcb97__sql_import_from_1sql_import_from_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+         
+         
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">IMPORT FROM [<var class="keyword varname">&lt;file_type&gt;</var>] <var class="keyword varname">&lt;file_path&gt;</var> [INTO <var class="keyword varname">&lt;database_object_name&gt;</var>] [WITH <var class="keyword varname">&lt;import_from_option_list&gt;</var>]</pre></div>
+
+      </div></div>
+
+      <div class="section" id="loio20f712e175191014907393741fadcb97__sql_import_from_1sql_import_from_syntax_elements"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+         
+         <dl class="dl parml">
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;file_type&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies the type of the file to be imported (comma-separated values or
+                     control file format).</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;file_type&gt;</var> ::= CSV FILE | CONTROL FILE</pre></div>
+
+                  <p class="p">When importing data statistics objects, only import from a control file is
+                     supported.</p>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;file_path&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <div class="p">Specifies
+            the complete path and file name of the file to import.
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;file_path&gt;</var> ::= <var class="keyword varname">&lt;string_literal&gt;</var></pre></div>
+</div>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;database_object_name&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <div class="p">Specifies
+            the target table name or data statistics object name into which the imported data will
+            be
+            imported.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;database_object_name&gt;</var> ::= 
+ [<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;table_name&gt;</var>
+ | STATISTICS [<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;data_statistics_object_name&gt;</var>
+
+<var class="keyword varname">&lt;schema_name&gt;</var> ::= <var class="keyword varname">&lt;unicode_name&gt;</var>
+<var class="keyword varname">&lt;table_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+<var class="keyword varname">&lt;data_statistics_object_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+            Specify STATISTICS when importing data into an existing database statistics object. If
+            the data statistics objects already has data, the data is overwritten by the data being
+            imported. INTO STATISTICS can only be specified in a control file. NOTE: When importing
+            data to a data statistics object, the only<var class="keyword varname">&lt;import_from_option&gt;</var> option
+            that is supported is ERROR LOG. </div>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;import_from_option_list&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Specifies a list of options that control import behavior.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">WITH <var class="keyword varname">&lt;import_from_option_list&gt;</var>
+
+<var class="keyword varname">&lt;import_from_option_list&gt;</var> ::= <var class="keyword varname">&lt;import_from_option&gt;</var>[{, <var class="keyword varname">&lt;import_from_option&gt;</var>}...]
+
+<var class="keyword varname">&lt;import_from_option&gt;</var> ::=
+ THREADS <var class="keyword varname">&lt;number_of_threads&gt;</var>
+ | BATCH <var class="keyword varname">&lt;number_of_records_of_each_commit&gt;</var>
+ | TABLE LOCK
+ | NO TYPE CHECK
+ | SKIP FIRST <var class="keyword varname">&lt;number_of_rows_to_skip&gt;</var> ROW
+ | COLUMN LIST IN FIRST ROW [<var class="keyword varname">&lt;with_schema_flexibility&gt;</var>]
+ | COLUMN LIST ( <var class="keyword varname">&lt;column_name_list&gt;</var> ) [<var class="keyword varname">&lt;with_schema_flexibility&gt;</var>]
+ | RECORD DELIMITED BY <var class="keyword varname">&lt;string_for_record_delimiter&gt;</var>
+ | FIELD DELIMITED BY <var class="keyword varname">&lt;string_for_field_delimiter&gt;</var>
+ | OPTIONALLY ENCLOSED BY <var class="keyword varname">&lt;character_for_optional_enclosure&gt;</var>
+ | DATE FORMAT <var class="keyword varname">&lt;string_for_date_format&gt;</var>
+ | TIME FORMAT <var class="keyword varname">&lt;string_for_time_format&gt;</var>
+ | TIMESTAMP FORMAT <var class="keyword varname">&lt;string_for_timestamp_format&gt;</var>
+ | ERROR LOG <var class="keyword varname">&lt;file_path_of_error_log&gt;</var>
+ | FAIL ON INVALID DATA</pre></div>
+
+                  <dl class="dl">
+                     
+                        <dt class="dt dlterm emphasis">THREADS <var class="keyword varname">&lt;number_of_threads&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the number of threads that can be used for concurrent
+                              import. The default value is 1 and maximum allowed is 256.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">THREADS <var class="keyword varname">&lt;number_of_threads&gt;</var>
+
+<var class="keyword varname">&lt;number_of_threads&gt;</var> ::= <var class="keyword varname">&lt;unsigned_integer&gt;</var></pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">BATCH <var class="keyword varname">&lt;number_of_records_of_each_commit&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the number of records to be inserted in each commit.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">BATCH <var class="keyword varname">&lt;number_of_records_of_each_commit&gt;</var>
+
+<var class="keyword varname">&lt;number_of_records_of_each_commit&gt;</var> ::= <var class="keyword varname">&lt;unsigned_integer&gt;</var></pre></div>
+
+                           <p class="p">THREADS and BATCH provide high loading performance by enabling
+                              parallel loading and also by committing many records at once. In
+                              general, for column tables, a good setting to use is 10 parallel
+                              loading threads, with a commit frequency of 10,000 records or
+                              greater.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">TABLE LOCK</dt>
+
+                        <dd class="dd">
+                           <p class="p">Provides faster data loading for column store tables. </p>
+
+                           <p class="p">Use this option carefully as it incurs table locks in exclusive mode
+                              as well as explicit hard merges and save points after data loading is
+                              finished. The performance gain from this option can vary according to
+                              the table constraints (like primary key) and optimization of other
+                              layers (like persistence or DML command).</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">NO TYPE CHECK</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies
+            that the record are inserted without checking the type of each field.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">SKIP FIRST <var class="keyword varname">&lt;number_of_rows_to_skip&gt;</var> ROW</dt>
+
+                        <dd class="dd">
+                           <div class="p">Skips
+            the specified number of rows in the import
+            file.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SKIP FIRST <var class="keyword varname">&lt;number_of_rows_to_skip&gt;</var> ROW
+
+<var class="keyword varname">&lt;number_of_rows_to_skip&gt;</var> ::= <var class="keyword varname">&lt;unsigned_integer&gt;</var></pre></div>
+</div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">COLUMN LIST IN FIRST ROW
+                           [<var class="keyword varname">&lt;with_schema_flexibility&gt;</var>]</dt>
+
+                        <dd class="dd">
+                           <p class="p">Indicates that the column list is stored in the first row of the CSV
+                              import file.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">COLUMN LIST IN FIRST ROW [<var class="keyword varname">&lt;with_schema_flexibility&gt;</var>]
+<var class="keyword varname">&lt;with_schema_flexibility&gt;</var> ::= WITH SCHEMA FLEXIBILITY</pre></div>
+
+                           <p class="p">WITH SCHEMA FLEXIBILITY creates missing columns in flexible tables
+                              during CSV imports, as specified in the header (first row) of the CSV
+                              file or column list. By default, missing columns in flexible tables
+                              are not created automatically during data imports.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">COLUMN LIST ( <var class="keyword varname">&lt;column_name_list&gt;</var> )
+                              [<var class="keyword varname">&lt;with_schema_flexibility&gt;</var>]</dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies the column list for the data being imported.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">COLUMN LIST ( <var class="keyword varname">&lt;column_name_list&gt;</var> )
+
+<var class="keyword varname">&lt;column_name_list&gt;</var> ::= <var class="keyword varname">&lt;column_name&gt;</var> [{, <var class="keyword varname">&lt;column_name&gt;</var>}...]
+
+<var class="keyword varname">&lt;column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;with_schema_flexibility&gt;</var> ::= WITH SCHEMA FLEXIBILITY</pre></div>
+
+                           <p class="p">The name list has one or more column names. The ordering of the column
+                              names has to match the order of the column data in the CSV file and
+                              the columns in the target table. WITH SCHEMA FLEXIBILITY creates
+                              missing columns in flexible tables during CSV imports, as specified in
+                              the header (first row) of the CSV file or column list. By default,
+                              missing columns in flexible tables are not created automatically
+                              during data imports.</p>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">RECORD DELIMITED BY <var class="keyword varname">&lt;string_for_record_delimiter&gt;</var></dt>
+
+                        <dd class="dd">
+                           <div class="p">Specifies
+            the record delimiter used in the CSV file being
+            imported.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">RECORD DELIMITED BY <var class="keyword varname">&lt;string_for_record_delimiter&gt;</var>
+
+<var class="keyword varname">&lt;string_for_record_delimiter&gt;</var> ::= <var class="keyword varname">&lt;string_literal&gt;</var></pre></div>
+</div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">FIELD DELIMITED BY <var class="keyword varname">&lt;string_for_field_delimiter&gt;</var></dt>
+
+                        <dd class="dd">
+                           <div class="p">Specifies
+            the field delimiter of the CSV
+            file.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">FIELD DELIMITED BY <var class="keyword varname">&lt;string_for_field_delimiter&gt;</var>
+
+<var class="keyword varname">&lt;string_for_field_delimiter&gt;</var> ::= <var class="keyword varname">&lt;string_literal&gt;</var></pre></div>
+</div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">OPTIONALLY ENCLOSED BY
+                              <var class="keyword varname">&lt;character_for_optional_enclosure&gt;</var></dt>
+
+                        <dd class="dd">
+                           <div class="p">Specifies
+            the optional enclosure character used to delimit field
+            data.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">OPTIONALLY ENCLOSED BY <var class="keyword varname">&lt;character_for_optional_enclosure&gt;</var>
+
+<var class="keyword varname">&lt;character_for_optional_enclosure&gt;</var> ::= <var class="keyword varname">&lt;character_literal&gt;</var></pre></div>
+</div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">DATE FORMAT <var class="keyword varname">&lt;string_for_date_format&gt;</var></dt>
+
+                        <dd class="dd">
+                           <div class="p">Specifies
+            the format that date strings are encoded with in the import
+            data.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">DATE FORMAT <var class="keyword varname">&lt;string_for_date_format&gt;</var>
+
+<var class="keyword varname">&lt;string_for_date_format&gt;</var> ::= <var class="keyword varname">&lt;string_literal&gt;</var></pre></div>
+Values
+            can include:<ul class="ul" id="loio20f712e175191014907393741fadcb97__d4079e132">
+                <li class="li"> Y : year </li>
+
+                <li class="li">MM : month</li>
+
+                <li class="li">MON : name of month</li>
+
+                <li class="li">DD : day</li>
+
+            </ul>
+For example:<ul class="ul" id="loio20f712e175191014907393741fadcb97__d4079e147">
+                <li class="li">'YYYYMMDD' = 20120520</li>
+
+                <li class="li">'YYYY-MM-DD' = 2012-05-20</li>
+
+                <li class="li">'YYYY-MON-DD' : 2012-MAY-20 </li>
+
+            </ul>
+</div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">TIME FORMAT <var class="keyword varname">&lt;string_for_time_format&gt;</var></dt>
+
+                        <dd class="dd">
+                           <div class="p">Specifies
+            the format that time strings are encoded with in the import
+            data.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">TIME FORMAT <var class="keyword varname">&lt;string_for_time_format&gt;</var>
+
+<var class="keyword varname">&lt;string_for_time_format&gt;</var> ::= <var class="keyword varname">&lt;string_literal&gt;</var></pre></div>
+Values
+            can include:<ul class="ul" id="loio20f712e175191014907393741fadcb97__d4079e173">
+                <li class="li">HH24 : hour</li>
+
+                <li class="li">MI : minute</li>
+
+                <li class="li">SS : second </li>
+
+            </ul>
+For example:<ul class="ul" id="loio20f712e175191014907393741fadcb97__d4079e185">
+                <li class="li">'HH24MISS' : 143025</li>
+
+                <li class="li">'HH24:MI:SS' : 14:30:25</li>
+
+            </ul>
+</div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">TIMESTAMP FORMAT <var class="keyword varname">&lt;string_for_timestamp_format&gt;</var></dt>
+
+                        <dd class="dd">
+                           <div class="p">Specifies
+            the format that timestamp strings are encoded with in the import data.
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">TIMESTAMP FORMAT <var class="keyword varname">&lt;string_for_timestamp_format&gt;</var>
+
+<var class="keyword varname">&lt;string_for_timestamp_format&gt;</var> ::= <var class="keyword varname">&lt;string_literal&gt;</var></pre></div>
+For
+            example: <ul class="ul" id="loio20f712e175191014907393741fadcb97__d4079e208">
+                <li class="li">'YYYY-MM-DD HH24:MI:SS' : 2012-05-20 14:30:25</li>
+
+            </ul>
+
+        </div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">ERROR LOG <var class="keyword varname">&lt;file_path_of_error_log&gt;</var></dt>
+
+                        <dd class="dd">
+                           <p class="p">Specifies that a log file of errors generated is stored in this file.
+                              Ensure the file path you use is writable by the database.</p>
+
+                           <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ERROR LOG <var class="keyword varname">&lt;file_path_of_error_log&gt;</var>
+
+<var class="keyword varname">&lt;file_path_of_error_log&gt;</var> ::= <var class="keyword varname">&lt;string_literal&gt;</var> </pre></div>
+
+                        </dd>
+
+                     
+                     
+                        <dt class="dt dlterm emphasis">FAIL ON INVALID DATA</dt>
+
+                        <dd class="dd">
+                           <p class="p" id="loio20f712e175191014907393741fadcb97__DT_IMPORT_FROM_FAIL_ON_INVALID_para">Specifies that the IMPORT
+                              FROM command fails unless all the entries import successfully.</p>
+
+                        </dd>
+
+                     
+                  </dl>
+
+               </dd>
+
+            
+         </dl>
+
+      </div></div>
+
+      <div class="section" id="loio20f712e175191014907393741fadcb97__sql_import_from_1sql_import_from_description"><div class="section_title">Description</div><div type="Description">
+         
+         <p class="p">Use the IMPORT FROM statement to import data in to database objects such as tables and
+            data statistics objects from files such as CSV files.</p>
+
+         <p class="p">To import catalog objects (tables, views, and so on) that have been exported with the EXPORT statement, use the IMPORT statement instead.</p>
+
+         <p class="p">When importing from data statistics objects, the schema of a data statistics object is
+            the same as that of the schema of the data source on which the data statistics object
+            was created.</p>
+
+         <p class="p">All <var class="keyword varname">&lt;string_literals&gt;</var> in the <var class="keyword varname">&lt;import_from_option&gt;</var>
+            support UTF-8 except surrogate-pair encoding.</p>
+
+         <div class="p">For
+            security reason, only CSV files located at paths defined in the
+                <samp class="ph codeph">csv_import_path_filter</samp> configuration parameter are allowed to be
+            loaded using the IMPORT FROM SQL statement. This feature can be disabled using the
+                <samp class="ph codeph">enable_csv_import_path_filter</samp> configuration parameter. Two related
+            configuration parameters are specified in the <samp class="ph codeph">import_export</samp> section of
+            the indexserver (nameserver in case of multi-DB) configuration, so you can turn off this
+            feature or update path filter like
+            follows:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">ALTER SYSTEM ALTER CONFIGURATION ('indexserver.ini', 'system') set ('import_export', 'enable_csv_import_path_filter') = 'false' with reconfigure
+ALTER SYSTEM ALTER CONFIGURATION ('indexserver.ini', 'system') set ('import_export', 'csv_import_path_filter') = '/A;/B' with reconfigure</pre></div>
+Once
+            you add a path '/A' to path filter every sub-path of '/A' is automatically added as
+            well.</div>
+
+         <div class="note note"><span class="notetitle">Note</span> 
+            <p class="p">When using CSV format to export/import tables that have columns of type GENERATED
+               ALWAYS AS <var class="keyword varname">&lt;expression&gt;</var>, verify that the imported records match what
+               was exported. If there are anomalies:</p>
+
+            <ul class="ul" id="loio20f712e175191014907393741fadcb97__ul_ks2_fvv_1z">
+               <li class="li">
+                  <p class="p">For column tables, switch to exporting/importing as BINARY. </p>
+
+               </li>
+
+               <li class="li">
+                  <p class="p">For row tables, change the table to be a column table and export/import as
+                     BINARY.</p>
+
+               </li>
+
+            </ul>
+
+         </div>
+
+         <p class="p">This feature is used with restrictions and/or is extended by the following SAP HANA
+            option:</p>
+
+         <ul class="ul" id="loio20f712e175191014907393741fadcb97__ul_i3t_bjs_1r">
+            <li class="li">Dynamic Tiering</li>
+
+         </ul>
+
+      </div></div>
+
+      <div class="section" id="loio20f712e175191014907393741fadcb97__sql_import_from_1sql_import_from_examples"><div class="section_title">Examples</div><div type="Examples">
+         
+         <div class="sectiondiv">
+            
+            <p class="p">Example 1 - Importing CSV Data</p>
+
+            <div class="p">You create a table mytable to store the imported data.
+                <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE mytable ( A INT, B VARCHAR(10), C DATE, D TIME, E DECIMAL );</pre></div>
+</div>
+
+            <div class="p">You create a CSV text file /data/data.csv and add the following contents.
+                <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">1,"DATA1","2012-05-20","14:30:25",123456
+2,"DATA2","2012-05-21","15:30:25",234567
+3,"DATA3","2012-05-22","16:30:25",345678
+4,"DATA4","2012-05-23","17:30:25",456789</pre></div>
+</div>
+
+            <div class="p">You execute the following command to import the
+                data.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">IMPORT FROM CSV FILE '/data/data.csv' INTO "MYTABLE" 
+   WITH RECORD DELIMITED BY '\n'
+   FIELD DELIMITED BY ',';</pre></div>
+</div>
+
+            <p class="p">Example 2 - Importing using a control file</p>
+
+            <div class="p">You import the data from Example 1 using a control file you create
+                    (<span class="ph filepath">/data/data.ctl</span>) that points to the CSV file. The control
+                file contains the following commands:
+                <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">IMPORT DATA INTO TABLE "MYTABLE" FROM '/data/data.csv'
+   RECORD DELIMITED BY '\n'
+   FIELD DELIMITED BY ','
+   OPTIONALLY ENCLOSED BY '"'
+   ERROR LOG '/data/data.err' </pre></div>
+You
+                execute the following command to import the data using the control file:
+                    <samp class="ph codeph">IMPORT FROM CONTROL FILE '/data/data.ctl';</samp></div>
+
+            <p class="p">In the fictitious example below, you import data into the data statistics object
+                    <kbd class="ph userinput">My_Schema.SKETCH5</kbd> using a control file that you create
+                    (<span class="ph filepath">/data/data.ctl</span>). The control file contains the following
+                commands:</p>
+
+            <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">IMPORT DATA INTO STATISTICS "My_Schema"."SKETCH5" FROM '/data/data'
+ ERROR LOG '/data/data.err'</pre></div>
+
+            <p class="p">You execute the following command to import the data using the control file:
+                    <samp class="ph codeph">IMPORT FROM CONTROL FILE '/data/data.ctl';</samp>.</p>
+
+            <p class="p">Example 3 - Import using date formats</p>
+
+            <div class="p">In the example below, the date format is of the CSV import data is different to the
+                default date format 'YYYY-MM-DD'. In this import data the date format used is
+                'MM-DD-YYYY'. You create a CSV text file /data/data_different_date.csv and add the
+                following contents.
+                <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">1,"DATA1","05-20-2012","14:30:25",123456
+2,"DATA2","05-21-2012","15:30:25",234567
+3,"DATA3","05-22-2012","16:30:25",345678
+4,"DATA4","05-23-2012","17:30:25",456789</pre></div>
+</div>
+
+            <div class="p">You execute the following command to import the data.
+                <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">IMPORT FROM CSV FILE '/data/data_different_date.csv' INTO "MYTABLE" WITH RECORD
+   DELIMITED BY '\n'
+   FIELD DELIMITED BY ','
+   DATE FORMAT 'MM-DD-YYYY';</pre></div>
+</div>
+
+            <p class="p">Example 4 - Import using COLUMN LIST</p>
+
+            <div class="p">You create a table called COLLIST to store the imported data.
+                <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE COLLIST ( A INT, B VARCHAR(10), C DATE, D DECIMAL );</pre></div>
+</div>
+
+            <div class="p">You create a CSV text file '/data/data_col_list.csv' and add the following contents.
+                <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">1,"DATA1","2012-05-20",123456
+2,"DATA2","2012-05-21",234567
+3,"DATA3","2012-05-22",345678
+4,"DATA4","2012-05-23",456789</pre></div>
+You
+                execute the following commands to import the data using a column list.
+                <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">IMPORT FROM CSV FILE '/data/data_col_list.csv' INTO "COLLIST"
+   WITH RECORD DELIMITED BY '\n'
+   FIELD DELIMITED BY ','
+   COLUMN LIST ("A", "B", "C", "D");</pre></div>
+</div>
+
+            <div class="p">To import data without dealing with the proper table layout, it is possible to use
+                WITH SCHEMA FLEXIBILITY as extended option of COLUMN LIST to import into a flexible
+                table. You create a flexible table to store the imported
+                data.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE TABLE FLEX ( X INT ) WITH SCHEMA FLEXIBILITY;</pre></div>
+You
+                execute the following commands to import previously created data_col_list.csv
+                without explicitly adding columns.
+                <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">IMPORT FROM CSV FILE '/data/data_col_list.csv' INTO "FLEX"
+   WITH RECORD DELIMITED BY '\n'
+   FIELD DELIMITED BY ','
+   COLUMN LIST ("A", "B", "C", "D")
+   WITH SCHEMA FLEXIBILITY;</pre></div>
+
+            </div>
+
+        </div>
+      </div></div>
+
+   </div>
+
+<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?20da0bec751910148e69c9668ea3ccb8.html" target="_top" title="Exports catalog objects.">EXPORT Statement (Data Import Export)</a></div>
+<div><a class="link" href="default.html?20f75ade751910148492a90e5e375b8f.html" target="_top" title="Imports catalog objects.">IMPORT Statement (Data Import Export)</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="IMPORT FROM Statement (Data Import Export)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Creates a virtual functions that allows you to employ smart data access on service interfaces exposed by remote systems (both ODBC/non-ODBC)."/>
+<meta name="description" content="Creates a virtual functions that allows you to employ smart data access on service interfaces exposed by remote systems (both ODBC/non-ODBC)."/>
+<meta name="keywords" content="CREATE VIRTUAL FUNCTION"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=7660729750627094"/>
+<title>CREATE VIRTUAL FUNCTION Statement (Procedural)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio55d2f440e375408194be7e58266733fa";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio55d2f440e375408194be7e58266733fa">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">CREATE VIRTUAL FUNCTION Statement (Procedural)</h1>
+
+	
+	
+	<div class="body refbody"><p class="shortdesc">Creates a virtual functions that allows you to employ smart data access on service
+		interfaces exposed by remote systems (both ODBC/non-ODBC).</p>
+
+		
+		
+		<div class="section"><div class="section_title">Syntax</div><div type="Syntax">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE VIRTUAL FUNCTION <var class="keyword varname">&lt;func_name&gt;</var> [(<var class="keyword varname">&lt;parameter_clause&gt;</var>)]
+   RETURNS <var class="keyword varname">&lt;return_table_type&gt;</var> [SQL SECURITY <var class="keyword varname">&lt;mode&gt;</var>] [<var class="keyword varname">&lt;package_clause&gt;</var>]
+   CONFIGURATION <var class="keyword varname">&lt;remote_proc_properties&gt;</var> AT <var class="keyword varname">&lt;source_name&gt;</var>;</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+			
+			<dl class="dl parml">
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;func_name&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies the function name with optional schema name. </p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;func_name&gt;</var> ::= [<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;schema_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;parameter_clause&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies input parameters for the virtual function.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;parameter_clause&gt;</var> ::= <var class="keyword varname">&lt;parameter&gt;</var> [{,<var class="keyword varname">&lt;parameter&gt;</var>}...]</pre></div>
+
+						<p class="p">These input parameters are only supported when creating a virtual
+							function that is used with the syntax element PACKAGE. the syntax
+							element PACKAGE allows the function to pass information to the custom
+							MR.</p>
+
+						<dl class="dl">
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;parameter&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Defines a function parameter with associated data type,
+										consisting of a name and the data type definition. </p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;parameter&gt;</var> ::= [IN] <var class="keyword varname">&lt;param_name&gt;</var> <var class="keyword varname">&lt;datatype&gt;</var>
+
+<var class="keyword varname">&lt;param_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;datatype&gt;</var> ::= <var class="keyword varname">&lt;sql_type&gt;</var></pre></div>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;sql_type&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Specifies the data type.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;sql_type&gt;</var> ::=
+ BIGINT
+ | INTEGER
+ | SMALLINT
+ | TINYINT
+ | DATE
+ | TIME
+ | TIMESTAMP
+ | SMALLDECIMAL
+ | DECIMAL
+ | REAL
+ | DOUBLE</pre></div>
+
+									<p class="p">Virtual functions support scalar functions types and
+										primitive SQL types as input.</p>
+
+								</dd>
+
+							
+						</dl>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;return_type&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">
+							
+						</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;return_type&gt;</var> ::= <var class="keyword varname">&lt;return_table_type&gt;</var> | <var class="keyword varname">&lt;table_type&gt;</var></pre></div>
+
+						<p class="p">Table functions must return a table whose type is defined by
+								<var class="keyword varname">&lt;return_type&gt;</var>. Non-scalar functions are
+							supported.</p>
+
+						<dl class="dl">
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;return_table_type&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Defines the structure of the returned table data.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;return_table_type&gt;</var> ::= TABLE ( <var class="keyword varname">&lt;ret_column_list&gt;</var> )</pre></div>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;ret_column_list&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Defines the list of columns returned from the function.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;ret_column_list&gt;</var> ::= <var class="keyword varname">&lt;ret_column_elem&gt;</var>[{, <var class="keyword varname">&lt;ret_column_elem&gt;</var>}...]</pre></div>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;ret_column_elem&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Defines the name of column element with associated data
+										type.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;ret_column_elem&gt;</var> ::= <var class="keyword varname">&lt;column_name&gt;</var> <var class="keyword varname">&lt;sql_type&gt;</var>
+
+<var class="keyword varname">&lt;column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;table_type&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Defines the output parameters and you can utilize a table
+										type previously defined with the CREATE TYPE command. See
+										CREATE TYPE for details.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_type&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+								</dd>
+
+							
+						</dl>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis">SQL SECURITY <var class="keyword varname">&lt;mode&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies the security mode of the table function.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;mode&gt;</var> ::= DEFINER | INVOKER</pre></div>
+
+						<p class="p">The default value is DEFINER.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;package_clause&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Defines the identifier of the map reduce program that was developed or
+							imported into SAP HANA repository via the SAP HANA Studio plugin.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;package_clause&gt;</var> ::= PACKAGE <var class="keyword varname">&lt;schema&gt;</var>.<var class="keyword varname">&lt;jobPackage&gt;</var>
+
+<var class="keyword varname">&lt;schema&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;jobPackage&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+						<p class="p">The map reduce program is a collection of artifacts that can be executed
+							on a Hadoop system. The schema name is optional.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis">CONFIGURATION <var class="keyword varname">&lt;remote_proc_properties&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Defines required and optional properties for executing remote
+							procedures.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;remote_proc_properties&gt;</var> ::= <var class="keyword varname">&lt;string_literal&gt;</var></pre></div>
+
+						<p class="p">The properties have the format of key-value pairs. The target map reduce
+							program can read these key-value pairs. Additional custom properties can
+							also be passed to the remote procedure. The following table lists the
+							user-defined key properties to define a virtual UDF function</p>
+
+						
+<div class="table-wrapper tablenoborder"><table summary="" id="loio55d2f440e375408194be7e58266733fa__table_ybk_xdr_1q" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: User-Defined Key Properties </span></caption>
+<colgroup><col width="25%"/><col width="25%"/><col width="25%"/><col width="25%"/></colgroup>
+
+								
+								
+								
+								
+								<thead class="thead" align="left">
+									<tr class="row">
+										<th class="entry" valign="top" id="d23712924e413">Property</th>
+
+										<th class="entry" valign="top" id="d23712924e416">Optional</th>
+
+										<th class="entry" valign="top" id="d23712924e419">Default</th>
+
+										<th class="entry" valign="top" id="d23712924e422">Definition</th>
+
+									</tr>
+
+								</thead>
+
+								<tbody class="tbody">
+									<tr class="row">
+										<td class="entry" valign="top" headers="d23712924e413 ">enable_remote_cache</td>
+
+										<td class="entry" valign="top" headers="d23712924e416 ">optional</td>
+
+										<td class="entry" valign="top" headers="d23712924e419 ">false</td>
+
+										<td class="entry" valign="top" headers="d23712924e422 ">Instructs SAP HANA to store results of the initial
+											remote query fragment in HDFS and subsequent queries are
+											read directly from the result set.</td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top" headers="d23712924e413 ">remote_cache_validity</td>
+
+										<td class="entry" valign="top" headers="d23712924e416 ">optional</td>
+
+										<td class="entry" valign="top" headers="d23712924e419 ">3600</td>
+
+										<td class="entry" valign="top" headers="d23712924e422 ">Defines the duration of time (in seconds) after which
+											the cache is stale.</td>
+
+									</tr>
+
+								</tbody>
+
+							</table>
+</div>
+
+						<p class="p">The following table lists the required user defined key properties, to
+							define a virtual UDF function that reads HDFS files:</p>
+
+						
+<div class="table-wrapper tablenoborder"><table summary="" id="loio55d2f440e375408194be7e58266733fa__table_ckt_fsw_zp" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 2: User-Defined Key Properties </span></caption>
+<colgroup><col width="25%"/><col width="25%"/><col width="25%"/><col width="25%"/></colgroup>
+
+								
+								
+								
+								
+								<thead class="thead" align="left">
+									<tr class="row">
+										<th class="entry" valign="top" id="d23712924e486">Property</th>
+
+										<th class="entry" valign="top" id="d23712924e489">Optional</th>
+
+										<th class="entry" valign="top" id="d23712924e492">Default</th>
+
+										<th class="entry" valign="top" id="d23712924e495">Definition</th>
+
+									</tr>
+
+								</thead>
+
+								<tbody class="tbody">
+									<tr class="row">
+										<td class="entry" valign="top" headers="d23712924e486 ">hdfs_location</td>
+
+										<td class="entry" valign="top" headers="d23712924e489 "> </td>
+
+										<td class="entry" valign="top" headers="d23712924e492 "> </td>
+
+										<td class="entry" valign="top" headers="d23712924e495 ">Defines the directory from where the query would read
+											the HDFS file(s). For example,
+											/user/hive/warehouse/test.</td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top" headers="d23712924e486 ">hdfs_input_format</td>
+
+										<td class="entry" valign="top" headers="d23712924e489 ">optional</td>
+
+										<td class="entry" valign="top" headers="d23712924e492 ">csv</td>
+
+										<td class="entry" valign="top" headers="d23712924e495 ">Defines the type of the data source file for the
+											query.</td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top" headers="d23712924e486 ">hdfs_field_delimiter</td>
+
+										<td class="entry" valign="top" headers="d23712924e489 ">optional</td>
+
+										<td class="entry" valign="top" headers="d23712924e492 ">,</td>
+
+										<td class="entry" valign="top" headers="d23712924e495 ">Defines the character which delimits columns in a
+											file. The default value is a comma.</td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top" headers="d23712924e486 ">date_format</td>
+
+										<td class="entry" valign="top" headers="d23712924e489 "> </td>
+
+										<td class="entry" valign="top" headers="d23712924e492 ">yyyy-MM-dd</td>
+
+										<td class="entry" valign="top" headers="d23712924e495 ">Defines the ISO date format of a date typed column in
+											the format.</td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top" headers="d23712924e486 ">time_format</td>
+
+										<td class="entry" valign="top" headers="d23712924e489 "> </td>
+
+										<td class="entry" valign="top" headers="d23712924e492 ">HH:mm:ss.S</td>
+
+										<td class="entry" valign="top" headers="d23712924e495 ">Defines the ISO time format of a time typed
+											column.</td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top" headers="d23712924e486 ">datetime_format</td>
+
+										<td class="entry" valign="top" headers="d23712924e489 "> </td>
+
+										<td class="entry" valign="top" headers="d23712924e492 "> </td>
+
+										<td class="entry" valign="top" headers="d23712924e495 ">Defines the ISO date_time format for the date_time
+											typed column.</td>
+
+									</tr>
+
+								</tbody>
+
+							</table>
+</div>
+
+						<p class="p">The following table lists the required user defined key properties to
+							define a virtual UDF function calling a custom map reduce program:</p>
+
+						
+<div class="table-wrapper tablenoborder"><table summary="" id="loio55d2f440e375408194be7e58266733fa__table_dfg_32r_1q" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 3: User-Defined Key Properties </span></caption>
+<colgroup><col width="25%"/><col width="25%"/><col width="25%"/><col width="25%"/></colgroup>
+
+								
+								
+								
+								
+								<thead class="thead" align="left">
+									<tr class="row">
+										<th class="entry" valign="top" id="d23712924e613">Property</th>
+
+										<th class="entry" valign="top" id="d23712924e616">Optional</th>
+
+										<th class="entry" valign="top" id="d23712924e619">Default</th>
+
+										<th class="entry" valign="top" id="d23712924e622">Definition</th>
+
+									</tr>
+
+								</thead>
+
+								<tbody class="tbody">
+									<tr class="row">
+										<td class="entry" valign="top" headers="d23712924e613 ">mapred_jobchain</td>
+
+										<td class="entry" valign="top" headers="d23712924e616 "> </td>
+
+										<td class="entry" valign="top" headers="d23712924e619 "> </td>
+
+										<td class="entry" valign="top" headers="d23712924e622 ">Provides a sequence of all <var class="keyword varname">&lt;mapred&gt;</var>
+											properties listed below</td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top" headers="d23712924e613 ">mapred_mapper</td>
+
+										<td class="entry" valign="top" headers="d23712924e616 "> </td>
+
+										<td class="entry" valign="top" headers="d23712924e619 "> </td>
+
+										<td class="entry" valign="top" headers="d23712924e622 ">Specifies the function that responsible for
+											transforming each element in an input list into a new
+											output list. One or more functions can be
+											listed.</td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top" headers="d23712924e613 ">mapred_reducer</td>
+
+										<td class="entry" valign="top" headers="d23712924e616 "> </td>
+
+										<td class="entry" valign="top" headers="d23712924e619 "> </td>
+
+										<td class="entry" valign="top" headers="d23712924e622 ">Defines the aggregation function of the output list
+											from a mapper. There could be zero or many
+											reducers.</td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top" headers="d23712924e613 ">mapred_combiner</td>
+
+										<td class="entry" valign="top" headers="d23712924e616 "> </td>
+
+										<td class="entry" valign="top" headers="d23712924e619 "> </td>
+
+										<td class="entry" valign="top" headers="d23712924e622 ">Defines the aggregation of input from a mapper,
+											normally used to help limit the amount of data passed to
+											a <var class="keyword varname">&lt;mapred_reducer&gt;</var>.</td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top" headers="d23712924e613 ">mapred_input</td>
+
+										<td class="entry" valign="top" headers="d23712924e616 "> </td>
+
+										<td class="entry" valign="top" headers="d23712924e619 "> </td>
+
+										<td class="entry" valign="top" headers="d23712924e622 ">Defines the data source. Values can be an input file
+											input or the result of a mapper function. There can be
+											one or many <var class="keyword varname">&lt;mapred_input&gt;</var>.</td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top" headers="d23712924e613 ">mapred_input_format</td>
+
+										<td class="entry" valign="top" headers="d23712924e616 "> </td>
+
+										<td class="entry" valign="top" headers="d23712924e619 "> </td>
+
+										<td class="entry" valign="top" headers="d23712924e622 ">Defines the data input format. </td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top" headers="d23712924e613 ">mapred_output_format</td>
+
+										<td class="entry" valign="top" headers="d23712924e616 ">optional</td>
+
+										<td class="entry" valign="top" headers="d23712924e619 ">text</td>
+
+										<td class="entry" valign="top" headers="d23712924e622 ">Defines the data output format for writing the
+											results to HDFS.</td>
+
+									</tr>
+
+									<tr class="row">
+										<td class="entry" valign="top" headers="d23712924e613 ">mapred_field_delimiter</td>
+
+										<td class="entry" valign="top" headers="d23712924e616 ">optional</td>
+
+										<td class="entry" valign="top" headers="d23712924e619 ">,</td>
+
+										<td class="entry" valign="top" headers="d23712924e622 ">Defines the delimiter between columns when generating
+											output files. The default value is a comma.</td>
+
+									</tr>
+
+								</tbody>
+
+							</table>
+</div>
+
+					</dd>
+
+				
+			</dl>
+
+			<dl class="dl parml">
+				
+					<dt class="dt pt dlterm emphasis">AT <var class="keyword varname">&lt;source_name&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Defines the name of the remote source.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;source_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+					</dd>
+
+				
+			</dl>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">A virtual function allows you to use smart data access on service interfaces exposed by remote
+				systems (both ODBC/non-ODBC). These service interfaces could be a SQLScript
+				Procedure on remote SAP HANA system (ODBC Compliant) or a custom map reduce job
+				executed on a Hadoop system. This feature complements the Virtual Table feature of
+				SDA.</p>
+
+			<p class="p">Remote procedure properties are specific to a given service interface on a remote system. It
+				is a delimited list of name value pairs enclosed in quotes. The source name is the
+				name of the remote source created using the CREATE REMOTE SOURCE statement. There is
+				no language type specified and the function body is empty. The execution is
+				delegated to the remote side through respective adapter for the given source name.
+				This function is strictly a table UDF and can be invoked part of regular SQL
+				fragment.</p>
+
+			<p class="p">From SP08, HANA supports custom map reduce invocation on a Hadoop system. For this reason, a
+				new adapter called hadoop is included along with a remote source that contains all
+				the necessary connectivity information.</p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Example</div><div type="Example">
+			
+			<p class="p">The following example show how to create a remote destination with the adapter type
+				hadoop.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE REMOTE SOURCE HOSTA1 ADAPTER
+   "hadoop" CONFIGURATION 'webhdfs.url=http://hostA:50070/;webhcat.url=http://hostA:50111'  WITH CREDENTIAL
+   TYPE 'PASSWORD' USING 'user=dbuser;password=dbtest';</pre></div>
+
+			<p class="p">The following example explains how to create a virtual function with the remote
+				source created in the above example.</p>
+
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE VIRTUAL FUNCTION word_count() RETURNS TABLE ( word
+   NVARCHAR(60),  count INT) PACKAGE "SYSTEM"."WORD_COUNT" CONFIGURATION
+   'sap.hana.hadoop.mapper=com.sap.hadoop.examples.WordCountMapper;
+   sap.hana.hadoop.reducer=com.sap.hadoop.examples.WordCountReducer;sap.hana.hadoop.input'/path/to/input'
+   AT HOSTA1;</pre></div>
+
+			<p class="p">The following example explains how to create a virtual function with the remote source created
+				above, </p>
+
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE VIRTUAL FUNCTION  v_tpch10() RETURNS TABLE  
+   ("c_custkey" integer , "c_name"  varchar (255), "revenue"  double ,
+   "c_acctbal" double , "n_name"  varchar (255), "c_address" varchar (255),
+   "c_phone"  varchar (255), "c_comment"  varchar (255)) 
+   PACKAGESYSTEM ."tpch10" CONFIGURATION'mapred_jobchain=[{"mapred_input":"/user/hive/warehouse/tpch.db/orders,/user/hive/warehouse/tpch.db/customer",
+     "mapred_mapper":"com.sap.hana.hadoop.samples.TestQuery5$Map",
+     "mapred_reducer":"com.sap.hana.hadoop.samples.TestQuery5$Reduce"},
+     {"mapred_input":"result{0},/user/hive/warehouse/tpch.db/lineitem",
+     "mapred_mapper":"com.sap.hana.hadoop.samples.TestQuery4$Map",
+     "mapred_reducer":"com.sap.hana.hadoop.samples.TestQuery4$Reduce"},
+     {"mapred_input":"result{1},/user/hive/warehouse/tpch.db/nation",
+     "mapred_mapper":"com.sap.hana.hadoop.samples.TestQuery3$Map",
+     "mapred_reducer":"com.sap.hana.hadoop.samples.TestQuery3$Reduce"},
+     {"mapred_input":"result{2}","mapred_mapper":"com.sap.hana.hadoop.samples.TestQuery2$Map",
+     "mapred_reducer":"com.sap.hana.hadoop.samples.TestQuery2$Reduce"},
+     {"mapred_input":"result{3}","mapred_mapper":"com.sap.hana.hadoop.samples.TestQuery1$Map",
+     "mapred_reducer":"com.sap.hana.hadoop.samples.TestQuery1$Reduce",
+     "mapreduce.partitioner.class":"org.apache.hadoop.mapred.lib.KeyFieldBasedPartitioner",
+     "mapred.output.key.comparator.class":"org.apache.hadoop.mapred.lib.KeyFieldBasedComparator",
+     "mapreduce.partition.keycomparator.options":"-k1,1nr",
+     "mapreduce.map.output.key.field.separator":"|"}]'
+   AT HOSTA1;</pre></div>
+
+		</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?20d5c1ed75191014a80d897035629def.html" target="_top" title="Creates a user-defined type">CREATE TYPE Statement (Procedural)</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="CREATE VIRTUAL FUNCTION Statement (Procedural)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

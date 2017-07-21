@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Provides information about internal events."/>
+<meta name="description" content="Provides information about internal events."/>
+<meta name="keywords" content="M_EVENTS"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=5173685949802379"/>
+<title>M_EVENTS System View</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20af4e6e75191014ba7da5b7c4c5da60";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20af4e6e75191014ba7da5b7c4c5da60">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">M_EVENTS System View</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Provides information about internal events.</p>
+
+      <div class="section" id="loio20af4e6e75191014ba7da5b7c4c5da60___m__e_v_e_n_t_s_1fulldesc_M_EVENTS"><div class="section_title">Full description</div><div type="Full description">
+         
+         <p class="p">Important events (for example, DiskFull) reported by the database are shown in this view. The state of an event can be either NEW or HANDLED. CREATE TIME shows the time the event was created (and reported) and HANDLE time shows the time the event was handled (that is, cleared). Handled events are removed periodically by the StatisticsServer</p>
+
+      </div></div>
+
+      <div class="section" id="loio20af4e6e75191014ba7da5b7c4c5da60___m__e_v_e_n_t_s_1struct_M_EVENTS"><div class="section_title">Structure</div><div type="Structure">
+         
+         
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20af4e6e75191014ba7da5b7c4c5da60__table_arg_fd4_cw" class="table" frame="border" border="1" rules="all">
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" id="d7202739e51">
+                        <p class="p">Column name</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d7202739e57">
+                        <p class="p">Data type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d7202739e63">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">HOST</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">VARCHAR(64)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">Specifies the host </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">PORT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">INTEGER</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">Specifies the port </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">TYPE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">VARCHAR(256)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">Specifies the type of event </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">ID</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">Specifies the ID of the event </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">INFOTEXT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">VARCHAR(2000)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">Specifies additional information in free text </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">CREATE_TIME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">TIMESTAMP</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">Specifies the time that the event was created </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">UPDATE_TIME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">TIMESTAMP</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">Specifies the time that the event was updated </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">HANDLE_TIME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">TIMESTAMP</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">Specifies the time that the event was handled </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">STATE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">VARCHAR(256)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">Specifies the state of the event </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">ACKNOWLEDGED</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">VARCHAR(5)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">Event acknowledged: TRUE, FALSE </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">FAILED_HANDLES</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d7202739e51 d7202739e57 d7202739e63 ">
+                        <p class="p">Specifies the number of failed handle attempts </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div></div>
+
+   </div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="M_EVENTS System View";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Service memory usage per host. The table contains information only for the last 42 days."/>
+<meta name="description" content="Service memory usage per host. The table contains information only for the last 42 days."/>
+<meta name="keywords" content="HOST_SERVICE_MEMORY"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=4825697240610246"/>
+<title>HOST_SERVICE_MEMORY System View (Embedded Statistics Service)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio0d32893a96cc4ca48e37621714979526";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio0d32893a96cc4ca48e37621714979526">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">HOST_SERVICE_MEMORY System View (Embedded Statistics Service)</h1>
+
+	
+	
+	<div class="body refbody"><p class="shortdesc">Service memory usage per host. The table contains information only for the last 42
+		days.</p>
+
+		<div class="section" id="loio0d32893a96cc4ca48e37621714979526__sys_statistics_views_1HOST_SERVICE_MEMORY"><div class="section_title">Structure</div><div type="Structure">
+			
+			<div class="p">
+				
+<div class="table-wrapper tablenoborder"><table summary="" id="loio0d32893a96cc4ca48e37621714979526__table_nyz_ysf_fr" class="table" frame="border" border="1" rules="all">
+						<thead class="thead" align="left">
+							<tr class="row">
+								<th class="entry" valign="top" id="d684763e42">
+									<p class="p">Column name</p>
+
+								</th>
+
+								<th class="entry" valign="top" id="d684763e48">
+									<p class="p">Data type</p>
+
+								</th>
+
+								<th class="entry" valign="top" id="d684763e54">
+									<p class="p">Unit</p>
+
+								</th>
+
+								<th class="entry" valign="top" id="d684763e60">
+									<p class="p">Description </p>
+
+								</th>
+
+							</tr>
+
+						</thead>
+
+						<tbody class="tbody">
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> SNAPSHOT_ID </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> TIMESTAMP </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Datetime </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Timestamp ID (UTC) </td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> SERVER_TIMESTAMP </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> TIMESTAMP </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Processing Timestamp (local time) </td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> INDEX </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> VARCHAR(106) </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Datetime </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Index </td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> ALLOCATION_LIMIT </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> BIGINT </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Byte </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Maximum memory pool size (configurable value) </td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> CODE_SIZE </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> BIGINT </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Byte </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Code size, including shared libraries </td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> COMPACTORS_ALLOCATED_SIZE </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> BIGINT </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Byte </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Part of the memory pool that can potentially (=if unpinned)
+									be freed on memory shortage </td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> COMPACTORS_FREEABLE_SIZE </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> BIGINT </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Byte </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Memory which can actually be freed on memory shortage
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> EFFECTIVE_ALLOCATION_LIMIT </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> BIGINT </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Byte </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Effective maximum memory pool size, considering pool sizes
+									of other processes (computed value) </td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> HEAP_MEMORY_ALLOCATED_SIZE </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> BIGINT </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Byte </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Heap part of the memory pool </td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> HEAP_MEMORY_USED_SIZE </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> BIGINT </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Byte </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Amount of pool heap memory that is currently actually in use
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> HOST </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> VARCHAR(64) </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Host name </td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> LOGICAL_MEMORY_SIZE </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> BIGINT </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Byte </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Virtual memory size (operating system perspective) </td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> PHYSICAL_MEMORY_SIZE </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> BIGINT </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Byte </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Physical/resident memory size (operating system perspective)
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> PORT </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> INTEGER </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Internal port </td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> PROCESS_ID </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> INTEGER </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Process ID </td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> SERVICE_NAME </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> VARCHAR(32) </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Service name </td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> SHARED_MEMORY_ALLOCATED_SIZE </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> BIGINT </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Byte </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Shared memory part of the memory pool </td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> SHARED_MEMORY_USED_SIZE </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> BIGINT </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Byte </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Amount of pool shared memory that is currently actually in
+									use </td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> STACK_SIZE </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> BIGINT </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Byte </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Stack size </td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> TOTAL_MEMORY_USED_SIZE </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> BIGINT </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> </td>
+
+								<td class="entry" valign="top" headers="d684763e42 d684763e48 d684763e54 d684763e60 "> Amount of memory from the memory pool that is currently
+									actually in use </td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+</div>
+
+			</div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="HOST_SERVICE_MEMORY System View (Embedded Statistics Service)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

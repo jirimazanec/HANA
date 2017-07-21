@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="The OData specification requires an EntityType to denote a set properties forming a unique key. In HANA only tables may have a unique key, the primary key. For all other (mostly view) objects you need to specify a key for the entity."/>
+<meta name="description" content="The OData specification requires an EntityType to denote a set properties forming a unique key. In HANA only tables may have a unique key, the primary key. For all other (mostly view) objects you need to specify a key for the entity."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=41766845508257444"/>
+<title>OData Key Specification</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioe86a01a7699a46528624d44678d37ea5";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioe86a01a7699a46528624d44678d37ea5">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">OData Key Specification</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">The OData specification requires an <samp class="ph codeph">EntityType</samp> to denote a set
+		properties forming a unique key. In HANA only tables may have a unique key, the primary key.
+		For all other (mostly view) objects you need to specify a key for the entity.</p>
+
+		<p class="p"> In OSDL, you can specify a key for an entity/object by denoting a set of existing columns or
+			by generating a key.</p>
+
+		<div class="note note"><span class="notetitle">Note</span> Key attributes are not evaluated.</div>
+
+		<p class="p">For the examples illustrating key specification, we use the following SQL view, which
+			selects all data from the specified table. </p>
+
+		<div class="p">View definition
+			<samp class="ph codeph">sample.odata:view.hdbview</samp><div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">{
+	VIEW "sample.odata::view" as select * from "sample.odata::table"
+ }</pre></div>
+
+		</div>
+
+		<div class="section" id="loioe86a01a7699a46528624d44678d37ea5__section_N1002A_N1000E_N10001"><div class="section_title">Existing Key Properties</div><div type="Existing Key Properties"><p class="p">If the object
+				has set of columns that may form a unique key, you can specify them as key for the
+				entity. These key properties are always selected from the database, no matter if
+				they are omitted in the <samp class="ph codeph">$select</samp> query option. Therefore explicit
+				keys are not suitable for calculation views and analytic views as the selection has
+				an impact on the result. </p>
+<div class="p">Service definition
+					<samp class="ph codeph">sample.odata:explicitkeys.xsodata/$metadata</samp><div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"> service {
+	 "sample.odata::view" as "MyView" key ("ID","Text"); 
+}  </pre></div>
+
+			</div>
+<p class="p">The metadata document for the exposure of the view above is almost equal to the
+				metadata document for repository objects. Only the key is different and consists now
+				of two columns: </p>
+<div class="p">
+				<div class="note note"><span class="notetitle">Note</span> Examples and graphics are provided for illustration pusrposes only; some URLs
+					may differ from the ones shown.</div>
+
+			</div>
+<p class="p">
+				<samp class="ph codeph">http://&lt;myHANAServer&gt;:&lt;port&gt;/odata/services/&lt;myService&gt;.xsodata/$metadata</samp>
+			</p>
+<img class="image" id="loioe86a01a7699a46528624d44678d37ea5__image_hws_xrm_5h" src="loiocbc8b9b080474158adc5c85bf1334b85_LowRes.png" alt="XS_examples_keys_explicit" title="XS_examples_keys_explicit"/><div class="note caution" id="loioe86a01a7699a46528624d44678d37ea5__note_N10053_N1002A_N1000E_N10001"><span class="cautiontitle">Caution</span> The OData infrastructure cannot
+				check whether your specified keys are unique, so be careful when choosing keys.
+			</div>
+</div></div>
+
+		<div class="section" id="loioe86a01a7699a46528624d44678d37ea5__section_N10058_N1000E_N10001"><div class="section_title">Generated Local Key</div><div type="Generated Local Key"><p class="p">For objects that
+				do not have a unique key in their results, for example, calculation views or
+				aggregated tables, you can generate a locally valid key. This key value numbers the
+				results starting with <samp class="ph codeph">1</samp> and is not meant for dereferencing the
+				entity; you cannot use this key to retrieve the entity. The key is valid only for
+				the duration of the current session and is used only to satisfy OData's need for a
+				unique ID in the results. The property type of a generated local key is
+					<samp class="ph codeph">Edm.String</samp> and cannot be changed. </p>
+<div class="p">Service definition
+					<samp class="ph codeph">sample.odata:generatedkeys.xsodata</samp><div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">service {
+    "sample.odata::view" as "MyView" key generate local "GenID";
+}
+</pre></div>
+</div>
+<p class="p"><samp class="ph codeph">http://&lt;myHANAServer&gt;:&lt;port&gt;/odata/services/&lt;myService&gt;.xsodata/$metadata</samp>
+			</p>
+<img class="image" id="loioe86a01a7699a46528624d44678d37ea5__image_mtm_qsm_5h" src="loio45d0bb17fea042f38eeb25b0f864cdda_LowRes.png" alt="XS_examples_keys_gen" title="XS_examples_keys_gen"/><p class="p">As a consequence of the transient
+				nature of generated local keys, it is not possible to define navigation properties
+				on these entities or use them in filter or order by conditions. </p>
+</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="OData Key Specification";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

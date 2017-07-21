@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Display a list of the certificates used to establish trusted connections between XS advanced hosts."/>
+<meta name="description" content="Display a list of the certificates used to establish trusted connections between XS advanced hosts."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=2808966865194771"/>
+<title>Trusted Certificates Details in XS Advanced</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loiocd7d870f778d41c99d6d4ee6290d7915";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loiocd7d870f778d41c99d6d4ee6290d7915">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Trusted Certificates Details in XS Advanced</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">Display a list of the certificates used to establish trusted connections between XS
+		advanced hosts.</p>
+
+		<div class="section" id="loiocd7d870f778d41c99d6d4ee6290d7915__section_mms_nqk_jx"><div class="section_title">Trusted Certificates Overview</div><div type="Trusted Certificates Overview">
+			
+			<p class="p">The <span class="ph uicontrol">Trusted Certificates</span> tool displays a list of the certificates that
+				have been configured and exchanged and includes the following information:</p>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loiocd7d870f778d41c99d6d4ee6290d7915__table_amd_y4k_jx" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: Trusted Certificate Overview</span></caption>
+<colgroup><col width="19.342359767891683%"/><col width="61.315280464216634%"/><col width="19.342359767891683%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="19.342359767891683%" id="d2604862e44">
+								<p class="p">UI Element</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="61.315280464216634%" id="d2604862e50">
+								<p class="p">Description</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="19.342359767891683%" id="d2604862e56">
+								<p class="p">Example</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e44 ">
+								<p class="p"><span class="ph uicontrol">Alias</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.315280464216634%" headers="d2604862e50 ">
+								<p class="p">A name representing the trusted certificate</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e56 ">
+								<p class="p">myCert</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e44 ">
+								<p class="p"><span class="ph uicontrol">Usage</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.315280464216634%" headers="d2604862e50 ">
+								<p class="p">The type of use for which the certificate is intended, for example, <span class="q">“HTTP”</span> or
+										<span class="q">“JDBC”</span>. To set up trust with the SAP HANA database, use
+									JDBC. The JDBC certificate establishes a secure and encrypted
+									communication channel between SAP HANA XS applications and the
+									SAP HANA database.</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e56 ">
+								<p class="p">HTTP</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e44 ">
+								<p class="p"><span class="ph uicontrol">Issuer</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.315280464216634%" headers="d2604862e50 ">
+								<p class="p">Details about the authority that issued the named certificate</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e56 ">
+								<p class="p">/C=IN/ST=KAR/L=BLR/O=ACME/OU=ACME/CN=Mensah/undefined=kwame.mensah@acme.com</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e44 ">
+								<p class="p"><span class="ph uicontrol">Valid Until</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.315280464216634%" headers="d2604862e50 ">
+								<p class="p">The date and time at which the certificate expires</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e56 ">
+								<p class="p">Feb 13, 2017, 10:55:11 AM</p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+			<div class="note tip"><span class="tiptitle">Tip</span> For more information about which applications and spaces are pinned to
+				a particular host, click the certificate name or choose <span class="ph uicontrol">&gt;</span> for
+				a selected host.</div>
+
+		</div></div>
+
+		<div class="section" id="loiocd7d870f778d41c99d6d4ee6290d7915__section_bp4_pzk_jx"><div class="section_title">Properties</div><div type="Properties">
+			
+			<p class="p">The <span class="ph uicontrol">Properties</span> tab in the XS advanced administration <span class="ph uicontrol">Trusted
+					Certificates</span> tool displays detailed information about a selected
+				certificate's properties and includes the following information:</p>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loiocd7d870f778d41c99d6d4ee6290d7915__table_bq5_qzk_jx" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 2: Trusted Certificate Properties</span></caption>
+<colgroup><col width="19.342359767891683%"/><col width="61.315280464216634%"/><col width="19.342359767891683%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="19.342359767891683%" id="d2604862e201">
+								<p class="p">Property</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="61.315280464216634%" id="d2604862e207">
+								<p class="p">Description</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="19.342359767891683%" id="d2604862e213">
+								<p class="p">Example</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e201 ">
+								<p class="p"><span class="ph uicontrol">Alias</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.315280464216634%" headers="d2604862e207 ">
+								<p class="p">A name representing the trusted certificate</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e213 ">
+								<p class="p">myCert</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e201 ">
+								<p class="p"><span class="ph uicontrol">Certificate</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.315280464216634%" headers="d2604862e207 ">
+								<p class="p">The text of the trusted certificate</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e213 ">
+								<p class="p">-</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e201 ">
+								<p class="p"><span class="ph uicontrol">Issuer</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.315280464216634%" headers="d2604862e207 ">
+								<p class="p">Details about the authority that issued the named certificate (or the person, if the
+									certificate is self-signed)</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e213 ">
+								<p class="p">/C=IN/ST=KAR/L=BLR/O=ACME/OU=ACME/CN=Mensah/undefined=kwame.mensah@acme.com</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e201 ">
+								<p class="p"><span class="ph uicontrol">Valid From</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.315280464216634%" headers="d2604862e207 ">
+								<p class="p">The date and time from which the certificate is valid</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e213 ">
+								<p class="p">Feb 13, 2016, 10:55:11 AM</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e201 ">
+								<p class="p"><span class="ph uicontrol">Valid Until</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.315280464216634%" headers="d2604862e207 ">
+								<p class="p">The date and time at which the certificate expires</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e213 ">
+								<p class="p">Feb 13, 2017, 10:55:11 AM</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e201 ">
+								<p class="p"><span class="ph uicontrol">Signature Algorithm</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.315280464216634%" headers="d2604862e207 ">
+								<p class="p">The type of algorithm used to sign the certificate</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e213 ">
+								<p class="p">SHA1withRSA</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e201 ">
+								<p class="p"><span class="ph uicontrol">CA</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.315280464216634%" headers="d2604862e207 ">
+								<p class="p">Is the selected certificate signed by a Certificate Authority: q<span class="q">“True”</span> or
+										<span class="q">“False”</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e213 ">
+								<p class="p">True</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e201 ">
+								<p class="p"><span class="ph uicontrol">Usage</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.315280464216634%" headers="d2604862e207 ">
+								<p class="p">The type of use for which the certificate is intended, for example, <span class="q">“HTTP”</span> or
+										<span class="q">“JDBC”</span>. </p>
+
+							</td>
+
+							<td class="entry" valign="top" width="19.342359767891683%" headers="d2604862e213 ">
+								<p class="p">HTTP</p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?77f5094e836d4816862968f49e2976f3.html" target="_top" title="View and maintain certificates used for trusted connections in XS advanced.">Managing Trusted Certificates in XS Advanced</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Trusted Certificates Details in XS Advanced";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="vLog" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Projection">
+  <descriptions defaultDescription="vLog"/>
+  <defaultSchema schemaName="OTEBW"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources>
+    <DataSource id="Log" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="OTEBW" columnObjectName="Log"/>
+    </DataSource>
+    <DataSource id="M_ERROR_CODES" type="DATA_BASE_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="SYS" columnObjectName="M_ERROR_CODES"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:JoinView" id="VLog" cardinality="C1_N" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="Log_ID"/>
+        <viewAttribute id="TST"/>
+        <viewAttribute id="ErrorCode"/>
+        <viewAttribute id="ErrorMess"/>
+        <viewAttribute id="CODE_STRING"/>
+        <viewAttribute id="DESCRIPTION"/>
+        <viewAttribute id="CurrSchema"/>
+        <viewAttribute id="CurrObject"/>
+        <viewAttribute id="Cnt"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Log">
+        <mapping xsi:type="Calculation:AttributeMapping" target="Log_ID" source="Log_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TST" source="TST"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ErrorCode" source="ErrorCode"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ErrorMess" source="ErrorMess"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CurrSchema" source="CurrSchema"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CurrObject" source="CurrObject"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="Cnt" source="Cnt"/>
+      </input>
+      <input node="#M_ERROR_CODES">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CODE_STRING" source="CODE_STRING"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DESCRIPTION" source="DESCRIPTION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ErrorCode" source="CODE"/>
+      </input>
+      <joinAttribute name="ErrorCode"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="VLog">
+    <descriptions/>
+    <attributes>
+      <attribute id="Log_ID" key="true" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Log_ID"/>
+        <keyMapping columnObjectName="VLog" columnName="Log_ID"/>
+      </attribute>
+      <attribute id="TST" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TST"/>
+        <keyMapping columnObjectName="VLog" columnName="TST"/>
+      </attribute>
+      <attribute id="ErrorCode" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ErrorCode"/>
+        <keyMapping columnObjectName="VLog" columnName="ErrorCode"/>
+      </attribute>
+      <attribute id="ErrorMess" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ErrorMess"/>
+        <keyMapping columnObjectName="VLog" columnName="ErrorMess"/>
+      </attribute>
+      <attribute id="CODE_STRING" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Error Code String"/>
+        <keyMapping columnObjectName="VLog" columnName="CODE_STRING"/>
+      </attribute>
+      <attribute id="DESCRIPTION" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Error Description"/>
+        <keyMapping columnObjectName="VLog" columnName="DESCRIPTION"/>
+      </attribute>
+      <attribute id="CurrSchema" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CurrSchema"/>
+        <keyMapping columnObjectName="VLog" columnName="CurrSchema"/>
+      </attribute>
+      <attribute id="CurrObject" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CurrObject"/>
+        <keyMapping columnObjectName="VLog" columnName="CurrObject"/>
+      </attribute>
+      <attribute id="Cnt" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Cnt"/>
+        <keyMapping columnObjectName="VLog" columnName="Cnt"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures/>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="100"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="VLog" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="210"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

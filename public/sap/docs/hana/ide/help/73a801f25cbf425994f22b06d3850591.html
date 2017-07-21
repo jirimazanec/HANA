@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="The OData Service Definition Language (OSDL) provides a set of keywords that enable you to set up an ODATA service definition file that specifies what data to expose, in what way, and to whom."/>
+<meta name="description" content="The OData Service Definition Language (OSDL) provides a set of keywords that enable you to set up an ODATA service definition file that specifies what data to expose, in what way, and to whom."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=5944876582046028"/>
+<title>OData Service Definition Language Syntax (XS Advanced)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio73a801f25cbf425994f22b06d3850591";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio73a801f25cbf425994f22b06d3850591">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">OData Service Definition Language Syntax (XS Advanced)</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">The OData Service Definition Language (OSDL) provides a set of keywords that enable
+		you to set up an ODATA service definition file that specifies what data to expose, in what
+		way, and to whom.</p>
+
+		<div class="section" id="loio73a801f25cbf425994f22b06d3850591__section_N10015_N10012_N10001">
+			<p class="p">The following list shows the syntax of the OData Service Definition Language (OSDL)
+				in an EBNF-like format; conditions that apply for usage are listed after the
+				table.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">definition             :=service [annotations]
+service				:='service' [namespace] body
+namespace              :='namespace' quotedstring
+quotedstring           :=quote string quote
+string                 :=UTF8
+quote                  :='"'
+body                   :='{' content '}'
+content                :=entry [content]
+entry                  :=( entity | association ) ';'
+entity                 :=object [entityset] [with] [keys] [navigates] [aggregates] [parameters] [modification]
+object                 :=['entity'] ( repoobject | catalogobject )
+repoobject             :=quote repopackage '/' reponame '.' repoextension quote
+repopackage            :=string
+reponame               :=string
+repoextension          :=string
+catalogobject          :=catalogobjectschema '.' catalogobjectname
+catalogobjectschema    :=quotedstring
+catalogobjectname      :=quotedstring
+entityset              :='as' entitysetname
+entitysetname          :=quotedstring
+with                   :=( 'with' | 'without' ) propertylist
+propertylist           :='(' columnlist ')'
+columnlist             :=columnname [',' columnlist]
+columnname             :=quotedstring
+keys                   :='keys' ( keylist | keygenerated )
+keylist                :=propertylist
+keygenerated           :='generate' ( keygenlocal ) 
+keygenlocal            :='local' columnname
+navigates              :='navigates' '(' navlist ')'
+navlist                :=naventry [',' navlist]
+naventry               :=assocname 'as' navpropname [fromend]
+assocname              :=quotedstring
+navpropname            :=quotedstring
+fromend                :='from' ( 'principal' | 'dependent' )
+aggregates             :='aggregates' 'always' [aggregatestuple]
+aggregatestuple        :='(' aggregateslist ')'
+aggregateslist         :=aggregate [',' aggregateslist]
+aggregate              :=aggregatefunction 'of' columnname
+aggregatefunction      :=( 'SUM' | 'AVG' | 'MIN' | 'MAX' )
+parameters             :='parameters' 'via' [parameterskeyand] 'entity' [parameterentitysetname] [parametersresultsprop]
+parameterskeyand       :='key' 'and'
+parameterentitysetname :=quotedstring
+parametersresultsprop  :='results' 'property' quotedstring
+modification           :=[create] [update] [delete]	
+create                 :='create' modificationspec
+update                 :='update' modificationspec
+delete                 :='delete' modificationspec
+modificationspec	   :=( modificationaction [events] | events | 'forbidden' )
+modificationaction	 :='using' action
+action                 :=quotedstring
+events                 :='events' '(' eventlist ')'
+eventlist              :=eventtype action [',' eventlist]
+eventtype              :=( 'before' | 'after' | 'precommit' | 'postcommit' )
+association            :=associationdef [assocrefconstraint] principalend dependentend [( assoctable | storage | modification )]
+associationdef         :='association' assocname
+assocrefconstraint     :=‘with’ ‘referential’ ‘constraint'
+principalend           :='principal' end
+dependentend           :='dependent' end
+end                    :=endref multiplicity
+endref                 :=endtype [joinpropertieslist]
+endtype                :=entitysetname
+joinpropertieslist	 :='(' joinproperties ')'
+joinproperties         :=columnlist
+multiplicity           :='multiplicity' quote multiplicityvalue quote
+multiplicityvalue      :=( '1' | '0..1' | '1..*' | '*' )
+assoctable             :='over' repoobject overprincipalend overdependentend [modification]
+overprincipalend       :='principal' overend
+overdependentend       :='dependent' overend
+overend                :=propertylist 
+storage                :=( nostorage | storageend [modification] )
+nostorage              :='no' 'storage'
+storageend             :='storage' 'on' ( 'principal' | 'dependent' )
+annotations            :='annotations' annotationsbody
+annotationsbody        :='{' annotationscontent '}'
+annotationscontent     :=annotationconfig [annotationscontent]
+annotationconfig       :='enable' annotation
+annotation             :='OData4SAP' </pre></div>
+
+			<div class="note note"><span class="notetitle">Note</span> Support for OData annotations is currently not available in SAP HANA XS Advanced.</div>
+
+		</div>
+
+		<div class="section" id="loio73a801f25cbf425994f22b06d3850591__section_N10023_N10012_N10001"><div class="section_title">Conditions</div><div type="Conditions">
+			
+			<p class="p">The following conditions apply when using the listed keywords:</p>
+
+			<ol class="ol" id="loio73a801f25cbf425994f22b06d3850591__ol_zy4_prf_5h">
+				<li class="li">If the <samp class="ph codeph">namespace</samp> is not specified, the schema namespace in the
+					EDMX metadata document will be the repository package of the service definition
+					file concatenated with the repository object name. E.g. if the repository design
+					time name of the <samp class="ph codeph">.xsodata</samp> file is<samp class="ph codeph">
+						sap.hana.xs.doc/hello.xsodata</samp> the namespace will implicitly be
+						<samp class="ph codeph">sap.hana.xs.doc.hello</samp>.</li>
+
+				<li class="li"><samp class="ph codeph">keyslist</samp> must not be specified for objects of type 'table'.
+					They must only be applied to objects referring a view type.
+						<samp class="ph codeph">keygenerated</samp> in turn, can be applied to table objects. </li>
+
+				<li class="li">If the <samp class="ph codeph">entityset</samp> is not specified in an entity, the EntitySet for this
+					object is named after the repository object name or the
+						<samp class="ph codeph">catalogobjectname</samp>. For example, if <samp class="ph codeph">object</samp>
+					is "<samp class="ph codeph">sap.hana.xs.doc/odata_docu</samp>", then the
+						<samp class="ph codeph">entitysetname</samp> is implicitly set to
+						<samp class="ph codeph">odata_docu</samp>, which then can also be referenced in
+					associations. </li>
+
+				<li class="li">The <samp class="ph codeph">fromend</samp> in a <samp class="ph codeph">naventry</samp> must be specified if
+					the <samp class="ph codeph">endtype</samp> is the same for both the
+						<samp class="ph codeph">principalend</samp> and the <samp class="ph codeph">dependentend</samp> of an
+					association. </li>
+
+				<li class="li">The number of <samp class="ph codeph">joinproperties</samp> in the
+						<samp class="ph codeph">principalend</samp> must be the same as in the
+						<samp class="ph codeph">dependentend</samp>. </li>
+
+				<li class="li">Ordering in the <samp class="ph codeph">joinproperties</samp> of <samp class="ph codeph">ends</samp> is
+					relevant. The first <samp class="ph codeph">columnname</samp> in the
+						<samp class="ph codeph">joinproperties</samp> of the <samp class="ph codeph">principalend</samp> is
+					compared with the first <samp class="ph codeph">columnname</samp> of the
+						<samp class="ph codeph">dependentend</samp>, the second with the second, and so on. </li>
+
+				<li class="li">The <samp class="ph codeph">overprincipalend</samp> corresponds to the <samp class="ph codeph">principalend</samp>. The
+					number of properties in the <samp class="ph codeph">joinproperties</samp> and the
+						<samp class="ph codeph">overproperties</samp> must be the same and their ordering is
+					relevant. The same statement is true for the dependent end. </li>
+
+				<li class="li"><samp class="ph codeph">aggregates</samp> can only be applied in combination with
+						<samp class="ph codeph">keygenerated</samp>. </li>
+
+				<li class="li">If <samp class="ph codeph">aggregatestuple</samp> is omitted, the aggregation functions are
+					derived from the database. This is only possible for calculation views and
+					analytic views. </li>
+
+				<li class="li">Specifying <samp class="ph codeph">parameters</samp> is only possible for calculation views
+					and analytic views. </li>
+
+				<li class="li">The default <samp class="ph codeph">parameterentitysetname</samp> is the
+						<samp class="ph codeph">entitysetname</samp> of the entity concatenated with the suffix
+						"<samp class="ph codeph">Parameters</samp>". </li>
+
+				<li class="li">If the <samp class="ph codeph">parametersresultsprop</samp> is omitted, the navigation
+					property from the parameter entity set to the entity is called
+						"<samp class="ph codeph">Results</samp>". </li>
+
+				<li class="li">Support for OData <samp class="ph codeph">annotations</samp> is currently under development.
+					For more information about the SAP-specific metadata annotations that become
+					available with the <samp class="ph codeph">enable OData4SAP</samp> statement in an
+						<span class="ph filepath">.xsodata</span> file, see the Related Links below. Note that
+					not all annotations allowed by OData are supported by SAP HANA XS.</li>
+
+			</ol>
+
+		</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="extlink" href="http://help.sap.com/disclaimer?site=http://scn.sap.com/docs/DOC-44986" target="_blank" alt="http://scn.sap.com/docs/DOC-44986" title="http://scn.sap.com/docs/DOC-44986">SAP Annotations for OData<img src="images/sap_link.png" class="link-sap" alt="Information published on SAP site" title="Information published on SAP site" border="0"/></a></div>
+<div><a class="extlink" href="http://help.sap.com/disclaimer?site=http://www.odata.org" target="_blank" alt="http://www.odata.org" title="http://www.odata.org">Open Data Protocol<img src="images/3rd_link.png" class="link-external" alt="Information published on non-SAP site" title="Information published on non-SAP site" border="0"/></a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="OData Service Definition Language Syntax (XS Advanced)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

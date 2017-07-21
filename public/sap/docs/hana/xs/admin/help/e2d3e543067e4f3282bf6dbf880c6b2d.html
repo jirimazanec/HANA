@@ -1,0 +1,2495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Overview of available SAP HANA DI and build-plugin parameters."/>
+<meta name="description" content="Overview of available SAP HANA DI and build-plugin parameters."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=5809602821857522"/>
+<title>SAP HANA DI Parameters</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioe2d3e543067e4f3282bf6dbf880c6b2d";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioe2d3e543067e4f3282bf6dbf880c6b2d">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">SAP HANA DI Parameters</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">Overview of available SAP HANA DI and build-plugin parameters.</p>
+
+		<div class="section">
+			<div class="p">In SAP HANA Deployment Infrastructure (HDI), parameters are a means of controlling the
+				execution flow of SAP HANA DI procedure calls. SAP HANA DI includes the following
+				parameter types: <ul class="ul" id="loioe2d3e543067e4f3282bf6dbf880c6b2d__ul_atw_j23_rv">
+					<li class="li">
+						<p class="p">SAP HANA DI parameters</p>
+
+						<p class="p">SAP HANA DI parameters are used to control the execution flow of SAP HANA
+							DI procedures and SAP HANA DI container-specific procedures. For
+							example, they specify the time a container operation waits for a locking
+							conflict to clear or they indicate if warnings during an SAP HANA DI
+							call should be treated as errors.</p>
+
+					</li>
+
+					<li class="li">
+						<p class="p">Build-plugin parameters</p>
+
+						<p class="p">Build plug-in parameters control the execution flow of the deployment
+							process of a build plug-in for all database objects of the corresponding
+							type. For example, a build-plug-in parameter can be used to specify the
+							batch size for batched database access or for batch-processing within a
+							build plug-in.</p>
+
+					</li>
+
+					
+				</ul>
+
+			</div>
+
+		</div>
+
+		<div class="section"><div class="section_title">SAP HANA DI Procedures</div><div type="SAP HANA DI Procedures"><p class="p">The following table lists the available
+				parameters for SAP HANA DI procedures.</p>
+
+<div class="table-wrapper tablenoborder"><table summary="" id="loioe2d3e543067e4f3282bf6dbf880c6b2d__table_dzb_ff3_rv" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="50%" id="d2839949e60">
+								<p class="p">SAP HANA DI Call</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="50%" id="d2839949e66">
+								<p class="p">Available Parameters</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.CANCEL</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">container_lock_wait_timeout </li>
+
+										<li class="sli">trace_context</li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+										<li class="sli">treat_warnings_as_errors</li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.CONFIGURE_CONTAINER_PARAMETERS</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">container_lock_wait_timeout </li>
+
+										<li class="sli">trace_context</li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.CONFIGURE_DI_PARAMETERS</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">trace_context</li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.CONFIGURE_LIBRARIES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">container_lock_wait_timeout </li>
+
+										<li class="sli">trace_context</li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+										<li class="sli">undeploy</li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.CREATE_CONTAINER</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">trace_context</li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.CREATE_CONTAINER_GROUP</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">trace_context</li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.DROP_CONTAINER</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">container_lock_wait_timeout</li>
+
+										<li class="sli">ignore_deployed </li>
+
+										<li class="sli">ignore_errors </li>
+
+										<li class="sli">ignore_work </li>
+
+										<li class="sli">trace_context </li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.DROP_CONTAINER_GROUP</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">move_containers_to_default_group</li>
+
+										<li class="sli">group</li>
+
+										<li class="sli">trace_context</li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.EXPORT_CONTAINER</span> *</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<div class="note caution"><span class="cautiontitle">Caution</span> Removed with SAP HANA 2.0 SPS 00. See
+											<span class="keyword parmname">_SYS_DI.EXPORT_CONTAINER_FOR_SUPPORT</span></div>
+
+									<ul class="sl simple">
+										<li class="sli">container_lock_wait_timeout </li>
+
+										<li class="sli">trace_context </li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.EXPORT_CONTAINER_FOR_SUPPORT</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">container_lock_wait_timeout </li>
+
+										<li class="sli">export_container_schema_data</li>
+
+										<li class="sli">export_container_schema_ foreign_objects</li>
+
+										<li class="sli">trace_context </li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.GRANT_CONTAINER_API_PRIVILEGES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">container_lock_wait_timeout </li>
+
+										<li class="sli">trace_context </li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.GRANT_CONTAINER_API_PRIVILEGES_WITH_GRANT_OPTION
+									</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">container_lock_wait_timeout </li>
+
+										<li class="sli">trace_context </li>
+
+										<li class="sli">trace_level.&lt;trace topic&gt; </li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.GRANT_CONTAINER_GROUP_API_PRIVILEGES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">trace_context</li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.GRANT_CONTAINER_GROUP_API_PRIVILEGES_WITH_
+										GRANT_OPTION</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">trace_context</li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.GRANT_CONTAINER_SCHEMA_PRIVILEGES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">container_lock_wait_timeout </li>
+
+										<li class="sli">trace_context </li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.GRANT_CONTAINER_SCHEMA_ROLES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">container_lock_wait_timeout </li>
+
+										<li class="sli">trace_context </li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var>
+										</li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.GRANT_CONTAINER_SUPPORT_PRIVILEGE</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">container_lock_wait_timeout </li>
+
+										<li class="sli">trace_context </li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.IMPORT_CONTAINER</span> *</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<div class="note caution"><span class="cautiontitle">Caution</span> Removed with SAP HANA 2.0 SPS 00. See
+											<span class="keyword parmname">_SYS_DI.IMPORT_CONTAINER_FOR_SUPPORT</span>.</div>
+
+								</div>
+
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout </li>
+
+									<li class="sli">trace_context </li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.IMPORT_CONTAINER_FOR_SUPPORT</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">container_lock_wait_timeout </li>
+
+										<li class="sli">accept_risk_of_database_corruption_by_container_import</li>
+
+										<li class="sli">trace_context </li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.LIST_CONFIGURED_LIBRARIES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">container_lock_wait_timeout </li>
+
+										<li class="sli">trace_context </li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.LIST_LIBRARIES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">trace_context </li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.MOVE_CONTAINER_TO_GROUP</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">trace_context </li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.REVOKE_CONTAINER_API_PRIVILEGES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">container_lock_wait_timeout </li>
+
+										<li class="sli">trace_context </li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.REVOKE_CONTAINER_GROUP_API_PRIVILEGES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">trace_context</li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.REVOKE_CONTAINER_SCHEMA_PRIVILEGES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">container_lock_wait_timeout </li>
+
+										<li class="sli">trace_context </li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.REVOKE_CONTAINER_SCHEMA_ROLES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">container_lock_wait_timeout </li>
+
+										<li class="sli">trace_context </li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.REVOKE_CONTAINER_SUPPORT_PRIVILEGE</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<ul class="sl simple">
+										<li class="sli">container_lock_wait_timeout </li>
+
+										<li class="sli">trace_context </li>
+
+										<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									</ul>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.CONFIGURE_CONTAINER</span> *</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<div class="note caution"><span class="cautiontitle">Caution</span> Deprecated since SAP HANA 1.0 SPS
+										12.</div>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e60 ">
+								<p class="p"><span class="keyword parmname">_SYS_DI.CONFIGURE_DI</span> *</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e66 ">
+								<div class="p">
+									<div class="note caution"><span class="cautiontitle">Caution</span> Deprecated since SAP HANA 1.0 SPS
+										12.</div>
+
+								</div>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+<div class="sectiondiv subsection">
+				<p class="p subsectiontitle">Example: Calling an SAP HANA DI Procedure with Parameters
+					Set</p>
+
+				<div class="p">
+					<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">-- prepare parameters table
+create table MY_PARAMETERS like _SYS_DI.TT_PARAMETERS;
+insert into MY_PARAMETERS (KEY, VALUE) values ('ignore_work', 'true');
+insert into MY_PARAMETERS (KEY, VALUE) values ('ignore_deployed', 'true');
+
+
+-- call procedure
+call _SYS_DI.DROP_CONTAINER('MY_CONTAINER', MY_PARAMETERS, ?, ?, ?);
+</pre></div>
+
+					</div>
+
+				</div>
+
+			</div></div></div>
+
+		<div class="section"><div class="section_title">SAP HANA DI Container-Specific Procedures</div><div type="SAP HANA DI Container-Specific Procedures"><p class="p">The following table lists the
+				available parameters for SAP HANA DI container-specific procedures.</p>
+
+<div class="table-wrapper tablenoborder"><table summary="" id="loioe2d3e543067e4f3282bf6dbf880c6b2d__table_ist_r33_rv" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="50%" id="d2839949e980">
+								<p class="p">SAP HANA DI Container-Specific Call</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="50%" id="d2839949e986">
+								<p class="p">Available Parameters</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.CANCEL</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout </li>
+
+									<li class="sli">trace_context </li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									<li class="sli">treat_warnings_as_errors </li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.CONFIGURE_CONTAINER_PARAMETERS</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout </li>
+
+									<li class="sli">trace_context </li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.CONFIGURE_LIBRARIES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout </li>
+
+									<li class="sli">trace_context </li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									<li class="sli">undeploy</li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.DELETE</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout </li>
+
+									<li class="sli">ignore_non_existing_paths</li>
+
+									<li class="sli">recursive</li>
+
+									<li class="sli">trace_context </li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.GET_DEPENDENCIES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout </li>
+
+									<li class="sli">trace_context </li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									<li class="sli">variant</li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.GET_MAKE_GROUPS</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout </li>
+
+									<li class="sli">max_parallel_jobs</li>
+
+									<li class="sli">optimized_redeploy</li>
+
+									<li class="sli">simulate_make</li>
+
+									<li class="sli">skip_unchanged_expansions</li>
+
+									<li class="sli">trace_context </li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									<li class="sli">treat_warnings_as_errors</li>
+
+									<li class="sli">undeploy_dependent_recursively</li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.GRANT_CONTAINER_API_PRIVILEGES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout </li>
+
+									<li class="sli">trace_context </li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.GRANT_CONTAINER_API_PRIVILEGES_WITH_GRANT_OPTION
+									</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout </li>
+
+									<li class="sli">trace_context </li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.GRANT_CONTAINER_SCHEMA_PRIVILEGES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout </li>
+
+									<li class="sli">trace_context </li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.GRANT_CONTAINER_SCHEMA_ROLES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout </li>
+
+									<li class="sli">trace_context </li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.LIST</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout</li>
+
+									<li class="sli">ignore_files </li>
+
+									<li class="sli">ignore_folders</li>
+
+									<li class="sli">recursive</li>
+
+									<li class="sli">trace_context</li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.LIST_CONFIGURED_LIBRARIES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout </li>
+
+									<li class="sli">trace_context </li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.LIST_DEPLOYED</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout</li>
+
+									<li class="sli">ignore_files </li>
+
+									<li class="sli">ignore_folders</li>
+
+									<li class="sli">recursive</li>
+
+									<li class="sli">trace_context</li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.MAKE</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout</li>
+
+									<li class="sli">max_parallel_jobs</li>
+
+									<li class="sli">optimized_redeploy</li>
+
+									<li class="sli">simulate_make</li>
+
+									<li class="sli">skip_unchanged_expansions</li>
+
+									<li class="sli">trace_context</li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									<li class="sli">treat_warnings_as_errors</li>
+
+									<li class="sli">undeploy_dependent_recursively</li>
+
+									<li class="sli">enable_make_enforcer</li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.MAKE_ASYNC</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout</li>
+
+									<li class="sli">max_parallel_jobs</li>
+
+									<li class="sli">optimized_redeploy</li>
+
+									<li class="sli">simulate_make</li>
+
+									<li class="sli">skip_unchanged_expansions</li>
+
+									<li class="sli">trace_context</li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+									<li class="sli">treat_warnings_as_errors</li>
+
+									<li class="sli">undeploy_dependent_recursively</li>
+
+									<li class="sli">enable_make_enforcer</li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.READ</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout</li>
+
+									<li class="sli">ignore_files </li>
+
+									<li class="sli">ignore_folders</li>
+
+									<li class="sli">recursive</li>
+
+									<li class="sli">trace_context</li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.READ_DEPLOYED</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout</li>
+
+									<li class="sli">ignore_files </li>
+
+									<li class="sli">ignore_folders</li>
+
+									<li class="sli">recursive</li>
+
+									<li class="sli">trace_context</li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.REVOKE_CONTAINER_API_PRIVILEGES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout </li>
+
+									<li class="sli">trace_context </li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.REVOKE_CONTAINER_SCHEMA_PRIVILEGES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout </li>
+
+									<li class="sli">trace_context </li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.REVOKE_GRANT_CONTAINER_SCHEMA_ROLES</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout </li>
+
+									<li class="sli">trace_context </li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+								</ul>
+
+								<p class="p"/>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.STATUS</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout </li>
+
+									<li class="sli">trace_context </li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.WRITE</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<ul class="sl simple">
+									<li class="sli">container_lock_wait_timeout </li>
+
+									<li class="sli">trace_context </li>
+
+									<li class="sli">trace_level.<var class="keyword varname">&lt;trace topic&gt;</var></li>
+
+								</ul>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d2839949e980 ">
+								<p class="p"><span class="keyword parmname">&lt;container&gt;#DI.CONFIGURE_CONTAINER</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="50%" headers="d2839949e986 ">
+								<div class="note caution"><span class="cautiontitle">Caution</span> Deprecated since SAP HANA 1.0 SPS 12.</div>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+<div class="sectiondiv subsection">
+				<p class="p subsectiontitle">Example: Calling a Container-Specific Procedure with Parameters
+					Set</p>
+
+				<div class="p">
+					<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">-- prepare path content table
+create table MY_PATH_CONTENT like _SYS_DI.TT_FILESFOLDERS_CONTENT;
+insert into MY_PATH_CONTENT (PATH, CONTENT) values ('mypath/', '');
+insert into MY_PATH_CONTENT (PATH, CONTENT) values ('mypath/myfile1.hdbtable', 'ROW TABLE MY_TABLE (X INTEGER)');
+insert into MY_PATH_CONTENT (PATH, CONTENT) values ('mypath/.hdiconfig', '{
+"file_suffixes" : { "hdbtable" : { "plugin_name" : "com.sap.hana.di.table", 
+"plugin_version" : "12.0.0" } } }');
+ 
+
+-- prepare parameters table
+create table MY_PARAMETERS like _SYS_DI.TT_PARAMETERS;
+insert into MY_PARAMETERS (KEY, VALUE) values ('container_lock_wait_timeout', '10');
+
+
+-- call procedure
+call MY_CONTAINER#DI.WRITE(MY_PATH_CONTENT, MY_PARAMETERS, ?, ?, ?);
+</pre></div>
+
+					</div>
+
+				</div>
+
+			</div></div></div>
+
+		<div class="section"><div class="section_title">Available SAP HANA DI Parameters</div><div type="Available SAP HANA DI Parameters">
+			
+			<p class="p">The following table describes the parameters available in SAP HANA DI and their possible
+				values.</p>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loioe2d3e543067e4f3282bf6dbf880c6b2d__table_z1p_vk3_rv" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="33.333333333333336%"/><col width="33.333333333333336%"/><col width="33.333333333333336%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="33.33333333333333%" id="d2839949e1768">
+								<p class="p">Parameter</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="33.33333333333333%" id="d2839949e1774">
+								<p class="p">Possible values</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="33.33333333333333%" id="d2839949e1780">
+								<p class="p">Description</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">container_lock_wait_timeout</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">0 … 2,147,483,647</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Specifies the time (in milliseconds) a container operation waits for a locking conflict
+									to clear. The default value is the value of the corresponding
+									SAP HANA DI configuration parameter
+										<span class="keyword parmname">connection.container_default_transaction_lock_wait_timeout</span>. </p>
+
+								<p class="p">For more information, see <cite class="cite">SAP HANA DI Configuration Parameters</cite>. </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">accept_risk_of_database_ corruption_by_container_import
+									</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">true, false</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Indicates that the user knows that a container import could
+									potentially corrupt the database. </p>
+
+								<p class="p">The default value is <span class="q">“false”</span>. </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">enable_make_enforcer</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">true, false</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Terminate all external database connections blocking a make
+									call.</p>
+
+								<p class="p">The default value is true.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">export_container_schema_data</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">true, false</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Indicates that a container export should also export the data of
+									the container schema. If set to <span class="q">“false”</span>, only the schema
+									structure will be exported. </p>
+
+								<p class="p">The default value is <span class="q">“true”</span>. </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">ignore_deployed</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">true, false</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Indicates if existing files in the deployed file system are to be
+									ignored when dropping a container. </p>
+
+								<p class="p">The default value is <span class="q">“false”</span>. </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">ignore_errors</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">true, false</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Indicates if errors during an SAP HANA DI call should be ignored, that is, execute and
+									commit as many internal operations as possible. Failing
+									operations are reported to the user. </p>
+
+								<p class="p">The default value is <span class="q">“false”</span>. </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">ignore_files</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">true, false</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Indicates if files are to be ignored in the output when reading
+									files. </p>
+
+								<p class="p">The default value is <span class="q">“false”</span>. </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">ignore_folders</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">true, false</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Indicates if folders are to be ignored in the output when reading
+									files. </p>
+
+								<p class="p">The default value is <span class="q">“false”</span>. </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">ignore_non_existing_paths</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">true, false</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Indicates if paths that do not exist should be ignored, for example, when deleting
+									folders. </p>
+
+								<p class="p">The default value is <span class="q">“false”</span>. </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">ignore_work</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">true, false</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Indicates if existing files in the work file system are to be
+									ignored when dropping a container. </p>
+
+								<p class="p">The default value is <span class="q">“false”</span>. </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">max_parallel_jobs</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">0 … 2,147,483,647</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Specifies the maximum number of parallel jobs for graph execution
+									and artifact deployment.</p>
+
+								<p class="p">The default value is 8.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">move_containers_to_default_ group</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">true, false</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Indicates if all containers in a group should be moved to the
+									default group _SYS_DI first before dropping the container group. </p>
+
+								<p class="p">The default value is <span class="q">“false”</span>. </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">optimized_redeploy</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">true, false</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Indicates if the optimized redeployment strategy should be used
+									instead of the undeploy-deploy mechanism when redeploying
+									artifacts. </p>
+
+								<p class="p">The default value is <span class="q">“true”</span>. </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">recursive</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">true, false</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Indicates if folders are to be read or deleted recursively. </p>
+
+								<p class="p">The default value is <span class="q">“false”</span>. </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">simulate_make</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">true, false</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Indicates if the make should run only in simulation mode. </p>
+
+								<p class="p">The default value is <span class="q">“false”</span>. </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">trace_context</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">request, container</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Indicates if, during an SAP HANA DI request, all traces for trace topics configured using
+									the <span class="keyword parmname">trace_level_&lt;trace topic&gt;</span>
+									parameter are written to a separate trace file in addition to
+									the DI server trace file. If set to <span class="q">“request”</span>, a new trace
+									file is created for the request. For container operations, if
+									set to <span class="q">“container”</span>, a trace file for the corresponding
+									container is created or appended to. </p>
+
+								<p class="p">There is no default value. </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">trace_level.&lt;trace topic&gt;</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">Fatal, Error, Warning, Info, Interface, Debug, InterfaceFull,
+									DebugFull</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Specifies the trace level of a specific trace topic. <var class="keyword varname">&lt;trace topic&gt;</var> may
+									be an arbitrary SAP HANA trace topic.</p>
+
+								<p class="p">There is no default value. </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">treat_warnings_as_errors</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">true, false</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Indicates if warnings during an SAP HANA DI call should be treated as errors. </p>
+
+								<p class="p">The default value is <span class="q">“false”</span>. </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">undeploy</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">true, false</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Indicates if,  in case of a call to configure libraries, files corresponding to a library
+									to be removed should also be undeployed. </p>
+
+								<p class="p">The default value is <span class="q">“false”</span>. </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">undeploy_dependent_recursively</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p">true, false</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Indicates that all dependent artifacts should be considered for
+									an undeployment. </p>
+
+								<p class="p">The default value is <span class="q">“false”</span>. </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1768 ">
+								<p class="p"><span class="keyword parmname">variant</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1774 ">
+								<p class="p"><span class="q">“providers”</span>, <span class="q">“provides_and_requires”</span>, <span class="q">“impacted”</span>, <span class="q">“depends”</span></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e1780 ">
+								<p class="p">Specifies the variant of the SAP HANA DI (HDI) container-specific procedure
+											<samp class="ph codeph"><var class="keyword varname">&lt;container&gt;</var>#DI.GET_DEPENDENCIES</samp>
+									to be used; the following values are permitted: </p>
+
+								<ul class="ul" id="loioe2d3e543067e4f3282bf6dbf880c6b2d__ul_nnr_j5m_4x">
+									<li class="li"><span class="q">“<samp class="ph codeph">providers</samp>”</span><p class="p">Returns the providing
+											file for a given database object </p>
+</li>
+
+									<li class="li"><span class="q">“<samp class="ph codeph">provides_and_requires</samp>”</span><p class="p">Returns the provided and required
+											database objects for a given artifact</p>
+</li>
+
+									<li class="li"><span class="q">“<samp class="ph codeph">impacted</samp>”</span><p class="p">Returns the files that
+											depend on (are affected by) the specified
+										files.</p>
+</li>
+
+									<li class="li"><span class="q">“<samp class="ph codeph">depends</samp>”</span><p class="p">Returns the files that the
+											specified files depend on.</p>
+</li>
+
+								</ul>
+
+								<p class="p">The default value is <span class="q">“providers”</span>. </p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Parameters for Build Plugins</div><div type="Parameters for Build Plugins">
+			
+			<p class="p">SAP HANA DI supports three types of parameters for controlling the execution flow of build
+				plugins. On a global level, a <span class="q">“plugins-wide parameter”</span> applies to all build
+				plugins supporting the parameter. On a more fine-grained level, a <span class="q">“plugin-specific
+					parameter”</span> only applies to the specified build plugin. Eventually, a <span class="q">“path
+					parameter”</span> serves to control the handling of a single file.</p>
+
+			<div class="p"> The following table describes the structure of each parameter type.
+<div class="table-wrapper tablenoborder"><table summary="" id="loioe2d3e543067e4f3282bf6dbf880c6b2d__table_qwy_tn3_rv" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="33.333333333333336%"/><col width="33.333333333333336%"/><col width="33.333333333333336%"/></colgroup>
+
+						
+						
+						
+						<thead class="thead" align="left">
+							<tr class="row">
+								<th class="entry" valign="top" width="33.33333333333333%" id="d2839949e2470">
+									<p class="p">Parameter Type</p>
+
+								</th>
+
+								<th class="entry" valign="top" width="33.33333333333333%" id="d2839949e2476">
+									<p class="p">File</p>
+
+								</th>
+
+								<th class="entry" valign="top" width="33.33333333333333%" id="d2839949e2482">
+									<p class="p">Parameter Structure</p>
+
+								</th>
+
+							</tr>
+
+						</thead>
+
+						<tbody class="tbody">
+							<tr class="row">
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2470 ">
+									<p class="p">plugins-wide parameter</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2476 ">
+									<p class="p">-</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2482 ">
+									<p class="p">com.sap.hana.di/&lt;key&gt;</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2470 ">
+									<p class="p">plugin-specific parameter</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2476 ">
+									<p class="p">-</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2482 ">
+									<p class="p">com.sap.hana.di.&lt;plugin&gt;/&lt;key&gt;</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2470 ">
+									<p class="p">path parameter</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2476 ">
+									<p class="p">&lt;file&gt;</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2482 ">
+									<p class="p">&lt;key&gt;</p>
+
+								</td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+</div>
+</div>
+
+			<p class="p">From the point of view of a build plugin, the three types of parameters form a
+				hierarchy whereby the most specific parameter type is considered first. The
+				following diagram visualizes the process of fetching a parameter from the point of
+				view of a build plugin.</p>
+
+			<p class="p"><img class="image" id="loioe2d3e543067e4f3282bf6dbf880c6b2d__image_lcr_c2n_rv" src="loiob4a272d2bab14da388aeebde0276b2fa_LowRes.png" alt="Fetch Parameter Process" title="Fetch Parameter Process"/></p>
+
+			<div class="p">The plugin-specific parameters support additional layering by allowing additional layers
+				within the parameter structure. For example, if a requested parameter
+					<span class="keyword parmname">com.sap.hana.di.&lt;layer1&gt;.&lt;plugin1&gt;/&lt;key&gt;</span>
+				is not found, the build plugin automatically searches for a parameter
+					<span class="keyword parmname">com.sap.hana.di.&lt;layer1&gt;/&lt;key&gt;</span>. The following
+				table shows an example of layering of parameters.
+<div class="table-wrapper tablenoborder"><table summary="" id="loioe2d3e543067e4f3282bf6dbf880c6b2d__table_pg4_b43_rv" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="33.333333333333336%"/><col width="33.333333333333336%"/><col width="33.333333333333336%"/></colgroup>
+
+						
+						
+						
+						<thead class="thead" align="left">
+							<tr class="row">
+								<th class="entry" valign="top" width="33.33333333333333%" id="d2839949e2591">
+									<p class="p">Parameter Type</p>
+
+								</th>
+
+								<th class="entry" valign="top" width="33.33333333333333%" id="d2839949e2597">
+									<p class="p">File</p>
+
+								</th>
+
+								<th class="entry" valign="top" width="33.33333333333333%" id="d2839949e2603">
+									<p class="p">Parameter Structure</p>
+
+								</th>
+
+							</tr>
+
+						</thead>
+
+						<tbody class="tbody">
+							<tr class="row">
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2591 ">
+									<p class="p">plugins-wide parameter</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2597 ">
+									<p class="p">-</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2603 ">
+									<p class="p">com.sap.hana.di/<var class="keyword varname">&lt;key&gt;</var></p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2591 ">
+									<p class="p">layered parameter</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2597 ">
+									<p class="p">-</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2603 ">
+									<p class="p">com.sap.hana.di.<var class="keyword varname">&lt;layer1&gt;</var>/<var class="keyword varname">&lt;key&gt;</var></p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2591 ">
+									<p class="p">layered plugin parameter</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2597 ">
+									<p class="p">-</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2603 ">
+									<p class="p">com.sap.hana.di.<var class="keyword varname">&lt;layer1&gt;</var>.<var class="keyword varname">&lt;plugin1&gt;</var>/<var class="keyword varname">&lt;key&gt;</var></p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2591 ">
+									<p class="p">path parameter</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2597 ">
+									<p class="p">&lt;file&gt;</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2603 ">
+									<p class="p"><var class="keyword varname">&lt;key&gt;</var></p>
+
+								</td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+</div>
+</div>
+
+			<p class="p">The following section lists the available build plugin parameters and path parameters in SAP
+				HANA DI. The section <cite class="cite">Build Plugin Parameters</cite> describes the available
+				parameters for the configuration of uild plug-ins.</p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Build Plugins</div><div type="Build Plugins">
+			
+			<div class="p">The following table lists the available parameters for the build plugins.
+<div class="table-wrapper tablenoborder"><table summary="" id="loioe2d3e543067e4f3282bf6dbf880c6b2d__table_jrf_n43_rv" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="33.333333333333336%"/><col width="33.333333333333336%"/><col width="33.333333333333336%"/></colgroup>
+
+						
+						
+						
+						<thead class="thead" align="left">
+							<tr class="row">
+								<th class="entry" valign="top" width="33.33333333333333%" id="d2839949e2745">
+									<p class="p">Build Plugin</p>
+
+								</th>
+
+								<th class="entry" valign="top" width="33.33333333333333%" id="d2839949e2751">
+									<p class="p">Available Build Plugin Parameters</p>
+
+								</th>
+
+								<th class="entry" valign="top" width="33.33333333333333%" id="d2839949e2757">
+									<p class="p">Available Path Parameters</p>
+
+								</th>
+
+							</tr>
+
+						</thead>
+
+						<tbody class="tbody">
+							<tr class="row">
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2745 ">
+									<p class="p">Applies to all build plugins</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2751 ">
+									<p class="p">optimized_redeploy</p>
+
+									<p class="p">skip_unchanged_expansions</p>
+
+									<p class="p">undeploy_dependent_recursively</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2757 ">
+									<p class="p">-</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2745 ">
+									<p class="p">com.sap.hana.di.cds</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2751 ">
+									<p class="p">force_undeploy</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2757 ">
+									<p class="p">-</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2745 ">
+									<p class="p">com.sap.hana.di.role</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2751 ">
+									<p class="p">force_undeploy</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2757 ">
+									<p class="p">-</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2745 ">
+									<p class="p">com.sap.hana.di.sequence</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2751 ">
+									<p class="p">force_undeploy</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2757 ">
+									<p class="p">-</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2745 ">
+									<p class="p">com.sap.hana.di.table</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2751 ">
+									<p class="p">force_undeploy</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2757 ">
+									<p class="p">-</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2745 ">
+									<p class="p">com.sap.hana.di.tabledata</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2751 ">
+									<p class="p">batch_size</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2757 ">
+									<p class="p">-</p>
+
+								</td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+</div>
+</div>
+
+			<div class="p">Example for calling the make procedure with a plugins-wide parameter set: <div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">-- prepare deploy paths table
+create table MY_DEPLOY_PATHS like _SYS_DI.TT_FILESFOLDERS;
+insert into MY_DEPLOY_PATHS (PATH) values ('mypath/myfile1.hdbtable');
+insert into MY_DEPLOY_PATHS (PATH) values ('mypath/.hdiconfig');
+
+-- prepare parameters table with a plugins-wide parameter
+create table MY_PARAMETERS like _SYS_DI.TT_PARAMETERS;
+insert into MY_PARAMETERS (KEY, VALUE) values ('com.sap.hana.di /force_undeploy', 'true');
+
+-- call procedure
+call MY_CONTAINER#DI.MAKE(MY_DEPLOY_PATHS, _SYS_DI.T_NO_FILESFOLDERS, _SYS_DI.T_NO_FILESFOLDERS_PARAMETERS, MY_PARAMETERS, ?, ?, ?);
+</pre></div>
+
+				</div>
+</div>
+
+			<div class="p">Example for calling the make procedure with a plugin-specific parameter set:<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">-- prepare deploy paths table
+create table MY_DEPLOY_PATHS like _SYS_DI.TT_FILESFOLDERS;
+insert into MY_DEPLOY_PATHS (PATH) values ('mypath/myfile1.hdbtable');
+insert into MY_DEPLOY_PATHS (PATH) values ('mypath/.hdiconfig');
+
+-- prepare parameters table with a plugin-specific parameter
+create table MY_PARAMETERS like _SYS_DI.TT_PARAMETERS;
+insert into MY_PARAMETERS (KEY, VALUE) values ('com.sap.hana.di.table/force_undeploy', 'true');
+
+-- call procedure
+call MY_CONTAINER#DI.MAKE(MY_DEPLOY_PATHS, _SYS_DI.T_NO_FILESFOLDERS, _SYS_DI.T_NO_FILESFOLDERS_PARAMETERS, MY_PARAMETERS, ?, ?, ?);
+</pre></div>
+
+				</div>
+</div>
+
+			<div class="p">Example for calling the make procedure with a path parameter set:<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">-- prepare deploy paths table
+create table MY_DEPLOY_PATHS like _SYS_DI.TT_FILESFOLDERS;
+insert into MY_DEPLOY_PATHS (PATH) values ('mypath/myfile1.hdbtable');
+insert into MY_DEPLOY_PATHS (PATH) values ('mypath/.hdiconfig');
+
+-- prepare path parameters table
+create table MY_PATH_PARAMETERS like _SYS_DI.TT_FILESFOLDERS_PARAMETERS;
+insert into MY_PATH_PARAMETERS (PATH, KEY, VALUE) values ('mypath/myfile1.hdbtable', 'force_undeploy', 'true');
+
+-- call procedure
+call MY_CONTAINER#DI.MAKE(MY_DEPLOY_PATHS, _SYS_DI.T_NO_FILESFOLDERS, MY_PATH_PARAMETERS, _SYS_DI.T_NO_PARAMETERS, ?, ?, ?);
+</pre></div>
+
+				</div>
+</div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Build Plugin Parameters</div><div type="Build Plugin Parameters">
+			
+			<div class="p">The following table describes the build plugin parameters available in SAP HANA DI and their
+				possible values.
+<div class="table-wrapper tablenoborder"><table summary="" id="loioe2d3e543067e4f3282bf6dbf880c6b2d__table_hzm_1p3_rv" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="33.333333333333336%"/><col width="33.333333333333336%"/><col width="33.333333333333336%"/></colgroup>
+
+						
+						
+						
+						<thead class="thead" align="left">
+							<tr class="row">
+								<th class="entry" valign="top" width="33.33333333333333%" id="d2839949e2949">
+									<p class="p">Build Plugin Parameter</p>
+
+								</th>
+
+								<th class="entry" valign="top" width="33.33333333333333%" id="d2839949e2955">
+									<p class="p">Possible Values</p>
+
+								</th>
+
+								<th class="entry" valign="top" width="33.33333333333333%" id="d2839949e2961">
+									<p class="p">Description</p>
+
+								</th>
+
+							</tr>
+
+						</thead>
+
+						<tbody class="tbody">
+							<tr class="row">
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2949 ">
+									<p class="p"><span class="keyword parmname">batch_size</span></p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2955 ">
+									<p class="p">0 … 2,147,483,647</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2961 ">
+									<p class="p">Specifies the batch size, for example, for batch database
+										access or for batch processing within a build plugin.</p>
+
+									<p class="p">The default value is <span class="q">“1”</span>.</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2949 ">
+									<p class="p"><span class="keyword parmname">force_undeploy</span></p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2955 ">
+									<p class="p">true, false</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2961 ">
+									<p class="p">Indicates if the undeployment of files should be forced within a build plugin that would
+										alter an existing database object instead of simply
+										re-creating it.</p>
+
+									<p class="p">The default value is <span class="q">“false”</span>.</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2949 ">
+									<p class="p"><span class="keyword parmname">optimized_redeploy</span></p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2955 ">
+									<p class="p">true, false </p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2961 ">
+									<p class="p">Indicates if the optimized redeployment strategy should be
+										used instead of the undeploy-deploy mechanism when
+										redeploying artifacts. </p>
+
+									<p class="p">The default value is <span class="q">“true”</span>. </p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2949 ">
+									<p class="p"><span class="keyword parmname">skip_unchanged_expansions</span></p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2955 ">
+									<p class="p">true, false </p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2961 ">
+									<p class="p">Instructs the make expander to not add expansions with same
+										name and content as a deployed expansion to the deploy and
+										undeploy sets.</p>
+
+									<p class="p">The default value is <span class="q">“false”</span>.</p>
+
+								</td>
+
+							</tr>
+
+							<tr class="row">
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2949 ">
+									<p class="p"><span class="keyword parmname">undeploy_dependent_ recursively</span></p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2955 ">
+									<p class="p">true, false</p>
+
+								</td>
+
+								<td class="entry" valign="top" width="33.33333333333333%" headers="d2839949e2961 ">
+									<p class="p">Indicates that all dependent artifacts should be considered
+										for an undeployment. </p>
+
+									<p class="p">The default value is <span class="q">“false”</span>. </p>
+
+								</td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+</div>
+</div>
+
+		</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?1d9582a464344b6c86bcd3489dca7554.html" target="_top" title="Configuration parameters are used to configure the behavior of SAP HANA DI. There are two types of configuration parameters: SAP HANA DI configuration parameters and container-specific configuration parameters.">SAP HANA DI Configuration Parameters</a></div>
+<div><a class="link" href="default.html?609c51c1580c4f57b8545c13d9745067.html" target="_top" title="Set up and manage the SAP HANA Deployment Infrastructure (HDI).">Maintaining the SAP HANA Deployment Infrastructure (HDI) Configuration</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="SAP HANA DI Parameters";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Confirms that a database snapshot has been created and manually made available in a separate storage location or that the database snapshot has been abandoned."/>
+<meta name="description" content="Confirms that a database snapshot has been created and manually made available in a separate storage location or that the database snapshot has been abandoned."/>
+<meta name="keywords" content="BACKUP DATA CLOSE SNAPSHOT"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=9210239829632093"/>
+<title>BACKUP DATA CLOSE SNAPSHOT Statement (Backup and Recovery)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loioc39739966f7f4bd5818769ad4ce6a7f8";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loioc39739966f7f4bd5818769ad4ce6a7f8">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">BACKUP DATA CLOSE SNAPSHOT Statement (Backup and Recovery)</h1>
+
+
+		
+		
+		
+		<div class="body refbody"><p class="shortdesc">Confirms that a database snapshot has been created and manually made available in a
+		separate storage location or that the database snapshot has been abandoned.</p>
+
+			<div class="section"><div class="section_title">Syntax</div><div type="Syntax">
+				
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">BACKUP DATA [ FOR FULL SYSTEM ] CLOSE SNAPSHOT BACKUP_ID <var class="keyword varname">&lt;backup_id&gt;</var> 
+ { SUCCESSFUL <var class="keyword varname">&lt;external_id&gt;</var> | UNSUCCESSFUL [ <var class="keyword varname">&lt;string&gt;</var> ] }</pre></div>
+
+			</div></div>
+
+		<div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+			
+			<dl class="dl parml">
+				
+					<dt class="dt pt dlterm emphasis">FOR FULL SYSTEM</dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies that the closing operation is performed on every database in the current system,
+							including SystemDB and all tenant databases. Omitting FOR FULL SYSTEM
+							performs the operation only on the connected database.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis">BACKUP_ID <var class="keyword varname">&lt;backup_id&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies the unique ID of a database snapshot to be confirmed or abandoned.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis">SUCCESSFUL <var class="keyword varname">&lt;external_id&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies an ID for the database snapshot to help to identify a specific snapshot.</p>
+
+						<p class="p">TIMESTAMP is supported for <var class="keyword varname">&lt;external_id&gt;</var>. The maximum length of the
+							external ID is 64 characters. </p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis">UNSUCCESSFUL [<var class="keyword varname">&lt;string&gt;</var> ] </dt>
+
+					<dd class="dd pd">
+						<p class="p">UNSUCCESSFUL <var class="keyword varname">&lt;string&gt;</var> marks the database snapshot as unsuccessful in the
+							backup catalog and includes the comment specified in
+								<var class="keyword varname">&lt;string&gt;</var>. UNSUCCESSFUL without
+								<var class="keyword varname">&lt;string&gt;</var> marks the database snapshot as
+							unsuccessful in the backup catalog without a comment.</p>
+
+						<p class="p">The maximum length of <var class="keyword varname">&lt;string&gt;</var> is 256 characters.</p>
+
+					</dd>
+
+				
+			</dl>
+
+		</div></div>
+
+			<div class="section"><div class="section_title">Description</div><div type="Description">
+				
+			<p class="p">Confirms that a database snapshot has been created and manually made available in a separate
+				storage location or that the storage snapshot has been abandoned. The storage
+				snapshot is then removed from the data area. It is now possible to create further
+				database snapshots or full backups. Specify an external ID to identify the database
+				snapshot if you need to use it for a recovery later. To find the backup ID, search
+				in the backup catalog M_BACKUP_CATALOG. The comment that was used when creating the
+				backup shows up in the COMMENT column of the M_BACKUP_CATALOG system view.</p>
+
+			<p class="p">A database snapshot can be used to recover a database provided that it completed
+				successfully.</p>
+
+			<p class="p">If an error is returned, then the database snapshot cannot be used. This can even happen if
+				SUCCESSFUL is specified. After you have confirmed or abandoned a database snapshot,
+				it is recorded in the backup catalog as either successful or unsuccessful.</p>
+
+			</div></div>
+
+			<div class="section"><div class="section_title">Example</div><div type="Example">
+			
+			<p class="p">Confirm that a database snapshot has been created.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">BACKUP DATA CLOSE SNAPSHOT BACKUP_ID 1400761459486 SUCCESSFUL 'External_ID_23';</pre></div>
+
+			<p class="p">The following example abandons the database snapshot. If the database snapshot was not created
+				successfully, or if you do not want to use it, then add a comment so that the
+				database snapshot can be identified more easily in the backup catalog. It can be
+				helpful for analysis to add the failure reason to the comment.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">BACKUP DATA CLOSE SNAPSHOT BACKUP_ID 1400761459486 UNSUCCESSFUL 'Do not use - was manually terminated';</pre></div>
+
+		</div></div>
+
+		</div>
+
+	</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="BACKUP DATA CLOSE SNAPSHOT Statement (Backup and Recovery)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="You can debug and analyze SQLScript procedures in the editor or catalog of the SAP HANA Web-based Development Workbench."/>
+<meta name="description" content="You can debug and analyze SQLScript procedures in the editor or catalog of the SAP HANA Web-based Development Workbench."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=7364080945635172"/>
+<title>Debug Procedures</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20c54efad0a14879accf6290fdf674f1";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20c54efad0a14879accf6290fdf674f1">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Debug Procedures</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">You can debug and analyze SQLScript procedures in the editor or catalog of the SAP HANA
+		Web-based Development Workbench.</p>
+
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps" id="loio20c54efad0a14879accf6290fdf674f1__steps_qs2_5br_sq"><li class="li step stepexpand">
+				<span class="ph cmd">Open the <span class="ph pname">SAP HANA</span> Web-based Development Workbench editor or catalog.</span>
+				
+<div class="table-wrapper"><table border="1" frame="border" rules="rows" cellpadding="4" cellspacing="0" summary="" class="simpletable choicetable choicetableborder" id="loio20c54efad0a14879accf6290fdf674f1__choicetable_yjc_qst_yr">
+<thead><tr><th valign="bottom" align="left" id="d418024e26-option">Option</th>
+<th valign="bottom" align="left" id="d418024e26-desc">URL</th></tr></thead>
+<tbody>
+					
+					<tr class="strow chrow">
+						<td valign="top" headers="d418024e26-option" id="d418024e39" class="stentry choption" width="20%"><strong>Editor</strong></td>
+
+						<td valign="top" headers="d418024e26-desc d418024e39" class="stentry chdesc" width="80%">http://&lt;WebServerHost&gt;:80&lt;SAPHANAinstance&gt;/sap/hana/ide/editor</td>
+
+					</tr>
+
+					<tr class="strow chrow">
+						<td valign="top" headers="d418024e26-option" id="d418024e48" class="stentry choption" width="20%"><strong>Catalog</strong></td>
+
+						<td valign="top" headers="d418024e26-desc d418024e48" class="stentry chdesc" width="80%">http://&lt;WebServerHost&gt;:80&lt;SAPHANAinstance&gt;/sap/hana/ide/catalog</td>
+
+					</tr>
+
+				</tbody></table></div>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Get the current debug token.</span>
+				<div class="itemgroup info">When working in different browser windows (for example, editor and catalog), one of the
+					browsers might already be attached to the SQL debugger. By applying the current
+					debug token you can attach the SQL debugger to your current browser
+					session.</div>
+				<ol type="a" class="ol substeps" id="loio20c54efad0a14879accf6290fdf674f1__substeps_bgk_ntt_yr">
+					<li class="li substep">
+						<span class="ph cmd">Choose <img class="image" id="loio20c54efad0a14879accf6290fdf674f1__image_hrt_p5t_yr" src="loio9fd6f4cfba214660b3d60ab3f401e6ed_LowRes.png"/>
+								(<span class="ph uicontrol">Settings</span>) in the toolbar.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">Editor only: Switch to the <span class="ph uicontrol">SQL Debugger</span> tab.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">Select the <span class="ph uicontrol">Select a Debug Token</span> radio
+							button.</span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">To enter the debug token, choose <span class="ph uicontrol">Get Current Debug
+								Token</span>. </span>
+					</li>
+
+					<li class="li substep">
+						<span class="ph cmd">Apply your changes.</span>
+					</li>
+
+				</ol>
+
+				<div class="itemgroup info">
+					<div class="note note"><span class="notetitle">Note</span> 
+						<p class="p">If the debugger is bound to another browser, you can also detach it, that is, release the
+							debugger, by refreshing your current browser.</p>
+
+					</div>
+
+					<div class="note tip"><span class="tiptitle">Tip</span> 
+						<p class="p">When you work in different browsers (Chrome and Firefox, for example),
+							each browser debugs separately. To invoke a procedure in your current
+							browser and debug it in another one, get the debug token of your current
+							browser and apply it in the other browser. Note that you might have to
+							refresh your current browser before giving the debug token to the other
+							browser.</p>
+
+					</div>
+
+				</div>
+			</li>
+<li class="li step stepexpand" id="loio20c54efad0a14879accf6290fdf674f1__step_N10020_N1001D_N10012_N10001">
+				<span class="ph cmd">Open a procedure. </span>
+				
+<div class="table-wrapper"><table border="1" frame="border" rules="rows" cellpadding="4" cellspacing="0" summary="" class="simpletable choicetable choicetableborder" id="loio20c54efad0a14879accf6290fdf674f1__choicetable_qzk_xst_yr">
+<thead><tr><th valign="bottom" align="left" id="d418024e133-option">Option</th>
+<th valign="bottom" align="left" id="d418024e133-desc">Description</th></tr></thead>
+<tbody>
+					
+					<tr class="strow chrow">
+						<td valign="top" headers="d418024e133-option" id="d418024e146" class="stentry choption" width="20%"><strong>Editor</strong></td>
+
+						<td valign="top" headers="d418024e133-desc d418024e146" class="stentry chdesc" width="80%">In the <span class="ph uicontrol">Content</span> tree, select the procedure to open it in the
+							code editor.</td>
+
+					</tr>
+
+					<tr class="strow chrow">
+						<td valign="top" headers="d418024e133-option" id="d418024e158" class="stentry choption" width="20%"><strong>Catalog</strong></td>
+
+						<td valign="top" headers="d418024e133-desc d418024e158" class="stentry chdesc" width="80%">In the catalog, expand the <span class="ph menucascade"><img src="images/navstart.gif" alt="Start of the navigation path" title="Start of the navigation path"/> <span class="ph uicontrol">&lt;schema&gt;</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">Procedures</span> <img src="images/navend.gif" alt="End of the navigation path" title="End of the navigation path"/></span> node and select the procedure.<p class="p">The source code appears
+								in the stored procedure viewer. It is read-only but you can set
+								breakpoints.</p>
+</td>
+
+					</tr>
+
+				</tbody></table></div>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Add breakpoints in the source code. </span>
+				<div class="itemgroup info">Set a breakpoint in front of a code line by clicking the line number, as shown in the
+					example below: <p class="p"><img class="image" id="loio20c54efad0a14879accf6290fdf674f1__image_szh_pqw_sq" src="loio7ed035969e494a8e9bdaf85af3bfad53_LowRes.png"/></p>
+</div>
+			</li>
+<li class="li step stepexpand" id="loio20c54efad0a14879accf6290fdf674f1__step_N10048_N10030_N10012_N10001">
+				<span class="ph cmd">Start a debug session.</span>
+				<ol type="a" class="ol substeps" id="loio20c54efad0a14879accf6290fdf674f1__substeps_pzx_g2r_sq">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the toolbar, choose <img class="image" id="loio20c54efad0a14879accf6290fdf674f1__image_cv5_s1l_vq" src="loio79701e1b6b8a4d879ddfe3c4ca69c0fb_LowRes.png"/> (<span class="ph uicontrol">Invoke
+							Procedure</span>).</span>
+						<div class="itemgroup stepresult">The SQL editor opens.</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Enter values for any input parameters.</span>
+						<div class="itemgroup info">
+							<div class="note note"><span class="notetitle">Note</span> For scalar types, insert a value. For table types,
+								enter the name of a catalog table
+								(<samp class="ph codeph">schema.tablename</samp>) that contains the relevant
+								input. For example, <samp class="ph codeph">SYS.USERS</samp>.</div>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Choose <img class="image" id="loio20c54efad0a14879accf6290fdf674f1__image_qfr_nqw_sq" src="loioa77ce732d6804f7f83be457fba1a5d62_LowRes.png"/>
+								(<span class="ph uicontrol">Run</span>) in the toolbar.</span>
+					</li>
+
+				</ol>
+
+				<div class="itemgroup info">
+					<p class="p">The debug session begins and the SQL debug browser opens on the right,
+						showing the status of the session. The debugger will stop at the first
+						breakpoint and the session will be suspended until you resume it.</p>
+
+					<div class="p">You can see a list of all of the breakpoints on the
+							<span class="ph uicontrol">Breakpoints</span> tab. From the
+							<span class="ph uicontrol">Breakpoints</span> tab, you can:<ul class="ul" id="loio20c54efad0a14879accf6290fdf674f1__ul_shr_nzt_yr">
+							<li class="li">Disable specific breakpoints or disable all of them.</li>
+
+							<li class="li">Remove specific breakpoints or remove all of them.</li>
+
+							<li class="li">Click a breakpoint to see which line it belongs to in the source
+								code.</li>
+
+						</ul>
+</div>
+
+				</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Add an expression.</span>
+				<ol type="a" class="ol substeps" id="loio20c54efad0a14879accf6290fdf674f1__substeps_ejp_rxt_yr">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Choose <img class="image" id="loio20c54efad0a14879accf6290fdf674f1__image_dz5_5wb_qr" src="loio8af54a6de2cd4383bb5e815ee7e3be46_LowRes.png"/> (<span class="ph uicontrol">Toggle
+								Expression Editor</span>) or choose <span class="ph uicontrol">Add
+								Expression</span> from the context menu of a variable you want
+							to investigate further.</span>
+						<div class="itemgroup stepresult">The Expression Editor opens. </div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Edit the expression.</span>
+						<div class="itemgroup info">
+							<div class="p">The following types of SQL expression are supported:
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20c54efad0a14879accf6290fdf674f1__table_umj_5nq_bs" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+										
+										
+										<thead class="thead" align="left">
+											<tr class="row">
+												<th class="entry" valign="top" width="50%" id="d418024e313">SQL Expression</th>
+
+												<th class="entry" valign="top" width="50%" id="d418024e316">Example</th>
+
+											</tr>
+
+										</thead>
+
+										<tbody class="tbody">
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d418024e313 ">Variable name</td>
+
+												<td class="entry" valign="top" width="50%" headers="d418024e316 ">v_index1</td>
+
+											</tr>
+
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d418024e313 ">&lt;expression&gt; &lt;operator&gt; &lt;expression&gt;</td>
+
+												<td class="entry" valign="top" width="50%" headers="d418024e316 ">v_index1 + v_index2 <p class="p">v_msg || 'ABCD'</p>
+</td>
+
+											</tr>
+
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d418024e313 ">Condition expression</td>
+
+												<td class="entry" valign="top" width="50%" headers="d418024e316 ">v_index1 &gt; 0 -&gt; return 0 (false) or 1 (true)</td>
+
+											</tr>
+
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d418024e313 ">Function expression</td>
+
+												<td class="entry" valign="top" width="50%" headers="d418024e316 ">substr(v_msg, 2)</td>
+
+											</tr>
+
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d418024e313 ">Aggregate expression</td>
+
+												<td class="entry" valign="top" width="50%" headers="d418024e316 ">select COUNT(*) from msgtable <p class="p">select SUM(T.amount) from msgtable T</p>
+</td>
+
+											</tr>
+
+											<tr class="row">
+												<td class="entry" valign="top" width="50%" headers="d418024e313 ">Column name<p class="p">&lt;table_variable&gt;.&lt;column_name&gt; </p>
+</td>
+
+												<td class="entry" valign="top" width="50%" headers="d418024e316 ">msgtable.amount <p class="p">select * from &lt;table_variable&gt;</p>
+</td>
+
+											</tr>
+
+										</tbody>
+
+									</table>
+</div>
+</div>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Press <kbd class="key">ENTER</kbd>. </span>
+						<div class="itemgroup stepresult">The expression is now listed under the
+								<span class="ph uicontrol">Expressions</span> node.</div>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Choose <img class="image" id="loio20c54efad0a14879accf6290fdf674f1__image_lfl_dnq_bs" src="loio8694d3158bb54e02a5d03ab69cb4e42b_LowRes.gif"/> (<span class="ph uicontrol">Resume</span>) or <img class="image" id="loio20c54efad0a14879accf6290fdf674f1__image_dlh_m1l_qr" src="loio885ca751548c46979b50a226c3699dc2_LowRes.png"/>
+						(<span class="ph uicontrol">Step over</span>) to step through the code execution. </span>
+				
+<div class="table-wrapper"><table border="1" frame="border" rules="rows" cellpadding="4" cellspacing="0" summary="" class="simpletable choicetable choicetableborder" id="loio20c54efad0a14879accf6290fdf674f1__choicetable_rql_twt_yr">
+<thead><tr><th valign="bottom" align="left" id="d418024e423-option">Option</th>
+<th valign="bottom" align="left" id="d418024e423-desc">Description</th></tr></thead>
+<tbody>
+					
+					<tr class="strow chrow">
+						<td valign="top" headers="d418024e423-option" id="d418024e436" class="stentry choption" width="41.1522633744856%"><strong>
+							<p class="p"><img class="image" id="loio20c54efad0a14879accf6290fdf674f1__image_njl_dnq_bs" src="loio8694d3158bb54e02a5d03ab69cb4e42b_LowRes.gif"/> (<span class="ph uicontrol">Resume</span>)</p>
+
+						</strong></td>
+
+						<td valign="top" headers="d418024e423-desc d418024e436" class="stentry chdesc" width="58.84773662551441%">
+							<p class="p">Continues execution to the next breakpoint</p>
+
+						</td>
+
+					</tr>
+
+					<tr class="strow chrow">
+						<td valign="top" headers="d418024e423-option" id="d418024e455" class="stentry choption" width="41.1522633744856%"><strong>
+							<p class="p"><img class="image" id="loio20c54efad0a14879accf6290fdf674f1__image_ekl_dnq_bs" src="loio885ca751548c46979b50a226c3699dc2_LowRes.png"/> (<span class="ph uicontrol">Step over</span>)</p>
+
+						</strong></td>
+
+						<td valign="top" headers="d418024e423-desc d418024e455" class="stentry chdesc" width="58.84773662551441%">
+							<p class="p">Steps through the code line-by-line</p>
+
+						</td>
+
+					</tr>
+
+				</tbody></table></div>
+
+				<div class="itemgroup info">You can evaluate your local scalar and table variables in the top pane under
+					the <span class="ph uicontrol">Variables</span> node. It shows the values of the scalar
+					variables and the number of rows in each table.<p class="p">Under the
+							<span class="ph uicontrol">Expressions</span> node, you can see the values of the
+						expressions you added. To view the content of tables, choose
+							<span class="ph uicontrol">Display Content </span> from the context menu of the
+						expression. The results are shown on the <span class="ph uicontrol">Expression
+							Result</span> tab.</p>
+</div>
+			</li>
+<li class="li step stepexpand" id="loio20c54efad0a14879accf6290fdf674f1__step_N100D1_N10030_N10012_N10001">
+				<span class="ph cmd">View the content of the tables listed under the <span class="ph uicontrol">Variables</span> node. </span>
+				<div class="itemgroup info">Select a table and from the context menu choose <span class="ph uicontrol">Display Content</span>.
+					The results are shown on a separate tab named according to the table.</div>
+			</li>
+</ol>
+
+		<div class="section result" id="loio20c54efad0a14879accf6290fdf674f1__result_N10148_N10016_N10001"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Results</h2></div>
+			<p class="p">The debug session is terminated when the procedure run has finished.</p>
+
+		</div>
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Debug Procedures";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

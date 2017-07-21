@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Provides common data for all backup catalog entries."/>
+<meta name="description" content="Provides common data for all backup catalog entries."/>
+<meta name="keywords" content="M_BACKUP_CATALOG"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=45892812246344983"/>
+<title>M_BACKUP_CATALOG System View</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20a8437d7519101495a3fa7ad9961cf6";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20a8437d7519101495a3fa7ad9961cf6">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">M_BACKUP_CATALOG System View</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Provides common data for all backup catalog entries.</p>
+
+      <div class="section" id="loio20a8437d7519101495a3fa7ad9961cf6___m__b_a_c_k_u_p__c_a_t_a_l_o_g_1struct_M_BACKUP_CATALOG"><div class="section_title">Structure</div><div type="Structure">
+         
+         
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20a8437d7519101495a3fa7ad9961cf6__table_bwq_qtn_cw" class="table" frame="border" border="1" rules="all">
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" id="d5729685e44">
+                        <p class="p">Column name</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d5729685e50">
+                        <p class="p">Data type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d5729685e56">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">ENTRY_ID</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">Specifies the unique ID of a backup catalog entry.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">ENTRY_TYPE_NAME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">VARCHAR(64)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">Specifies the classification of backup catalog entries. The following
+                           types are supported: complete data backup, data snapshot, log backup, log
+                           missing, differential, and incremental backups </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">BACKUP_ID</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">Specifies the unique ID of a data backup or a log backup, respectively.
+                           All backup files of a single data backup share the same BACKUP_ID.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">SYS_START_TIME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">TIMESTAMP</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">Specifies the start time given in server local time.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">UTC_START_TIME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">TIMESTAMP</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">Specifies the start time given in UTC.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">SYS_END_TIME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">TIMESTAMP</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">Specifies the stop time given in server local time.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">UTC_END_TIME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">TIMESTAMP</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">Specifies the stop time given in UTC.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">STATE_NAME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">VARCHAR(64)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">Specifies the result of the corresponding action: successful, failed,
+                           running, cancel pending, or canceled.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">COMMENT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">VARCHAR(256)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">Specifies any additional information.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">MESSAGE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">VARCHAR(512)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">Specifies any additional information.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">SYSTEM_ID</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">VARCHAR(3)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">Specifies the system identifier (SID) of the SAP HANA database.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">ENCRYPTION_ROOT_KEY_HASH</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">VARCHAR(64)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">Specifies the key used, if any, for encrypting the backup.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">SOURCE_DATABASE_NAME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">NVARCHAR(256)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d5729685e44 d5729685e50 d5729685e56 ">
+                        <p class="p">Specifies the name of the database that creates the backup.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div></div>
+
+   </div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="M_BACKUP_CATALOG System View";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="SAP HANA uses roles to control access to the Web-based tool that enable you to maintain important parts of the application-development environment, for example, security and authentication methods."/>
+<meta name="description" content="SAP HANA uses roles to control access to the Web-based tool that enable you to maintain important parts of the application-development environment, for example, security and authentication methods."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=33820779489226727"/>
+<title>SAP HANA XS Administration Roles</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio9fdfbe396db9496c993779db91df01aa";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio9fdfbe396db9496c993779db91df01aa">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">SAP HANA XS Administration Roles</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc"><span class="ph pname">SAP HANA</span> uses roles to control access to the Web-based tool that enable
+		you to maintain important parts of the application-development environment, for example,
+		security and authentication methods.</p>
+
+		<div class="section" id="loio9fdfbe396db9496c993779db91df01aa__section_N10018_N10015_N10001">
+			<p class="p">When using the Web-based tools provided by SAP HANA XS, the availability of features, screens,
+				tabs, and UI controls (for example, <span class="ph uicontrol">Add</span>,
+					<span class="ph uicontrol">Edit</span>, or <span class="ph uicontrol">Save</span>, or
+					<span class="ph uicontrol">Delete</span> buttons) is based on privileges. For the sake of
+				convenience, the specific privileges required to use the features provided with a
+				particular tool have been collected into a selection of specific roles, which you
+				assign to the user who wants to use a tool. For example, a user assigned the role
+					<span class="ph uicontrol">sap.hana.xs.admin.roles::HTTPDestViewer</span> can display HTTP
+				destinations but not change them in any way; a user assigned the role
+					<span class="ph uicontrol">sap.hana.xs.admin.roles::SQLCCAdministrator</span> can view SQL
+				connection configurations and modify them, too.</p>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio9fdfbe396db9496c993779db91df01aa__table_owq_lqv_jk" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: SAP HANA XS Administration Tools Roles</span></caption>
+<colgroup><col width="25%"/><col width="75%"/></colgroup>
+
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="25%" id="d2320427e57"><span class="ph pname">SAP HANA</span> XS Role</th>
+
+							<th class="entry" valign="top" width="75%" id="d2320427e62">Description</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d2320427e57 ">HTTPDestAdministrator</td>
+
+							<td class="entry" valign="top" width="75%" headers="d2320427e62 ">Full access to the details of HTTP destination configurations (display and
+								edit)</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d2320427e57 ">HTTPDestViewer</td>
+
+							<td class="entry" valign="top" width="75%" headers="d2320427e62 ">Read-only access to HTTP destination configurations, which are
+								used to specify connection details for outbound connections, for
+								example, using the server-side JavaScript Connectivity API that is
+								included with <span class="ph pname">SAP HANA</span> XS.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d2320427e57 ">RuntimeConfAdministrator</td>
+
+							<td class="entry" valign="top" width="75%" headers="d2320427e62 ">Full access to the configuration settings for <span class="ph pname">SAP
+								HANA</span> XS application security and the related
+								user-authentication providers.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d2320427e57 ">RuntimeConfViewer</td>
+
+							<td class="entry" valign="top" width="75%" headers="d2320427e62 ">Read-only access to the configuration settings for <span class="ph pname">SAP
+									HANA</span> XS application security and the related
+								user-authentication providers, for example, SAML or X509.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d2320427e57 ">JobAdministrator</td>
+
+							<td class="entry" valign="top" width="75%" headers="d2320427e62 ">Full access to the configuration settings for <span class="ph pname">SAP
+									HANA</span> XS job schedules (defined in
+									<span class="ph filepath">.xsjob</span> files); you can specify start/stop
+								times, the user account to run the job, and the language
+								locale.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d2320427e57 ">JobViewer</td>
+
+							<td class="entry" valign="top" width="75%" headers="d2320427e62 ">Read-only access to the configuration settings for <span class="ph pname">SAP
+									HANA</span> XS job schedules (defined in
+									<span class="ph filepath">.xsjob</span> files).</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d2320427e57 ">JobScheduleAdministrator</td>
+
+							<td class="entry" valign="top" width="75%" headers="d2320427e62 ">Full access to the <span class="ph uicontrol">XS Job Dashboard</span> tool,
+								which you can use to add and delete XS job schedules, maintain
+								individual schedules, and enable the scheduling feature.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d2320427e57 ">oAuthAdmin</td>
+
+							<td class="entry" valign="top" width="75%" headers="d2320427e62 ">Required when setting the client secret during administration of the OAuth client
+								configuration (<span class="ph filepath">.xsoauthclientconfig</span>)
+								artifact.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d2320427e57 ">SAMLAdministrator</td>
+
+							<td class="entry" valign="top" width="75%" headers="d2320427e62 ">Full access to the details of SAML configurations, including both the service provider
+								and the identity providers. You can add new entries and make changes
+								to existing service or identity providers and parse the resulting
+								metadata.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d2320427e57 ">SAMLViewer</td>
+
+							<td class="entry" valign="top" width="75%" headers="d2320427e62 ">Read-only access to SAML configurations, which are used to
+								provide details of SAML service providers and identity providers.
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d2320427e57 ">SMTPDestAdministrator</td>
+
+							<td class="entry" valign="top" width="75%" headers="d2320427e62 ">Full access to the details of SMTP destination configurations, which are used to
+								define details of the SMTP relay server that <span class="ph pname">SAP HANA</span>
+								XS applications use to send e-mails. The administrator role enables
+								you to add new entries and make changes to an existing
+								configuration, for example, the host name and port number, logon
+								credentials and authentication type, and any transport security
+								settings.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d2320427e57 ">SMTPDestViewer</td>
+
+							<td class="entry" valign="top" width="75%" headers="d2320427e62 ">Read-only access to SMTP destination configurations, which are
+								used to define details of the  SMTP relay server that <span class="ph pname">SAP
+									HANA</span> XS applications can use to send e-mails.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d2320427e57 ">SQLCCAdministrator</td>
+
+							<td class="entry" valign="top" width="75%" headers="d2320427e62 ">Full access to the details of SQL connection configurations (SQLCC).</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d2320427e57 ">SQLCCViewer</td>
+
+							<td class="entry" valign="top" width="75%" headers="d2320427e62 ">Read-only access to SQL connection configurations (SQLCC), which are used to enable
+								the execution of SQL statements from inside your server-side
+								JavaScript application with credentials that are different to the
+								credentials of the requesting user. </td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d2320427e57 ">TrustStoreAdministrator</td>
+
+							<td class="entry" valign="top" width="75%" headers="d2320427e62 ">Full access to the <span class="ph pname">SAP HANA</span> XS <span class="ph uicontrol">Trust Manager</span>
+								tool, which the administrator uses to maintain secure
+									<span class="ph emphasis emphasis">outbound</span> communication, for example, the
+								SSL/TLS certificates required by <span class="ph pname">SAP HANA</span> XS
+								applications that connect to an ABAP system.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d2320427e57 ">TrustStoreViewer</td>
+
+							<td class="entry" valign="top" width="75%" headers="d2320427e62 ">Read-only access to the trust store, which contains the server's
+								root certificate or the certificate of the certification authority
+								that signed the server’s certificate.</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div>
+
+		<div class="section" id="loio9fdfbe396db9496c993779db91df01aa__section_vxw_5mj_qr"><div class="section_title">Additional SAP HANA XS Roles</div><div type="Additional SAP HANA XS Roles">
+			
+			<p class="p">The following table lists roles for tools that are not strictly part of the SAP HANA
+				XS Administration toolset. The roles are included here for the sake of convenience
+				and because the roles, and the tools to which they correspond, are (with the
+				exception of the <span class="ph uicontrol">WebDispatcherAdmin/Viewer</span>) installed with
+				the delivery unit which contains the XS Administration tools.</p>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio9fdfbe396db9496c993779db91df01aa__table_zm5_1jj_qr" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 2: Additional Roles for SAP HANA XS Administration Toos</span></caption>
+<colgroup><col width="40%"/><col width="60%"/></colgroup>
+
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="40%" id="d2320427e290"><span class="ph pname">SAP HANA</span> XS Role</th>
+
+							<th class="entry" valign="top" width="60%" id="d2320427e295">Description</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="40%" headers="d2320427e290 ">translator</td>
+
+							<td class="entry" valign="top" width="60%" headers="d2320427e295 ">The role <span class="ph uicontrol">sap.hana.xs.translationTool.roles::translator</span> enables
+								an SAP HANA user to maintain translation text strings with the SAP
+								HANA Online Translation Tool.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="40%" headers="d2320427e290 ">USSAdministrator</td>
+
+							<td class="entry" valign="top" width="60%" headers="d2320427e295 ">The role <span class="ph uicontrol">sap.hana.xs.selfService.admin.roles::USSAdministrator</span>
+								is assigned to the user responsible for administrating the requests
+								sent by users using self-service tools. For example, it enables the
+								activation of users who request a new user account in the <span class="ph pname">SAP
+									HANA</span> database and allows the user-self-service
+								administrator to manage self-service-specific blacklists for users,
+								e-mail addresses, domains, and IP addresses. </td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="40%" headers="d2320427e290 ">USSExecutor</td>
+
+							<td class="entry" valign="top" width="60%" headers="d2320427e295 ">The role <span class="ph uicontrol">sap.hana.xs.selfService.user.roles::USSExecutor</span> is
+								assigned to the technical user that is used to respond to and
+								execute user-self-service requests, for example, to create an new
+								account or request a new password</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="40%" headers="d2320427e290 ">WebDispatcherAdmin</td>
+
+							<td class="entry" valign="top" width="60%" headers="d2320427e295 ">The role
+									<span class="ph uicontrol">sap.hana.xs.wdisp.admin::WebDispatcherAdmin</span>
+								enables full access to the <span class="ph pname">SAP HANA</span>
+								<span class="ph uicontrol">Web Dispatcher Administration</span> tool, which the
+								administrator uses to maintain secure <span class="ph emphasis emphasis">inbound</span>
+								communication, for example, to enable SSL/TLS connections between an
+								ABAP system and an <span class="ph pname">SAP HANA</span> XS application. </td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="40%" headers="d2320427e290 ">WebDispatcherMonitor</td>
+
+							<td class="entry" valign="top" width="60%" headers="d2320427e295 ">The role
+									<span class="ph uicontrol">sap.hana.xs.wdisp.admin::WebDispatcherMonitor</span>
+								enables read-only access to the information displayed in the
+									<span class="ph pname">SAP HANA</span>
+								<span class="ph uicontrol">Web Dispatcher Administration</span> tool.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="40%" headers="d2320427e290 ">WebDispatcherHTTPTracingViewer </td>
+
+							<td class="entry" valign="top" width="60%" headers="d2320427e295 ">Read-only access to the HTTP setting of SAP HANA XS applications running on the
+								selected SAP HANA instance. This role extends the JobViewer role to
+								enable the user to view details of the xsjob configuration
+									(<span class="ph filepath">httptracing.xsjob</span>) that starts and stops
+								the HTTP tracing tasks.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="40%" headers="d2320427e290 ">WebDispatcherHTTPTracingAdministrator</td>
+
+							<td class="entry" valign="top" width="60%" headers="d2320427e295 ">Full access required to maintain HTTP tracing on the SAP Web Dispatcher for SAP HANA
+								XS applications. This role extends the
+									<span class="ph uicontrol">JobAdministrator</span> role to enable the user
+								to maintain the XS job file (<span class="ph filepath">httptracing.xsjob</span>)
+								used to configure and enable HTTP tracing for XS applications on the
+								SAP Web Dispatcher.</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="SAP HANA XS Administration Roles";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Maintain translations for text strings displayed in an SAP HANA application's user interface."/>
+<meta name="description" content="Maintain translations for text strings displayed in an SAP HANA application's user interface."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=4384196171954944"/>
+<title>Create and Edit Text Translations</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio5e593196ba9f49dea67fa63b475c941e";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio5e593196ba9f49dea67fa63b475c941e">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Create and Edit Text Translations</h1>
+
+	
+	<div class="body taskbody"><p class="shortdesc">Maintain translations for text strings displayed in an SAP HANA application's user
+		interface.</p>
+
+		<div class="section prereq p"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Prerequisites</h2></div>
+			<p class="p">To maintain translated text for an application in <span class="ph pname">SAP HANA</span> XS, the
+				following prerequisites apply:</p>
+
+			<ul class="ul" id="loio5e593196ba9f49dea67fa63b475c941e__ul_id3_h2z_1m">
+				<li class="li">You have access to an <span class="ph pname">SAP HANA</span> system</li>
+
+				<li class="li">You have the privileges required to access the repository packages containing the text
+					strings to be localised/translated</li>
+
+				<li class="li">You have been granted the privileges assigned in the following <span class="ph pname">SAP HANA</span> user
+						roles:<ul class="ul" id="loio5e593196ba9f49dea67fa63b475c941e__ul_wst_ydj_qr">
+						<li class="li"><span class="ph uicontrol">sap.hana.xs.translationTool.roles::translator </span></li>
+
+					</ul>
+</li>
+
+				<li class="li">If you want to make use of optional external translation services, you must maintain access
+					to the translation server system. <div class="note restriction"><span class="restrictiontitle">Restriction</span> Access to external
+						translation services is not granted in the SAP HANA license. To use external
+						translation services such as the <cite class="cite">SAP Translation Hub</cite>, an
+						additional license is required. The <cite class="cite">SAP Translation Hub</cite> is
+						currently available only for BETA testing.</div>
+<p class="p">Details of the remote
+						systems where the translation service is running (for example, SAP
+						Translation Hub) are defined in HTTP destination configuration files along
+						with details of any corresponding user account and authentication
+						certificates.</p>
+</li>
+
+			</ul>
+
+		</div>
+
+		<div class="section context"><div class="tasklabel"><h2 class="sectiontitle tasklabel">Context</h2></div>
+			<p class="p">An application's user interface and notifications can be translated from the original source
+				language (for example, English) into one or more local (target) languages, for
+				example, French, Spanish, or Japanese. You can either translate the texts manually
+				or with the help of an (optional) external translation service. To provide
+				translations of the UI text strings for your SAP HANA application, perform the
+				following steps:</p>
+
+		</div>
+		<div class="ol steps tasklabel"><h2 class="sectiontitle tasklabel">Procedure</h2></div><ol class="ol steps"><li class="li step stepexpand">
+				<span class="ph cmd">Start the <span class="keyword uilabel">SAP HANA Online Translation Tool</span>.</span>
+				<div class="itemgroup info">The <span class="keyword uilabel">SAP HANA Online Translation Tool</span> tool is available on the
+						<span class="ph pname">SAP HANA</span> XS Web server at the following URL:
+							<span class="ph filepath">http://<var class="keyword varname">&lt;WebServerHost&gt;</var>:80<var class="keyword varname">&lt;SAPHANAinstance&gt;</var>/sap/hana/xs/translationTool</span>.<div class="note note" id="loio5e593196ba9f49dea67fa63b475c941e__note_N1003F_N1002C_N10021_N1001E_N10012_N10001"><span class="notetitle">Note</span> In the default
+						configuration, the URL redirects the request to a logon screen, which
+						requires the credentials of an authenticated <span class="ph pname">SAP HANA</span>
+						database user to complete the logon process. The user who logs on must also
+						have the privileges required to perform the tasks associated with the
+						maintenance of translation texts.</div>
+</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Select the delivery unit that contains the application with the text strings
+					you want to translate.</span>
+				<div class="itemgroup info">
+					<p class="p">Use the <span class="ph uicontrol">Delivery Unit</span> drop-down list to select a
+						delivery unit.</p>
+
+					<div class="note tip"><span class="tiptitle">Tip</span> 
+						<p class="p">The name of the vendor associated with the selected delivery unit is displayed
+							automatically in the <span class="ph uicontrol">Vendor</span> field, for example,
+								<span class="ph uicontrol">acme.com</span>; the vendor name cannot be changed
+							here.</p>
+
+					</div>
+
+				</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Select the package that contains the text strings you want to translate.</span>
+				<div class="itemgroup info">
+					<p class="p">Use the <span class="ph uicontrol">Package</span> drop-down list to select a package. If the selected
+						package contains text elements, they are displayed alphabetically in a
+						list.</p>
+
+					<div class="note tip"><span class="tiptitle">Tip</span> 
+						<p class="p">The original source language associated with the contents of the selected
+							package is displayed automatically.</p>
+
+					</div>
+
+				</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Enable access to a text-translation service, for example, <cite class="cite">SAP Translation Hub</cite>.
+						(<span class="ph emphasis emphasis">optional</span>).</span>
+				<div class="itemgroup info"><div class="note restriction"><span class="restrictiontitle">Restriction</span> Access to external translation services is not granted in the SAP
+						HANA license. To use external translation services, an additional license is
+						required.</div>
+If you want to make user of the services provided by a
+					translation server, you need to maintain an HTTP destination
+						<span class="ph emphasis emphasis">extension</span> that provide details of the host system where
+					the translation service is running; access to the translation service usually
+					requires a user account and logon authentication. You must also ensure that a
+					trust relationship exists between the translation server and SAP HANA, for
+					example, by importing the translation server's client certificate into the SAP
+					HANA trust store that you are using to handle authentication for this HTTP
+						destination.<p class="p">The HTTP destination configuration
+							<span class="ph filepath">sap.hana.xs.translationTool.server:translationService.xshttpdest</span>
+						defines details of the server hosting the SAP Translation Hub service.
+						Although you cannot edit this destination configuration, note that you can
+						use an HTTP destination <span class="ph emphasis emphasis">extension</span> to change the
+						details, for example, to point to an alternative host name.</p>
+</div>
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Add a translation for a text element.</span>
+				<div class="itemgroup info">
+					<p class="p">For a given text element in the <span class="ph uicontrol">Text ID</span> list, you can
+						provide a suitable translation in one or more languages, for example: French
+							(<span class="ph uicontrol">fr</span>), Spanish (<span class="ph uicontrol">es</span>), and
+						Japanese (<span class="ph uicontrol">ja</span>). </p>
+
+				</div>
+				<ol type="a" class="ol substeps" id="loio5e593196ba9f49dea67fa63b475c941e__substeps_h51_dz3_qr">
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Expand the desired UI text element.</span>
+						<div class="itemgroup info">
+							<p class="p">In the <span class="ph uicontrol">Text ID</span> list, locate and expand the
+								element for which you want to provide a translation.</p>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Add a translation. </span>
+						<div class="itemgroup info">
+							<p class="p">Choose <span class="ph uicontrol">Add Translation</span>.</p>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Select the desired language for the translation from the
+								<span class="ph uicontrol">Target Language</span> drop-down list.</span>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">In the <span class="ph uicontrol">Target Language Text</span> box, type the
+							translation for the selected text element.</span>
+						<div class="itemgroup info">
+							<div class="note tip"><span class="tiptitle">Tip</span> 
+								<p class="p">If the <span class="ph uicontrol">SAP Translation Hub</span> option is enabled, language-specific
+									suggestions for possible translation matches are provided as you
+									type. If you see a suggestion that is suitable, use the mouse to
+									select the suggested text.</p>
+
+							</div>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Add another translation.</span>
+						<div class="itemgroup info">
+							<p class="p">Choose <span class="ph uicontrol">Add Translation</span></p>
+
+						</div>
+					</li>
+
+					<li class="li substep substepexpand">
+						<span class="ph cmd">Edit an existing translation</span>
+						<div class="itemgroup info">
+							<p class="p">Choose the <span class="ph uicontrol">Edit</span> icon next to the translation
+								you want to modify and make the required changes.</p>
+
+						</div>
+					</li>
+
+				</ol>
+
+			</li>
+<li class="li step stepexpand">
+				<span class="ph cmd">Save your additions and changes.</span>
+				<div class="itemgroup info">
+					<p class="p">Choose <span class="ph uicontrol">Save</span> to store the added translations or any modifications in
+						the appropriate tables in the SAP HANA database.</p>
+
+				</div>
+			</li>
+</ol>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?dc638ee69433417f80c86b6348237769.html" target="_top" title="Display details of the source text for an application's user interface elements and, if available, any available translations.">Online Translation Tool Details</a></div>
+<div><a class="link" href="default.html?4384c596a4c144e39ee275c4421c7967.html" target="_top" title="Transport text translations between systems using the industry-standard, XML-based xliff format.">Export and Import Translated Text</a></div>
+<div><a class="link" href="default.html?1aa9a3a2e3534c739028b06ed8345d6a.html" target="_top" title="An HTTP destination defines connection details for services running on a specific host, whose details you want to define and distribute. The HTTP destination can be referenced by an application.">Edit an HTTP Destination Runtime Configuration</a></div>
+<div><a class="link" href="default.html?dbe18cbe48004d5f90a6c6c35680adb0.html" target="_top" title="Trust relationships enable you to establish secure connections between known servers whose identity can be confirmed by a signed certificate. The certificates are stored in a trust store.">Managing Trust Relationships</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Create and Edit Text Translations";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

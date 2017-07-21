@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Create a new measure column and calculate its value at runtime based on the result of an expression."/>
+<meta name="description" content="Create a new measure column and calculate its value at runtime based on the result of an expression."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=5200501688548044"/>
+<title>Example: Calculated Measures</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio24f2c33d95c14a1d8f281f68838f5ff4";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio24f2c33d95c14a1d8f281f68838f5ff4">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Example: Calculated Measures</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">Create a new measure column and calculate its value at runtime based on the result of an
+		expression.</p>
+
+		<div class="section">
+			<p class="p">For example, consider a business scenario where you want to create a new calculated measure
+				column, PRODUCT_PROFIT_PERCENT within an aggregation node. This measure column
+				stores the profit of a product in percentage.</p>
+
+			<p class="p">Consider the sales transaction table, SALES_TRANSACTION with columns,  PRODUCT_ID,
+				PRODUCT_COST_PRICE and PRODUCT_SALES_PRICE.</p>
+
+			<p class="p"><span class="ph emphasis emphasis">SALES_TRANSACTION</span></p>
+
+			<div class="p">
+				<div class="table-wrapper"><table summary="" id="loio24f2c33d95c14a1d8f281f68838f5ff4__simpletable_dts_1nh_gs" border="1" class="simpletable"><tr class="sthead">
+						<th valign="bottom" align="left" id="d237270e45" class="stentry" width="33.333333333333336%">
+							<p class="p">PRODUCT_ID</p>
+
+						</th>
+
+						<th valign="bottom" align="left" id="d237270e51" class="stentry" width="33.333333333333336%">
+							<p class="p">PRODUCT_COST_PRICE</p>
+
+						</th>
+
+						<th valign="bottom" align="left" id="d237270e57" class="stentry" width="33.333333333333336%">
+							<p class="p">PRODUCT_SALES_PRICE</p>
+
+						</th>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d237270e45" class="stentry">
+							<p class="p">P1</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e51" class="stentry">
+							<p class="p"> 30000</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e57" class="stentry">
+							<p class="p">32000</p>
+
+						</td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d237270e45" class="stentry">
+							<p class="p">P2</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e51" class="stentry">
+							<p class="p">32000</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e57" class="stentry">
+							<p class="p">24000</p>
+
+						</td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d237270e45" class="stentry">
+							<p class="p">P3</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e51" class="stentry">
+							<p class="p">40000</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e57" class="stentry">
+							<p class="p">41000</p>
+
+						</td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d237270e45" class="stentry">
+							<p class="p">P4</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e51" class="stentry">
+							<p class="p">10000</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e57" class="stentry">
+							<p class="p">11000</p>
+
+						</td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d237270e45" class="stentry">
+							<p class="p">P5</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e51" class="stentry">
+							<p class="p">14000</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e57" class="stentry">
+							<p class="p">13800</p>
+
+						</td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d237270e45" class="stentry">
+							<p class="p">P6</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e51" class="stentry">
+							<p class="p">18000</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e57" class="stentry">
+							<p class="p">17000</p>
+
+						</td>
+
+					</tr>
+</table></div>
+
+			</div>
+
+			<div class="p">Create a new calculated measure, PRODUCT_PROFIT_PERCENT using the expression:<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">(("PRODUCT_SALES_PRICE" - "PRODUCT_COST_PRICE")/"PRODUCT_COST_PRICE")*100</pre></div>
+
+				</div>
+</div>
+
+			<div class="p">Add the columns, PRODUCT_ID, PRODUCT_COST_PRICE, PRODUCT_SALES_PRICE and
+				PRODUCT_PROFIT_PERCENT to the output of aggregation view node. When you execute the
+				node, the output data is:<div class="table-wrapper"><table summary="" id="loio24f2c33d95c14a1d8f281f68838f5ff4__simpletable_ngg_x4h_gs" border="1" class="simpletable"><tr class="sthead">
+						<th valign="bottom" align="left" id="d237270e208" class="stentry" width="25%">
+							<p class="p">PRODUCT_ID</p>
+
+						</th>
+
+						<th valign="bottom" align="left" id="d237270e214" class="stentry" width="25%">
+							<p class="p">PRODUCT_COST_PRICE</p>
+
+						</th>
+
+						<th valign="bottom" align="left" id="d237270e220" class="stentry" width="25%">
+							<p class="p">PRODUCT_SALES_PRICE</p>
+
+						</th>
+
+						<th valign="bottom" align="left" id="d237270e226" class="stentry" width="25%">
+							<p class="p">PRODUCT_PROFIT_PERCENTAGE</p>
+
+						</th>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d237270e208" class="stentry">
+							<p class="p">P1</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e214" class="stentry">
+							<p class="p"> 30000</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e220" class="stentry">
+							<p class="p">32000</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e226" class="stentry">6.67</td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d237270e208" class="stentry">
+							<p class="p">P2</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e214" class="stentry">
+							<p class="p">32000</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e220" class="stentry">
+							<p class="p">24000</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e226" class="stentry">-4.00</td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d237270e208" class="stentry">
+							<p class="p">P3</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e214" class="stentry">
+							<p class="p">40000</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e220" class="stentry">
+							<p class="p">41000</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e226" class="stentry">2.50</td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d237270e208" class="stentry">
+							<p class="p">P4</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e214" class="stentry">
+							<p class="p">10000</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e220" class="stentry">
+							<p class="p">11000</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e226" class="stentry">10.00</td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d237270e208" class="stentry">
+							<p class="p">P5</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e214" class="stentry">
+							<p class="p">14000</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e220" class="stentry">
+							<p class="p">13800</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e226" class="stentry">-1.42</td>
+
+					</tr>
+<tr class="strow">
+						<td valign="top" headers="d237270e208" class="stentry">
+							<p class="p">P6</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e214" class="stentry">
+							<p class="p">18000</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e220" class="stentry">
+							<p class="p">17000</p>
+
+						</td>
+
+						<td valign="top" headers="d237270e226" class="stentry">-.56</td>
+
+					</tr>
+</table></div>
+</div>
+
+		</div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Example: Calculated Measures";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

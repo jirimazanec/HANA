@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Use this command to display and analyze dependencies of SAP HANA delivery units."/>
+<meta name="description" content="Use this command to display and analyze dependencies of SAP HANA delivery units."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=19003541787166733"/>
+<title>hdbalm dependencies Command</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio37b45309dc414d5dbf1498772c6d5b50";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio37b45309dc414d5dbf1498772c6d5b50">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">hdbalm dependencies Command</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">Use this command to display and analyze dependencies of <span class="ph pname">SAP HANA</span> delivery
+		units.</p>
+
+		<div class="section">
+			<div class="p">Use the following syntax for the <span class="keyword cmdname">dependencies</span>
+				command:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">hdbalm [<var class="keyword varname">&lt;general options&gt;</var>] dependencies [<var class="keyword varname">&lt;command option&gt;</var>]* [<var class="keyword varname">&lt;source du&gt;</var>] [<var class="keyword varname">&lt;source du vendor&gt;</var>] [<var class="keyword varname">&lt;target du&gt;</var>] [<var class="keyword varname">&lt;target du vendor&gt;</var>]</pre></div>
+</div>
+
+		</div>
+
+		<div class="section"><div class="section_title">Command options</div><div type="Command options">The following command options exist:
+<div class="table-wrapper tablenoborder"><table summary="" id="loio37b45309dc414d5dbf1498772c6d5b50__table_sxh_c2l_rp" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="50%"/><col width="50%"/></colgroup>
+
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="50%" id="d275340e65">Command Option</th>
+
+							<th class="entry" valign="top" width="50%" id="d275340e68">Description</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d275340e65 "><samp class="ph codeph">-f</samp>, <samp class="ph codeph">--full</samp></td>
+
+							<td class="entry" valign="top" width="50%" headers="d275340e68 ">Shows the full dependency view and analysis.</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d275340e65 "><samp class="ph codeph">-r</samp>, <samp class="ph codeph">--references</samp></td>
+
+							<td class="entry" valign="top" width="50%" headers="d275340e68 ">Shows object references between delivery units.<p class="p">This command
+									requires the name and vendor of the source and the target
+									delivery units.</p>
+</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="50%" headers="d275340e65 "><samp class="ph codeph">-n</samp>, <samp class="ph codeph">--nirvana</samp></td>
+
+							<td class="entry" valign="top" width="50%" headers="d275340e68 ">Shows nirvana references for a delivery unit.<p class="p">This option
+									displays object references for objects that are part of a
+									delivery unit to objects which are not part of a delivery unit.
+									If a delivery unit contains objects with these references, it
+									cannot be imported into another system.</p>
+</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+<div class="note note"><span class="notetitle">Note</span> If you do not specify any command options, a list of delivery unit
+				dependencies is displayed. Each line of the output lists a delivery unit followed by
+				a colon and a comma-separated list of referenced delivery
+				units.</div>
+<div class="note sap-example example"><span class="exampletitle">Example</span> To display the dependencies of the delivery unit
+					<samp class="ph codeph">HANA_XS_LM</samp>, you use the following
+				command:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">hdbalm dependencies HANA_XS_LM sap.com</pre></div>
+The delivery
+				unit <samp class="ph codeph">HANA_XS_LM</samp> has references to the delivery units
+					<samp class="ph codeph">SAPUI5_1</samp> and <samp class="ph codeph">HANA_XS_BASE</samp>. The output appears
+				as
+				follows:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">HANA_XS_LM(sap.com): SAPUI5_1(sap.com), HANA_XS_BASE(sap.com)</pre></div>
+</div>
+</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?37be2f0d13e343ef8a3d3998361ea883.html" target="_top" title="With hdbalm you can use a selection of commands and their options to perform application lifecycle-mangement tasks in SAP HANA.">hdbalm Commands, Options, and Variables</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="hdbalm dependencies Command";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

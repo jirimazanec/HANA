@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Creates data statistics objects that approximate the specified data sources. Data statistics objects help you estimate the properties of the data without directly accessing the data itself."/>
+<meta name="description" content="Creates data statistics objects that approximate the specified data sources. Data statistics objects help you estimate the properties of the data without directly accessing the data itself."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=7619429731061846"/>
+<title>CREATE STATISTICS Statement (Multistore Table) [Dynamic Tiering]</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio43a36b3923294924a0bae80fd4b370dc";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio43a36b3923294924a0bae80fd4b370dc">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">CREATE STATISTICS Statement (Multistore Table) [Dynamic Tiering]</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">Creates data statistics objects that approximate the specified data sources. Data
+		statistics objects help you estimate the properties of the data without directly accessing
+		the data itself.
+		</p>
+
+		<div class="section"><div class="section_title">Syntax</div><div type="Syntax">
+			<div class="note caution"><span class="cautiontitle">Caution</span> <span class="ph">This
+                                                  information applies only for the SAP HANA option
+                                                  cited in the title of this topic. You must have
+                                                  purchased the license for it in order to use the
+                                                  information contained in this topic.</span>
+			</div>
+
+			<div class="note note"><span class="notetitle">Note</span>  While SAP HANA and dynamic tiering share much of the same base SQL syntax, there are some
+				differences in supported and nonsupported clauses and parameters. The following
+				syntax applies only to multistore tables.</div>
+
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE STATISTICS [<var class="keyword varname">&lt;data_statistics_name&gt;</var>] ON <var class="keyword varname">&lt;data_sources&gt;</var> 
+ [<var class="keyword varname">&lt;source_storage_type&gt;</var>] 
+ [<var class="keyword varname">&lt;data_statistics_type&gt;</var>]
+ [<var class="keyword varname">&lt;data_statistics_properties&gt;</var>]
+ [<var class="keyword varname">&lt;initial_refresh&gt;</var>]</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loio43a36b3923294924a0bae80fd4b370dc__sql_create_statistics_1sql_create_statistics_syntax_element"><div class="section_title">Syntax Element</div><div type="Syntax Element">
+			
+			<dl class="dl parml">
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;data_statistics_name&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies a unique name for the data statistics object.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;data_statistics_name&gt;</var> ::= [<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+						<p class="p"><var class="keyword varname">&lt;data_statistics_name&gt;</var> is only allowed when the result of the creation is
+							a single data statistics object. The number of data statistics objects
+							created by CREATE STATISTICS is determined by the combination of
+								<var class="keyword varname">&lt;data_statistics_type&gt;</var> and the number of columns
+							specified in <var class="keyword varname">&lt;data_sources&gt;</var>, as well as
+								by<var class="keyword varname">&lt;source storage_type&gt;</var> specified..</p>
+
+						<p class="p">For example, CREATE STATISTICS ON T(x) TYPE HISTOGRAM will create two
+							objects on a multistore table -- one on the column store part, and one
+							for the extended storage part of the table.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;data_sources&gt;</var></dt>
+
+					<dd class="dd pd">
+						<div class="p">Data sources for which to create data statistics
+							objects.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;data_sources&gt;</var> ::= <var class="keyword varname">&lt;table_name&gt;</var> [(<var class="keyword varname">&lt;column_name&gt;</var>{, <var class="keyword varname">&lt;column_name&gt;</var>}...)]</pre></div>
+</div>
+
+						<p class="p">If you specify a name, you can only specify one data source, and TYPE cannot be ALL. The
+							data source must identify a single data statistics object. For
+							HISTOGRAM, SIMPLE, and TOPK, if you specify multiple columns, SAP HANA
+							creates a data statistics object for each data source
+								<var class="keyword varname">&lt;table_name&gt;</var>
+							<var class="keyword varname">&lt;column_name&gt;</var>. For RECORD COUNT statistics objects, you
+							cannot specify columns as part of <var class="keyword varname">&lt;data_sources&gt;</var>. </p>
+
+						<dl class="dl">
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;table_name&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">The table name, with optional schema name, for which
+										statistics are to be created.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_name&gt;</var> ::= [<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;identifier&gt;</var>
+   
+<var class="keyword varname">&lt;schema_name&gt;</var> ::= <var class="keyword varname">&lt;unicode_name&gt;</var></pre></div>
+
+									<p class="p">For more information on schema names and identifiers, see
+											<a class="xref" href="default.html?209f5020751910148fd8fe88aa4d79d9.html#loio209f5020751910148fd8fe88aa4d79d9___bsql_introduction_1sql_introduction_identifiers" target="_top">Identifiers</a>.</p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis"><var class="keyword varname">&lt;column_name&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">A table column to use as the data source.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;column_name&gt;</var> ::= <var class="keyword varname">&lt;identifier&gt;</var></pre></div>
+
+								</dd>
+
+							
+						</dl>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;source_storage_type&gt;</var>
+					</dt>
+
+					<dd class="dd pd">
+						<div class="p">The storage type of multistore table partitions for which to create statistics.
+							<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;source_storage_type&gt;</var> ::= FOR { DEFAULT | EXTENDED } STORAGE</pre></div>
+DEFAULT
+							specifies partitions in the HANA column store; EXTENDED specifies
+							partitions on extended storage. If no type is specified, the statement
+							applies to partitions irrespective of their storage types. This creates
+							pairs of objects, one for each storage type. Use this clause to restrict
+							the statement scope to table partitions of a specified storage type. </div>
+
+						<p class="p"> Statistics of some types can only be created on one storage class
+							partitions - for example, SKETCH on HANA column store partitions, and
+							RECORD COUNT on extended storage partitions. Attempting to create such
+							objects on a multistore table without specifying source_storage_type
+							returns an error.</p>
+
+						<p class="p">You can implement different statistics types for different storage
+							classes, and create statistics to address specific performance problems
+							that only affect the query plan for one of the storage classes of the
+							table. The statement returns an error if no partitions of the specified
+							storage type exist.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;data_statistics_type&gt;</var></dt>
+
+					<dd class="dd pd">
+						<div class="p">Specifies the type of statistic
+							generated.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">TYPE <var class="keyword varname">&lt;data_statistics_type&gt;</var>
+
+<var class="keyword varname">&lt;data_statistics_type&gt;</var> ::= 
+HISTOGRAM 
+   | SIMPLE 
+   | SKETCH 
+   | RECORD COUNT
+   | TOPK</pre></div>
+In
+							general, most statistics types can be built on most data sources,
+							however some data statistics types may not be appropriate for a given
+							data source. For example, highly volatile data sources, like a delta
+							store, should have data statistics that can be efficiently updated when
+							data updates occur. A data source can have only one data statistics
+							object of a certain type. If TYPE is not specified, the default is
+							HISTOGRAM. </div>
+
+						<dl class="dl">
+							
+								<dt class="dt dlterm emphasis">HISTOGRAM</dt>
+
+								<dd class="dd">
+									<p class="p">Creates a one-dimensional data statistics object. Applies to both storage types. Creates
+										one object per column and storage type. </p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis"> SIMPLE</dt>
+
+								<dd class="dd">
+									<p class="p">Creates a data statistics object that helps the query optimizer calculate basic
+										statistics, such as min, max, null count, count, and
+										distinct count for a single-column data source. SIMPLE
+										statistics are only supported on the extended storage part
+										of a multistore table and must be created using the FOR
+										EXTENDED STORAGE clause.</p>
+
+									
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis"> SKETCH</dt>
+
+								<dd class="dd">
+									<p class="p">Creates a data statistics object that helps the query optimizer estimate the number of
+										distinct values in the data source. Only one data statistics
+										object is created for the specified
+												<samp class="ph codeph"><var class="keyword varname">&lt;table-name&gt;</var>(<var class="keyword varname">&lt;column-name&gt;</var>,...)</samp>,
+										which approximates the number of distinct tuples in the
+										projection of the table on the set of specified columns.</p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">RECORD COUNT </dt>
+
+								<dd class="dd">
+									<p class="p">Creates a data statistics object that helps the query optimizer calculate the number of
+										records (rows) in a table data source. You can only create
+										RECORD COUNT statistics on tables (not on columns). Create
+										RECORD COUNT statistics on the extended storage part of a
+										multistore table by using the FOR EXTENDED STORAGE clause.
+										You cannot create RECORD COUNT statistics on the default
+										storage portion of the table. </p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">TOPK</dt>
+
+								<dd class="dd">
+									<p class="p">Creates a data statistics object that helps the query optimizer identify the
+										highest-frequency values in a table data source. If you
+										specify multiple columns in <var class="keyword varname">&lt;data_sources&gt;</var>,
+										multiple data statistics objects are created - one per
+										column specified. TOPK statistics are only supported on the
+										extended storage part of a multistore table and must be
+										created using the FOR EXTENDED STORAGE clause.</p>
+
+								</dd>
+
+							
+						</dl>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;data_statistics_properties&gt;</var></dt>
+
+					<dd class="dd pd">
+						<div class="p">The data statistics properties clause specifies the properties of the data statistics
+							objects to be built from the specified data
+							sources.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;data_statistics_properties&gt;</var> ::= 
+ <var class="keyword varname">&lt;data_statistics_property&gt;</var> [<var class="keyword varname">&lt;data_statistics_property&gt;</var>]...
+   
+<var class="keyword varname">&lt;data_statistics_property&gt;</var> ::= 
+ | CONSTRAINT <var class="keyword varname">&lt;constraint_param&gt;</var>
+ | BUCKETS <var class="keyword varname">&lt;unsigned_integer&gt;</var>
+ | QERROR <var class="keyword varname">&lt;numeric_literal&gt;</var>
+ | QTHETA <var class="keyword varname">&lt;unsigned_integer&gt;</var>
+ | MEMORY <var class="keyword varname">&lt;memory_bytes&gt;</var>
+ | MEMORY PERCENT <var class="keyword varname">&lt;memory_percentage&gt;</var>
+ | ACCURACY <var class="keyword varname">&lt;numeric_literal&gt;</var>
+ | PREFIXBITS <var class="keyword varname">&lt;unsigned_integer&gt;</var>
+ | PERSISTENT <var class="keyword varname">&lt;on_off&gt;</var>
+ | REFRESH <var class="keyword varname">&lt;refresh_type&gt;</var>
+ | ENABLE <var class="keyword varname">&lt;on_off&gt;</var></pre></div>
+</div>
+
+						<dl class="dl">
+							
+								<dt class="dt dlterm emphasis">CONSTRAINT</dt>
+
+								<dd class="dd">
+									<p class="p">The mathematical constraint used for the specified
+											<var class="keyword varname">&lt;data_statistics_type&gt;</var>.</p>
+
+									<ul class="ul" id="loio43a36b3923294924a0bae80fd4b370dc__ul_wjg_qpq_kx">
+										<li class="li">
+											<p class="p">For HISTOGRAM, <var class="keyword varname">&lt;constraint_param&gt;</var>
+												specifies the mathematical constraint for the
+												histogram:</p>
+
+											<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;constraint_param&gt;</var> ::= 'QOPTIMAL' | 'MAXDIFF'</pre></div>
+
+											<p class="p">For multistore tables, MAXDIFF is the default for the
+												extended storage portion and QOPTIMAL is the default
+												for the default storage portion.</p>
+
+											<p class="p">Histogram sizing restrictions (BUCKETS, MEMORY, and
+												MEMORY PERCENT) are applied per histogram. For
+												multistore tables, this means that size limits apply
+												separately to the histograms on the default storage
+												partitions and to the histograms on the extended
+												storage portion. A non-default CONSTRAINT for a
+												histogram returns an error.</p>
+
+										</li>
+
+										<li class="li">
+											<p class="p">For SKETCH, <var class="keyword varname">&lt;constraint_param&gt;</var> specifies the algorithm to use to
+												build the sketch on the default storage portion of a
+												multistore table. The default is LOGLOGCOUNTING; the
+												remaining algorithms are for internal use. </p>
+
+											<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;constraint_param&gt;</var> ::= 
+KMINVAL
+PCSA
+LINEARCOUNTING
+LOGCOUNTING
+LOGLOGCOUNTING
+SUPERLOGLOGCOUNTING</pre></div>
+
+										</li>
+
+									</ul>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">BUCKETS <var class="keyword varname">&lt;unsigned_integer&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">This parameter is used only with TYPE HISTOGRAM or TOPK. For HISTOGRAM, BUCKETS
+										specifies the maximum number of data buckets in the
+										histogram. For TOPK, BUCKETS specifies the K value. The
+										histogram algorithm used determines the default
+										automaticallyif no BUCKETS clause is specified. If a very
+										small number of buckets is specified for a QOPTIMAL
+										histogram, then the algorithm may fail to build a valid
+										histogram either during the first build or during some
+										subsequent refresh executed for the histogram</p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">QERROR <var class="keyword varname">&lt;numeric_literal&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">The Q error used to build the q-optimal histogram. This parameter can only be specified
+										when TYPE is HISTOGRAM, and CONSTRAINT is QOPTIMAL and is
+										otherwise automatically determined by the histogram build
+										algorithm in use. It is best to use QERROR with FOR DEFAULT
+										STORAGE. </p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">QTHETA <var class="keyword varname">&lt;unsigned_integer&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">A lower bound on the frequencies for which a q error constraint is applied when building
+										a q-optimal histogram. You can specify this parameter when
+										TYPE is HISTOGRAM and CONSTRAINT is QOPTIMAL. The default is
+										automatically determined by the histogram algorithm in use.
+										It is best to use QTHETA with FOR DEFAULT STORAGE. </p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">MEMORY <var class="keyword varname">&lt;memory_bytes&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Specifies the maximum amount of memory, in bytes, that can be
+										used for the data statistics object.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;memory_bytes&gt;</var> ::= <var class="keyword varname">&lt;unsigned_integer&gt;</var></pre></div>
+
+									<p class="p">Similar to the MEMORY PERCENT parameter, the MEMORY parameter
+										limits the memory for data statistics objects. Small values
+										for MEMORY may cause the QOPTIMAL histogram algorithm to
+										pick a small number of buckets, which can lead to failures
+										building or refreshing the histogram.</p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">MEMORY PERCENT <var class="keyword varname">&lt;memory_percentage&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Limits the amount of memory used for data statistics
+										objects.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;memory_percentage&gt;</var> ::= <var class="keyword varname">&lt;unsigned_integer&gt;</var></pre></div>
+
+									<p class="p">Data statistics objects can use a large amount of memory for
+										some data sources.</p>
+
+									<p class="p"><var class="keyword varname">&lt;memory_percentage&gt;</var> is specified as the
+										percentage of the space used by the data source itself. It
+										represents the maximum amount of memory that can be used for
+										the data statistics object. For example, if a data source is
+										a table column that uses 100 MB of memory, and
+											<var class="keyword varname">&lt;memory_percentage&gt;</var> is 5, then the data
+										statistics object for this column can use, at most, 5 MB for
+										its memory representation.</p>
+
+									<p class="p">The default is automatically determined by the histogram
+										algorithm in use.</p>
+
+									<p class="p">Small values for MEMORY PERCENT may cause the QOPTIMAL
+										histogram algorithm to pick a small number of buckets, which
+										can lead to failures building or refreshing the
+										histogram.</p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">PERSISTENT <var class="keyword varname">&lt;on_off&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Specifies whether data persists in the column store part of the table, and only applies
+										to QOPTIMAL histograms on column store part of the
+										multistore table. The default is PERSISTENT ON.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;on_off&gt;</var> ::= ON | OFF</pre></div>
+
+									<p class="p">Other statistics types are always persistent.</p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">ACCURACY <var class="keyword varname">&lt;numeric_literal&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Controls the time and space requirements to use for the
+										sketch algorithms.You can only specify this parameter on the
+										default storage portion of a multistore table where TYPE is
+										SKETCH, and must be a number between 0 and 1, with larger
+										values causing decreased time and space requirements but
+										poorer sketch resolution. The default is 0.1.</p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">PREFIXBITS <var class="keyword varname">&lt;unsigned_integer&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Controls the number of bits the sketch algorithms use when
+										constructing the sketch statistics. You can only specify
+										this parameter on the default storage portion of a
+										multistore table where TYPE is SKETCH, and its value is an
+										integer between 0 and 63. The default is 8.</p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">REFRESH <var class="keyword varname">&lt;refresh_type&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Specifies the strategy for refreshing the data statistics
+										object.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;refresh_type&gt;</var> ::= TYPE {AUTO | MANUAL | DEFAULT}</pre></div>
+
+									<p class="p">AUTO specifies that the data statistics object is refreshed
+										automatically when underlying data changes.</p>
+
+									<p class="p">MANUAL specifies that the database statistics object is not
+										refreshed until explicitly requested by a REFRESH STATISTICS
+										object.</p>
+
+									<p class="p">DEFAULT specifies that the database server decides the best refresh strategy based on
+										the data source. For example, for data statistics objects on
+										column store data sources, the database server applies AUTO
+										for the default. For data statistics objects on extended
+										storage, the default depends on
+											<var class="keyword varname">&lt;statistics_type&gt;</var>. For RECORD COUNT,
+										SIMPLE, and TOPK, the default is AUTO. For HISTOGRAM, the
+										default is MANUAL.</p>
+
+									<p class="p">REFRESH TYPE only affects data statistics objects that are
+										enabled.</p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">ENABLE <var class="keyword varname">&lt;on_off&gt;</var></dt>
+
+								<dd class="dd">
+									<p class="p">Controls whether the optimizer uses the data statistics
+										object.</p>
+
+									<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;on_off&gt;</var> ::= ON | OFF</pre></div>
+
+									<p class="p">ENABLE ON enables the use of the data statistics object by
+										the optimizer. However, the data statistics object must also
+										be populated with data (refreshed) for the optimizer to use
+										it. The default behavior is ENABLE ON unless you specify NO
+										INITIAL REFRESH.</p>
+
+									<p class="p">ENABLE OFF disables the use of the data statistics object by
+										the optimizer and prevents the ability to refresh the data
+										statistics object. Data statistics objects that are not
+										enabled can still be dropped. To make a data statistics
+										object with ENABLE OFF accessible to the optimizer, execute
+										an ALTER STATISTICS..ENABLE ON statement.</p>
+
+								</dd>
+
+							
+						</dl>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;initial_refresh&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies whether to populate the data statistics object with data after
+							creation.</p>
+
+						<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;initial_refresh&gt;</var> ::= [ NO ] INITIAL REFRESH</pre></div>
+
+						<dl class="dl">
+							
+								<dt class="dt dlterm emphasis">INITIAL REFRESH</dt>
+
+								<dd class="dd">
+									<p class="p">Creates the definition of the data statistics object and
+										populates it with data. The default behavior is INITIAL
+										REFRESH.</p>
+
+								</dd>
+
+							
+							
+								<dt class="dt dlterm emphasis">NO INITIAL REFRESH</dt>
+
+								<dd class="dd">
+									<p class="p">Creates the definition of the data statistics object but does
+										not populate it with data.</p>
+
+									<p class="p">Use NO INITIAL REFRESH when you want to change the underlying
+										data before refreshing the data statistics object.</p>
+
+									<p class="p">You cannot specify NO INITIAL REFRESH if you specify ENABLE
+										ON.</p>
+
+								</dd>
+
+							
+						</dl>
+
+					</dd>
+
+				
+			</dl>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">The CREATE STATISTICS statement creates data statistics objects which approximate the
+				specified <var class="keyword varname">&lt;data_sources&gt;</var>. The optimizer uses data statistics
+				objects to estimate the properties of the data without directly accessing the data
+				itself. They can be useful during query optimization and query execution.</p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Example</div><div type="Example">
+			
+			<div class="p">Create a q-optimal histogram for each partition of the HANA column store, with a
+				maximum 1000 buckets on the column T.X, where T is a multistore table. The QERROR
+				that is not specified will be determined by the histogram build
+				algorithm.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE STATISTICS ON T (X) FOR DEFAULT STORAGE TYPE HISTOGRAM BUCKETS 1000</pre></div>
+</div>
+
+			<div class="p">Create a histogram for each storage part of the column T.X, where T is a multistore
+				table. The histogram build algorithm determines the algorithms to use for each part,
+				as well as unspecified parameters -- BUCKETS for both parts and QERROR, QTHETA for
+				the column store part. The statement creates two
+				histograms.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE STATISTICS ON T (X) TYPE HISTOGRAM
+</pre></div>
+</div>
+
+			<div class="p">Create a 10 bucket histogram over the extended storage partitions of column T.col2,
+				where T is a multistore
+				table.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE STATISTICS "HISTOGRAM_T_COL2" ON T(col2) FOR EXTENDED STORAGE TYPE HISTOGRAM BUCKETS 10</pre></div>
+</div>
+
+			<div class="p">Create a sketch over the column store partitions of T.col2 and T.col3, where T is a
+				multistore table. This statement creates a single object representing a sketch over
+				the pair of columns. Specify column lists within a single set of
+				parentheses.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE STATISTICS "SKETCH_T_COL2_COL3" ON T(col2,col3) FOR DEFAULT STORAGE TYPE SKETCH</pre></div>
+</div>
+
+			<div class="p">Create a sketch over columns T.col2, T.col3, and T.col4, where T is a multistore
+				table. This statement creates two objects: one for the default storage partitions of
+				table T, and the other for the extended storage partitions. Each object represents a
+				sketch over the joint distribution of the three
+				columns.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE STATISTICS ON T(col2,col3,col4) TYPE SKETCH</pre></div>
+</div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="CREATE STATISTICS Statement (Multistore Table) [Dynamic Tiering]";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

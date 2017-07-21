@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Details about the task parameters view"/>
+<meta name="description" content="Details about the task parameters view"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=8129823681983884"/>
+<title>TASK_PARAMETERS System View [Smart Data Integration]</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio9e31562bdc7842e2bfb6c7c312694fe9";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio9e31562bdc7842e2bfb6c7c312694fe9">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">TASK_PARAMETERS System View [<span class="ph pname">Smart Data Integration</span>]</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">Details about the task parameters view</p>
+
+		<div class="section">
+			<div class="note caution"><span class="cautiontitle">Caution</span> <span class="ph">This
+                                                  information applies only for the SAP HANA option
+                                                  cited in the title of this topic. You must have
+                                                  purchased the license for it in order to use the
+                                                  information contained in this topic.</span></div>
+
+		</div>
+
+		<div class="section"><div class="section_title">Structure</div><div type="Structure">
+			
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loio9e31562bdc7842e2bfb6c7c312694fe9__table_b5w_xcc_np" class="table" frame="border" border="1" rules="all">
+<colgroup><col width="25%"/><col width="25%"/><col width="50%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="25%" id="d28252866e45">Column</th>
+
+							<th class="entry" valign="top" width="25%" id="d28252866e48">Data type</th>
+
+							<th class="entry" valign="top" width="50%" id="d28252866e51">Description</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+					
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d28252866e45 ">SCHEMA_NAME</td>
+
+							<td class="entry" valign="top" width="25%" headers="d28252866e48 ">NVARCHAR(256)</td>
+
+							<td class="entry" valign="top" width="50%" headers="d28252866e51 ">Schema in which the task was created </td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d28252866e45 ">TASK_NAME</td>
+
+							<td class="entry" valign="top" width="25%" headers="d28252866e48 ">NVARCHAR(256)</td>
+
+							<td class="entry" valign="top" width="50%" headers="d28252866e51 ">Name of task</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d28252866e45 ">PARAMETER_NAME</td>
+
+							<td class="entry" valign="top" width="25%" headers="d28252866e48 ">NVARCHAR(256)</td>
+
+							<td class="entry" valign="top" width="50%" headers="d28252866e51 ">Name of parameter</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d28252866e45 ">POSITION</td>
+
+							<td class="entry" valign="top" width="25%" headers="d28252866e48 ">INTEGER</td>
+
+							<td class="entry" valign="top" width="50%" headers="d28252866e51 ">Position of parameter</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d28252866e45 ">TABLE_TYPE_SCHEMA</td>
+
+							<td class="entry" valign="top" width="25%" headers="d28252866e48 ">NVARCHAR(256)</td>
+
+							<td class="entry" valign="top" width="50%" headers="d28252866e51 ">Schema in which the TableType was created</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d28252866e45 ">TABLE_TYPE_NAME</td>
+
+							<td class="entry" valign="top" width="25%" headers="d28252866e48 ">NVARCHAR(256)</td>
+
+							<td class="entry" valign="top" width="50%" headers="d28252866e51 ">Name of TableType</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="25%" headers="d28252866e45 ">PARAMETER_TYPE</td>
+
+							<td class="entry" valign="top" width="25%" headers="d28252866e48 ">VARCHAR(7)</td>
+
+							<td class="entry" valign="top" width="50%" headers="d28252866e51 ">Parameter type: IN or OUT</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+	</div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="TASK_PARAMETERS System View [Smart Data Integration]";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

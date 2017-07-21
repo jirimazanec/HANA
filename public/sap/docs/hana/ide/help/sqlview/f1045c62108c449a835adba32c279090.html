@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Returns an XML element that matches the specified XPath query."/>
+<meta name="description" content="Returns an XML element that matches the specified XPath query."/>
+<meta name="keywords" content="XMLEXTRACT"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=46318872855488025"/>
+<title>XMLEXTRACT Function (Miscellaneous)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loiof1045c62108c449a835adba32c279090";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loiof1045c62108c449a835adba32c279090">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">XMLEXTRACT Function (Miscellaneous)</h1>
+
+	
+	
+	<div class="body refbody"><p class="shortdesc">Returns an XML element that matches the specified XPath query.</p>
+
+		<div class="section"><div class="section_title">Syntax</div><div type="Syntax">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">XMLEXTRACT(<var class="keyword varname">&lt;XML_document&gt;</var>, <var class="keyword varname">&lt;XPath_query&gt;</var> [,<var class="keyword varname">&lt;NamespaceDeclarations&gt;</var>])</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+			
+			<dl class="dl parml">
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;XML_document&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies an XML document of type CLOB, NCLOB, VARCHAR, or NVARCHAR.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;XPath_query&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies an XPath expression of type VARCHAR or NVARCHAR.</p>
+
+					</dd>
+
+				
+				
+					<dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;NamespaceDeclarations&gt;</var></dt>
+
+					<dd class="dd pd">
+						<p class="p">Specifies a namespace declaration of type VARCHAR or NVARCHAR.</p>
+
+					</dd>
+
+				
+			</dl>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Description</div><div type="Description">
+			
+			<p class="p">Returns the matching XML element. The return value is of type VARCHAR/NVARCHAR or CLOB/NCLOB
+				depending on the type given for  <var class="keyword varname">&lt;XML_document&gt;</var>.</p>
+
+			<p class="p">If an XML element is empty (for example, <samp class="ph codeph">&lt;name&gt;&lt;/name&gt;</samp>), then an
+				empty result is returned. If an XML element is not found, then the function returns
+				an error.</p>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Example</div><div type="Example">
+			
+			<p class="p">The following statement returns the <kbd class="ph userinput">&lt;name&gt;</kbd> element from item 2 (the
+				example returns <samp class="ph systemoutput">&lt;name&gt;Jar&lt;/name&gt;</samp>):</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT XMLEXTRACT(
+   '&lt;doc&gt;
+      &lt;item&gt;&lt;id&gt;1&lt;/id&gt;&lt;name&gt;Box&lt;/name&gt;&lt;/item&gt;
+      &lt;item&gt;&lt;id&gt;2&lt;/id&gt;&lt;name&gt;Jar&lt;/name&gt;&lt;/item&gt;
+   &lt;/doc&gt;',
+   '/doc/item[2]/name'
+) FROM DUMMY;</pre></div>
+
+			<p class="p">The following statement returns
+					<samp class="ph systemoutput">&lt;ns1:name&gt;Jar&lt;/ns1:name&gt;</samp>:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT XMLEXTRACT(                         
+   '&lt;doc xmlns:ns1="http://namespace1.sap.com" xmlns:ns2="http://namespace2.sap.com"&gt;
+      &lt;ns1:item&gt;&lt;ns1:id&gt;1&lt;/ns1:id&gt;&lt;ns1:name&gt;Box&lt;/ns1:name&gt;&lt;/ns1:item&gt;
+      &lt;ns1:item&gt;&lt;ns1:id&gt;2&lt;/ns1:id&gt;&lt;ns1:name&gt;Jar&lt;/ns1:name&gt;&lt;/ns1:item&gt;
+      &lt;ns2:item&gt;&lt;ns2:id&gt;3&lt;/ns2:id&gt;&lt;ns2:name&gt;Table&lt;/ns2:name&gt;&lt;/ns2:item&gt;
+   &lt;/doc&gt;',
+   '/doc/ns1:item[2]/ns1:name',
+   'xmlns:ns1="http://namespace1.sap.com" xmlns:ns2="http://namespace2.sap.com"'
+) FROM DUMMY;</pre></div>
+
+		</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?85ee0084ac014a63aa2680b384466f39.html" target="_top" title="Returns an XML value that matches the specified XPath query.">XMLEXTRACTVALUE Function (Miscellaneous)</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="XMLEXTRACT Function (Miscellaneous)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="An analytic privilege consists of a set of restrictions against which user access to a particular attribute view, analytic view, or calculation view is verified. In an XML-based analytic privilege, these restrictions are specified in an XML document that conforms to a defined XML schema definition (XSD)."/>
+<meta name="description" content="An analytic privilege consists of a set of restrictions against which user access to a particular attribute view, analytic view, or calculation view is verified. In an XML-based analytic privilege, these restrictions are specified in an XML document that conforms to a defined XML schema definition (XSD)."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=8985119407231631"/>
+<title>Structure of XML-Based Analytic Privileges</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loiodb1ed2c8bb571014b949bf017a41ba78";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loiodb1ed2c8bb571014b949bf017a41ba78">
+<div id="wrapper"><div id="container">
+<h1 class="title topictitle1">Structure of XML-Based Analytic Privileges</h1>
+
+	<div class="body conbody"><p class="shortdesc">An analytic privilege consists of a set of restrictions against which user access to a
+		particular attribute view, analytic view, or calculation view is verified. In an XML-based
+		analytic privilege, these restrictions are specified in an XML document that conforms to a
+		defined XML schema definition (XSD).</p>
+
+		<p class="p">Each restriction in an XML-based analytic privilege controls the authorization check on the
+			restricted view using a set of value filters. A value filter defines a check condition
+			that verifies whether or not the values of the view (or view columns) qualify for user
+			access. </p>
+
+		<div class="p">The following restriction types can be used to restrict data access:<ul class="ul" id="loiodb1ed2c8bb571014b949bf017a41ba78__ul_dn5_drz_rh">
+				<li class="li">View</li>
+
+				<li class="li">Activity</li>
+
+				<li class="li">Validity</li>
+
+				<li class="li">Attribute</li>
+
+			</ul>
+The following operators can be used to define value filters in the restrictions.
+				<div class="note note" id="loiodb1ed2c8bb571014b949bf017a41ba78__note_N1002F_N10017_N10010_N10001"><span class="notetitle">Note</span> The activity and validity restrictions
+				support only a subset of these operators.</div>
+<ul class="ul" id="loiodb1ed2c8bb571014b949bf017a41ba78__ul_vrc_grz_rh">
+				<li class="li">IN &lt;list of scalar values&gt;</li>
+
+				<li class="li">CP &lt;pattern with *&gt;</li>
+
+				<li class="li">EQ (=), LE (&lt;=), LT (&lt;), GT (&gt;), GE (&gt;=) &lt;scalar value&gt;</li>
+
+				<li class="li">BT &lt;scalar value as lower limit&gt;&lt;scalar value as upper limit&gt;</li>
+
+				<li class="li">IS_NULL</li>
+
+				<li class="li">NOT_NULL</li>
+
+			</ul>
+All of the above operators, except IS_NULL and NOT_NULL, accept empty strings (" ")
+			as filter operands. IS_NULL and NOT_NULL do not allow any input value.</div>
+
+		<p class="p">The following are examples of how empty strings can be used with the filter
+			operators:</p>
+
+		<div class="p">
+			<ul class="ul" id="loiodb1ed2c8bb571014b949bf017a41ba78__ul_vdr_wwf_sh">
+				<li class="li">For the IN operator: IN ("", "A", "B") to filter on these exact values</li>
+
+				<li class="li">As a lower limit in comparison operators, such as:<ul class="ul" id="loiodb1ed2c8bb571014b949bf017a41ba78__ul_lkf_zwf_sh">
+						<li class="li">BT ("", “XYZ”), which is equivalent to NOT_NULL AND LE "XYZ”"GT "",
+							which is equivalent to NOT_NULL</li>
+
+						<li class="li">LE "", which is equivalent to EQ ""</li>
+
+						<li class="li">LT "", which will always return false</li>
+
+						<li class="li">CP "", which is equivalent to EQ ""</li>
+
+					</ul>
+The filter conditions CP "*" will also return rows with empty-string as
+					values in the corresponding attribute.</li>
+
+			</ul>
+
+		</div>
+
+		<div class="section" id="loiodb1ed2c8bb571014b949bf017a41ba78__section_N1007E_N10010_N10001"><div class="section_title">View Restriction</div><div type="View Restriction">
+			
+			<p class="p">This restriction specifies to which column view(s) the analytic privilege applies. It
+				can be a single view, a list of views, or all views. An analytic privilege must have
+				exactly one cube restriction.</p>
+
+			<div class="note sap-example example" id="loiodb1ed2c8bb571014b949bf017a41ba78__sap-example_N10087_N1007B_N10010_N10001"><span class="exampletitle">Example</span> IN ("Cube1", "Cube2")</div>
+
+			<div class="note note" id="loiodb1ed2c8bb571014b949bf017a41ba78__note_N10096_N1007F_N10010_N10001"><span class="notetitle">Note</span> When an analytic view is created in the SAP
+				HANA modeler, automatically-generated views are included automatically in the cube
+				restriction.</div>
+
+			<div class="note note" id="loiodb1ed2c8bb571014b949bf017a41ba78__note_N10097_N1007B_N10010_N10001"><span class="notetitle">Note</span> The SAP HANA modeler uses a special syntax
+				to specify the cube names in the view restriction:
+					<samp class="ph codeph">_SYS_BIC:&lt;package_hierarchy&gt;/&lt;view_name&gt;</samp><div class="p">For
+					example:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;cubes&gt;
+      &lt;cube name="_SYS_BIC:test.sales/AN_SALES" /&gt;
+      &lt;cube name="_SYS_BIC:test.sales/AN_SALES/olap" /&gt;
+&lt;/cubes&gt;
+</pre></div>
+
+				</div>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loiodb1ed2c8bb571014b949bf017a41ba78__section_N10099_N10010_N10001"><div class="section_title">Activity Restriction</div><div type="Activity Restriction">
+			
+			<p class="p">This restriction specifies the activities that the user is allowed to perform on the
+				restricted view(s), for example, read data. An analytic privilege must have exactly
+				one activity restriction.</p>
+
+			<div class="note sap-example example" id="loiodb1ed2c8bb571014b949bf017a41ba78__sap-example_N100B0_N100A4_N10010_N10001"><span class="exampletitle">Example</span> EQ "read", or EQ "edit"</div>
+
+			<div class="note note" id="loiodb1ed2c8bb571014b949bf017a41ba78__note_N100B3_N1009C_N10010_N10001"><span class="notetitle">Note</span> Currently, all analytic privileges created
+				in the SAP HANA modeler are automatically configured to restrict access to READ
+				activity only. This corresponds to SQL SELECT queries. This is due to the fact that
+				the attribute, analytic, and calculation views are read-only views. This restriction
+				is therefore not configurable.</div>
+
+		</div></div>
+
+		<div class="section" id="loiodb1ed2c8bb571014b949bf017a41ba78__section_N100B4_N10010_N10001"><div class="section_title">Validity Restriction</div><div type="Validity Restriction">
+			
+			<p class="p">This restriction specifies the validity period of the analytic privilege. An analytic
+				privilege must have exactly one validity restriction.</p>
+
+			<div class="note sap-example example" id="loiodb1ed2c8bb571014b949bf017a41ba78__sap-example_N100C9_N100BD_N10010_N10001"><span class="exampletitle">Example</span> GT 2010/10/01
+				01:01:00.000</div>
+
+			
+		</div></div>
+
+		<div class="section" id="loiodb1ed2c8bb571014b949bf017a41ba78__section_N100CF_N10010_N10001"><div class="section_title">Attribute Restriction</div><div type="Attribute Restriction">
+			
+			<div class="p">This restriction specifies the value range that the user is permitted to access. Attribute
+				restrictions are applied to the actual attributes of a view. Each attribute
+				restriction is relevant for one attribute, which can contain multiple value filters.
+				Each value filter represents a logical filter condition.<div class="note note" id="loiodb1ed2c8bb571014b949bf017a41ba78__note_N100ED_N100EA_N100E2_N10010_N10001"><span class="notetitle">Note</span> The SAP HANA modeler uses different
+					ways to specify attribute names in the attribute restriction depending on the
+					type of view providing the attribute. In particular, attributes from attribute
+					views are specified using the syntax
+							"<samp class="ph codeph"><var class="keyword varname">&lt;package_hierarchy&gt;</var>/<var class="keyword varname">&lt;view_name&gt;</var>$<var class="keyword varname">&lt;attribute_name&gt;</var></samp>",
+					while local attributes of analytic views and calculation views are specified
+					using their attribute name only. For
+					example:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;dimensionAttribute name="test.sales/AT_PRODUCT$PRODUCT_NAME"&gt;
+        &lt;restrictions&gt;
+          &lt;valueFilter operator="IN"&gt;
+            &lt;value value="Car" /&gt;
+            &lt;value value="Bike" /&gt;
+          &lt;/valueFilter&gt;
+        &lt;/restrictions&gt;
+      &lt;/dimensionAttribute&gt;</pre></div>
+</div>
+</div>
+
+			<div class="p">Value filters for attribute restrictions can be static or dynamic.<ul class="ul" id="loiodb1ed2c8bb571014b949bf017a41ba78__ul_whz_zsz_rh">
+					<li class="li">A <strong class="ph b">static</strong> value filter consists of an operator and either a list of
+						values as the filter operands or a single value as the filter operand. All
+						data types are supported except those for LOB data types (CLOB, BLOB, and
+							NCLOB).<p class="p">For example, a value filter (EQ 2006) can be defined for an
+							attribute YEAR in a dimension restriction to filter accessible data
+							using the condition YEAR=2006 for potential users.</p>
+<div class="note note" id="loiodb1ed2c8bb571014b949bf017a41ba78__note_N100F3_N100E9_N100E5_N100E2_N100D6_N10010_N10001"><span class="notetitle">Note</span> Only
+							attributes, not aggregatable facts (for example, measures or key
+							figures) can be used in dimension restrictions for analytic
+							views.</div>
+</li>
+
+					<li class="li">A <strong class="ph b">dynamic</strong> value filter consists of an operator and a stored procedure call that
+						determines the operand value at runtime.<p class="p">For example, a value filter
+								<samp class="ph codeph">(IN (GET_MATERIAL_NUMBER_FOR_CURRENT_USER()))</samp> is
+							defined for the attribute <samp class="ph codeph">MATERIAL_NUMBER</samp>. This filter
+							indicates that a user with this analytic privilege is only allowed to
+							access material data with the numbers returned by the procedure
+								<samp class="ph codeph">GET_MATERIAL_NUMBER_FOR_CURRENT_USER</samp>.</p>
+</li>
+
+				</ul>
+</div>
+
+			<div class="p">It is possible to combine static and dynamic value filters as shown in the following example.<div class="note sap-example example" id="loiodb1ed2c8bb571014b949bf017a41ba78__sap-example_N10113_N10110_N100D6_N10010_N10001"><span class="exampletitle">Example</span> 
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;dimensionAttribute name=" test.sales/AT_PRODUCT$PRODUCT_NAME "&gt;
+        &lt;restrictions&gt;
+           &lt;valueFilter operator="CP"&gt; &lt;value value="ELECTRO*"/&gt; &lt;/valueFilter&gt;
+           &lt;valueFilter operator="IN"&gt; &lt;procedureCall schema="PROCEDURE_OWNER" procedure="DETERMINE_AUTHORIZED_PRODUCT_FOR_USER" /&gt; &lt;/valueFilter &gt;
+        &lt;/restrictions&gt;
+      &lt;/dimensionAttribute&gt;
+      &lt;dimensionAttribute name=" test.sales/AT_TIME$YEAR "&gt;
+        &lt;restrictions&gt;
+           &lt;valueFilter operator="EQ"&gt; &lt;value value="2012"/&gt; &lt;/valueFilter&gt;
+           &lt;valueFilter operator="IN"&gt; &lt;procedureCall schema="PROCEDURE_OWNER" procedure="DETERMINE_AUTHORIZED_YEAR_FOR_USER" /&gt; &lt;/valueFilter &gt;
+        &lt;/restrictions&gt;</pre></div>
+
+				</div>
+</div>
+
+			<p class="p">An analytic privilege can have multiple attribute restrictions, but it must have at
+				least one attribute restriction. An attribute restriction must have at least one
+				value filter. Therefore, if you want to permit access to the whole content of a
+				restricted view, then the attribute restriction must specify all attributes.</p>
+
+			<p class="p">Similarly, if you want to permit access to the whole content of the view with the
+				corresponding attribute, then the value filter must specify all values.</p>
+
+			<p class="p">The SAP HANA modeler automatically implements these two cases if you do not select
+				either an attribute restriction or a value filter.</p>
+
+			<div class="note sap-example example" id="loiodb1ed2c8bb571014b949bf017a41ba78__sap-example_N1011B_N100CD_N10010_N10001"><span class="exampletitle">Example</span> 
+				<p class="p">Specification of all attributes:</p>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;dimensionAttributes&gt;
+      &lt;allDimensionAttributes/ &gt;
+    &lt;/dimensionAttributes&gt;
+</pre></div>
+
+			</div>
+
+			<div class="note sap-example example" id="loiodb1ed2c8bb571014b949bf017a41ba78__sap-example_N1012B_N100CD_N10010_N10001"><span class="exampletitle">Example</span> 
+				<p class="p">Specification of all values of an attribute:</p>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;dimensionAttributes&gt;
+      &lt;dimensionAttribute name="PRODUCT"&gt;
+        &lt;all /&gt;
+      &lt;/dimensionAttribute&gt;
+    &lt;/dimensionAttributes&gt;
+</pre></div>
+
+			</div>
+
+		</div></div>
+
+		<div class="section" id="loiodb1ed2c8bb571014b949bf017a41ba78__section_N1012A_N10010_N10001"><div class="section_title">Logical Combination of Restrictions and Filter Conditions</div><div type="Logical Combination of Restrictions and Filter Conditions">
+			
+			<p class="p">The result of user queries on restricted views is filtered according to the conditions
+				specified by the analytic privileges granted to the user as follows:</p>
+
+			<ul class="ul" id="loiodb1ed2c8bb571014b949bf017a41ba78__ul_pdh_25z_rh">
+				<li class="li">Multiple analytic privileges are combined with the logical operator OR.</li>
+
+				<li class="li">Within one analytic privilege, all attribute restrictions are combined with the
+					logical operator AND.</li>
+
+				<li class="li">Within one attribute restriction, all value filters on the attribute are
+					combined with the logical operator OR.</li>
+
+			</ul>
+
+		</div></div>
+
+		<div class="example"><h2 class="exampletitle">Example</h2>
+			<p class="p">You create two analytic privileges AP1 and AP2. AP1 has the following attribute
+				restrictions:</p>
+
+			<ul class="ul" id="loiodb1ed2c8bb571014b949bf017a41ba78__ul_l1l_35z_rh">
+				<li class="li">Restriction R11 restricting the attribute Year with the value filters
+						<samp class="ph codeph">(EQ 2006)</samp> and <samp class="ph codeph">(BT 2008, 2010)</samp></li>
+
+				<li class="li">Restriction R12 restricting the attribute Country with the value filter
+						<samp class="ph codeph">(IN ("USA", "Germany")) </samp></li>
+
+			</ul>
+
+			<p class="p">Given that multiple value filters are combined with the logical operator OR and
+				multiple attribute restrictions are combined with the logical operator AND, AP1
+				generates the condition:</p>
+
+			<p class="p"><samp class="ph codeph"> ((Year = 2006) OR (Year BT 2008 and 2010)) AND (Country IN ("USA",
+					"Germany"))</samp></p>
+
+			<p class="p">AP2 has the following restriction:</p>
+
+			<p class="p">Restriction R21 restricting the attribute Country with the value filter <samp class="ph codeph">(EQ
+					"France")</samp>
+			</p>
+
+			<p class="p">AP2 generates the condition:</p>
+
+			<p class="p"><samp class="ph codeph">(Country = "France")</samp></p>
+
+			<p class="p">Any query of a user who has been granted both AP1 and AP2 will therefore be appended
+				with the following WHERE clause:</p>
+
+			<p class="p"><samp class="ph codeph">((Year = 2006) OR (Year BT 2008 and 2010)) AND (Country IN ("USA",
+					"Germany"))) OR (Country = "France")</samp></p>
+
+		</div>
+
+	</div>
+<div class="related-links"> 
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Structure of XML-Based Analytic Privileges";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="An HTTP destination defines connection details for services running on specific hosts whose details you want to define and distribute. Syntax rules apply to the contents of the HTTP destination configuration are checked when you activate the configuration in the repository."/>
+<meta name="description" content="An HTTP destination defines connection details for services running on specific hosts whose details you want to define and distribute. Syntax rules apply to the contents of the HTTP destination configuration are checked when you activate the configuration in the repository."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=23157885325497152"/>
+<title>HTTP Destination Configuration Syntax</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio6efe500d91ee462c85cce7609646e17a";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio6efe500d91ee462c85cce7609646e17a">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">HTTP Destination Configuration Syntax</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc">An HTTP destination defines connection details for services running on specific hosts
+		whose details you want to define and distribute. Syntax rules apply to the contents of the
+		HTTP destination configuration are checked when you activate the configuration in the
+		repository.</p>
+
+		<div class="example"><h2 class="exampletitle example_title">Example: </h2><div class="title authorexampletitle">The .xshttpdest Configuration File</div>
+			
+			<p class="p">The following example shows all possible keyword combinations in the <span class="ph pname">SAP
+					HANA</span> XS application-access (<span class="ph filepath">.xshttpdest</span>) file. </p>
+
+			<div class="p">
+				<div class="note note" id="loio6efe500d91ee462c85cce7609646e17a__note_N1002F_N10024_N10019_N10016_N10001"><span class="notetitle">Note</span> In the form shown below, the
+						<span class="ph filepath">.xshttpdest</span> file is <span class="ph emphasis emphasis">not</span> a working
+					model; it is used to illustrate the syntax for all possible options.</div>
+
+			</div>
+
+			<div class="p">
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_N1006B_N10011_N10001" target="_top">host</a> = "download.finance.yahoo.com";
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_N10077_N10012_N10001" target="_top">port</a> = 80;
+//All of the following keywords are optional
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_N1004E_N10011_N10001" target="_top">description</a> = "";   
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_N10085_N10011_N10001" target="_top">useSSL</a> = false;
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_gkn_ykz_vp" target="_top">sslAuth</a>  = client;
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_sck_5tz_vp" target="_top">sslHostCheck</a> = true;
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_N100A2_N10011_N10001" target="_top">pathPrefix</a> = "/d/quotes.csv?f=a";
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_N100BC_N10011_N10001" target="_top">authType</a> = none;
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_xwt_nlz_vp" target="_top">samlProvider</a> = "";
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_ff5_hnz_vp" target="_top">samlACS</a> = "header";
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_upf_jnz_vp" target="_top">samlAttributes</a> = "";
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_j4k_q4z_vp" target="_top">samlNameId</a> = ["email"];
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_hsf_fbq_hp" target="_top">proxyType</a> = none;
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_N100E8_N10011_N10001" target="_top">proxyHost</a> = ""; //in-line comments are allowed
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_N10106_N10011_N10001" target="_top">proxyPort</a> = 0;
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_N10120_N10011_N10001" target="_top">timeout</a> = 0;
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_gnj_q5q_1n" target="_top">remoteSID</a> = "Q7E";
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_ocr_p5q_1n" target="_top">remoteClient</a> = "007";
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_kkn_pxy_vp" target="_top">oAuthAppConfigPackage</a> = "sap.hana.test";
+<a class="xref nopagenumber" href="default.html?6efe500d91ee462c85cce7609646e17a.html#loio6efe500d91ee462c85cce7609646e17a__section_jr5_pxy_vp" target="_top">oAuthAppConfig</a> = "abapTest";
+</pre></div>
+
+			</div>
+
+		</div>
+
+		<div class="section">
+			<p class="p">When you are defining the HTTP destination, bear in mind the following important
+				syntax rules:</p>
+
+			<div class="p">
+				<ul class="ul" id="loio6efe500d91ee462c85cce7609646e17a__ul_i14_glt_gk">
+					<li class="li">A semi-colon (;) is required at the end of each line in the HTTP destination
+						configuration, including the last line in the file.</li>
+
+					<li class="li">String values must be wrapped in quotes (""), for example:<p class="p"><samp class="ph codeph">host =
+								"download.finance.yahoo.com";</samp></p>
+</li>
+
+				</ul>
+
+			</div>
+
+			<div class="p">
+				<div class="note note" id="loio6efe500d91ee462c85cce7609646e17a__note_N1004B_N10015_N10012_N10001"><span class="notetitle">Note</span> The <span class="keyword">host</span> and
+						<span class="keyword">port</span> keywords are mandatory; all other keywords are
+					optional.</div>
+
+			</div>
+
+		</div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_N1006B_N10011_N10001"><div class="section_title">host</div><div type="host">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">host = "download.finance.yahoo.com";</pre></div>
+
+			<p class="p">The <span class="keyword">host</span> keyword is mandatory: it enables you to specify the hostname of
+				the HTTP destination providing the service or data you want your <span class="ph pname">SAP
+					HANA</span> XS application to access. </p>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_N10077_N10012_N10001"><div class="section_title">port</div><div type="port">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">port = 80;</pre></div>
+
+			<p class="p">The <span class="keyword">port</span> keyword is mandatory; it enables you to specify the port number to
+				use for connections to the HTTP destination hosting the service or data you want
+				your <span class="ph pname">SAP HANA</span> XS application to access. </p>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_N1004E_N10011_N10001"><div class="section_title">description</div><div type="description">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">description = "my short description of the HTTP connection";</pre></div>
+
+			<p class="p">The optional keyword <span class="keyword">description</span>  enables you to provide a short
+				description of the HTTP destination you want to configure. If you do not want to
+				provide a description, include the <span class="keyword">description</span> but leave the
+				entry between the quotes empty, for example, <span class="q">“”</span>. </p>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_N10085_N10011_N10001"><div class="section_title">useSSL</div><div type="useSSL">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">useSSL = [true | false];</pre></div>
+
+			<div class="p">The optional keyword <span class="keyword">useSSL</span> is of type Boolean and enables you to specify
+				if the outbound connections between <span class="ph pname">SAP HANA</span> XS and the HTTP
+				destination is secured with the Secure Sockets Layer (SSL) protocol (HTTPS).<div class="note note" id="loio6efe500d91ee462c85cce7609646e17a__note_N10099_N10092_N10085_N10011_N10001"><span class="notetitle">Note</span> Setting this option does not
+					configure SSL; if you want to use SSL to secure connections to the configured
+					destination, you must ensure that <span class="ph pname">SAP HANA</span> is already set up to
+					enable secure outbound connections using SSL.</div>
+</div>
+
+			<p class="p">If <samp class="ph codeph">useSSL = true</samp>, you can set the authentication type with the
+				keyword <samp class="ph codeph">sslAuth</samp>. You can also use the <samp class="ph codeph">sslHostCheck</samp>
+				to enable a check which ensures that the certificate used for authentication is
+				valid (matches the host).</p>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_gkn_ykz_vp"><div class="section_title">sslAuth</div><div type="sslAuth">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">sslAuth  = [client | anonymous];</pre></div>
+
+			<p class="p">If <samp class="ph codeph">useSSL = true</samp>, you can use the keyword <samp class="ph codeph">sslAuth</samp>
+				to set the authentication type. The following values are permitted:</p>
+
+			<ul class="ul" id="loio6efe500d91ee462c85cce7609646e17a__ul_q4p_z3z_vp">
+				<li class="li"><samp class="ph codeph">client</samp><p class="p">(Default setting). You must create a TRUST store entry
+						in the <span class="ph uicontrol">SAP HANA XS Admin Tool</span>'s <span class="ph uicontrol">Trust
+							manager</span>  (or use an exisiting one that is known to the HTTP
+						destination configuration) and maintain the trust relationship with the SSL
+						server, for example, by adding a certificate to the trust store that is used
+						for the authentication process.</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">anonymous</samp><p class="p">A built-in key is used for SSL encryption; no TRUST
+						store is needed.. No authentication via SSL is possible.</p>
+</li>
+
+			</ul>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_sck_5tz_vp"><div class="section_title">sslHostCheck</div><div type="sslHostCheck">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">sslHostCheck  = [true | false];</pre></div>
+
+			<p class="p">If <samp class="ph codeph">useSSL = true</samp>, you can use the keyword
+					<samp class="ph codeph">sslHostCheck</samp> to enable a check which ensures that the
+				certificate used for authentication is valid (matches the host). The following
+				values are permitted:</p>
+
+			<ul class="ul" id="loio6efe500d91ee462c85cce7609646e17a__ul_lww_fsz_vp">
+				<li class="li"><samp class="ph codeph">true</samp><p class="p">(Default setting). The SSL certificate subject must
+						match the host name. For example, if SSL server certificate
+							<samp class="ph codeph">CN=server1.acme.com</samp>, then the host parameter must be
+							<samp class="ph codeph">server1.acme.com</samp>. If there is no match, SSL
+						terminates.</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">false</samp><p class="p">No host check is performed. Note that if the SSL server
+						certificate is <span class="ph pname">CN=server1.acme.com</span>, and you use
+								<span class="q">“<samp class="ph codeph">localhost</samp>”</span> as a connection parameter (because
+						this certificate is installed on its own server), then this works with
+							<samp class="ph codeph">sslHostCheck</samp> deactivated
+							(<samp class="ph codeph">sslHostCheck=false</samp>).</p>
+</li>
+
+			</ul>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_N100A2_N10011_N10001"><div class="section_title">pathPrefix</div><div type="pathPrefix">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">pathPrefix = "";</pre></div>
+
+			<p class="p">The optional keyword <span class="keyword">pathPrefix</span> enables you to specify a text element to
+				add to the start of the URL used for connections to the service specified in the
+				HTTP destination configuration. For example, <samp class="ph codeph">pathPrefix =
+					"/d/quotes.csv?f=a"</samp> inserts the specified path into the URL called by
+				the connection.</p>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_N100BC_N10011_N10001"><div class="section_title">authType</div><div type="authType">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">authType = [none | basic | AssertionTicket | SamlAssertion | SamlAssertionPropagation];</pre></div>
+
+			<p class="p">The optional keyword <samp class="ph codeph">authType</samp> enables you to specify the authentication
+				method that must be used for connection requests for the service located at the HTTP
+				destination specified in the configuration, for example, <span class="q">“basic”</span>, which
+				requires users to provide a user name and password as authentication credentials.
+				Permitted values for the <samp class="ph codeph">authType</samp> are <span class="q">“none”</span>, <span class="q">“basic”</span>,
+				and <span class="q">“AssertionTicket”</span>. If no authentication type is specified, the default
+				setting <span class="q">“none”</span> applies.</p>
+
+			<p class="p">The <span class="keyword option">AssertionTicket</span> option is for use with XSJS applications that want to
+				enable access to HTTP services running on remote SAP servers using single sign-on
+				(SSO) with SAP assertion tickets. If the <span class="keyword option">AssertionTicket</span> option is
+				enabled, a user with administration privileges in <span class="ph pname">SAP HANA</span> must use
+				the parameter <samp class="ph codeph">saplogontickettruststore</samp> to specify the location of
+				the trust store containing the assertion tickets.</p>
+
+			<div class="note tip" id="loio6efe500d91ee462c85cce7609646e17a__note_N10100_N100EB_N10012_N10001"><span class="tiptitle">Tip</span> The
+					<span class="keyword parmname">saplogontickettruststore</span> parameter can be set in <span class="ph menucascade"><img src="images/navstart.gif" alt="Start of the navigation path" title="Start of the navigation path"/> <span class="ph uicontrol">[indexserver | xsengine].ini</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">authentication</span> <img src="images/navstep.gif" alt="Next navigation step" title="Next navigation step"/> <span class="ph uicontrol">saplogontickettruststore</span> <img src="images/navend.gif" alt="End of the navigation path" title="End of the navigation path"/></span>. </div>
+
+			<p class="p">If <samp class="ph codeph">authType = AssertionTicket</samp> is set you also need to set values for
+				the keywords <samp class="ph codeph">remoteSID</samp> and <samp class="ph codeph">remoteclient</samp>.</p>
+
+			<p class="p">For <samp class="ph codeph">authType = SamlAssertion;</samp>, you must also set the subproperties
+					<samp class="ph codeph">samlProvider</samp>, <samp class="ph codeph">samlACS</samp>,
+					<samp class="ph codeph">samlAttributes</samp>, and <samp class="ph codeph">samlNameId</samp>.</p>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_xwt_nlz_vp"><div class="section_title">samlProvider</div><div type="samlProvider">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">samlProvider = "";</pre></div>
+
+			<p class="p">If you set  <samp class="ph codeph">authType = SamlAssertion</samp>, you must also set the
+				subproperty <samp class="ph codeph">samlProvider</samp>, which enables you to specify the entityID
+				of the remote SAML party.</p>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_ff5_hnz_vp"><div class="section_title">samlACS</div><div type="samlACS">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">samlACS = "header";</pre></div>
+
+			<p class="p">If you set <samp class="ph codeph">authType = SamlAssertion</samp>, you must also set the subproperty
+					<samp class="ph codeph">samlACS</samp>, which enables you to specify the way in which SAML
+				assertions or responses are sent. The following values are supported:</p>
+
+			<ul class="ul" id="loio6efe500d91ee462c85cce7609646e17a__ul_e3w_v4z_vp">
+				<li class="li"><samp class="ph codeph">""</samp> (empty string)<p class="p">A SAML response (including the SAML assertion) is sent
+						to the HTTP destination end point as a POST parameter.</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">/saml/acs/sso</samp><p class="p">If you provide a URL path, the SAML response
+						(including the SAML Assertion) is sent to the specified endpoint in an
+						additional Web connection to establish the authentication context
+						(session).When the outbound communication is being established, there are
+						two connections: first to the specified end point (for example,
+							<samp class="ph codeph">/saml/asc/sso</samp>) and then to the destination service end
+						point.</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">header</samp><p class="p">The SAML response (including the SAML assertion) is sent in the
+						HTTP header authorization with the following syntax: <samp class="ph codeph">Authorization:
+							SAML2.0 &amp;lt;base-64-saml-response&amp;gt;</samp>.</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">parameter:assertion</samp><p class="p">The SAML Assertion is sent as a POST
+						parameter. This flavor is needed for JAM integrations.</p>
+</li>
+
+			</ul>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_upf_jnz_vp"><div class="section_title">samlAttributes</div><div type="samlAttributes">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">samlAttributes = "name1=<var class="keyword varname">&lt;property&gt;</var>&amp;name2=<var class="keyword varname">&lt;property&gt;</var>";</pre></div>
+
+			<p class="p">If you set  <samp class="ph codeph">authType = SamlAssertion</samp>, you must also set the
+				subproperty <samp class="ph codeph">samlAttributes</samp>, which enables  you to specify
+				additional attributes for the SAML Assertion.</p>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_j4k_q4z_vp"><div class="section_title">samlNameId</div><div type="samlNameId">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">samlNameId = ["email", "unspecified"]; </pre></div>
+
+			<p class="p">If you set <samp class="ph codeph">authType = SamlAssertion</samp>, you must also set the subproperty
+					<samp class="ph codeph">samlNameId</samp>, which enables you to define a list of name-ID
+				mappings. The following values are supported:</p>
+
+			<ul class="ul" id="loio6efe500d91ee462c85cce7609646e17a__ul_xml_d4z_vp">
+				<li class="li"><samp class="ph codeph">email</samp></li>
+
+				<li class="li"><samp class="ph codeph">unspecified</samp></li>
+
+			</ul>
+
+			<p class="p">For example, if you have an e-mail maintained in <span class="ph pname">SAP HANA</span> User Self
+				Services (USS), the SAML assertion contains your e-mail address; if you do
+					<span class="ph emphasis emphasis">not</span> have a e-mail address maintained in <span class="ph pname">SAP
+					HANA</span> USS, the mapping is <span class="q">“<samp class="ph codeph">unspecified</samp>”</span>.</p>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_hsf_fbq_hp"><div class="section_title">proxyType</div><div type="proxyType">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">proxytype = none;</pre></div>
+
+			<p class="p">The optional keyword <span class="keyword">proxyType</span> enables you to specify if a proxy server
+				must be used to resolve the host name specified in the HTTP destination
+				configuration file, and if so, which <span class="ph emphasis emphasis">type</span> of proxy. The
+				following values are allowed:</p>
+
+			<ul class="ul" id="loio6efe500d91ee462c85cce7609646e17a__ul_tfk_dbq_hp">
+				<li class="li">none</li>
+
+				<li class="li">http</li>
+
+				<li class="li">socks</li>
+
+			</ul>
+
+			<div class="note caution"><span class="cautiontitle">Caution</span> <samp class="ph codeph">proxyType</samp> replaces and extends the functionality previously
+				provided with the keyword <samp class="ph codeph">useProxy</samp>. For backward compatibility, the
+					<samp class="ph codeph">useProxy</samp> is still allowed but should not be used any
+				more.</div>
+
+			<p class="p">To define the proxy host and the port to connect on, use the keywords
+					<samp class="ph codeph">proxyHost</samp> and <samp class="ph codeph">proxyPort</samp> respectively.</p>
+
+			<p class="p">If you want to include the proxy-related information in a separate configuration (a
+				so-called <span class="ph emphasis emphasis">extension</span> to the original HTTP destination
+				configuration), you must set <samp class="ph codeph">proxyType = none</samp> in the original HTTP
+				destination configuration. In the HTTP destination extension that references and
+				modifies the original HTTP destination, you can change the proxy setting to
+					<samp class="ph codeph">proxyType = http</samp>. You must then provide the corresponding host
+				name of the proxy server and a port number to use for connections.</p>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_N100E8_N10011_N10001"><div class="section_title">proxyHost</div><div type="proxyHost">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">proxyHost = "";</pre></div>
+
+			<div class="p">If you use the keyword <samp class="ph codeph">useProxy = true</samp> to specify that a proxy server must be
+				used to resolve the target host name specified in the HTTP destination
+				configuration, you must use the <span class="keyword">proxyHost</span> and
+					<span class="keyword">proxyPort</span> keywords to specify the fully qualified name of the
+				host providing the proxy service (and the port number to use for connections). The
+				name of the proxy host must be wrapped in quotes, as illustrated in the following
+				example, <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">proxyHost = "myproxy.hostname.com"</pre></div>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_N10106_N10011_N10001"><div class="section_title">proxyPort</div><div type="proxyPort">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">proxyPort = 8080;</pre></div>
+
+			<p class="p">If you use the keyword <samp class="ph codeph">useProxy = true</samp> to indicate that a proxy server must
+				be used to resolve the host name specified in the HTTP destination configuration,
+				you must also use the <span class="keyword">proxyPort</span> keyword (in combination with
+					<span class="keyword">proxyHost =</span>) to specify the port on which the proxy server
+				accepts connections.</p>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_N10120_N10011_N10001"><div class="section_title">timeout</div><div type="timeout">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">timeout = -1;</pre></div>
+
+			<p class="p">The optional keyword <span class="keyword">timeout</span> enables you to specify for how long (in
+				milliseconds) an application tries to connect to the remote host specified in the
+				HTTP destination configuration, for example, <samp class="ph codeph">timeout = 5000;</samp> (5
+				seconds). By default, the timeout interval is set to -1, which means that there is
+				no limit to the time required to connect to the server specified in the HTTP
+				destination configuration. In the default setting, the application keeps trying to
+				connect to the destination server either until the server responds, however long
+				this takes, or the underlying request-session timeout (300 seconds) is reached. The
+				default setting (-1) is intended to help in situations where the destination server
+				is slow to respond, for example, due to high load.</p>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_gnj_q5q_1n"><div class="section_title">remoteSID</div><div type="remoteSID">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">remoteSID = "Q7E";</pre></div>
+
+			<p class="p">The optional keyword <samp class="ph codeph">remoteSID</samp> enables you to specify the SID of a remote
+				ABAP system. You use this keyword in combination with the
+					<samp class="ph codeph">remoteClient</samp> keyword, for example, to enable an application to
+				log on to an ABAP system that is configured to provide SAP assertion tickets. If the
+				XSJS application service requires access to remote services, you can create an HTTP
+				destination that defines the logon details required by the remote ABAP system and
+				specifies SSO with SAP assertion tickets as the logon authentication method.</p>
+
+			<div class="note note"><span class="notetitle">Note</span> In the <span class="ph uicontrol">XS Administration Tool</span>, the value specified in an HTTP
+				destination configuration file with the <samp class="ph codeph">remoteSID</samp> keyword is
+				displayed in the <span class="ph uicontrol">SAP SID</span> field in the
+					<span class="ph uicontrol">AUTHENTICATION</span> section of the application's runtime
+				configuration. The <span class="ph uicontrol">SAP SID</span> option is only available if you
+				select <span class="ph uicontrol">SAP Assertion Ticket</span> as the authentication type in the
+				application's runtime configuration.</div>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_ocr_p5q_1n"><div class="section_title">remoteClient</div><div type="remoteClient">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">remoteClient = "007";</pre></div>
+
+			<p class="p">The optional keyword <samp class="ph codeph"> remoteClient</samp> enables you to specify the client number
+				to use when logging on to a remote ABAP system. You use this keyword in combination
+				with the <samp class="ph codeph">remoteSID</samp> keyword, for example, to enable an application
+				to logon to an ABAP system that is configured to provide SAP assertion tickets. If
+				the XSJS application service requires access to remote services, you can create an
+				HTTP destination that defines the logon details required by the remote ABAP system
+				and specifies SSO with SAP assertion tickets as the logon authentication method.</p>
+
+			<div class="note note"><span class="notetitle">Note</span> In the <span class="ph uicontrol">XS Administration Tool</span>, the value specified in an
+				HTTP destination configuration file with the <span class="keyword">remoteClient</span> keyword
+				is displayed in the <span class="ph uicontrol">SAP Client</span> field in the
+					<span class="ph uicontrol">AUTHENTICATION</span> section of the application's runtime
+				configuration. The <span class="ph uicontrol">SAP Client</span> option is only available if you
+				select <span class="ph uicontrol">SAP Assertion Ticket</span> as the authentication type in the
+				application's runtime configuration.</div>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_kkn_pxy_vp"><div class="section_title">oAuthAppConfigPackage</div><div type="oAuthAppConfigPackage">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">oAuthAppConfigPackage = "sap.hana.test";
+
+</pre></div>
+
+			<p class="p">Use the optional keyword <samp class="ph codeph">oAuthAppConfigPackage</samp> enables you to
+				specify the location of the package that contains the oAuth application
+				configuration to be used by an HTTP destination configuration. </p>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_jr5_pxy_vp"><div class="section_title">oAuthAppConfig</div><div type="oAuthAppConfig">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">oAuthAppConfig = "abapTest";
+</pre></div>
+
+			<p class="p">Use the optional keyword <samp class="ph codeph">oAuthAppConfig</samp> enables you to specify the
+				name of the oAuth application configuration to be used by an HTTP destination
+				configuration. The OAuth application configuration is a file describing the
+				application-specific OAuth parameters that are used to enable access to a resource
+				running on a remote HTTP destination. The OAuth application configuration is defined
+				in a design-time artifact with the mandatory file suffix
+					<span class="ph filepath">.xsoauthappconfig</span>; the configuration file must be specified
+				using the JSON format. </p>
+
+		</div></div>
+
+		<div class="section" id="loio6efe500d91ee462c85cce7609646e17a__section_N10180_N10012_N10001"><div class="section_title">modifies</div><div type="modifies">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">modifies pkg.path.testApp:yahoo.xshttpdest;</pre></div>
+
+			<p class="p">The keyword <span class="keyword">modifies</span> can only be used in an HTTP
+					<span class="ph emphasis emphasis">extension</span> file and enables you to reference an existing
+				HTTP destination (or extension) whose settings you want to further extend or modify.
+				The settings in an HTTP destination <span class="ph emphasis emphasis">extension</span> overwrite any
+				identical settings in the original HTTP destination configuration. The HTTP
+				destination configuration referenced by the <span class="keyword">modifies</span> keyword must
+				already exist.</p>
+
+			<div class="note note" id="loio6efe500d91ee462c85cce7609646e17a__note_N10019_N10012_N10001"><span class="notetitle">Note</span> The HTTP destination <span class="ph emphasis emphasis">extension</span>
+				does not have to be tied to a particular XSJS application; it can be located in any
+				application package or  subpackage. For this reason, you must include the full
+				package path to the HTTP destination extension when using the
+					<span class="keyword">modifies</span> keyword.</div>
+
+		</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?64f3fad3b21a41c388339f0dc27001a5.html" target="_top" title="An HTTP destination defines connection details for services running on specific hosts whose details you want to define and distribute. An extension to an HTTP destination provides additional information or modifies values set in the original configuration.">The HTTP Destination Extension</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="HTTP Destination Configuration Syntax";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

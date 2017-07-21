@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="You can configure SAP HANA applications to use single sign-on (SSO) authentication to confirm the logon credentials of a user calling an application service. SAP HANA supports SSO certificates based on the Security Assertion Markup Language (SAML) or X.509."/>
+<meta name="description" content="You can configure SAP HANA applications to use single sign-on (SSO) authentication to confirm the logon credentials of a user calling an application service. SAP HANA supports SSO certificates based on the Security Assertion Markup Language (SAML) or X.509."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=021694989556562017"/>
+<title>Maintaining Single Sign-On for SAP HANA XS Applications</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loiod50588f4cd664f7f8eaecde3445d3bb1";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loiod50588f4cd664f7f8eaecde3445d3bb1">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Maintaining Single Sign-On for SAP HANA XS Applications</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">You can configure <span class="ph pname">SAP HANA</span> applications to use single sign-on (SSO)
+		authentication to confirm the logon credentials of a user calling an application service.
+			<span class="ph pname">SAP HANA</span> supports SSO certificates based on the Security Assertion Markup
+		Language (SAML) or X.509.</p>
+
+		<p class="p">If you want your the <span class="ph pname">SAP HANA</span> XS applications to use an SSO certificate
+			based on SAML or X.509 as the logon authentication method, you must perform the
+			following high-level steps:</p>
+
+		<ol class="ol" id="loiod50588f4cd664f7f8eaecde3445d3bb1__ol_y4c_zpv_sp">
+			<li class="li">Maintain the <span class="ph pname">SAP HANA</span> trust store.<p class="p"><span class="ph pname">SAP HANA</span> makes use of
+					multiple trust stores; the trust stores listed below are provided by
+					default.</p>
+<div class="note note"><span class="notetitle">Note</span> The trust stores listed below are located in the
+						<span class="ph emphasis emphasis">file system</span>. In some cases, it is possible and
+					recommended to use trust stores that exist in the database as database objects.
+					In-database trust stores (referred to as <dfn class="term">certificate collections</dfn>)
+					contain the required client certificates, which are also stored in the database.
+					We recommend using in-database certificate collections where possible. For more
+					information, see <cite class="cite">Managing Client Certificates in the SAP HANA
+						Database</cite>.</div>
+<ul class="ul" id="loiod50588f4cd664f7f8eaecde3445d3bb1__ul_ntk_1qv_sp">
+					<li class="li">The <span class="ph pname">SAP HANA</span> trust store (<span class="ph filepath">sapsrv.pse</span>)<p class="p">Used for secure
+							SQL and SAML or OAuth scenario, <span class="ph filepath">sapsrv.pse</span> is
+							installed automatically and is available by default.
+							</p>
+<div class="note sap-recommendation recommendation"><span class="recommendationtitle">Recommendation</span> For user authentication based on X.509
+							certificates and SAML assertions, we recommend creating separate
+							certificate collections with the purposes <span class="ph uicontrol">X.509</span>
+							and <span class="ph uicontrol">SAML</span> instead of using the file system-based
+							trust store <span class="ph filepath">sapsrv.pse</span>.</div>
+</li>
+
+					<li class="li">The SAP Web Dispatcher trust store
+							(<span class="ph filepath">SAPSSLS.pse</span>)<p class="p">Required for secure connections
+							using the Secure Socket Layer (SSL) protocol,
+								<span class="ph filepath">SAPSSLS.pse</span> is installed automatically and is
+							available by default.</p>
+</li>
+
+					<li class="li">The SAP Logon Ticket trust store
+								(<span class="ph filepath">saplogon.pse</span>)<p class="p"><span class="ph emphasis emphasis">Optional</span>:
+								<span class="ph filepath">saplogon.pse</span> is only necessary if an <span class="ph pname">SAP
+								HANA</span> XS application requires an SAP logon ticket from a user
+							at logon.</p>
+<div class="note sap-recommendation recommendation"><span class="recommendationtitle">Recommendation</span> For user authentication based on logon
+							tickets, we recommend creating a certificate collection with the purpose
+								<span class="ph uicontrol">SAP LOGON</span> instead of using the file
+							system-based trust store
+							<span class="ph filepath">saplogon.pse</span>.</div>
+</li>
+
+					<li class="li">The client authentication trust store (<span class="ph filepath">SAPSSLC.pse</span>)
+								<p class="p"><span class="ph emphasis emphasis">Optional</span>: <span class="ph filepath">SAPSSLC.pse</span>
+							is only required for client connections, for example, that use the SQL
+							client interface (<samp class="ph codeph">hdbsql</samp>).</p>
+</li>
+
+				</ul>
+</li>
+
+			<li class="li">Choose the SSO authentication method and configure the trust relationships:<p class="p">Trust
+					relationships are required between <span class="ph pname">SAP HANA</span> and any remote system
+					providing services that an <span class="ph pname">SAP HANA</span> XS application
+					requires.</p>
+<ul class="ul" id="loiod50588f4cd664f7f8eaecde3445d3bb1__ul_yvk_1qv_sp">
+					<li class="li">SSO with X.509 certificates<p class="p">Add the root certificate of the Certification
+							Authority (CA) for trusted X.509 certificates to both the <span class="ph pname">SAP
+								HANA</span> trust store <span class="ph emphasis emphasis">and</span> the trust store
+							for the SAP Web Dispatcher.</p>
+</li>
+
+					<li class="li">SSO with SAML certificates<p class="p">Obtain, authenticate, and import the SAML
+							identity provider (IDP) metadata (an XML document) for the SAML service
+							provider.</p>
+</li>
+
+				</ul>
+</li>
+
+			<li class="li">Maintain the SSO provider for <span class="ph pname">SAP HANA</span> XS<p class="p">Maintain a runtime
+					configuration for the <span class="ph pname">SAP HANA</span> application, which indicates that
+					user authentication is by means of SSO certificates based on either SAML or
+					X.509. </p>
+</li>
+
+		</ol>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?57f8419a071c49279d04370ccb918a0b.html" target="_top" title="SAP HANA applications can use single sign-on (SSO) authentication with X.509 certificates to confirm the logon credentials of a user calling an application service.">Configure SSO with X.509 Authentication for SAP HANA XS Applications</a></div>
+<div><a class="link" href="default.html?5830507afc1a401fb0aef9f6179a4422.html" target="_top" title="SAP HANA applications can use single sign-on (SSO) authentication with SAML assertions to confirm the logon credentials of a user calling an application service. SAML assertions are certificates that comply with the Security Assertion Markup Language.">Configure SSO with SAML Authentication for SAP HANA XS Applications</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Maintaining Single Sign-On for SAP HANA XS Applications";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

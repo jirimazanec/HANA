@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Detailed information on memory utilization by services."/>
+<meta name="description" content="Detailed information on memory utilization by services."/>
+<meta name="keywords" content="M_SERVICE_MEMORY"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=8627597554028401"/>
+<title>M_SERVICE_MEMORY System View</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20bf33c975191014bc16d7ffb7717db2";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20bf33c975191014bc16d7ffb7717db2">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">M_SERVICE_MEMORY System View</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Detailed information on memory utilization by services.</p>
+
+      <div class="section" id="loio20bf33c975191014bc16d7ffb7717db2___m__s_e_r_v_i_c_e__m_e_m_o_r_y_1struct_M_SERVICE_MEMORY"><div class="section_title">Structure</div><div type="Structure">
+         
+         
+<div class="table-wrapper tablenoborder"><table summary="" id="loio20bf33c975191014bc16d7ffb7717db2__table_txn_pxj_dw" class="table" frame="border" border="1" rules="all">
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" id="d10071920e40">
+                        <p class="p">Column name</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d10071920e46">
+                        <p class="p">Data type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d10071920e52">
+                        <p class="p">Unit</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" id="d10071920e58">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">HOST</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">VARCHAR(64)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Host name </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">PORT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">INTEGER</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Internal port </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">SERVICE_NAME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">VARCHAR(32)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Service name </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">PROCESS_ID</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">INTEGER</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Process ID </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">LOGICAL_MEMORY_SIZE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Byte</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Virtual memory size (operating system perspective) </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">PHYSICAL_MEMORY_SIZE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Byte</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Physical/resident memory size (operating system perspective) </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">CODE_SIZE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Byte</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Code size, including shared libraries </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">STACK_SIZE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Byte</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Stack size </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">HEAP_MEMORY_ALLOCATED_SIZE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Byte</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Heap part of the memory pool </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">HEAP_MEMORY_USED_SIZE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Byte</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Amount of pool heap memory that is currently actually in use </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">SHARED_MEMORY_ALLOCATED_SIZE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Byte</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Shared memory part of the memory pool </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">SHARED_MEMORY_USED_SIZE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Byte</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Amount of pool shared memory that is currently actually in use </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">COMPACTORS_ALLOCATED_SIZE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Byte</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Part of the memory pool that can potentially (=if unpinned) be freed on
+                           memory shortage </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">COMPACTORS_FREEABLE_SIZE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Byte</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Memory which can actually be freed on memory shortage </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">ALLOCATION_LIMIT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Byte</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Maximum memory pool size (configurable value) </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">EFFECTIVE_ALLOCATION_LIMIT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Byte</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Effective maximum memory pool size, considering pool sizes of other
+                           processes (computed value) </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">TOTAL_MEMORY_USED_SIZE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">BIGINT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 "> </td>
+
+                     <td class="entry" valign="top" headers="d10071920e40 d10071920e46 d10071920e52 d10071920e58 ">
+                        <p class="p">Amount of memory from the memory pool that is currently actually in use
+                        </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div></div>
+
+   </div>
+
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="M_SERVICE_MEMORY System View";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

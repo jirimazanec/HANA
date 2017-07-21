@@ -1,0 +1,180 @@
+PROCEDURE "OTEBW_EMTAS"."EMTAS::MIG_EMTAS" ( ) 
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   DEFAULT SCHEMA OTEBW_EMTAS
+   AS
+BEGIN
+/***************************** 
+	Write your procedure logic 
+ *****************************/
+-- VDT
+	truncate table BW_IMBALM_PRODUCT;
+	insert into BW_IMBALM_PRODUCT select * from REMOTE_BW_IMBALM_PRODUCT;
+	truncate table BW_IMBALM_CONTRACT;
+	insert into BW_IMBALM_CONTRACT select * from REMOTE_BW_IMBALM_CONTRACT;
+	truncate table BW_IM_INTERVAL;
+	insert into BW_IM_INTERVAL select * from REMOTE_BW_IM_INTERVAL;
+	truncate table BW_IMBALM_ORDER;
+	insert into BW_IMBALM_ORDER select * from REMOTE_BW_IMBALM_ORDER;
+	truncate table BW_IMBALM_TRADE;
+	insert into BW_IMBALM_TRADE select * from REMOTE_BW_IMBALM_TRADE;
+	truncate table BW_IMBALM_EVENT;
+	insert into BW_IMBALM_EVENT select * from REMOTE_BW_IMBALM_EVENT;
+
+-- DT
+	truncate table BW_DM_AGGR_CURVES;
+	insert into BW_DM_AGGR_CURVES select * from REMOTE_BW_DM_AGGR_CURVES;
+	truncate table BW_DM_ATC;
+	insert into BW_DM_ATC select * from REMOTE_BW_DM_ATC;
+	truncate table BW_DM_BID_RESULTS;
+	insert into BW_DM_BID_RESULTS select * from REMOTE_BW_DM_BID_RESULTS;
+	truncate table BW_DM_BIDS_DETAIL;
+	insert into BW_DM_BIDS_DETAIL select * from REMOTE_BW_DM_BIDS_DETAIL;
+	truncate table BW_DM_BIDS_HEADER;
+	insert into BW_DM_BIDS_HEADER select * from REMOTE_BW_DM_BIDS_HEADER;
+	truncate table BW_DM_CALENDAR;
+	insert into BW_DM_CALENDAR select * from REMOTE_BW_DM_CALENDAR;
+    truncate table BW_DM_CBF;
+	insert into BW_DM_CBF select * from REMOTE_BW_DM_CBF;
+	truncate table BW_DM_RESULTS;
+	insert into BW_DM_RESULTS select * from REMOTE_BW_DM_RESULTS;	
+	truncate table BW_DM_MATCH_CURVES;
+	-- rok 2014
+	insert into BW_DM_MATCH_CURVES select * from REMOTE_BW_DM_MATCH_CURVES
+     where DeliveryDay >= TO_DATE('19.11.2014','dd.mm.yyyy') and DeliveryDay <= TO_DATE('31.12.2014','dd.mm.yyyy') ;		
+	-- rok 2015
+	insert into BW_DM_MATCH_CURVES select * from REMOTE_BW_DM_MATCH_CURVES
+     where DeliveryDay >= TO_DATE('01.01.2015','dd.mm.yyyy') and DeliveryDay <= TO_DATE('31.12.2015','dd.mm.yyyy') ;
+	-- rok 2016
+	insert into BW_DM_MATCH_CURVES select * from REMOTE_BW_DM_MATCH_CURVES
+     where DeliveryDay >= TO_DATE('01.01.2016','dd.mm.yyyy') and DeliveryDay <= TO_DATE('31.12.2016','dd.mm.yyyy') ;
+	-- rok 2017
+	insert into BW_DM_MATCH_CURVES select * from REMOTE_BW_DM_MATCH_CURVES
+     where DeliveryDay >= TO_DATE('01.01.2017','dd.mm.yyyy') and DeliveryDay <= TO_DATE('31.12.2017','dd.mm.yyyy') ;
+	
+-- zuctovani
+-- Zúčtovací poplatky a ceny
+	Truncate table BW_ZUCT_POPLATKY;
+	insert into BW_ZUCT_POPLATKY select * from REMOTE_BW_ZUCT_POPLATKY;	
+-- Koncový plán	
+	Truncate table BW_KONCOVY_PLAN;
+	insert into BW_KONCOVY_PLAN select * from REMOTE_BW_KONCOVY_PLAN;	
+-- Koncový plán ERD		
+	Truncate table BW_KONCOVY_PLAN_ERD;
+	insert into BW_KONCOVY_PLAN_ERD select * from REMOTE_BW_KONCOVY_PLAN_ERD;
+-- Zúčtování odchylek
+	Truncate table BW_ODCHYLKY_PLATBY;
+	insert into BW_ODCHYLKY_PLATBY select * from REMOTE_BW_ODCHYLKY_PLATBY;
+	Truncate table BW_ODCHYLKY_PODRIZENYCH_SZ;
+	insert into BW_ODCHYLKY_PODRIZENYCH_SZ select * from REMOTE_BW_ODCHYLKY_PODRIZEN_SZ;
+	Truncate table BW_ODCHYLKY_ROU;
+	insert into BW_ODCHYLKY_ROU select * from REMOTE_BW_ODCHYLKY_ROU;
+	Truncate table BW_ODCHYLKY_PREBYTEK_RE;
+	insert into BW_ODCHYLKY_PREBYTEK_RE select * from REMOTE_BW_ODCHYLKY_PREBYTEK_RE;
+	Truncate table BW_VYPORADANI_RE_PPS;
+	insert into BW_VYPORADANI_RE_PPS select * from REMOTE_BW_VYPORADANI_RE_PPS;
+	Truncate table BW_VYPORADANI_RE_VT;
+	insert into BW_VYPORADANI_RE_VT select * from REMOTE_BW_VYPORADANI_RE_VT;
+	Truncate table BW_CENA_ODCHYLKY;
+	insert into BW_CENA_ODCHYLKY select * from REMOTE_BW_CENA_ODCHYLKY;
+	Truncate table BW_CENA_PROTIODCHYLKY;
+	insert into BW_CENA_PROTIODCHYLKY select * from REMOTE_BW_CENA_PROTIODCHYLKY;
+-- Denní platby elektřina	
+	Truncate table BW_DPLATBY_DT_SPOT;
+	insert into BW_DPLATBY_DT_SPOT select * from REMOTE_BW_DPLATBY_DT_SPOT;
+	Truncate table BW_DPLATBY_DT_DER;
+	insert into BW_DPLATBY_DT_DER select * from REMOTE_BW_DPLATBY_DT_DER;
+	Truncate table BW_DPLATBY_POPL_DT;
+	insert into BW_DPLATBY_POPL_DT select * from REMOTE_BW_DPLATBY_POPL_DT;
+	Truncate table BW_DPLATBY_PXE;
+	insert into BW_DPLATBY_PXE select * from REMOTE_BW_DPLATBY_PXE;
+	Truncate table BW_DPLATBY_BT;
+	insert into BW_DPLATBY_BT select * from REMOTE_BW_DPLATBY_BT;
+	Truncate table BW_DPLATBY_POPL_BT;
+	insert into BW_DPLATBY_POPL_BT select * from REMOTE_BW_DPLATBY_POPL_BT;
+	Truncate table BW_DPLATBY_VDT;
+	insert into BW_DPLATBY_VDT select * from REMOTE_BW_DPLATBY_VDT;
+	Truncate table BW_DPLATBY_POPL_VDT;
+	insert into BW_DPLATBY_POPL_VDT select * from REMOTE_BW_DPLATBY_POPL_VDT;
+	Truncate table BW_DPLATBY_POPL_VT;
+	insert into BW_DPLATBY_POPL_VT select * from REMOTE_BW_DPLATBY_POPL_VT;
+	Truncate table BW_DPLATBY_EM;
+	insert into BW_DPLATBY_EM select * from REMOTE_BW_DPLATBY_EM;
+	Truncate table BW_ZUCT_TDD;
+	insert into BW_ZUCT_TDD select * from REMOTE_BW_ZUCT_TDD;
+	Truncate table BW_ZUCT_TDDS;
+	insert into BW_ZUCT_TDDS select * from REMOTE_BW_ZUCT_TDDS;
+	Truncate table BW_DPLATBY_POPL_SZ;
+	insert into BW_DPLATBY_POPL_SZ select * from REMOTE_BW_DPLATBY_POPL_SZ;
+	Truncate table BW_DPLATBY_POPL_CDS;
+	insert into BW_DPLATBY_POPL_CDS select * from REMOTE_BW_DPLATBY_POPL_CDS;
+	Truncate table BW_DPLATBY_POPL_REMIT;
+	insert into BW_DPLATBY_POPL_REMIT select * from REMOTE_BW_DPLATBY_POPL_REMIT;
+-- Denní platby plyn
+	Truncate table BW_DPLATBY_VDP;
+	insert into BW_DPLATBY_VDP select * from REMOTE_BW_DPLATBY_VDP;
+	Truncate table BW_DPLATBY_POPL_VDP;
+	insert into BW_DPLATBY_POPL_VDP select * from REMOTE_BW_DPLATBY_POPL_VDP;
+	Truncate table BW_DPLATBY_G_POPL_SZ;
+	insert into BW_DPLATBY_G_POPL_SZ select * from REMOTE_BW_DPLATBY_G_POPL_SZ;
+	Truncate table BW_DPLATBY_G_POPL_CDS;
+	insert into BW_DPLATBY_G_POPL_CDS select * from REMOTE_BW_DPLATBY_G_POPL_CDS;
+	Truncate table BW_DPLATBY_G_POPL_REMIT;
+	insert into BW_DPLATBY_G_POPL_REMIT select * from REMOTE_BW_DPLATBY_G_POPL_REMIT;
+-- Zpracování zúčtování 	
+	Truncate table BW_GCT_SETTLMENT;
+	insert into BW_GCT_SETTLMENT select * from REMOTE_BW_GCT_SETTLMENT;		
+ 
+ --BT
+	truncate table BW_BM_PRODUCT;
+	insert into BW_BM_PRODUCT select * from REMOTE_BW_BM_PRODUCT;
+	truncate table BW_BM_CONTRACT;
+	insert into BW_BM_CONTRACT select * from REMOTE_BW_BM_CONTRACT;
+	truncate table BW_BM_INTERVAL;
+	insert into BW_BM_INTERVAL select * from REMOTE_BW_BM_INTERVAL;
+	truncate table BW_BM_ORDER;
+	insert into BW_BM_ORDER select * from REMOTE_BW_BM_ORDER;
+	truncate table BW_BM_TRADE;
+	insert into BW_BM_TRADE select * from REMOTE_BW_BM_TRADE;
+	truncate table BW_BM_EVENT;
+	insert into BW_BM_EVENT select * from REMOTE_BW_BM_EVENT;
+	
+ --VDP
+	truncate table BW_IMG_PRODUCT;
+	insert into BW_IMG_PRODUCT select * from REMOTE_BW_IMG_PRODUCT;
+	truncate table BW_IMG_CONTRACT;
+	insert into BW_IMG_CONTRACT select * from REMOTE_BW_IMG_CONTRACT;
+	truncate table BW_IMG_INTERVAL;
+	insert into BW_IMG_INTERVAL select * from REMOTE_BW_IMG_INTERVAL;
+	truncate table BW_IMG_ORDER;
+	insert into BW_IMG_ORDER select * from REMOTE_BW_IMG_ORDER;
+	truncate table BW_IMG_TRADE;
+	insert into BW_IMG_TRADE select * from REMOTE_BW_IMG_TRADE;
+	truncate table BW_IMG_EVENT;
+	insert into BW_IMG_EVENT select * from REMOTE_BW_IMG_EVENT;	
+    truncate table BW_IMG_INDEX;
+	insert into BW_IMG_INDEX select * from REMOTE_BW_IMG_INDEX;	
+	
+ --RRD
+	truncate table BW_RRD_EXT_ID_DOC;
+	insert into BW_RRD_EXT_ID_DOC select * from REMOTE_BW_RRD_EXT_ID_DOC;
+	truncate table BW_RRD_EXT_ID_INTRVL;
+	insert into BW_RRD_EXT_ID_INTRVL select * from REMOTE_BW_RRD_EXT_ID_INTRVL;
+	truncate table BW_RRD_EXT_ID_TS;
+	insert into BW_RRD_EXT_ID_TS select * from REMOTE_BW_RRD_EXT_ID_TS;
+	truncate table BW_RRD_EXT_LTD_DOC;
+	insert into BW_RRD_EXT_LTD_DOC select * from REMOTE_BW_RRD_EXT_LTD_DOC;
+	truncate table BW_RRD_EXT_LTD_INTRVL;
+	insert into BW_RRD_EXT_LTD_INTRVL select * from REMOTE_BW_RRD_EXT_LTD_INTRVL;
+	truncate table BW_RRD_EXT_LTD_TS;
+	insert into BW_RRD_EXT_LTD_TS select * from REMOTE_BW_RRD_EXT_LTD_TS;		
+	truncate table BW_RRD_INTERNAL_DOC;
+	insert into BW_RRD_INTERNAL_DOC select * from REMOTE_BW_RRD_INTERNAL_DOC;
+	truncate table BW_RRD_INTERNAL_INTRVL;
+	insert into BW_RRD_INTERNAL_INTRVL select * from REMOTE_BW_RRD_INTERNAL_INTRVL;
+	truncate table BW_RRD_INTERNAL_TS;
+	insert into BW_RRD_INTERNAL_TS select * from REMOTE_BW_RRD_INTERNAL_TS;			
+    truncate table BW_RRD_UZAVERKY;
+	insert into BW_RRD_UZAVERKY select * from REMOTE_BW_RRD_UZAVERKY;	
+	
+END;

@@ -1,0 +1,1199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="SAP HANA XS includes a dedicated, CDS-compliant syntax, which you must adhere to when using a CDS document to define a view as a design-time artifact."/>
+<meta name="description" content="SAP HANA XS includes a dedicated, CDS-compliant syntax, which you must adhere to when using a CDS document to define a view as a design-time artifact."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=6663164804320986"/>
+<title>CDS View Syntax Options</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loiode9843e69bd14989b8a592cf3e6c95d7";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loiode9843e69bd14989b8a592cf3e6c95d7">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">CDS View Syntax Options</h1>
+
+	
+	<div class="body refbody"><p class="shortdesc"><span class="ph pname">SAP HANA</span> XS includes a dedicated, CDS-compliant syntax, which you must
+		adhere to when using a CDS document to define a view as a design-time artifact.</p>
+
+		<div class="example"><h2 class="exampletitle">Example</h2>
+			<div class="note note"><span class="notetitle">Note</span> The following example is intended for illustration purposes only and might contain
+				syntactical errors. For further details about the keywords illustrated, click the
+				links provided.</div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">context views {
+<a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_wqj_ndz_qt" target="_top">const</a> x : Integer = 4;
+<a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_wqj_ndz_qt" target="_top">const</a> y : Integer = 5;
+<a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_wqj_ndz_qt" target="_top">const</a> Z : Integer = 6;
+
+VIEW MyView1 AS <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_pt3_31d_hn" target="_top">SELECT</a> FROM Employee
+{
+  a + b  AS <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_ihf_h1d_hn" target="_top">theSum</a>
+};
+
+VIEW MyView2 AS SELECT FROM Employee
+{ officeId.building,
+  officeId.floor,
+  officeId.roomNumber,
+  office.capacity,
+  <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_md4_h1d_hn" target="_top">count</a>(id) AS seatsTaken,
+  count(id)/office.capacity as occupancyRate
+} <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_gxg_41d_hn" target="_top">WHERE</a> officeId.building = 1
+  <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_ljz_pbd_hn" target="_top">GROUP BY</a> officeId.building,
+           officeId.floor,
+           officeId.roomNumber,
+           office.capacity,
+           office.type
+  <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_tqh_tcd_hn" target="_top">HAVING</a> office.type = 'office' <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_gxg_41d_hn" target="_top">AND</a> <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_md4_h1d_hn" target="_top">count</a>(id)/office.capacity &lt; 0.5;
+
+VIEW MyView3 AS SELECT FROM Employee
+{ orgUnit,
+  salary
+} <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_gpz_x5q_jp" target="_top">ORDER BY</a> salary DESC; 
+
+VIEW MyView4 AS SELECT FROM Employee {
+    <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_otn_y5q_jp" target="_top">CASE</a>
+        WHEN a &lt; 10 then 'small'
+        WHEN 10 &lt;= a AND a &lt; 100 THEN 'medium'
+        ELSE 'large'
+    END AS size   
+};
+
+VIEW MyView5 AS
+  SELECT FROM E1 { a, b, c}
+  <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_g1x_y5q_jp" target="_top">UNION</a>
+  SELECT FROM E2 { z, x, y};
+
+VIEW MyView6 AS SELECT FROM Customer {
+  name,
+  <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_qn5_yfr_xr" target="_top">orders[status='open']</a>.{ id   as orderId,
+                          date as orderDate,
+                          items[price&gt;200].{ descr,
+                                             price }  }
+};
+
+VIEW MyView7 as 
+  select from E { a, b, c} 
+  order by a <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_fm5_2bv_mx" target="_top">limit</a> 10 <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_fm5_2bv_mx" target="_top">offset</a> 30;
+
+VIEW V_join as select from E <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_zcn_ntx_qt" target="_top">join</a> (F as X full outer join G on X.id = G.id) on E.id = c {
+  a, b, c
+};
+
+VIEW V_top as select from E <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_v4b_bnf_cz" target="_top">TOP</a> 10 { a, b, c};
+
+VIEW V_dist as select from E <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_xxz_ttx_qt" target="_top">distinct</a> { a };
+
+VIEW V_param <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_rcq_dpf_cz" target="_top">with parameters</a> PAR1: Integer, PAR2: MyUserDefinedType, PAR3: type of E.elt 
+      as select from MyEntity { 
+        id, 
+        elt };
+
+VIEW V_type as select from E { 
+  a,  
+  a+b as s1,  
+  a+b as s2 : <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_llw_vcr_qv" target="_top">MyInteger</a> 
+}; 
+
+view VE as select from E <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_qn5_yfr_xr" target="_top">mixin</a> { 
+  f : Association[1] to VF on f.vy = <a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_qn5_yfr_xr" target="_top">$projection</a>.vb; 
+ } into { 
+  a as va, 
+  b as vb, 
+  f as vf 
+ };
+
+VIEW SpatialView1 as select from Person {
+    name, 
+    homeAddress.street_name   || ', ' || homeAddress.city   as home, 
+    officeAddress.street_name || ', ' || officeAddress.city as office, 
+    round( homeAddress.loc.<a class="xref nopagenumber" href="default.html?de9843e69bd14989b8a592cf3e6c95d7.html#loiode9843e69bd14989b8a592cf3e6c95d7__section_ycj_vqy_xr" target="_top">ST_Distance</a>(officeAddress.loc, 'meter')/1000, 1) as distanceHomeToWork,
+    round( homeAddress.loc.ST_Distance(NEW ST_POINT(8.644072, 49.292910), 'meter')/1000, 1) as distFromSAP03
+};
+}</pre></div>
+
+		</div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_ihf_h1d_hn"><div class="section_title">Expressions and Functions</div><div type="Expressions and Functions">
+			
+			<p class="p">In a CDS view definition you can use any of the functions and expressions listed in
+				the following example:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">View MyView9 AS SELECT FROM SampleEntity
+{
+  a + b  AS theSum,
+  a - b  AS theDifference,
+  a * b  AS theProduct,
+  a / b  AS theQuotient,
+  -a     AS theUnaryMinus,
+  c || d AS theConcatenation
+};
+</pre></div>
+
+			<div class="note note"><span class="notetitle">Note</span> When expressions are used in a view element, an alias must be specified, for
+				example, <samp class="ph codeph">AS theSum</samp>.</div>
+
+		</div></div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_md4_h1d_hn"><div class="section_title">Aggregates</div><div type="Aggregates">
+			
+			<p class="p">In a CDS view definition, you can use the following aggregates:</p>
+
+			<ul class="ul" id="loiode9843e69bd14989b8a592cf3e6c95d7__ul_dll_sxp_xl">
+				<li class="li">AVG</li>
+
+				<li class="li">COUNT</li>
+
+				<li class="li">MIN</li>
+
+				<li class="li">MAX</li>
+
+				<li class="li">SUM</li>
+
+				<li class="li">STDDEV</li>
+
+				<li class="li">VAR</li>
+
+			</ul>
+
+			<p class="p">The following example shows how to use aggregates and expressions to collect
+				information about headcount and salary per organizational unit for all employees
+				hired from 2011 to now.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">VIEW MyView10 AS SELECT FROM Employee
+{
+  orgUnit,
+  count(id)   AS headCount,
+  sum(salary) AS totalSalary,
+  max(salary) AS maxSalary
+}  
+  WHERE joinDate &gt; date'2011-01-01'
+  GROUP BY orgUnit;
+</pre></div>
+
+			<div class="note note"><span class="notetitle">Note</span> Expressions are not allowed in the <samp class="ph codeph">GROUP BY</samp> clause.</div>
+
+		</div></div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_wqj_ndz_qt"><div class="section_title">Constants in Views</div><div type="Constants in Views">
+			
+			<p class="p">With SPS 11, you can use constants in the views, as illustrated in <span class="q">“MyView”</span> at
+				the end of the following example:</p>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">context MyContext {
+  const MyIntConst      : Integer      = 7;
+  const MyStringConst   : String(10)   = 'bright';
+  const MyDecConst      : Decimal(4,2) = 3.14;
+  const MyDateTimeConst : UTCDateTime  = '2015-09-30 14:33'; 
+
+  entity MyEntity {
+    key id : Integer;
+    a : Integer;
+    b : String(100);
+    c : Decimal(20,10);
+    d : UTCDateTime;
+    your : Association[1] to YourEntity on your.a - a &lt; MyIntConst;
+  };
+
+  entity YourEntity {
+    key id : Integer;
+    a : Integer;    
+  };
+
+  entity HerEntity {
+    key id : Integer;
+    t : String(20);
+  };
+
+  view MyView as select from MyEntity 
+           inner join HerEntity on locate (b, :MyStringConst) &gt; 0
+  {
+    a + :MyIntConst as x,
+    b || ' is ' || :MyStringConst as y,
+    c * sin(:MyDecConst) as z    
+  } where d &lt; :MyContext.MyDateTimeConst; 
+};
+</pre></div>
+
+			</div>
+
+			<p class="p">When constants are used in a view definition, their name must be prefixed with the
+				scope operator <span class="q">“<samp class="ph codeph">:</samp>”</span>. Usually names that appear in a query are
+				resolved as alias or element names. The scope operator instructs the compiler to
+				resolve the name outside of the query. </p>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">context NameResolution {
+  const a : Integer = 4;
+  const b : Integer = 5;
+  const c : Integer = 6;
+
+  entity E {
+    key id : Integer;
+    a : Integer;
+    c : Integer;
+  };
+
+  view V as select from E {
+    a    as a1,   
+    b,            
+    :a   as a2,   
+    E.a  as a3,   
+    :E,           
+    :E.a as a4,   
+    :c            
+  };
+}
+</pre></div>
+
+			</div>
+
+			<p class="p">The following table explains how the constants used in view <span class="q">“V”</span> are resolved. </p>
+
+			
+<div class="table-wrapper tablenoborder"><table summary="" id="loiode9843e69bd14989b8a592cf3e6c95d7__table_lvq_dcz_qt" class="table" frame="border" border="1" rules="all"><caption><span class="tablecap">Table 1: Constant Declaration and Result</span></caption>
+<colgroup><col width="22.80701754385965%"/><col width="15.94896331738437%"/><col width="61.24401913875599%"/></colgroup>
+
+					
+					
+					
+					<thead class="thead" align="left">
+						<tr class="row">
+							<th class="entry" valign="top" width="22.80701754385965%" id="d4033792e250">
+								<p class="p">Constant Expression</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="15.94896331738437%" id="d4033792e256">
+								<p class="p">Result</p>
+
+							</th>
+
+							<th class="entry" valign="top" width="61.24401913875598%" id="d4033792e262">
+								<p class="p">Comments</p>
+
+							</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody class="tbody">
+						<tr class="row">
+							<td class="entry" valign="top" width="22.80701754385965%" headers="d4033792e250 ">
+								<p class="p"><samp class="ph codeph">a as a1,</samp></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="15.94896331738437%" headers="d4033792e256 ">
+								<p class="p">Success</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.24401913875598%" headers="d4033792e262 ">
+								<p class="p"><span class="q">“a”</span> is resolved in the space of alias and element names, for
+									example, element <span class="q">“a”</span> of entity <span class="q">“E”</span>.</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="22.80701754385965%" headers="d4033792e250 ">
+								<p class="p"><samp class="ph codeph">b,</samp></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="15.94896331738437%" headers="d4033792e256 ">
+								<p class="p">Error</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.24401913875598%" headers="d4033792e262 ">
+								<p class="p">There is no alias and no element with name <span class="q">“b”</span> in entity
+										<span class="q">“E”</span></p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="22.80701754385965%" headers="d4033792e250 ">
+								<p class="p"><samp class="ph codeph">:a as a2,</samp></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="15.94896331738437%" headers="d4033792e256 ">
+								<p class="p">Success</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.24401913875598%" headers="d4033792e262 ">
+								<p class="p">Scope operator <span class="q">“:”</span> instructs the compiler to search for
+									element <span class="q">“a”</span> outside of the query (finds the constant
+										<span class="q">“a”</span>). </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="22.80701754385965%" headers="d4033792e250 ">
+								<p class="p"><samp class="ph codeph">E.a as a3,</samp></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="15.94896331738437%" headers="d4033792e256 ">
+								<p class="p">Success</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.24401913875598%" headers="d4033792e262 ">
+								<p class="p"><span class="q">“E”</span> is resolved in the space of alias and element names, so
+									this matches element <span class="q">“a”</span> of entity <span class="q">“Entity”</span> . </p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="22.80701754385965%" headers="d4033792e250 ">
+								<p class="p"><samp class="ph codeph">:E,</samp></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="15.94896331738437%" headers="d4033792e256 ">
+								<p class="p">Success</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.24401913875598%" headers="d4033792e262 ">
+								<p class="p">Error: no access to <span class="q">“E”</span> via <span class="q">“:”</span>
+								</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="22.80701754385965%" headers="d4033792e250 ">
+								<p class="p"><samp class="ph codeph">:E.a as a4,</samp></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="15.94896331738437%" headers="d4033792e256 ">
+								<p class="p">Error</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.24401913875598%" headers="d4033792e262 ">
+								<p class="p">Error; no access to <span class="q">“E”</span> (or any of its elements) via
+										<span class="q">“:”</span>
+								</p>
+
+							</td>
+
+						</tr>
+
+						<tr class="row">
+							<td class="entry" valign="top" width="22.80701754385965%" headers="d4033792e250 ">
+								<p class="p"><samp class="ph codeph">:c</samp></p>
+
+							</td>
+
+							<td class="entry" valign="top" width="15.94896331738437%" headers="d4033792e256 ">
+								<p class="p">Error</p>
+
+							</td>
+
+							<td class="entry" valign="top" width="61.24401913875598%" headers="d4033792e262 ">
+								<p class="p">Error: there is no alias for <span class="q">“c”</span>.</p>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+</div>
+
+		</div></div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_pt3_31d_hn"><div class="section_title">SELECT</div><div type="SELECT"><p class="p">In the following example of an
+				association in a <samp class="ph codeph">SELECT</samp> list, a view compiles a list of all
+				employees; the list includes the employee's name, the capacity of the employee's
+				office, and the color of the carpet in the office. The association follows the
+				to-one association office from entity <samp class="ph codeph">Employee</samp> to entity
+					<samp class="ph codeph">Room</samp> to collect the relevant information about the office.</p>
+<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">VIEW MyView11 AS SELECT FROM Employee
+{
+  name.last,
+  office.capacity,
+  office.carpetColor
+};
+</pre></div>
+<div class="sectiondiv subsection">
+				<p class="p subsectiontitle">Subqueries</p>
+
+				<p class="p">You can define subqueries in a CDS view, as illustrated in the following
+					example:</p>
+
+				<div class="note sap-codesyntaxblock codesyntax"><span class="codesyntaxtitle">Code Syntax</span> 
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">select from (select from F {a as x, b as y}) as Q { 
+  x+y as xy, 
+    (select from E {a} where b=Q.y) as a 
+} where x &lt; all (select from E{b}) </pre></div>
+
+				</div>
+
+				<div class="note restriction"><span class="restrictiontitle">Restriction</span> In a <span class="ph emphasis emphasis">correlated</span> subquery, elements of
+					outer queries must always be addressed by means of a table alias.</div>
+
+			</div></div></div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_gxg_41d_hn"><div class="section_title">WHERE</div><div type="WHERE">
+			
+			<p class="p">The following example shows how the syntax required in the <samp class="ph codeph">WHERE</samp>
+				clause used in a CDS view definition. In this example, the <samp class="ph codeph">WHERE</samp>
+				clause is used in an association to restrict the result set according to information
+				located in the association's target. Further filtering of the result set can be
+				defined with the <samp class="ph codeph">AND</samp> modifier.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">VIEW EmployeesInRoom_ABC_3_4 AS SELECT FROM Employee
+{
+  name.last
+} WHERE officeId.building = 'ABC'
+    AND officeId.floor    = 3
+    AND officeId.number   = 4;
+</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_kwf_r1d_hn"><div class="section_title">FROM</div><div type="FROM">
+			
+			<p class="p">The following example shows the syntax required when using the FROM clause in a CDS
+				view definition. This example shows an association that lists the license plates of
+				all company cars.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">VIEW CompanyCarLicensePlates AS SELECT FROM Employee.companyCar
+{
+  licensePlate
+};</pre></div>
+
+			<p class="p">In the <samp class="ph codeph">FROM</samp> clause, you can use the following elements:</p>
+
+			<ul class="ul" id="loiode9843e69bd14989b8a592cf3e6c95d7__ul_mbx_tgd_hn">
+				<li class="li">an entity or a view defined in the same CDS source file</li>
+
+				<li class="li">a native <span class="ph pname">SAP HANA</span> table or view that is available in the schema
+					specified in the schema annotation (<samp class="ph codeph">@Schema</samp> in the
+					corresponding CDS document)</li>
+
+			</ul>
+
+			<p class="p">If a CDS view references a native <span class="ph pname">SAP HANA</span> table, the table and column
+				names must be specified using their effective <span class="ph pname">SAP HANA</span> names.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">create table foo (
+  bar    : Integer,
+  "gloo" : Integer
+)
+</pre></div>
+
+			<p class="p">This means that if a table (<samp class="ph codeph">foo</samp>) or its columns
+					(<samp class="ph codeph">bar</samp> and <samp class="ph codeph"><span class="q">“gloo”</span></samp> were created
+					<span class="ph emphasis emphasis">without</span> using quotation marks (""), the corresponding
+				uppercase names for the table or columns must be used in the CDS document, as
+				illustrated in the following example.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">VIEW MyViewOnNative as SELECT FROM FOO
+{
+  BAR,
+  gloo
+};
+</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_ljz_pbd_hn"><div class="section_title">GROUP BY</div><div type="GROUP BY">
+			
+			<p class="p">The following example shows the syntax required when using the <samp class="ph codeph">GROUP
+					BY</samp> clause in a CDS view definition. This example shows an association
+				in a view that compiles a list of all offices that are less than 50% occupied.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">VIEW V11 AS SELECT FROM Employee
+{
+  officeId.building,
+  officeId.floor,
+  officeId.roomNumber,
+  office.capacity,
+  count(id) as seatsTaken,
+  count(id)/office.capacity as occupancyRate
+} GROUP BY officeId.building,
+           officeId.floor,
+           officeId.roomNumber,
+           office.capacity,
+           office.type
+  HAVING office.type = 'office' AND count(id)/capacity &lt; 0.5;
+</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_tqh_tcd_hn"><div class="section_title">HAVING</div><div type="HAVING">
+			
+			<p class="p">The following example shows the syntax required when using the
+					<samp class="ph codeph">HAVING</samp> clause in a CDS view definition. This example shows a
+				view with an association that compiles a list of all offices that are less than 50%
+				occupied.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">VIEW V11 AS SELECT FROM Employee
+{
+  officeId.building,
+  officeId.floor,
+  officeId.roomNumber,
+  office.capacity,
+  count(id)          as seatsTaken,
+  count(id)/office.capacity as occupancyRate
+} GROUP BY officeId.building,
+           officeId.floor,
+           officeId.roomNumber,
+           office.capacity,
+           office.type
+  HAVING office.type = 'office' AND count(id)/capacity &lt; 0.5;
+</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_gpz_x5q_jp"><div class="section_title">ORDER BY</div><div type="ORDER BY">
+			
+			<p class="p">The <samp class="ph codeph">ORDER BY</samp> operator enables you to list results according to an
+				expression or position, for example <samp class="ph codeph">salary</samp>. </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">VIEW MyView3 AS SELECT FROM Employee
+{
+  orgUnit,
+  salary
+} ORDER BY salary DESC; 
+</pre></div>
+
+			<p class="p">In the same way as with plain SQL, the <samp class="ph codeph">ASC</samp> and <samp class="ph codeph">DESC</samp>
+				operators enable you to sort the list order as follows. </p>
+
+			<ul class="ul" id="loiode9843e69bd14989b8a592cf3e6c95d7__ul_hzx_rvq_jp">
+				<li class="li"><samp class="ph codeph">ASC</samp><p class="p">Display the result set in <span class="ph emphasis emphasis">ascending</span>
+						order</p>
+</li>
+
+				<li class="li"><samp class="ph codeph">DESC</samp><p class="p">Display the result set in
+							<span class="ph emphasis emphasis">descending</span> order</p>
+</li>
+
+			</ul>
+
+		</div></div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_fm5_2bv_mx"><div class="section_title">LIMIT/OFFSET</div><div type="LIMIT/OFFSET">
+			
+			<p class="p">You can use the SQL clauses <samp class="ph codeph">LIMIT</samp> and <samp class="ph codeph">OFFSET</samp> in a
+				CDS query. The <samp class="ph codeph">LIMIT <var class="keyword varname">&lt;INTEGER&gt;</var> [OFFSET
+						<var class="keyword varname">&lt;INTEGER&gt;</var>]</samp> operator enables you to restrict the
+				number of output records to display to a specified <span class="q">“limit”</span>; the <samp class="ph codeph">OFFSET
+						<var class="keyword varname">&lt;INTEGER&gt;</var></samp> specifies the number of records to skip
+				before displaying the records according to the defined <samp class="ph codeph">LIMIT</samp>. </p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">VIEW MyViewV AS SELECT FROM E
+  { a, b, c}
+  order by a limit 10 offset 30;
+</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_otn_y5q_jp"><div class="section_title">CASE</div><div type="CASE">
+			
+			<p class="p">In the same way as in plain SQL, you can use the <samp class="ph codeph">case</samp> expression in
+				a CDS view definition to introduce <samp class="ph codeph">IF-THEN-ELSE</samp> conditions without
+				the need to use procedures.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">entity MyEntity12 {   
+key id : Integer;
+     a : Integer;
+     color : String(1);   
+};
+ 
+VIEW MyView12 AS SELECT FROM MyEntity12 {
+    id,
+    CASE color     // defined in MyEntity12
+        WHEN 'R' THEN 'red'
+        WHEN 'G' THEN 'green'
+        WHEN 'B' THEN 'blue'
+        ELSE 'black'
+    END AS color,
+    CASE
+        WHEN a &lt; 10 then 'small'
+        WHEN 10 &lt;= a AND a &lt; 100 THEN 'medium'
+        ELSE 'large'
+    END AS size   
+};</pre></div>
+
+			<p class="p">In the first example of usage of the <samp class="ph codeph">CASE</samp> operator, <samp class="ph codeph">CASE
+					color</samp> shows a <span class="q">“switched”</span> CASE (one table column and multiple
+				values). The second example of CASE usage shows a <span class="q">“conditional”</span> CASE with
+				multiple arbitrary conditions, possibly referring to different table columns.</p>
+
+		</div></div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_g1x_y5q_jp"><div class="section_title">UNION</div><div type="UNION">
+			
+			<p class="p">Enables multiple select statements to be combined but return only one result set.
+					<samp class="ph codeph">UNION</samp> works in the same way as the <span class="ph pname">SAP HANA</span> SQL
+				command of the same name; it selects all unique records from all select statements
+				by removing duplicates found from different select statements.The signature of the
+				result view is equal to the signature of the first <samp class="ph codeph">SELECT</samp> in the
+				union.</p>
+
+			<div class="note note"><span class="notetitle">Note</span> View <samp class="ph codeph">MyView5</samp> has elements <samp class="ph codeph">a</samp>, <samp class="ph codeph">b</samp>,
+				and <samp class="ph codeph">c</samp>.</div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">entity E1 {
+  key a : Integer;
+  b : String(20);
+  c : LocalDate;
+};
+
+entity E2 {
+  key x : String(20);
+  y : LocalDate;
+  z : Integer;
+};
+
+VIEW MyView5 AS
+  SELECT FROM E1 { a, b, c}
+  UNION
+  SELECT FROM E2 { z, x, y};</pre></div>
+
+		</div></div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_zcn_ntx_qt"><div class="section_title">JOIN</div><div type="JOIN">
+			
+			<p class="p">You can include a JOIN clause in a CDS view definition; the following JOIN types are
+				supported:</p>
+
+			<ul class="ul" id="loiode9843e69bd14989b8a592cf3e6c95d7__ul_sst_qrx_qt">
+				<li class="li">[ INNER ] JOIN </li>
+
+				<li class="li">LEFT [ OUTER ] JOIN </li>
+
+				<li class="li">RIGHT [ OUTER ] JOIN </li>
+
+				<li class="li">FULL [ OUTER ] JOIN </li>
+
+				<li class="li">CROSS JOIN </li>
+
+			</ul>
+
+			<p class="p">The following example shows a simple join.</p>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">entity E {
+  key id : Integer;
+  a : Integer;
+};
+entity F {
+  key id : Integer;
+  b : Integer;
+};
+entity G {
+  key id : Integer;
+  c : Integer;
+};
+view V_join as select from E join (F as X full outer join G on X.id = G.id) on E.id = c {
+  a, b, c
+};</pre></div>
+
+			</div>
+
+		</div></div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_v4b_bnf_cz"><div class="section_title">TOP</div><div type="TOP">
+			
+			<p class="p">You can use the SQL clause <samp class="ph codeph">TOP</samp> in a CDS query, as illustrated in the
+				following example:</p>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">view V_top as select from E TOP 10 { a, b, c};</pre></div>
+
+			</div>
+
+			<div class="note restriction"><span class="restrictiontitle">Restriction</span> It is not permitted to use <samp class="ph codeph">TOP</samp> in combination
+				with the <samp class="ph codeph">LIMIT</samp> clause in a CDS query.</div>
+
+		</div></div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_xxz_ttx_qt"><div class="section_title">SELECT DISTINCT</div><div type="SELECT DISTINCT">
+			
+			<p class="p">CDS now supports the <samp class="ph codeph">SELECT DISTINCT</samp> semantic. The position of the
+					<samp class="ph codeph">DISTINCT</samp> keyword is important; it must appear directly in front
+				of the curly brace, as illustrated in the following example:</p>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">entity E {
+  key id : Integer;
+  a : Integer;
+};
+entity F {
+  key id : Integer;
+  b : Integer;
+};
+entity G {
+  key id : Integer;
+  c : Integer;
+};
+view V_dist as select from E distinct { a };</pre></div>
+
+			</div>
+
+		</div></div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_rcq_dpf_cz"><div class="section_title">With Parameters</div><div type="With Parameters"><p class="p">You can define parameters
+				for use in a CDS view; this allows you to pass additional values to modify the
+				results of the query at runtime. Parameters must be defined in the view definition
+				before the query block, as illustrated in the following example: </p>
+<div class="note note"><span class="notetitle">Note</span> Keywords
+				are case insensitive.</div>
+<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> Parameters in a CDS View
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">context MyContext 
+{ 
+  entity MyEntity1 { 
+     id: Integer; 
+     elt: String(100); }; 
+
+  entity MyEntity2 { 
+     id: Integer; 
+     elt: String(100); }; 
+
+  type MyUserDefinedType: type of E.elt; 
+
+  view MyParamView with parameters PAR1: Integer, 
+                                   PAR2: MyUserDefinedType, 
+                                   PAR3: type of E.elt 
+      as select from MyEntity { 
+        id, 
+        elt }; </pre></div>
+</div>
+<div class="sectiondiv subsection">
+				<p class="p subsectiontitle">Parameters in View Queries</p>
+
+				<p class="p">Parameters can be used in a query at any position where an expression is allowed. A parameter
+					is referred to inside a query by prefixing the parameter name either with the
+					colon <dfn class="term">Scope</dfn> operator ':' or the string
+							<span class="q">“<samp class="ph codeph">$parameters</samp>”</span> .</p>
+
+				<div class="note tip"><span class="tiptitle">Tip</span> If no matching parameter can be found, the scope operator <span class="q">“escapes”</span> from
+					the query and attempts to resolve the identifier outside the query.</div>
+
+				<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> Using Parameters in a View
+					Query<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">view ExampleView with parameters PAR1: Integer,
+                                 PAR2: UserDefinedType, 
+                                 PAR3: type of E.elt 
+        as select from SomeEntity 
+             left outer join SomeOtherEntity 
+               on SomeEntity.id &lt; SomeOtherEntity.id + :PAR1 
+     { 
+       id + :PAR1 as idWithOffset, 
+       elt, 
+       :PAR1,
+       $parameters.PAR3 
+     } where elt != $parameters.PAR2;</pre></div>
+</div>
+
+			</div><div class="sectiondiv subsection">
+				<p class="p subsectiontitle">Invoking a View with Parameters</p>
+
+				<p class="p">Parameters are passed to views as a comma-separated list in parentheses. Optional
+					filter expressions must then follow the parameter list.</p>
+
+				<div class="note restriction"><span class="restrictiontitle">Restriction</span> It is not allowed to use a query as value expression. Nor
+					is it allowed to provide a parameter list in the <samp class="ph codeph">ON</samp> condition
+					of an association definition to a parameterized view. This is because the
+					association definition establishes the relationship between the two entities but
+					makes no assumptions about the run-time conditions. For the same reason, it is
+					not allowed to specify filter conditions in those <samp class="ph codeph">ON</samp>
+					conditions.</div>
+
+				<p class="p">The following example shows two entities <span class="ph filepath">SourceEntity</span> and
+						<span class="ph filepath">TargetEntity</span> and a parameterized view
+						<span class="ph filepath">TargetWindowView</span>, which selects from
+						<span class="ph filepath">TargetEntity</span>. An association is established between
+						<span class="ph filepath">SourceEntity</span> and <span class="ph filepath">TargetEntity</span>.</p>
+
+				<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">entity SourceEntity {
+   id: Integer; 
+   someElementOfSourceEntity: String(100); 
+   toTargetViaParamView: association to TargetWindowView on 
+      toTargetViaParamView.targetId = id; 
+   }; 
+
+entity TargetEntity { 
+   targetId: Integer; 
+   someElementOfTargetEntity: String(100); 
+   }; 
+ 
+view TargetWindowView with parameters LOWER_LIMIT: Integer 
+   as select from TargetEntity { 
+      targetId,
+      someElementOfTargetEntity 
+   } where targetId &gt; :LOWER_LIMIT 
+     and targetId &lt;= :LOWER_LIMIT + 10;</pre></div>
+
+				</div>
+
+				<p class="p">It is now possible to query <samp class="ph codeph">SourceEntity</samp> in a view; it is also
+					possible to follow the association to <samp class="ph codeph">TargetWindowView</samp>, for
+					example, by providing the required parameters, as illustrated in the following
+					example:</p>
+
+				<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> Query a Parameterized CDS View (with
+					Association)<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">view SourceConsumption with parameters CUSTOMER_ID: Integer
+   as select from SourceEntity { 
+      someElementOfSourceEntity, 
+      toTargetViaParamView(LOWER_LIMIT: $parameters.CUSTOMER_ID).someElementOfTargetEntity 
+   }; </pre></div>
+</div>
+
+				<p class="p">It is also possible to follow the association in the <samp class="ph codeph">FROM</samp>
+					clause; this provides access only to the elements of the target artifact:</p>
+
+				<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> Follow an Association in the FROM
+					Clause<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">view ConsumptionView with parameters CUSTOMER_ID: Integer 
+   as select from SourceEntity.toTargetViaParamView(LOWER_LIMIT: :CUSTOMER_ID)
+   { 
+      id, 
+      someElementOfTargetEntity 
+   }; </pre></div>
+</div>
+
+				<p class="p">You can select directly from the view with parameters, adding a free
+						<samp class="ph codeph">JOIN</samp> expression, as illustrated in the following
+					example:</p>
+
+				<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> Select from a Parameterized View with JOIN
+					Expression<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">view ConsumptionView with parameters CUSTOMER_ID: Integer 
+   as select from TargetWindowView(LOWER_LIMIT: :CUSTOMER_ID) as TWV_ALIAS 
+      RIGHT OUTER JOIN ... ON TWV_ALIAS.targetId .... 
+{ 
+   ... 
+};</pre></div>
+</div>
+
+			</div><div class="sectiondiv subsection">
+				<p class="p subsectiontitle">Annotations in Parameter Definitions</p>
+
+				<p class="p">Parameter definitions can be annotated in the same way as any other artifact in
+					CDS; the annotations must be prepended to the parameter name. Multiple
+					annotations are separated either by whitespace or new-line characters. </p>
+
+				<div class="note tip"><span class="tiptitle">Tip</span> To improve readability and comprehension, it is recommended to include only one
+					annotation assignment per line.</div>
+
+				<p class="p">In the following example, the view <samp class="ph codeph">TargetWindowView</samp> selects from
+					the entity <samp class="ph codeph">TargetEntity</samp>; the annotation
+						<samp class="ph codeph">@positiveValuesOnly</samp> is not checked; and the
+						<samp class="ph codeph">targetId</samp> is required for the <samp class="ph codeph">ON</samp> condition
+					in the entity <samp class="ph codeph">SourceEntity</samp>.</p>
+
+				<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> Annotation Assignments to Parameter Definitions in CDS
+					Views<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">annotation remark: String(100);
+ 
+view TargetWindowView with parameters
+   <span class="ph emphasis emphasis">@remark</span>: 'This is an arbitrary annotation'
+   <span class="ph emphasis emphasis">@positiveValuesOnly</span>: true
+   LOWER_LIMIT: Integer
+as select from TargetEntity
+{ 
+  targetId,
+  ....
+} where targetId &gt; :LOWER_LIMIT and targetId &lt;= :LOWER_LIMIT + 10;</pre></div>
+</div>
+
+			</div></div></div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_qn5_yfr_xr"><div class="section_title">Associations, Filters, and Prefixes</div><div type="Associations, Filters, and Prefixes"><p class="p">You
+				can define an association as a view element, for example, by defining an ad-hoc
+				association in the <samp class="ph codeph">mixin</samp> clause and then adding the association to
+				the <samp class="ph codeph">SELECT</samp> list, as illustrated in the following
+				example:</p>
+<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> Associations as View
+				Elements<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">
+entity E {
+  a : Integer; 
+  b : Integer; 
+ }; 
+entity F { 
+  x : Integer; 
+  y : Integer; 
+ }; 
+view VE as select from E <span class="ph emphasis emphasis">mixin</span> { 
+  f : Association[1] to VF on f.vy = $projection.vb; 
+ } into { 
+  a as va, 
+  b as vb, 
+  f as vf 
+ }; 
+view VF as select from F { 
+  x as vx, 
+  y as vy 
+ }; </pre></div>
+</div>
+<p class="p">In
+				the <samp class="ph codeph">ON</samp> condition of this type of association in a view, it is
+				necessary to use the pseudo-identifier <samp class="ph codeph">$projection</samp> to specify that
+				the following element name must be resolved in the <samp class="ph codeph">select</samp> list of
+				the view (<span class="q">“<samp class="ph codeph">VE</samp>”</span>) rather than in the entity
+						(<span class="q">“<samp class="ph codeph">E</samp>”</span>) in the <samp class="ph codeph">FROM</samp> clause</p>
+<div class="sectiondiv subsection">
+				<p class="p subsectiontitle">Filter Conditions</p>
+
+				<p class="p">It is possible to apply a filter condition when resolving associations between
+					entities; the filter is merged into the <samp class="ph codeph">ON</samp>-condition of the
+					resulting <samp class="ph codeph">JOIN</samp>. The following example shows how to get a list
+					of customers and then filter the list according to the sales orders that are
+					currently <span class="q">“open”</span> for each customer. In the example, the filter is inserted
+					after the association <samp class="ph codeph">orders</samp>; this ensures that the list
+					displayed by the view only contains those orders that satisfy the condition
+						<samp class="ph codeph">[status='open']</samp>.</p>
+
+				<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">view C1 as select from Customer {
+  name,
+  orders[status='open'].id as orderId
+};</pre></div>
+
+				</div>
+
+				<p class="p">The following example shows how to use the prefix notation to ensure that the
+					compiler understands that there is only one association
+					(<samp class="ph codeph">orders</samp>) to resolve but with multiple elements
+						(<samp class="ph codeph">id</samp> and <samp class="ph codeph">date</samp>):</p>
+
+				<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">view C1 as select from Customer {
+  name,
+  orders[status='open'].{ id   as orderId,
+                          date as orderDate  
+                        }
+};</pre></div>
+
+				</div>
+
+				<div class="note tip"><span class="tiptitle">Tip</span> 
+					<p class="p">Filter conditions and prefixes can be nested.</p>
+
+				</div>
+
+				<p class="p">The following example shows how to use the associations <samp class="ph codeph">orders</samp>
+					and <samp class="ph codeph">items</samp> in a view that displays a list of customers with open
+					sales orders for items with a price greater than 200.</p>
+
+			</div><div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">view C2 as select from Customer {
+  name,
+  orders[status='open'].{ id   as orderId,
+                          date as orderDate,
+                          items[price&gt;200].{ descr,
+                                             price
+                                           }  
+                        }
+};</pre></div>
+
+			</div>
+<div class="sectiondiv subsection">
+				<p class="p subsectiontitle">Prefix Notation</p>
+
+				<p class="p">The prefix notation can also be used without filters. The following example shows
+					how to get a list of all customers with details of their sales orders. In this
+					example, all uses of the association <samp class="ph codeph">orders</samp> are combined so
+					that there is only one <samp class="ph codeph">JOIN</samp> to the table
+						<samp class="ph codeph">SalesOrder</samp>. Similarly, both uses of the association
+						<samp class="ph codeph">items</samp> are combined, and there is only one
+						<samp class="ph codeph">JOIN</samp> to the table <samp class="ph codeph">Item</samp>.</p>
+
+				<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">view C3 as select from Customer {
+  name,
+  orders.id          as orderId,
+  orders.date        as orderDate,
+  orders.items.descr as itemDescr,
+  orders.items.price as itemPrice
+};</pre></div>
+
+				</div>
+
+				<p class="p">The example above can be expressed more elegantly by combining the associations
+						<samp class="ph codeph">orders</samp> and <samp class="ph codeph">items</samp> using the following
+					prefix notation:</p>
+
+				<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+					<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">view C1 as select from Customer {
+  name,
+  orders.{ id   as orderId,
+           date as orderDate,
+           items. { descr as itemDescr,
+                    price as itemPrice
+                  }
+         }
+};</pre></div>
+
+				</div>
+
+			</div></div></div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_llw_vcr_qv"><div class="section_title">Type Definition</div><div type="Type Definition">
+			
+			<p class="p">In a CDS view definition, you can explicitly specify the <samp class="ph codeph">type</samp> of a
+				select item, as illustrated in the following example:</p>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">
+type MyInteger : Integer; 
+entity E { 
+  a : MyInteger; 
+  b : MyInteger; 
+}; 
+view V as select from E { 
+  a,  
+  a+b as s1,  
+  a+b as s2 : MyInteger 
+}; </pre></div>
+
+			</div>
+
+			<p class="p">In the example of different <samp class="ph codeph">type</samp> definitions, the following is
+				true:</p>
+
+			<ul class="ul" id="loiode9843e69bd14989b8a592cf3e6c95d7__ul_jph_myq_qv">
+				<li class="li"><samp class="ph codeph">a,</samp><p class="p">Has type <span class="q">“<samp class="ph codeph">MyInteger</samp>”</span>
+					</p>
+</li>
+
+				<li class="li"><samp class="ph codeph"> a+b as s1,</samp><p class="p">Has type <span class="q">“<samp class="ph codeph">Integer</samp>”</span> and any
+						information about the user-defined <samp class="ph codeph">type</samp> is lost </p>
+</li>
+
+				<li class="li"><samp class="ph codeph">a+b as s2 : MyInteger</samp><p class="p">Has type
+							<span class="q">“<samp class="ph codeph">MyInteger</samp>”</span>, which is explicitly specified
+					</p>
+</li>
+
+			</ul>
+
+			<div class="note note"><span class="notetitle">Note</span> If necessary, a <samp class="ph codeph">CAST</samp> function is added to the generated view in
+				SAP HANA; this ensures that the <samp class="ph codeph">select</samp> item's type in the SAP HANA
+				view is the SAP HANA <span class="q">“type”</span> corresponding to the explicitly specified CDS
+				type.</div>
+
+		</div></div>
+
+		<div class="section" id="loiode9843e69bd14989b8a592cf3e6c95d7__section_ycj_vqy_xr"><div class="section_title">Spatial Functions</div><div type="Spatial Functions">
+			
+			<p class="p">The following view (<samp class="ph codeph">SpatialView1</samp>) displays a list of all persons
+				selected from the entity <samp class="ph codeph">Person</samp> and uses the spatial function
+					<samp class="ph codeph">ST_Distance</samp> (<span class="ph emphasis emphasis">*</span>) to include information
+				such as the distance between each person's home and business address
+					(<samp class="ph codeph">distanceHomeToWork</samp>), and the distance between their home
+				address and the building SAP03 (<samp class="ph codeph">distFromSAP03</samp>). The value for both
+				distances is measured in kilometers, which is rounded up and displayed to one
+				decimal point.</p>
+
+			<div class="note sap-samplecodeblock samplecode"><span class="samplecodetitle">Sample Code</span> 
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">view SpatialView1 as select from Person {
+    name, 
+    homeAddress.street_name   || ', ' || homeAddress.city   as home, 
+    officeAddress.street_name || ', ' || officeAddress.city as office, 
+    round( homeAddress.loc.ST_Distance(officeAddress.loc, 'meter')/1000, 1) as distanceHomeToWork,
+    round( homeAddress.loc.ST_Distance(NEW ST_POINT(8.644072, 49.292910), 'meter')/1000, 1) as distFromSAP03
+};</pre></div>
+
+			</div>
+
+			<div class="p">
+				<div class="note caution"><span class="cautiontitle">Caution</span> (<span class="ph emphasis emphasis">*</span>) <span class="ph">SAP HANA server software and tools can be used
+        for several SAP HANA platform and options scenarios as well as the respective capabilities
+        used in these scenarios. The availability of these is based on the available SAP HANA
+        licenses and the SAP HANA landscape, including the type and version of the back-end systems
+        the SAP HANA administration and development tools are connected to. There are several types
+        of licenses available for SAP HANA. Depending on your SAP HANA installation license type,
+        some of the features and tools described in the SAP HANA platform documentation may only be
+        available in the SAP HANA options and capabilities, which may be released independently of
+        an SAP HANA Platform Support Package Stack (SPS). Although various features included in SAP
+        HANA options and capabilities are cited in the SAP HANA platform documentation, each SAP
+        HANA edition governs the options and capabilities available. Based on this, customers do not
+        necessarily have the right to use features included in SAP HANA options and capabilities.
+        For customers to whom these license restrictions apply, the use of features included in SAP
+        HANA options and capabilities in a production system requires purchasing the corresponding
+        software license(s) from SAP. The documentation for the SAP HANA options is available in SAP
+        Help Portal. If you have additional questions about what your particular license provides,
+        or wish to discuss licensing features available in SAP HANA options, please contact your SAP
+        account team representative.</span></div>
+
+			</div>
+
+		</div></div>
+
+	</div>
+
+	<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?1f122dda87664cd8a5b7e827e380ba9b.html" target="_top" title="A view is a virtual table based on the dynamic results returned in response to an SQL statement. SAP HANA Extended Application Services (SAP HANA XS) enables you to use CDS syntax to create a database view as a design-time file in the repository.">Create a View in CDS</a></div>
+<div><a class="link" href="default.html?3c6980ab6ddb45f7bf15ef67a461258e.html" target="_top" title="CDS supports the use of Geographic Information Systems (GIS) functions and element types in CDS-compliant entities and views.">Spatial Types and Functions</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="CDS View Syntax Options";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,15 @@
+schema="OTEBW_EMTAS";
+
+query = "select to_date(PERIODFROM) as PERIODFROM,
+				to_date(PERIODTO) as PERIODTO,
+				to_date(SETTLSTART) as SETTLSTARTDATE,
+				to_time(SETTLSTART) as SETTLSTARTTIME,
+				to_date(SETTLEND) as SETTLENDDATE,
+				to_time(SETTLEND) as SETTLENDTIME,				
+				to_char(VERSION) as VERSION,
+				to_char(EXTERNALVERSION) as EXTERNALVERSION,
+				map(COMMODITY, 'EN', 'E', 'G') as COMMODITY
+		   from BW_GCT_SETTLMENT 	    		    		      
+";
+
+depends_on_table=["OTEBW_EMTAS::BW_GCT_SETTLMENT"];

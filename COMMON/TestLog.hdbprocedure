@@ -1,0 +1,14 @@
+PROCEDURE "OTEBW"."COMMON::TestLog" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+AS BEGIN
+
+declare a int;
+
+declare exit handler for sqlexception begin
+  insert into OTEBW."Log" ("CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") values (::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
+end;
+
+a=5/0;
+
+END;

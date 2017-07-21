@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="cache-control" content="max-age=0"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta name="abstract" content="Unloads the column store table from memory."/>
+<meta name="description" content="Unloads the column store table from memory."/>
+<meta name="keywords" content="UNLOAD"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=8229160461712127"/>
+<title>UNLOAD Statement (Data Manipulation)</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+<script type="text/javascript"><!-- 
+        var loops = 10; 
+        function GetLoio() { return "loio20fe92a2751910148c38887562a97c5a";
+        } 
+        function Sync() { if (parent.SAP_TOC && parent.SAP_TOC.gMenu) {parent.SAP_TOC.gMenu.SelectEntry(GetLoio()); } 
+        else if (parent != self && loops-- > 0) { window.setTimeout( "Sync()",500 ); } } 
+        Sync(); 
+
+ function hijackLink (elem) { if(elem.href.indexOf('#')
+          > 0 ){ var hr = elem.href.substr(0,
+          elem.href.indexOf('#')); var anc = elem.href.substr(elem.href.indexOf('#'),
+          elem.href.length); var dum = Math.random(); parent.window.location = hr + "?x=" + dum +
+          anc; } } //-->
+</script>
+</head>
+<body class="sap_bluecrystal" id="loio20fe92a2751910148c38887562a97c5a">
+<div id="wrapper"><div id="container">
+
+   <h1 class="title topictitle1">UNLOAD Statement (Data Manipulation)</h1>
+
+   
+   
+   <div class="body refbody"><p class="shortdesc">Unloads the column store table from memory.</p>
+
+      <div class="section" id="loio20fe92a2751910148c38887562a97c5a__sql_unload_1sql_unload_syntax"><div class="section_title">Syntax</div><div type="Syntax">
+         
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">UNLOAD <var class="keyword varname">&lt;table_name&gt;</var> [<var class="keyword varname">&lt;partition_restriction&gt;</var>]</pre></div>
+
+      </div></div>
+
+      <div class="section" id="loio20fe92a2751910148c38887562a97c5a__sql_unload_1sql_load_syntax_elements"><div class="section_title">Syntax Elements</div><div type="Syntax Elements">
+         
+         <dl class="dl parml">
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;table_name&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Unloads the specified table from memory.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;table_name&gt;</var> ::= [<var class="keyword varname">&lt;schema_name&gt;</var>.]<var class="keyword varname">&lt;identifier&gt;</var>
+
+<var class="keyword varname">&lt;schema_name&gt;</var> ::= <var class="keyword varname">&lt;unicode_name&gt;</var></pre></div>
+
+               </dd>
+
+            
+            
+               <dt class="dt pt dlterm emphasis"><var class="keyword varname">&lt;partition_restriction&gt;</var></dt>
+
+               <dd class="dd pd">
+                  <p class="p">Unloads the specified partition(s) from memory. This option is supported for
+                     partitioned column store tables.
+                     For multistore
+                     tables, only partitions in default storage are supported.  Partitions in
+                     extended storage are not supported and return an error if specified.</p>
+
+                  <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><var class="keyword varname">&lt;partition_restriction&gt;</var> ::=
+ PARTITION (<var class="keyword varname">&lt;partition_number&gt;</var> [, ...])</pre></div>
+
+                  <p class="p"><var class="keyword varname">&lt;partition_number&gt;</var> is the logical partition ID and is stored
+                     in the M_CS_PARTITIONS system view.</p>
+
+                  <p class="p">If <var class="keyword varname">&lt;partition_restriction&gt;</var> is not specified, then all
+                     partitions are unloaded by default.</p>
+
+               </dd>
+
+            
+         </dl>
+
+      </div></div>
+
+      <div class="section" id="loio20fe92a2751910148c38887562a97c5a__sql_unload_1sql_unload_description"><div class="section_title">Description</div><div type="Description">
+         
+         <p class="p">To free up memory, use the UNLOAD statement to unload the column store table from
+            memory. The table is loaded again on next access.</p>
+
+         <p class="p">While the UNLOAD statement allows you to specify partitioned tables, the LOAD statement
+            does not.</p>
+
+         <p class="p">The use of this statement requires the UPDATE privilege.</p>
+
+         <p class="p">For more information on table partitioning, see the <cite class="cite">SAP HANA Administration
+               Guide</cite>.</p>
+
+      </div></div>
+
+      <div class="section" id="loio20fe92a2751910148c38887562a97c5a__sql_unload_1sql_unload_examples"><div class="section_title">Example</div><div type="Example">
+         
+         <p class="p">Create column table A.</p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">CREATE COLUMN TABLE A (A INT, B INT);</pre></div>
+
+         <p class="p">Load table A into memory. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">LOAD A all;</pre></div>
+
+         <p class="p">Unload table A from memory. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">UNLOAD A;</pre></div>
+
+         <p class="p">Check the load status of table A. </p>
+
+         <div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">SELECT loaded FROM m_cs_tables WHERE table_name = 'A';</pre></div>
+
+      </div></div>
+
+   </div>
+
+<div class="related-links"> 
+<div class="relinfo"><div class="relinfotitle ">Related Information</div>
+<div><a class="link" href="default.html?20ad3d1075191014bce8aba8320b5b94.html" target="_top" title="Provides partition information of column tables.">M_CS_PARTITIONS System View</a></div>
+</div>
+</div>
+</div></div><div class="footer" id="custom-footer">
+	<div id="custom-footerSpacer"><hr width="350px" align="left"/></div>
+	<a class="copyright" href="copyright.html" target="_blank">Copyright</a><span class="separator"> | </span><a class="disclaimer" href="disclaimer.html" target="_blank">Important Disclaimers and Legal Information</a>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="UNLOAD Statement (Data Manipulation)";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>
