@@ -15,21 +15,27 @@ values
 ('400', TO_VARCHAR(CURRENT_TIMESTAMP,'YYYYMMDDHHMMSS'), :IN_load_uid, 0, ::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
 end;
 
-truncate table "OTEBW_OZ"."ZOZE_HEAT_SRC_H";
-insert into "OTEBW_OZ"."ZOZE_HEAT_SRC_H" select
+truncate table "OTEBW_OZ"."ZOZE_SOURCE_H";
+
+insert into "OTEBW_OZ"."ZOZE_SOURCE_H" select
 	 MANDT,
 	APPL_FORM_ID,
 	PROMO_DATE_FROM,
 	PROMO_DATE_TO,
-	POWER,
-	EPOWER,
+	PROTOTION_TYPE,
+	DECENT_GEN_BONUS,
+	RES_TARIF,
+	CHP_TARIF,
+	PFS_CALC,
+	FEED_IN_RMP,
+	COMP_PURCHASE,
 	ERDAT,
 	ERTIM,
 	ERNAM,
 	AEDAT,
 	AETIM,
-	AENAM
-from "OTEBW_OZ"."REMOTE_ZOZE_HEAT_SRC_H";
+	AENAM 
+from "OTEBW_OZ"."REMOTE_ZOZE_SOURCE_H";
 commit;
 
 insert into "SAPABAP1"."ZBW_LOAD_LOG" ("MANDT", "TST", "LOAD_UID", "CNT", "CURR_SCHEMA", "CURR_OBJECT", "ERROR_CODE", "ERROR_MESS") 
