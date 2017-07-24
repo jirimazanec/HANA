@@ -8,6 +8,7 @@ BEGIN
 /***************************** 
 	Write your procedure logic 
  *****************************/
+ 
 declare exit handler for sqlexception begin
 
 insert into "SAPABAP1"."ZBW_LOAD_LOG" ("MANDT", "TST", "LOAD_UID", "CNT", "CURR_SCHEMA", "CURR_OBJECT", "ERROR_CODE", "ERROR_MESS" )
