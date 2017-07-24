@@ -41,5 +41,5 @@ Help people interested in this repository understand your project by adding a RE
 36	CHG 	EPROFVAL60_CHG  	0	          88 662 115	
 37	CHG 	ERCHC_CHG       	0	          922 437   	
 38	CHG 	ERCH_CHG        	0	          1 170 945 	
-39	CHG 	ERDK_CHG        	0	          665 935   	
+39	CHG 	ERDK_CHG        	0	          665 935   	 
 40	CHG 	ETTIFN_CHG      	0	          32 727 453	
