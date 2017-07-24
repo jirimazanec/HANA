@@ -14,10 +14,11 @@ select 	odhc_union.* ,
 	 	ceny.UNIT as CENY_UNIT,
 	 	ceny.SYSIMBALANCE,
 	 	ceny.SETTLPRICEIMB,
-	 	ceny.SETTLPRICEANTIIMB,
+	 	ceny.SETTLPRICEANTIIMB  ,
 	 	iep_iem.VOLUME_SIEP,
 	 	iep_iem.VOLUME_SIEM,
-	 	iep_iem.UNIT as iep_iem_UNIT
+	 	iep_iem.UNIT as iep_iem_UNIT,
+	 	1 as pocet
    from
 	(select   DPLATBY_E.DELIVERYDAY,
 			 DPLATBY_E.EXTERNALVERSION,
@@ -81,7 +82,7 @@ select 	odhc_union.* ,
 		and odhc_union.PERIOD = iep_iem.PERIOD
 	
 		
-where odhc_union.DELIVERYDAY = '01.01.2015'
+--where odhc_union.DELIVERYDAY = '01.01.2015'
 
 ";
 

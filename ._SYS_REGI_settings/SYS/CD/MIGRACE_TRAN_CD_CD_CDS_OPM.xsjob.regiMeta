@@ -15,10 +15,10 @@
   "type": "1",
   "version_id": "14"
  },
+ "name": "MIGRACE_TRAN_CD_CD_CDS_OPM",
+ "package": "CD",
+ "suffix": "xsjob",
  "version": {
   "versionType": "1"
- },
- "package": "CD",
- "name": "MIGRACE_TRAN_CD_CD_CDS_OPM",
- "suffix": "xsjob"
+ }
 }

@@ -12,12 +12,12 @@
   "type": "2",
   "version_id": "2"
  },
- "package": "CLT.CD_BASE",
  "name": "",
+ "package": "CLT.CD_BASE",
  "suffix": "xsaccess",
  "version": {
-  "versionType": "2",
   "owner": "MAZANECJ",
+  "versionType": "2",
   "workspace": ""
  }
 }

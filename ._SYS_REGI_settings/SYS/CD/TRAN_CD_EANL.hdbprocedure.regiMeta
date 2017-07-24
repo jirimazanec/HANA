@@ -12,12 +12,12 @@
   "type": "2",
   "version_id": "11"
  },
- "package": "CD",
  "name": "TRAN_CD_EANL",
+ "package": "CD",
  "suffix": "hdbprocedure",
  "version": {
-  "versionType": "2",
   "owner": "MAZANECJ",
+  "versionType": "2",
   "workspace": ""
  }
 }

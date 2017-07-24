@@ -12,12 +12,12 @@
   "type": "2",
   "version_id": "4"
  },
- "package": "CLT.CD_BASE",
  "name": "KMEN2",
+ "package": "CLT.CD_BASE",
  "suffix": "hdbprocedure",
  "version": {
-  "versionType": "2",
   "owner": "MAZANECJ",
+  "versionType": "2",
   "workspace": ""
  }
 }

@@ -1,0 +1,26 @@
+schema="OTEBW_EMTAS";
+
+query = "SELECT 
+CALYEAR,
+CALQUARTER,
+CALWEEK,
+CALMONTH,
+DELIVERYDAY, 
+PERIOD, 
+CURRENCY,
+UNIT,
+sum(volumebuy) as VOLUMEbuy,
+sum(volumesell) as VOLUMEsell, 
+sum(pricebuy) as PRICEbuy, 
+sum(pricesell) as PRICEsell,
+sum(volume12) as VOLUME12
+FROM \"EMTAS::BW_DM_BID\" 
+group by
+CALYEAR,
+CALQUARTER,
+CALWEEK,
+CALMONTH,
+DELIVERYDAY, 
+PERIOD, 
+CURRENCY,
+UNIT";

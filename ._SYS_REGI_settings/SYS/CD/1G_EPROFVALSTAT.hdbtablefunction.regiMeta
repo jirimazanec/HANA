@@ -12,12 +12,12 @@
   "type": "2",
   "version_id": "2"
  },
- "package": "CD",
  "name": "1G_EPROFVALSTAT",
+ "package": "CD",
  "suffix": "hdbtablefunction",
  "version": {
-  "versionType": "2",
   "owner": "MAZANECJ",
+  "versionType": "2",
   "workspace": ""
  }
 }

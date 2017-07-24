@@ -12,12 +12,12 @@
   "type": "2",
   "version_id": "3"
  },
- "package": "CD",
  "name": "MigProfValToSerie",
+ "package": "CD",
  "suffix": "xsjob",
  "version": {
-  "versionType": "2",
   "owner": "MAZANECJ",
+  "versionType": "2",
   "workspace": ""
  }
 }

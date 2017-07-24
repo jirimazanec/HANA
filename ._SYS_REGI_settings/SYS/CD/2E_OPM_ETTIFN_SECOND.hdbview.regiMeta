@@ -12,12 +12,12 @@
   "type": "2",
   "version_id": "1"
  },
- "package": "CD",
  "name": "2E_OPM_ETTIFN_SECOND",
+ "package": "CD",
  "suffix": "hdbview",
  "version": {
-  "versionType": "2",
   "owner": "MAZANECJ",
+  "versionType": "2",
   "workspace": ""
  }
 }

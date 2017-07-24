@@ -12,12 +12,12 @@
   "type": "2",
   "version_id": "39"
  },
- "package": "CD",
  "name": "2E_TEST3",
+ "package": "CD",
  "suffix": "calculationview",
  "version": {
-  "versionType": "2",
   "owner": "MAZANECJ",
+  "versionType": "2",
   "workspace": ""
  }
 }

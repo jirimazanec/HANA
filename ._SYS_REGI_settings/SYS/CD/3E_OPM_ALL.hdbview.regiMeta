@@ -12,12 +12,12 @@
   "type": "2",
   "version_id": "1"
  },
- "package": "CD",
  "name": "3E_OPM_ALL",
+ "package": "CD",
  "suffix": "hdbview",
  "version": {
-  "versionType": "2",
   "owner": "MAZANECJ",
+  "versionType": "2",
   "workspace": ""
  }
 }

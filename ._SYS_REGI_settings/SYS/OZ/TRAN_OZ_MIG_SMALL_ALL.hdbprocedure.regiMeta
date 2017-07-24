@@ -15,10 +15,10 @@
   "type": "1",
   "version_id": "18"
  },
+ "name": "TRAN_OZ_MIG_SMALL_ALL",
+ "package": "OZ",
+ "suffix": "hdbprocedure",
  "version": {
   "versionType": "1"
- },
- "package": "OZ",
- "name": "TRAN_OZ_MIG_SMALL_ALL",
- "suffix": "hdbprocedure"
+ }
 }

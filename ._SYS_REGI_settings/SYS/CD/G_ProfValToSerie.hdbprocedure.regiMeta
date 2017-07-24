@@ -12,12 +12,12 @@
   "type": "2",
   "version_id": "4"
  },
- "package": "CD",
  "name": "G_ProfValToSerie",
+ "package": "CD",
  "suffix": "hdbprocedure",
  "version": {
-  "versionType": "2",
   "owner": "MAZANECJ",
+  "versionType": "2",
   "workspace": ""
  }
 }

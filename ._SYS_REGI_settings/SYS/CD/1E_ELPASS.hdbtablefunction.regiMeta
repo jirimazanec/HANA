@@ -12,12 +12,12 @@
   "type": "2",
   "version_id": "7"
  },
- "package": "CD",
  "name": "1E_ELPASS",
+ "package": "CD",
  "suffix": "hdbtablefunction",
  "version": {
-  "versionType": "2",
   "owner": "MAZANECJ",
+  "versionType": "2",
   "workspace": ""
  }
 }

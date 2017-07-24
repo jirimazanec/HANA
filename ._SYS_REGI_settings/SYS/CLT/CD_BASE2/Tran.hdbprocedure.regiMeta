@@ -12,12 +12,12 @@
   "type": "2",
   "version_id": "10"
  },
- "package": "CLT.CD_BASE2",
  "name": "Tran",
+ "package": "CLT.CD_BASE2",
  "suffix": "hdbprocedure",
  "version": {
-  "versionType": "2",
   "owner": "MAZANECJ",
+  "versionType": "2",
   "workspace": ""
  }
 }

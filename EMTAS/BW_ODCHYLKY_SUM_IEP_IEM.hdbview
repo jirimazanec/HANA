@@ -4,8 +4,10 @@ query = "select 	to_date(DELIVERYDAY) as DELIVERYDAY ,
 					EXTERNALVERSION,
 					PERIOD,
 			 		'MWH' as UNIT , 	 
-					sum(VOLUME_SIEP) as VOLUME_SIEP,
-					sum(VOLUME_SIEM) as VOLUME_SIEM
+--					sum(VOLUME_SIEP) as VOLUME_SIEP,
+--					sum(VOLUME_SIEM) as VOLUME_SIEM
+					VOLUME_SIEP,
+					VOLUME_SIEM
 			from
 			(
 			select o1.DELIVERYDAY,
@@ -27,9 +29,10 @@ query = "select 	to_date(DELIVERYDAY) as DELIVERYDAY ,
 					   from \"OTEBW_EMTAS\".\"BW_ODCHYLKY_PLATBY\" as o2
 					   where	o2.CONCEPTABRV =  'IEM'
 			)
-			group by DELIVERYDAY,
-					EXTERNALVERSION,
-					PERIOD
+--			group by DELIVERYDAY,
+--					EXTERNALVERSION,
+--					PERIOD
+
 ";
 
 depends_on_table=["OTEBW_EMTAS::BW_ODCHYLKY_PLATBY"];

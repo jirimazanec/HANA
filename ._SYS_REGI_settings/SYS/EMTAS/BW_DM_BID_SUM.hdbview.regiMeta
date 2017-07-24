@@ -1,0 +1,24 @@
+{
+ "metadata": {
+  "activated_at": "2017-07-23 15:42:59.959 GMT+02:00",
+  "activated_by": "JANCUSF",
+  "change_number": "0",
+  "delivery_unit": "",
+  "du_vendor": "",
+  "du_version": "",
+  "du_version_patch": "",
+  "du_version_sp": "",
+  "edit": "true",
+  "format_version": "",
+  "object_status": "0",
+  "released_at": "null",
+  "type": "1",
+  "version_id": "2"
+ },
+ "name": "BW_DM_BID_SUM",
+ "package": "EMTAS",
+ "suffix": "hdbview",
+ "version": {
+  "versionType": "1"
+ }
+}

@@ -12,12 +12,12 @@
   "type": "2",
   "version_id": "13"
  },
- "package": "CLT.CD_BASE",
  "name": "MIG_CD",
+ "package": "CLT.CD_BASE",
  "suffix": "hdbprocedure",
  "version": {
-  "versionType": "2",
   "owner": "MAZANECJ",
+  "versionType": "2",
   "workspace": ""
  }
 }

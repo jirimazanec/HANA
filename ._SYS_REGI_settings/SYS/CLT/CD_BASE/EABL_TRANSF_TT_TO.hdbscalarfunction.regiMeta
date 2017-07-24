@@ -1,7 +1,4 @@
 {
- "package": "CLT.CD_BASE",
- "name": "EABL_TRANSF_TT_TO",
- "suffix": "hdbscalarfunction",
  "metadata": {
   "activated_at": "2017-03-27 13:30:59.722 GMT+02:00",
   "activated_by": "SUHAJEKS",
@@ -18,6 +15,9 @@
   "type": "1",
   "version_id": "1"
  },
+ "name": "EABL_TRANSF_TT_TO",
+ "package": "CLT.CD_BASE",
+ "suffix": "hdbscalarfunction",
  "version": {
   "versionType": "1"
  }

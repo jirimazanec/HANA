@@ -12,12 +12,12 @@
   "type": "2",
   "version_id": "8"
  },
- "package": "CLT.CD_BASE2",
  "name": "CV_KMEN3",
+ "package": "CLT.CD_BASE2",
  "suffix": "calculationview",
  "version": {
-  "versionType": "2",
   "owner": "MAZANECJ",
+  "versionType": "2",
   "workspace": ""
  }
 }

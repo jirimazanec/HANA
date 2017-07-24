@@ -15,10 +15,10 @@
   "type": "1",
   "version_id": "28"
  },
+ "name": "TRAN_CD_CDS_OPM",
+ "package": "CD",
+ "suffix": "hdbprocedure",
  "version": {
   "versionType": "1"
- },
- "package": "CD",
- "name": "TRAN_CD_CDS_OPM",
- "suffix": "hdbprocedure"
+ }
 }

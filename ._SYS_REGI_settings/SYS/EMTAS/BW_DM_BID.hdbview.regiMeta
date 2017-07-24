@@ -1,8 +1,8 @@
 {
  "metadata": {
-  "activated_at": "2017-07-05 09:48:16.947 GMT+02:00",
+  "activated_at": "2017-07-23 15:21:03.896 GMT+02:00",
   "activated_by": "JANCUSF",
-  "change_number": "4074",
+  "change_number": "0",
   "delivery_unit": "",
   "du_vendor": "",
   "du_version": "",
@@ -11,9 +11,9 @@
   "edit": "true",
   "format_version": "",
   "object_status": "0",
-  "released_at": "2017-07-10 13:17:59.7300000",
+  "released_at": "null",
   "type": "1",
-  "version_id": "2"
+  "version_id": "3"
  },
  "name": "BW_DM_BID",
  "package": "EMTAS",

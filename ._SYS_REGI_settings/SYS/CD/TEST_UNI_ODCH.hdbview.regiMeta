@@ -1,6 +1,6 @@
 {
  "metadata": {
-  "activated_at": "2017-07-21 14:32:40.498 GMT+02:00",
+  "activated_at": "2017-07-24 10:23:05.788 GMT+02:00",
   "activated_by": "REHANEKM",
   "change_number": "0",
   "delivery_unit": "",
@@ -13,7 +13,7 @@
   "object_status": "0",
   "released_at": "null",
   "type": "1",
-  "version_id": "4"
+  "version_id": "9"
  },
  "name": "TEST_UNI_ODCH",
  "package": "CD",

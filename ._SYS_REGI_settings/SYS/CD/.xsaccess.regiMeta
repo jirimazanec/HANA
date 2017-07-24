@@ -15,10 +15,10 @@
   "type": "1",
   "version_id": "3"
  },
+ "name": "",
+ "package": "CD",
+ "suffix": "xsaccess",
  "version": {
   "versionType": "1"
- },
- "package": "CD",
- "name": "",
- "suffix": "xsaccess"
+ }
 }

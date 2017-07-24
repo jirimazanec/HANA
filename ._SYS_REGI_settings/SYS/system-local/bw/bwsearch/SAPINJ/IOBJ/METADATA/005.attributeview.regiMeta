@@ -1,0 +1,24 @@
+{
+ "metadata": {
+  "activated_at": "2017-04-26 12:40:27.987 GMT+02:00",
+  "activated_by": "SAPABAP1",
+  "change_number": "4074",
+  "delivery_unit": "",
+  "du_vendor": "",
+  "du_version": "",
+  "du_version_patch": "",
+  "du_version_sp": "",
+  "edit": "true",
+  "format_version": "",
+  "object_status": "0",
+  "released_at": "2017-07-10 13:17:59.7300000",
+  "type": "1",
+  "version_id": "1"
+ },
+ "name": "005",
+ "package": "system-local.bw.bwsearch.SAPINJ.IOBJ.METADATA",
+ "suffix": "attributeview",
+ "version": {
+  "versionType": "1"
+ }
+}

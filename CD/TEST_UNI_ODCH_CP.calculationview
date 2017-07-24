@@ -82,6 +82,7 @@
 			 '' as BUSSTYPE,
 			 DPLATBY_E.CREDITDEBET 
 		from &quot;OTEBW_EMTAS&quot;.&quot;EMTAS::BW_DPLATBY_E&quot; as DPLATBY_E
+--		where DPLATBY_E.DELIVERYDAY between  :X_FR and :X_TO
 	UNION ALL
 	select   ERD.DELIVERYDAY,
 			 ERD.EXTERNALVERSION,
@@ -95,6 +96,7 @@
 			 ERD.BUSSTYPE,
 			 '' as CREDITDEBET 
 		from &quot;OTEBW_EMTAS&quot;.&quot;EMTAS::BW_KONCOVY_PLAN_ERD&quot; as ERD
+--		where ERD.DELIVERYDAY between  :X_FR and :X_TO
 	UNION ALL
 	select   PRFV.G_DATE as DELIVERYDAY,
 			 PRFV.VERSION as EXTERNALVERSION,
@@ -122,17 +124,19 @@
 			 '' as BUSSTYPE,
 			 '' as CREDITDEBET 
 		from &quot;OTEBW_EMTAS&quot;.&quot;EMTAS::BW_ODCHYLKY_AGGR&quot; as AGGR
+--		where AGGR.DELIVERYDAY between  :X_FR and :X_TO
 		) as odhc_union 
 	inner join &quot;OTEBW_EMTAS&quot;.&quot;EMTAS::BW_ODCHYLKY_CENY&quot; as ceny 
 		on 	odhc_union.DELIVERYDAY = ceny.DELIVERYDAY 
 		and	odhc_union.EXTERNALVERSION = ceny.EXTERNALVERSION
 		and odhc_union.PERIOD = ceny.PERIOD
-		and odhc_union.PARTIC = ceny.PARTIC
+--		and odhc_union.PARTIC = ceny.PARTIC
+		and ceny.DELIVERYDAY between  :X_FR and :X_TO
 	inner join &quot;OTEBW_EMTAS&quot;.&quot;EMTAS::BW_ODCHYLKY_SUM_IEP_IEM&quot; as iep_iem
 		on 	odhc_union.DELIVERYDAY = iep_iem.DELIVERYDAY 
-		and	odhc_union.EXTERNALVERSION = iep_iem.EXTERNALVERSION
-		and odhc_union.PERIOD = iep_iem.PERIOD;
-
+		and	odhc_union.EXTERNALVERSION = odhc_union.EXTERNALVERSION
+		and odhc_union.PERIOD = iep_iem.PERIOD
+		and iep_iem.DELIVERYDAY  between  :X_FR and :X_TO;
 END /********* End Procedure Script ************/</definition>
     </calculationView>
   </calculationViews>

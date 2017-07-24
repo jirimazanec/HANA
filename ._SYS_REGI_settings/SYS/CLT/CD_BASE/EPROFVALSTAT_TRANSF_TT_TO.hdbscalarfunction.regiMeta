@@ -12,12 +12,12 @@
   "type": "2",
   "version_id": "2"
  },
- "package": "CLT.CD_BASE",
  "name": "EPROFVALSTAT_TRANSF_TT_TO",
+ "package": "CLT.CD_BASE",
  "suffix": "hdbscalarfunction",
  "version": {
-  "versionType": "2",
   "owner": "MAZANECJ",
+  "versionType": "2",
   "workspace": ""
  }
 }

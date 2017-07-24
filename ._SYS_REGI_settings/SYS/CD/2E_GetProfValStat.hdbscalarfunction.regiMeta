@@ -12,12 +12,12 @@
   "type": "2",
   "version_id": "6"
  },
- "package": "CD",
  "name": "2E_GetProfValStat",
+ "package": "CD",
  "suffix": "hdbscalarfunction",
  "version": {
-  "versionType": "2",
   "owner": "MAZANECJ",
+  "versionType": "2",
   "workspace": ""
  }
 }
