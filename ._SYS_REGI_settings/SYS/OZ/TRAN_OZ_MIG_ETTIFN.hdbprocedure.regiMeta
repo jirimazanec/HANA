@@ -1,9 +1,6 @@
 {
- "name": "TRAN_OZ_MIG_ETTIFN",
- "package": "OZ",
- "suffix": "hdbprocedure",
  "metadata": {
-  "activated_at": "2017-07-18 11:15:56.732 GMT+02:00",
+  "activated_at": "2017-07-24 11:47:37.610 GMT+02:00",
   "activated_by": "MAZANECJ",
   "change_number": "0",
   "delivery_unit": "",
@@ -16,9 +13,12 @@
   "object_status": "0",
   "released_at": "null",
   "type": "1",
-  "version_id": "14"
+  "version_id": "15"
  },
  "version": {
   "versionType": "1"
- }
+ },
+ "package": "OZ",
+ "name": "TRAN_OZ_MIG_ETTIFN",
+ "suffix": "hdbprocedure"
 }

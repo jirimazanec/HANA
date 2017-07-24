@@ -8,13 +8,12 @@ BEGIN
 /***************************** 
 	Write your procedure logic 
  *****************************/
-declare Cnt int;
-declare Cnt_chg int;
 
-declare exit handler for sqlexception 
-begin
-insert into "OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG" ("Log_ID","TST","CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") 
-	values ("OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG_SEQ".nextval, current_timestamp, ::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
+declare exit handler for sqlexception begin
+
+insert into "SAPABAP1"."ZBW_LOAD_LOG" ("MANDT", "TST", "LOAD_UID", "CNT", "CURR_SCHEMA", "CURR_OBJECT", "ERROR_CODE", "ERROR_MESS" )
+values
+('400', TO_VARCHAR(CURRENT_TIMESTAMP,'YYYYMMDDHHMMSS'), 'TRAN_OZ_MIG_ETTIFN', 0, ::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
 end;
  
  
@@ -110,12 +109,10 @@ insert into "OTEBW_OZ"."ETTIFN" select
 from :t_ETTIFN;
 commit;
 
+insert into "SAPABAP1"."ZBW_LOAD_LOG" ("MANDT", "TST", "LOAD_UID", "CNT", "CURR_SCHEMA", "CURR_OBJECT", "ERROR_CODE", "ERROR_MESS") 
+values
+('400',TO_VARCHAR(CURRENT_TIMESTAMP,'YYYYMMDDHHMMSS'), 'TRAN_OZ_MIG_ETTIFN', ::rowcount, ::current_object_schema, ::current_object_name, 0, 'Transfer');
 
-select count(*) into Cnt from "OTEBW_OZ"."DBERCHZ1";  
-select count(*) into Cnt_chg from "OTEBW_OZ"."DBERCHZ1_CHG";  
-
-insert into "OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG" ("Log_ID","TST", "CurrSchema", "CurrObject", "Cnt", "ErrorMess") 
-values ("OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG_SEQ".nextval, current_timestamp, 'OTEBW_OZ', 'ETTIFN,'||' ETTIFN_CHG', cnt + Cnt_chg, 'Transfered');  
 commit;
 
 END;

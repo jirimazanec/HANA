@@ -1,4 +1,4 @@
-PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_MIG_DBERCHZ1" ( ) 
+PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_MIG_DBERCHZ1" ( )
 	LANGUAGE SQLSCRIPT
 	SQL SECURITY INVOKER 
 	--DEFAULT SCHEMA <default_schema_name>
@@ -9,13 +9,11 @@ BEGIN
 	Write your procedure logic 
  ********************** *******/ 
  
-declare Cnt int;
-declare Cnt_chg int;
+declare exit handler for sqlexception begin
 
-declare exit handler for sqlexception 
-begin
-insert into "OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG" ("Log_ID","TST","CurrSchema", "CurrObject", "ErrorCode", "ErrorMess") 
-	values ("OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG_SEQ".nextval, current_timestamp, ::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
+insert into "SAPABAP1"."ZBW_LOAD_LOG" ("MANDT", "TST", "LOAD_UID", "CNT", "CURR_SCHEMA", "CURR_OBJECT", "ERROR_CODE", "ERROR_MESS" )
+values
+('400', TO_VARCHAR(CURRENT_TIMESTAMP,'YYYYMMDDHHMMSS'), 'TRAN_OZ_MIG_DBERCHZ1', 0, ::current_object_schema, ::current_object_name, ::sql_error_code, ::sql_error_message);
 end;
  
 truncate table "OTEBW_OZ"."REMOTE_DBERCHZ1_CHG";
@@ -380,11 +378,10 @@ insert into "OTEBW_OZ"."DBERCHZ1" select
 from :t_DBERCHZ1;
 commit;
 
-select count(*) into Cnt from "OTEBW_OZ"."DBERCHZ1";  
-select count(*) into Cnt_chg from "OTEBW_OZ"."DBERCHZ1_CHG";
+insert into "SAPABAP1"."ZBW_LOAD_LOG" ("MANDT", "TST", "LOAD_UID", "CNT", "CURR_SCHEMA", "CURR_OBJECT", "ERROR_CODE", "ERROR_MESS") 
+values
+('400',TO_VARCHAR(CURRENT_TIMESTAMP,'YYYYMMDDHHMMSS'), 'TRAN_OZ_MIG_DBERCHZ1', ::rowcount, ::current_object_schema, ::current_object_name, 0, 'Transfer');
 
-insert into "OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG" ("Log_ID","TST", "CurrSchema", "CurrObject", "Cnt", "ErrorMess") 
-values ("OTEBW_OZ"."TRANSPORT_LARGE_TABLES_LOG_SEQ".nextval, current_timestamp, 'OTEBW_OZ', 'DBERCHZ1,'||' DBERCHZ1_CHG', cnt + Cnt_chg, 'Transfered');  
 commit;
 
 END;

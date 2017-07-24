@@ -1,4 +1,4 @@
-PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_BUT000" ( in IN_load_uid nvarchar(32)) 
+PROCEDURE "OTEBW_OZ"."OZ::TRAN_OZ_BUT000" ( in IN_load_uid nvarchar(32))
 	LANGUAGE SQLSCRIPT
 	SQL SECURITY INVOKER 
 	--DEFAULT SCHEMA <default_schema_name>
