@@ -1,6 +1,6 @@
 {
  "metadata": {
-  "activated_at": "2017-07-24 12:46:41.654 GMT+02:00",
+  "activated_at": "2017-07-24 12:44:44.622 GMT+02:00",
   "activated_by": "REHANEKM",
   "change_number": "0",
   "delivery_unit": "",
@@ -13,10 +13,10 @@
   "object_status": "0",
   "released_at": "null",
   "type": "1",
-  "version_id": "10"
+  "version_id": "1"
  },
- "name": "TEST_UNI_ODCH",
- "package": "CD",
+ "name": "BW_ODCHYLKY_SUM_IEP_IEM_V",
+ "package": "EMTAS",
  "suffix": "hdbview",
  "version": {
   "versionType": "1"

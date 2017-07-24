@@ -76,7 +76,7 @@ select 	odhc_union.* ,
 		on 	odhc_union.DELIVERYDAY = ceny.DELIVERYDAY 
 		and	odhc_union.EXTERNALVERSION = ceny.EXTERNALVERSION
 		and odhc_union.PERIOD = ceny.PERIOD
-	inner join \"OTEBW_EMTAS\".\"EMTAS::BW_ODCHYLKY_SUM_IEP_IEM\" as iep_iem
+	inner join \"OTEBW_EMTAS\".\"BW_ODCHYLKY_SUM_IEP_IEM\" as iep_iem
 		on 	odhc_union.DELIVERYDAY = iep_iem.DELIVERYDAY 
 		and	odhc_union.EXTERNALVERSION = iep_iem.EXTERNALVERSION
 		and odhc_union.PERIOD = iep_iem.PERIOD

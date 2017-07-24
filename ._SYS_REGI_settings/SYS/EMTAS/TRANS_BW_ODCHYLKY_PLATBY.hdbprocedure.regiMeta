@@ -1,6 +1,6 @@
 {
  "metadata": {
-  "activated_at": "2017-07-24 10:25:31.472 GMT+02:00",
+  "activated_at": "2017-07-24 12:47:24.827 GMT+02:00",
   "activated_by": "REHANEKM",
   "change_number": "0",
   "delivery_unit": "",
@@ -13,11 +13,11 @@
   "object_status": "0",
   "released_at": "null",
   "type": "1",
-  "version_id": "6"
+  "version_id": "3"
  },
- "name": "BW_ODCHYLKY_SUM_IEP_IEM",
+ "name": "TRANS_BW_ODCHYLKY_PLATBY",
  "package": "EMTAS",
- "suffix": "hdbview",
+ "suffix": "hdbprocedure",
  "version": {
   "versionType": "1"
  }

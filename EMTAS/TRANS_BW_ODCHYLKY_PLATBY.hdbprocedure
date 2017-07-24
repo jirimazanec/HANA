@@ -1,0 +1,32 @@
+PROCEDURE "OTEBW_EMTAS"."EMTAS::TRANS_BW_ODCHYLKY_PLATBY" ( ) 
+	LANGUAGE SQLSCRIPT
+	SQL SECURITY INVOKER 
+	DEFAULT SCHEMA OTEBW_EMTAS
+	AS
+BEGIN
+
+/* !!!!!!!!!!! Dopsat plneni tabulky TRANS_BW_ODCHYLKY_PLATBY !!!!!!!!!!!!!!!*/
+
+
+-- *** Materializovani odvozene tabulky					
+truncate table "OTEBW_EMTAS"."BW_ODCHYLKY_SUM_IEP_IEM";
+insert into "OTEBW_EMTAS"."BW_ODCHYLKY_SUM_IEP_IEM" select
+	 				DELIVERYDAY ,
+					EXTERNALVERSION,
+					PERIOD,
+			 		UNIT , 	 
+					VOLUME_SIEP,
+					VOLUME_SIEM
+from "OTEBW_EMTAS"."EMTAS::BW_ODCHYLKY_SUM_IEP_IEM_V";
+
+/* -- pro priadne zalozeni zalozeni tabulky
+	create column table "OTEBW_EMTAS"."BW_ODCHYLKY_SUM_IEP_IEM"(DELIVERYDAY date,
+					EXTERNALVERSION dec(3),
+					PERIOD dec(2),
+			 		UNIT nvarchar(3) , 	 
+					VOLUME_SIEP dec(17,3),
+					VOLUME_SIEM dec(17,3) 
+					);*/
+
+
+END;

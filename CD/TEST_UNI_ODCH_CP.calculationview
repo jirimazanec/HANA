@@ -34,8 +34,8 @@
         <viewAttribute datatype="DECIMAL" id="VOLUME_AGGR" length="17" scale="3"/>
         <viewAttribute datatype="NVARCHAR" id="CONCEPTABRV" length="8"/>
         <viewAttribute datatype="NVARCHAR" id="UNIT" length="3"/>
-        <viewAttribute datatype="NVARCHAR" id="BUYSELL" length="2"/>
-        <viewAttribute datatype="NVARCHAR" id="BUSSTYPE" length="2"/>
+        <viewAttribute datatype="NVARCHAR" id="BUYSELL" length="1"/>
+        <viewAttribute datatype="NVARCHAR" id="BUSSTYPE" length="1"/>
         <viewAttribute datatype="NVARCHAR" id="CREDITDEBET" length="1"/>
         <viewAttribute datatype="NVARCHAR" id="CALMONTH" length="6"/>
         <viewAttribute datatype="NVARCHAR" id="CALYEAR" length="4"/>
@@ -82,7 +82,7 @@
 			 '' as BUSSTYPE,
 			 DPLATBY_E.CREDITDEBET 
 		from &quot;OTEBW_EMTAS&quot;.&quot;EMTAS::BW_DPLATBY_E&quot; as DPLATBY_E
---		where DPLATBY_E.DELIVERYDAY between  :X_FR and :X_TO
+		where DPLATBY_E.DELIVERYDAY between  :X_FR and :X_TO
 	UNION ALL
 	select   ERD.DELIVERYDAY,
 			 ERD.EXTERNALVERSION,
@@ -130,9 +130,8 @@
 		on 	odhc_union.DELIVERYDAY = ceny.DELIVERYDAY 
 		and	odhc_union.EXTERNALVERSION = ceny.EXTERNALVERSION
 		and odhc_union.PERIOD = ceny.PERIOD
---		and odhc_union.PARTIC = ceny.PARTIC
 		and ceny.DELIVERYDAY between  :X_FR and :X_TO
-	inner join &quot;OTEBW_EMTAS&quot;.&quot;EMTAS::BW_ODCHYLKY_SUM_IEP_IEM&quot; as iep_iem
+	inner join &quot;OTEBW_EMTAS&quot;.&quot;BW_ODCHYLKY_SUM_IEP_IEM&quot; as iep_iem
 		on 	odhc_union.DELIVERYDAY = iep_iem.DELIVERYDAY 
 		and	odhc_union.EXTERNALVERSION = odhc_union.EXTERNALVERSION
 		and odhc_union.PERIOD = iep_iem.PERIOD
